@@ -1,0 +1,517 @@
+<head>
+    <title>Phasmophobia Cheat Sheet</title>
+    <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles/style.css"/>
+</head>
+
+<body>
+    
+    <div class="data">
+        <div class="header"></div>
+        <div class="evidence_title phasfont white">
+            Evidence
+        </div>
+        <div class="evidence">
+            <button class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="EMF 5">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">EMF 5</div>
+            </button>
+            <button class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="DOTs">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">DOTs</div>
+            </button>
+            <button class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="Fingerprints">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">Fingerprints</div>
+            </button>
+            <button class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="Freezing">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">Freezing</div>
+            </button>
+            <button class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="Ghost Orbs">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">Ghost Orbs</div>
+            </button>
+            <button class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="Writing">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">Writing</div>
+            </button>
+            <button class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="Spirit Box">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">Spirit Box</div>
+            </button>
+        </div>
+
+        <div class="speed_title phasfont white">
+            Speed
+        </div>
+        <div class="speed">
+            <label class="containero phasfont white" onchange="filter()">Slow
+                <input type="checkbox" name="speed" value="Slow">
+                <span class="checkmarko"></span>
+            </label>
+            <label class="containero phasfont white" onchange="filter()">Normal
+                <input type="checkbox" name="speed" value="Normal">
+                <span class="checkmarko"></span>
+            </label>
+            <label class="containero phasfont white" onchange="filter()">Fast
+                <input type="checkbox" name="speed" value="Fast">
+                <span class="checkmarko"></span>
+            </label>
+        </div>
+
+        <div class="cards">
+
+            <div class="ghost_card">
+                <div class="ghost_name">Spirit</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">EMF 5 | Spirit Box | Writing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Will stop attacking after smudging for 180s instead of the normal 90s</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Wraith</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">EMF 5 | Spirit Box | DOTs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">No UV footprints after stepping in salt</div>
+                    <hr>
+                    <div class="ghost_behavior_item">No Camera "Footprints"</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Teleports to random players</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Phantom</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">Spirit Box | Fingerprints | DOTs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Does not appear in photos, photos will not be glitched</div>
+                    <hr>
+                    <div class="ghost_behavior_item">During an event, taking photo will cause the ghost to disappear</div>
+                    <hr>
+                    <div class="ghost_behavior_item">During hunts, only visible every 1-2s</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Can randomly walk to a random player</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Poltergeist</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">Spirit Box | Fingerprints | Writing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Higher chance to throw & interact with objects</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Can throw objects faster and further</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Throwing multiple objects at once</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Will throw an item every 0.5s during a hunt</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Banshee</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">Fingerprints | Ghost Orbs | DOTs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Prefers singing ghost events</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Will target a single player (ignoring others while hunting)</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Banshee scream through paramic</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Jinn</div>
+                <div class="ghost_speed">1.7 m/s | 2.81 m/s</div>
+                <div class="ghost_evidence">EMF 5 | Fingerprints | Freezing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">25% sanity drop when within 3m (by chance) with EMF 2 at the breaker</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Can not turn off fuse box</div>
+                    <hr>
+                    <div class="ghost_behavior_item"><b>Faster when Fuse box is on & >3m</b></div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Mare</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">Spirit Box | Ghost Orbs | Writing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Hunts at 60% sanity when lights off in the room where its in, 40% when lights on</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Can not turn on lights</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Likely to turn off and bust light bulbs</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Revenant</div>
+                <div class="ghost_speed">1.0 m/s | 3.0 m/s</div>
+                <div class="ghost_evidence">Ghost Orbs | Writing | Freezing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Speed difference</div>
+                    <hr>
+                    <div class="ghost_behavior_item"><b>Faster when in line of sight</b></div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Shade</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">EMF 5 | Writing | Freezing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Will not perform actions that result in EMF 3 if people nearby</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Will not hunt if in the same room</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Has a chance to appear as a shadow if summoned from music box or summoning circle</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Demon</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">Fingerprints | Writing | Freezing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Starts hunting normally at 70% sanity</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Crucifix range effect increase to 5m instead of 3m</div>
+                    <hr>
+                    <div class="ghost_behavior_item">60s no-hunt smudge time</div>
+                    <hr>
+                    <div class="ghost_behavior_item">20s hunt cool-down (normal is 25s)</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Yurei</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">Ghost Orbs | Freezing | DOTs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Prefers ghosts events that drop 10% sanity</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Smudge stops wandering for 90 seconds</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Can drop sanity of nearby players by 15% and close a door</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Oni</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">EMF 5 | Freezing | DOTs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">More active around multiple people</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Drains 20% on ghost events, instead of 10%</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Will <b><i>not</i></b> appear as smoke and hiss at player</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Does not blink as often during hunts and are more visible</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Yokai</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">Spirit Box | Ghost Orbs | DOTs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Can hunt up to 80% sanity when talking near it</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Hearing/electronic distance is less than 2m during hunts</div>
+                    <hr>
+                    <div class="ghost_behavior_item">More active when talked to</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Hantu</div>
+                <div class="ghost_speed">1.44 m/s - 2.7 m/s</div>
+                <div class="ghost_evidence">Fingerprints | Ghost Orbs | Freezing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Guaranteed Freezing on Nightmare</div>
+                    <hr>
+                    <div class="ghost_behavior_item">High chance to turn off breaker, cannot turn breaker on</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Visible freezing breath in rooms below 37.4 F</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Guaranteed freezing on Nightmare mode</div>
+                    <hr>
+                    <div class="ghost_behavior_item"><b>Faster when cold (fastest in ghost room), does not speed up in line of sight</b></div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Goryo</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">EMF 5 | Fingerprints | DOTs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Can not roam far away from ghost room</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Guaranteed DOTs on Nightmare mode</div>
+                    <hr>
+                    <div class="ghost_behavior_item">DOTs only appear on camera</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Myling</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">EMF 5 | Fingerprints | Writing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Lots of paranormal sounds through paramic</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Footsteps can only be heard less than 10m during hunts</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Nearly silent during hunts</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Onryo</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">Spirit Box | Ghost Orbs | Freezing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Can hunt at ANY sanity by chance after extinguishing of candle/lighter</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Candles act like crucifixes, will blow out candle if it tries to hunt in range</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">The Twins</div>
+                <div class="ghost_speed">1.53 m/s | 1.87 m/s</div>
+                <div class="ghost_evidence">EMF 5 | Spirit Box | Freezing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Often do interactions at the same time</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Decoy only does interactions/EMF, no evidence or sensors</div>
+                    <hr>
+                    <div class="ghost_behavior_item"><b>Main twin is slower</b></div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Raiju</div>
+                <div class="ghost_speed">1.7 m/s | 2.81 m/s</div>
+                <div class="ghost_evidence">EMF 5 | Ghost Orbs | DOTs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Hunts at 65% sanity near electronics</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Flickers electronics at 15m range instead of 10m</div>
+                    <hr>
+                    <div class="ghost_behavior_item">EMF 5 + Ghost Orbs on Nightmare mode will confirm Raiju</div>
+                    <hr>
+                    <div class="ghost_behavior_item"><b>Faster near electronics</b></div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Obake</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">EMF 5 | Fingerprints | Ghost Orbs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Does not always leave fingerprints</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Guaranteed fingerprints on nightmare</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Special 6 fingered handprint, double fingie on lightswitch, and 5 fingers on keyboards</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">The Mimic</div>
+                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_evidence">Spirit Box | Fingerprints | Freezing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Changes ghost behavior within minutes</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Always shows orbs as additional fake evidence (4th evidence)</div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Moroi</div>
+                <div class="ghost_speed">2.25 m/s - 3.71 ms</div>
+                <div class="ghost_evidence">Spirit Box | Writing | Freezing</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">During a hunt, smudging the ghost will cause it to wander for 12s</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Places curse on player when heard through paramic or spirit box, curse drops sanity 2x as fast</div>
+                    <hr>
+                    <div class="ghost_behavior_item"><b>Faster when average sanity is lower</b></div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Deogen</div>
+                <div class="ghost_speed">0.4 m/s - 3.0 m/s</div>
+                <div class="ghost_evidence">Spirit Box | Writing | DOTs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Picks closest target randomly and switches randomly</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Spirit box scream when within 1m of the ghost</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Guaranteed spiritbox on Nightmare mode</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Cannot hide from a Deogen</div>
+                    <hr>
+                    <div class="ghost_behavior_item"><b>Slower when closer to the player</b></div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+            <div class="ghost_card">
+                <div class="ghost_name">Thaye</div>
+                <div class="ghost_speed">1 m/s - 2.75 m/s</div>
+                <div class="ghost_evidence">Ghost Orbs | Writing | DOTs</div>
+                <div class="ghost_behavior">
+                    <div class="ghost_behavior_item">Ghost ages over time (1-2 minutes)</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Hunts at 75% when young, 15% when old</div>
+                    <hr>
+                    <div class="ghost_behavior_item">Writing + DOTs on Nightmare mode confirms Thaye</div>
+                    <hr>
+                    <div class="ghost_behavior_item"><b>Slower with age, does not speed up in line of sight</b></div>
+                </div>
+                <div class="ghost_clear">
+                    <span class="check" onclick="select(this.parentElement.parentElement)"></span>
+                    <span class="space"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                </div>
+            </div>
+
+        </div>
+        <button id="reset" onclick="location.reload()">Reset</button>
+        <div class="footer"></div>
+
+    </div>
+
+    <script src="scripts/filter.js"></script>
+    <script src="scripts/analytics.js"></script>
+
+</body>
