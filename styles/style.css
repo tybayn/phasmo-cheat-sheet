@@ -25,7 +25,7 @@ body{
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 hr{
@@ -52,18 +52,18 @@ hr{
     .header{
         grid-column: 1 / 8;
         grid-row: 1 / 3;
-        background-color: #121212;
+        background-color: #171a1f;
         margin: -8px -8px 0 -8px;
-        box-shadow: 0px 10px 10px #121212;
+        box-shadow: 0px 10px 10px #000;
         z-index: 1;
     }
     
     .footer{
         grid-column: 1 / 8;
         grid-row: 4;
-        background-color: #121212;
+        background-color: #171a1f;
         margin: 0px -8px -8px -8px;
-        box-shadow: 0px -10px 10px #121212;
+        box-shadow: 0px -10px 10px #000;
         z-index: 1;
     }
 
@@ -72,7 +72,7 @@ hr{
         height: 100%;
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        grid-template-rows: 35px 100px auto 72px;
+        grid-template-rows: 35px 100px auto 55px;
     }
 
     .evidence_title{
@@ -91,7 +91,7 @@ hr{
         flex-direction: row;
         flex-wrap: wrap;
         align-content: flex-start;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         align-items: center;
         z-index: 2;
     }
@@ -112,7 +112,7 @@ hr{
         flex-direction: row;
         flex-wrap: wrap;
         align-content: flex-start;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         align-items: center;
         z-index: 2;
     }
@@ -128,6 +128,9 @@ hr{
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        width: calc(50% - 75px);
+        text-align: left;
+        justify-content: start;
     }
     
     .containero input {
@@ -187,14 +190,26 @@ hr{
         overflow-y: scroll;
         align-content: flex-start;
         user-select: none;
+        background: rgba(0,0,0,0.5);
+        padding-bottom: 30px;
+    }
+
+    .copyright{
+        grid-column: 3/6;
+        grid-row: 4;
+        text-align: center;
+        z-index: 2;
+        color: #FFF;
+        font-size: 10px;
+        padding-top: 25px;
     }
 
     #reset{
         grid-column: 7/8;
         grid-row: 4;
-        width: 100px;
+        width: 80px;
         justify-self: right;
-        font-size: 30px;
+        font-size: 24px;
         color: #000;
         background-color: #ccc;
         font-family: "October Crow";
@@ -209,10 +224,10 @@ hr{
     .ghost_card{
         display: grid;
         width: 600px;
-        border-radius: 30px;
+        border-radius: 5px;
         grid-template-columns: repeat(7, 1fr);
         color: white;
-        background-color: rgb(70, 70, 70);
+        background-color: #363c44;
         margin-top: 20px;
         height: 125px;
     }
@@ -255,6 +270,9 @@ hr{
         flex-direction: column;
         justify-content: flex-start;
         overflow-y: scroll;
+        background: rgba(0,0,0,0.25);
+        margin-top: 1px;
+        margin-bottom: 1px;
     }
     
     .ghost_behavior_item{
@@ -341,20 +359,20 @@ hr{
 @media screen and (max-device-width: 999px) {
 
     .header{
-        grid-column: 1 / 7;
+        grid-column: 1 / 8;
         grid-row: 1 / 3;
-        background-color: #121212;
+        background-color: #171a1f;
         margin: -8px -8px 0 -8px;
-        box-shadow: 0px 10px 10px #121212;
+        box-shadow: 0px 10px 10px #000;
         z-index: 1;
     }
     
     .footer{
-        grid-column: 1 / 7;
+        grid-column: 1 / 8;
         grid-row: 4;
-        background-color: #121212;
+        background-color: #171a1f;
         margin: 0px -8px -8px -8px;
-        box-shadow: 0px -10px 10px #121212;
+        box-shadow: 0px -10px 10px #000;
         z-index: 1;
     }
 
@@ -362,19 +380,19 @@ hr{
         width: 100%;
         height: 100%;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(7, 1fr);
         grid-template-rows: 75px 185px auto 120px;
     }
 
     .evidence_title{
-        grid-column: 1 / 5;
+        grid-column: 1 / 6;
         grid-row: 1;
         font-size: 50px;
         z-index: 2;
     }
 
     .evidence{
-        grid-column: 1 / 5;
+        grid-column: 1 / 6;
         grid-row: 2;
         font-size: 30px;
         text-align: center;
@@ -382,20 +400,20 @@ hr{
         flex-direction: row;
         flex-wrap: wrap;
         align-content: flex-start;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         align-items: center;
         z-index: 2;
     }
 
     .speed_title{
-        grid-column: 5 / 7;
+        grid-column: 6 / 8;
         grid-row: 1;
         font-size: 50px;
         z-index: 2;
     }
 
     .speed{
-        grid-column: 5 / 7;
+        grid-column: 6 / 8;
         grid-row: 2;
         font-size: 30px;
         text-align: center;
@@ -470,7 +488,7 @@ hr{
     }
 
     .cards{
-        grid-column: 1 / 7;
+        grid-column: 1 / 8;
         grid-row: 3;
         display: flex;
         flex-wrap: wrap;
@@ -478,10 +496,22 @@ hr{
         overflow-y: scroll;
         align-content: flex-start;
         user-select: none;
+        background: rgba(0,0,0,0.5);
+        padding-bottom: 30px;
+    }
+
+    .copyright{
+        grid-column: 3/6;
+        grid-row: 4;
+        text-align: center;
+        z-index: 2;
+        color: #FFF;
+        font-size: 19px;
+        padding-top: 48px;
     }
 
     #reset{
-        grid-column: 6/7;
+        grid-column: 7/8;
         grid-row: 4;
         width: 150px;
         justify-self: right;
@@ -500,10 +530,10 @@ hr{
     .ghost_card{
         display: grid;
         width: calc(100% - 50px);
-        border-radius: 30px;
+        border-radius: 5px;
         grid-template-columns: repeat(7, 1fr);
         color: white;
-        background-color: rgb(70, 70, 70);
+        background-color: #393e44;
         margin-top: 20px;
         height: 170px;
     }
@@ -546,6 +576,9 @@ hr{
         flex-direction: column;
         justify-content: flex-start;
         overflow-y: scroll;
+        background: rgba(0,0,0,0.25);
+        margin-top: 3px;
+        margin-bottom: 3px;
     }
     
     .ghost_behavior_item{
@@ -676,13 +709,14 @@ input{
 @media screen and (min-device-width: 1000px) {
     .tricheck{
         border: 0;
-        width: auto;
+        width: calc(25% - 20px);
         background:none;
         position: relative;
         margin: 8px 10px;
         cursor: pointer;
         font-size: 22px;
         display: grid;
+        justify-content: start;
     }
 
     #checkbox{
@@ -700,6 +734,40 @@ input{
 
     .neutral:hover{
         background-color: rgb(110, 110, 110);
+    }
+
+    .block{
+        cursor: not-allowed !important;
+    }
+
+    .disabled, .disabled:hover{
+        background-color: #282e36;
+    }
+
+    .disabled .icon{
+        background: #171a1f;
+        border-radius: 3px;
+        width: 15px;
+        height: 11px;
+        top: 11px;
+        left: 11px;
+        position: absolute;
+    }
+    
+    .disabled .icon:before {
+        content: "";
+        display: block;
+        position: absolute;
+        border:2px solid #171a1f;
+        top: -7px;
+        left: 2px;
+        width: 7px;
+        height: 8px;
+        border-radius: 35px 35px 0 0;
+    }
+
+    .disabled-text{
+        color: #282e36;
     }
 
     .good{
@@ -772,13 +840,14 @@ input{
 @media screen and (max-device-width: 999px) {
     .tricheck{
         border: 0;
-        width: auto;
+        width: 33%;
         background:none;
         position: relative;
-        margin: 8px 10px;
+        margin: 8px 0px;
         cursor: pointer;
         font-size: 35px;
         display: grid;
+        justify-content: start;
     }
 
     #checkbox{
@@ -796,6 +865,40 @@ input{
 
     .neutral:hover{
         background-color: rgb(110, 110, 110);
+    }
+
+    .block{
+        cursor: not-allowed !important;
+    }
+
+    .disabled, .disabled:hover{
+        background-color: #282e36;
+    }
+
+    .disabled .icon{
+        background: #171a1f;
+        border-radius: 3px;
+        width: 20px;
+        height: 12px;
+        top: 18px;
+        left: 13px;
+        position: absolute;
+    }
+    
+    .disabled .icon:before {
+        content: "";
+        display: block;
+        position: absolute;
+        border:2px solid #171a1f;
+        top: -13px;
+        left: 3px;
+        width: 10px;
+        height: 11px;
+        border-radius: 35px 35px 0 0;
+    }
+
+    .disabled-text{
+        color: #282e36;
     }
 
     .good{
@@ -876,7 +979,7 @@ input{
 
 #reset:hover{
     color: #ffffff;
-    background-color: rgb(110, 110, 110);
+    background-color: #393e44;
 }
 
 .selected {

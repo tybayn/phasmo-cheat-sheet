@@ -1,6 +1,67 @@
+const all_evidence = ["DOTs","EMF 5","Fingerprints","Freezing","Ghost Orbs","Writing","Spirit Box"]
+    const impossible = {
+        "DOTs":{
+            "EMF 5":["Writing"],
+            "Fingerprints":["Freezing","Writing"],
+            "Freezing":["Fingerprints","Writing","Spirit Box"],
+            "Writing":["EMF 5","Fingerprints","Freezing"],
+            "Spirit Box":["Freezing"]
+        },
+        "EMF 5":{
+            "DOTs":["Writing"],
+            "Fingerprints":["Spirit Box"],
+            "Freezing":["Ghost Orbs"],
+            "Ghost Orbs":["Freezing","Writing","Spirit Box"],
+            "Writing":["DOTs","Ghost Orbs"],
+            "Spirit Box":["Fingerprints","Ghost Orbs"]
+        },
+        "Fingerprints":{
+            "DOTs":["Freezing","Writing"],
+            "EMF 5":["Spirit Box"],
+            "Freezing":["DOTs"],
+            "Ghost Orbs":["Writing","Spirit Box"],
+            "Writing":["DOTs","Ghost Orbs"],
+            "Spirit Box":["EMF 5","Ghost Orbs"]
+        },
+        "Freezing":{
+            "DOTs":["Fingerprints","Writing","Spirit Box"],
+            "EMF 5":["Ghost Orbs"],
+            "Freezing":["Ghost Orbs"],
+            "Ghost Orbs":["Freezing","Writing","Spirit Box"],
+            "Writing":["DOTs","Ghost Orbs"],
+            "Spirit Box":["Fingerprints","Ghost Orbs"]
+        },
+        "Ghost Orbs":{
+            "EMF 5":["Freezing","Writing","Spirit Box"],
+            "Fingerprints":["Writing","Spirit Box"],
+            "Freezing":["EMF 5"],
+            "Writing":["EMF 5","Fingerprints"],
+            "Spirit Box":["EMF 5","Fingerprints"]
+        },
+        "Writing":{
+            "DOTs":["EMF 5","Fingerprints","Freezing"],
+            "EMF 5":["DOTs","Ghost Orbs"],
+            "Fingerprints":["DOTs","Ghost Orbs"],
+            "Freezing":["DOTs"],
+            "Ghost Orbs":["EMF 5","Fingerprints"]
+        },
+        "Spirit Box":{
+            "DOTs":["Freezing"],
+            "EMF 5":["Fingerprints","Ghost Orbs"],
+            "Fingerprints":["EMF 5","Ghost Orbs"],
+            "Freezing":["DOTs"],
+            "Ghost Orbs":["EMF 5","Fingerprints"]
+        }
+    }
+
 function tristate(elem){
     var checkbox = $(elem).find("#checkbox");
     var label = $(elem).find(".label");
+
+    if (checkbox.hasClass("disabled")){
+        return;
+    }
+
     if (checkbox.hasClass("neutral")){
         checkbox.removeClass("neutral")
         checkbox.addClass("good")
@@ -70,6 +131,35 @@ function filter(){
         spe_array.push(speed_checkboxes[i].value);
     }
 
+    // Filter other evidences
+    for (var i = 0; i < all_evidence.length; i++){
+        var checkbox = document.getElementById(all_evidence[i]);
+        $(checkbox).removeClass("block")
+        $(checkbox).find("#checkbox").removeClass(["block","disabled"])
+        $(checkbox).find(".label").removeClass("disabled-text")
+    }
+    if (evi_array.length == 2){
+        var imp_evi = impossible[evi_array[0]][evi_array[1]]
+        for (var i = 0; i < imp_evi.length; i++){
+            var checkbox = document.getElementById(imp_evi[i]);
+            $(checkbox).addClass("block")
+            $(checkbox).find("#checkbox").removeClass(["good","bad"])
+            $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+            $(checkbox).find(".label").addClass("disabled-text")
+            $(checkbox).find(".label").removeClass("strike")
+        }
+    }
+    if (evi_array.length == 3){
+        var imp_evi = all_evidence.filter(x => !evi_array.includes(x))
+        for (var i = 0; i < imp_evi.length; i++){
+            var checkbox = document.getElementById(imp_evi[i]);
+            $(checkbox).addClass("block")
+            $(checkbox).find("#checkbox").removeClass(["good","bad"])
+            $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+            $(checkbox).find(".label").removeClass("strike")
+        }
+    }
+
     // Get all ghosts
     var ghosts = document.getElementsByClassName("ghost_card")
 
@@ -135,10 +225,8 @@ function filter(){
             }
         }
 
-        if (keep){
-            ghosts[i].className = ghosts[i].className.replaceAll(" hidden","");
-        }
-        else{
+        ghosts[i].className = ghosts[i].className.replaceAll(" hidden","");
+        if (!keep){
             ghosts[i].className += " hidden";
         }
     }
