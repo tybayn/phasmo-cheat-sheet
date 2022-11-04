@@ -156,6 +156,7 @@ function filter(){
             $(checkbox).addClass("block")
             $(checkbox).find("#checkbox").removeClass(["good","bad"])
             $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+            $(checkbox).find(".label").addClass("disabled-text")
             $(checkbox).find(".label").removeClass("strike")
         }
     }
