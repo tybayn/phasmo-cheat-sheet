@@ -230,6 +230,8 @@ hr{
         background-color: #363c44;
         margin-top: 20px;
         height: 125px;
+        overflow: hidden;
+        position: relative;
     }
 
     .ghost_name{
@@ -255,6 +257,19 @@ hr{
         font-size: 18px;
         padding:10px 20px;
         text-align: center;
+    }
+
+    .ghost_hunt{
+        position: absolute;
+        bottom: -7px;
+        left: -20px;
+        width: 60px;
+        height: 30px;
+        padding-top: 3px;
+        -webkit-transform: rotate(45deg);
+        font-size: 12px;
+        text-align: center;
+        box-shadow: inset 0 0 10px #161615;
     }
 
     .ghost_behavior{
@@ -536,6 +551,21 @@ hr{
         background-color: #393e44;
         margin-top: 20px;
         height: 170px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .ghost_hunt{
+        position: absolute;
+        bottom: -14px;
+        left: -31px;
+        width: 85px;
+        height: 45px;
+        padding-top: 7px;
+        -webkit-transform: rotate(45deg);
+        font-size: 16px;
+        text-align: center;
+        box-shadow: inset 0 0 10px #161615;
     }
 
     .ghost_name{
@@ -551,7 +581,7 @@ hr{
     .ghost_evidence{
         grid-column: 1 / 4;
         grid-row: 2;
-        font-size: 25px;
+        font-size: 20px;
         text-align: center;
     }
     
@@ -975,6 +1005,21 @@ input{
 
 .strike{
     text-decoration: line-through;
+}
+
+.average{
+    color:#FFF;
+    background: rgba(0,0,0,0.25);
+}
+
+.low{
+    color:rgb(180, 255, 180);
+    background: rgba(0,75,0,0.25);
+}
+
+.high{
+    color:rgb(255, 180, 180);
+    background: rgba(75, 0, 0, 0.25);
 }
 
 #reset:hover{
