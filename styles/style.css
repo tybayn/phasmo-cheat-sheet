@@ -204,6 +204,16 @@ hr{
         padding-top: 25px;
     }
 
+    #session{
+        grid-column: 3/6;
+        grid-row: 4;
+        text-align: center;
+        z-index: 2;
+        color: rgb(74 74 74);
+        font-size: 8px;
+        padding-top: 42px;
+    }
+
     #reset{
         grid-column: 7/8;
         grid-row: 4;
@@ -523,6 +533,16 @@ hr{
         color: #FFF;
         font-size: 19px;
         padding-top: 48px;
+    }
+
+    #session{
+        grid-column: 3/6;
+        grid-row: 4;
+        text-align: center;
+        z-index: 2;
+        color: rgb(74 74 74);
+        font-size: 18px;
+        padding-top: 76px;
     }
 
     #reset{
