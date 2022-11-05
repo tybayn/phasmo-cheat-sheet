@@ -50,80 +50,74 @@ hr{
 
 @media screen and (min-device-width: 1000px) {
     .header{
-        grid-column: 1 / 8;
-        grid-row: 1 / 3;
-        background-color: #171a1f;
-        margin: -8px -8px 0 -8px;
-        box-shadow: 0px 10px 10px #000;
+        grid-column: 1;
+        grid-row: 1 / 7;
+        background-color: #363c44;
+        margin: -8px;
+        box-shadow: 10px 0px 10px #000;
         z-index: 1;
     }
-    
+
     .footer{
-        grid-column: 1 / 8;
-        grid-row: 4;
-        background-color: #171a1f;
-        margin: 0px -8px -8px -8px;
-        box-shadow: 0px -10px 10px #000;
-        z-index: 1;
+        display: none;
     }
 
     .data{
         width: 100%;
         height: 100%;
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        grid-template-rows: 35px 100px auto 55px;
+        grid-template-columns: 150px auto;
+        grid-template-rows: 36px 300px 45px auto 55px 55px;
     }
 
     .evidence_title{
-        grid-column: 1 / 6;
+        grid-column: 1;
         grid-row: 1;
-        font-size: 30px;
+        font-size: 24px;
         z-index: 2;
     }
 
     .evidence{
-        grid-column: 1 / 6;
+        grid-column: 1;
         grid-row: 2;
         font-size: 30px;
         text-align: center;
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        justify-content: flex-start;
-        align-items: center;
+        flex-direction: column;
         z-index: 2;
+        box-shadow: inset 0 0 10px #161615;
+        background: rgba(0,0,0,0.25);
+        justify-content: space-evenly;
     }
 
     .speed_title{
-        grid-column: 6 / 8;
-        grid-row: 1;
-        font-size: 30px;
+        grid-column: 1;
+        grid-row: 3;
+        font-size: 24px;
         z-index: 2;
+        margin-top: 8px;
     }
 
     .speed{
-        grid-column: 6 / 8;
-        grid-row: 2;
+        grid-column: 1;
+        grid-row: 4;
         font-size: 30px;
         text-align: center;
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        justify-content: flex-start;
-        align-items: center;
+        flex-direction: column;
         z-index: 2;
+        box-shadow: inset 0 0 10px #161615;
+        background: rgba(0,0,0,0.25);
     }
 
     .containero {
+        height: 25px;
         display: inline-block;
         position: relative;
         padding-left: 35px;
-        margin: 12px 20px;
+        margin: 8px 6px;
         cursor: pointer;
-        font-size: 22px;
+        font-size: 18px;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -145,8 +139,8 @@ hr{
         position: absolute;
         top: 0;
         left: 0;
-        height: 25px;
-        width: 25px;
+        height: 23px;
+        width: 23px;
         background-color: #ccc;
         border-radius: 5px;
     }
@@ -156,7 +150,7 @@ hr{
     }
     
     .containero input:checked ~ .checkmarko {
-        background-color: #ff9900;
+        background-color: #d37f00;
     }
     
     .checkmarko:after {
@@ -170,8 +164,8 @@ hr{
     }
     
     .containero .checkmarko:after {
-        left: 9px;
-        top: 5px;
+        left: 8px;
+        top: 3px;
         width: 5px;
         height: 10px;
         border: solid white;
@@ -182,8 +176,8 @@ hr{
     }
 
     .cards{
-        grid-column: 1 / 8;
-        grid-row: 3;
+        grid-column: 2;
+        grid-row: 1 / 7;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
@@ -192,34 +186,35 @@ hr{
         user-select: none;
         background: rgba(0,0,0,0.5);
         padding-bottom: 30px;
+        margin: -8px -8px -8px 8px;
     }
 
     .copyright{
-        grid-column: 3/6;
-        grid-row: 4;
+        grid-column: 1;
+        grid-row: 6;
         text-align: center;
         z-index: 2;
-        color: #FFF;
+        color: rgb(173, 173, 173);
         font-size: 10px;
-        padding-top: 25px;
+        padding-top: 10px;
     }
 
     #session{
-        grid-column: 3/6;
-        grid-row: 4;
+        grid-column: 1;
+        grid-row: 6;
         text-align: center;
         z-index: 2;
-        color: rgb(74 74 74);
-        font-size: 8px;
+        color: rgb(26, 26, 26);
+        font-size: 7px;
         padding-top: 42px;
     }
 
     #reset{
-        grid-column: 7/8;
-        grid-row: 4;
-        width: 80px;
-        justify-self: right;
-        font-size: 24px;
+        grid-column: 1;
+        grid-row: 5;
+        width: 100%;
+        justify-self: center;
+        font-size: 20px;
         color: #000;
         background-color: #ccc;
         font-family: "October Crow";
@@ -233,9 +228,9 @@ hr{
 
     .ghost_card{
         display: grid;
-        width: 600px;
+        width: 515px;
         border-radius: 5px;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: 215px 300px;
         color: white;
         background-color: #363c44;
         margin-top: 20px;
@@ -245,26 +240,26 @@ hr{
     }
 
     .ghost_name{
-        grid-column: 1 / 4;
+        grid-column: 1;
         grid-row: 1;
         font-family:"October Crow";
-        font-size: 30px;
+        font-size: 24px;
         font-weight: bold;
         padding:10px;
         text-align: center;
     }
 
     .ghost_evidence{
-        grid-column: 1 / 4;
+        grid-column: 1;
         grid-row: 2;
-        font-size: 14px;
+        font-size: 12px;
         text-align: center;
     }
     
     .ghost_speed{
-        grid-column: 1 / 4;
+        grid-column: 1;
         grid-row: 3;
-        font-size: 18px;
+        font-size: 14px;
         padding:10px 20px;
         text-align: center;
     }
@@ -283,9 +278,8 @@ hr{
     }
 
     .ghost_behavior{
-        grid-column: 4 / 8;
+        grid-column: 2;
         grid-row: 1 / 4;
-        font-size: 18px;
         padding:10px 20px;
         margin-left: 2px;
         margin-right: 30px;
@@ -298,15 +292,16 @@ hr{
         background: rgba(0,0,0,0.25);
         margin-top: 1px;
         margin-bottom: 1px;
+        z-index: 5;
     }
     
     .ghost_behavior_item{
-        line-height: 20px;
-        font-size: 13px;
+        line-height: 18px;
+        font-size: 12px;
     }
 
     .ghost_clear{
-        grid-column: 7;
+        grid-column: 2;
         grid-row: 1 / 4;
         display: flex;
         align-content: center;
@@ -487,7 +482,7 @@ hr{
     }
     
     .containero input:checked ~ .checkmarko {
-        background-color: #ff9900;
+        background-color: #d37f00;
     }
     
     .checkmarko:after {
@@ -759,20 +754,19 @@ input{
 @media screen and (min-device-width: 1000px) {
     .tricheck{
         border: 0;
-        width: calc(25% - 20px);
         background:none;
         position: relative;
-        margin: 8px 10px;
+        margin: 8px 0px;
         cursor: pointer;
-        font-size: 22px;
+        font-size: 18px;
         display: grid;
         justify-content: start;
     }
 
     #checkbox{
         grid-column: 1;
-        width: 25px;
-        height: 25px;
+        width: 23px;
+        height: 23px;
         cursor: pointer;
         margin-right: 10px;
         border-radius: 5px;
@@ -799,8 +793,8 @@ input{
         border-radius: 3px;
         width: 15px;
         height: 11px;
-        top: 11px;
-        left: 11px;
+        top: 10px;
+        left: 10px;
         position: absolute;
     }
     
@@ -821,46 +815,46 @@ input{
     }
 
     .good{
-        background-color: #00ff40;
+        background-color: #00aa2b;
     }
 
     .good .icon{
         display:inline-block;
-        width: 25px;
-        height:25px;
+        width: 23px;
+        height:23px;
         -ms-transform: rotate(45deg); /* IE 9 */
         -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
         transform: rotate(45deg);
     }
 
     .good .icon:before{
-        content:"";
+        content: "";
         position: absolute;
-        width:3px;
-        height:14px;
-        background-color:#fff;
-        left:13px;
-        top:4px;
+        width: 3px;
+        height: 13px;
+        background-color: #fff;
+        left: 12px;
+        top: 3px;
     }
 
     .good .icon:after{
-        content:"";
+        content: "";
         position: absolute;
-        width:5px;
-        height:3px;
-        background-color:#fff;
-        left:8px;
-        top:15px;
+        width: 5px;
+        height: 3px;
+        background-color: #fff;
+        left: 7px;
+        top: 13px;
     }
 
     .bad{
-        background-color: crimson;
+        background-color: rgb(180, 0, 36);
     }
 
     .bad .icon{
         display:inline-block;
-        width: 25px;
-        height:25px;
+        width: 23px;
+        height:23px;
         -ms-transform: rotate(45deg); /* IE 9 */
         -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
         transform: rotate(45deg);
@@ -870,20 +864,20 @@ input{
         content:"";
         position: absolute;
         width:3px;
-        height:17px;
+        height:15px;
         background-color:#fff;
-        left:11px;
+        left:10px;
         top:4px;
     }
 
     .bad .icon:after{
         content:"";
         position: absolute;
-        width:17px;
+        width:15px;
         height:3px;
         background-color:#fff;
         left:4px;
-        top:11px;
+        top:10px;
     }
 }
 
@@ -952,7 +946,7 @@ input{
     }
 
     .good{
-        background-color: #00ff40;
+        background-color: #00aa2b;
     }
 
     .good .icon{
@@ -985,7 +979,7 @@ input{
     }
 
     .bad{
-        background-color: crimson;
+        background-color: rgb(180, 0, 36);
     }
 
     .bad .icon{
