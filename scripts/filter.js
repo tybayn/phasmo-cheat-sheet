@@ -2,60 +2,6 @@ function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";
 
 const all_evidence = ["DOTs","EMF 5","Fingerprints","Freezing","Ghost Orbs","Writing","Spirit Box"]
 const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","Mare","Revenant","Shade","Demon","Yurei","Oni","Yokai","Hantu","Goryo","Myling","Onryo","The Twins","Raiju","Obake","The Mimic","Moroi","Deogen","Thaye"]
-const impossible = {
-    "DOTs":{
-        "EMF 5":["Writing"],
-        "Fingerprints":["Freezing","Writing"],
-        "Freezing":["Fingerprints","Writing","Spirit Box"],
-        "Writing":["EMF 5","Fingerprints","Freezing"],
-        "Spirit Box":["Freezing"]
-    },
-    "EMF 5":{
-        "DOTs":["Writing"],
-        "Fingerprints":["Spirit Box"],
-        "Freezing":["Ghost Orbs"],
-        "Ghost Orbs":["Freezing","Writing","Spirit Box"],
-        "Writing":["DOTs","Ghost Orbs"],
-        "Spirit Box":["Fingerprints","Ghost Orbs"]
-    },
-    "Fingerprints":{
-        "DOTs":["Freezing","Writing"],
-        "EMF 5":["Spirit Box"],
-        "Freezing":["DOTs"],
-        "Ghost Orbs":["Writing","Spirit Box"],
-        "Writing":["DOTs","Ghost Orbs"],
-        "Spirit Box":["EMF 5","Ghost Orbs"]
-    },
-    "Freezing":{
-        "DOTs":["Fingerprints","Writing","Spirit Box"],
-        "EMF 5":["Ghost Orbs"],
-        "Freezing":["Ghost Orbs"],
-        "Ghost Orbs":["Freezing","Writing","Spirit Box"],
-        "Writing":["DOTs","Ghost Orbs"],
-        "Spirit Box":["Fingerprints","Ghost Orbs"]
-    },
-    "Ghost Orbs":{
-        "EMF 5":["Freezing","Writing","Spirit Box"],
-        "Fingerprints":["Writing","Spirit Box"],
-        "Freezing":["EMF 5"],
-        "Writing":["EMF 5","Fingerprints"],
-        "Spirit Box":["EMF 5","Fingerprints"]
-    },
-    "Writing":{
-        "DOTs":["EMF 5","Fingerprints","Freezing"],
-        "EMF 5":["DOTs","Ghost Orbs"],
-        "Fingerprints":["DOTs","Ghost Orbs"],
-        "Freezing":["DOTs"],
-        "Ghost Orbs":["EMF 5","Fingerprints"]
-    },
-    "Spirit Box":{
-        "DOTs":["Freezing"],
-        "EMF 5":["Fingerprints","Ghost Orbs"],
-        "Fingerprints":["EMF 5","Ghost Orbs"],
-        "Freezing":["DOTs"],
-        "Ghost Orbs":["EMF 5","Fingerprints"]
-    }
-}
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
 
@@ -201,31 +147,10 @@ function filter(){
         $(checkbox).find("#checkbox").removeClass(["block","disabled"])
         $(checkbox).find(".label").removeClass("disabled-text")
     }
-    if (evi_array.length == 2){
-        var imp_evi = impossible[evi_array[0]][evi_array[1]]
-        for (var i = 0; i < imp_evi.length; i++){
-            var checkbox = document.getElementById(imp_evi[i]);
-            $(checkbox).addClass("block")
-            $(checkbox).find("#checkbox").removeClass(["good","bad"])
-            $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
-            $(checkbox).find(".label").addClass("disabled-text")
-            $(checkbox).find(".label").removeClass("strike")
-        }
-    }
-    if (evi_array.length == 3){
-        var imp_evi = all_evidence.filter(x => !evi_array.includes(x))
-        for (var i = 0; i < imp_evi.length; i++){
-            var checkbox = document.getElementById(imp_evi[i]);
-            $(checkbox).addClass("block")
-            $(checkbox).find("#checkbox").removeClass(["good","bad"])
-            $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
-            $(checkbox).find(".label").addClass("disabled-text")
-            $(checkbox).find(".label").removeClass("strike")
-        }
-    }
 
     // Get all ghosts
     var ghosts = document.getElementsByClassName("ghost_card")
+    var keep_evidence = new Set();
 
     for (var i = 0; i < ghosts.length; i++){
         var keep = true;
@@ -293,6 +218,25 @@ function filter(){
         if (!keep){
             ghosts[i].className += " hidden";
         }
+        else{
+            var evidence = ghosts[i].getElementsByClassName("ghost_evidence")[0];
+            for (var e =0; e < evidence.textContent.split('|').length; e++){
+                keep_evidence.add(evidence.textContent.split('|')[e].trim())
+            }
+        }
+    }
+
+    if (evi_array.length > 0){
+        all_evidence.filter(evi => !keep_evidence.has(evi)).forEach(function(item){
+            if (!not_evi_array.includes(item)){
+                var checkbox = document.getElementById(item);
+                $(checkbox).addClass("block")
+                $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+                $(checkbox).find(".label").addClass("disabled-text")
+                $(checkbox).find(".label").removeClass("strike")
+            }
+        })
     }
 
     setCookie("state",JSON.stringify(state),1)
@@ -312,6 +256,10 @@ function reset(){
         setCookie("session",uuid,-1)
         setCookie("state",JSON.stringify(state),-1)
         location.reload()
+    })
+    .catch((response) => {
+        setCookie("session",uuid,-1)
+        setCookie("state",JSON.stringify(state),-1)
+        location.reload()
     });
-    
 }
