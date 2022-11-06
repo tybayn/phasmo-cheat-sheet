@@ -47,15 +47,15 @@
             Speed
         </div>
         <div class="speed">
-            <label class="containero phasfont white" onchange="filter()">Slow
+            <label id="Slow" class="containero phasfont white" onchange="filter()">Slow
                 <input type="checkbox" name="speed" value="Slow">
                 <span class="checkmarko"></span>
             </label>
-            <label class="containero phasfont white" onchange="filter()">Normal
+            <label id="Normal" class="containero phasfont white" onchange="filter()">Normal
                 <input type="checkbox" name="speed" value="Normal">
                 <span class="checkmarko"></span>
             </label>
-            <label class="containero phasfont white" onchange="filter()">Fast
+            <label id="Fast" class="containero phasfont white" onchange="filter()">Fast
                 <input type="checkbox" name="speed" value="Fast">
                 <span class="checkmarko"></span>
             </label>
@@ -63,7 +63,7 @@
 
         <div class="cards">
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Spirit">
                 <div class="ghost_name">Spirit</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Wraith">
                 <div class="ghost_name">Wraith</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Phantom">
                 <div class="ghost_name">Phantom</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -118,7 +118,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Poltergeist">
                 <div class="ghost_name">Poltergeist</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -139,7 +139,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Banshee">
                 <div class="ghost_name">Banshee</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -158,7 +158,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Jinn">
                 <div class="ghost_name">Jinn</div>
                 <div class="ghost_speed">1.7 m/s | 2.81 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -177,7 +177,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Mare">
                 <div class="ghost_name">Mare</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt high">60%</div>
@@ -196,7 +196,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Revenant">
                 <div class="ghost_name">Revenant</div>
                 <div class="ghost_speed">1.0 m/s | 3.0 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -213,7 +213,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Shade">
                 <div class="ghost_name">Shade</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt low">35%</div>
@@ -234,7 +234,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Demon">
                 <div class="ghost_name">Demon</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt high">70%</div>
@@ -257,7 +257,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Yurei">
                 <div class="ghost_name">Yurei</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -274,7 +274,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Oni">
                 <div class="ghost_name">Oni</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -295,7 +295,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Yokai">
                 <div class="ghost_name">Yokai</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt high">80%</div>
@@ -314,7 +314,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Hantu">
                 <div class="ghost_name">Hantu</div>
                 <div class="ghost_speed">1.44 m/s - 2.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -335,7 +335,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Goryo">
                 <div class="ghost_name">Goryo</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -354,7 +354,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Myling">
                 <div class="ghost_name">Myling</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -373,7 +373,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Onryo">
                 <div class="ghost_name">Onryo</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt high">60%</div>
@@ -390,7 +390,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="The Twins">
                 <div class="ghost_name">The Twins</div>
                 <div class="ghost_speed">1.53 m/s | 1.87 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -409,7 +409,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Raiju">
                 <div class="ghost_name">Raiju</div>
                 <div class="ghost_speed">1.7 m/s | 2.5 m/s</div>
                 <div class="ghost_hunt high">65%</div>
@@ -430,7 +430,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Obake">
                 <div class="ghost_name">Obake</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -451,7 +451,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="The Mimic">
                 <div class="ghost_name">The Mimic</div>
                 <div class="ghost_speed">1.7 m/s</div>
                 <div class="ghost_hunt average">50%</div>
@@ -468,7 +468,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Moroi">
                 <div class="ghost_name">Moroi</div>
                 <div class="ghost_speed">2.25 m/s - 3.71 ms</div>
                 <div class="ghost_hunt average">50%</div>
@@ -487,7 +487,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Deogen">
                 <div class="ghost_name">Deogen</div>
                 <div class="ghost_speed">0.4 m/s - 3.0 m/s</div>
                 <div class="ghost_hunt low">40%</div>
@@ -510,7 +510,7 @@
                 </div>
             </div>
 
-            <div class="ghost_card">
+            <div class="ghost_card" id="Thaye">
                 <div class="ghost_name">Thaye</div>
                 <div class="ghost_speed">1.0 m/s - 2.75 m/s</div>
                 <div class="ghost_hunt high">75%</div>
@@ -534,7 +534,7 @@
         </div>
         <div id="session">-</div>
         <div class="copyright">Copyright &copy; 2022<br>Ty Bayn (Zero-Network)</div>
-        <button id="reset" onclick="location.reload()">Reset</button>
+        <button id="reset" onclick="reset()">Reset</button>
         <div class="footer"></div>
 
     </div>
