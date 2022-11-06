@@ -308,7 +308,10 @@ function reset(){
     }
     var uuid = getCookie("session")
     fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/state",{method:"POST",body:JSON.stringify(state)})
-    setCookie("session",uuid,-1)
-    setCookie("state",JSON.stringify(state),-1)
-    location.reload()
+    .then((response) => {
+        setCookie("session",uuid,-1)
+        setCookie("state",JSON.stringify(state),-1)
+        location.reload()
+    });
+    
 }
