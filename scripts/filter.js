@@ -243,13 +243,6 @@ function filter(){
 }
 
 function reset(){
-    state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
-    for (var i = 0; i < all_evidence.length; i++){
-        state["evidence"][all_evidence[i]] = 0
-    }
-    for (var i = 0; i < all_ghosts.length; i++){
-        state["ghosts"][all_ghosts[i]] = 1
-    }
     var uuid = getCookie("session")
     fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/state",{method:"POST",body:JSON.stringify(state)})
     .then((response) => {
