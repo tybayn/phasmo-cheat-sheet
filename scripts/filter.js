@@ -306,6 +306,7 @@ function reset(){
     for (var i = 0; i < all_ghosts.length; i++){
         state["ghosts"][all_ghosts[i]] = 1
     }
+    setCookie("session","<session-ended>",-1)
     setCookie("state",JSON.stringify(state),1)
     location.reload()
 }
