@@ -78,18 +78,20 @@ function tristate(elem){
 
 function select(elem){
     if (!$(elem).hasClass("faded")){
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
         var on = $(elem).hasClass("selected")
 
         var selected = $(".selected");
         for (var i = 0 ; i < selected.length; i++){
             $(selected[i]).removeClass("selected");
+            state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
         }
         if ($(elem).hasClass("faded")){
             $(elem).removeClass("selected");
+            state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
         }
         else if (!on){
             $(elem).addClass("selected");
+            state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
         }
         setCookie("state",JSON.stringify(state),1)
         heartbeat()
@@ -97,7 +99,12 @@ function select(elem){
 }
 
 function fade(elem){
-    state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
+    if (state["ghosts"][$(elem).find(".ghost_name")[0].innerText] != 0){
+        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
+    }
+    else{
+        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+    }
     $(elem).toggleClass("faded");
     $(elem).removeClass("selected");
     $(elem).find(".ghost_name").toggleClass("strike");
