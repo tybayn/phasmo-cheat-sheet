@@ -2,7 +2,7 @@ function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";
 function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
 async function get_session(){
     var e="";
-    e=await fetch("http://zero-network.duckdns.org/analytics/",{headers:{Accept:"application/json"}})
+    e=await fetch("https://zero-network.duckdns.org/analytics/",{headers:{Accept:"application/json"}})
     .then(e=>e.json());
     setCookie("znid",e.znid,1)
     $("#session").text(e.znid)
