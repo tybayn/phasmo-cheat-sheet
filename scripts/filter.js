@@ -1,4 +1,5 @@
-function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";");for(let n=0;n<i.length;n++){let o=i[n];for(;" "==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(t))return o.substring(t.length,o.length)}return""}function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
+function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";");for(let n=0;n<i.length;n++){let o=i[n];for(;" "==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(t))return o.substring(t.length,o.length)}return""}
+function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
 
 const all_evidence = ["DOTs","EMF 5","Fingerprints","Freezing","Ghost Orbs","Writing","Spirit Box"]
 const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","Mare","Revenant","Shade","Demon","Yurei","Oni","Yokai","Hantu","Goryo","Myling","Onryo","The Twins","Raiju","Obake","The Mimic","Moroi","Deogen","Thaye"]
@@ -91,6 +92,8 @@ function select(elem){
             $(elem).addClass("selected");
         }
         setCookie("state",JSON.stringify(state),1)
+        var uuid = getCookie("znid")
+        fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/",{method:"POST",body:JSON.stringify(state)})
     }
 }
 
@@ -100,12 +103,16 @@ function fade(elem){
     $(elem).removeClass("selected");
     $(elem).find(".ghost_name").toggleClass("strike");
     setCookie("state",JSON.stringify(state),1)
+    var uuid = getCookie("znid")
+    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/",{method:"POST",body:JSON.stringify(state)})
 }
 
 function remove(elem){
     state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -1;
     $(elem).addClass("permhidden");
     setCookie("state",JSON.stringify(state),1)
+    var uuid = getCookie("znid")
+    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/",{method:"POST",body:JSON.stringify(state)})
 }
 
 function filter(){
@@ -239,19 +246,22 @@ function filter(){
         })
     }
 
+    
     setCookie("state",JSON.stringify(state),1)
+    var uuid = getCookie("znid")
+    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/",{method:"POST",body:JSON.stringify(state)})
 }
 
 function reset(){
-    var uuid = getCookie("session")
-    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/state",{method:"POST",body:JSON.stringify(state)})
+    var uuid = getCookie("znid")
+    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state)})
     .then((response) => {
-        setCookie("session",uuid,-1)
+        setCookie("znid",uuid,-1)
         setCookie("state",JSON.stringify(state),-1)
         location.reload()
     })
     .catch((response) => {
-        setCookie("session",uuid,-1)
+        setCookie("znid",uuid,-1)
         setCookie("state",JSON.stringify(state),-1)
         location.reload()
     });
