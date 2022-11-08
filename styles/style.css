@@ -67,7 +67,7 @@ hr{
         height: 100%;
         display: grid;
         grid-template-columns: 150px auto;
-        grid-template-rows: 36px 300px 45px auto 55px 55px;
+        grid-template-rows: 36px 300px 45px auto 55px 75px;
     }
 
     .evidence_title{
@@ -199,6 +199,16 @@ hr{
         padding-top: 10px;
     }
 
+    #active-users{
+        grid-column: 1;
+        grid-row: 6;
+        text-align: center;
+        z-index: 2;
+        color: rgb(173, 173, 173);
+        font-size: 9px;
+        padding-top: 45px;
+    }
+
     #session{
         grid-column: 1;
         grid-row: 6;
@@ -206,7 +216,7 @@ hr{
         z-index: 2;
         color: rgb(26, 26, 26);
         font-size: 7px;
-        padding-top: 42px;
+        padding-top: 65px;
     }
 
     #reset{
@@ -527,7 +537,17 @@ hr{
         z-index: 2;
         color: #FFF;
         font-size: 19px;
-        padding-top: 48px;
+        padding-top: 10px;
+    }
+
+    #active-users{
+        grid-column: 3/6;
+        grid-row: 4;
+        text-align: center;
+        z-index: 2;
+        color: rgb(173, 173, 173);
+        font-size: 18px;
+        padding-top: 65px;
     }
 
     #session{
@@ -537,7 +557,7 @@ hr{
         z-index: 2;
         color: rgb(74 74 74);
         font-size: 18px;
-        padding-top: 76px;
+        padding-top: 95px;
     }
 
     #reset{

@@ -6,6 +6,24 @@ async function get_session(){
     .then(e=>e.json());
     setCookie("znid",e.znid,1)
     $("#session").text(e.znid)
+    heartbeat()
+}
+function heartbeat(){
+    var uuid = getCookie("znid")
+    fetch("https://zero-network.duckdns.org/analytics/"+uuid,{method:"POST",Accept:"application/json",body:JSON.stringify(state)})
+    .then(response => response.json())
+    .then(data => {
+        $("#active-users").text("Active Users: " + data['active_num_users'])
+    })
+    .catch(response => {
+        $("#active-users").text("Active Users: -")
+    });
 }
 var znid=getCookie("znid")
-znid?($("#session").text(znid)):get_session()
+if(znid){
+    $("#session").text(znid)
+    heartbeat()
+}
+else{
+    get_session()
+}

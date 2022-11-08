@@ -92,8 +92,7 @@ function select(elem){
             $(elem).addClass("selected");
         }
         setCookie("state",JSON.stringify(state),1)
-        var uuid = getCookie("znid")
-        fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/",{method:"POST",body:JSON.stringify(state)})
+        heartbeat()
     }
 }
 
@@ -103,16 +102,14 @@ function fade(elem){
     $(elem).removeClass("selected");
     $(elem).find(".ghost_name").toggleClass("strike");
     setCookie("state",JSON.stringify(state),1)
-    var uuid = getCookie("znid")
-    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/",{method:"POST",body:JSON.stringify(state)})
+    heartbeat()
 }
 
 function remove(elem){
     state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -1;
     $(elem).addClass("permhidden");
     setCookie("state",JSON.stringify(state),1)
-    var uuid = getCookie("znid")
-    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/",{method:"POST",body:JSON.stringify(state)})
+    heartbeat()
 }
 
 function filter(){
@@ -248,8 +245,7 @@ function filter(){
 
     
     setCookie("state",JSON.stringify(state),1)
-    var uuid = getCookie("znid")
-    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/",{method:"POST",body:JSON.stringify(state)})
+    heartbeat()
 }
 
 function reset(){
