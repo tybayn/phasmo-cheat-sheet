@@ -2,6 +2,10 @@
     <title>Phasmophobia Cheat Sheet</title>
     <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="https://bl.ocks.org/mbostock/raw/7ea1dde508cec6d2d95306f92642bc42/6aac691494f752142a67cc43c51a0fd09896dbd4/versor.js"></script>
     <link rel="stylesheet" href="styles/style.css"/>
 </head>
 
@@ -532,13 +536,22 @@
             </div>
 
         </div>
-        <div id="active-users">Active Users: -</div>
+        <div id="active-users"><span id="active-users-label" onclick="showGlobe()">Active Users: -</span></div>
         <div id="session">-</div>
         <div class="copyright">Copyright &copy; 2022<br>Ty Bayn (Zero-Network)</div>
         <button id="reset" onclick="reset()">Reset</button>
         <div class="footer"></div>
 
     </div>
+
+    <div id="world" class="hidden">
+        <div class="active_title phasfont white">
+            Active Users
+        </div>
+        <span class="icon" onclick="showGlobe()"></span>
+        <canvas id="globe"></canvas>
+    </div>
+    <script src="scripts/geo.js"></script>
 
     <script src="scripts/filter.js"></script>
     <script src="scripts/analytics.js"></script>

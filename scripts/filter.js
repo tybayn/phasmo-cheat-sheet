@@ -255,6 +255,11 @@ function filter(){
     heartbeat()
 }
 
+function showGlobe(){
+    $("#world").fadeToggle(400)
+    scale()
+}
+
 function reset(){
     var uuid = getCookie("znid")
     fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state)})

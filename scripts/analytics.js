@@ -13,10 +13,12 @@ function heartbeat(){
     fetch("https://zero-network.duckdns.org/analytics/"+uuid,{method:"POST",Accept:"application/json",body:JSON.stringify(state)})
     .then(response => response.json())
     .then(data => {
-        $("#active-users").text("Active Users: " + data['active_num_users'])
+        $("#active-users-label").text("Active Users: " + data['active_num_users'])
+        $(".active_title").text("Active Users: " + data['active_num_users'])
     })
     .catch(response => {
-        $("#active-users").text("Active Users: -")
+        $("#active-users-label").text("Active Users: -")
+        $(".active_title").text("Active Users: -")
     });
 }
 var znid=getCookie("znid")
