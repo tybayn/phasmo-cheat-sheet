@@ -93,7 +93,9 @@ function rotate(elapsed) {
     rotation = projection.rotate()
     rotation[0] += diff * degPerMs
     projection.rotate(rotation)
-    render()
+    if (!document.hidden || !$("#world").is(":visible")){
+      render()
+    }
   }
   lastTime = now
 }
@@ -133,6 +135,8 @@ loadData(function(world,locations) {
 })
 
 setInterval(function(){
+  if(!document.hidden){
     reloadData()
     heartbeat()
+  }
 }, 60000)

@@ -257,6 +257,7 @@ function filter(){
 
 function showGlobe(){
     $("#world").fadeToggle(400)
+    reloadData()
     scale()
 }
 
