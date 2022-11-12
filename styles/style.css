@@ -1378,7 +1378,7 @@ input{
     }
 
     .disabled, .disabled:hover{
-        background-color: #282e36;
+        background-color: #363c44;
     }
 
     .disabled .icon{
@@ -1404,7 +1404,7 @@ input{
     }
 
     .disabled-text{
-        color: #282e36;
+        color: #363c44;
     }
 
     .good{
