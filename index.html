@@ -1,4 +1,5 @@
 <head>
+    <meta charset="UTF-8">
     <title>Phasmophobia Cheat Sheet</title>
     <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -65,11 +66,28 @@
             </label>
         </div>
 
+        <div class="modifier_title phasfont white">
+            Modifiers
+        </div>
+        <div class="modifier">
+            <div class="modifier_ghost_speed phasfont white">Ghost Speed</div>
+            <input type="range" id="ghost_modifier_speed" name="volume" 
+                min="50" max="150" step="25" default="100" onchange="setTempo()">
+            <div class="modifier_ghost_speed_labels">
+                <div class="modifier_ghost_speed_label">50%</div>
+                <div class="modifier_ghost_speed_label">75%</div>
+                <div class="modifier_ghost_speed_label">100%</div>
+                <div class="modifier_ghost_speed_label">125%</div>
+                <div class="modifier_ghost_speed_label">150%</div>
+            </div>
+            <div class="modifier_note">(Click &#128266; to hear ghost speed)</div>
+        </div>
+
         <div class="cards">
 
             <div class="ghost_card" id="Spirit">
                 <div class="ghost_name">Spirit</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'spirit')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">EMF 5 | Spirit Box | Writing</div>
                 <div class="ghost_behavior">
@@ -84,7 +102,7 @@
 
             <div class="ghost_card" id="Wraith">
                 <div class="ghost_name">Wraith</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'wraith')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">EMF 5 | Spirit Box | DOTs</div>
                 <div class="ghost_behavior">
@@ -103,7 +121,7 @@
 
             <div class="ghost_card" id="Phantom">
                 <div class="ghost_name">Phantom</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'phantom')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">Spirit Box | Fingerprints | DOTs</div>
                 <div class="ghost_behavior">
@@ -124,7 +142,7 @@
 
             <div class="ghost_card" id="Poltergeist">
                 <div class="ghost_name">Poltergeist</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'poltergeist')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">Spirit Box | Fingerprints | Writing</div>
                 <div class="ghost_behavior">
@@ -145,7 +163,7 @@
 
             <div class="ghost_card" id="Banshee">
                 <div class="ghost_name">Banshee</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'banshee')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">Fingerprints | Ghost Orbs | DOTs</div>
                 <div class="ghost_behavior">
@@ -164,7 +182,7 @@
 
             <div class="ghost_card" id="Jinn">
                 <div class="ghost_name">Jinn</div>
-                <div class="ghost_speed">1.7 m/s | 2.81 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'jinn0')">&#128266;</span> | 2.5 m/s <span class="sound" onclick="toggleSound(2.5,'jinn1')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">EMF 5 | Fingerprints | Freezing</div>
                 <div class="ghost_behavior">
@@ -183,7 +201,7 @@
 
             <div class="ghost_card" id="Mare">
                 <div class="ghost_name">Mare</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'mare')">&#128266;</span></div>
                 <div class="ghost_hunt high">60%</div>
                 <div class="ghost_evidence">Spirit Box | Ghost Orbs | Writing</div>
                 <div class="ghost_behavior">
@@ -202,7 +220,7 @@
 
             <div class="ghost_card" id="Revenant">
                 <div class="ghost_name">Revenant</div>
-                <div class="ghost_speed">1.0 m/s | 3.0 m/s</div>
+                <div class="ghost_speed">1.0 m/s <span class="sound" onclick="toggleSound(1.0,'revenant0')">&#128266;</span> | 3.0 m/s <span class="sound" onclick="toggleSound(3.0,'revenant1')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">Ghost Orbs | Writing | Freezing</div>
                 <div class="ghost_behavior">
@@ -219,7 +237,7 @@
 
             <div class="ghost_card" id="Shade">
                 <div class="ghost_name">Shade</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'shade')">&#128266;</span></div>
                 <div class="ghost_hunt low">35%</div>
                 <div class="ghost_evidence">EMF 5 | Writing | Freezing</div>
                 <div class="ghost_behavior">
@@ -240,7 +258,7 @@
 
             <div class="ghost_card" id="Demon">
                 <div class="ghost_name">Demon</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'demon')">&#128266;</span></div>
                 <div class="ghost_hunt high">70%</div>
                 <div class="ghost_evidence">Fingerprints | Writing | Freezing</div>
                 <div class="ghost_behavior">
@@ -263,7 +281,7 @@
 
             <div class="ghost_card" id="Yurei">
                 <div class="ghost_name">Yurei</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'yurei')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">Ghost Orbs | Freezing | DOTs</div>
                 <div class="ghost_behavior">
@@ -280,7 +298,7 @@
 
             <div class="ghost_card" id="Oni">
                 <div class="ghost_name">Oni</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'oni')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">EMF 5 | Freezing | DOTs</div>
                 <div class="ghost_behavior">
@@ -301,7 +319,7 @@
 
             <div class="ghost_card" id="Yokai">
                 <div class="ghost_name">Yokai</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'yokai')">&#128266;</span></div>
                 <div class="ghost_hunt high">80%</div>
                 <div class="ghost_evidence">Spirit Box | Ghost Orbs | DOTs</div>
                 <div class="ghost_behavior">
@@ -320,7 +338,7 @@
 
             <div class="ghost_card" id="Hantu">
                 <div class="ghost_name">Hantu</div>
-                <div class="ghost_speed">1.44 m/s - 2.7 m/s</div>
+                <div class="ghost_speed">1.44 m/s <span class="sound" onclick="toggleSound(1.44,'hantu')">&#128266;</span> - 2.7 m/s <span class="sound" onclick="toggleSound(2.7,'spirit0')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">Fingerprints | Ghost Orbs | Freezing</div>
                 <div class="ghost_behavior">
@@ -341,7 +359,7 @@
 
             <div class="ghost_card" id="Goryo">
                 <div class="ghost_name">Goryo</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'goryo')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">EMF 5 | Fingerprints | DOTs</div>
                 <div class="ghost_behavior">
@@ -360,7 +378,7 @@
 
             <div class="ghost_card" id="Myling">
                 <div class="ghost_name">Myling</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'myling')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">EMF 5 | Fingerprints | Writing</div>
                 <div class="ghost_behavior">
@@ -379,7 +397,7 @@
 
             <div class="ghost_card" id="Onryo">
                 <div class="ghost_name">Onryo</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'onryo')">&#128266;</span></div>
                 <div class="ghost_hunt high">60%</div>
                 <div class="ghost_evidence">Spirit Box | Ghost Orbs | Freezing</div>
                 <div class="ghost_behavior">
@@ -396,7 +414,7 @@
 
             <div class="ghost_card" id="The Twins">
                 <div class="ghost_name">The Twins</div>
-                <div class="ghost_speed">1.53 m/s | 1.87 m/s</div>
+                <div class="ghost_speed">1.53 m/s <span class="sound" onclick="toggleSound(1.53,'the_twins0')">&#128266;</span> | 1.87 m/s <span class="sound" onclick="toggleSound(1.87,'the_twins1')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">EMF 5 | Spirit Box | Freezing</div>
                 <div class="ghost_behavior">
@@ -415,7 +433,7 @@
 
             <div class="ghost_card" id="Raiju">
                 <div class="ghost_name">Raiju</div>
-                <div class="ghost_speed">1.7 m/s | 2.5 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'raiju0')">&#128266;</span> | 2.5 m/s <span class="sound" onclick="toggleSound(2.5,'raiju1')">&#128266;</span></div>
                 <div class="ghost_hunt high">65%</div>
                 <div class="ghost_evidence">EMF 5 | Ghost Orbs | DOTs</div>
                 <div class="ghost_behavior">
@@ -436,7 +454,7 @@
 
             <div class="ghost_card" id="Obake">
                 <div class="ghost_name">Obake</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'obake')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">EMF 5 | Fingerprints | Ghost Orbs</div>
                 <div class="ghost_behavior">
@@ -457,7 +475,7 @@
 
             <div class="ghost_card" id="The Mimic">
                 <div class="ghost_name">The Mimic</div>
-                <div class="ghost_speed">1.7 m/s</div>
+                <div class="ghost_speed">1.7 m/s <span class="sound" onclick="toggleSound(1.7,'the_mimic')">&#128266;</span></div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">Spirit Box | Fingerprints | Freezing</div>
                 <div class="ghost_behavior">
@@ -474,7 +492,7 @@
 
             <div class="ghost_card" id="Moroi">
                 <div class="ghost_name">Moroi</div>
-                <div class="ghost_speed">2.25 m/s - 3.71 ms</div>
+                <div class="ghost_speed">1.5 m/s <span class="sound" onclick="toggleSound(1.5,'moroi0')">&#128266;</span> - 2.25 m/s <span class="sound" onclick="toggleSound(2.25,'moroi1')">&#128266;</span><br>(3.71 m/s <span class="sound" onclick="toggleSound(3.71,'moroi2')">&#128266;</span>)</div>
                 <div class="ghost_hunt average">50%</div>
                 <div class="ghost_evidence">Spirit Box | Writing | Freezing</div>
                 <div class="ghost_behavior">
@@ -482,7 +500,7 @@
                     <hr>
                     <div class="ghost_behavior_item">Places curse on player when heard through paramic or spirit box, curse drops sanity 2x as fast</div>
                     <hr>
-                    <div class="ghost_behavior_item"><b>Faster when average sanity is lower</b></div>
+                    <div class="ghost_behavior_item"><b>Faster when average sanity is lower,</b> can reach a speed of 3.71 m/s when in line of sight</div>
                 </div>
                 <div class="ghost_clear">
                     <span class="check" onclick="select(this.parentElement.parentElement)"></span>
@@ -493,7 +511,7 @@
 
             <div class="ghost_card" id="Deogen">
                 <div class="ghost_name">Deogen</div>
-                <div class="ghost_speed">0.4 m/s - 3.0 m/s</div>
+                <div class="ghost_speed">0.4 m/s <span class="sound" onclick="toggleSound(0.4,'deogen0')">&#128266;</span> - 3.0 m/s <span class="sound" onclick="toggleSound(3.0,'deogen1')">&#128266;</span></div>
                 <div class="ghost_hunt low">40%</div>
                 <div class="ghost_evidence">Spirit Box | Writing | DOTs</div>
                 <div class="ghost_behavior">
@@ -516,7 +534,7 @@
 
             <div class="ghost_card" id="Thaye">
                 <div class="ghost_name">Thaye</div>
-                <div class="ghost_speed">1.0 m/s - 2.75 m/s</div>
+                <div class="ghost_speed">1.0 m/s <span class="sound" onclick="toggleSound(1.0,'thaye0')">&#128266;</span> - 2.75 m/s <span class="sound" onclick="toggleSound(2.75,'thaye1')">&#128266;</span></div>
                 <div class="ghost_hunt high">75%</div>
                 <div class="ghost_evidence">Ghost Orbs | Writing | DOTs</div>
                 <div class="ghost_behavior">
@@ -551,8 +569,8 @@
         <span class="icon" onclick="showGlobe()"></span>
         <canvas id="globe"></canvas>
     </div>
+    <script src="scripts/metronome.js"></script>
     <script src="scripts/geo.js"></script>
-
     <script src="scripts/filter.js"></script>
     <script src="scripts/analytics.js"></script>
 
