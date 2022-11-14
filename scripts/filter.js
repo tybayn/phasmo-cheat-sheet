@@ -263,7 +263,7 @@ function showGlobe(){
 
 function reset(){
     var uuid = getCookie("znid")
-    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state)})
+    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(8000)})
     .then((response) => {
         setCookie("znid",uuid,-1)
         setCookie("state",JSON.stringify(state),-1)

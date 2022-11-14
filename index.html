@@ -84,7 +84,7 @@
             <div class="modifier_note">(Click &#128266; to hear ghost speed)</div>
         </div>
 
-        <div id="cards" class="cards"></div>
+        <div id="cards" class="cards"><div class="dot-flashing"></div></div>
 
         <div id="active-users"><span id="active-users-label" onclick="showGlobe()">Active Users: -</span></div>
         <div id="session">-</div>
@@ -103,10 +103,11 @@
     </div>
 
     <script>
-        fetch("https://zero-network.duckdns.org/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(5000)})
+        fetch("https://zero-network.duckdns.org/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(8000)})
         .then(data => data.json())
         .then(data => {
             var cards = document.getElementById('cards')
+            cards.innerHTML = "";
             for(var i = 0; i < data.ghosts.length; i++){
                 var ghost = new Ghost(data.ghosts[i]);
                 cards.innerHTML += `${ghost.ghostTemplate}`
@@ -117,6 +118,7 @@
             .then(data => data.json())
             .then(data => {
                 var cards = document.getElementById('cards')
+                cards.innerHTML = "";
                 for(var i = 0; i < data.ghosts.length; i++){
                     var ghost = new Ghost(data.ghosts[i]);
                     cards.innerHTML += `${ghost.ghostTemplate}`

@@ -15,6 +15,7 @@ var colorWater = '#000'
 var colorLand = '#066770'
 var colorGraticule = '#032f33'
 var colorLogin = '#c9870c'
+var colorDailies = '#055961'
 
 
 //
@@ -33,7 +34,7 @@ var q0 // Projection rotation as versor at start.
 var lastTime = d3.now()
 var degPerMs = degPerSec / 1000
 var width, height
-var land, logins
+var land, logins, dailies
 var countryList
 var autorotate, now, diff, roation
 var currentCountry
@@ -69,6 +70,7 @@ function render() {
   fill(water, colorWater)
   stroke(graticule, colorGraticule)
   fill(land, colorLand)
+  fill(dailies, colorDailies)
   fill(logins, colorLogin)
 }
 
@@ -104,18 +106,21 @@ function loadData(cb) {
   d3.queue()
   .defer(d3.json,'https://unpkg.com/world-atlas@1/world/110m.json')
   .defer(d3.json,"https://zero-network.duckdns.org/analytics/active.json")
-  .await((error, world, points) => {
+  .defer(d3.json,"https://zero-network.duckdns.org/analytics/daily.json")
+  .await((error, world, points, points_hist) => {
     if (error) throw error
-    cb(world,points)
+    cb(world,points,points_hist)
   });
 }
 
 function reloadData(){
     d3.queue()
     .defer(d3.json,"https://zero-network.duckdns.org/analytics/active.json")
-    .await((error, points) => {
+    .defer(d3.json,"https://zero-network.duckdns.org/analytics/daily.json")
+    .await((error, points, points_hist) => {
         if (error) throw error
         logins = points
+        dailies = points_hist
       });
 }
 
@@ -125,9 +130,10 @@ function reloadData(){
 
 setAngles()
 
-loadData(function(world,locations) {
+loadData(function(world,locations,locations_hist) {
   land = topojson.feature(world, world.objects.land)
   logins = locations
+  dailies = locations_hist
   
   window.addEventListener('resize', scale)
   scale()
