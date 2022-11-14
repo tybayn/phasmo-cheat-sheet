@@ -103,7 +103,7 @@
     </div>
 
     <script>
-        fetch("https://zero-network.duckdns.org/phasmophobia/data/ghosts.json")
+        fetch("https://zero-network.duckdns.org/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(5000)})
         .then(data => data.json())
         .then(data => {
             var cards = document.getElementById('cards')
