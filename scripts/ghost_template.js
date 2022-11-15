@@ -1,5 +1,17 @@
 class Ghost {
     constructor(data){
+
+        for (var i = 0; i < data.behavior.length; i++){
+            var assets = [...data.behavior[i].matchAll("\{[a-zA-Z0-9:/_.-]+\}")];
+            for (var j = 0; j < assets.length; j++){
+                var type = assets[j].toString().replace('{','').replace('}','').split(':')[0]
+                var resource_path = assets[j].toString().replace('{','').replace('}','').split(':')[1]
+                if (type == 'audio') {
+                    data.behavior[i] = data.behavior[i].replace(assets[j],` <span class="sound" onClick="playSound('${resource_path}')">&#128266;</span>`)
+                }
+            }
+        }
+
         this.ghostTemplate = `
         <div class="ghost_card" id="${data.ghost}">
                 <div class="ghost_name">${data.ghost}</div>

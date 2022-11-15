@@ -114,6 +114,7 @@
             }
         })
         .catch(error => {
+            console.log(error)
             fetch("backup-data/ghosts.json")
             .then(data => data.json())
             .then(data => {

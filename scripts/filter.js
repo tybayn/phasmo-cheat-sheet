@@ -261,6 +261,11 @@ function showGlobe(){
     scale()
 }
 
+function playSound(resource){
+    var snd = new Audio(resource);
+    snd.play()
+}
+
 function reset(){
     var uuid = getCookie("znid")
     fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(8000)})
