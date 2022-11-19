@@ -261,6 +261,17 @@ function showGlobe(){
     scale()
 }
 
+function showMaps(){
+    $("#maps").fadeToggle(400)
+}
+
+function changeMap(elem,map){
+
+    $(".maps_button").removeClass("selected_map")
+    $(elem).addClass("selected_map")
+    $(".maps_image").css("background-image","url(imgs/maps/"+map+")")
+}
+
 function playSound(resource){
     var snd = new Audio(resource);
     snd.play()

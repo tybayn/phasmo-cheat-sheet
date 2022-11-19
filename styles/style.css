@@ -47,7 +47,6 @@ hr{
     color: white;
 }
 
-
 @media screen and (min-device-width: 1000px) {
 
     input[type="range"] {
@@ -151,6 +150,7 @@ hr{
     .footer{
         display: none;
     }
+
 
     .data{
         width: 100%;
@@ -334,10 +334,82 @@ hr{
         padding-top: 10px;
     }
 
-    .active_title{
+    .active_title,.maps_title{
         font-size: 24px;
         height:24px;
         padding: 10px;
+    }
+
+    .map_toggle{
+        grid-column: 1;
+        grid-row: 1;
+        z-index: 3;
+        text-align: right;
+    }
+
+    .map_icon{
+        filter: invert(1);
+        height: 100%;
+        margin-top: -5px;
+        cursor: pointer;
+    }
+    .map_icon:hover{
+        filter: invert(0);
+    }
+
+    .maps_image{
+        width: calc(100% - 60px);
+        height: calc(100% - 260px);
+        margin: 0px 30px 30px 30px;
+        background-color: #000;
+        background-image: url(../imgs/maps/tanglewood.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 5px;
+    }
+
+    .maps_credit{
+        color: #FFF;
+        text-align: right;
+        position: absolute;
+        bottom: 205px;
+        right: 35px;
+        font-size: 10px;
+    }
+
+    .maps_credit a{
+        text-decoration: none;
+        color:#00aa2b
+    }
+
+    .maps_buttons{
+        display: flex;
+        height: 158px;
+        width: calc(100% - 60px);
+        margin: 0px 30px 30px 30px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: stretch;
+    }
+
+    .maps_button{
+        cursor: pointer;
+        border: 1px solid #FFF;
+        border-radius: 5px;
+        margin: 3px;
+    }
+
+    .selected_map{
+        background-color: #00aa2b;
+        border: 1px solid #00aa2b;
+        color: #FFF;
+    }
+
+    .maps_button:hover{
+        background-color: #363c44;
+        color: #FFF;
     }
 
     #active-users{
@@ -386,6 +458,18 @@ hr{
         z-index: 100;
     }
 
+    #maps{
+        position: absolute;
+        z-index: 100;
+        width: calc(100% - 100px);
+        height: calc(100vh - 100px);
+        top:50px;
+        left:50px;
+        background-color: #363c44;
+        border-radius: 5px;
+        box-shadow: 0 0 50px 50px #000;
+    }
+
     #world{
         position: absolute;
         z-index: 100;
@@ -398,7 +482,7 @@ hr{
         box-shadow: 0 0 50px 50px #000;
     }
 
-    #world .icon{
+    #world .icon, #maps .icon{
         position: absolute;
         top: 10px;
         right: 10px;
@@ -410,7 +494,7 @@ hr{
         cursor: pointer;
     }
 
-    #world .icon:before{
+    #world .icon:before, #maps .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -420,7 +504,7 @@ hr{
         top:4px;
     }
 
-    #world .icon:after{
+    #world .icon:after, #maps .icon:after{
         content:"";
         position: absolute;
         width:15px;
@@ -430,11 +514,11 @@ hr{
         top:10px;
     }
 
-    #world .icon:before:hover{
+    #world .icon:before:hover, #maps .icon:before:hover{
         background-color: #363c44;
     }
 
-    #world .icon:after:hover{
+    #world .icon:after:hover, #maps .icon:before:hover{
         background-color: #363c44;
     }
 
@@ -905,10 +989,83 @@ hr{
         padding-top: 10px;
     }
 
-    .active_title{
+    .active_title, .maps_title{
         font-size: 40px;
         height: 50px;
         padding: 15px;
+    }
+
+    .map_toggle{
+        grid-column: 1;
+        grid-row: 6;
+        z-index: 51;
+        width: 150px;
+        justify-self: left;
+    }
+
+    .map_icon{
+        filter: invert(1);
+        height: 100%;
+        cursor: pointer;
+    }
+    .map_icon:hover{
+        filter: invert(0);
+    }
+
+    .maps_image{
+        width: calc(100% - 60px);
+        height: calc(100% - 600px);
+        margin: 0px 30px 30px 30px;
+        background-color: #000;
+        background-image: url(../imgs/maps/tanglewood.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 5px;
+    }
+
+    .maps_credit{
+        color: #FFF;
+        text-align: right;
+        position: absolute;
+        bottom: 485px;
+        right: 35px;
+        font-size: 22px;
+    }
+
+    .maps_credit a{
+        text-decoration: none;
+        color:#00aa2b
+    }
+
+    .maps_buttons{
+        display: flex;
+        height: 430px;
+        width: calc(100% - 60px);
+        margin: 60px 30px 30px 30px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: stretch;
+    }
+
+    .maps_button{
+        cursor: pointer;
+        border: 1px solid #FFF;
+        border-radius: 5px;
+        margin: 6px;
+        font-size: 28px;
+    }
+
+    .selected_map{
+        background-color: #00aa2b;
+        border: 1px solid #00aa2b;
+        color: #FFF;
+    }
+
+    .maps_button:hover{
+        background-color: #363c44;
+        color: #FFF;
     }
 
     #active-users{
@@ -956,6 +1113,18 @@ hr{
         z-index: 100;
     }
 
+    #maps{
+        position: absolute;
+        z-index: 100;
+        width: calc(100% - 100px);
+        height: calc(100% - 100px);
+        top:50px;
+        left:50px;
+        background-color: #363c44;
+        border-radius: 5px;
+        box-shadow: 0 0 50px 50px #000;
+    }
+
     #world{
         position: absolute;
         z-index: 100;
@@ -968,7 +1137,7 @@ hr{
         box-shadow: 0 0 50px 50px #000;
     }
 
-    #world .icon{
+    #world .icon, #maps .icon{
         position: absolute;
         top: 24px;
         right: 24px;
@@ -980,7 +1149,7 @@ hr{
         cursor: pointer;
     }
 
-    #world .icon:before{
+    #world .icon:before, #maps .icon:before{
         content:"";
         position: absolute;
         width:7px;
@@ -990,7 +1159,7 @@ hr{
         top:4px;
     }
 
-    #world .icon:after{
+    #world .icon:after, #maps .icon:after{
         content:"";
         position: absolute;
         width:28px;
@@ -1000,11 +1169,11 @@ hr{
         top:14px;
     }
 
-    #world .icon:before:hover{
+    #world .icon:before:hover, #maps .icon:before:hover{
         background-color: #363c44;
     }
 
-    #world .icon:after:hover{
+    #world .icon:after:hover, #maps .icon:after:hover{
         background-color: #363c44;
     }
 

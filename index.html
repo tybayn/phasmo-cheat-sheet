@@ -15,6 +15,7 @@
     
     <div class="data">
         <div class="header"></div>
+        <div class="map_toggle"><img src="imgs/map.png" class="map_icon" alt="maps" onclick="showMaps()"/></div>
         <div class="evidence_title phasfont white">
             Evidence
         </div>
@@ -100,6 +101,34 @@
         </div>
         <span class="icon" onclick="showGlobe()"></span>
         <canvas id="globe"></canvas>
+    </div>
+
+    <div id="maps" style="display:none;">
+        <div class="maps_title phasfont white">
+            Maps
+        </div>
+        <span class="icon" onclick="showMaps()"></span>
+        <div class="maps_image">
+            <div class="maps_credit">Map images belong to <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">Images</a>)</div>
+        </div>
+        <div class="maps_buttons">
+            <button class="maps_button selected_map" onclick="changeMap(this,'tanglewood.png')">6 Tanglewood Drive</button>
+            <button class="maps_button" onclick="changeMap(this,'edgefield.png')">42 Edgefield Road</button>
+            <button class="maps_button" onclick="changeMap(this,'ridgeview.png')">10 Ridgeview Court</button>
+            <button class="maps_button" onclick="changeMap(this,'grafton.png')">Grafton Farmhouse</button>
+            <button class="maps_button" onclick="changeMap(this,'willow.png')">13 Willow Street</button>
+            <button class="maps_button" onclick="changeMap(this,'brownstone.png')">Brownstone High School</button>
+            <button class="maps_button" onclick="changeMap(this,'bleasdale.png')">Bleasdale Farmhouse</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows.png')">Sunny Meadows</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_courtyard.png')">SM Restricted - Courtyard</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_male.png')">SM Restricted - Male Wing</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_female.png')">SM Restricted - Female Wing</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_hospital.png')">SM Restricted - Hospital</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_restricted.png')">SM Restricted - Restricted</button>
+            <button class="maps_button" onclick="changeMap(this,'prison.png')">Prison</button>
+            <button class="maps_button" onclick="changeMap(this,'maplelodge.png')">Maple Lodge Campsite</button>
+            <button class="maps_button" onclick="changeMap(this,'woodwind.png')">Camp Woodwind</button>
+        </div>
     </div>
 
     <script>
