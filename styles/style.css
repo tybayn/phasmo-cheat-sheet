@@ -1192,7 +1192,7 @@ hr{
         display: grid;
         width: calc(100% - 50px);
         border-radius: 5px;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: 130px 130px 130px auto auto auto 70px;
         color: white;
         background-color: #393e44;
         margin-top: 20px;
