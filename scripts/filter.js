@@ -3,52 +3,98 @@ function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="e
 
 const all_evidence = ["DOTs","EMF 5","Fingerprints","Freezing","Ghost Orbs","Writing","Spirit Box"]
 const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","Mare","Revenant","Shade","Demon","Yurei","Oni","Yokai","Hantu","Goryo","Myling","Onryo","The Twins","Raiju","Obake","The Mimic","Moroi","Deogen","Thaye"]
+const all_speed = ["Slow","Normal","Fast"]
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
 
 $(window).on('load', function() {
-    var start_state = getCookie("state")
+    fetch("https://zero-network.duckdns.org/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(8000)})
+    .then(data => data.json())
+    .then(data => {
+        var cards = document.getElementById('cards')
+        cards.innerHTML = "";
+        for(var i = 0; i < data.ghosts.length; i++){
+            var ghost = new Ghost(data.ghosts[i]);
+            cards.innerHTML += `${ghost.ghostTemplate}`
+        }
+    })
+    .catch(error => {
+        console.log(error)
+        fetch("backup-data/ghosts.json")
+        .then(data => data.json())
+        .then(data => {
+            var cards = document.getElementById('cards')
+            cards.innerHTML = "";
+            for(var i = 0; i < data.ghosts.length; i++){
+                var ghost = new Ghost(data.ghosts[i]);
+                cards.innerHTML += `${ghost.ghostTemplate}`
+            }
+        })
+    })
+    .finally(final => {
+        var start_state = getCookie("state")
 
-    for (var i = 0; i < all_evidence.length; i++){
-        state["evidence"][all_evidence[i]] = 0
-    }
-    for (var i = 0; i < all_ghosts.length; i++){
-        state["ghosts"][all_ghosts[i]] = 1
-    }
+        for (var i = 0; i < all_evidence.length; i++){
+            state["evidence"][all_evidence[i]] = 0
+        }
+        for (var i = 0; i < all_ghosts.length; i++){
+            state["ghosts"][all_ghosts[i]] = 1
+        }
+        
+        if (!start_state){
+            start_state = state;
+        }
+        else{
+            start_state = JSON.parse(start_state)
+        }
     
-    if (!start_state){
-        start_state = state;
-    }
-    else{
-        start_state = JSON.parse(start_state)
+        for (const [key, value] of Object.entries(start_state["ghosts"])){ 
+            if (value == 0){
+                fade(document.getElementById(key));
+            }
+            else if (value == -1){
+                remove(document.getElementById(key));
+            }
+            else if (value == 2){
+                select(document.getElementById(key));
+            }
+        }
+        for (const [key, value] of Object.entries(start_state["evidence"])){ 
+            if (value == 1){
+                tristate(document.getElementById(key));
+            }
+            else if (value == -1){
+                tristate(document.getElementById(key));
+                tristate(document.getElementById(key));
+            }
+        }
+        for (const [key, value] of Object.entries(start_state["speed"])){ 
+            if (value == 1){
+                $("#"+key)[0].click();
+            }
+        }
+    })
+    
+});
+
+function dualstate(elem){
+    var checkbox = $(elem).find("#checkbox");
+
+    if (checkbox.hasClass("disabled")){
+        return;
     }
 
-    for (const [key, value] of Object.entries(start_state["ghosts"])){ 
-        if (value == 0){
-            fade(document.getElementById(key));
-        }
-        else if (value == -1){
-            remove(document.getElementById(key));
-        }
-        else if (value == 2){
-            select(document.getElementById(key));
-        }
+    if (checkbox.hasClass("neutral")){
+        checkbox.removeClass("neutral")
+        checkbox.addClass("good")
     }
-    for (const [key, value] of Object.entries(start_state["evidence"])){ 
-        if (value == 1){
-            tristate(document.getElementById(key));
-        }
-        else if (value == -1){
-            tristate(document.getElementById(key));
-            tristate(document.getElementById(key));
-        }
+    else if (checkbox.hasClass("good")){
+        checkbox.removeClass("good")
+        checkbox.addClass("neutral")
     }
-    for (const [key, value] of Object.entries(start_state["speed"])){ 
-        if (value == 1){
-            $("#"+key)[0].click();
-        }
-    }
-});
+
+    filter()
+}
 
 function tristate(elem){
     var checkbox = $(elem).find("#checkbox");
@@ -131,9 +177,9 @@ function filter(){
     var evi_array = [];
     var not_evi_array = [];
     var spe_array = [];
-    var good_checkboxes = document.querySelectorAll(('#checkbox.good'));
-    var bad_checkboxes = document.querySelectorAll(('#checkbox.bad'));
-    var speed_checkboxes = document.querySelectorAll(('input[type=checkbox]:checked'));
+    var good_checkboxes = document.querySelectorAll('[name="evidence"] .good');
+    var bad_checkboxes = document.querySelectorAll('[name="evidence"] .bad');
+    var speed_checkboxes = document.querySelectorAll('[name="speed"] .good');
 
     for (var i = 0; i < good_checkboxes.length; i++) {
         evi_array.push(good_checkboxes[i].parentElement.value);
@@ -146,8 +192,8 @@ function filter(){
     }
 
     for (var i = 0; i < speed_checkboxes.length; i++) {
-        spe_array.push(speed_checkboxes[i].value);
-        state["speed"][speed_checkboxes[i].value] = 1;
+        spe_array.push(speed_checkboxes[i].parentElement.value);
+        state["speed"][speed_checkboxes[i].parentElement.value] = 1;
     }
 
 
@@ -158,10 +204,18 @@ function filter(){
         $(checkbox).find("#checkbox").removeClass(["block","disabled"])
         $(checkbox).find(".label").removeClass("disabled-text")
     }
+    // Filter other evidences
+    for (var i = 0; i < all_speed.length; i++){
+        var checkbox = document.getElementById(all_speed[i]);
+        $(checkbox).removeClass("block")
+        $(checkbox).find("#checkbox").removeClass(["block","disabled"])
+        $(checkbox).find(".label").removeClass("disabled-text")
+    }
 
     // Get all ghosts
     var ghosts = document.getElementsByClassName("ghost_card")
     var keep_evidence = new Set();
+    var keep_speed = new Set();
 
     for (var i = 0; i < ghosts.length; i++){
         var keep = true;
@@ -187,26 +241,38 @@ function filter(){
         }
 
         //Check for speed
+        var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
+        if (speed.includes('|')){
+            var speeds = speed.split('|')
+        }
+        else if(speed.includes('-')){
+            var speeds = speed.split('-')
+        }
+        else{
+            var speeds = [speed]
+        }
+
+        var min_speed = parseFloat(speeds[0].replaceAll(" m/s",""))
+        if (speeds.length > 1){
+            var max_speed = parseFloat(speeds[1].replaceAll(" m/s",""))
+        }
+        else{
+            var max_speed = min_speed
+        }
+
+        if (keep){
+            if(min_speed < base_speed){
+                keep_speed.add('Slow')
+            }
+            if(min_speed === base_speed || max_speed === base_speed){
+                keep_speed.add('Normal')
+            }
+            if(max_speed > base_speed){
+                keep_speed.add('Fast')
+            }
+        }
+
         if (spe_array.length > 0){
-            var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
-            if (speed.includes('|')){
-                var speeds = speed.split('|')
-            }
-            else if(speed.includes('-')){
-                var speeds = speed.split('-')
-            }
-            else{
-                var speeds = [speed]
-            }
-
-            var min_speed = parseFloat(speeds[0].replaceAll(" m/s",""))
-            if (speeds.length > 1){
-                var max_speed = parseFloat(speeds[1].replaceAll(" m/s",""))
-            }
-            else{
-                var max_speed = min_speed
-            }
-
             var skeep = false,nkeep = false,fkeep = false;
             spe_array.forEach(function (item,index){
                 if (item === "Slow" && min_speed < base_speed){
@@ -247,6 +313,14 @@ function filter(){
                 $(checkbox).find(".label").addClass("disabled-text")
                 $(checkbox).find(".label").removeClass("strike")
             }
+        })
+
+        all_speed.filter(spe => !keep_speed.has(spe)).forEach(function(item){
+            var checkbox = document.getElementById(item);
+            $(checkbox).addClass("block")
+            $(checkbox).find("#checkbox").removeClass(["good"])
+            $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+            $(checkbox).find(".label").addClass("disabled-text")
         })
     }
 

@@ -245,71 +245,6 @@ hr{
         padding-top: 10px;
     }
 
-    .containero {
-        height: 25px;
-        display: inline-block;
-        position: relative;
-        padding-left: 35px;
-        margin: 8px 6px;
-        cursor: pointer;
-        font-size: 18px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        width: calc(50% - 75px);
-        text-align: left;
-        justify-content: start;
-    }
-    
-    .containero input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-    }
-    
-    .checkmarko {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 23px;
-        width: 23px;
-        background-color: #ccc;
-        border-radius: 5px;
-    }
-    
-    .containero:hover input ~ .checkmarko {
-        background-color: rgb(110, 110, 110);
-    }
-    
-    .containero input:checked ~ .checkmarko {
-        background-color: #d37f00;
-    }
-    
-    .checkmarko:after {
-        content: "";
-        position: absolute;
-        display: none;
-    }
-    
-    .containero input:checked ~ .checkmarko:after {
-        display: block;
-    }
-    
-    .containero .checkmarko:after {
-        left: 8px;
-        top: 3px;
-        width: 5px;
-        height: 10px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
-    }
-
     .cards{
         grid-column: 2;
         grid-row: 1 / 9;
@@ -903,67 +838,6 @@ hr{
 
     .modifier_note{
         display: none;
-    }
-
-    .containero {
-        display: inline-block;
-        position: relative;
-        padding-left: 45px;
-        margin: 10px 20px;
-        cursor: pointer;
-        font-size: 35px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-    
-    .containero input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-    }
-    
-    .checkmarko {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 35px;
-        width: 35px;
-        background-color: #ccc;
-        border-radius: 5px;
-    }
-    
-    .containero:hover input ~ .checkmarko {
-        background-color: rgb(110, 110, 110);
-    }
-    
-    .containero input:checked ~ .checkmarko {
-        background-color: #d37f00;
-    }
-    
-    .checkmarko:after {
-        content: "";
-        position: absolute;
-        display: none;
-    }
-    
-    .containero input:checked ~ .checkmarko:after {
-        display: block;
-    }
-    
-    .containero .checkmarko:after {
-        left: 11px;
-        top: 3px;
-        width: 7px;
-        height: 17px;
-        border: solid white;
-        border-width: 0 5px 6px 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
     }
 
     .cards{

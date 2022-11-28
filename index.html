@@ -54,18 +54,18 @@
             Speed
         </div>
         <div class="speed">
-            <label id="Slow" class="containero phasfont white" onchange="filter()">Slow
-                <input type="checkbox" name="speed" value="Slow">
-                <span class="checkmarko"></span>
-            </label>
-            <label id="Normal" class="containero phasfont white" onchange="filter()">Normal
-                <input type="checkbox" name="speed" value="Normal">
-                <span class="checkmarko"></span>
-            </label>
-            <label id="Fast" class="containero phasfont white" onchange="filter()">Fast
-                <input type="checkbox" name="speed" value="Fast">
-                <span class="checkmarko"></span>
-            </label>
+            <button id="Slow" class="tricheck phasfont white" name="speed" onclick="dualstate(this)" value="Slow">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">Slow</div>
+            </button>
+            <button id="Normal" class="tricheck phasfont white" name="speed" onclick="dualstate(this)" value="Normal">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">Normal</div>
+            </button>
+            <button id="Fast" class="tricheck phasfont white" name="speed" onclick="dualstate(this)" value="Fast">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">Fast</div>
+            </button>
         </div>
 
         <div class="modifier_title phasfont white">
@@ -131,34 +131,9 @@
         </div>
     </div>
 
-    <script>
-        fetch("https://zero-network.duckdns.org/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(8000)})
-        .then(data => data.json())
-        .then(data => {
-            var cards = document.getElementById('cards')
-            cards.innerHTML = "";
-            for(var i = 0; i < data.ghosts.length; i++){
-                var ghost = new Ghost(data.ghosts[i]);
-                cards.innerHTML += `${ghost.ghostTemplate}`
-            }
-        })
-        .catch(error => {
-            console.log(error)
-            fetch("backup-data/ghosts.json")
-            .then(data => data.json())
-            .then(data => {
-                var cards = document.getElementById('cards')
-                cards.innerHTML = "";
-                for(var i = 0; i < data.ghosts.length; i++){
-                    var ghost = new Ghost(data.ghosts[i]);
-                    cards.innerHTML += `${ghost.ghostTemplate}`
-                }
-            })
-        })
-    </script>
     <script src="scripts/metronome.js"></script>
-    <script src="scripts/geo.js"></script>
     <script src="scripts/filter.js"></script>
+    <script src="scripts/geo.js"></script>
     <script src="scripts/analytics.js"></script>
-
+    
 </body>
