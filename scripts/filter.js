@@ -12,11 +12,13 @@ $(window).on('load', function() {
     .then(data => data.json())
     .then(data => {
         var cards = document.getElementById('cards')
+        var cur_version = document.getElementById('current-version-label')
         cards.innerHTML = "";
         for(var i = 0; i < data.ghosts.length; i++){
             var ghost = new Ghost(data.ghosts[i]);
             cards.innerHTML += `${ghost.ghostTemplate}`
         }
+        cur_version.innerHTML = `${data.version}`
     })
     .catch(error => {
         console.log(error)
@@ -24,11 +26,13 @@ $(window).on('load', function() {
         .then(data => data.json())
         .then(data => {
             var cards = document.getElementById('cards')
+            var cur_version = document.getElementById('current-version-label')
             cards.innerHTML = "";
             for(var i = 0; i < data.ghosts.length; i++){
                 var ghost = new Ghost(data.ghosts[i]);
                 cards.innerHTML += `${ghost.ghostTemplate}`
             }
+            cur_version.innerHTML = `${data.version}`
         })
     })
     .finally(final => {
@@ -323,7 +327,6 @@ function filter(){
             $(checkbox).find(".label").addClass("disabled-text")
         })
     }
-
     
     setCookie("state",JSON.stringify(state),1)
     heartbeat()

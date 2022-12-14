@@ -366,6 +366,10 @@ hr{
         color: #c9870c;
     }
 
+    #current-version-label{
+        color: #0abdce;
+    }
+
     #session{
         grid-column: 1;
         grid-row: 8;
@@ -960,6 +964,11 @@ hr{
     #active-users-label:hover{
         color: #c9870c;
     }
+
+    #current-version-label{
+        color: #0abdce;
+    }
+    
     #session{
         grid-column: 1;
         grid-row: 6;
