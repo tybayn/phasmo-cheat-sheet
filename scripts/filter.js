@@ -8,7 +8,7 @@ const all_speed = ["Slow","Normal","Fast"]
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
 
 $(window).on('load', function() {
-    fetch("https://zero-network.duckdns.org/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(8000)})
+    fetch("https://zero-network.duckdns.org/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(5000)})
     .then(data => data.json())
     .then(data => {
         var cards = document.getElementById('cards')
@@ -19,24 +19,9 @@ $(window).on('load', function() {
             cards.innerHTML += `${ghost.ghostTemplate}`
         }
         cur_version.innerHTML = `${data.version}`
-    })
-    .catch(error => {
-        console.log(error)
-        fetch("backup-data/ghosts.json")
-        .then(data => data.json())
-        .then(data => {
-            var cards = document.getElementById('cards')
-            var cur_version = document.getElementById('current-version-label')
-            cards.innerHTML = "";
-            for(var i = 0; i < data.ghosts.length; i++){
-                var ghost = new Ghost(data.ghosts[i]);
-                cards.innerHTML += `${ghost.ghostTemplate}`
-            }
-            cur_version.innerHTML = `${data.version}`
-        })
-    })
-    .finally(final => {
+
         var start_state = getCookie("state")
+        console.log(start_state)
 
         for (var i = 0; i < all_evidence.length; i++){
             state["evidence"][all_evidence[i]] = 0
@@ -78,7 +63,20 @@ $(window).on('load', function() {
             }
         }
     })
-    
+    .catch(error => {
+        fetch("backup-data/ghosts.json")
+        .then(data => data.json())
+        .then(data => {
+            var cards = document.getElementById('cards')
+            var cur_version = document.getElementById('current-version-label')
+            cards.innerHTML = "";
+            for(var i = 0; i < data.ghosts.length; i++){
+                var ghost = new Ghost(data.ghosts[i]);
+                cards.innerHTML += `${ghost.ghostTemplate}`
+            }
+            cur_version.innerHTML = `${data.version}`
+        })
+    })
 });
 
 function dualstate(elem){
@@ -356,7 +354,7 @@ function playSound(resource){
 
 function reset(){
     var uuid = getCookie("znid")
-    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(8000)})
+    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(5000)})
     .then((response) => {
         setCookie("znid",uuid,-1)
         setCookie("state",JSON.stringify(state),-1)
