@@ -4,7 +4,7 @@ async function get_session(){
     var e="";
     e=await fetch("https://zero-network.duckdns.org/analytics/",{headers:{Accept:"application/json"},signal: AbortSignal.timeout(2000)})
     .then(e=>e.json())
-    .then(data => {
+    .then(e => {
         setCookie("znid",e.znid,1)
         $("#session").text(e.znid)
         heartbeat()
