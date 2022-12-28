@@ -883,6 +883,10 @@ hr{
         rotate: 340deg;
     }
 
+    .modifier_sound_select{
+        display: none;
+    }
+
     .modifier_note{
         display: none;
     }
