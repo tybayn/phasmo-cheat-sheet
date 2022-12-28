@@ -245,6 +245,49 @@ hr{
         padding-top: 10px;
     }
 
+    .modifier_sound_select{
+        display: flex;
+        padding-top: 10px;
+    }
+
+    .modifier_sound_select img{
+        height: 20px;
+        filter: invert(1);
+        padding: 0px 5px;
+    }
+
+    #modifier_sound_type {
+        display: none;
+    }
+
+    .toggle {
+        height: 15px;
+        width: 40px;
+        border-radius: 10px;
+        box-shadow: inset 0 0 10px #161615;
+        background: rgba(0,0,0,0.25);
+        position: relative;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        margin-top: 3px;
+    }
+    
+    .toggle::before {
+        content: "";
+        height: 15px;
+        width: 15px;
+        position: absolute;
+        left: 0;
+        border-radius: 50%;
+        background-color: #f4f4f4;
+        transition: all 0.2s ease-in-out;
+    }
+    
+    #modifier_sound_type:checked + .toggle::before {
+        position: absolute;
+        left: calc(100% - 15px);
+    }
+
     .cards{
         grid-column: 2;
         grid-row: 1 / 11;

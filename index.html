@@ -74,13 +74,21 @@
         <div class="modifier">
             <div class="modifier_ghost_speed phasfont white">Ghost Speed</div>
             <input type="range" id="ghost_modifier_speed" name="volume" 
-                min="50" max="150" step="25" default="100" onchange="setTempo()">
+                min="0" max="4" step="1" default="2" onchange="setTempo()">
             <div class="modifier_ghost_speed_labels">
                 <div class="modifier_ghost_speed_label">50%</div>
                 <div class="modifier_ghost_speed_label">75%</div>
                 <div class="modifier_ghost_speed_label">100%</div>
                 <div class="modifier_ghost_speed_label">125%</div>
                 <div class="modifier_ghost_speed_label">150%</div>
+            </div>
+            <div class="modifier_sound_select">
+                <img src="imgs/footsteps.png">
+                <label for="modifier_sound_type" onchange="setSoundType()">
+                    <input type="checkbox" name="" id="modifier_sound_type">
+                    <div class="toggle"></div>
+                </label>
+                <img src="imgs/metronome.png">
             </div>
             <div class="modifier_note">(Click &#128266; to hear ghost speed)</div>
         </div>
