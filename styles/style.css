@@ -220,6 +220,7 @@ hr{
         box-shadow: inset 0 0 10px #161615;
         background: rgba(0,0,0,0.25);
         align-items: center;
+        overflow-y: scroll;
     }
 
     .modifier_ghost_speed{
@@ -229,7 +230,7 @@ hr{
 
     .modifier_smudge_timer{
         font-size: 18px;
-        padding: 10px 10px 0px 10px;
+        padding: 10px;
     }
 
     .modifier_ghost_speed_labels{
@@ -398,6 +399,24 @@ hr{
         left: 71.666%;
         bottom: -6px;
         position: absolute;
+    }
+
+    .modifier_volume{
+        font-size: 18px;
+        padding: 10px 10px 0px 10px;
+    }
+
+    .modifier_volume_labels{
+        display: flex;
+        justify-content: space-between;
+        width: 92%;
+        padding-top: 2px;
+    }
+
+    .modifier_volume_label{
+        color: #fff;
+        font-size: 10px;
+        rotate: 320deg;
     }
 
     .cards{
@@ -891,7 +910,7 @@ hr{
         height: 100%;
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 55px 130px 70px 170px auto 60px 30px 30px;
+        grid-template-rows: 55px 130px 70px 260px auto 60px 30px 30px;
     }
 
     .evidence_title{
@@ -957,7 +976,7 @@ hr{
         text-align: center;
         display: grid;
         grid-template-columns: 25% 75%;
-        grid-template-rows: 40px 30px 35px 40px;
+        grid-template-rows: 40px 30px 40px 60px 40px 30px;
         z-index: 2;
         box-shadow: inset 0 0 10px #161615;
         background: rgba(0,0,0,0.25);
@@ -1121,6 +1140,35 @@ hr{
         left: 55.666%;
         bottom: -12px;
         position: absolute;
+    }
+
+    .modifier_volume{
+        font-size: 33px;
+        padding: 40px 10px 0px 10px;
+        grid-column: 1;
+        grid-row: 5;
+    }
+
+    #modifier_volume{
+        grid-column: 2;
+        grid-row: 5;
+        margin-right: 20px;
+    }
+
+    .modifier_volume_labels{
+        grid-column: 2;
+        grid-row: 6;
+        display: flex;
+        justify-content: space-between;
+        width: 97%;
+        padding-top: 2px;
+        margin-right: 20px;
+    }
+
+    .modifier_volume_label{
+        color: #fff;
+        font-size: 22px;
+        rotate: 340deg;
     }
 
     .cards{

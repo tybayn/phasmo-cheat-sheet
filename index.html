@@ -109,6 +109,17 @@
             <div id="time_left">
                 <span id="minute">03</span>:<span id="second">00</span>
             </div>
+            <hr>
+            <div class="modifier_volume phasfont white">Volume</div>
+            <input type="range" id="modifier_volume" name="volume" 
+                min="0" max="100" step="2" default="50" onchange="setVolume()">
+            <div class="modifier_volume_labels">
+                <div class="modifier_volume_label">0%</div>
+                <div class="modifier_volume_label">25%</div>
+                <div class="modifier_volume_label">50%</div>
+                <div class="modifier_volume_label">75%</div>
+                <div class="modifier_volume_label">100%</div>
+            </div>
         </div>
 
         <div id="cards" class="cards"><div class="dot-flashing"></div></div>
@@ -157,8 +168,8 @@
         </div>
     </div>
 
-    <script src="scripts/metronome.js"></script>
-    <script src="scripts/timer.js"></script>
+    <script src="scripts/metronome-v2.js"></script>
+    <script src="scripts/timer-v2.js"></script>
     <script src="scripts/filter-v2.js"></script>
     <script src="scripts/geo-v2.js"></script>
     <script src="scripts/analytics-v2.js"></script>

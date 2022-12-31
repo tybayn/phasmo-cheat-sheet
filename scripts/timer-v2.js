@@ -62,31 +62,49 @@ function start_timer(){
         var timeleft = Math.floor(t / 1000);
 
         if (timeleft == 128){
-            timer_snd[8].cloneNode().play()
+            cur_sound = timer_snd[8].cloneNode()
+            cur_sound.volume = volume
+            cur_sound.play()
         }
         if (timeleft == 98){
-            timer_snd[7].cloneNode().play()
+            cur_sound = timer_snd[7].cloneNode()
+            cur_sound.volume = volume
+            cur_sound.play()
         }
         if (timeleft == 8){
-            timer_snd[6].cloneNode().play()
+            cur_sound = timer_snd[6].cloneNode()
+            cur_sound.volume = volume
+            cur_sound.play()
         }
         if (timeleft == 125 || timeleft == 95 || timeleft == 5){
-            timer_snd[5].cloneNode().play()
+            cur_sound = timer_snd[5].cloneNode()
+            cur_sound.volume = volume
+            cur_sound.play()
         }
         if (timeleft == 124 || timeleft == 94 || timeleft == 4){
-            timer_snd[4].cloneNode().play()
+            cur_sound = timer_snd[4].cloneNode()
+            cur_sound.volume = volume
+            cur_sound.play()
         }
         if (timeleft == 123 || timeleft == 93 || timeleft == 3){
-            timer_snd[3].cloneNode().play()
+            cur_sound = timer_snd[3].cloneNode()
+            cur_sound.volume = volume
+            cur_sound.play()
         }
         if (timeleft == 122 || timeleft == 92 || timeleft == 2){
-            timer_snd[2].cloneNode().play()
+            cur_sound = timer_snd[2].cloneNode()
+            cur_sound.volume = volume
+            cur_sound.play()
         }
         if (timeleft == 121 || timeleft == 91 || timeleft == 1){
-            timer_snd[1].cloneNode().play()
+            cur_sound = timer_snd[1].cloneNode()
+            cur_sound.volume = volume
+            cur_sound.play()
         }
         if (timeleft == 120 || timeleft == 90 || timeleft == 0){
-            timer_snd[0].cloneNode().play()
+            cur_sound = timer_snd[0].cloneNode()
+            cur_sound.volume = volume
+            cur_sound.play()
         }
 
 
