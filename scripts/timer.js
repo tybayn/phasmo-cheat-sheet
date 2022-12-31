@@ -102,6 +102,7 @@ function start_timer(){
             }, 1000);
         }
         else{
+            $("#play_button").toggleClass("playing")
             $("#play_button").attr('src','imgs/play.png')
         }
     };
