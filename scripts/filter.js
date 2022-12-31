@@ -21,7 +21,6 @@ $(window).on('load', function() {
         cur_version.innerHTML = `${data.version}`
 
         var start_state = getCookie("state")
-        console.log(start_state)
 
         for (var i = 0; i < all_evidence.length; i++){
             state["evidence"][all_evidence[i]] = 0

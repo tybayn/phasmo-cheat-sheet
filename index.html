@@ -69,7 +69,7 @@
         </div>
 
         <div class="modifier_title phasfont white">
-            Modifiers
+            Misc.
         </div>
         <div class="modifier">
             <div class="modifier_ghost_speed phasfont white">Ghost Speed</div>
@@ -91,6 +91,24 @@
                 <img src="imgs/metronome.png">
             </div>
             <div class="modifier_note">(Click &#128266; to hear ghost speed)</div>
+            <hr>
+            <div class="modifier_smudge_timer phasfont white">Smudge Timer</div>
+            <div class="line_labels">
+                <div class="spirit_line_label">Spirit</div>
+                <div class="demon_line_label">Demon</div>
+            </div>
+            <div id="progress">
+                <img src="imgs/play.png" id="play_button" class="play_button" onclick="toggle_timer()">
+                <div id="progressBar">
+                    <div id="progressBarInner" class="bar"></div>
+                    <div class="demon_line"></div>
+                    <div class="ghost_line"></div>
+                    <div class="spirit_line"></div>
+                </div>
+            </div>
+            <div id="time_left">
+                <span id="minute">03</span>:<span id="second">00</span>
+            </div>
         </div>
 
         <div id="cards" class="cards"><div class="dot-flashing"></div></div>
@@ -140,6 +158,7 @@
     </div>
 
     <script src="scripts/metronome.js"></script>
+    <script src="scripts/timer.js"></script>
     <script src="scripts/filter.js"></script>
     <script src="scripts/geo.js"></script>
     <script src="scripts/analytics.js"></script>
