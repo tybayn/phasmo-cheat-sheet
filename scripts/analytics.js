@@ -2,7 +2,7 @@ function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";
 function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
 async function get_session(){
     var e="";
-    e=await fetch("https://zero-network.duckdns.org/analytics/",{headers:{Accept:"application/json"},signal: AbortSignal.timeout(2000)})
+    e=await fetch("https://zero-network.net/analytics/",{headers:{Accept:"application/json"},signal: AbortSignal.timeout(2000)})
     .then(e=>e.json())
     .then(e => {
         setCookie("znid",e.znid,1)
@@ -18,7 +18,7 @@ async function get_session(){
 function heartbeat(){
     var uuid = getCookie("znid")
     if(uuid != "no-connection-to-server"){
-        fetch("https://zero-network.duckdns.org/analytics/"+uuid,{method:"POST",Accept:"application/json",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
+        fetch("https://zero-network.net/analytics/"+uuid,{method:"POST",Accept:"application/json",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
         .then(response => response.json())
         .then(data => {
             $("#active-users-label").text("Active Users: " + data['active_num_users'])

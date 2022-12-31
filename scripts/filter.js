@@ -8,7 +8,7 @@ const all_speed = ["Slow","Normal","Fast"]
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
 
 $(window).on('load', function() {
-    fetch("https://zero-network.duckdns.org/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(2000)})
+    fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(2000)})
     .then(data => data.json())
     .then(data => {
         var cards = document.getElementById('cards')
@@ -353,7 +353,7 @@ function playSound(resource){
 
 function reset(){
     var uuid = getCookie("znid")
-    fetch("https://zero-network.duckdns.org/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
+    fetch("https://zero-network.net/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
     .then((response) => {
         setCookie("znid",uuid,-1)
         setCookie("state",JSON.stringify(state),-1)

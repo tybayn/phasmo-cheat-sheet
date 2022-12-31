@@ -105,8 +105,8 @@ function rotate(elapsed) {
 function loadData(cb) {
   d3.queue()
   .defer(d3.json,'https://unpkg.com/world-atlas@1/world/110m.json')
-  .defer(d3.json,"https://zero-network.duckdns.org/analytics/active.json")
-  .defer(d3.json,"https://zero-network.duckdns.org/analytics/daily.json")
+  .defer(d3.json,"https://zero-network.net/analytics/active.json")
+  .defer(d3.json,"https://zero-network.net/analytics/daily.json")
   .await((error, world, points, points_hist) => {
     if (error) throw error
     cb(world,points,points_hist)
@@ -115,8 +115,8 @@ function loadData(cb) {
 
 function reloadData(){
     d3.queue()
-    .defer(d3.json,"https://zero-network.duckdns.org/analytics/active.json")
-    .defer(d3.json,"https://zero-network.duckdns.org/analytics/daily.json")
+    .defer(d3.json,"https://zero-network.net/analytics/active.json")
+    .defer(d3.json,"https://zero-network.net/analytics/daily.json")
     .await((error, points, points_hist) => {
         if (error) throw error
         logins = points
