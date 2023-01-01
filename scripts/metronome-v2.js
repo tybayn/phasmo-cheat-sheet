@@ -18,14 +18,14 @@ function toggleSound(set_tempo,id){
     var speed_modifier = [0.48,0.75,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
     if (last_id != id){
         last_id = id
-        tempo = ((9.6*Math.pow(set_tempo,2)) + (45.341*set_tempo) + 9.5862) * speed_modifier
+        tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier)
         start = Date.now()
         if (!running){
             startMetronome()
         }
     }
     else if (!running){
-        tempo = ((9.6*Math.pow(set_tempo,2)) + (45.341*set_tempo) + 9.5862) * speed_modifier
+        tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier)
         start = Date.now()
         if (!running){
             startMetronome()
@@ -42,7 +42,7 @@ function setSoundType(){
 
 function setTempo(){
     var speed_modifier = [0.48,0.75,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
-    tempo = ((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier
+    tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier)
 }
 
 function setVolume(){
