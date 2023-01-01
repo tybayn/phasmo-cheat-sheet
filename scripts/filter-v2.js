@@ -348,6 +348,7 @@ function changeMap(elem,map){
 
 function playSound(resource){
     var snd = new Audio(resource);
+    snd.volume = volume
     snd.play()
 }
 
