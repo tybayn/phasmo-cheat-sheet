@@ -339,6 +339,10 @@ function showMaps(){
     $("#maps").fadeToggle(400)
 }
 
+function showInfo(){
+    $("#blackout").fadeToggle(400)
+}
+
 function changeMap(elem,map){
 
     $(".maps_button").removeClass("selected_map")
