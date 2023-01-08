@@ -95,7 +95,7 @@ function rotate(elapsed) {
     rotation = projection.rotate()
     rotation[0] += diff * degPerMs
     projection.rotate(rotation)
-    if (!document.hidden || !$("#world").is(":visible")){
+    if (!document.hidden && $("#world").is(":visible")){
       render()
     }
   }

@@ -152,6 +152,9 @@ hr{
     .info_image_text img{
         padding-right: 20px;
         height: 60px;
+        filter: drop-shadow(2px 2px 2px black);
+        position: relative;
+        z-index: -1;
     }
 
     #info_box .copyright_text{
@@ -1019,6 +1022,9 @@ hr{
     .info_image_text img{
         padding-right: 20px;
         height: 120px;
+        filter: drop-shadow(5px 5px 5px black);
+        position: relative;
+        z-index: -1;
     }
 
     #info_box .copyright_text{

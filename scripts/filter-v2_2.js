@@ -220,12 +220,17 @@ function filter(){
 
     for (var i = 0; i < ghosts.length; i++){
         var keep = true;
+        var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
+        var evidence = ghosts[i].getElementsByClassName("ghost_evidence")[0].textContent.split(' | ')
+        if (name == "The Mimic"){
+            evidence.push("Ghost Orbs")
+        }
+        var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
 
         //Check for evidence
         if (evi_array.length > 0){
-            var evidence = ghosts[i].getElementsByClassName("ghost_evidence")[0];
             evi_array.forEach(function (item,index){
-                if(!evidence.textContent.includes(item)){
+                if(!evidence.includes(item)){
                     keep = false
                 }
             });
@@ -233,16 +238,14 @@ function filter(){
 
         // Check for not evidence
         if (not_evi_array.length > 0){
-            var evidence = ghosts[i].getElementsByClassName("ghost_evidence")[0];
             not_evi_array.forEach(function (item,index){
-                if(evidence.textContent.includes(item)){
+                if(evidence.includes(item)){
                     keep = false
                 }
             });
         }
 
         //Check for speed
-        var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
         if (speed.includes('|')){
             var speeds = speed.split('|')
         }
@@ -297,9 +300,8 @@ function filter(){
             ghosts[i].className += " hidden";
         }
         else{
-            var evidence = ghosts[i].getElementsByClassName("ghost_evidence")[0];
-            for (var e =0; e < evidence.textContent.split('|').length; e++){
-                keep_evidence.add(evidence.textContent.split('|')[e].trim())
+            for (var e = 0; e < evidence.length; e++){
+                keep_evidence.add(evidence[e])
             }
         }
     }
@@ -340,6 +342,15 @@ function showMaps(){
 }
 
 function showInfo(){
+
+    if (!$("#blackout").is(":visible")){
+        set_sparkle(false)
+        initSparkling()
+    }
+    else{
+        set_sparkle(true)
+    }
+
     $("#blackout").fadeToggle(400)
 }
 
