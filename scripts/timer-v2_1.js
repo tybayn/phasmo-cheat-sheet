@@ -1,5 +1,14 @@
 const zeroPad = (num, places) => String(num).padStart(places, '0')
 
+document.body.onkeyup = function(e) {
+    if (e.key == "t" ||
+        e.code == "KeyT" ||      
+        e.keyCode == 84      
+    ) {
+        toggle_timer();
+    }
+}
+
 var timer_snd = [
     new Audio('assets/finish.wav'),
     new Audio('assets/1.wav'),

@@ -10,7 +10,7 @@
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://bl.ocks.org/mbostock/raw/7ea1dde508cec6d2d95306f92642bc42/6aac691494f752142a67cc43c51a0fd09896dbd4/versor.js"></script>
     <script src="scripts/ghost_template.js"></script>
-    <link rel="stylesheet" href="styles/style-v2_3.css"/>
+    <link rel="stylesheet" href="styles/style-v2_4.css"/>
     <link rel="stylesheet" href="styles/sparkles.css" >
 </head>
 
@@ -124,13 +124,13 @@
             </div>
             <div class="modifier_note">(Click &#128266; to hear speed)</div>
             <hr>
-            <div class="modifier_smudge_timer phasfont white">Smudge Timer</div>
-            <div class="line_labels">
+            <div class="modifier_smudge_timer phasfont white" onclick="toggle_timer()">Smudge Timer</div>
+            <div class="line_labels" onclick="toggle_timer()">
                 <div class="spirit_line_label">Spirit</div>
                 <div class="demon_line_label">Demon</div>
             </div>
-            <div id="progress">
-                <img src="imgs/play.png" id="play_button" class="play_button" onclick="toggle_timer()">
+            <div id="progress" onclick="toggle_timer()">
+                <img src="imgs/play.png" id="play_button" class="play_button">
                 <div id="progressBar">
                     <div id="progressBarInner" class="bar"></div>
                     <div class="demon_line"></div>
@@ -138,9 +138,10 @@
                     <div class="spirit_line"></div>
                 </div>
             </div>
-            <div id="time_left">
+            <div id="time_left" onclick="toggle_timer()">
                 <span id="minute">03</span>:<span id="second">00</span>
             </div>
+            <div class="modifier_note_2" onclick="toggle_timer()">(Press 't' to start/stop)</div>
             <hr>
             <div class="modifier_volume phasfont white">Volume</div>
             <input type="range" id="modifier_volume" name="volume" 
@@ -202,7 +203,7 @@
     </div>
 
     <script src="scripts/metronome-v2.js"></script>
-    <script src="scripts/timer-v2.js"></script>
+    <script src="scripts/timer-v2_1.js"></script>
     <script src="scripts/filter-v2_3.js"></script>
     <script src="scripts/geo-v2_1.js"></script>
     <script src="scripts/analytics-v2.js"></script>
