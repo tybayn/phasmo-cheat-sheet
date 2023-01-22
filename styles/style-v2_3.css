@@ -609,11 +609,19 @@ hr{
         height: calc(100% - 260px);
         margin: 0px 30px 30px 30px;
         background-color: #000;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .map_image{
+        width: 100%;
+        height: 100%;
+        background-color: #000;
         background-image: url(../imgs/maps/tanglewood.png);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        border-radius: 5px;
+        position: absolute;
     }
 
     .maps_credit{
@@ -1483,11 +1491,18 @@ hr{
         height: calc(100% - 600px);
         margin: 0px 30px 30px 30px;
         background-color: #000;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .map_image{
+        width: 100%;
+        height: 100%;
+        background-color: #000;
         background-image: url(../imgs/maps/tanglewood.png);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        border-radius: 5px;
     }
 
     .maps_credit{

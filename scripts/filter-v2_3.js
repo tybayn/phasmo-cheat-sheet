@@ -358,7 +358,27 @@ function changeMap(elem,map){
 
     $(".maps_button").removeClass("selected_map")
     $(elem).addClass("selected_map")
-    $(".maps_image").css("background-image","url(imgs/maps/"+map+")")
+    $(".map_image").css("background-image","url(imgs/maps/"+map+")")
+}
+
+function zoomMap(elem){
+    $(".map_image").css("width",`200%`)
+    $(".map_image").css("height",`200%`)
+}
+
+function unZoomMap(elem){
+    $(".map_image").css("width",`100%`)
+    $(".map_image").css("height",`100%`)
+    $(".map_image").css("left",`0`)
+    $(".map_image").css("top",`0`)
+}
+
+function moveZoom(elem,e){
+    mpx = (e.clientX - $(elem).offset().left) / $(elem).width()
+    mpy = (e.clientY - $(elem).offset().top) / $(elem).height()
+    $(".map_image").css("left",`-${(mpx*120)-10}%`)
+    $(".map_image").css("top",`-${(mpy*120)-10}%`)
+    console.log(`${mpx},${mpy}`)
 }
 
 function playSound(resource){
