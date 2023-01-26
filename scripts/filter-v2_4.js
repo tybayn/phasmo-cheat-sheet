@@ -378,7 +378,6 @@ function moveZoom(elem,e){
     mpy = (e.clientY - $(elem).offset().top) / $(elem).height()
     $(".map_image").css("left",`-${(mpx*120)-10}%`)
     $(".map_image").css("top",`-${(mpy*120)-10}%`)
-    console.log(`${mpx},${mpy}`)
 }
 
 function playSound(resource){

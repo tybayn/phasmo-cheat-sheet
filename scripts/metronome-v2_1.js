@@ -12,20 +12,29 @@ var running = false
 var start = Date.now()
 var snd_choice = 0;
 
+function getTempo(s,i){
+    return [
+        Math.ceil((-68.3*Math.pow(s,6)) + (824*Math.pow(s,5)) + (-4045*Math.pow(s,4)) + (10333*Math.pow(s,3)) + (-14451*Math.pow(s,2)) + (10506*s) - 3068), // 50%, R^2:1
+        Math.ceil((-32.1*Math.pow(s,6)) + (388*Math.pow(s,5)) + (-1912*Math.pow(s,4)) + (4896*Math.pow(s,3)) + (-6859*Math.pow(s,2)) + (5025*s) - 1459), // 75%, R^2:1
+        Math.ceil((4.12*Math.pow(s,6)) + (-47.4*Math.pow(s,5)) + (222*Math.pow(s,4)) + (-541*Math.pow(s,3)) + (733*Math.pow(s,2)) + (-456*s) + 151), // 100%, R^2:1
+        Math.ceil((-20.4*Math.pow(s,6)) + (263*Math.pow(s,5)) + (-1361*Math.pow(s,4)) + (3626*Math.pow(s,3)) + (-5211*Math.pow(s,2)) + (3908*s) - 1122), // 125%, R^2:1
+        Math.ceil((-45*Math.pow(s,6)) + (573*Math.pow(s,5)) + (-2943*Math.pow(s,4)) +(7794*Math.pow(s,3)) + (-11155*Math.pow(s,2)) + (8272*s) - 2395)  // 150%, R^2:1
+    ][i]
+}
+
 var last_id = "";
 function toggleSound(set_tempo,id){
     speed = set_tempo
-    var speed_modifier = [0.48,0.75,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
     if (last_id != id){
         last_id = id
-        tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier)
+        tempo = getTempo(speed,parseInt($("#ghost_modifier_speed").val()))
         start = Date.now()
         if (!running){
             startMetronome()
         }
     }
     else if (!running){
-        tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier)
+        tempo = getTempo(speed,parseInt($("#ghost_modifier_speed").val()))
         start = Date.now()
         if (!running){
             startMetronome()
@@ -41,8 +50,7 @@ function setSoundType(){
 }
 
 function setTempo(){
-    var speed_modifier = [0.48,0.75,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
-    tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier)
+    tempo = getTempo(speed,parseInt($("#ghost_modifier_speed").val()))
 }
 
 function setVolume(){
