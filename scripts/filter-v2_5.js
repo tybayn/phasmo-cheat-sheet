@@ -5,7 +5,7 @@ const all_evidence = ["DOTs","EMF 5","Fingerprints","Freezing","Ghost Orbs","Wri
 const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","Mare","Revenant","Shade","Demon","Yurei","Oni","Yokai","Hantu","Goryo","Myling","Onryo","The Twins","Raiju","Obake","The Mimic","Moroi","Deogen","Thaye"]
 const all_speed = ["Slow","Normal","Fast"]
 
-var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
+var state = {"evidence":{},"num_evidences":3,"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
 
 $(window).on('load', function() {
     fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(2000)})
@@ -35,6 +35,8 @@ $(window).on('load', function() {
         else{
             start_state = JSON.parse(start_state)
         }
+
+        document.getElementById("num_evidence").value = start_state["num_evidences"]
     
         for (const [key, value] of Object.entries(start_state["ghosts"])){ 
             if (value == 0){
@@ -61,6 +63,8 @@ $(window).on('load', function() {
                 $("#"+key)[0].click();
             }
         }
+        filter()
+
     })
     .catch(error => {
         fetch("backup-data/ghosts.json")
@@ -74,6 +78,7 @@ $(window).on('load', function() {
                 cards.innerHTML += `${ghost.ghostTemplate}`
             }
             cur_version.innerHTML = `${data.version}`
+            filter()
         })
     })
 });
@@ -172,6 +177,7 @@ function filter(){
     for (var i = 0; i < all_evidence.length; i++){
         state["evidence"][all_evidence[i]] = 0
     }
+    state["num_evidences"] = document.getElementById("num_evidence").value
 
     // Get values of checkboxes
     var base_speed = 1.7;
@@ -181,6 +187,7 @@ function filter(){
     var good_checkboxes = document.querySelectorAll('[name="evidence"] .good');
     var bad_checkboxes = document.querySelectorAll('[name="evidence"] .bad');
     var speed_checkboxes = document.querySelectorAll('[name="speed"] .good');
+    var num_evidences = document.getElementById("num_evidence").value
 
     for (var i = 0; i < good_checkboxes.length; i++) {
         evi_array.push(good_checkboxes[i].parentElement.value);
@@ -217,32 +224,120 @@ function filter(){
     var ghosts = document.getElementsByClassName("ghost_card")
     var keep_evidence = new Set();
     var keep_speed = new Set();
+    var mimic_evi = []
+    var mimic_nm_evi = ""
 
     for (var i = 0; i < ghosts.length; i++){
         var keep = true;
         var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
         var evidence = ghosts[i].getElementsByClassName("ghost_evidence")[0].textContent.split(' | ')
+        var nm_evidence = ghosts[i].getElementsByClassName("ghost_nightmare_evidence")[0].textContent;
         if (name == "The Mimic"){
             evidence.push("Ghost Orbs")
+            mimic_evi = evidence
+            nm_evidence = "Ghost Orbs"
+            mimic_nm_evi = "Ghost Orbs"
         }
         var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
 
-        //Check for evidence
-        if (evi_array.length > 0){
-            evi_array.forEach(function (item,index){
-                if(!evidence.includes(item)){
-                    keep = false
-                }
-            });
+        // Check for evidences
+        // Standard
+        if (num_evidences == "3"){
+
+            if (evi_array.length > 0){
+                evi_array.forEach(function (item,index){
+                    if(!evidence.includes(item)){
+                        keep = false
+                    }
+                });
+            }
+
+            if (not_evi_array.length > 0){
+                not_evi_array.forEach(function (item,index){
+                    if(evidence.includes(item)){
+                        keep = false
+                    }
+                });
+            }
         }
 
-        // Check for not evidence
-        if (not_evi_array.length > 0){
-            not_evi_array.forEach(function (item,index){
-                if(evidence.includes(item)){
+        // Nightmare Mode
+        else if (num_evidences == "2"){
+
+
+            if (evi_array.length == 3 && name != "The Mimic"){
+                keep = false
+            }
+            else if (evi_array.length > 0){
+                if (evi_array.length > (evidence.length > 3 ? 2 : 1) && evidence.filter(x => !evi_array.includes(x)).includes(nm_evidence)){
                     keep = false
                 }
-            });
+
+                evi_array.forEach(function (item,index){
+                    if(!evidence.includes(item)){
+                        keep = false
+                    }
+                });
+
+            }
+
+            if (not_evi_array.length > 1){
+                if (evidence.filter(x => !not_evi_array.includes(x)).length <= (evidence.length > 3 ? 2 : 1)){
+                    keep = false
+                }
+            }
+            else if (not_evi_array.length == 1 && nm_evidence != ""){
+                not_evi_array.forEach(function (item,index){
+                    if(nm_evidence == item){
+                        keep = false
+                    }
+                });
+            }
+        }
+
+        // Insanity
+        else if (num_evidences == "1"){
+
+            if (evi_array.length == 2 && name != "The Mimic"){
+                keep = false
+            }
+            else if (evi_array.length > 0){
+                if (evi_array.length > (evidence.length > 3 ? 1 : 0) && evidence.filter(x => !evi_array.includes(x)).includes(nm_evidence)){
+                    keep = false
+                }
+
+                evi_array.forEach(function (item,index){
+                    if(!evidence.includes(item)){
+                        keep = false
+                    }
+                });
+
+            }
+
+            if (not_evi_array.length > 1){
+                if (evidence.filter(x => !not_evi_array.includes(x)).length <= (evidence.length > 3 ? 1 : 0)){
+                    keep = false
+                }
+            }
+            else if (not_evi_array.length == 1 && nm_evidence != ""){
+                not_evi_array.forEach(function (item,index){
+                    if(nm_evidence == item){
+                        keep = false
+                    }
+                });
+            }
+        }
+
+        // Apocalypse
+        else if (num_evidences == "0"){
+
+            if (evi_array.length > 0 && name != "The Mimic"){
+                keep = false
+            }
+
+            if (not_evi_array.length > 0 && name == "The Mimic"){
+                keep = false
+            }
         }
 
         //Check for speed
@@ -306,18 +401,135 @@ function filter(){
         }
     }
 
-    if (evi_array.length > 0){
-        all_evidence.filter(evi => !keep_evidence.has(evi)).forEach(function(item){
-            if (!not_evi_array.includes(item)){
-                var checkbox = document.getElementById(item);
-                $(checkbox).addClass("block")
-                $(checkbox).find("#checkbox").removeClass(["good","bad"])
-                $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
-                $(checkbox).find(".label").addClass("disabled-text")
-                $(checkbox).find(".label").removeClass("strike")
-            }
-        })
+    if (num_evidences == "3"){
+        if (evi_array.length > 0){
+            all_evidence.filter(evi => !keep_evidence.has(evi)).forEach(function(item){
+                if (!not_evi_array.includes(item)){
+                    var checkbox = document.getElementById(item);
+                    $(checkbox).addClass("block")
+                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+                    $(checkbox).find(".label").addClass("disabled-text")
+                    $(checkbox).find(".label").removeClass("strike")
+                }
+            })
+        }
+    }
 
+    else if (num_evidences == "2"){
+        var keep_evi = evi_array
+        if (keep_evi.length == 3){
+            all_evidence.filter(evi => !keep_evi.includes(evi)).forEach(function(item){
+                if (!not_evi_array.includes(item)){
+                    var checkbox = document.getElementById(item);
+                    $(checkbox).addClass("block")
+                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+                    $(checkbox).find(".label").addClass("disabled-text")
+                    $(checkbox).find(".label").removeClass("strike")
+                }
+            })
+        }
+        else if (keep_evi.length == 2){
+            if (keep_evi.every(x => mimic_evi.includes(x))){
+                mimic_evi.pop(mimic_nm_evi)
+                if (keep_evi.every(x => mimic_evi.includes(x))){
+                    keep_evi.push(mimic_nm_evi)
+                }
+                else{
+                    keep_evi=mimic_evi
+                    keep_evi.push(mimic_nm_evi)
+                } 
+            }
+
+            all_evidence.filter(evi => !keep_evi.includes(evi)).forEach(function(item){
+                if (!not_evi_array.includes(item)){
+                    var checkbox = document.getElementById(item);
+                    $(checkbox).addClass("block")
+                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+                    $(checkbox).find(".label").addClass("disabled-text")
+                    $(checkbox).find(".label").removeClass("strike")
+                }
+            })
+        }
+        else if (keep_evi.length > 0){
+            all_evidence.filter(evi => !keep_evidence.has(evi)).forEach(function(item){
+                if (!not_evi_array.includes(item)){
+                    var checkbox = document.getElementById(item);
+                    $(checkbox).addClass("block")
+                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+                    $(checkbox).find(".label").addClass("disabled-text")
+                    $(checkbox).find(".label").removeClass("strike")
+                }
+            })
+        }
+    }
+
+    else if (num_evidences == "1"){
+        var keep_evi = evi_array
+        if (keep_evi.length == 2){
+            all_evidence.filter(evi => !keep_evi.includes(evi)).forEach(function(item){
+                if (!not_evi_array.includes(item)){
+                    var checkbox = document.getElementById(item);
+                    $(checkbox).addClass("block")
+                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+                    $(checkbox).find(".label").addClass("disabled-text")
+                    $(checkbox).find(".label").removeClass("strike")
+                }
+            })
+        }
+        else if (keep_evi.length == 1){
+            if (keep_evi.every(x => mimic_evi.includes(x))){
+                mimic_evi.pop(mimic_nm_evi)
+                if (keep_evi.every(x => mimic_evi.includes(x))){
+                    keep_evi.push(mimic_nm_evi)
+                }
+                else{
+                    keep_evi=mimic_evi
+                    keep_evi.push(mimic_nm_evi)
+                } 
+            }
+
+            all_evidence.filter(evi => !keep_evi.includes(evi)).forEach(function(item){
+                if (!not_evi_array.includes(item)){
+                    var checkbox = document.getElementById(item);
+                    $(checkbox).addClass("block")
+                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+                    $(checkbox).find(".label").addClass("disabled-text")
+                    $(checkbox).find(".label").removeClass("strike")
+                }
+            })
+        }
+        else if (keep_evi.length > 0){
+            all_evidence.filter(evi => !keep_evidence.has(evi)).forEach(function(item){
+                if (!not_evi_array.includes(item)){
+                    var checkbox = document.getElementById(item);
+                    $(checkbox).addClass("block")
+                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+                    $(checkbox).find(".label").addClass("disabled-text")
+                    $(checkbox).find(".label").removeClass("strike")
+                }
+            })
+        }
+    }
+
+    else if (num_evidences == "0"){
+        all_evidence.filter(evi => evi != 'Ghost Orbs').forEach(function(item){
+            var checkbox = document.getElementById(item);
+            $(checkbox).addClass("block")
+            $(checkbox).find("#checkbox").removeClass(["good","bad"])
+            $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+            $(checkbox).find(".label").addClass("disabled-text")
+            $(checkbox).find(".label").removeClass("strike")
+        })
+    }
+
+    if (evi_array.length > 0){
         all_speed.filter(spe => !keep_speed.has(spe)).forEach(function(item){
             var checkbox = document.getElementById(item);
             $(checkbox).addClass("block")
