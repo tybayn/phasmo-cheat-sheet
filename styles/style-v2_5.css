@@ -282,6 +282,19 @@ hr{
         z-index: 2;
     }
 
+    .num_evidence{
+        border: none;
+        color: #FFF;
+        background: rgba(0,0,0,0.25);
+        box-shadow: inset 0 0 10px #161615;
+        height: 25px;
+        font-size: 16px;
+        padding: 0px 3px;
+        padding-top: 1px;
+        font-family: 'October Crow';
+        float: right;
+    }
+
     .evidence{
         grid-column: 1;
         grid-row: 2;
@@ -598,15 +611,15 @@ hr{
 
     .map_toggle{
         grid-column: 1;
-        grid-row: 1;
+        grid-row: 5;
         z-index: 3;
         text-align: right;
     }
 
     .map_icon{
         filter: invert(1);
-        height: 100%;
-        margin-top: -5px;
+        height: 90%;
+        margin-top: 0px;
         cursor: pointer;
     }
     .map_icon:hover{
@@ -841,6 +854,10 @@ hr{
         grid-row: 2;
         font-size: 12px;
         text-align: center;
+    }
+
+    .ghost_nightmare_evidence{
+        display: none;
     }
     
     .ghost_speed{
@@ -1192,6 +1209,18 @@ hr{
         grid-row: 1;
         font-size: 40px;
         z-index: 2;
+    }
+
+    .num_evidence{
+        border: none;
+        color: #FFF;
+        background: rgba(0,0,0,0.25);
+        box-shadow: inset 0 0 10px #161615;
+        height: 52px;
+        font-size: 40px;
+        padding: 0px 10px;
+        margin-left: 7px;
+        font-family: 'October Crow';
     }
 
     .evidence{
@@ -1744,6 +1773,10 @@ hr{
         grid-row: 2;
         font-size: 20px;
         text-align: center;
+    }
+
+    .ghost_nightmare_evidence{
+        display: none;
     }
     
     .ghost_speed{

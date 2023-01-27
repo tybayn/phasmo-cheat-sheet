@@ -15,7 +15,7 @@ var snd_choice = 0;
 var last_id = "";
 function toggleSound(set_tempo,id){
     speed = set_tempo
-    var speed_modifier = [0.48,0.75,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
+    var speed_modifier = [0.46,0.74,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
     if (last_id != id){
         last_id = id
         tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier)
@@ -41,7 +41,7 @@ function setSoundType(){
 }
 
 function setTempo(){
-    var speed_modifier = [0.48,0.75,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
+    var speed_modifier = [0.46,0.74,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
     tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier)
 }
 

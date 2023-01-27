@@ -9,8 +9,8 @@
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://bl.ocks.org/mbostock/raw/7ea1dde508cec6d2d95306f92642bc42/6aac691494f752142a67cc43c51a0fd09896dbd4/versor.js"></script>
-    <script src="scripts/ghost_template.js"></script>
-    <link rel="stylesheet" href="styles/style-v2_4.css"/>
+    <script src="scripts/ghost_template-v2.js"></script>
+    <link rel="stylesheet" href="styles/style-v2_5.css"/>
     <link rel="stylesheet" href="styles/sparkles.css" >
 </head>
 
@@ -25,6 +25,7 @@
 
             <h3>Data Accuracy</h3>
             <div class="info_text">The data was last reviewed by Phasmophobia Discord Moderator "Shuee01" on 2023-01-04 (v0.8.0.5)</div>
+            <div class="info_text" style="padding-top: 15px;">Graphics settings and GPU/CPU load will impact the speed of footstep sounds in game. What you hear in game may differ and not match exactly with what is heard on this guide.</div>
             <h3>Copyright and Disclaimers</h3>
             <div class="info_block">Phasmophobia, the Phasmophobia logo, and any game related info, images, or sounds (specifically footstep sounds, banshee scream, and deogen breathing) are either ® or TM, Kinetic Games Limited. Any assets used within this site are used with direct permission from Kinetic Games.<br><br>
                 The Zero-Network "Unofficial Phasmophobia Cheat Sheet" is not created by nor affiliated with Kinetic Games, its developers, or partners. This service is created by an independent third party.<br><br>
@@ -49,7 +50,12 @@
         <div class="header"></div>
         <div class="map_toggle"><img src="imgs/map.png" class="map_icon" alt="maps" onclick="showMaps()"/></div>
         <div class="evidence_title phasfont white">
-            Evidence
+            Evidence <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="filter()">
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+                <option value="0">0</option>
+              </select>
         </div>
         <div class="evidence">
             <button id="EMF 5" class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="EMF 5">
@@ -202,9 +208,9 @@
         </div>
     </div>
 
-    <script src="scripts/metronome-v2.js"></script>
+    <script src="scripts/metronome-v2_2.js"></script>
     <script src="scripts/timer-v2_1.js"></script>
-    <script src="scripts/filter-v2_3.js"></script>
+    <script src="scripts/filter-v2_5.js"></script>
     <script src="scripts/geo-v2_1.js"></script>
     <script src="scripts/analytics-v2.js"></script>
     <script src="scripts/sparkles.js"></script>
