@@ -281,17 +281,13 @@ function filter(){
 
             }
 
+            if (nm_evidence != "" && not_evi_array.includes(nm_evidence)){
+                keep = false
+            }
             if (not_evi_array.length > 1){
                 if (evidence.filter(x => !not_evi_array.includes(x)).length <= (evidence.length > 3 ? 2 : 1)){
                     keep = false
                 }
-            }
-            else if (not_evi_array.length == 1 && nm_evidence != ""){
-                not_evi_array.forEach(function (item,index){
-                    if(nm_evidence == item){
-                        keep = false
-                    }
-                });
             }
         }
 
@@ -314,17 +310,13 @@ function filter(){
 
             }
 
+            if (nm_evidence != "" && not_evi_array.includes(nm_evidence)){
+                keep = false
+            }
             if (not_evi_array.length > 1){
                 if (evidence.filter(x => !not_evi_array.includes(x)).length <= (evidence.length > 3 ? 1 : 0)){
                     keep = false
                 }
-            }
-            else if (not_evi_array.length == 1 && nm_evidence != ""){
-                not_evi_array.forEach(function (item,index){
-                    if(nm_evidence == item){
-                        keep = false
-                    }
-                });
             }
         }
 
