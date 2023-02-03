@@ -847,6 +847,7 @@ hr{
         font-weight: bold;
         padding:10px;
         text-align: center;
+        letter-spacing: 2px;
     }
 
     .ghost_evidence{
@@ -1766,6 +1767,7 @@ hr{
         font-weight: bold;
         padding:10px;
         text-align: center;
+        letter-spacing: 4px;
     }
 
     .ghost_evidence{
