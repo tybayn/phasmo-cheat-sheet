@@ -581,7 +581,7 @@ function flashMode(){
 
 function saveSettings(){
     user_settings['volume'] = parseInt(document.getElementById("modifier_volume").value)
-    user_settings['offset'] = parseInt(document.getElementById("offset_value").innerText.replace(/\D/g,""))
+    user_settings['offset'] = parseInt(document.getElementById("offset_value").innerText.replace(/\d+(?:-\d+)+/g,""))
     user_settings['ghost_modifier'] = parseInt(document.getElementById("ghost_modifier_speed").value)
     user_settings['num_evidences'] = parseInt(document.getElementById("num_evidence").value)
     user_settings['sound_type'] = document.getElementById("modifier_sound_type").checked ? 1 : 0;
