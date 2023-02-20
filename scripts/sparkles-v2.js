@@ -32,11 +32,15 @@ function initSparkling() {
             setTimeout(sparkling, rand);
         }
         else{
-            stars.each(function(index) {
-                if(index === 0) {
-                    $(this).remove();
-                }
-            });
+            try{
+                stars.each(function(index) {
+                    if(index === 0) {
+                        $(this).remove();
+                    }
+                });
+            } catch(Error) {
+                // Om nom nom
+            }
         }
     }
 			
