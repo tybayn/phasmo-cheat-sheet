@@ -10,7 +10,8 @@
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://bl.ocks.org/mbostock/raw/7ea1dde508cec6d2d95306f92642bc42/6aac691494f752142a67cc43c51a0fd09896dbd4/versor.js"></script>
     <script src="scripts/ghost_template-v2.js"></script>
-    <link rel="stylesheet" href="styles/style-v2_6.css"/>
+    <link rel="stylesheet" href="styles/style-v2_7.css"/>
+    <link rel="stylesheet" href="styles/style-mobile-v1.css"/>
     <link rel="stylesheet" href="styles/sparkles.css" >
 </head>
 
@@ -22,7 +23,7 @@
 
             <h3>Data Accuracy</h3>
             <div class="info_text">The data was last reviewed by Phasmophobia Discord Moderator "Shuee01" on 2023-01-04 (v0.8.0.5)</div>
-            <div class="info_text" style="padding-top: 15px;">Graphics settings and GPU/CPU load will impact the speed of footstep sounds in game. What you hear in game may differ and not match exactly with what is heard on this guide.</div>
+            <div class="info_text" style="padding-top: 15px;">Graphics settings and GPU/CPU load will impact the speed of footstep sounds in game. What you hear in game may differ and not match exactly with what is heard on this guide. You can adjust the "Speed Offset" in settings to more accurately align the footstep sounds to what you hear in game.</div>
             <h3>Copyright and Disclaimers</h3>
             <div class="info_block">Phasmophobia, the Phasmophobia logo, and any game related info, images, or sounds (specifically footstep sounds, banshee scream, and deogen breathing) are either ® or TM, Kinetic Games Limited. Any assets used within this site are used with direct permission from Kinetic Games.<br><br>
                 The Zero-Network "Unofficial Phasmophobia Cheat Sheet" is not created by nor affiliated with Kinetic Games, its developers, or partners. This service is created by an independent third party.<br><br>
@@ -42,18 +43,46 @@
             <div id="session">-</div>
         </div>
     </div>
+
+    <div id="settings_box" style="left:-7px;">
+        <div id="settings_tab" onclick="showSettings()">Settings</div>
+        <span class="icon" onclick="showSettings()"></span>
+
+        <div class="settings_title phasfont white">Settings</div>
+        <div class="info_block">
+            <div class="modifier_volume phasfont white">Volume</div>
+            <input type="range" id="modifier_volume" name="volume" 
+                min="0" max="100" step="2" default="50" onchange="setVolume();saveSettings();">
+            <div class="modifier_volume_labels">
+                <div class="modifier_volume_label">0%</div>
+                <div class="modifier_volume_label">25%</div>
+                <div class="modifier_volume_label">50%</div>
+                <div class="modifier_volume_label">75%</div>
+                <div class="modifier_volume_label">100%</div>
+            </div>
+            <div class="modifier_note">(Change volume of footsteps)</div>
+            <hr>
+            <div class="modifier_volume phasfont white">Speed Offset</div>
+            <div id="speed_offset">
+                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-1);setTempo();saveSettings();">-</span>
+                <span id="offset_value"> 0% </span>
+                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(1);setTempo();saveSettings();">+</span></div>
+            <div class="modifier_note">(Adjust speed of footsteps)</div>
+        </div>
+    </div>
     
     <div class="data">
         <div class="header"></div>
         <div class="map_toggle"><img src="imgs/map.png" class="map_icon" alt="maps" onclick="showMaps()"/></div>
         <div class="evidence_title phasfont white">
-            Evidence <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="filter()">
+            Evidence <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="filter();flashMode();saveSettings();">
                 <option value="3">3</option>
                 <option value="2">2</option>
                 <option value="1">1</option>
                 <option value="0">0</option>
               </select>
         </div>
+        <div id="game_mode" class="phasfont white" style="display:none;">Insanity</div>
         <div class="evidence">
             <button id="EMF 5" class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="EMF 5">
                 <div id="checkbox" class="neutral"><span class="icon"></span></div>
@@ -109,7 +138,7 @@
         <div class="modifier">
             <div class="modifier_ghost_speed phasfont white">Ghost Speed</div>
             <input type="range" id="ghost_modifier_speed" name="volume" 
-                min="0" max="4" step="1" default="2" onchange="setTempo()">
+                min="0" max="4" step="1" default="2" onchange="setTempo();saveSettings();">
             <div class="modifier_ghost_speed_labels">
                 <div class="modifier_ghost_speed_label">50%</div>
                 <div class="modifier_ghost_speed_label">75%</div>
@@ -119,7 +148,7 @@
             </div>
             <div class="modifier_sound_select">
                 <img src="imgs/footsteps.png">
-                <label for="modifier_sound_type" onchange="setSoundType()">
+                <label for="modifier_sound_type" onchange="setSoundType();saveSettings();">
                     <input type="checkbox" name="" id="modifier_sound_type">
                     <div class="toggle"></div>
                 </label>
@@ -145,17 +174,6 @@
                 <span id="minute">03</span>:<span id="second">00</span>
             </div>
             <div class="modifier_note_2" onclick="toggle_timer()">(Press 't' to start/stop)</div>
-            <hr>
-            <div class="modifier_volume phasfont white">Volume</div>
-            <input type="range" id="modifier_volume" name="volume" 
-                min="0" max="100" step="2" default="50" onchange="setVolume()">
-            <div class="modifier_volume_labels">
-                <div class="modifier_volume_label">0%</div>
-                <div class="modifier_volume_label">25%</div>
-                <div class="modifier_volume_label">50%</div>
-                <div class="modifier_volume_label">75%</div>
-                <div class="modifier_volume_label">100%</div>
-            </div>
         </div>
 
         <div id="cards" class="cards"><div class="dot-flashing"></div></div>
@@ -205,11 +223,11 @@
         </div>
     </div>
 
-    <script src="scripts/metronome-v2_2.js"></script>
+    <script src="scripts/metronome-v2_3.js"></script>
     <script src="scripts/timer-v2_1.js"></script>
-    <script src="scripts/filter-v2_6.js"></script>
+    <script src="scripts/filter-v2_7.js"></script>
     <script src="scripts/geo-v2_1.js"></script>
-    <script src="scripts/analytics-v2.js"></script>
+    <script src="scripts/analytics-v2_1.js"></script>
     <script src="scripts/sparkles.js"></script>
 
 </body>
