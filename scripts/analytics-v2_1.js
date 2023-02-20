@@ -18,6 +18,7 @@ async function get_session(){
 function heartbeat(){
     var uuid = getCookie("znid")
     if(uuid != "no-connection-to-server"){
+        state['settings'] = JSON.stringify(user_settings)
         fetch("https://zero-network.net/analytics/"+uuid,{method:"POST",Accept:"application/json",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
         .then(response => response.json())
         .then(data => {

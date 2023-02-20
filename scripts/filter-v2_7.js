@@ -5,12 +5,15 @@ const all_evidence = ["DOTs","EMF 5","Fingerprints","Freezing","Ghost Orbs","Wri
 const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","Mare","Revenant","Shade","Demon","Yurei","Oni","Yokai","Hantu","Goryo","Myling","Onryo","The Twins","Raiju","Obake","The Mimic","Moroi","Deogen","Thaye"]
 const all_speed = ["Slow","Normal","Fast"]
 
-var state = {"evidence":{},"num_evidences":3,"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
+var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
+var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0}
 
 $(window).on('load', function() {
     fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(2000)})
     .then(data => data.json())
     .then(data => {
+        loadSettings()
+
         var cards = document.getElementById('cards')
         var cur_version = document.getElementById('current-version-label')
         cards.innerHTML = "";
@@ -35,8 +38,6 @@ $(window).on('load', function() {
         else{
             start_state = JSON.parse(start_state)
         }
-
-        document.getElementById("num_evidence").value = start_state["num_evidences"]
     
         for (const [key, value] of Object.entries(start_state["ghosts"])){ 
             if (value == 0){
@@ -63,10 +64,13 @@ $(window).on('load', function() {
                 $("#"+key)[0].click();
             }
         }
+        
         filter()
 
     })
     .catch(error => {
+        loadSettings()
+
         fetch("backup-data/ghosts.json")
         .then(data => data.json())
         .then(data => {
@@ -177,7 +181,6 @@ function filter(){
     for (var i = 0; i < all_evidence.length; i++){
         state["evidence"][all_evidence[i]] = 0
     }
-    state["num_evidences"] = document.getElementById("num_evidence").value
 
     // Get values of checkboxes
     var base_speed = 1.7;
@@ -558,6 +561,62 @@ function showInfo(){
     $("#blackout").fadeToggle(400)
 }
 
+function showSettings(){
+    if (document.getElementById("settings_box").style.left == "-7px"){
+        document.getElementById("settings_box").style.left = "196px"
+    }
+    else {
+        document.getElementById("settings_box").style.left = "-7px"
+    }
+}
+
+function flashMode(){
+    var cur_evidence = parseInt(document.getElementById("num_evidence").value)
+    var mode_text = ["Apocalypse","Insanity","Nightmare","Professional"][cur_evidence]
+    document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${cur_evidence} evidence)</span>`
+    $("#game_mode").fadeIn(500,function () {
+        $("#game_mode").delay(500).fadeOut(500);
+      });
+}
+
+function saveSettings(){
+    user_settings['volume'] = parseInt(document.getElementById("modifier_volume").value)
+    user_settings['offset'] = parseInt(document.getElementById("offset_value").innerText.replace(/\D/g,""))
+    user_settings['ghost_modifier'] = parseInt(document.getElementById("ghost_modifier_speed").value)
+    user_settings['num_evidences'] = parseInt(document.getElementById("num_evidence").value)
+    user_settings['sound_type'] = document.getElementById("modifier_sound_type").checked ? 1 : 0;
+    setCookie("settings",JSON.stringify(user_settings),30)
+}
+
+function loadSettings(){
+    try{
+        user_settings = JSON.parse(getCookie("settings"))
+    } catch (error) {
+        user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0}
+    }
+    document.getElementById("modifier_volume").value = user_settings['volume']
+    document.getElementById("offset_value").innerText = ` ${user_settings['offset']}% `
+    document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier']
+    document.getElementById("num_evidence").value = user_settings['num_evidences']
+    document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] == 1
+    setCookie("settings",JSON.stringify(user_settings),30)
+    setVolume()
+    adjustOffset(0)
+    setTempo()
+    setSoundType()
+    flashMode()
+}
+
+function resetSettings(){
+    user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0}
+    document.getElementById("modifier_volume").value = user_settings['volume']
+    document.getElementById("offset_value").innerText = ` ${user_settings['offset']}% `
+    document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier']
+    document.getElementById("num_evidence").value = user_settings['num_evidences']
+    document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] == 1
+    setCookie("settings",JSON.stringify(user_settings),30)
+}
+
 function changeMap(elem,map){
 
     $(".maps_button").removeClass("selected_map")
@@ -592,6 +651,7 @@ function playSound(resource){
 
 function reset(){
     var uuid = getCookie("znid")
+    state['settings'] = JSON.stringify(user_settings)
     fetch("https://zero-network.net/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
     .then((response) => {
         setCookie("znid",uuid,-1)
