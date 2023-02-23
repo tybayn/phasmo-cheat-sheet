@@ -2,7 +2,13 @@ function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";
 function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
 async function get_session(){
     var e="";
-    e=await fetch("https://zero-network.net/analytics/",{headers:{Accept:"application/json"},signal: AbortSignal.timeout(2000)})
+    var id;
+    try{
+        id = JSON.parse(getCookie("discord_link"))['id'];
+    } catch(Error) {
+        id = false;
+    }
+    e=await fetch(`https://zero-network.net/analytics/${id ? '?discord_id='+id : ''}`,{headers:{Accept:"application/json"},signal: AbortSignal.timeout(2000)})
     .then(e=>e.json())
     .then(e => {
         setCookie("znid",e.znid,1)

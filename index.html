@@ -10,8 +10,9 @@
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://bl.ocks.org/mbostock/raw/7ea1dde508cec6d2d95306f92642bc42/6aac691494f752142a67cc43c51a0fd09896dbd4/versor.js"></script>
     <script src="scripts/ghost_template-v2.js"></script>
-    <link rel="stylesheet" href="styles/style-v2_8.css"/>
+    <link rel="stylesheet" href="styles/style-v2_9.css"/>
     <link rel="stylesheet" href="styles/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="discord/discord.css" >
     <link rel="stylesheet" href="styles/sparkles.css" >
 </head>
 
@@ -68,6 +69,20 @@
                 <span id="offset_value"> 0% </span>
                 <span id="minus_speed" class="speed_icon" onclick="adjustOffset(1);setTempo();saveSettings();">+</span></div>
             <div class="modifier_note">(Adjust speed of footsteps)</div>
+        </div>
+        <div class="settings_title phasfont white" style="padding-top: 7px;">Discord Link</div>
+        <div class="info_block">
+            <img id="discord_avatar" src="imgs/discord-mark-blue.png">
+            <div id="discord_name">Link your Discord</div>
+            <div id="discord_link_date" class="hidden"></div>
+            <div id="discord_stats" class="discord_note">Linking your Discord account will allow you to record what is input into this Cheat Sheet, allowing you to view statistics about ghosts, evidences, and play style!</div>
+            <div id="discord_note" class="discord_note grey">(1) Linking does not maintain an active connection to Discord, you will need to relink every 30 days or if you update your Discord profile. (2) Stats provided are purely from the use of this Cheat Sheet. We do not connect to the Phasmophobia game or Steam in any way.</div>
+            <div>
+                <a id="discord_link" href="https://discord.com/api/oauth2/authorize?client_id=1077230568422510602&redirect_uri=https%3A%2F%2Fzero-network.net%2Fanalytics%2Fdiscord-connect&response_type=code&scope=identify">
+                    <div id="discord_login_button">Link</div>
+                </a>
+                <div id="discord_unlink_button" class="hidden" onclick="discord_unlink()">Unlink</div>
+            </div>
         </div>
     </div>
     
@@ -226,8 +241,9 @@
     <script src="scripts/metronome-v2_3.js"></script>
     <script src="scripts/timer-v2_1.js"></script>
     <script src="scripts/filter-v2_8.js"></script>
-    <script src="scripts/geo-v2_1.js"></script>
-    <script src="scripts/analytics-v2_1.js"></script>
+    <script src="scripts/geo-v2_2.js"></script>
+    <script src="discord/discord.js"></script>
+    <script src="scripts/analytics-v2_2.js"></script>
     <script src="scripts/sparkles-v2.js"></script>
 
 </body>

@@ -142,6 +142,9 @@ hr{
         width: 100%;
         padding-bottom: 20px;
         user-select: none;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        margin-bottom: 13px;
     }
 
     #speed_offset{
@@ -473,6 +476,7 @@ hr{
         align-items: center;
         overflow-y: scroll;
         overflow-x: hidden;
+        padding-bottom: 13px;
     }
 
     .modifier_ghost_speed{
@@ -508,6 +512,7 @@ hr{
         color: #999;
         font-size: 10px;
         padding-top: 10px;
+        margin: 0px 10px;
     }
 
     .modifier_note_2{
@@ -957,7 +962,7 @@ hr{
         grid-template-columns: 215px 300px;
         color: white;
         background-color: #363c44;
-        margin-top: 20px;
+        margin: 20px 5px 0px 5px;
         height: 125px;
         overflow: hidden;
         position: relative;
@@ -1449,7 +1454,7 @@ input{
 }
 
 .selected {
-    background-color: #353;
+    background-color: #353 !important;
 }
 
 .dot-flashing {
