@@ -34,7 +34,7 @@ $(window).on('load', function() {
         fetch("https://zero-network.net/analytics/f045b35c-5e26-4fd7-bf18-69a973ab3390/322470764848873474", {signal: AbortSignal.timeout(2000)})
         .then(data => data.json())
         .then(data => {
-            var stats_info = `<strong>Total Games</strong>: ${data.total_games}<hr><div style="display:grid; grid-template-columns: 50% 50%;">`
+            var stats_info = `<strong>Total Games</strong>: ${data.total_games}<hr><div style="display:grid; grid-template-columns: 60%;">`
 
             stats_info += `<div style="padding:0px 5px;">Professional: <span style="float:right;">${data['game_evidence']['3']}</span></div>`
             stats_info += `<div style="padding:0px 5px;">Nightmare: <span style="float:right;">${data['game_evidence']['2']}</span></div>`
@@ -44,7 +44,7 @@ $(window).on('load', function() {
 
             stats_info += '</div><br><strong>Ghosts</strong><hr><div style="display:grid; grid-template-columns: 50% 50%;">'
             for (const g in data['ghost_stats']){
-                stats_info += `<div style="padding:0px 5px;">${g}: <span style="float:right;">${data['ghost_stats'][g]}</span></div>`
+                stats_info += `<div style="padding:0px 5px;${g == 'Unknown'?'color:#555;':''}">${g}: <span style="float:right;">${data['ghost_stats'][g]}</span></div>`
             }
             stats_info += '</div>'
 

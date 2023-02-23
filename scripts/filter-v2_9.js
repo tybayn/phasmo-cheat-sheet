@@ -562,11 +562,11 @@ function showInfo(){
 }
 
 function showSettings(){
-    if (document.getElementById("settings_box").style.left == "-7px"){
+    if (document.getElementById("settings_box").style.left == "-32px"){
         document.getElementById("settings_box").style.left = "196px"
     }
     else {
-        document.getElementById("settings_box").style.left = "-7px"
+        document.getElementById("settings_box").style.left = "-32px"
     }
 }
 
