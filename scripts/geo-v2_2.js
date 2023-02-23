@@ -15,6 +15,7 @@ var colorWater = '#000'
 var colorLand = '#066770'
 var colorGraticule = '#032f33'
 var colorLogin = '#c9870c'
+var colorDLogin = '#b6ff0a'
 var colorDailies = '#055961'
 
 
@@ -34,7 +35,7 @@ var q0 // Projection rotation as versor at start.
 var lastTime = d3.now()
 var degPerMs = degPerSec / 1000
 var width, height
-var land, logins, dailies
+var land, logins, d_logins, dailies
 var countryList
 var autorotate, now, diff, roation
 var currentCountry
@@ -72,6 +73,7 @@ function render() {
   fill(land, colorLand)
   fill(dailies, colorDailies)
   fill(logins, colorLogin)
+  fill(d_logins, colorDLogin)
 }
 
 function fill(obj, color) {
@@ -105,22 +107,21 @@ function rotate(elapsed) {
 function loadData(cb) {
   d3.queue()
   .defer(d3.json,'https://unpkg.com/world-atlas@1/world/110m.json')
-  .defer(d3.json,"https://zero-network.net/analytics/active.json")
-  .defer(d3.json,"https://zero-network.net/analytics/daily.json")
-  .await((error, world, points, points_hist) => {
+  .defer(d3.json,"https://zero-network.net/analytics/active-users.json")
+  .await((error, world, points) => {
     if (error) throw error
-    cb(world,points,points_hist)
+    cb(world,points)
   });
 }
 
 function reloadData(){
     d3.queue()
-    .defer(d3.json,"https://zero-network.net/analytics/active.json")
-    .defer(d3.json,"https://zero-network.net/analytics/daily.json")
-    .await((error, points, points_hist) => {
+    .defer(d3.json,"https://zero-network.net/analytics/active-users.json")
+    .await((error, points) => {
         if (error) throw error
-        logins = points
-        dailies = points_hist
+        dailies = points[0]
+        logins = points[1]
+        d_logins = points[2]
       });
 }
 
@@ -130,10 +131,11 @@ function reloadData(){
 
 setAngles()
 
-loadData(function(world,locations,locations_hist) {
+loadData(function(world,points) {
   land = topojson.feature(world, world.objects.land)
-  logins = locations
-  dailies = locations_hist
+  dailies = points[0]
+  logins = points[1]
+  d_logins = points[2]
   
   window.addEventListener('resize', scale)
   scale()
