@@ -150,7 +150,6 @@ function select(elem){
             state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
         }
         setCookie("state",JSON.stringify(state),1)
-        heartbeat()
     }
 }
 
@@ -165,14 +164,12 @@ function fade(elem){
     $(elem).removeClass("selected");
     $(elem).find(".ghost_name").toggleClass("strike");
     setCookie("state",JSON.stringify(state),1)
-    heartbeat()
 }
 
 function remove(elem){
     state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -1;
     $(elem).addClass("permhidden");
     setCookie("state",JSON.stringify(state),1)
-    heartbeat()
 }
 
 function filter(){
@@ -535,7 +532,6 @@ function filter(){
     }
     
     setCookie("state",JSON.stringify(state),1)
-    heartbeat()
 }
 
 function showGlobe(){
