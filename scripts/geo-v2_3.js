@@ -144,7 +144,7 @@ loadData(function(world,points) {
 
 setInterval(function(){
   if(!document.hidden){
-    reloadData()
-    heartbeat()
+    try{reloadData()} catch(Error){console.error("Could not load geo data!")}
+    try{heartbeat()} catch(Error){console.error("Heartbeat failed!")}
   }
 }, 60000)
