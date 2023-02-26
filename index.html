@@ -10,7 +10,7 @@
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://bl.ocks.org/mbostock/raw/7ea1dde508cec6d2d95306f92642bc42/6aac691494f752142a67cc43c51a0fd09896dbd4/versor.js"></script>
     <script src="scripts/ghost_template-v2.js"></script>
-    <link rel="stylesheet" href="styles/style-v2_10.css"/>
+    <link rel="stylesheet" href="styles/style-v2_11.css"/>
     <link rel="stylesheet" href="styles/style-mobile-v1.css"/>
     <link rel="stylesheet" href="discord/discord.css" >
     <link rel="stylesheet" href="styles/sparkles.css" >
@@ -131,6 +131,14 @@
 
         <div class="speed_title phasfont white">
             Speed
+            <div class="speed_logic_select">
+                <span>OR</span>
+                <label for="speed_logic_type" onchange="filter();saveSettings();">
+                    <input type="checkbox" name="" id="speed_logic_type">
+                    <div class="toggle"></div>
+                </label>
+                <span>AND</span>
+            </div>
         </div>
         <div class="speed">
             <button id="Slow" class="tricheck phasfont white" name="speed" onclick="dualstate(this)" value="Slow">
@@ -240,7 +248,7 @@
 
     <script src="scripts/metronome-v2_3.js"></script>
     <script src="scripts/timer-v2_1.js"></script>
-    <script src="scripts/filter-v2_10.js"></script>
+    <script src="scripts/filter-v2_11.js"></script>
     <script src="scripts/geo-v2_3.js"></script>
     <script src="discord/discord-v2.js"></script>
     <script src="scripts/zn-v2_2.js"></script>

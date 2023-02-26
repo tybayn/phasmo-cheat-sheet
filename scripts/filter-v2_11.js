@@ -6,7 +6,7 @@ const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","
 const all_speed = ["Slow","Normal","Fast"]
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
-var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0}
+var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0}
 
 $(window).on('load', function() {
     fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(2000)})
@@ -188,6 +188,7 @@ function filter(){
     var bad_checkboxes = document.querySelectorAll('[name="evidence"] .bad');
     var speed_checkboxes = document.querySelectorAll('[name="speed"] .good');
     var num_evidences = document.getElementById("num_evidence").value
+    var speed_logic_type = document.getElementById("speed_logic_type").checked ? 1 : 0;
 
     for (var i = 0; i < good_checkboxes.length; i++) {
         evi_array.push(good_checkboxes[i].parentElement.value);
@@ -232,13 +233,14 @@ function filter(){
         var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
         var evidence = ghosts[i].getElementsByClassName("ghost_evidence")[0].textContent.split(' | ')
         var nm_evidence = ghosts[i].getElementsByClassName("ghost_nightmare_evidence")[0].textContent;
+        var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
         if (name == "The Mimic"){
             evidence.push("Ghost Orbs")
             mimic_evi = evidence
             nm_evidence = "Ghost Orbs"
             mimic_nm_evi = "Ghost Orbs"
         }
-        var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
+        
 
         // Check for evidences
         // Standard
@@ -333,16 +335,21 @@ function filter(){
         }
 
         //Check for speed
+        //Parse Ghost speeds
         if (speed.includes('|')){
             var speeds = speed.split('|')
+            var speed_type = "or"
         }
         else if(speed.includes('-')){
             var speeds = speed.split('-')
+            var speed_type = "range"
         }
         else{
             var speeds = [speed]
+            var speed_type = "or"
         }
 
+        // Get min and max
         var min_speed = parseFloat(speeds[0].replaceAll(" m/s",""))
         if (speeds.length > 1){
             var max_speed = parseFloat(speeds[1].replaceAll(" m/s",""))
@@ -351,35 +358,57 @@ function filter(){
             var max_speed = min_speed
         }
 
+        // Check if speed is being kept
         if (keep){
-            if(min_speed < base_speed){
+            if(min_speed < base_speed || name == "The Mimic"){
                 keep_speed.add('Slow')
             }
-            if(min_speed === base_speed || max_speed === base_speed){
+            if ((speed_type == "range" && min_speed <= base_speed && base_speed <= max_speed) || name == "The Mimic"){
                 keep_speed.add('Normal')
             }
-            if(max_speed > base_speed){
+            else if(min_speed === base_speed || max_speed === base_speed){
+                keep_speed.add('Normal')
+            }
+            if(max_speed > base_speed || name == "The Mimic"){
                 keep_speed.add('Fast')
             }
         }
 
+        // Check if ghost is being kept
         if (spe_array.length > 0){
             var skeep = false,nkeep = false,fkeep = false;
+
+            var shas = (min_speed < base_speed || name == "The Mimic")
+            var nhas = (speed_type == "or" && (min_speed === base_speed || max_speed === base_speed || name == "The Mimic")) || (speed_type == "range" && min_speed <= base_speed && base_speed <= max_speed)
+            var fhas = (max_speed > base_speed || name == "The Mimic")
+
             spe_array.forEach(function (item,index){
-                if (item === "Slow" && min_speed < base_speed){
-                    skeep = true;
+
+                if (item == "Slow"){
+                    skeep = true
                 }
-                if (item === "Normal" && (min_speed === base_speed || max_speed === base_speed)){
-                    nkeep = true;
+                else if (item == "Normal"){
+                    nkeep = true
                 }
-                if (item === "Fast" && max_speed > base_speed){
-                    fkeep = true;
+                else if (item == "Fast"){
+                    fkeep = true
                 }
             });
 
-            if(!skeep && !nkeep && !fkeep){
-                keep = false;
+            // OR Logic
+            if (speed_logic_type == 0){
+                if(!((skeep && shas) || (nkeep && nhas) || (fkeep && fhas))){
+                    keep = false
+                }
             }
+
+            // AND Logic
+            else{
+                if(!(skeep == (skeep && shas) && nkeep == (nkeep && nhas) && fkeep == (fkeep && fhas))){
+                    keep = false
+                }
+            }
+
         }
 
         ghosts[i].className = ghosts[i].className.replaceAll(" hidden","");
@@ -581,6 +610,7 @@ function saveSettings(){
     user_settings['ghost_modifier'] = parseInt(document.getElementById("ghost_modifier_speed").value)
     user_settings['num_evidences'] = parseInt(document.getElementById("num_evidence").value)
     user_settings['sound_type'] = document.getElementById("modifier_sound_type").checked ? 1 : 0;
+    user_settings['speed_logic_type'] = document.getElementById("speed_logic_type").checked ? 1 : 0;
     setCookie("settings",JSON.stringify(user_settings),30)
 }
 
@@ -588,13 +618,14 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0}
+        user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0}
     }
-    document.getElementById("modifier_volume").value = user_settings['volume']
-    document.getElementById("offset_value").innerText = ` ${user_settings['offset']}% `
-    document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier']
-    document.getElementById("num_evidence").value = user_settings['num_evidences']
-    document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] == 1
+    document.getElementById("modifier_volume").value = user_settings['volume'] ?? 50
+    document.getElementById("offset_value").innerText = ` ${user_settings['offset'] ?? 0}% `
+    document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier'] ?? 2
+    document.getElementById("num_evidence").value = user_settings['num_evidences'] ?? 3
+    document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] ?? 0 == 1
+    document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] ?? 0 == 1
     setCookie("settings",JSON.stringify(user_settings),30)
     setVolume()
     adjustOffset(0)
@@ -604,12 +635,13 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0}
+    user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0}
     document.getElementById("modifier_volume").value = user_settings['volume']
     document.getElementById("offset_value").innerText = ` ${user_settings['offset']}% `
     document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier']
     document.getElementById("num_evidence").value = user_settings['num_evidences']
     document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] == 1
+    document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] == 1
     setCookie("settings",JSON.stringify(user_settings),30)
 }
 
@@ -643,6 +675,10 @@ function playSound(resource){
     var snd = new Audio(resource);
     snd.volume = volume
     snd.play()
+}
+
+function setSpeedLogicType(){
+    snd_choice = document.getElementById("speed_logic_type").checked ? 1 : 0;
 }
 
 function reset(){
