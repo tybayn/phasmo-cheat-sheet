@@ -17,33 +17,18 @@
 
     #settings_box{
         display: none;
-        /* position: fixed;
-        top: 0;
-        z-index: 1;
-        width: 100%;
-        height: 448px;
-        background-color: #363c44;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        align-content: stretch;
-        align-items: flex-start;
-        color: #fff;
-        padding: 5px 8px 5px 20px;
-        font-size: 40px;
-        box-shadow: 5px 0px 10px 0px #000;
-        transition: all 0.5s ease; */
     }
 
     #settings_tab{
         display: none;
-        /* position: absolute;
-        bottom: -50px;
-        right: 30px;
-        background-color: #363c44;
-        padding: 5px;
-        cursor: pointer;
-        box-shadow: -6px 5px 5px -2px #000; */
+    }
+
+    #discord_link_box{
+        display: none;
+    }
+
+    #discord_link_tab{
+        display: none;
     }
 
     #info_box{

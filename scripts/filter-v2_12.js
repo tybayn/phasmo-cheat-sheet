@@ -588,10 +588,27 @@ function showInfo(){
 
 function showSettings(){
     if (document.getElementById("settings_box").style.left == "-32px"){
+        document.getElementById("settings_box").style.boxShadow = "5px 0px 10px 0px #000"
+        document.getElementById("discord_link_box").style.zIndex= "0"
+        document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("settings_box").style.left = "196px"
     }
     else {
         document.getElementById("settings_box").style.left = "-32px"
+        document.getElementById("settings_box").style.boxShadow = "none"
+    }
+}
+
+function showDiscordLink(){
+    if (document.getElementById("discord_link_box").style.left == "-32px"){
+        document.getElementById("discord_link_box").style.boxShadow = "5px 0px 10px 0px #000"
+        document.getElementById("settings_box").style.zIndex = "0"
+        document.getElementById("discord_link_box").style.zIndex= "1"
+        document.getElementById("discord_link_box").style.left = "196px"
+    }
+    else {
+        document.getElementById("discord_link_box").style.left = "-32px"
+        document.getElementById("discord_link_box").style.boxShadow = "none"
     }
 }
 

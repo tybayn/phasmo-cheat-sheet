@@ -80,8 +80,7 @@ hr{
         color: #fff;
         padding: 5px 8px 5px 20px;
         font-size: 14px;
-        box-shadow: 5px 0px 10px 0px #000;
-        transition: all 0.5s ease;
+        transition: left 0.5s ease;
     }
 
     #settings_tab{
@@ -95,15 +94,44 @@ hr{
         box-shadow: -6px 5px 5px -2px #000;
     }
 
+    #discord_link_box{
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        width: 200px;
+        height: 100%;
+        background-color: #363c44;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: stretch;
+        align-items: flex-start;
+        color: #fff;
+        padding: 5px 8px 5px 20px;
+        font-size: 14px;
+        transition: left 0.5s ease;
+    }
+
+    #discord_link_tab{
+        position: absolute;
+        transform: rotate(-90deg);
+        top: 97px;
+        right: -55px;
+        background-color: #363c44;
+        padding: 5px;
+        cursor: pointer;
+        box-shadow: -6px 5px 5px -2px #000;
+    }
+
     .settings_title{
         font-size: 20px;
         margin: 2px 0px 10px 0px;
     }
 
-    #settings_box .icon{
+    #settings_box .icon, #discord_link_box .icon{
         position: absolute;
         top: 5px;
-        right: 0px;
+        right: 4px;
         width: 23px;
         height:23px;
         -ms-transform: rotate(45deg); /* IE 9 */
@@ -112,7 +140,7 @@ hr{
         cursor: pointer;
     }
 
-    #settings_box .icon:before{
+    #settings_box .icon:before, #discord_link_box .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -122,7 +150,7 @@ hr{
         top:4px;
     }
 
-    #settings_box .icon:after{
+    #settings_box .icon:after, #discord_link_box .icon:after{
         content:"";
         position: absolute;
         width:15px;
@@ -132,7 +160,7 @@ hr{
         top:10px;
     }
 
-    #settings_box .info_block{
+    #settings_box .info_block, #discord_link_box .info_block{
         display: flex;
         flex-direction: column;
         z-index: 2;
