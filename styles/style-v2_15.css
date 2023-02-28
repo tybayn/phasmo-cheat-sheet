@@ -91,7 +91,6 @@ hr{
         background-color: #363c44;
         padding: 5px;
         cursor: pointer;
-        box-shadow: -6px 5px 5px -2px #000;
     }
 
     #discord_link_box{
@@ -120,7 +119,34 @@ hr{
         background-color: #363c44;
         padding: 5px;
         cursor: pointer;
-        box-shadow: -6px 5px 5px -2px #000;
+    }
+
+    #event_box{
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        width: 350px;
+        height: 100%;
+        background-color: #363c44;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: stretch;
+        align-items: flex-start;
+        color: #fff;
+        padding: 5px 8px 5px 20px;
+        font-size: 14px;
+        transition: left 0.5s ease;
+    }
+
+    #event_tab{
+        position: absolute;
+        transform: rotate(-90deg);
+        top: 193px;
+        right: -61px;
+        background-color: #363c44;
+        padding: 5px;
+        cursor: pointer;
     }
 
     .settings_title{
@@ -128,7 +154,7 @@ hr{
         margin: 2px 0px 10px 0px;
     }
 
-    #settings_box .icon, #discord_link_box .icon{
+    #settings_box .icon, #discord_link_box .icon, #event_box .icon{
         position: absolute;
         top: 5px;
         right: 4px;
@@ -140,7 +166,7 @@ hr{
         cursor: pointer;
     }
 
-    #settings_box .icon:before, #discord_link_box .icon:before{
+    #settings_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -150,7 +176,7 @@ hr{
         top:4px;
     }
 
-    #settings_box .icon:after, #discord_link_box .icon:after{
+    #settings_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after{
         content:"";
         position: absolute;
         width:15px;
@@ -160,7 +186,7 @@ hr{
         top:10px;
     }
 
-    #settings_box .info_block, #discord_link_box .info_block{
+    #settings_box .info_block, #discord_link_box .info_block, #event_box .info_block{
         display: flex;
         flex-direction: column;
         z-index: 2;
@@ -1075,7 +1101,7 @@ hr{
         background: rgba(0,0,0,0.25);
         margin-top: 1px;
         margin-bottom: 1px;
-        z-index: 5;
+        z-index: 0;
     }
     
     .ghost_behavior_item{
