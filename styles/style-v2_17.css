@@ -68,7 +68,7 @@ hr{
     #settings_box{
         position: fixed;
         top: 0;
-        z-index: 1;
+        z-index: 2;
         width: 200px;
         height: 100%;
         background-color: #363c44;
@@ -86,17 +86,23 @@ hr{
     #settings_tab{
         position: absolute;
         transform: rotate(-90deg);
-        top: 20px;
-        right: -43px;
+        height: 15px;
+        width: 90px;
+        text-align: center;
+        top: 44px;
+        right: -64px;
         background-color: #363c44;
         padding: 5px;
         cursor: pointer;
+        border-style: solid;
+        border-color: #5a5a5a;
+        border-width: 0px 1px 1px 1px;
     }
 
     #discord_link_box{
         position: fixed;
         top: 0;
-        z-index: 0;
+        z-index: 1;
         width: 200px;
         height: 100%;
         background-color: #363c44;
@@ -114,17 +120,23 @@ hr{
     #discord_link_tab{
         position: absolute;
         transform: rotate(-90deg);
-        top: 98px;
-        right: -56px;
+        height: 15px;
+        width: 90px;
+        text-align: center;
+        top: 153px;
+        right: -64px;
         background-color: #363c44;
         padding: 5px;
         cursor: pointer;
+        border-style: solid;
+        border-color: #5a5a5a;
+        border-width: 0px 1px 1px 1px;
     }
 
     #event_box{
         position: fixed;
         top: 0;
-        z-index: 0;
+        z-index: 1;
         width: 350px;
         height: 100%;
         background-color: #363c44;
@@ -142,11 +154,17 @@ hr{
     #event_tab{
         position: absolute;
         transform: rotate(-90deg);
-        top: 193px;
-        right: -60px;
+        height: 15px;
+        width: 90px;
+        text-align: center;
+        top: 262px;
+        right: -64px;
         background-color: #363c44;
         padding: 5px;
         cursor: pointer;
+        border-style: solid;
+        border-color: #5a5a5a;
+        border-width: 0px 1px 1px 1px;
     }
 
     .settings_title{
@@ -420,7 +438,7 @@ hr{
         background-color: #363c44;
         margin: -8px;
         box-shadow: 5px 0px 10px 0px #000;
-        z-index: 1;
+        z-index: 2;
     }
 
     .footer{
