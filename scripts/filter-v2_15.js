@@ -16,6 +16,18 @@ $(window).on('load', function() {
 
         var cards = document.getElementById('cards')
         var cur_version = document.getElementById('current-version-label')
+        var evidence_list = document.getElementById('evidence')
+
+        evidence_list.innerHTML = "";
+        for(var i = 0; i < data.evidence.length; i++){
+            evidence_list.innerHTML += `
+            <button id="${data.evidence[i]}" class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="${data.evidence[i]}">
+                <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                <div class="label">${data.evidence[i]}</div>
+            </button>
+            `
+        }
+
         cards.innerHTML = "";
         for(var i = 0; i < data.ghosts.length; i++){
             var ghost = new Ghost(data.ghosts[i]);
@@ -71,11 +83,22 @@ $(window).on('load', function() {
     .catch(error => {
         loadSettings()
 
-        fetch("backup-data/ghosts.json")
+        fetch("backup-data/ghosts_backup.json")
         .then(data => data.json())
         .then(data => {
             var cards = document.getElementById('cards')
             var cur_version = document.getElementById('current-version-label')
+            var evidence_list = document.getElementById('evidence')
+
+            evidence_list.innerHTML = "";
+            for(var i = 0; i < data.evidence.length; i++){
+                evidence_list.innerHTML += `
+                <button id="${data.evidence[i]}" class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="${data.evidence[i]}">
+                    <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                    <div class="label">${data.evidence[i]}</div>
+                </button>
+                `
+            }
             cards.innerHTML = "";
             for(var i = 0; i < data.ghosts.length; i++){
                 var ghost = new Ghost(data.ghosts[i]);
