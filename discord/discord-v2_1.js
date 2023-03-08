@@ -31,7 +31,7 @@ $(window).on('load', function() {
         document.getElementById("discord_login_button").innerText = "Relink"
         $("#discord_unlink_button").removeClass("hidden")
         document.getElementById("reset").innerText = "Save & Reset"
-        fetch("https://zero-network.net/analytics/f045b35c-5e26-4fd7-bf18-69a973ab3390/322470764848873474", {signal: AbortSignal.timeout(2000)})
+        fetch(`https://zero-network.net/analytics/${znid}/${discord_user['id']}`, {signal: AbortSignal.timeout(2000)})
         .then(data => data.json())
         .then(data => {
             var stats_info = `<strong>Total Games</strong>: ${data.total_games}<hr><div style="display:grid; grid-template-columns: 60%;">`
