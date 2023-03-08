@@ -1,7 +1,7 @@
 
 discord_user = {}
 
-$(window).on('load', function() {
+function checkLink(){
     params = new URL(window.location.href).searchParams
 
     if (params.get("id")){
@@ -19,8 +19,13 @@ $(window).on('load', function() {
         window.location.href = window.location.href.split("?")[0]
     }
 
+}
+
+function getLink(){
+
     try{
         znid = getCookie("znid")
+
         discord_user = JSON.parse(getCookie("discord_link"))
         document.getElementById("discord_avatar").src = `https://cdn.discordapp.com/avatars/${discord_user['id']}/${discord_user['avatar']}`
         $("#discord_avatar").addClass("avatar")
@@ -54,7 +59,7 @@ $(window).on('load', function() {
     } catch(Error){
         // Om nom nom
     }
-})
+}
 
 function discord_unlink(){
     discord_user = {}

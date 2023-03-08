@@ -8,7 +8,7 @@ const all_speed = ["Slow","Normal","Fast"]
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
 var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0}
 
-$(window).on('load', function() {
+function loadData(){
     fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(2000)})
     .then(data => data.json())
     .then(data => {
@@ -108,7 +108,7 @@ $(window).on('load', function() {
             filter()
         })
     })
-});
+}
 
 function dualstate(elem){
     var checkbox = $(elem).find("#checkbox");
