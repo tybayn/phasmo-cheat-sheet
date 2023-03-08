@@ -116,18 +116,28 @@
     }
 
     .info_image_text img{
-        padding-right: 20px;
-        height: 120px;
+        margin-right: 20px;
+        max-height: 120px;
+        max-width: 120px;
         filter: drop-shadow(5px 5px 5px black);
         position: relative;
         z-index: -1;
     }
 
     #info_box .copyright_text{
-        margin-top: 40px;
+        margin-top: 20px;
         text-align: center;
         align-self: center;
         font-size: 10px;
+        width: 100%;
+    }
+
+    #info_box .thankyou_text{
+        color: #999;
+        margin-top: 40px;
+        text-align: center;
+        align-self: center;
+        font-size: 9px;
         width: 100%;
     }
 

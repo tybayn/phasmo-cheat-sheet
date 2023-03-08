@@ -329,18 +329,28 @@ hr{
     }
 
     .info_image_text img{
-        padding-right: 20px;
-        height: 60px;
+        margin-right: 20px;
+        max-height: 60px;
+        max-width: 60px;
         filter: drop-shadow(2px 2px 2px black);
         position: relative;
         z-index: -1;
     }
 
     #info_box .copyright_text{
+        margin-top: 10px;
+        text-align: center;
+        align-self: center;
+        font-size: 11px;   
+    }
+
+    #info_box .thankyou_text{
+        color: #999;
         margin-top: 25px;
         text-align: center;
         align-self: center;
-        font-size: 11px;
+        font-size: 10px;
+        line-height: 15px;
     }
 
     input[type="range"] {
@@ -952,12 +962,10 @@ hr{
     }
 
     #session{
-        color: rgb(26, 26, 26);
+        color: #999;
         font-size: 8px;
-        padding-top: 10px;
         text-align: center;
         align-self: center;
-        width: 100%;
     }
 
     #reset{
