@@ -10,6 +10,7 @@
 #event_details .spoilers{
     position: relative;
     cursor: pointer;
+    margin-bottom: 3px;
 }
 
 #event_details .curtain{
