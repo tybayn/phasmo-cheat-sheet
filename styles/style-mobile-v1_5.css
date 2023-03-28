@@ -39,6 +39,14 @@
         display: none;
     }
 
+    #wiki_box{
+        display: none;
+    }
+
+    #wiki_tab{
+        display: none;
+    }
+
     #info_box{
         z-index: 100;
         width: calc(100% - 100px);

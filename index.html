@@ -10,9 +10,10 @@
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://bl.ocks.org/mbostock/raw/7ea1dde508cec6d2d95306f92642bc42/6aac691494f752142a67cc43c51a0fd09896dbd4/versor.js"></script>
     <script src="scripts/ghost_template-v2.js"></script>
-    <link rel="stylesheet" href="styles/style-v2_19.css"/>
-    <link rel="stylesheet" href="styles/style-mobile-v1_4.css"/>
+    <link rel="stylesheet" href="styles/style-v2_20.css"/>
+    <link rel="stylesheet" href="styles/style-mobile-v1_5.css"/>
     <link rel="stylesheet" href="discord/discord.css" >
+    <link rel="stylesheet" href="wiki/wiki.css" >
     <link rel="stylesheet" href="events/events-v2_1.css" >
     <link rel="stylesheet" href="styles/sparkles.css" >
 </head>
@@ -89,7 +90,7 @@
     </div>
 
     <div id="discord_link_box" style="left:-32px;">
-        <div id="discord_link_tab" onclick="showDiscordLink()">Discord Link</div>
+        <div id="discord_link_tab" onclick="showDiscordLink();getLink();">Discord Link</div>
         <span class="icon" onclick="showDiscordLink()"></span>
         <div class="settings_title phasfont white">Discord Link</div>
         <div class="info_block">
@@ -118,6 +119,13 @@
                 Check back on the next update!
             </div>
         </div>
+    </div>
+
+    <div id="wiki_box" style="left:-182px;">
+        <div id="wiki_tab" onclick="showWiki();setFlicker();">Guides</div>
+        <span class="icon" onclick="showWiki();setFlicker();"></span>
+        <div class="settings_title phasfont white">Guides</div>
+        <div id="wiki-body" class="info_block"></div>
     </div>
     
     <div class="data">
@@ -249,7 +257,8 @@
     <script src="scripts/timer-v2_1.js"></script>
     <script src="scripts/geo-v2_3.js"></script>
     <script src="discord/discord-v2_2.js"></script>
-    <script src="scripts/filter-v2_16.js"></script>
+    <script src="wiki/wiki.js"></script>
+    <script src="scripts/filter-v2_17.js"></script>
     <script src="events/events.js"></script>
     <script src="scripts/zn-v2_2.js"></script>
     <script src="scripts/sparkles-v2.js"></script>
@@ -258,6 +267,7 @@
             checkLink()
             loadData()
             getLink()
+            $(function(){$("#wiki-body").load("wiki/wiki.html")});
         });
     </script>
 
