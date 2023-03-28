@@ -1100,9 +1100,9 @@ hr{
 
     .ghost_card{
         display: grid;
-        width: 515px;
+        width: 510px;
         border-radius: 5px;
-        grid-template-columns: 215px 300px;
+        grid-template-columns: 215px 295px;
         color: white;
         background-color: #363c44;
         margin: 20px 5px 0px 5px;
