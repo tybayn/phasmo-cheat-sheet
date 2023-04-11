@@ -18,7 +18,7 @@
     top: 0;
     right: 0;
     background: rgba(17,17,17,0.95);
-    color: #999;
+    color: #ffffffa0;
     width: 100%;
     height: 100%;
     display: flex;
@@ -56,7 +56,7 @@
 }
 
 #event_details .caption{
-    color: #999;
+    color: #ffffffa0;
     font-size: 10px;
 }
 

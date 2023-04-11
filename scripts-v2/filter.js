@@ -21,7 +21,7 @@ function loadData(){
         evidence_list.innerHTML = "";
         for(var i = 0; i < data.evidence.length; i++){
             evidence_list.innerHTML += `
-            <button id="${data.evidence[i]}" class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="${data.evidence[i]}">
+            <button id="${data.evidence[i]}" class="tricheck white" name="evidence" onclick="tristate(this)" value="${data.evidence[i]}">
                 <div id="checkbox" class="neutral"><span class="icon"></span></div>
                 <div class="label">${data.evidence[i]}</div>
             </button>
@@ -254,7 +254,9 @@ function filter(){
     for (var i = 0; i < ghosts.length; i++){
         var keep = true;
         var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
-        var evidence = ghosts[i].getElementsByClassName("ghost_evidence")[0].textContent.split(' | ')
+        var evi_objects = ghosts[i].getElementsByClassName("ghost_evidence_item")
+        var evidence = []
+        for (var j = 0; j < evi_objects.length; j++){evidence.push(evi_objects[j].textContent)}
         var nm_evidence = ghosts[i].getElementsByClassName("ghost_nightmare_evidence")[0].textContent;
         var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
         if (name == "The Mimic"){
