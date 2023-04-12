@@ -1211,6 +1211,7 @@ hr{
 
     .ghost_speed_values{
         width: fit-content;
+        line-height: 1.2;
     }
 
     .ghost_hunt{
