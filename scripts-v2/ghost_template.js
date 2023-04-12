@@ -8,6 +8,16 @@ evi_color = {
     "Spirit Box": "#d18c5e", 
 }
 
+evi_icons = {
+    "EMF 5": "imgs/emf5-icon.png",
+    "DOTs": "imgs/dots-icon.png",
+    "Fingerprints": "imgs/fingerprints-icon.png",
+    "Freezing": "imgs/freezing-icon.png",
+    "Ghost Orbs": "imgs/orbs-icon.png",
+    "Writing": "imgs/writing-icon.png",
+    "Spirit Box": "imgs/spirit-box-icon.png", 
+}
+
 class Ghost {
     constructor(data){
 
@@ -35,9 +45,9 @@ class Ghost {
                     </div>
                 </div>
                 <div class="ghost_evidence">
-                    <div class="ghost_evidence_item" ${data.evidence[0] in evi_color ? 'style=\"color:' + evi_color[data.evidence[0]] + ' !important; border-color:' + evi_color[data.evidence[0]] + ' !important;\"' : ''}>${data.evidence[0]}</div>
-                    <div class="ghost_evidence_item" ${data.evidence[1] in evi_color ? 'style=\"color:' + evi_color[data.evidence[1]] + ' !important; border-color:' + evi_color[data.evidence[1]] + ' !important;\"' : ''}>${data.evidence[1]}</div>
-                    <div class="ghost_evidence_item" ${data.evidence[2] in evi_color ? 'style=\"color:' + evi_color[data.evidence[2]] + ' !important; border-color:' + evi_color[data.evidence[2]] + ' !important;\"' : ''}>${data.evidence[2]}</div>
+                    <div class="ghost_evidence_item" ${data.evidence[0] in evi_color ? 'style=\"color:' + evi_color[data.evidence[0]] + ' !important;\"' : ''}><img src="${evi_icons[data.evidence[0]]}">${data.evidence[0]}</div>
+                    <div class="ghost_evidence_item" ${data.evidence[1] in evi_color ? 'style=\"color:' + evi_color[data.evidence[1]] + ' !important;\"' : ''}><img src="${evi_icons[data.evidence[1]]}">${data.evidence[1]}</div>
+                    <div class="ghost_evidence_item" ${data.evidence[2] in evi_color ? 'style=\"color:' + evi_color[data.evidence[2]] + ' !important;\"' : ''}><img src="${evi_icons[data.evidence[2]]}">${data.evidence[2]}</div>
                 </div>
                 <div class="ghost_nightmare_evidence">${data.nightmare_evidence?data.nightmare_evidence:''}</div>
                 <div class="ghost_behavior">

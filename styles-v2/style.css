@@ -541,7 +541,7 @@ hr{
     #game_mode{
         grid-column: 1;
         grid-row: 2;
-        font-size: 24px;
+        font-size: 32px;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -555,7 +555,7 @@ hr{
     }
 
     #game_mode span{
-        font-size:15px;
+        font-size:20px;
     }
 
     .evidence{
@@ -1129,7 +1129,7 @@ hr{
         display: grid;
         width: 510px;
         border-radius: 5px;
-        grid-template-columns: 235px 275px;
+        grid-template-columns: 245px 265px;
         grid-template-rows: 45px 35px 45px;
         color: white;
         background-color: #313248;
@@ -1157,15 +1157,22 @@ hr{
         font-size: 12px;
         text-align: center;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-around;
         align-items: center;
     }
 
     .ghost_evidence_item{
-        border: 1px solid #ccc;
-        border-radius: 15px;
         height: fit-content;
-        padding: 2px 4px;
+        padding: 2px 3px;
+        margin: -2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ghost_evidence_item img{
+        padding-right: 1px;
+        width: 17px;
     }
 
     .ghost_nightmare_evidence{
@@ -1175,7 +1182,8 @@ hr{
     .ghost_hunt_info{
         grid-column: 1;
         grid-row: 3;
-        display: flex;
+        display: grid;
+        grid-template-columns: 28% 72%;
         justify-content: space-evenly;
     }
     
@@ -1185,11 +1193,14 @@ hr{
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 3px 3px 3px 0px;
+        border-radius: 0px 5px 5px 0px;
+        background: rgb(0,0,0,0.25);
     }
 
     .ghost_speed img{
         height: 20px;
-        filter: invert(1);
+        filter: invert(1) opacity(0.6);
     }
 
     .ghost_speed .ms{
@@ -1208,17 +1219,20 @@ hr{
         display: flex;
         align-items: center;
         justify-content: center;
+        border-radius: 5px 0px 0px 5px;
+        margin: 3px 0px 3px 5px;
     }
 
     .ghost_hunt img{
         height: 20px;
         padding-right: 2px;
+        filter: opacity(0.6);
     }
 
     .ghost_behavior{
         grid-column: 2;
         grid-row: 1 / 4;
-        padding:10px 20px;
+        padding:10px 10px;
         margin-left: 2px;
         margin-right: 30px;
         box-shadow: inset 0 0 10px #161615;
@@ -1504,16 +1518,21 @@ input{
     text-decoration: line-through;
 }
 
-.average{
-    color:#FFF;
+.low{
+    color:#ffffff99;
+    background: linear-gradient(90deg, rgba(0,75,0,0.6) 0%, rgba(0,0,0,0.25) 100%);
 }
 
-.low{
-    color:#88c487;
+
+.average{
+    color:#ffffff99;
+    background: rgba(0,0,0,0.25);
 }
+
 
 .high{
-    color:#daa2a0;
+    color:#ffffff99;
+    background: linear-gradient(90deg, rgba(75,0,0,0.5) 0%, rgba(0,0,0,0.25) 100%);
 }
 
 .sound{

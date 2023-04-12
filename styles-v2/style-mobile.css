@@ -842,15 +842,18 @@
         font-size: 24px;
         text-align: center;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
     }
 
     .ghost_evidence_item{
-        border: 1px solid #ccc;
-        border-radius: 15px;
         height: fit-content;
         padding: 2px 4px;
+        margin: 6px;
+    }
+
+    .ghost_evidence_item img{
+        display: none;
     }
 
     .ghost_nightmare_evidence{
@@ -860,7 +863,8 @@
     .ghost_hunt_info{
         grid-column: 1 / 4;
         grid-row: 3;
-        display: flex;
+        display: grid;
+        grid-template-columns: 28% 72%;
         justify-content: space-evenly;
     }
     
@@ -871,6 +875,9 @@
         align-items: center;
         justify-content: center;
         font-size: 25px;
+        margin: 8px 8px 8px 0px;
+        border-radius: 0px 10px 10px 0px;
+        background: rgb(0,0,0,0.25);
     }
 
     .ghost_speed img{
@@ -894,6 +901,8 @@
         align-items: center;
         justify-content: center;
         font-size: 25px;
+        border-radius: 10px 0px 0px 10px;
+        margin: 8px 0px 8px 8px;
     }
 
     .ghost_hunt img{
