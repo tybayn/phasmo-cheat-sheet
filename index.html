@@ -8,14 +8,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
-    <script src="https://bl.ocks.org/mbostock/raw/7ea1dde508cec6d2d95306f92642bc42/6aac691494f752142a67cc43c51a0fd09896dbd4/versor.js"></script>
-    <script src="scripts/ghost_template-v2.js"></script>
-    <link rel="stylesheet" href="styles/style-v2_21.css"/>
-    <link rel="stylesheet" href="styles/style-mobile-v1_5.css"/>
-    <link rel="stylesheet" href="discord/discord.css" >
-    <link rel="stylesheet" href="wiki/wiki.css" >
-    <link rel="stylesheet" href="events/events-v2_1.css" >
-    <link rel="stylesheet" href="styles/sparkles.css" >
+    <script src="scripts-v2/ghost_template.js"></script>
+    <link rel="stylesheet" href="styles-v2/style.css"/>
+    <link rel="stylesheet" href="styles-v2/style-mobile.css"/>
+    <link rel="stylesheet" href="discord-v2/discord.css" >
+    <link rel="stylesheet" href="wiki-v2/wiki.css" >
+    <link rel="stylesheet" href="events-v2/events.css" >
+    <link rel="stylesheet" href="styles-v2/sparkles.css" >
 </head>
 
 <body>
@@ -55,9 +54,9 @@
         <div id="settings_tab" onclick="showSettings()">Settings</div>
         <span class="icon" onclick="showSettings()"></span>
 
-        <div class="settings_title phasfont white">Settings</div>
+        <div class="settings_title yfont white">Settings</div>
         <div class="info_block">
-            <div class="modifier_volume phasfont white">Volume</div>
+            <div class="modifier_volume yfont white">Volume</div>
             <input type="range" id="modifier_volume" name="volume" 
                 min="0" max="100" step="2" default="50" onchange="setVolume();saveSettings();">
             <div class="modifier_volume_labels">
@@ -69,14 +68,14 @@
             </div>
             <div class="modifier_note">(Change volume of footsteps)</div>
             <hr>
-            <div class="modifier_volume phasfont white">Speed Offset</div>
+            <div class="modifier_volume yfont white">Speed Offset</div>
             <div id="speed_offset">
                 <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-1);setTempo();saveSettings();">-</span>
                 <span id="offset_value"> 0% </span>
                 <span id="minus_speed" class="speed_icon" onclick="adjustOffset(1);setTempo();saveSettings();">+</span></div>
             <div class="modifier_note">(Adjust speed of footsteps)</div>
             <hr>
-            <div class="modifier_volume phasfont white">Speed Filter Logic</div>
+            <div class="modifier_volume yfont white">Speed Filter Logic</div>
             <div class="speed_logic_select">
                 <span>OR</span>
                 <label for="speed_logic_type" onchange="filter();saveSettings();">
@@ -92,7 +91,7 @@
     <div id="discord_link_box" style="left:-32px;">
         <div id="discord_link_tab" onclick="showDiscordLink();getLink();">Discord Link</div>
         <span class="icon" onclick="showDiscordLink()"></span>
-        <div class="settings_title phasfont white">Discord Link</div>
+        <div class="settings_title yfont white">Discord Link</div>
         <div class="info_block">
             <img id="discord_avatar" src="imgs/discord-mark-blue.png">
             <div id="discord_name">Link your Discord</div>
@@ -111,7 +110,7 @@
     <div id="event_box" style="left:-182px;">
         <div id="event_tab" onclick="showEvent()">Current Event</div>
         <span class="icon" onclick="showEvent()"></span>
-        <div class="settings_title phasfont white">Current Event</div>
+        <div class="settings_title yfont white">Current Event</div>
         <div class="info_block">
             <div id="event_title">No current events!</div>
             <hr>
@@ -124,14 +123,14 @@
     <div id="wiki_box" style="left:-182px;">
         <div id="wiki_tab" onclick="showWiki();setFlicker();">Guides</div>
         <span class="icon" onclick="showWiki();setFlicker();"></span>
-        <div class="settings_title phasfont white">Guides</div>
+        <div class="settings_title yfont white">Guides</div>
         <div id="wiki-body" class="info_block"></div>
     </div>
     
     <div class="data">
         <div class="header"></div>
         <div class="map_toggle"><img src="imgs/map.png" class="map_icon" alt="maps" onclick="showMaps()"/></div>
-        <div class="evidence_title phasfont white">
+        <div class="evidence_title yfont white">
             Evidence <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="filter();flashMode();saveSettings();">
                 <option value="3">3</option>
                 <option value="2">2</option>
@@ -139,34 +138,34 @@
                 <option value="0">0</option>
               </select>
         </div>
-        <div id="game_mode" class="phasfont white" style="display:none;">Insanity</div>
+        <div id="game_mode" class="yfont white" style="display:none;">Insanity</div>
         <div id="evidence" class="evidence">
             <div class="dot-flashing"></div>
         </div>
 
-        <div class="speed_title phasfont white">
+        <div class="speed_title yfont white">
             Speed
         </div>
         <div class="speed">
-            <button id="Slow" class="tricheck phasfont white" name="speed" onclick="dualstate(this)" value="Slow">
+            <button id="Slow" class="tricheck white" name="speed" onclick="dualstate(this)" value="Slow">
                 <div id="checkbox" class="neutral"><span class="icon"></span></div>
                 <div class="label">Slow</div>
             </button>
-            <button id="Normal" class="tricheck phasfont white" name="speed" onclick="dualstate(this)" value="Normal">
+            <button id="Normal" class="tricheck white" name="speed" onclick="dualstate(this)" value="Normal">
                 <div id="checkbox" class="neutral"><span class="icon"></span></div>
                 <div class="label">Normal</div>
             </button>
-            <button id="Fast" class="tricheck phasfont white" name="speed" onclick="dualstate(this)" value="Fast">
+            <button id="Fast" class="tricheck white" name="speed" onclick="dualstate(this)" value="Fast">
                 <div id="checkbox" class="neutral"><span class="icon"></span></div>
                 <div class="label">Fast</div>
             </button>
         </div>
 
-        <div class="modifier_title phasfont white">
-            Misc.
+        <div class="modifier_title yfont white">
+            Tools
         </div>
         <div class="modifier">
-            <div class="modifier_ghost_speed phasfont white">Ghost Speed</div>
+            <div class="modifier_ghost_speed yfont white">Ghost Speed</div>
             <input type="range" id="ghost_modifier_speed" name="volume" 
                 min="0" max="4" step="1" default="2" onchange="setTempo();saveSettings();">
             <div class="modifier_ghost_speed_labels">
@@ -186,7 +185,7 @@
             </div>
             <div class="modifier_note">(Click &#128266; to hear speed)</div>
             <hr>
-            <div class="modifier_smudge_timer phasfont white" onclick="toggle_timer()">Smudge Timer</div>
+            <div class="modifier_smudge_timer yfont white" onclick="toggle_timer()">Smudge Timer</div>
             <div class="line_labels" onclick="toggle_timer()">
                 <div class="spirit_line_label">Spirit</div>
                 <div class="demon_line_label">Demon</div>
@@ -210,13 +209,13 @@
 
         <div id="active-users"><span id="current-version-label"></span> | <span id="active-users-label" onclick="showGlobe()">Active Users: -</span></div>
         <div class="copyright" onclick="showInfo()"><img class="question" src="imgs/question.png"> Info / Copyright</div>
-        <button id="reset" onclick="reset()">Reset</button>
+        <button id="reset" class="yfont" onclick="reset()">Reset</button>
         <div class="footer"></div>
 
     </div>
 
     <div id="world" style="display:none;">
-        <div class="active_title phasfont white">
+        <div class="active_title yfont white">
             Active Users
         </div>
         <span class="icon" onclick="showGlobe()"></span>
@@ -224,7 +223,7 @@
     </div>
 
     <div id="maps" style="display:none;">
-        <div class="maps_title phasfont white">
+        <div class="maps_title yfont white">
             Maps
         </div>
         <span class="icon" onclick="showMaps()"></span>
@@ -253,21 +252,21 @@
         </div>
     </div>
 
-    <script src="scripts/metronome-v2_3.js"></script>
-    <script src="scripts/timer-v2_1.js"></script>
-    <script src="scripts/geo-v2_3.js"></script>
-    <script src="discord/discord-v2_2.js"></script>
-    <script src="wiki/wiki.js"></script>
-    <script src="scripts/filter-v2_17.js"></script>
-    <script src="events/events.js"></script>
-    <script src="scripts/zn-v2_2.js"></script>
-    <script src="scripts/sparkles-v2.js"></script>
+    <script src="scripts-v2/metronome.js"></script>
+    <script src="scripts-v2/timer.js"></script>
+    <script src="scripts-v2/geo.js"></script>
+    <script src="discord-v2/discord.js"></script>
+    <script src="wiki-v2/wiki.js"></script>
+    <script src="scripts-v2/filter.js"></script>
+    <script src="events-v2/events.js"></script>
+    <script src="scripts-v2/zn.js"></script>
+    <script src="scripts-v2/sparkles.js"></script>
     <script>
         $(window).on('load', function() {
             checkLink()
             loadData()
             getLink()
-            $(function(){$("#wiki-body").load("wiki/wiki.html")});
+            $(function(){$("#wiki-body").load("wiki-v2/wiki.html")});
         });
     </script>
 
