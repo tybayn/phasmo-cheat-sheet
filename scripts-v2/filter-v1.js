@@ -8,6 +8,8 @@ const all_speed = ["Slow","Normal","Fast"]
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
 var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0}
 
+let hasLink = false;
+
 function loadData(){
     fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(2000)})
     .then(data => data.json())
@@ -110,7 +112,7 @@ function loadData(){
     })
 }
 
-function dualstate(elem){
+function dualstate(elem,ignore_link=false){
     var checkbox = $(elem).find("#checkbox");
 
     if (checkbox.hasClass("disabled")){
@@ -126,10 +128,10 @@ function dualstate(elem){
         checkbox.addClass("neutral")
     }
 
-    filter()
+    filter(ignore_link)
 }
 
-function tristate(elem){
+function tristate(elem,ignore_link=false){
     var checkbox = $(elem).find("#checkbox");
     var label = $(elem).find(".label");
 
@@ -152,10 +154,10 @@ function tristate(elem){
         checkbox.addClass("neutral")
     }
 
-    filter()
+    filter(ignore_link)
 }
 
-function select(elem){
+function select(elem,ignore_link=false){
     if (!$(elem).hasClass("faded")){
         var on = $(elem).hasClass("selected")
 
@@ -173,10 +175,11 @@ function select(elem){
             state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
         }
         setCookie("state",JSON.stringify(state),1)
+        if (hasLink && !ignore_link){send_state()}
     }
 }
 
-function fade(elem){
+function fade(elem,ignore_link=false){
     if (state["ghosts"][$(elem).find(".ghost_name")[0].innerText] != 0){
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
     }
@@ -187,15 +190,17 @@ function fade(elem){
     $(elem).removeClass("selected");
     $(elem).find(".ghost_name").toggleClass("strike");
     setCookie("state",JSON.stringify(state),1)
+    if (hasLink && !ignore_link){send_state()}
 }
 
-function remove(elem){
+function remove(elem,ignore_link=false){
     state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -1;
     $(elem).addClass("permhidden");
     setCookie("state",JSON.stringify(state),1)
+    if (hasLink && !ignore_link){send_state()}
 }
 
-function filter(){
+function filter(ignore_link=false){
     state["evidence"] = {}
     state["speed"] = {"Slow":0,"Normal":0,"Fast":0}
     for (var i = 0; i < all_evidence.length; i++){
@@ -586,6 +591,7 @@ function filter(){
     }
     
     setCookie("state",JSON.stringify(state),1)
+    if (hasLink && !ignore_link){send_state()}
 }
 
 function showGlobe(){
@@ -765,7 +771,8 @@ function setSpeedLogicType(){
     snd_choice = document.getElementById("speed_logic_type").checked ? 1 : 0;
 }
 
-function reset(){
+function reset(skip_continue_session=false){
+    if(!skip_continue_session){continue_session()}
     var uuid = getCookie("znid")
     state['settings'] = JSON.stringify(user_settings)
     fetch("https://zero-network.net/analytics/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})

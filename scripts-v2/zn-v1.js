@@ -12,6 +12,7 @@ async function get_session(){
     .then(e=>e.json())
     .then(e => {
         setCookie("znid",e.znid,1)
+        auto_link()
         $("#session").text(e.znid)
         heartbeat()
     })

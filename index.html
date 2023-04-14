@@ -9,7 +9,7 @@
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="scripts-v2/ghost_template.js"></script>
-    <link rel="stylesheet" href="styles-v2/style.css"/>
+    <link rel="stylesheet" href="styles-v2/style-v1.css"/>
     <link rel="stylesheet" href="styles-v2/style-mobile.css"/>
     <link rel="stylesheet" href="discord-v2/discord.css" >
     <link rel="stylesheet" href="wiki-v2/wiki.css" >
@@ -84,6 +84,17 @@
                 </label>
                 <span>AND</span>
             </div>
+            <hr>
+            <div class="modifier_volume yfont white">Shared Journal Link</div>
+            <div class="journal_link">
+                <input type="text" placeholder="XXXXXX" id="room_id" class="text">
+                <div class="journal_link_buttons">
+                    <button id="room_id_create" class="journal_link_button" onclick="create_room()">Create</button>
+                    <button id="room_id_link" class="journal_link_button" onclick="link_room()">Join</button>
+                    <button id="room_id_disconnect" class="journal_link_button" style="display: none;" onclick="disconnect_room()">Disconnect</button>
+                </div>
+            </div>
+            <div id="room_id_note" class="modifier_note">(STATUS: Not connected)</div>
         </div>
         <div id="session">-</div>
     </div>
@@ -257,10 +268,11 @@
     <script src="scripts-v2/geo.js"></script>
     <script src="discord-v2/discord.js"></script>
     <script src="wiki-v2/wiki.js"></script>
-    <script src="scripts-v2/filter.js"></script>
+    <script src="scripts-v2/filter-v1.js"></script>
     <script src="events-v2/events.js"></script>
-    <script src="scripts-v2/zn.js"></script>
+    <script src="scripts-v2/zn-v1.js"></script>
     <script src="scripts-v2/sparkles.js"></script>
+    <script src="scripts-v2/wslink.js"></script>
     <script>
         $(window).on('load', function() {
             checkLink()
