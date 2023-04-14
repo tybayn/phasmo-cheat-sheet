@@ -14,7 +14,10 @@ function create_room(){
         'evidence': state['evidence'],
         'speed': state['speed'],
         'ghosts': state['ghosts'],
-        'settings': {"num_evidences":parseInt(document.getElementById("num_evidence").value)}
+        'settings': {
+            "num_evidences":parseInt(document.getElementById("num_evidence").value),
+            "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
+        }
     }
     fetch(`https://zero-network.net/phasmophobia/create-room/${uuid}`,{method:"POST",Accept:"application/json",body:JSON.stringify(outgoing_state),signal: AbortSignal.timeout(2000)})
     .then(response => response.json())
@@ -69,6 +72,8 @@ function link_room(){
 
                 for (const [key, value] of Object.entries(incoming_state["ghosts"])){ 
                     document.getElementById(key).className = "ghost_card"
+                    document.getElementById(key).querySelector(".ghost_name").className = "ghost_name"
+                    state['ghosts'][key] = value
                     if (value == 0){
                         fade(document.getElementById(key),true);
                     }

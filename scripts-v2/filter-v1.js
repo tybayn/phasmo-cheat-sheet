@@ -180,11 +180,13 @@ function select(elem,ignore_link=false){
 }
 
 function fade(elem,ignore_link=false){
-    if (state["ghosts"][$(elem).find(".ghost_name")[0].innerText] != 0){
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
-    }
-    else{
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+    if(!ignore_link){
+        if (state["ghosts"][$(elem).find(".ghost_name")[0].innerText] != 0){
+            state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
+        }
+        else{
+            state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+        }
     }
     $(elem).toggleClass("faded");
     $(elem).removeClass("selected");
