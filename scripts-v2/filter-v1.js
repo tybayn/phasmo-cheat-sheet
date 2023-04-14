@@ -128,7 +128,7 @@ function dualstate(elem,ignore_link=false){
         checkbox.addClass("neutral")
     }
 
-    filter(ignore_link)
+    if(!ignore_link){filter(ignore_link)}
 }
 
 function tristate(elem,ignore_link=false){
@@ -154,23 +154,29 @@ function tristate(elem,ignore_link=false){
         checkbox.addClass("neutral")
     }
 
-    filter(ignore_link)
+    if(!ignore_link){filter(ignore_link)}
 }
 
 function select(elem,ignore_link=false){
     if (!$(elem).hasClass("faded")){
-        var on = $(elem).hasClass("selected")
+        var on = false
+        if (!ignore_link){
 
-        var selected = $(".selected");
-        for (var i = 0 ; i < selected.length; i++){
-            $(selected[i]).removeClass("selected");
+            on = $(elem).hasClass("selected")
+
+            for (const [key, value] of Object.entries(state["ghosts"])){ 
+                if(value == 2){
+                    state['ghosts'][key] = 1
+                    document.getElementById(key).className = "ghost_card"
+                }
+            }
+        }
+
+        if (on){
+            $(elem).removeClass("selected");
             state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
         }
-        if ($(elem).hasClass("faded")){
-            $(elem).removeClass("selected");
-            state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
-        }
-        else if (!on){
+        else{
             $(elem).addClass("selected");
             state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
         }
