@@ -51,14 +51,21 @@ function link_room(){
             if (event.data == "::RESET::"){
                 reset(true)
             }
+            else if (event.data == "::TIMER::"){
+                toggle_timer()
+            }
             else {
 
                 var incoming_state = JSON.parse(event.data)
                 if (document.getElementById("num_evidence").value != incoming_state['settings']['num_evidences']){
                     document.getElementById("num_evidence").value = incoming_state['settings']['num_evidences']
                     flashMode()
-                    saveSettings()
                 }
+                if(document.getElementById("ghost_modifier_speed").value != incoming_state['settings']['ghost_modifier']){
+                    document.getElementById("ghost_modifier_speed").value = incoming_state['settings']['ghost_modifier']
+                }
+
+                saveSettings()
 
                 for (const [key, value] of Object.entries(incoming_state["ghosts"])){ 
                     document.getElementById(key).className = "ghost_card"
@@ -110,12 +117,19 @@ function disconnect_room(reset=false){
     }
 }
 
+function send_timer(){
+    ws.send("::TIMER::")
+}
+
 function send_state() {
     var outgoing_state = JSON.stringify({
         'evidence': state['evidence'],
         'speed': state['speed'],
         'ghosts': state['ghosts'],
-        'settings': {"num_evidences":parseInt(document.getElementById("num_evidence").value)}
+        'settings': {
+            "num_evidences":parseInt(document.getElementById("num_evidence").value),
+            "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
+        }
     })
     ws.send(outgoing_state)
 }

@@ -178,7 +178,7 @@
         <div class="modifier">
             <div class="modifier_ghost_speed yfont white">Ghost Speed</div>
             <input type="range" id="ghost_modifier_speed" name="volume" 
-                min="0" max="4" step="1" default="2" onchange="setTempo();saveSettings();">
+                min="0" max="4" step="1" default="2" onchange="setTempo();saveSettings();send_state();">
             <div class="modifier_ghost_speed_labels">
                 <div class="modifier_ghost_speed_label">50%</div>
                 <div class="modifier_ghost_speed_label">75%</div>
@@ -197,11 +197,11 @@
             <div class="modifier_note">(Click &#128266; to hear speed)</div>
             <hr>
             <div class="modifier_smudge_timer yfont white" onclick="toggle_timer()">Smudge Timer</div>
-            <div class="line_labels" onclick="toggle_timer()">
+            <div class="line_labels" onclick="toggle_timer();send_timer();">
                 <div class="spirit_line_label">Spirit</div>
                 <div class="demon_line_label">Demon</div>
             </div>
-            <div id="progress" onclick="toggle_timer()">
+            <div id="progress" onclick="toggle_timer();send_timer();">
                 <img src="imgs/play.png" id="play_button" class="play_button">
                 <div id="progressBar">
                     <div id="progressBarInner" class="bar"></div>
@@ -210,10 +210,10 @@
                     <div class="spirit_line"></div>
                 </div>
             </div>
-            <div id="time_left" onclick="toggle_timer()">
+            <div id="time_left" onclick="toggle_timer();send_timer();">
                 <span id="minute">03</span>:<span id="second">00</span>
             </div>
-            <div class="modifier_note_2" onclick="toggle_timer()">(Press 't' to start/stop)</div>
+            <div class="modifier_note_2" onclick="toggle_timer();send_timer();">(Press 't' to start/stop)</div>
         </div>
 
         <div id="cards" class="cards"><div class="dot-flashing"></div></div>
@@ -264,7 +264,7 @@
     </div>
 
     <script src="scripts-v2/metronome.js"></script>
-    <script src="scripts-v2/timer.js"></script>
+    <script src="scripts-v2/timer-v1.js"></script>
     <script src="scripts-v2/geo.js"></script>
     <script src="discord-v2/discord.js"></script>
     <script src="wiki-v2/wiki.js"></script>
