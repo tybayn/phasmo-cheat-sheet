@@ -24,7 +24,6 @@ let flickering = false
 function startFlicker(elem){
     let obj = $(elem).find("#ghost-flicker")
     let ghost = $(elem).find("#flicker-ghost-name")[0].innerText
-    console.log(ghost)
     let vis_min = ghost_flicker_data[ghost].vis_min
     let vis_max = ghost_flicker_data[ghost].vis_max
     let invis_min = ghost_flicker_data[ghost].invis_min
@@ -34,7 +33,6 @@ function startFlicker(elem){
         if (flickering){
             $(obj).show()
             r = Math.floor((Math.random() * (vis_max - vis_min) + vis_min) * 1000)
-            console.log(r)
             setTimeout(flickerOff,r)
         }
     }
@@ -43,7 +41,6 @@ function startFlicker(elem){
         if (flickering){
             $(obj).hide()
             r = Math.floor((Math.random() * (invis_max - invis_min) + invis_min) * 1000)
-            console.log(r)
             setTimeout(flickerOn,r)
         }
     }
