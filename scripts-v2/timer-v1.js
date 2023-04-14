@@ -6,6 +6,7 @@ document.body.onkeyup = function(e) {
         e.keyCode == 84      
     ) {
         toggle_timer();
+        send_timer();
     }
 }
 
