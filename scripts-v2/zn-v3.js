@@ -44,6 +44,7 @@ function heartbeat(){
 }
 var znid=getCookie("znid")
 if(znid){
+    auto_link()
     $("#session").text(znid)
     heartbeat()
 }

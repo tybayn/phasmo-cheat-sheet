@@ -44,9 +44,11 @@ function link_room(){
         $("#room_id_link").hide()
         $("#room_id_disconnect").show()
         document.getElementById("room_id_note").innerText = "(STATUS: Connected)"
+        document.getElementById("settings_status").className = "connected"
     }
     ws.onerror = function(event){
         document.getElementById("room_id_note").innerText = "(ERROR: Could not connect!)"
+        document.getElementById("settings_status").className = "error"
         setCookie("room_id","",-1)
     }
     ws.onmessage = function(event) {
@@ -117,6 +119,7 @@ function disconnect_room(reset=false){
         $("#room_id_link").show()
         $("#room_id_disconnect").hide()
         document.getElementById("room_id_note").innerText = "(STATUS: Not connected)"
+        document.getElementById("settings_status").className = null
         setCookie("room_id","",-1)
         hasLink=false
     }

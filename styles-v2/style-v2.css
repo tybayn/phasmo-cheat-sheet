@@ -109,6 +109,23 @@ hr{
         border-radius: 0px 0px 5px 5px;
     }
 
+    #settings_status, #discord_link_status{
+        width: 5px;
+        height: 25px;
+        border-radius: 0px 0px 15px 0px;
+        top: 0px;
+        right: 0px;
+        position: absolute;
+    }
+
+    .connected{
+        background: #2ccc29;
+    }
+
+    .error{
+        background: #db4d48;
+    }
+
     #discord_link_box{
         position: fixed;
         top: 0;

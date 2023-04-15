@@ -54,6 +54,7 @@ function getLink(){
             stats_info += '</div>'
 
             document.getElementById("discord_stats").innerHTML = stats_info
+            document.getElementById("discord_link_status").className = "connected"
         })
         
     } catch(Error){
