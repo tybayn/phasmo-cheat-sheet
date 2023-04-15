@@ -15,7 +15,7 @@ function checkLink(){
         znid = getCookie("znid")
 
         setCookie("discord_link",JSON.stringify(discord_link),30)
-        fetch(`https://zero-network.net/analytics/${znid}/attach/${discord_link['id']}`, {method:"POST",signal: AbortSignal.timeout(2000)})
+        fetch(`https://zero-network.net/zn/${znid}/attach/${discord_link['id']}`, {method:"POST",signal: AbortSignal.timeout(2000)})
         window.location.href = window.location.href.split("?")[0]
     }
 
@@ -36,7 +36,7 @@ function getLink(){
         document.getElementById("discord_login_button").innerText = "Relink"
         $("#discord_unlink_button").removeClass("hidden")
         document.getElementById("reset").innerText = "Save & Reset"
-        fetch(`https://zero-network.net/analytics/${znid}/${discord_user['id']}`, {signal: AbortSignal.timeout(2000)})
+        fetch(`https://zero-network.net/zn/${znid}/${discord_user['id']}`, {signal: AbortSignal.timeout(2000)})
         .then(data => data.json())
         .then(data => {
             var stats_info = `<strong>Total Games</strong>: ${data.total_games}<hr><div style="display:grid; grid-template-columns: 60%;">`

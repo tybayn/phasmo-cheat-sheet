@@ -8,7 +8,7 @@ async function get_session(){
     } catch(Error) {
         id = false;
     }
-    e=await fetch(`https://zero-network.net/analytics/${id ? '?discord_id='+id : ''}`,{headers:{Accept:"application/json"},signal: AbortSignal.timeout(2000)})
+    e=await fetch(`https://zero-network.net/zn/${id ? '?discord_id='+id : ''}`,{headers:{Accept:"application/json"},signal: AbortSignal.timeout(2000)})
     .then(e=>e.json())
     .then(e => {
         setCookie("znid",e.znid,1)
@@ -26,7 +26,7 @@ function heartbeat(){
     var uuid = getCookie("znid")
     if(uuid != "no-connection-to-server"){
         state['settings'] = JSON.stringify(user_settings)
-        fetch("https://zero-network.net/analytics/"+uuid,{method:"POST",Accept:"application/json",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
+        fetch("https://zero-network.net/zn/"+uuid,{method:"POST",Accept:"application/json",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
         .then(response => response.json())
         .then(data => {
             $("#active-users-label").text("Active Users: " + data['active_num_users'])

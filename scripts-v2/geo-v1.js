@@ -107,7 +107,7 @@ function rotate(elapsed) {
 function loadData(cb) {
   d3.queue()
   .defer(d3.json,'https://unpkg.com/world-atlas@1/world/110m.json')
-  .defer(d3.json,"https://zero-network.net/analytics/active-users.json")
+  .defer(d3.json,"https://zero-network.net/zn/active-users.json")
   .await((error, world, points) => {
     if (error) throw error
     cb(world,points)
@@ -116,7 +116,7 @@ function loadData(cb) {
 
 function reloadData(){
     d3.queue()
-    .defer(d3.json,"https://zero-network.net/analytics/active-users.json")
+    .defer(d3.json,"https://zero-network.net/zn/active-users.json")
     .await((error, points) => {
         if (error) throw error
         dailies = points[0]
