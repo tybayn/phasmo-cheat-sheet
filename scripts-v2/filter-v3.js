@@ -181,7 +181,8 @@ function select(elem,ignore_link=false){
             state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
         }
         setCookie("state",JSON.stringify(state),1)
-        if (hasLink && !ignore_link){send_state()}
+        if(!ignore_link){filter(ignore_link)}
+
     }
 }
 
