@@ -13,6 +13,7 @@ async function get_session(){
     .then(e => {
         setCookie("znid",e.znid,1)
         auto_link()
+        getLink()
         $("#session").text(e.znid)
         heartbeat()
     })
@@ -45,6 +46,7 @@ function heartbeat(){
 var znid=getCookie("znid")
 if(znid){
     auto_link()
+    getLink()
     $("#session").text(znid)
     heartbeat()
 }
