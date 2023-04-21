@@ -25,7 +25,7 @@
 }
 
 body{
-    background-image: radial-gradient(circle, rgba(0,0,0,0.75), rgba(0,0,0,1)), url('../imgs/backgroundv2.jpg');
+    background-image: radial-gradient(circle, rgba(0,0,0,0.75), rgba(0,0,0,1)), url('https://zero-network.net/phasmophobia/static/imgs/background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -796,7 +796,7 @@ hr{
 
     .play_button {
         filter: invert(1);
-        opacity: 1;
+        opacity: 0.8;
         cursor: pointer;
         position: relative;
         width: 28px;
@@ -977,9 +977,9 @@ hr{
     }
 
     .map_icon{
-        filter: invert(1);
-        height: 90%;
-        margin-top: 0px;
+        filter: invert(1) opacity(0.8);
+        height: 82%;
+        margin-top: 3px;
         cursor: pointer;
     }
     .map_icon:hover{
@@ -1000,7 +1000,7 @@ hr{
         width: 100%;
         height: 100%;
         background-color: #000;
-        background-image: url(../imgs/maps/tanglewood.png);
+        background-image: url(https://zero-network.net/phasmophobia/static/imgs/maps/tanglewood.png);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -1179,7 +1179,7 @@ hr{
         margin: 0px 30px 30px 30px;
         box-shadow: inset 0 0 200px 200px #000000;
         background: rgba(0,0,0,0.25);
-        background-image: url(../imgs/globe-background.jpg);
+        background-image: url(https://zero-network.net/phasmophobia/static/imgs/globe-background.jpg);
         background-size: cover;
         border-radius: 5px;
     }
@@ -1271,6 +1271,7 @@ hr{
     .ghost_speed_values{
         width: fit-content;
         line-height: 1.2;
+        color: #ccc;
     }
 
     .ghost_hunt{

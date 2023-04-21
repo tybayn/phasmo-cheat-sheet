@@ -1,5 +1,5 @@
 
-var snd = [new Audio('assets/footstep.wav'),new Audio('assets/click.wav')];
+var snd = [new Audio('https://zero-network.net/phasmophobia/static/assets/footstep.wav'),new Audio('assets/click.wav')];
 snd[0].preload = 'auto';
 snd[1].preload = 'auto';
 snd[0].load();

@@ -27,7 +27,7 @@ class Ghost {
                 var type = assets[j].toString().replace('{','').replace('}','').split(':')[0]
                 var resource_path = assets[j].toString().replace('{','').replace('}','').split(':')[1]
                 if (type == 'audio') {
-                    data.behavior[i] = data.behavior[i].replace(assets[j],` <span class="sound" onClick="playSound('${resource_path}')">&#128266;</span>`)
+                    data.behavior[i] = data.behavior[i].replace(assets[j],` <span class="sound" onClick="playSound('https://zero-network.net/phasmophobia/static/${resource_path}')">&#128266;</span>`)
                 }
             }
         }
