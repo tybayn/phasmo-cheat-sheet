@@ -1314,6 +1314,15 @@ hr{
         font-size: 12px;
     }
 
+    .ghost_behavior_item ul{
+        margin: 0px;
+        padding: 0px 0px 0px 20px;
+    }
+
+    .ghost_behavior_item li{
+        padding: 0px;
+    }
+
     .ghost_clear{
         grid-column: 2;
         grid-row: 1 / 4;

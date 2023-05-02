@@ -935,6 +935,15 @@
         font-size: 24px;
     }
 
+    .ghost_behavior_item ul{
+        margin: 0px;
+        padding: 0px 0px 0px 20px;
+    }
+
+    .ghost_behavior_item li{
+        padding: 0px;
+    }
+
     .ghost_clear{
         grid-column: 7;
         grid-row: 1 / 4;
