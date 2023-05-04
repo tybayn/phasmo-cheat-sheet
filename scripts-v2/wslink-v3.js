@@ -43,11 +43,11 @@ function link_room(){
         $("#room_id_create").hide()
         $("#room_id_link").hide()
         $("#room_id_disconnect").show()
-        document.getElementById("room_id_note").innerText = "(STATUS: Connected)"
+        document.getElementById("room_id_note").innerText = "STATUS: Connected"
         document.getElementById("settings_status").className = "connected"
     }
     ws.onerror = function(event){
-        document.getElementById("room_id_note").innerText = "(ERROR: Could not connect!)"
+        document.getElementById("room_id_note").innerText = "ERROR: Could not connect!"
         document.getElementById("settings_status").className = "error"
         setCookie("room_id","",-1)
     }
@@ -63,13 +63,15 @@ function link_room(){
                 }
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
                     toggle_timer()
-
+                }
+                if (incoming_state['action'].toUpperCase() == "CHANGE"){
+                    document.getElementById("room_id_note").innerText = `STATUS: Connected (${incoming_state['players']})`
                 }
                 return
             }
 
             if (incoming_state.hasOwnProperty("error")){
-                document.getElementById("room_id_note").innerText = `(ERROR: ${incoming_state['error']}!)`
+                document.getElementById("room_id_note").innerText = `ERROR: ${incoming_state['error']}!`
                 document.getElementById("settings_status").className = "error"
                 if (incoming_state.hasOwnProperty("disconnect") && incoming_state['disconnect']){
                     disconnect_room(false,true)
@@ -134,7 +136,7 @@ function disconnect_room(reset=false,has_status=false){
         $("#room_id_link").show()
         $("#room_id_disconnect").hide()
         if(!has_status){
-            document.getElementById("room_id_note").innerText = "(STATUS: Not connected)"
+            document.getElementById("room_id_note").innerText = "STATUS: Not connected"
             document.getElementById("settings_status").className = null
         }
         setCookie("room_id","",-1)
@@ -147,14 +149,16 @@ function send_timer(){
 }
 
 function send_state() {
-    var outgoing_state = JSON.stringify({
-        'evidence': state['evidence'],
-        'speed': state['speed'],
-        'ghosts': state['ghosts'],
-        'settings': {
-            "num_evidences":parseInt(document.getElementById("num_evidence").value),
-            "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
-        }
-    })
-    ws.send(outgoing_state)
+    if (hasLink){
+        var outgoing_state = JSON.stringify({
+            'evidence': state['evidence'],
+            'speed': state['speed'],
+            'ghosts': state['ghosts'],
+            'settings': {
+                "num_evidences":parseInt(document.getElementById("num_evidence").value),
+                "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
+            }
+        })
+        ws.send(outgoing_state)
+    }
 }
