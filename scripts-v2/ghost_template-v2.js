@@ -18,6 +18,14 @@ evi_icons = {
     "Spirit Box": "imgs/spirit-box-icon.png", 
 }
 
+behavior_titles = {
+    "<Tells>":"<div class='dtitle'><i>Tells</i><div class='ddash'></div></div>",
+    "<Behaviors>":"<div class='dtitle'><i>Behaviors</i><div class='ddash'></div></div>",
+    "<Hunt Sanity>":"<div class='dtitle'><i>Hunt Sanity</i><div class='ddash'></div></div>",
+    "<Hunt Speed>":"<div class='dtitle'><i>Hunt Speed</i><div class='ddash'></div></div>",
+    "<Evidence>":"<div class='dtitle'><i>Evidence</i><div class='ddash'></div></div>"
+}
+
 class Ghost {
     constructor(data){
 
@@ -51,7 +59,7 @@ class Ghost {
                 </div>
                 <div class="ghost_nightmare_evidence">${data.nightmare_evidence?data.nightmare_evidence:''}</div>
                 <div class="ghost_behavior">
-                   ${data.behavior.map(this.behavior).join('<hr>')}
+                   ${this.behavior(data.behavior)}
                 </div>
                 <div class="ghost_clear">
                     <span class="check" onclick="select(this.parentElement.parentElement)"></span>
@@ -63,7 +71,25 @@ class Ghost {
     }
 
     behavior(value){
-        return '<div class="ghost_behavior_item">' + value + '</div>'
+        var opened = false
+        var msg = "<div class='ghost_behavior_item'>"
+
+        for (var i = 0; i < value.length; i++){
+            if (behavior_titles.hasOwnProperty(value[i])){
+                if(opened){
+                    msg += `</ul>${behavior_titles[value[i]]}<ul>`
+                }
+                else {
+                    msg += `${behavior_titles[value[i]]}<ul>`
+                    opened = true
+                }
+            }
+            else{
+                msg += `<li>${value[i]}</li>`
+            }
+        }
+        msg += "</ul></div>"
+        return msg
     }
 
     toNumStr(num) { 
