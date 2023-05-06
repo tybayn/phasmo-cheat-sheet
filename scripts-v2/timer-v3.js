@@ -19,6 +19,7 @@ document.body.onkeyup = function(e) {
         e.keyCode == 82      
     ) {
         bpm_clear();
+        saveSettings();
     }
 }
 

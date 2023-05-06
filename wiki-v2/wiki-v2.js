@@ -1,3 +1,19 @@
+
+function accordian(elem){
+    var panel = elem.nextElementSibling;
+
+    if (panel.style.height == '' || panel.style.height != '0px') {
+        elem.classList.remove("wiki_active");
+        panel.style.height = "0px"
+        panel.style.display = "none";
+    } else {
+        elem.classList.add("wiki_active");
+        panel.style.display = "table";
+        panel.style.height = "auto"
+    }
+}
+
+// -----------------------------------------------
 let ghost_flicker_data = {
     "Normal":{
         "vis_max":0.3,

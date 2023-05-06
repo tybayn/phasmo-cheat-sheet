@@ -15,10 +15,45 @@
 .wiki_title{
     padding: 10px;
     font-size: 18px;
+    cursor: pointer;
+    border-bottom: 1px dashed rgba(204, 204, 204, 0.26);
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wiki_title:hover, .wiki_active{
+    background-color: #414256;
+}
+
+.wiki_title:after {
+    content: '\02795';
+    font-size: 10px;
+}
+
+.wiki_active:after {
+    content: "\2796";
 }
 
 .wiki_details{
-    padding: 0px 3px 5px 5px;
+    padding: 0px 3px 5px 15px;
+    width: 95%;
+    overflow: hidden;
+    display: none;
+    box-shadow: inset 0 0 10px #161615;
+    transition: max-height 0.2s ease-out;
+}
+
+.wiki_details ul{
+    margin: 4px 0px;
+    padding: 0px 0px 0px 20px;
+}
+
+.wiki_details li{
+    padding-bottom: 4px;
 }
 
 .flicker-img{
