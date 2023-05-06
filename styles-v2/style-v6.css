@@ -638,10 +638,10 @@ hr{
         overflow-x: hidden;
         padding-bottom: 13px;
         border-radius: 5px;
-        padding: 2px 0;
+        padding: 2px 0px 0px 4px;
     }
 
-    .modifier_ghost_speed{
+    .modifier_ghost_speed, .modifier_bpm_finder{
         font-size: 18px;
         letter-spacing: 1px;
         padding: 10px 10px 0px 10px;
@@ -715,7 +715,7 @@ hr{
         margin: 0px 5px;
     }
 
-    #speed_logic_type {
+    #speed_logic_type, #bpm_type {
         display: none;
     }
 
@@ -785,6 +785,11 @@ hr{
     }
 
     #speed_logic_type:checked + .toggle::before {
+        position: absolute;
+        left: calc(100% - 15px);
+    }
+
+    #bpm_type:checked + .toggle::before {
         position: absolute;
         left: calc(100% - 15px);
     }
@@ -898,6 +903,49 @@ hr{
         left: 71.666%;
         bottom: -6px;
         position: absolute;
+    }
+
+    #tap{
+        font-size: 18px;
+        color: #ccc;
+        border: 2px solid #ccc;
+        background: none;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 5px;
+        cursor: pointer;
+        z-index: 100;
+        width: 90%;
+        height: 45px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #tap_viz{
+        color: #ffffff52;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 12px;
+        width: 90%;
+        height: 18px;
+        overflow: hidden;
+        margin-top: -10px;
+    }
+
+    .tap_note{
+        color: #ffffffa0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 9px;
+    }
+
+    #input_bpm, #input_speed{
+        color: #ffffff52;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 12px;
+        text-align: center;
+        width: 30px;
     }
 
     .modifier_volume{
@@ -1633,7 +1681,7 @@ input{
     transform: scale(1.1); 
 }
 
-#reset:hover{
+#reset:hover, #tap:hover{
     background-color: #ffffff60;
 }
 

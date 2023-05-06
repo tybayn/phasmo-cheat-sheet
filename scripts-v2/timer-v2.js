@@ -8,6 +8,18 @@ document.body.onkeyup = function(e) {
         toggle_timer();
         send_timer();
     }
+    if (e.key == "f" ||
+        e.code == "KeyF" ||      
+        e.keyCode == 70      
+    ) {
+        bpm_tap();
+    }
+    if (e.key == "r" ||
+        e.code == "KeyR" ||      
+        e.keyCode == 82      
+    ) {
+        bpm_clear();
+    }
 }
 
 var timer_snd = [

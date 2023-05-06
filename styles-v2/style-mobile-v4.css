@@ -529,6 +529,10 @@
         position: absolute;
     }
 
+    #tap,#tap_viz{
+        display: none;
+    }
+
     .modifier_volume{
         font-size: 33px;
         padding: 40px 10px 0px 10px;
@@ -556,6 +560,10 @@
         color: #fff;
         font-size: 22px;
         rotate: 340deg;
+    }
+
+    .modifier_bpm_finder{
+        display: none;
     }
 
     .cards{

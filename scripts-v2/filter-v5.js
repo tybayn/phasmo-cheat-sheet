@@ -6,7 +6,8 @@ const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","
 const all_speed = ["Slow","Normal","Fast"]
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
-var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0}
+var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm":0}
+
 
 let hasLink = false;
 
@@ -32,6 +33,9 @@ function loadData(){
 
         cards.innerHTML = "";
         for(var i = 0; i < data.ghosts.length; i++){
+            bpm_speeds.add(data.ghosts[i].min_speed)
+            if(data.ghosts[i].max_speed != null){bpm_speeds.add(data.ghosts[i].max_speed)}
+            if(data.ghosts[i].alt_speed != null){bpm_speeds.add(data.ghosts[i].alt_speed)}
             var ghost = new Ghost(data.ghosts[i]);
             cards.innerHTML += `${ghost.ghostTemplate}`
         }
@@ -79,6 +83,7 @@ function loadData(){
             }
         }
         
+        loadSettings()
         filter()
 
     })
@@ -107,6 +112,7 @@ function loadData(){
                 cards.innerHTML += `${ghost.ghostTemplate}`
             }
             cur_version.innerHTML = `${data.version}`
+            loadSettings()
             filter()
         })
     })
@@ -703,13 +709,15 @@ function flashMode(){
       });
 }
 
-function saveSettings(){
+function saveSettings(reset = false){
     user_settings['volume'] = parseInt(document.getElementById("modifier_volume").value)
     user_settings['offset'] = parseInt(document.getElementById("offset_value").innerText.replace(/\d+(?:-\d+)+/g,""))
     user_settings['ghost_modifier'] = parseInt(document.getElementById("ghost_modifier_speed").value)
     user_settings['num_evidences'] = parseInt(document.getElementById("num_evidence").value)
     user_settings['sound_type'] = document.getElementById("modifier_sound_type").checked ? 1 : 0;
     user_settings['speed_logic_type'] = document.getElementById("speed_logic_type").checked ? 1 : 0;
+    user_settings['bpm_type'] = document.getElementById("bpm_type").checked ? 1 : 0;
+    user_settings['bpm'] = reset ? 0 : parseInt(document.getElementById('input_bpm').innerHTML.split("<br>")[0])
     setCookie("settings",JSON.stringify(user_settings),30)
 }
 
@@ -717,7 +725,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0}
+        user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0}
     }
     document.getElementById("modifier_volume").value = user_settings['volume'] ?? 50
     document.getElementById("offset_value").innerText = ` ${user_settings['offset'] ?? 0}% `
@@ -725,7 +733,17 @@ function loadSettings(){
     document.getElementById("num_evidence").value = user_settings['num_evidences'] ?? 3
     document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] ?? 0 == 1
     document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] ?? 0 == 1
+    document.getElementById("bpm_type").checked = user_settings['bpm_type'] ?? 0 == 1
+
+    if ((user_settings['bpm'] ?? 0) > 0){
+        document.getElementById('input_bpm').innerHTML = `${user_settings['bpm']}<br>bpm`
+        var cms = document.getElementById("bpm_type").checked ? get_ms(user_settings['bpm']) : get_ms_exact(user_settings['bpm'])
+        document.getElementById('input_speed').innerHTML = `${cms}<br>m/s`;
+        mark_ghosts(cms)
+    }
+
     setCookie("settings",JSON.stringify(user_settings),30)
+
     setVolume()
     adjustOffset(0)
     setTempo()
@@ -734,13 +752,14 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0}
+    user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0}
     document.getElementById("modifier_volume").value = user_settings['volume']
     document.getElementById("offset_value").innerText = ` ${user_settings['offset']}% `
     document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier']
     document.getElementById("num_evidence").value = user_settings['num_evidences']
     document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] == 1
     document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] == 1
+    document.getElementById("bpm_type").checked = user_settings['bpm_type'] == 1
     setCookie("settings",JSON.stringify(user_settings),30)
 }
 
@@ -784,6 +803,8 @@ function reset(skip_continue_session=false){
     if(!skip_continue_session){continue_session()}
     var uuid = getCookie("znid")
     state['settings'] = JSON.stringify(user_settings)
+    saveSettings(true)
+
     fetch("https://zero-network.net/zn/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
     .then((response) => {
         setCookie("znid",uuid,-1)
