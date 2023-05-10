@@ -615,10 +615,6 @@ function showGlobe(){
     scale()
 }
 
-function showMaps(){
-    $("#maps").fadeToggle(400)
-}
-
 function showInfo(){
 
     if (!$("#blackout").is(":visible")){
@@ -639,6 +635,7 @@ function showSettings(){
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
+        document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("settings_box").style.zIndex = "2"
         document.getElementById("settings_box").style.left = "196px"
     }
@@ -656,6 +653,7 @@ function showDiscordLink(){
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
+        document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("discord_link_box").style.zIndex= "2"
         document.getElementById("discord_link_box").style.left = "196px"
     }
@@ -673,6 +671,7 @@ function showEvent(){
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
+        document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "2"
         document.getElementById("event_box").style.left = "196px"
     }
@@ -690,13 +689,35 @@ function showWiki(){
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
-        document.getElementById("wiki_box").style.zIndex= "1"
+        document.getElementById("maps_box").style.zIndex= "1"
+        document.getElementById("wiki_box").style.zIndex= "2"
         document.getElementById("wiki_box").style.left = "196px"
     }
     else {
         document.getElementById("wiki_box").style.left = "-182px"
         document.getElementById("wiki_box").style.boxShadow = "none"
         document.getElementById("wiki_tab").style.boxShadow = "none"
+    }
+}
+
+
+function showMaps(){
+    if (document.getElementById("maps_box").style.left == "-388px"){
+        document.getElementById("maps_box").style.boxShadow = "5px 0px 10px 0px #000"
+        document.getElementById("maps_box").style.boxShadow = "-6px 5px 5px -2px #000"
+        document.getElementById("settings_box").style.zIndex = "1"
+        document.getElementById("discord_link_box").style.zIndex= "1"
+        document.getElementById("event_box").style.zIndex= "1"
+        document.getElementById("wiki_box").style.zIndex= "1"
+        document.getElementById("maps_box").style.zIndex= "2"
+        document.getElementById("maps_box").style.left = "196px"
+        document.getElementById("maps_box").style.width = "calc(100% - 256px)"
+    }
+    else {
+        document.getElementById("maps_box").style.width = "556px"
+        document.getElementById("maps_box").style.left = "-388px"
+        document.getElementById("maps_box").style.boxShadow = "none"
+        document.getElementById("maps_box").style.boxShadow = "none"
     }
 }
 

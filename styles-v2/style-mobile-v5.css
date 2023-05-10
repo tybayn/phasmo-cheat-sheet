@@ -47,6 +47,14 @@
         display: none;
     }
 
+    #maps_box{
+        display: none;
+    }
+
+    #maps_tab{
+        display: none;
+    }
+
     #info_box{
         z-index: 100;
         width: calc(100% - 100px);
@@ -605,96 +613,14 @@
         filter: opacity(0.5)
     }
 
-    .active_title, .maps_title, .info_title{
+    .active_title,.info_title{
         font-size: 50px;
         height: 50px;
         padding: 15px;
     }
 
-    .map_toggle{
-        grid-column: 1;
-        grid-row: 6 / 8;
-        z-index: 51;
-        width: 150px;
-        justify-self: left;
-    }
-
-    .map_icon{
-        filter: invert(1);
-        height: 90%;
-        margin-top: 5px;
-        cursor: pointer;
-    }
-    .map_icon:hover{
-        filter: invert(0);
-    }
-
-    .maps_image{
-        width: calc(100% - 60px);
-        height: calc(100% - 600px);
-        margin: 0px 30px 30px 30px;
-        background-color: #000;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    .map_image{
-        width: 100%;
-        height: 100%;
-        background-color: #000;
-        background-image: url(https://zero-network.net/phasmophobia/static/imgs/maps/tanglewood.png);
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-
     .hover_zoom{
         display: none;
-    }
-
-    .maps_credit{
-        color: #FFF;
-        text-align: right;
-        position: absolute;
-        bottom: 485px;
-        right: 35px;
-        font-size: 22px;
-    }
-
-    .maps_credit a{
-        text-decoration: none;
-        color:#00aa2b;
-    }
-
-    .maps_buttons{
-        display: flex;
-        height: 430px;
-        width: calc(100% - 60px);
-        margin: 60px 30px 30px 30px;
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-content: stretch;
-    }
-
-    .maps_button{
-        background: none;
-        cursor: pointer;
-        border: 1px solid #FFF;
-        color: #fff;
-        border-radius: 5px;
-        margin: 6px;
-        font-size: 28px;
-    }
-
-    .selected_map{
-        background-color: #FFF;
-        border: 1px solid #FFF;
-        color: #313248;
-    }
-
-    .maps_button:hover{
-        background-color: #ffffff60;
     }
 
     #active-users{
@@ -745,18 +671,6 @@
         z-index: 100;
     }
 
-    #maps{
-        position: absolute;
-        z-index: 100;
-        width: calc(100% - 100px);
-        height: calc(100% - 100px);
-        top:50px;
-        left:50px;
-        background-color: #313248;
-        border-radius: 5px;
-        box-shadow: 0 0 50px 50px #000;
-    }
-
     #world{
         position: absolute;
         z-index: 100;
@@ -769,7 +683,7 @@
         box-shadow: 0 0 50px 50px #000;
     }
 
-    #world .icon, #maps .icon{
+    #world .icon{
         position: absolute;
         top: 24px;
         right: 24px;
@@ -781,7 +695,7 @@
         cursor: pointer;
     }
 
-    #world .icon:before, #maps .icon:before{
+    #world .icon:before{
         content:"";
         position: absolute;
         width:7px;
@@ -791,7 +705,7 @@
         top:4px;
     }
 
-    #world .icon:after, #maps .icon:after{
+    #world .icon:after{
         content:"";
         position: absolute;
         width:28px;
@@ -801,11 +715,11 @@
         top:14px;
     }
 
-    #world .icon:before:hover, #maps .icon:before:hover{
+    #world .icon:before:hover{
         background-color: #313248;
     }
 
-    #world .icon:after:hover, #maps .icon:after:hover{
+    #world .icon:after:hover{
         background-color: #313248;
     }
 

@@ -9,8 +9,8 @@
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="scripts-v2/ghost_template-v2.js"></script>
-    <link rel="stylesheet" href="styles-v2/style-v6.css"/>
-    <link rel="stylesheet" href="styles-v2/style-mobile-v4.css"/>
+    <link rel="stylesheet" href="styles-v2/style-v7.css"/>
+    <link rel="stylesheet" href="styles-v2/style-mobile-v5.css"/>
     <link rel="stylesheet" href="discord-v2/discord.css" >
     <link rel="stylesheet" href="wiki-v2/wiki-v1.css" >
     <link rel="stylesheet" href="events-v2/events.css" >
@@ -147,10 +147,39 @@
         <div class="settings_title yfont white">Guides</div>
         <div id="wiki-body" class="info_block"></div>
     </div>
+
+    <div id="maps_box" style="left:-388px">
+        <div id="maps_tab" onclick="showMaps()">Maps</div>
+        <span class="icon" onclick="showMaps()"></span>
+
+        <div class="maps_title yfont white">Maps</div>
+        <div class="maps_image" onmouseenter="zoomMap(this)" onmouseleave="unZoomMap(this)" onmousemove="moveZoom(this,event)">
+            <div class="map_image"></div>
+            <div class="hover_zoom">+ Hover to zoom</div>
+        </div>
+        <div class="maps_credit">Map images belong to <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">Images</a>)</div>
+        <div class="maps_buttons">
+            <button class="maps_button selected_map" onclick="changeMap(this,'tanglewood.png')">6 Tanglewood Drive</button>
+            <button class="maps_button" onclick="changeMap(this,'edgefield.png')">42 Edgefield Road</button>
+            <button class="maps_button" onclick="changeMap(this,'ridgeview.png')">10 Ridgeview Court</button>
+            <button class="maps_button" onclick="changeMap(this,'grafton.png')">Grafton Farmhouse</button>
+            <button class="maps_button" onclick="changeMap(this,'willow.png')">13 Willow Street</button>
+            <button class="maps_button" onclick="changeMap(this,'brownstone.png')">Brownstone High School</button>
+            <button class="maps_button" onclick="changeMap(this,'bleasdale.png')">Bleasdale Farmhouse</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows.png')">Sunny Meadows</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_courtyard.png')">SM Restricted - Courtyard</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_male.png')">SM Restricted - Male Wing</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_female.png')">SM Restricted - Female Wing</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_hospital.png')">SM Restricted - Hospital</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_restricted.png')">SM Restricted - Restricted</button>
+            <button class="maps_button" onclick="changeMap(this,'prison.png')">Prison</button>
+            <button class="maps_button" onclick="changeMap(this,'maplelodge.png')">Maple Lodge Campsite</button>
+            <button class="maps_button" onclick="changeMap(this,'woodwind.png')">Camp Woodwind</button>
+        </div>
+    </div>
     
     <div class="data">
         <div class="header"></div>
-        <div class="map_toggle"><img src="imgs/map.png" class="map_icon" alt="maps" onclick="showMaps()"/></div>
         <div class="evidence_title yfont white">
             Evidence <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="filter();flashMode();saveSettings();">
                 <option value="3">3</option>
@@ -253,42 +282,12 @@
         <canvas id="globe"></canvas>
     </div>
 
-    <div id="maps" style="display:none;">
-        <div class="maps_title yfont white">
-            Maps
-        </div>
-        <span class="icon" onclick="showMaps()"></span>
-        <div class="maps_image" onmouseenter="zoomMap(this)" onmouseleave="unZoomMap(this)" onmousemove="moveZoom(this,event)">
-            <div class="map_image"></div>
-            <div class="hover_zoom">+ Hover to zoom</div>
-        </div>
-        <div class="maps_credit">Map images belong to <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">Images</a>)</div>
-        <div class="maps_buttons">
-            <button class="maps_button selected_map" onclick="changeMap(this,'tanglewood.png')">6 Tanglewood Drive</button>
-            <button class="maps_button" onclick="changeMap(this,'edgefield.png')">42 Edgefield Road</button>
-            <button class="maps_button" onclick="changeMap(this,'ridgeview.png')">10 Ridgeview Court</button>
-            <button class="maps_button" onclick="changeMap(this,'grafton.png')">Grafton Farmhouse</button>
-            <button class="maps_button" onclick="changeMap(this,'willow.png')">13 Willow Street</button>
-            <button class="maps_button" onclick="changeMap(this,'brownstone.png')">Brownstone High School</button>
-            <button class="maps_button" onclick="changeMap(this,'bleasdale.png')">Bleasdale Farmhouse</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows.png')">Sunny Meadows</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_courtyard.png')">SM Restricted - Courtyard</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_male.png')">SM Restricted - Male Wing</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_female.png')">SM Restricted - Female Wing</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_hospital.png')">SM Restricted - Hospital</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_restricted.png')">SM Restricted - Restricted</button>
-            <button class="maps_button" onclick="changeMap(this,'prison.png')">Prison</button>
-            <button class="maps_button" onclick="changeMap(this,'maplelodge.png')">Maple Lodge Campsite</button>
-            <button class="maps_button" onclick="changeMap(this,'woodwind.png')">Camp Woodwind</button>
-        </div>
-    </div>
-
     <script src="scripts-v2/metronome-v2.js"></script>
     <script src="scripts-v2/timer-v3.js"></script>
     <script src="scripts-v2/geo-v1.js"></script>
     <script src="discord-v2/discord-v2.js"></script>
     <script src="wiki-v2/wiki-v2.js"></script>
-    <script src="scripts-v2/filter-v5.js"></script>
+    <script src="scripts-v2/filter-v6.js"></script>
     <script src="events-v2/events.js"></script>
     <script src="scripts-v2/wslink-v3.js"></script>
     <script src="scripts-v2/zn-v4.js"></script>
