@@ -4,6 +4,13 @@
     
     <link rel="icon" type="image/x-icon" href="https://zero-network.net/phasmophobia/static/imgs/favicon.ico">
     <meta name="viewport" content="user-scalable=no" />
+    <script>
+        AbortSignal.timeout = ms => {
+            const controller = new AbortController();
+            setTimeout(() => controller.abort(), ms);
+            return controller.signal;
+        };
+    </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
