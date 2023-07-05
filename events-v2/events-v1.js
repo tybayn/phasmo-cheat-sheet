@@ -4,7 +4,7 @@ function uncover(elem){
 }
 
 $(window).on('load', function() {
-    fetch("https://zero-network.net/phasmophobia/data/event.json", {signal: AbortSignal.timeout(2000)})
+    fetch("https://zero-network.net/phasmophobia/data/event.json", {signal: AbortSignal.timeout(6000)})
     .then(data => data.json())
     .then(data => {
         if(data['version'] != false){

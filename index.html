@@ -104,10 +104,10 @@
             <hr>
             <div class="modifier_volume yfont white">Shared Journal Link</div>
             <div class="journal_link">
-                <input type="text" placeholder="XXXXXX" id="room_id" class="text">
+                <input type="text" placeholder="XXXXXX" id="room_id" class="text" value="Connecting..." disabled style="color:#444;">
                 <div class="journal_link_buttons">
-                    <button id="room_id_create" class="journal_link_button" onclick="create_room()">Create</button>
-                    <button id="room_id_link" class="journal_link_button" onclick="link_room()">Join</button>
+                    <button id="room_id_create" class="journal_link_button" style="display: none;" onclick="create_room()">Create</button>
+                    <button id="room_id_link" class="journal_link_button" style="display: none;" onclick="link_room()">Join</button>
                     <button id="room_id_disconnect" class="journal_link_button" style="display: none;" onclick="disconnect_room()">Disconnect</button>
                 </div>
             </div>
@@ -292,12 +292,12 @@
     <script src="scripts-v2/metronome-v2.js"></script>
     <script src="scripts-v2/timer-v3.js"></script>
     <script src="scripts-v2/geo-v1.js"></script>
-    <script src="discord-v2/discord-v2.js"></script>
+    <script src="discord-v2/discord-v3.js"></script>
     <script src="wiki-v2/wiki-v2.js"></script>
-    <script src="scripts-v2/filter-v6.js"></script>
-    <script src="events-v2/events.js"></script>
-    <script src="scripts-v2/wslink-v3.js"></script>
-    <script src="scripts-v2/zn-v4.js"></script>
+    <script src="scripts-v2/filter-v7.js"></script>
+    <script src="events-v2/events-v1.js"></script>
+    <script src="scripts-v2/wslink-v4.js"></script>
+    <script src="scripts-v2/zn-v5.js"></script>
     <script src="scripts-v2/sparkles.js"></script>
     <script>
         $(window).on('load', function() {

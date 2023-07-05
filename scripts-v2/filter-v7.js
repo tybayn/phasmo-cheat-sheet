@@ -12,7 +12,7 @@ var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0
 let hasLink = false;
 
 function loadData(){
-    fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(2000)})
+    fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(6000)})
     .then(data => data.json())
     .then(data => {
         loadSettings()
@@ -826,7 +826,7 @@ function reset(skip_continue_session=false){
     state['settings'] = JSON.stringify(user_settings)
     saveSettings(true)
 
-    fetch("https://zero-network.net/zn/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
+    fetch("https://zero-network.net/zn/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(6000)})
     .then((response) => {
         setCookie("znid",uuid,-1)
         setCookie("state",JSON.stringify(state),-1)

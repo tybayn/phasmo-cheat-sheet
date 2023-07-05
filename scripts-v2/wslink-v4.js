@@ -19,7 +19,7 @@ function create_room(){
             "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
         }
     }
-    fetch(`https://zero-network.net/phasmophobia/create-room/${uuid}`,{method:"POST",Accept:"application/json",body:JSON.stringify(outgoing_state),signal: AbortSignal.timeout(2000)})
+    fetch(`https://zero-network.net/phasmophobia/create-room/${uuid}`,{method:"POST",Accept:"application/json",body:JSON.stringify(outgoing_state),signal: AbortSignal.timeout(6000)})
     .then(response => response.json())
     .then(data => {
         var room_id = data['room_id']

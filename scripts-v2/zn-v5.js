@@ -8,17 +8,29 @@ async function get_session(){
     } catch(Error) {
         id = false;
     }
-    e=await fetch(`https://zero-network.net/zn/${id ? '?discord_id='+id : ''}`,{headers:{Accept:"application/json"},signal: AbortSignal.timeout(2000)})
+    e=await fetch(`https://zero-network.net/zn/${id ? '?discord_id='+id : ''}`,{headers:{Accept:"application/json"},signal: AbortSignal.timeout(10000)})
     .then(e=>e.json())
     .then(e => {
         setCookie("znid",e.znid,1)
         auto_link()
         getLink()
         $("#session").text(e.znid)
-        heartbeat()
+        try {
+            heartbeat()
+        } catch (error){
+            console.warn("Possible latency issues!")
+        }
+        $('#room_id').val("")
+        $('#room_id').css('color',"#CCC")
+        $('#room_id').prop('disabled',false)
+        $('#room_id_create').show()
+        $('#room_id_link').show()
     })
     .catch(response => {
+        console.log(response)
+        console.warn("Possible latency issues!")
         setCookie("znid","no-connection-to-server",1)
+        $('#room_id').val("No connection to server!")
         $("#session").text("no-connection-to-server")
     })
     
@@ -27,7 +39,7 @@ function heartbeat(){
     var uuid = getCookie("znid")
     if(uuid != "no-connection-to-server"){
         state['settings'] = JSON.stringify(user_settings)
-        fetch("https://zero-network.net/zn/"+uuid,{method:"POST",Accept:"application/json",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
+        fetch("https://zero-network.net/zn/"+uuid,{method:"POST",Accept:"application/json",body:JSON.stringify(state),signal: AbortSignal.timeout(10000)})
         .then(response => response.json())
         .then(data => {
             $("#active-users-label").text("Active Users: " + data['active_num_users'])
@@ -49,6 +61,16 @@ if(znid){
     getLink()
     $("#session").text(znid)
     heartbeat()
+    if(znid!="no-connection-to-server"){
+        $('#room_id').val("")
+        $('#room_id').css('color',"#CCC")
+        $('#room_id').prop('disabled',false)
+        $('#room_id_create').show()
+        $('#room_id_link').show()
+    }
+    else{
+        $('#room_id').val("No connection to server!")
+    }
 }
 else{
     get_session()
