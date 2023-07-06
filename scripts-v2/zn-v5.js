@@ -30,7 +30,7 @@ async function get_session(){
         console.log(response)
         console.warn("Possible latency issues!")
         setCookie("znid","no-connection-to-server",1)
-        $('#room_id').val("No connection to server!")
+        $('#room_id').val("Can't Connect!")
         $("#session").text("no-connection-to-server")
     })
     
@@ -69,7 +69,7 @@ if(znid){
         $('#room_id_link').show()
     }
     else{
-        $('#room_id').val("No connection to server!")
+        $('#room_id').val("Can't Connect!")
     }
 }
 else{
