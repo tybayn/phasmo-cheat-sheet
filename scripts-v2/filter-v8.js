@@ -826,7 +826,7 @@ function reset(skip_continue_session=false){
     state['settings'] = JSON.stringify(user_settings)
     saveSettings(true)
 
-    fetch("https://zero-network.net/zn/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(6000)})
+    fetch("https://zero-network.net/zn/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
     .then((response) => {
         setCookie("znid",uuid,-1)
         setCookie("state",JSON.stringify(state),-1)

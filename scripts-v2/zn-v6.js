@@ -60,7 +60,11 @@ if(znid){
     auto_link()
     getLink()
     $("#session").text(znid)
-    heartbeat()
+    try {
+        heartbeat()
+    } catch (error){
+        console.warn("Possible latency issues!")
+    }
     if(znid!="no-connection-to-server"){
         $('#room_id').val("")
         $('#room_id').css('color',"#CCC")
