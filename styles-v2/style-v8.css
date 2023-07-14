@@ -1650,6 +1650,10 @@ input{
         left:1px;
         top:7px;
     }
+
+    .footer_link{
+        font-size: inherit;
+    }
 }
 
 .label{
@@ -1749,3 +1753,11 @@ input{
     }
 }
   
+.inline_image_text{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}

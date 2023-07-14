@@ -1098,4 +1098,8 @@
         left:4px;
         top:17px;
     }
+
+    .footer_link{
+        font-size: large;
+    }
 }
