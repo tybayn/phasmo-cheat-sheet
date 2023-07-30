@@ -1,7 +1,7 @@
 evi_color = {
     "EMF 5": "#db4d48",
     "DOTs": "#2ccc29",
-    "Fingerprints": "#ad8ce7",
+    "Ultraviolet": "#ad8ce7",
     "Freezing": "#9ae0f7",
     "Ghost Orbs": "#dbd993",
     "Writing": "#4d8ce3",
@@ -11,7 +11,7 @@ evi_color = {
 evi_icons = {
     "EMF 5": "imgs/emf5-icon.png",
     "DOTs": "imgs/dots-icon.png",
-    "Fingerprints": "imgs/fingerprints-icon.png",
+    "Ultraviolet": "imgs/fingerprints-icon.png",
     "Freezing": "imgs/freezing-icon.png",
     "Ghost Orbs": "imgs/orbs-icon.png",
     "Writing": "imgs/writing-icon.png",
