@@ -55,6 +55,14 @@
         display: none;
     }
 
+    #news_box{
+        display: none;
+    }
+
+    #news_tab{
+        display: none;
+    }
+
     #info_box{
         z-index: 100;
         width: calc(100% - 100px);

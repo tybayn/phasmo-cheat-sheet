@@ -16,11 +16,12 @@
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="scripts-v2/ghost_template-v3.js"></script>
-    <link rel="stylesheet" href="styles-v2/style-v8.css"/>
-    <link rel="stylesheet" href="styles-v2/style-mobile-v6.css"/>
+    <link rel="stylesheet" href="styles-v2/style-v9.css"/>
+    <link rel="stylesheet" href="styles-v2/style-mobile-v7.css"/>
     <link rel="stylesheet" href="discord-v2/discord.css" >
     <link rel="stylesheet" href="wiki-v2/wiki-v1.css" >
     <link rel="stylesheet" href="events-v2/events.css" >
+    <link rel="stylesheet" href="feed-v1/feed.css" >
     <link rel="stylesheet" href="styles-v2/sparkles.css" >
 </head>
 
@@ -191,6 +192,16 @@
             <button class="maps_button" onclick="changeMap(this,'woodwind.png')">Camp Woodwind</button>
         </div>
     </div>
+
+    <div id="news_box" style="right:-366px;">
+        <div id="news_tab" onclick="showNews();">
+            <img src="imgs/news-icon.png" width="24px" id="feed_icon_img"/>
+        </div>
+        <span class="icon" onclick="showNews()"></span>
+        <div class="settings_title yfont white">News Feed</div>
+        <div class="info_block" id="feed_info_block">
+        </div>
+    </div>
     
     <div class="data">
         <div class="header"></div>
@@ -303,6 +314,7 @@
     <script src="wiki-v2/wiki-v2.js"></script>
     <script src="scripts-v2/filter-v9.js"></script>
     <script src="events-v2/events-v1.js"></script>
+    <script src="feed-v1/feed-v1.js"></script>
     <script src="scripts-v2/wslink-v4.js"></script>
     <script src="scripts-v2/zn-v6.js"></script>
     <script src="scripts-v2/sparkles.js"></script>
