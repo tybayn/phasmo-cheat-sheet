@@ -726,6 +726,7 @@ function showNews(){
         document.getElementById("news_box").style.boxShadow = "-5px 0px 10px 0px #000"
         document.getElementById("news_tab").style.boxShadow = "-5px 6px 5px -2px #000"
         document.getElementById("news_box").style.right = "0px"
+        mark_feed_read()
     }
     else {
         document.getElementById("news_box").style.right = "-366px"
