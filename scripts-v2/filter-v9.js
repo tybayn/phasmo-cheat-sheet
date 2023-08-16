@@ -721,6 +721,19 @@ function showMaps(){
     }
 }
 
+function showNews(){
+    if (document.getElementById("news_box").style.right == "-366px"){
+        document.getElementById("news_box").style.boxShadow = "-5px 0px 10px 0px #000"
+        document.getElementById("news_tab").style.boxShadow = "-5px 6px 5px -2px #000"
+        document.getElementById("news_box").style.right = "0px"
+    }
+    else {
+        document.getElementById("news_box").style.right = "-366px"
+        document.getElementById("news_box").style.boxShadow = "none"
+        document.getElementById("news_box").style.boxShadow = "none"
+    }
+}
+
 function flashMode(){
     var cur_evidence = parseInt(document.getElementById("num_evidence").value)
     var mode_text = ["Apocalypse","Insanity","Nightmare","Professional"][cur_evidence]
