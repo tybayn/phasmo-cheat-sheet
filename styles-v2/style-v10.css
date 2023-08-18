@@ -57,7 +57,7 @@ hr{
     color: white;
 }
 
-@media screen and (min-device-width: 1000px) {
+@media screen and (any-pointer: fine),screen and (any-pointer: coarse) and (min-device-width: 601px) {
 
     #blackout{
         position: fixed;
@@ -1566,7 +1566,7 @@ input{
     opacity: 0.3;
 }
 
-@media screen and (min-device-width: 1000px) {
+@media screen and (any-pointer: fine),screen and (any-pointer: coarse) and (min-device-width: 601px) {
     .tricheck{
         border: 0;
         background:none;
