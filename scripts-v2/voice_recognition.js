@@ -220,10 +220,16 @@ if ("webkitSpeechRecognition" in window && !navigator.userAgent.toLowerCase().ma
         if(!stop_listen){
             speechRecognition.start(auto=true);
         }
-    };
+    }
+
     speechRecognition.onspeechstart = () =>{
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-listening.png)"
+    }
+
+    speechRecognition.onerror = (error) =>{
+        if(error.error != "no-speech")
+            console.log(error)
     }
   
     speechRecognition.onresult = (event) => {
