@@ -59,7 +59,7 @@ hr{
 
 @media screen and (any-pointer: fine),screen and (any-pointer: coarse) and (min-device-width: 601px) {
 
-    #blackout{
+    #blackout, #blackout_voice{
         position: fixed;
         background: rgba(0,0,0,0.9);
         left: 0;
@@ -116,6 +116,37 @@ hr{
         top: 0px;
         right: 0px;
         position: absolute;
+    }
+
+    #voice_recognition_status{
+        background-size: cover;
+        background-repeat: no-repeat;
+        transform: rotate(90deg);
+        width: 16px;
+        height: 16px;
+        top: 7px;
+        left: 4px;
+        position: absolute;
+        
+    }
+
+    .pulse_animation{
+        animation: mic_pulse 3s infinite;
+    }
+
+    @keyframes mic_pulse{
+        0% {
+            filter: opacity(1);
+            -webkit-filter: opacity(1);
+        }
+        50% {
+            filter: opacity(0.5);
+            -webkit-filter: opacity(0.3);
+        }
+        100% {
+            filter: opacity(1);
+            -webkit-filter: opacity(1);
+        }
     }
 
     .connected{
@@ -397,7 +428,7 @@ hr{
         background-color: #747474;
     }
 
-    #info_box{
+    #info_box, #info_box_voice{
         z-index: 100;
         width: 600px;
         height: auto;
@@ -413,10 +444,10 @@ hr{
         color: #fff;
         padding: 20px;
         overflow-y: scroll;
-        font-size: 14px;
+        font-size: 12px;
     }
 
-    #info_box .icon{
+    #info_box .icon, #info_box_voice .icon{
         position: absolute;
         top: 10px;
         right: 10px;
@@ -428,7 +459,7 @@ hr{
         cursor: pointer;
     }
 
-    #info_box .icon:before{
+    #info_box .icon:before, #info_box_voice .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -438,7 +469,7 @@ hr{
         top:4px;
     }
 
-    #info_box .icon:after{
+    #info_box .icon:after, #info_box_voice .icon:after{
         content:"";
         position: absolute;
         width:15px;
@@ -448,27 +479,32 @@ hr{
         top:10px;
     }
 
-    #info_box h3{
+    #info_box h3, #info_box_voice h3{
         margin-bottom: 8px;
     }
 
-    #info_box .info_block{
+    #info_box .info_block, #info_box_voice .info_block{
         font-family: 'Courier New', Courier, monospace;
         box-shadow: inset 0 0 10px #161615;
         background: rgba(0,0,0,0.25);
         padding: 10px;
         height: fit-content;
-        font-size: 12px;
+        width: calc(100% - 20px);
+        font-size: 11px;
         
     }
 
-    #info_box .info_block hr{
+    #info_box_voice .info_block li{
+        padding-bottom: 5px !important;
+    }
+
+    #info_box .info_block hr, #info_box_voice .info_block hr{
         width: calc(100% - 10px);
         margin-top: 15px;
         margin-bottom: 15px;
     }
 
-    #info_box .info_text{
+    #info_box .info_text, #info_box_voice .info_text{
         margin-left: 10px;
         display: flex;
         flex-direction: row;
@@ -493,14 +529,14 @@ hr{
         z-index: -1;
     }
 
-    #info_box .copyright_text{
+    #info_box .copyright_text, #info_box_voice .copyright_text{
         margin-top: 10px;
         text-align: center;
         align-self: center;
         font-size: 11px;   
     }
 
-    #info_box .thankyou_text{
+    #info_box .thankyou_text, #info_box_voice .thankyou_text{
         color: #ffffffa0;
         margin-top: 25px;
         text-align: center;
@@ -1094,6 +1130,16 @@ hr{
     }
 
     .copyright:hover{
+        filter: opacity(0.5)
+    }
+
+    .link_hover{
+        color: rgb(173, 173, 173);
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .link_hover:hover{
         filter: opacity(0.5)
     }
 

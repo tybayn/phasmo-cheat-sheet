@@ -628,6 +628,10 @@ function showInfo(){
     $("#blackout").fadeToggle(400)
 }
 
+function showVoiceInfo(){
+    $("#blackout_voice").fadeToggle(400)
+}
+
 function showSettings(){
     if (document.getElementById("settings_box").style.left == "-32px"){
         document.getElementById("settings_box").style.boxShadow = "5px 0px 10px 0px #000"
