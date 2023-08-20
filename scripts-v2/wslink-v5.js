@@ -145,7 +145,9 @@ function disconnect_room(reset=false,has_status=false){
 }
 
 function send_timer(){
-    ws.send('{"action":"TIMER"}')
+    if(hasLink){
+        ws.send('{"action":"TIMER"}')
+    }
 }
 
 function send_state() {

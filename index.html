@@ -16,7 +16,7 @@
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="scripts-v2/ghost_template-v3.js"></script>
-    <link rel="stylesheet" href="styles-v2/style-v10.css"/>
+    <link rel="stylesheet" href="styles-v2/style-v11.css"/>
     <link rel="stylesheet" href="styles-v2/style-mobile-v8.css"/>
     <link rel="stylesheet" href="discord-v2/discord.css" >
     <link rel="stylesheet" href="wiki-v2/wiki-v1.css" >
@@ -65,8 +65,59 @@
         </div>
     </div>
 
+    <div id="blackout_voice" style="display: none;">
+        <div id="info_box_voice">
+            <span class="icon" onclick="showVoiceInfo()"></span>
+
+            <h3>Voice Commands</h3>
+            <div class="info_text">Voice commands allow you to control the cheat sheet via your voice. Once you hit enable, the cheat sheet will begin listening to your voice commands and will persist between resets until you disable it. It will by deafult read from your default microphone, so ensure that it is set correctly. The voice recognition will continue to work even if the page is not in focus and you are using the same microphone in-game.</div>
+            <div class="info_block" style="margin-top: 10px;">
+                <strong>Evidence:</strong>
+                <ul>
+                    <li>"evidence &lt;evidence&gt;" -> Mark as a found evidence</li>
+                    <li>"evidence not &lt;evidence&gt;" -> Mark as not an evidence</li>
+                    <li>"evidence clear &lt;evidence&gt;" -> Reset state of an evidence</li>
+                </ul>
+                <hr>
+                <strong>Speed:</strong>
+                <ul>
+                    <li>"speed &lt;speed&gt;" -> Mark specified speed</li>
+                    <li>"speed clear &lt;speed&gt;" -> Reset state of specified speed</li>
+                </ul>
+                <hr>
+                <strong>Ghosts:</strong>
+                <ul>
+                    <li>"ghost not &lt;ghost&gt;" -> Grey out the specified ghost card</li>
+                    <li>"ghost clear &lt;ghost&gt;" -> Reset state of a ghost card (excluding hidden cards)</li>
+                    <li>"ghost select &lt;ghost&gt;" -> Select/highlight specified ghost card</li>
+                    <li>"ghost remove &lt;ghost&gt;" -> Remove the specified ghost card from the screen</li>
+                </ul>
+                <hr>
+                <strong>Timer:</strong>
+                <ul>
+                    <li>"timer start" -> Start the smudge timer</li>
+                    <li>"timer stop " -> Stop the smudge timer</li>
+                </ul>
+                <hr>
+                <strong>Misc:</strong>
+                <ul>
+                    <li>"reset journal" or "reset cheat sheet" -> Reset the cheat sheet (will save if linked with Discord)</li>
+                    <li>"stop listening" -> Stop the voice recognition</li>
+                </ul>
+            </div>
+            <h3>Data Privacy</h3>
+            <div class="info_text">Voice commands are routed through the built-in Web Speech API. Although microphone access is required for this feature, your voice is never recorded or stored.</div>
+            <div class="copyright_text">Copyright © 2023 Ty Bayn (Zero-Network)</div>
+            
+        </div>
+    </div>
+
     <div id="settings_box" style="left:-32px;">
-        <div id="settings_tab" onclick="showSettings()">Settings<div id="settings_status"></div></div>
+        <div id="settings_tab" onclick="showSettings()">
+            Settings
+            <div id="settings_status"></div>
+            <div id="voice_recognition_status" class="pulse_animation" style="display:none; background-image: url(imgs/mic.png);"></div>
+        </div>
         <span class="icon" onclick="showSettings()"></span>
 
         <div class="settings_title yfont white">Settings</div>
@@ -109,6 +160,15 @@
                 </label>
                 <span>Rounded</span>
             </div>
+            <hr>
+            <div class="modifier_volume yfont white">Voice Commands</div>
+            <div class="journal_link" style="width:176px; margin-top: 10px;">
+                <div class="journal_link_buttons">
+                    <button id="start_voice" class="journal_link_button" onclick="start_voice()">Enable</button>
+                    <button id="stop_voice" class="journal_link_button" onclick="stop_voice()" disabled>Disable</button>
+                </div>
+            </div>
+            <div id="voice_recognition_note" class="modifier_note"><div onclick="showVoiceInfo()" class="link_hover">Commands and Info &#187;</div></div>
             <hr>
             <div class="modifier_volume yfont white">Shared Journal Link</div>
             <div class="journal_link">
@@ -312,17 +372,21 @@
     <script src="scripts-v2/geo-v2.js"></script>
     <script src="discord-v2/discord-v3.js"></script>
     <script src="wiki-v2/wiki-v2.js"></script>
-    <script src="scripts-v2/filter-v10.js"></script>
+    <script src="scripts-v2/filter-v11.js"></script>
     <script src="events-v2/events-v1.js"></script>
     <script src="feed-v1/feed-v1.js"></script>
-    <script src="scripts-v2/wslink-v4.js"></script>
+    <script src="scripts-v2/wslink-v5.js"></script>
     <script src="scripts-v2/zn-v6.js"></script>
+    <script src="scripts-v2/voice_recognition.js"></script>
     <script src="scripts-v2/sparkles.js"></script>
     <script>
         $(window).on('load', function() {
             checkLink()
             loadData()
             $(function(){$("#wiki-body").load("wiki-v2/wiki-v1.html")});
+            if(getCookie("voice_recognition_on")){
+                start_voice()
+            }
         });
     </script>
 
