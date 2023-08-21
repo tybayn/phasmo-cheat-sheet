@@ -642,12 +642,7 @@
     }
 
     #active-users-label{
-        cursor: pointer;
         color: #0abdce;
-    }
-
-    #active-users-label:hover{
-        color: #c9870c;
     }
 
     #current-version-label{
@@ -677,69 +672,6 @@
         margin: 5px;
         cursor: pointer;
         z-index: 100;
-    }
-
-    #world{
-        position: absolute;
-        z-index: 100;
-        width: calc(100% - 100px);
-        height: calc(100% - 100px);
-        top:50px;
-        left:50px;
-        background-color: #313248;
-        border-radius: 5px;
-        box-shadow: 0 0 50px 50px #000;
-    }
-
-    #world .icon{
-        position: absolute;
-        top: 24px;
-        right: 24px;
-        width: 40px;
-        height:40px;
-        -ms-transform: rotate(45deg); /* IE 9 */
-        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-        transform: rotate(45deg);
-        cursor: pointer;
-    }
-
-    #world .icon:before{
-        content:"";
-        position: absolute;
-        width:7px;
-        height:28px;
-        background-color:#fff;
-        left:14px;
-        top:4px;
-    }
-
-    #world .icon:after{
-        content:"";
-        position: absolute;
-        width:28px;
-        height:7px;
-        background-color:#fff;
-        left:4px;
-        top:14px;
-    }
-
-    #world .icon:before:hover{
-        background-color: #313248;
-    }
-
-    #world .icon:after:hover{
-        background-color: #313248;
-    }
-
-    #globe{
-        width: calc(100% - 100px);
-        height: calc(100% - 135px);
-        margin: 0px 50px 50px 50px;
-        box-shadow: inset 0 0 200px 200px #000000;
-        background: rgba(0,0,0,0.25);
-        background-image: url(https://zero-network.net/phasmophobia/static/imgs/globe-background.jpg);
-        background-size: cover;
-        border-radius: 5px;
     }
 
     .ghost_card{

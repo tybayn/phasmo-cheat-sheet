@@ -43,16 +43,13 @@ function heartbeat(){
         .then(response => response.json())
         .then(data => {
             $("#active-users-label").text("Active Users: " + data['active_num_users'])
-            $(".active_title").text("Active Users: " + data['active_num_users'])
         })
         .catch(response => {
             $("#active-users-label").text("Active Users: -")
-            $(".active_title").text("Active Users: -")
         });
     }
     else {
         $("#active-users-label").text("Active Users: -")
-        $(".active_title").text("Active Users: -")
     }
 }
 var znid=getCookie("znid")
