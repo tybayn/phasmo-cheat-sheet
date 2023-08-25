@@ -208,7 +208,7 @@ function parse_speech(vtext){
 
 }
 
-if ("webkitSpeechRecognition" in window && !navigator.userAgent.toLowerCase().match(/firefox|fxios|opr/)) {
+if (("webkitSpeechRecognition" in window || "speechRecognition" in window) && !navigator.userAgent.toLowerCase().match(/firefox|fxios|opr/) && !('brave' in navigator)) {
     let speechRecognition = new webkitSpeechRecognition() || new speechRecognition();
     let stop_listen = true
   
@@ -240,7 +240,7 @@ if ("webkitSpeechRecognition" in window && !navigator.userAgent.toLowerCase().ma
                 final_transcript = event.results[i][0].transcript;
             }
         }
-        final_transcript = final_transcript.replace(/[.,;:-]/g, '')
+
         parse_speech(final_transcript);
     };
     
