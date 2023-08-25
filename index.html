@@ -13,7 +13,7 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v2/ghost_template-v3.js"></script>
-    <link rel="stylesheet" href="styles-v2/style-v12.css"/>
+    <link rel="stylesheet" href="styles-v2/style-v13.css"/>
     <link rel="stylesheet" href="styles-v2/style-mobile-v9.css"/>
     <link rel="stylesheet" href="discord-v2/discord.css" >
     <link rel="stylesheet" href="wiki-v2/wiki-v1.css" >
@@ -113,6 +113,7 @@
         <div id="settings_tab" onclick="showSettings()">
             Settings
             <div id="settings_status"></div>
+            <div id="dllink_status"></div>
             <div id="voice_recognition_status" class="pulse_animation" style="display:none; background-image: url(imgs/mic.png);"></div>
         </div>
         <span class="icon" onclick="showSettings()"></span>
@@ -177,6 +178,19 @@
                 </div>
             </div>
             <div id="room_id_note" class="modifier_note">(STATUS: Not connected)</div>
+            <hr>
+            <div class="modifier_volume yfont white">
+                Desktop Link
+                <a class="download" href="assets/ZN-Desktop-Link.exe" download="ZN-Desktop-Link.exe"><img class="download_icon" src="imgs/download.png"></a>
+            </div>
+            <div class="journal_link">
+                <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
+                <div class="journal_link_buttons">
+                    <button id="link_id_create" class="journal_link_button" style="display: none;" onclick="create_link()">Create</button>
+                    <button id="link_id_disconnect" class="journal_link_button" style="display: none;" onclick="disconnect_link()">Disconnect</button>
+                </div>
+            </div>
+            <div id="link_id_note" class="modifier_note">(STATUS: Not linked)</div>
         </div>
         <div id="session">-</div>
     </div>
@@ -360,12 +374,12 @@
     <script src="scripts-v2/timer-v3.js"></script>
     <script src="discord-v2/discord-v3.js"></script>
     <script src="wiki-v2/wiki-v2.js"></script>
-    <script src="scripts-v2/filter-v11.js"></script>
+    <script src="scripts-v2/filter-v12.js"></script>
     <script src="events-v2/events-v1.js"></script>
     <script src="feed-v1/feed-v1.js"></script>
-    <script src="scripts-v2/wslink-v5.js"></script>
-    <script src="scripts-v2/zn-v7.js"></script>
-    <script src="scripts-v2/voice_recognition.js"></script>
+    <script src="scripts-v2/wslink-v6.js"></script>
+    <script src="scripts-v2/zn-v8.js"></script>
+    <script src="scripts-v2/voice_recognition-v2.js"></script>
     <script src="scripts-v2/sparkles.js"></script>
     <script>
         $(window).on('load', function() {
