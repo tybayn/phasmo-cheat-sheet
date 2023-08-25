@@ -241,6 +241,7 @@ if (("webkitSpeechRecognition" in window || "speechRecognition" in window) && !n
             }
         }
 
+        final_transcript = final_transcript.replace(/[.,;:-]/g, '')
         parse_speech(final_transcript);
     };
     
