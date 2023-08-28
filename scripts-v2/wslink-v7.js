@@ -168,6 +168,7 @@ function link_link(){
             if (incoming_state.hasOwnProperty("action")){
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
                     toggle_timer()
+                    send_timer()
                 }
                 if (incoming_state['action'].toUpperCase() == "LINKED"){
                     document.getElementById("link_id_note").innerText = `STATUS: Linked`
