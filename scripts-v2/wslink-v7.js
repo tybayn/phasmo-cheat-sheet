@@ -5,27 +5,51 @@ function auto_link(){
     var room_id = getCookie("room_id")
     var link_id = getCookie("link_id")
     if(room_id){
-        document.getElementById("room_id").value = room_id
-        link_room()
+        var r = document.getElementById("room_id")
+        setTimeout(function(){
+            r.value = room_id
+            link_room()
+        },1)
     }
     if(link_id){
-        document.getElementById("link_id").value = link_id
-        link_link()
+        var l = document.getElementById("link_id")
+        setTimeout(function(){
+            l.value = link_id
+            link_link()
+        },1)
     }
 }
 
+function copy_code(){
+    var copyText = document.getElementById("link_id").value
+    navigator.clipboard.writeText(copyText)
+    $("#link_id_cover").fadeIn(150)
+    setTimeout(function(){
+        $("#link_id_cover").fadeOut(150)
+    },1000)
+}
+
+function copy_url_code(){
+    var copyText = document.getElementById("room_id").value
+    navigator.clipboard.writeText(`${window.location.href}?journal=${copyText}`)
+    $("#room_id_cover").fadeIn(150)
+    setTimeout(function(){
+        $("#room_id_cover").fadeOut(150)
+    },1000)
+}
+
 function create_room(){
-    var uuid = getCookie("znid")
     var outgoing_state = {
         'evidence': state['evidence'],
         'speed': state['speed'],
+        'sanity': state['sanity'],
         'ghosts': state['ghosts'],
         'settings': {
             "num_evidences":parseInt(document.getElementById("num_evidence").value),
             "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
         }
     }
-    fetch(`https://zero-network.net/phasmophobia/create-room/${uuid}`,{method:"POST",Accept:"application/json",body:JSON.stringify(outgoing_state),signal: AbortSignal.timeout(6000)})
+    fetch(`https://zero-network.net/phasmophobia/create-room/${znid}`,{method:"POST",Accept:"application/json",body:JSON.stringify(outgoing_state),signal: AbortSignal.timeout(6000)})
     .then(response => response.json())
     .then(data => {
         var room_id = data['room_id']
@@ -38,8 +62,7 @@ function create_room(){
 }
 
 function create_link(){
-    var uuid = getCookie("znid")
-    fetch(`https://zero-network.net/phasmophobia/create-link/${uuid}`,{method:"POST",Accept:"application/json",signal: AbortSignal.timeout(6000)})
+    fetch(`https://zero-network.net/phasmophobia/create-link/${znid}`,{method:"POST",Accept:"application/json",signal: AbortSignal.timeout(6000)})
     .then(response => response.json())
     .then(data => {
         var link_id = data['link_id']
@@ -53,9 +76,7 @@ function create_link(){
 
 function link_room(){
     var room_id = document.getElementById("room_id").value
-    var uuid = getCookie("znid")
-
-    ws = new WebSocket(`wss://zero-network.net/phasmolink/link/${uuid}/${room_id}`);
+    ws = new WebSocket(`wss://zero-network.net/phasmolink/link/${znid}/${room_id}`);
     setCookie("room_id",room_id,1)
 
     ws.onopen = function(event){
@@ -75,6 +96,9 @@ function link_room(){
         try {
 
             document.getElementById("settings_status").className = "connected"
+            if(event.data == "-"){
+                return
+            }
             var incoming_state = JSON.parse(event.data)
 
             if (incoming_state.hasOwnProperty("action")){
@@ -84,6 +108,9 @@ function link_room(){
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
                     toggle_timer()
                 }
+                if (incoming_state['action'].toUpperCase() == "COOLDOWNTIMER"){
+                    toggle_cooldown_timer()
+                }
                 if (incoming_state['action'].toUpperCase() == "CHANGE"){
                     document.getElementById("room_id_note").innerText = `STATUS: Connected (${incoming_state['players']})`
                 }
@@ -91,6 +118,7 @@ function link_room(){
             }
 
             if (incoming_state.hasOwnProperty("error")){
+                console.log(incoming_state)
                 document.getElementById("room_id_note").innerText = `ERROR: ${incoming_state['error']}!`
                 document.getElementById("settings_status").className = "error"
                 if (incoming_state.hasOwnProperty("disconnect") && incoming_state['disconnect']){
@@ -134,10 +162,16 @@ function link_room(){
                     dualstate(document.getElementById(key),true);
                 }
             }
+            for (const [key, value] of Object.entries(incoming_state["sanity"])){ 
+                while (value != {"good":1,"neutral":0}[document.getElementById(key).querySelector("#checkbox").classList[0]]){
+                    dualstate(document.getElementById(key),true);
+                }
+            }
             
             filter(true)
 
         } catch (error){
+            console.log(error)
             console.log(event.data)
         }
     }
@@ -170,6 +204,10 @@ function link_link(){
                     toggle_timer()
                     send_timer()
                 }
+                if (incoming_state['action'].toUpperCase() == "COOLDOWNTIMER"){
+                    toggle_cooldown_timer()
+                    send_cooldown_timer()
+                }
                 if (incoming_state['action'].toUpperCase() == "LINKED"){
                     document.getElementById("link_id_note").innerText = `STATUS: Linked`
                     document.getElementById("dllink_status").className = "connected"
@@ -183,6 +221,9 @@ function link_link(){
                 if (incoming_state['action'].toUpperCase() == "DL_RESET"){
                     bpm_clear()
                     saveSettings()
+                }
+                if (incoming_state['action'].toUpperCase() == "MENUFLIP"){
+                    toggleFilterTools()
                 }
                 return
             }
@@ -246,11 +287,18 @@ function send_timer(){
     }
 }
 
+function send_cooldown_timer(){
+    if(hasLink){
+        ws.send('{"action":"COOLDOWNTIMER"}')
+    }
+}
+
 function send_state() {
     if (hasLink){
         var outgoing_state = JSON.stringify({
             'evidence': state['evidence'],
             'speed': state['speed'],
+            'sanity': state['sanity'],
             'ghosts': state['ghosts'],
             'settings': {
                 "num_evidences":parseInt(document.getElementById("num_evidence").value),

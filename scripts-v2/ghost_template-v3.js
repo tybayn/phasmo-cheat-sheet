@@ -58,6 +58,9 @@ class Ghost {
                     <div class="ghost_evidence_item" ${data.evidence[2] in evi_color ? 'style=\"color:' + evi_color[data.evidence[2]] + ' !important;\"' : ''}><img src="${evi_icons[data.evidence[2]]}">${data.evidence[2]}</div>
                 </div>
                 <div class="ghost_nightmare_evidence">${data.nightmare_evidence?data.nightmare_evidence:''}</div>
+                <div class="ghost_hunt_high">${data.hunt_sanity_high}</div>
+                <div class="ghost_hunt_low">${data.hunt_sanity_low}</div>
+
                 <div class="ghost_behavior">
                    ${this.behavior(data.behavior)}
                 </div>

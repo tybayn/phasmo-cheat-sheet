@@ -4,119 +4,62 @@ function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="e
 const all_evidence = ["DOTs","EMF 5","Ultraviolet","Freezing","Ghost Orbs","Writing","Spirit Box"]
 const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","Mare","Revenant","Shade","Demon","Yurei","Oni","Yokai","Hantu","Goryo","Myling","Onryo","The Twins","Raiju","Obake","The Mimic","Moroi","Deogen","Thaye"]
 const all_speed = ["Slow","Normal","Fast"]
+const all_sanity = ["Late","Average","Early","VeryEarly"]
 
-var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"ghosts":{}}
+var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{}}
 var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm":0}
 
+let znid = getCookie("znid")
 
 let hasLink = false;
 let hasDLLink = false;
 
-function loadData(){
-    fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(6000)})
-    .then(data => data.json())
-    .then(data => {
-        loadSettings()
-
-        var cards = document.getElementById('cards')
-        var cur_version = document.getElementById('current-version-label')
-        var evidence_list = document.getElementById('evidence')
-
-        evidence_list.innerHTML = "";
-        for(var i = 0; i < data.evidence.length; i++){
-            evidence_list.innerHTML += `
-            <button id="${data.evidence[i]}" class="tricheck white" name="evidence" onclick="tristate(this)" value="${data.evidence[i]}">
-                <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                <div class="label">${data.evidence[i]}</div>
-            </button>
-            `
-        }
-
-        cards.innerHTML = "";
-        for(var i = 0; i < data.ghosts.length; i++){
-            bpm_speeds.add(data.ghosts[i].min_speed)
-            if(data.ghosts[i].max_speed != null){bpm_speeds.add(data.ghosts[i].max_speed)}
-            if(data.ghosts[i].alt_speed != null){bpm_speeds.add(data.ghosts[i].alt_speed)}
-            var ghost = new Ghost(data.ghosts[i]);
-            cards.innerHTML += `${ghost.ghostTemplate}`
-        }
-        cur_version.innerHTML = `${data.version}`
-
-        var start_state = getCookie("state")
-
-        for (var i = 0; i < all_evidence.length; i++){
-            state["evidence"][all_evidence[i]] = 0
-        }
-        for (var i = 0; i < all_ghosts.length; i++){
-            state["ghosts"][all_ghosts[i]] = 1
-        }
-        
-        if (!start_state){
-            start_state = state;
+function waitForElementById(id){
+    let wait_for_element = () => {
+        const c = document.getElementById(id)
+        if(!c){
+            return setTimeout(wait_for_element, 50)
         }
         else{
-            start_state = JSON.parse(start_state)
+            return c
         }
-    
-        for (const [key, value] of Object.entries(start_state["ghosts"])){ 
-            if (value == 0){
-                fade(document.getElementById(key));
-            }
-            else if (value == -1){
-                remove(document.getElementById(key));
-            }
-            else if (value == 2){
-                select(document.getElementById(key));
-            }
-        }
-        for (const [key, value] of Object.entries(start_state["evidence"])){ 
-            if (value == 1){
-                tristate(document.getElementById(key));
-            }
-            else if (value == -1){
-                tristate(document.getElementById(key));
-                tristate(document.getElementById(key));
-            }
-        }
-        for (const [key, value] of Object.entries(start_state["speed"])){ 
-            if (value == 1){
-                $("#"+key)[0].click();
-            }
-        }
-        
-        loadSettings()
-        filter()
+    }
+    return wait_for_element()
+}
 
-    })
-    .catch(error => {
-        loadSettings()
-
-        fetch("backup-data/ghosts_backup.json")
-        .then(data => data.json())
-        .then(data => {
-            var cards = document.getElementById('cards')
-            var cur_version = document.getElementById('current-version-label')
-            var evidence_list = document.getElementById('evidence')
-
-            evidence_list.innerHTML = "";
-            for(var i = 0; i < data.evidence.length; i++){
-                evidence_list.innerHTML += `
-                <button id="${data.evidence[i]}" class="tricheck phasfont white" name="evidence" onclick="tristate(this)" value="${data.evidence[i]}">
-                    <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                    <div class="label">${data.evidence[i]}</div>
-                </button>
-                `
-            }
-            cards.innerHTML = "";
-            for(var i = 0; i < data.ghosts.length; i++){
-                var ghost = new Ghost(data.ghosts[i]);
-                cards.innerHTML += `${ghost.ghostTemplate}`
-            }
-            cur_version.innerHTML = `${data.version}`
-            loadSettings()
-            filter()
-        })
-    })
+function toggleFilterTools(){
+    if($('#tools-content').is(':visible')){
+        $('#show_tool_button').attr('onclick',"toggleFilterTools()")
+        $('#show_tool_button').addClass('filter_tool_button_back')
+        $('#show_tool_button').removeClass('filter_tool_button_live')
+        $('#show_filter_button').removeAttr('onclick')
+        $('#show_filter_button').addClass('filter_tool_button_live')
+        $('#show_filter_button').removeClass('filter_tool_button_back')
+        $('#tools-content').removeClass('spin_show')
+        $('#tools-content').addClass('spin_hide')
+        setTimeout(function(){
+            $('#tools-content').toggle()
+            $('#tools-content').removeClass('spin_hide')
+            $('#filter-content').addClass('spin_show')
+            $('#filter-content').toggle()
+        },150)
+    }
+    else{
+        $('#show_tool_button').removeAttr('onclick')
+        $('#show_tool_button').addClass('filter_tool_button_live')
+        $('#show_tool_button').removeClass('filter_tool_button_back')
+        $('#show_filter_button').attr('onclick',"toggleFilterTools()")
+        $('#show_filter_button').addClass('filter_tool_button_back')
+        $('#show_filter_button').removeClass('filter_tool_button_live')
+        $('#filter-content').removeClass('spin_show')
+        $('#filter-content').addClass('spin_hide')
+        setTimeout(function(){
+            $('#filter-content').toggle()
+            $('#filter-content').removeClass('spin_hide')
+            $('#tools-content').addClass('spin_show')
+            $('#tools-content').toggle()
+        },150)
+    }
 }
 
 function dualstate(elem,ignore_link=false){
@@ -222,15 +165,19 @@ function filter(ignore_link=false){
     for (var i = 0; i < all_evidence.length; i++){
         state["evidence"][all_evidence[i]] = 0
     }
+    state["sanity"] = {"Late":0,"Average":0,"Early":0,"VeryEarly":0}
 
     // Get values of checkboxes
     var base_speed = 1.7;
     var evi_array = [];
     var not_evi_array = [];
     var spe_array = [];
+    var san_array = [];
+    var san_lookup = {"Late":0,"Average":40,"Early":50,"VeryEarly":75}
     var good_checkboxes = document.querySelectorAll('[name="evidence"] .good');
     var bad_checkboxes = document.querySelectorAll('[name="evidence"] .bad');
     var speed_checkboxes = document.querySelectorAll('[name="speed"] .good');
+    var sanity_checkboxes = document.querySelectorAll('[name="hunt-sanity"] .good');
     var num_evidences = document.getElementById("num_evidence").value
     var speed_logic_type = document.getElementById("speed_logic_type").checked ? 1 : 0;
 
@@ -249,6 +196,11 @@ function filter(ignore_link=false){
         state["speed"][speed_checkboxes[i].parentElement.value] = 1;
     }
 
+    for (var i = 0; i < sanity_checkboxes.length; i++) {
+        san_array.push(san_lookup[sanity_checkboxes[i].parentElement.value]);
+        state["sanity"][sanity_checkboxes[i].parentElement.value] = 1;
+    }
+
 
     // Filter other evidences
     for (var i = 0; i < all_evidence.length; i++){
@@ -264,11 +216,19 @@ function filter(ignore_link=false){
         $(checkbox).find("#checkbox").removeClass(["block","disabled"])
         $(checkbox).find(".label").removeClass("disabled-text")
     }
+    // Filter other evidences
+    for (var i = 0; i < all_sanity.length; i++){
+        var checkbox = document.getElementById(all_sanity[i]);
+        $(checkbox).removeClass("block")
+        $(checkbox).find("#checkbox").removeClass(["block","disabled"])
+        $(checkbox).find(".label").removeClass("disabled-text")
+    }
 
     // Get all ghosts
     var ghosts = document.getElementsByClassName("ghost_card")
     var keep_evidence = new Set();
     var keep_speed = new Set();
+    var keep_sanity = new Set();
     var mimic_evi = []
     var mimic_nm_evi = ""
 
@@ -280,6 +240,10 @@ function filter(ignore_link=false){
         for (var j = 0; j < evi_objects.length; j++){evidence.push(evi_objects[j].textContent)}
         var nm_evidence = ghosts[i].getElementsByClassName("ghost_nightmare_evidence")[0].textContent;
         var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
+        var sanity = [
+            parseInt(ghosts[i].getElementsByClassName("ghost_hunt_low")[0].textContent),
+            parseInt(ghosts[i].getElementsByClassName("ghost_hunt_high")[0].textContent)
+        ]
         if (name == "The Mimic"){
             evidence.push("Ghost Orbs")
             mimic_evi = evidence
@@ -404,19 +368,10 @@ function filter(ignore_link=false){
             var max_speed = min_speed
         }
 
-        // Check if speed is being kept
-        if (keep){
-            if(min_speed < base_speed || name == "The Mimic"){
-                keep_speed.add('Slow')
-            }
-            if ((speed_type == "range" && min_speed <= base_speed && base_speed <= max_speed) || name == "The Mimic"){
-                keep_speed.add('Normal')
-            }
-            else if(min_speed === base_speed || max_speed === base_speed){
-                keep_speed.add('Normal')
-            }
-            if(max_speed > base_speed || name == "The Mimic"){
-                keep_speed.add('Fast')
+        // Check sanity
+        if (san_array.length > 0){
+            if (Math.max(...sanity) <= Math.min(...san_array)){
+                keep = false
             }
         }
 
@@ -454,7 +409,35 @@ function filter(ignore_link=false){
                     keep = false
                 }
             }
+        }
 
+        // Check if speed is being kept
+        if (keep){
+            if(min_speed < base_speed || name == "The Mimic"){
+                keep_speed.add('Slow')
+            }
+            if ((speed_type == "range" && min_speed <= base_speed && base_speed <= max_speed) || name == "The Mimic"){
+                keep_speed.add('Normal')
+            }
+            else if(min_speed === base_speed || max_speed === base_speed){
+                keep_speed.add('Normal')
+            }
+            if(max_speed > base_speed || name == "The Mimic"){
+                keep_speed.add('Fast')
+            }
+
+            if(sanity[0] > san_lookup['Late'] || sanity[1] > san_lookup['Late']){
+                keep_sanity.add('Late')
+            }
+            if(sanity[0] > san_lookup['Average'] || sanity[1] > san_lookup['Average']){
+                keep_sanity.add('Average')
+            }
+            if(sanity[0] > san_lookup['Early'] || sanity[1] > san_lookup['Early']){
+                keep_sanity.add('Early')
+            }
+            if(sanity[0] > san_lookup['VeryEarly'] || sanity[1] > san_lookup['VeryEarly']){
+                keep_sanity.add('VeryEarly')
+            }
         }
 
         ghosts[i].className = ghosts[i].className.replaceAll(" hidden","");
@@ -596,8 +579,16 @@ function filter(ignore_link=false){
         })
     }
 
-    if (evi_array.length > 0){
+    if (evi_array.length > 0 || not_evi_array.length > 0){
         all_speed.filter(spe => !keep_speed.has(spe)).forEach(function(item){
+            var checkbox = document.getElementById(item);
+            $(checkbox).addClass("block")
+            $(checkbox).find("#checkbox").removeClass(["good"])
+            $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+            $(checkbox).find(".label").addClass("disabled-text")
+        })
+
+        all_sanity.filter(san => !keep_sanity.has(san)).forEach(function(item){
             var checkbox = document.getElementById(item);
             $(checkbox).addClass("block")
             $(checkbox).find("#checkbox").removeClass(["good"])
@@ -841,18 +832,17 @@ function setSpeedLogicType(){
 
 function reset(skip_continue_session=false){
     if(!skip_continue_session){continue_session()}
-    var uuid = getCookie("znid")
     state['settings'] = JSON.stringify(user_settings)
     saveSettings(true)
 
-    fetch("https://zero-network.net/zn/"+uuid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
+    fetch("https://zero-network.net/zn/"+znid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
     .then((response) => {
-        setCookie("znid",uuid,-1)
+        setCookie("znid",znid,-1)
         setCookie("state",JSON.stringify(state),-1)
         location.reload()
     })
     .catch((response) => {
-        setCookie("znid",uuid,-1)
+        setCookie("znid",znid,-1)
         setCookie("state",JSON.stringify(state),-1)
         location.reload()
     });

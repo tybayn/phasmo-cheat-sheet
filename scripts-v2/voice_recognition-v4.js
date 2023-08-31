@@ -39,6 +39,11 @@ function parse_speech(vtext){
         vtext = "ghost not the mimic"
     if(["go stay"].includes(vtext))
         vtext = "ghost thaye"
+    if(["huntsman elite"].includes(vtext))
+        vtext = "sanity late"
+
+    vtext = vtext.replace("saturday","sanity").replace("insanity","sanity").replace("unsanity","sanity").replace("sandy","sanity")
+    vtext = vtext.replace("hunts","hunt")
 
 
     if(vtext.startsWith('ghost')){
@@ -155,7 +160,7 @@ function parse_speech(vtext){
             vvalue = 0
         }
         else if(vtext.startsWith("undo ") || vtext.startsWith("undue ") || vtext.startsWith("on do ") || vtext.startsWith("on due ") || vtext.startsWith("clear")){
-            vtext = vtext.replace('undo ', "").replace('undue ', "").replace("on do ","")("on do ").replace("on due ","").replace("clear ","").trim()
+            vtext = vtext.replace('undo ', "").replace('undue ', "").replace("on do ","").replace("on due ","").replace("clear ","").trim()
             vvalue = 0
         }
 
@@ -169,6 +174,43 @@ function parse_speech(vtext){
 
         while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_speed).querySelector("#checkbox").classList[0]]){
             dualstate(document.getElementById(smallest_speed));
+        }
+
+        reset_voice_status()
+
+    }
+    else if(vtext.startsWith('hunt sanity') || vtext.startsWith('sanity')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized speed command")
+        console.log(`Heard '${vtext}'`)
+        vtext = vtext.replace('hunt sanity', "").replace('sanity', "").trim()
+
+        var smallest_sanity = "Late"
+        var smallest_val = 100
+        var vvalue = 1
+        if(vtext.startsWith("not ") || vtext.startsWith("knot ")){
+            vtext = vtext.replace('not ', "").replace('knot ', "").trim()
+            vvalue = 0
+        }
+        else if(vtext.startsWith("undo ") || vtext.startsWith("undue ") || vtext.startsWith("on do ") || vtext.startsWith("on due ") || vtext.startsWith("clear")){
+            vtext = vtext.replace('undo ', "").replace('undue ', "").replace("on do ","").replace("on due ","").replace("clear ","").trim()
+            vvalue = 0
+        }
+
+        vtext = vtext.replace("normal","average")
+        vtext = vtext.replace("elite","late")
+
+        for(var i = 0; i < all_sanity.length; i++){
+            var leven_val = levenshtein_distance(all_sanity[i].toLowerCase(),vtext)
+            if(leven_val < smallest_val){
+                smallest_val = leven_val 
+                smallest_sanity = all_sanity[i]
+            }
+        }
+
+        while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_sanity).querySelector("#checkbox").classList[0]]){
+            dualstate(document.getElementById(smallest_sanity));
         }
 
         reset_voice_status()

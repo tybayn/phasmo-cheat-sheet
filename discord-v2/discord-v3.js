@@ -19,6 +19,10 @@ function checkLink(){
         window.location.href = window.location.href.split("?")[0]
     }
 
+    if (params.get('journal')){
+        setCookie("room_id",params.get('journal'),1)
+        window.location.href = window.location.href.split("?")[0]
+    }
 }
 
 function getLink(){
