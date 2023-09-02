@@ -91,3 +91,48 @@
     color: #ffffffa0;
     font-size: 10px;
 }
+
+
+.tarot-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.tarot-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 3px 6px 9px 3px rgba(0, 0, 0, 0.5);
+    border: 1px rgba(0, 0, 0, 0.5) solid;
+}
+
+.tarot-card img {
+    width: 60px;
+    height: 100px;
+}
+
+.square {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border: 1px solid white;
+    border-radius: 10%;
+    margin-right: 4px;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+} 
+
+.smaller-text {
+    font-size: 90%;
+}
