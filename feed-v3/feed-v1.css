@@ -1,0 +1,25 @@
+#feed_title{
+    padding: 10px 10px 0px 10px;
+    font-size: 18px;
+}
+
+#feed_date{
+    padding-left: 20px;
+    font-size: 10px;
+    color: #7d7d7d;
+}
+
+#feed_image{
+    width: calc(100% - 40px);
+    margin: 10px 0px 0px 20px;
+}
+
+#feed_description{
+    padding: 10px 10px 10px 20px;
+}
+
+#feed_notes{
+    padding: 0px 10px 10px 20px;
+    font-size: 10px;
+    color: #7d7d7d;
+}

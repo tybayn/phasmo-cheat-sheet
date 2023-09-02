@@ -1,0 +1,211 @@
+<div class="wiki_title accordian" onclick="accordian(this)">Hunts</div>
+<div class="wiki_details" style="height: 0px;">
+    <h3>Flickering</h3>
+    <div class="text">During a hunt, ghosts will flicker in and out of existance, alternating between visible and invisible multiple times every few seconds. There are a couple of ghosts that can be identified by their flickering during a hunt: (1) an Oni will be more visible during a hunt and (2) the Phantom will be invisible for longer periods of time.</div>
+    <div class="text">Below you can see examples of the flicker timing of Phantom, Oni, and all other ghosts.</div>
+    <div class="wiki-flex">
+        <div id="phantom-flicker" class="wiki-img-block">
+            <div id="flicker-ghost-name">Phantom</div>
+            <div id="ghost-flicker">
+                <img class="flicker-img" src="imgs/flicker_ghost.png">
+            </div>
+        </div>
+        <div id="normal-flicker" class="wiki-img-block">
+            <div id="flicker-ghost-name">Normal</div>
+            <div id="ghost-flicker">
+                <img class="flicker-img" src="imgs/flicker_ghost.png">
+            </div>
+        </div>
+        <div id="oni-flicker" class="wiki-img-block">
+            <div id="flicker-ghost-name">Oni</div>
+            <div id="ghost-flicker">
+                <img class="flicker-img" src="imgs/flicker_ghost.png">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="wiki_title accordian" onclick="accordian(this)">Monkey Paw</div>
+<div class="wiki_details" style="height: 0px;">
+    <h3>Wishes</h3>
+    <div class="text">
+        <b>"I wish to see the ghost"</b>
+        <ul>
+            <li>Pro: Ghost appears at its current location</li>
+            <li>Con: After the event, a hunt will start and player vision is darkened for the duration of the event and hunt</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"I wish for activity"</b>
+        <ul>
+            <li>Pro: Doubles all ghost activity for 2 min</li>
+            <li>Con: Breaker set to broken and front door locked for 2 min</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"I wish for sanity"</b>
+        <ul>
+            <li>Pro: Averages everyone's sanity to 50%</li>
+            <li>Con: Sets ghost's favorite room to a random room and increases current sanity drain by 50%</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"I wish the ghost was trapped"</b>
+        <ul>
+            <li>Pro: Ghost locked in its room for 1 min where it cannot hunt, roam, or do abilities</li>
+            <li>Con: Locks doors in the players room and hunt starts after the 1 min period (25% doors will unlock after grace period)</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"I wish for life"</b>
+        <ul>
+            <li>Pro: Revive a dead player</li>
+            <li>Con: 50% chance that the wishing player will die</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"I wish to be safe"</b>
+        <ul>
+            <li>Pro: Unblocks the nearest blocked hiding spot</li>
+            <li>Con: Breaks the light in that room and ghost is able to sense or hear the player from any distance</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"I wish to leave"</b>
+        <ul>
+            <li>Pro: Unlocks all exit doors (works during hunts)</li>
+            <li>Con: Player slowness and darkened vision for 5 secs</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"I wish for knowledge"</b>
+        <ul>
+            <li>Pro: Removes 1 incorrect evidence from the journal and crosses out associated ghosts</li>
+            <li>Con: Starts a hunt and player vision and audio is reduced the rest of that round</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"I wish for [weather]"</b>
+        <ul>
+            <li>Pro: Changes the weather to the one specified</li>
+            <li>Con: Drops sanity by 25%</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"I wish for anything"</b>
+        <ul>
+            <li>Randomly chooses one of the above wishes</li>
+        </ul>
+    </div>
+</div>
+
+<div class="wiki_title accordian" onclick="accordian(this)">Oujia Board</div>
+<div class="wiki_details" style="height: 0px;">
+    <h3>Questions</h3>
+    <div class="text">
+        <b>"Where are you?"</b>
+        <ul>
+            <li>Sanity Cost: 50%</li>
+            <li>Gives the current room of the ghost (not the favorite room)</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>Are you here? / Are you close?"</b>
+        <ul>
+            <li>Sanity Cost: 20%</li>
+            <li>Tells if the ghost is in the same room as the player</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"Where is the bone?"</b>
+        <ul>
+            <li>Sanity Cost: 50%</li>
+            <li>Gives the room of the bone</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"Hide and seek?"</b>
+        <ul>
+            <li>Sanity Cost: 0% (breaks board)</li>
+            <li>Counts down from 5 and starts a hunt</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"Do you respond to everyone?"</b>
+        <ul>
+            <li>Sanity Cost: 20%</li>
+            <li>Replies with if the ghosts wants to be alone when using the spirit box</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"How old are you?"</b>
+        <ul>
+            <li>Sanity Cost: 5%</li>
+            <li>Returns the current age of the ghost. If the number changes, the ghost is a Thaye</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"When did you die?"</b>
+        <ul>
+            <li>Sanity Cost: 5%</li>
+            <li>Returns a random number</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"What is my sanity?"</b>
+        <ul>
+            <li>Sanity Cost: 5%</li>
+            <li>'Healthy' (Sanity > 80%), 'Good' (60-80%), 'Average' (40-60%), 'Bad' (20-40%), 'Awful' (&lt;20%)</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"How insane am I?"</b>
+        <ul>
+            <li>Sanity Cost: 5%</li>
+            <li>'Not Very' (Sanity > 50%), 'Very' (25-50%), 'Insane' (&lt;25%)</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"Am I insane?"</b>
+        <ul>
+            <li>Sanity Cost: 5%</li>
+            <li>'No' (Sanity > 90%), 'Maybe' (20-90%), 'Yes' (&lt;20%)</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"How did you die?"</b>
+        <ul>
+            <li>Sanity Cost: 5%</li>
+            <li>Returns the ghost's cause of death</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"How do you feel?"</b>
+        <ul>
+            <li>Sanity Cost: 5%</li>
+            <li>Returns a randomly selected emotion</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"Why are you here?"</b>
+        <ul>
+            <li>Sanity Cost: 5%</li>
+            <li>Returns a randomly selected reason</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"Knock Knock"</b>
+        <ul>
+            <li>Sanity Cost: 5%</li>
+            <li>"Whos there"</li>
+        </ul>
+    </div>
+    <div class="text">
+        <b>"Marco"</b>
+        <ul>
+            <li>Sanity Cost: 5%</li>
+            <li>"Polo"</li>
+        </ul>
+    </div>
+</div>

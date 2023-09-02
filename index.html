@@ -13,14 +13,14 @@
         };
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
-    <script src="scripts-v2/ghost_template-v3.js"></script>
-    <link rel="stylesheet" href="styles-v2/style-v13.css"/>
-    <link rel="stylesheet" href="styles-v2/style-mobile-v9.css"/>
-    <link rel="stylesheet" href="discord-v2/discord.css" >
-    <link rel="stylesheet" href="wiki-v2/wiki-v1.css" >
-    <link rel="stylesheet" href="events-v2/events.css" >
-    <link rel="stylesheet" href="feed-v1/feed.css" >
-    <link rel="stylesheet" href="styles-v2/sparkles.css" >
+    <script src="scripts-v3/ghost_template-v1.js"></script>
+    <link rel="stylesheet" href="styles-v3/style-v1.css"/>
+    <link rel="stylesheet" href="styles-v3/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="discord-v3/discord-v1.css" >
+    <link rel="stylesheet" href="wiki-v3/wiki-v1.css" >
+    <link rel="stylesheet" href="events-v3/events-v1.css" >
+    <link rel="stylesheet" href="feed-v3/feed-v1.css" >
+    <link rel="stylesheet" href="styles-v3/sparkles-v1.css" >
 </head>
 
 <body>
@@ -80,6 +80,12 @@
                 <ul>
                     <li>"speed &lt;speed&gt;" -> Mark specified speed</li>
                     <li>"speed clear &lt;speed&gt;" -> Reset state of specified speed</li>
+                </ul>
+                <hr>
+                <strong>Hunt Sanity:</strong>
+                <ul>
+                    <li>"sanity &lt;sanity&gt;" -> Mark specified hunt sanity</li>
+                    <li>"sanity clear &lt;sanity&gt;" -> Reset state of specified hunt sanity</li>
                 </ul>
                 <hr>
                 <strong>Ghosts:</strong>
@@ -171,6 +177,8 @@
             <div class="modifier_volume yfont white">Shared Journal Link</div>
             <div class="journal_link">
                 <input type="text" placeholder="XXXXXX" id="room_id" class="text" value="Connecting..." disabled style="color:#444;">
+                <div id="room_id_cover" class="copy_cover" style="display:none;">Copied!</div>
+                <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_url_code()">
                 <div class="journal_link_buttons">
                     <button id="room_id_create" class="journal_link_button" style="display: none;" onclick="create_room()">Create</button>
                     <button id="room_id_link" class="journal_link_button" style="display: none;" onclick="link_room()">Join</button>
@@ -185,6 +193,8 @@
             </div>
             <div class="journal_link">
                 <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
+                <div id="link_id_cover" class="copy_cover" style="display:none;">Copied!</div>
+                <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_code()">
                 <div class="journal_link_buttons">
                     <button id="link_id_create" class="journal_link_button" style="display: none;" onclick="create_link()">Create</button>
                     <button id="link_id_disconnect" class="journal_link_button" style="display: none;" onclick="disconnect_link()">Disconnect</button>
@@ -278,117 +288,165 @@
     </div>
     
     <div class="data">
-        <div class="header"></div>
-        <div class="evidence_title yfont white">
-            Evidence <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="filter();flashMode();saveSettings();">
-                <option value="3">3</option>
-                <option value="2">2</option>
-                <option value="1">1</option>
-                <option value="0">0</option>
-              </select>
-        </div>
-        <div id="game_mode" class="yfont white" style="display:none;">Insanity</div>
-        <div id="evidence" class="evidence">
-            <div class="dot-flashing"></div>
-        </div>
-
-        <div class="speed_title yfont white">
-            Speed
-        </div>
-        <div class="speed">
-            <button id="Slow" class="tricheck white" name="speed" onclick="dualstate(this)" value="Slow">
-                <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                <div class="label">Slow</div>
-            </button>
-            <button id="Normal" class="tricheck white" name="speed" onclick="dualstate(this)" value="Normal">
-                <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                <div class="label">Normal</div>
-            </button>
-            <button id="Fast" class="tricheck white" name="speed" onclick="dualstate(this)" value="Fast">
-                <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                <div class="label">Fast</div>
-            </button>
-        </div>
-
-        <div class="modifier_title yfont white">
-            Tools
-        </div>
-        <div class="modifier">
-            <div class="modifier_ghost_speed yfont white">Ghost Speed</div>
-            <input type="range" id="ghost_modifier_speed" name="volume" 
-                min="0" max="4" step="1" default="2" onchange="setTempo();bpm_calc(true);saveSettings();send_state();">
-            <div class="modifier_ghost_speed_labels">
-                <div class="modifier_ghost_speed_label">50%</div>
-                <div class="modifier_ghost_speed_label">75%</div>
-                <div class="modifier_ghost_speed_label">100%</div>
-                <div class="modifier_ghost_speed_label">125%</div>
-                <div class="modifier_ghost_speed_label">150%</div>
+        <div class="menu">
+            <div class="tools-filter-buttons">
+                <button id="show_filter_button" class="filter_tool_button filter_tool_button_live">Filters</button>
+                <button id="show_tool_button" class="filter_tool_button filter_tool_button_back" onclick="toggleFilterTools()">Tools</button>
             </div>
-            <div class="modifier_sound_select">
-                <img src="imgs/footsteps.png">
-                <label for="modifier_sound_type" onchange="setSoundType();saveSettings();">
-                    <input type="checkbox" name="" id="modifier_sound_type">
-                    <div class="toggle"></div>
-                </label>
-                <img src="imgs/metronome.png">
-            </div>
-            <div class="modifier_note">(Click &#128266; to hear speed)</div>
-            <hr>
-            <div class="modifier_smudge_timer yfont white" onclick="toggle_timer()">Smudge Timer</div>
-            <div class="line_labels" onclick="toggle_timer();send_timer();">
-                <div class="spirit_line_label">Spirit</div>
-                <div class="demon_line_label">Demon</div>
-            </div>
-            <div id="progress" onclick="toggle_timer();send_timer();">
-                <img src="imgs/play.png" id="play_button" class="play_button">
-                <div id="progressBar">
-                    <div id="progressBarInner" class="bar"></div>
-                    <div class="demon_line"></div>
-                    <div class="ghost_line"></div>
-                    <div class="spirit_line"></div>
+            <div id="tools-content" class="tools-content" style="display: none;">
+                <div class="timer_title yfont white">
+                    Timers
+                </div>
+                <div class="timers">
+                    <div class="modifier_smudge_timer yfont white" onclick="toggle_timer()">Smudge Timer</div>
+                    <div class="line_labels" onclick="toggle_timer();send_timer();">
+                        <div class="spirit_line_label">Spirit</div>
+                        <div class="demon_line_label">Demon</div>
+                    </div>
+                    <div id="progress" onclick="toggle_timer();send_timer();">
+                        <img src="imgs/play.png" id="play_button" class="play_button">
+                        <div id="progressBar">
+                            <div id="progressBarInner" class="bar"></div>
+                            <div class="demon_line"></div>
+                            <div class="ghost_line"></div>
+                            <div class="spirit_line"></div>
+                        </div>
+                    </div>
+                    <div id="time_left" onclick="toggle_timer();send_timer();">
+                        <span id="minute">03</span>:<span id="second">00</span>
+                    </div>
+                    <div class="modifier_note_2" onclick="toggle_timer();send_timer();">(Press 'T' to start/stop)</div>
+                    <hr>
+                    <div class="modifier_smudge_timer yfont white" onclick="toggle_cooldown_timer()">Cooldown Timer</div>
+                    <div class="line_labels" onclick="toggle_cooldown_timer();send_cooldown_timer();">
+                        <div class="cooldown_demon_line_label">Demon</div>
+                    </div>
+                    <div id="cooldownProgress" onclick="toggle_cooldown_timer();send_cooldown_timer();">
+                        <img src="imgs/play.png" id="play_cooldown_button" class="play_button">
+                        <div id="cooldownProgressBar">
+                            <div id="cooldownProgressBarInner" class="bar"></div>
+                            <div class="ghost_line"></div>
+                            <div class="demon_line"></div>
+                        </div>
+                    </div>
+                    <div id="time_left_cooldown" onclick="toggle_cooldown_timer();send_cooldown_timer();">
+                        <span id="minute_cooldown">00</span>:<span id="second_cooldown">25</span>
+                    </div>
+                    <div class="modifier_note_2" onclick="toggle_cooldown_timer();send_cooldown_timer();">(Press 'H' to start/stop)</div>
+                </div>
+                <div class="modifier_title yfont white">
+                    Tools
+                </div>
+                <div class="modifier">
+                    <div class="modifier_ghost_speed yfont white">Ghost Speed</div>
+                    <input type="range" id="ghost_modifier_speed" name="volume" 
+                        min="0" max="4" step="1" default="2" onchange="setTempo();bpm_calc(true);saveSettings();send_state();">
+                    <div class="modifier_ghost_speed_labels">
+                        <div class="modifier_ghost_speed_label">50%</div>
+                        <div class="modifier_ghost_speed_label">75%</div>
+                        <div class="modifier_ghost_speed_label">100%</div>
+                        <div class="modifier_ghost_speed_label">125%</div>
+                        <div class="modifier_ghost_speed_label">150%</div>
+                    </div>
+                    <div class="modifier_sound_select">
+                        <img src="imgs/footsteps.png">
+                        <label for="modifier_sound_type" onchange="setSoundType();saveSettings();">
+                            <input type="checkbox" name="" id="modifier_sound_type">
+                            <div class="toggle"></div>
+                        </label>
+                        <img src="imgs/metronome.png">
+                    </div>
+                    <div class="modifier_note">(Click &#128266; to hear speed)</div>
+                    <hr>
+                    <div class="modifier_bpm_finder yfont white">BPM Finder</div>
+                    <button id="tap" class="yfont" onclick="bpm_tap()">
+                        <div id="input_bpm">0<br>bpm</div>
+                        <div>Tap<div class="tap_note">(or press 'F')</div></div>
+                        <div id="input_speed">0<br>m/s</div>
+                    </button>
+                    <div id="tap_viz"></div>
+                    <div class="modifier_note_2">(Press 'R' to reset)</div>
                 </div>
             </div>
-            <div id="time_left" onclick="toggle_timer();send_timer();">
-                <span id="minute">03</span>:<span id="second">00</span>
+            <div id="filter-content" class="filter-content">
+                <div class="evidence_title yfont white">
+                    Evidence <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="filter();flashMode();saveSettings();">
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                        <option value="0">0</option>
+                    </select>
+                </div>
+                <div id="game_mode" class="yfont white" style="display:none;">Insanity</div>
+                <div id="evidence" class="evidence">
+                    <div class="dot-flashing"></div>
+                </div>
+
+                <div class="speed_title yfont white">
+                    Speed
+                </div>
+                <div class="speed">
+                    <button id="Slow" class="tricheck white" name="speed" onclick="dualstate(this)" value="Slow">
+                        <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                        <div class="label">Slow</div>
+                    </button>
+                    <button id="Normal" class="tricheck white" name="speed" onclick="dualstate(this)" value="Normal">
+                        <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                        <div class="label">Normal</div>
+                    </button>
+                    <button id="Fast" class="tricheck white" name="speed" onclick="dualstate(this)" value="Fast">
+                        <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                        <div class="label">Fast</div>
+                    </button>
+                </div>
+                <div class="hunt_sanity_title yfont white">
+                    Hunt Sanity
+                </div>
+                <div class="hunt_sanity">
+                    <button id="Late" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Late">
+                        <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                        <div class="label">Late <span class="hunt_sanity_num">(&lt;40%)</span></div>
+                    </button>
+                    <button id="Average" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Average">
+                        <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                        <div class="label">Normal <span class="hunt_sanity_num">(>40%)</span></div>
+                    </button>
+                    <button id="Early" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Early">
+                        <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                        <div class="label">Early <span class="hunt_sanity_num">(>50%)</span></div>
+                    </button>
+                    <button id="VeryEarly" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="VeryEarly">
+                        <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                        <div class="label">Very Early <span class="hunt_sanity_num">(>75%)</span></div>
+                    </button>
+                </div>
+
             </div>
-            <div class="modifier_note_2" onclick="toggle_timer();send_timer();">(Press 'T' to start/stop)</div>
-            <hr>
-            <div class="modifier_bpm_finder yfont white">BPM Finder</div>
-            <button id="tap" class="yfont" onclick="bpm_tap()">
-                <div id="input_bpm">0<br>bpm</div>
-                <div>Tap<div class="tap_note">(or press 'F')</div></div>
-                <div id="input_speed">0<br>m/s</div>
-            </button>
-            <div id="tap_viz"></div>
-            <div class="modifier_note_2">(Press 'R' to reset)</div>
-            
+            <div id="active-users"><span id="current-version-label"></span> | <span id="active-users-label">Active Users: -</span></div>
+            <div class="copyright" onclick="showInfo()"><img class="question" src="imgs/question.png"> Info / Copyright</div>
+            <button id="reset" class="yfont" onclick="reset()">Reset</button>
+
         </div>
 
         <div id="cards" class="cards"><div class="dot-flashing"></div></div>
-
-        <div id="active-users"><span id="current-version-label"></span> | <span id="active-users-label">Active Users: -</span></div>
-        <div class="copyright" onclick="showInfo()"><img class="question" src="imgs/question.png"> Info / Copyright</div>
-        <button id="reset" class="yfont" onclick="reset()">Reset</button>
-        <div class="footer"></div>
-
     </div>
 
-    <script src="scripts-v2/metronome-v2.js"></script>
-    <script src="scripts-v2/timer-v3.js"></script>
-    <script src="discord-v2/discord-v3.js"></script>
-    <script src="wiki-v2/wiki-v2.js"></script>
-    <script src="scripts-v2/filter-v12.js"></script>
-    <script src="events-v2/events-v1.js"></script>
-    <script src="feed-v1/feed-v1.js"></script>
-    <script src="scripts-v2/wslink-v7.js"></script>
-    <script src="scripts-v2/zn-v8.js"></script>
-    <script src="scripts-v2/voice_recognition-v4.js"></script>
-    <script src="scripts-v2/sparkles.js"></script>
+    <script src="scripts-v3/metronome-v1.js"></script>
+    <script src="scripts-v3/timer-v1.js"></script>
+    <script src="discord-v3/discord-v1.js"></script>
+    <script src="wiki-v3/wiki-v1.js"></script>
+    <script src="scripts-v3/filter-v1.js"></script>
+    <script src="scripts-v3/wslink-v1.js"></script>
+    <script src="scripts-v3/zn-v1.js"></script>
+    <script src="events-v3/events-v1.js"></script>
+    <script src="feed-v3/feed-v1.js"></script>
+    <script src="scripts-v3/voice_recognition-v1.js"></script>
+    <script src="scripts-v3/sparkles-v1.js"></script>
     <script>
         $(window).on('load', function() {
+            loadAllAndConnect()
             checkLink()
-            loadData()
-            $(function(){$("#wiki-body").load("wiki-v2/wiki-v1.html")});
+            $(function(){$("#wiki-body").load("wiki-v3/wiki-v1.html")});
             if(getCookie("voice_recognition_on")){
                 start_voice()
             }
