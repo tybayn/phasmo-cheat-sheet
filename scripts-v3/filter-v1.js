@@ -62,8 +62,9 @@ function toggleFilterTools(){
     }
 }
 
-function dualstate(elem,ignore_link=false){
+function dualstate(elem,ignore_link=false,radio=false){
     var checkbox = $(elem).find("#checkbox");
+    var siblings = $(elem).siblings()
 
     if (checkbox.hasClass("disabled")){
         return;
@@ -72,6 +73,12 @@ function dualstate(elem,ignore_link=false){
     if (checkbox.hasClass("neutral")){
         checkbox.removeClass("neutral")
         checkbox.addClass("good")
+        if(radio){
+            for(var i=0;i<siblings.length;i++){
+                $(siblings[i]).find("#checkbox").removeClass("good")
+                $(siblings[i]).find("#checkbox").addClass("neutral")
+            }
+        }
     }
     else if (checkbox.hasClass("good")){
         checkbox.removeClass("good")
