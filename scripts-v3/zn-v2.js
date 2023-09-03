@@ -20,7 +20,7 @@ function heartbeat(){
 
 function loadAllAndConnect(){
     let loadZN = new Promise((resolve, reject) => {
-        if(znid){
+        if(znid && znid!="no-connection-to-server"){
             getLink()
             $("#session").text(znid)
             try {
