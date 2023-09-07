@@ -1,7 +1,10 @@
 <div class="wiki_title accordian" onclick="accordian(this)">Hunts</div>
 <div class="wiki_details" style="height: 0px;">
     <h3>Flickering</h3>
-    <div class="text">During a hunt, ghosts will flicker in and out of existance, alternating between visible and invisible multiple times every few seconds. There are a couple of ghosts that can be identified by their flickering during a hunt: (1) an Oni will be more visible during a hunt and (2) the Phantom will be invisible for longer periods of time.</div>
+    <div class="text">During a hunt, ghosts will flicker in and out of existance, alternating between visible and
+        invisible multiple times every few seconds. There are a couple of ghosts that can be identified by their
+        flickering during a hunt: (1) an Oni will be more visible during a hunt and (2) the Phantom will be invisible
+        for longer periods of time.</div>
     <div class="text">Below you can see examples of the flicker timing of Phantom, Oni, and all other ghosts.</div>
     <div class="wiki-flex">
         <div id="phantom-flicker" class="wiki-img-block">
@@ -33,7 +36,8 @@
         <b>"I wish to see the ghost"</b>
         <ul>
             <li>Pro: Ghost appears at its current location</li>
-            <li>Con: After the event, a hunt will start and player vision is darkened for the duration of the event and hunt</li>
+            <li>Con: After the event, a hunt will start and player vision is darkened for the duration of the event and
+                hunt</li>
         </ul>
     </div>
     <div class="text">
@@ -54,7 +58,8 @@
         <b>"I wish the ghost was trapped"</b>
         <ul>
             <li>Pro: Ghost locked in its room for 1 min where it cannot hunt, roam, or do abilities</li>
-            <li>Con: Locks doors in the players room and hunt starts after the 1 min period (25% doors will unlock after grace period)</li>
+            <li>Con: Locks doors in the players room and hunt starts after the 1 min period (25% doors will unlock after
+                grace period)</li>
         </ul>
     </div>
     <div class="text">
@@ -211,104 +216,130 @@
 </div>
 
 
-<div class="wiki_title accordian" onclick="accordian(this)">Tarot Cards</div>
+<div class="wiki_title accordian" #tarot onclick="accordian(this)">Tarot Cards</div>
 <div class="wiki_details" style="height: 0px;">
     <h3>Tarot Cards</h3>
     <div class="text">Tarot cards can be picked up, and you can draw one card at a time.</div>
     <div class="text">Each Tarot card deck contains 10 randomly generated cards.</div>
+    <br />
+    <hr>
 
-    <div class="tarot-card-container">
-        <div class="tarot-card">
-            <div>
-                <h3>The Tower</h3>
-                <p>Causes an interaction and doubles all ghost activity for 20 seconds.</p>
-                <p>20% Draw Chance</p>
-            </div>
-        </div>
-
-        <div class="tarot-card">
-            <div>
-                <h3>The Wheel of Fortune</h3>
-                <p>The player who draws the card will experience either a gain or loss of sanity, depending on the burn
-                    color of the card.</p>
-                <p>
-                    <span class="square green"></span>Green burn: 25% Sanity gain
-                </p>
-                <p>
-                    <span class="square red"></span>Red burn: 25% Sanity loss
-                </p>
-                <p>20% Draw Chance</p>
-            </div>
-        </div>
-
-        <div class="tarot-card">
-            <div>
-                <h3>The Fool</h3>
-                <p>No effect is applied when drawing this card.</p>
-                <p class="smaller-text">Randomly selects another card to appear as, before turning into The Fool as it burns. </p>
-                <p>17% Draw Chance</p>
-                <p class="smaller-text">(100% during hunts) </p>
-            </div>
-        </div>
-
-        <div class="tarot-card">
-            <div>
-                <h3>The Devil</h3>
-                <p>Triggers a Ghost Event towards the nearest player to the ghost.</p>
-                <p>10% Draw Chance</p>
-            </div>
-        </div>
-
-        <div class="tarot-card">
-            <div>
-                <h3>Death</h3>
-                <p>Triggers a cursed hunt.</p>
-                <p>10% Draw Chance</p>
-            </div>
-        </div>
-
-        <div class="tarot-card">
-            <div>
-                <h3>The Hermit</h3>
-                <p>Teleports the ghost back to its ghost room and traps it there for 1 minute. </p>
-                <p class="smaller-text">This does not affect hunts and ghost events.</p>
-                <p>10% Draw Chance</p>
-            </div>
-        </div>
-
-        <div class="tarot-card">
-            <div>
-                <h3>The Sun</h3>
-                <p>The player who draws the card will have their sanity fully restored to 100%</p>
-                <p>5% Draw Chance</p>
-            </div>
-        </div>
-
-        <div class="tarot-card">
-            <div>
-                <h3>The Moon</h3>
-                <p>The player who draws the card will have their sanity instantly set to 0%.</p>
-                <p>5% Draw Chance</p>
-            </div>
-        </div>
-
-        <div class="tarot-card">
-            <div>
-                <h3>The High Priestess</h3>
-                <p>Revives a randomly chosen dead player at their corpse. </p>
-                <p class="smaller-text">If no one is currently dead, it will revive
-                    the next player who dies. Multiple cards do not stack.<br>(A player cannot die twice in the same hunt)</p>
-                <p>2% Draw Chance</p>
-            </div>
-        </div>
-
-        <div class="tarot-card">
-            <div>
-                <h3>The Hanged Man</h3>
-                <p>Instantly kills the player.<br></p>
-                <p class="smaller-text">If 'Friendly Ghost' custom difficulty option is turned on, this will always turn into "The Fool".</p>
-                <p>1% Draw Chance</p>
-            </div>
-        </div>
+    <div class="text">
+        <p><b>The Tower</b></p>
+        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/tower.webp">
+        <p>Causes an interaction and doubles all ghost activity for 20 seconds.</p>
+        <ul class="text">
+            <li>20% Draw Chance</li>
+        </ul>
     </div>
+
+    <hr>
+
+    <div class="text">
+        <p><b>The Wheel of Fortune</b></p>
+        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/wheeloffortune.webp">
+        <p>The player who draws the card will experience either a gain or loss of sanity, depending on the burn color of the card.</p>
+        <p>
+            <span class="square green"></span>Green burn: 25% Sanity gain
+            <br>
+            <span class="square red"></span>Red burn: 25% Sanity loss
+        </p>
+        <ul class="text">
+            <li>20% Draw Chance</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="text">
+        <p><b>The Fool</b></p>
+        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/fool.webp">
+        <p>No effect is applied when drawing this card.</p>
+        <p class="smaller-text">Randomly selects another card to appear as, before turning into The Fool as it burns.</p>
+        <ul class="text">
+            <li>17% Draw Chance</li>
+            <li>(100% during hunts)</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="text">
+        <p><b>The Devil</b></p>
+        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/devil.webp">
+        <p>Triggers a Ghost Event towards the nearest player to the ghost.</p>
+        <ul class="text">
+            <li>10% Draw Chance</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="text">
+        <p><b>Death</b></p>
+        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/death.webp">
+        <p>Triggers a cursed hunt.</p>
+        <ul class="text">
+            <li>10% Draw Chance</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="text">
+        <p><b>The Hermit</b></p>
+        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/hermit.webp">
+        <p>Teleports the ghost back to its ghost room and traps it there for 1 minute. </p>
+        <p class="smaller-text">This does not affect hunts and ghost events.</p>
+        <ul class="text">
+            <li>10% Draw Chance</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="text">
+        <p><b>The Sun</b></p>
+        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/sun.webp">
+        <p>The player who draws the card will have their sanity fully restored to 100%</p>
+        <ul class="text">
+            <li>5% Draw Chance</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="text">
+        <p><b>The Moon</b></p>
+        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/moon.webp">
+        <p>The player who draws the card will have their sanity instantly set to 0%.</p>
+        <ul class="text">
+            <li>5% Draw Chance</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="text">
+        <p><b>The High Priestess</b></p>
+        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/highpriestess.webp">
+        <p>Revives a randomly chosen dead player at their corpse. </p>
+        <p class="smaller-text">If no one is currently dead, it will revive the next player who dies. Multiple cards do not stack.<br>(A player cannot die twice in the same hunt)</p>
+        <ul class="text">
+            <li>2% Draw Chance</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="text">
+        <p><b>The Hanged Man</b></p>
+        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/hangedman.webp">
+        <p>Instantly kills the player.<br></p>
+        <p class="smaller-text">If 'Friendly Ghost' custom difficulty option is turned on, this will always turn into "The Fool".</p>
+        <ul class="text">
+            <li>1% Draw Chance</li>
+        </ul>
+    </div>
+
 </div>
