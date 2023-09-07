@@ -91,3 +91,29 @@
     color: #ffffffa0;
     font-size: 10px;
 }
+
+.square {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border: 1px solid white;
+    border-radius: 10%;
+    margin-right: 4px;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+} 
+
+.smaller-text {
+    font-size: 90%;
+}
+
+.tarot-img {
+    width: 60px!important;
+    height: 100px;
+}
