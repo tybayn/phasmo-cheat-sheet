@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="styles-v3/style-v1.css"/>
     <link rel="stylesheet" href="styles-v3/style-mobile-v1.css"/>
     <link rel="stylesheet" href="discord-v3/discord-v1.css" >
-    <link rel="stylesheet" href="wiki-v3/wiki-v1.css" >
+    <link rel="stylesheet" href="wiki-v3/wiki-v2.css" >
     <link rel="stylesheet" href="events-v3/events-v1.css" >
     <link rel="stylesheet" href="feed-v3/feed-v1.css" >
     <link rel="stylesheet" href="styles-v3/sparkles-v1.css" >
@@ -434,7 +434,7 @@
     <script src="scripts-v3/metronome-v1.js"></script>
     <script src="scripts-v3/timer-v1.js"></script>
     <script src="discord-v3/discord-v1.js"></script>
-    <script src="wiki-v3/wiki-v1.js"></script>
+    <script src="wiki-v3/wiki-v2.js"></script>
     <script src="scripts-v3/filter-v1.js"></script>
     <script src="scripts-v3/wslink-v1.js"></script>
     <script src="scripts-v3/zn-v1.js"></script>
@@ -446,7 +446,7 @@
         $(window).on('load', function() {
             loadAllAndConnect()
             checkLink()
-            $(function(){$("#wiki-body").load("wiki-v3/wiki-v1.html")});
+            $(function(){$("#wiki-body").load("wiki-v3/wiki-v2.html")});
             if(getCookie("voice_recognition_on")){
                 start_voice()
             }
