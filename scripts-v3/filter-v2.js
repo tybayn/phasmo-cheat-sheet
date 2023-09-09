@@ -62,6 +62,35 @@ function toggleFilterTools(){
     }
 }
 
+function monkeyPawFilter(elem,ignore_link=false){
+    var checkbox = $(elem).siblings().find("#checkbox");
+    var label = $(elem).siblings().find(".label");
+    var smudge = $(elem).parent().find(".monkey-smudge");
+    var siblings = $(elem).parent().siblings()
+
+    if($(elem).hasClass("monkey-paw-selected")){
+        $(checkbox).removeClass("monkey-disabled")
+        $(elem).removeClass("monkey-paw-selected")
+        $(smudge).hide()
+    }
+    else{
+        for (var i =0; i < siblings.length; i++){
+            $(siblings[i]).find(".monkey-paw-select").removeClass("monkey-paw-selected")
+            $(siblings[i]).find("#checkbox").removeClass("disabled")
+            $(siblings[i]).find("#checkbox").removeClass("monkey-disabled")
+            $(siblings[i]).find(".monkey-smudge").hide()
+        }
+        $(checkbox).removeClass(["good","bad"])
+        $(checkbox).addClass(["neutral","block","disabled","monkey-disabled"])
+        $(label).addClass("disabled-text")
+        $(label).removeClass("strike")
+        $(elem).addClass("monkey-paw-selected")
+        $(smudge).show()
+    }
+
+    if(!ignore_link){filter(ignore_link)}
+}
+
 function dualstate(elem,ignore_link=false,radio=false){
     var checkbox = $(elem).find("#checkbox");
     var siblings = $(elem).siblings()
@@ -177,10 +206,14 @@ function filter(ignore_link=false){
     // Get values of checkboxes
     var base_speed = 1.7;
     var evi_array = [];
+    
     var not_evi_array = [];
     var spe_array = [];
     var san_array = [];
     var san_lookup = {"Late":0,"Average":40,"Early":50,"VeryEarly":75}
+    var monkey_evi = ""
+    if (document.querySelectorAll('[name="evidence"] .monkey-disabled').length > 0)
+        monkey_evi = document.querySelectorAll('[name="evidence"] .monkey-disabled')[0].parentElement.value;
     var good_checkboxes = document.querySelectorAll('[name="evidence"] .good');
     var bad_checkboxes = document.querySelectorAll('[name="evidence"] .bad');
     var speed_checkboxes = document.querySelectorAll('[name="speed"] .good');
@@ -196,6 +229,10 @@ function filter(ignore_link=false){
     for (var i = 0; i < bad_checkboxes.length; i++) {
         not_evi_array.push(bad_checkboxes[i].parentElement.value);
         state["evidence"][bad_checkboxes[i].parentElement.value] = -1;
+    }
+
+    if(monkey_evi){
+        state["evidence"][monkey_evi] = -2;
     }
 
     for (var i = 0; i < speed_checkboxes.length; i++) {
@@ -257,8 +294,12 @@ function filter(ignore_link=false){
             nm_evidence = "Ghost Orbs"
             mimic_nm_evi = "Ghost Orbs"
         }
-        
 
+        //Check for monkey paw filter
+        if (evidence.includes(monkey_evi)){
+            keep = false
+        }
+        
         // Check for evidences
         // Standard
         if (num_evidences == "3"){
@@ -585,6 +626,13 @@ function filter(ignore_link=false){
             $(checkbox).find(".label").removeClass("strike")
         })
     }
+
+    var monkey_checkbox = document.getElementById(monkey_evi);
+    $(monkey_checkbox).addClass("block")
+    $(monkey_checkbox).find("#checkbox").removeClass(["good","bad"])
+    $(monkey_checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+    $(monkey_checkbox).find(".label").addClass("disabled-text")
+    $(monkey_checkbox).find(".label").removeClass("strike")
 
     if (evi_array.length > 0 || not_evi_array.length > 0){
         all_speed.filter(spe => !keep_speed.has(spe)).forEach(function(item){

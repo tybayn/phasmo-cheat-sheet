@@ -153,8 +153,13 @@ function link_room(){
                 }
             }
             for (const [key, value] of Object.entries(incoming_state["evidence"])){ 
-                while (value != {"good":1,"bad":-1,"neutral":0}[document.getElementById(key).querySelector("#checkbox").classList[0]]){
-                    tristate(document.getElementById(key),true);
+                if(value == -2){
+                    monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"),true)
+                }
+                else{
+                    while (value != {"good":1,"bad":-1,"neutral":0}[document.getElementById(key).querySelector("#checkbox").classList[0]]){
+                        tristate(document.getElementById(key),true);
+                    }
                 }
             }
             for (const [key, value] of Object.entries(incoming_state["speed"])){ 

@@ -14,8 +14,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v3/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v3/style-v1.css"/>
-    <link rel="stylesheet" href="styles-v3/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="styles-v3/style-v2.css"/>
+    <link rel="stylesheet" href="styles-v3/style-mobile-v2.css"/>
     <link rel="stylesheet" href="discord-v3/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v3/wiki-v2.css" >
     <link rel="stylesheet" href="events-v3/events-v1.css" >
@@ -73,7 +73,8 @@
                 <ul>
                     <li>"evidence &lt;evidence&gt;" -> Mark as a found evidence</li>
                     <li>"evidence not &lt;evidence&gt;" -> Mark as not an evidence</li>
-                    <li>"evidence clear &lt;evidence&gt;" -> Reset state of an evidence</li>
+                    <li>"evidence clear &lt;evidence&gt;" -> Reset state of an evidence<br><br></li>
+                    <li>"monkey paw &lt;evidence&gt;" -> This will mark the evidence off with monkey paw logic</li>
                 </ul>
                 <hr>
                 <strong>Speed:</strong>
@@ -255,22 +256,22 @@
         </div>
         <div class="maps_credit">Map images belong to <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">Images</a>)</div>
         <div class="maps_buttons">
-            <button class="maps_button selected_map" onclick="changeMap(this,'tanglewood.png')">6 Tanglewood Drive</button>
-            <button class="maps_button" onclick="changeMap(this,'edgefield.png')">42 Edgefield Road</button>
-            <button class="maps_button" onclick="changeMap(this,'ridgeview.png')">10 Ridgeview Court</button>
-            <button class="maps_button" onclick="changeMap(this,'grafton.png')">Grafton Farmhouse</button>
-            <button class="maps_button" onclick="changeMap(this,'willow.png')">13 Willow Street</button>
-            <button class="maps_button" onclick="changeMap(this,'brownstone.png')">Brownstone High School</button>
-            <button class="maps_button" onclick="changeMap(this,'bleasdale.png')">Bleasdale Farmhouse</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows.png')">Sunny Meadows</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_courtyard.png')">SM Restricted - Courtyard</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_male.png')">SM Restricted - Male Wing</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_female.png')">SM Restricted - Female Wing</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_hospital.png')">SM Restricted - Hospital</button>
-            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_restricted.png')">SM Restricted - Restricted</button>
-            <button class="maps_button" onclick="changeMap(this,'prison.png')">Prison</button>
-            <button class="maps_button" onclick="changeMap(this,'maplelodge.png')">Maple Lodge Campsite</button>
-            <button class="maps_button" onclick="changeMap(this,'woodwind.png')">Camp Woodwind</button>
+            <button class="maps_button selected_map" onclick="changeMap(this,'tanglewood.png')"><div class="map_size s">S</div>6 Tanglewood Drive</button>
+            <button class="maps_button" onclick="changeMap(this,'edgefield.png')"><div class="map_size s">S</div>42 Edgefield Road</button>
+            <button class="maps_button" onclick="changeMap(this,'ridgeview.png')"><div class="map_size s">S</div>10 Ridgeview Court</button>
+            <button class="maps_button" onclick="changeMap(this,'grafton.png')"><div class="map_size s">S</div>Grafton Farmhouse</button>
+            <button class="maps_button" onclick="changeMap(this,'willow.png')"><div class="map_size s">S</div>13 Willow Street</button>
+            <button class="maps_button" onclick="changeMap(this,'brownstone.png')"><div class="map_size l">L</div>Brownstone High School</button>
+            <button class="maps_button" onclick="changeMap(this,'bleasdale.png')"><div class="map_size s">S</div>Bleasdale Farmhouse</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows.png')"><div class="map_size l">L</div>Sunny Meadows</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_courtyard.png')"><div class="map_size s">S</div>SM Restricted - Courtyard</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_male.png')"><div class="map_size s">S</div>SM Restricted - Male Wing</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_female.png')"><div class="map_size s">S</div>SM Restricted - Female Wing</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_hospital.png')"><div class="map_size s">S</div>SM Restricted - Hospital</button>
+            <button class="maps_button" onclick="changeMap(this,'sunnymeadows_restricted.png')"><div class="map_size s">S</div>SM Restricted - Restricted</button>
+            <button class="maps_button" onclick="changeMap(this,'prison.png')"><div class="map_size m">M</div>Prison</button>
+            <button class="maps_button" onclick="changeMap(this,'maplelodge.png')"><div class="map_size m">M</div>Maple Lodge Campsite</button>
+            <button class="maps_button" onclick="changeMap(this,'woodwind.png')"><div class="map_size s">S</div>Camp Woodwind</button>
         </div>
     </div>
 
@@ -435,18 +436,18 @@
     <script src="scripts-v3/timer-v1.js"></script>
     <script src="discord-v3/discord-v1.js"></script>
     <script src="wiki-v3/wiki-v1.js"></script>
-    <script src="scripts-v3/filter-v1.js"></script>
-    <script src="scripts-v3/wslink-v1.js"></script>
-    <script src="scripts-v3/zn-v2.js"></script>
+    <script src="scripts-v3/filter-v2.js"></script>
+    <script src="scripts-v3/wslink-v2.js"></script>
+    <script src="scripts-v3/zn-v3.js"></script>
     <script src="events-v3/events-v1.js"></script>
     <script src="feed-v3/feed-v1.js"></script>
-    <script src="scripts-v3/voice_recognition-v1.js"></script>
+    <script src="scripts-v3/voice_recognition-v2.js"></script>
     <script src="scripts-v3/sparkles-v1.js"></script>
     <script>
         $(window).on('load', function() {
             loadAllAndConnect()
             checkLink()
-            $(function(){$("#wiki-body").load("wiki-v3/wiki-v2.html")});
+            $(function(){$("#wiki-body").load("wiki-v3/wiki-v3.html")});
             if(getCookie("voice_recognition_on")){
                 start_voice()
             }
