@@ -1124,6 +1124,7 @@
 }
 
 @media screen and (any-pointer: coarse) and (max-device-width: 600px) {
+    
     .tricheck{
         border: 0;
         width: 33.3%;
@@ -1139,6 +1140,10 @@
         align-items: center;
     }
 
+    .evidence-row .tricheck{
+        width: 100% !important;
+    }
+
     #checkbox{
         grid-column: 1;
         width: 45px;
@@ -1150,6 +1155,38 @@
         display: flex;
         align-content: center;
         justify-content: center;
+    }
+
+    .evidence-row{
+        display: flex;
+        flex-wrap: nowrap;
+        align-content: center;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        width: 33.3%;
+    }
+
+    .monkey-smudge{
+        position: absolute;
+        left: 0;
+        z-index: 1;
+        width: 85%;
+    }
+
+    .monkey-paw-select{
+        height: 32px;
+        cursor: pointer;
+        margin-right: 10px;
+        filter: opacity(0.2);
+    }
+
+    .monkey-paw-select:hover{
+        filter: opacity(0.9);
+    }
+
+    .monkey-paw-selected{
+        filter: opacity(0.9) !important;
     }
 
     .neutral{}

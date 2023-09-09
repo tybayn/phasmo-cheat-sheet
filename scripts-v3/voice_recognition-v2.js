@@ -145,6 +145,38 @@ function parse_speech(vtext){
         reset_voice_status()
 
     }
+    else if(vtext.startsWith('monkey paw')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized evidence command")
+        console.log(`Heard '${vtext}'`)
+        vtext = vtext.replace('monkey paw', "").trim()
+        var smallest_evidence = "emf 5"
+        var smallest_val = 100
+        var vvalue = 1
+
+        // Common replacements for evidence names
+        vtext = vtext.replace("fingerprints", "ultraviolet")
+        vtext = vtext.replace("uv", "ultraviolet")
+        vtext = vtext.replace("be enough","emf5")
+        vtext = vtext.replace("thoughts","dots")
+        if(vtext.startsWith("orbs"))
+            vtext = "ghost orbs"
+
+
+        for(var i = 0; i < all_evidence.length; i++){
+            var leven_val = levenshtein_distance(all_evidence[i].toLowerCase(),vtext)
+            if(leven_val < smallest_val){
+                smallest_val = leven_val 
+                smallest_evidence = all_evidence[i]
+            }
+        }
+
+        monkeyPawFilter($(document.getElementById(smallest_evidence)).parent().find(".monkey-paw-select"))
+
+        reset_voice_status()
+
+    }
     else if(vtext.startsWith('speed') || vtext.startsWith('feed')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
