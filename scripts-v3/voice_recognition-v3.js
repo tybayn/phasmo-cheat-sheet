@@ -44,9 +44,44 @@ function parse_speech(vtext){
 
     vtext = vtext.replace("saturday","sanity").replace("insanity","sanity").replace("unsanity","sanity").replace("sandy","sanity")
     vtext = vtext.replace("hunts","hunt")
+    vtext = vtext.replace("go speed","ghost speed")
 
+    if(vtext.startsWith('ghost speed')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized ghost speed command")
+        console.log(`Heard '${vtext}'`)
+        vtext = vtext.replace('ghost speed', "").trim()
 
-    if(vtext.startsWith('ghost')){
+        vtext = vtext.replace('three','3')
+        vtext = vtext.replace('two','2').replace('to','2')
+        vtext = vtext.replace('one','1')
+        vtext = vtext.replace('zero','0')
+
+        var smallest_num = '150'
+        var smallest_val = 100
+        var prev_value = document.getElementById("ghost_modifier_speed").value
+        var all_ghost_speed = ['50','75','100','125','150']
+        var all_ghost_speed_convert = {'50':0,'75':1,'100':2,'125':3,'150':4}
+
+        for(var i = 0; i < all_ghost_speed.length; i++){
+            var leven_val = levenshtein_distance(all_ghost_speed[i],vtext)
+            if(leven_val < smallest_val){
+                smallest_val = leven_val 
+                smallest_num = all_ghost_speed[i]
+            }
+        }
+
+        document.getElementById("ghost_modifier_speed").value = all_ghost_speed_convert[smallest_num] ?? 2
+
+        if(prev_value != all_ghost_speed_convert[smallest_num]){
+            setTempo();
+            bpm_calc(true);
+            saveSettings();
+            send_state()
+        }
+    }
+    else if(vtext.startsWith('ghost')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized ghost command")
@@ -258,6 +293,57 @@ function parse_speech(vtext){
         send_timer()
 
         reset_voice_status()
+    }
+    else if(vtext.startsWith('cooldown') || vtext.startsWith('cool down')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized timer command")
+        console.log(`Heard '${vtext}'`)
+        vtext = vtext.replace('cooldown', "").replace('cool down', "").trim()
+        toggle_cooldown_timer()
+        send_cooldown_timer()
+
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('number of evidence') || vtext.startsWith('difficulty')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized evidence set command")
+        console.log(`Heard '${vtext}'`)
+        vtext = vtext.replace('number of evidence', "").replace('difficulty', "").trim()
+        vtext = vtext.replace('three','3')
+        vtext = vtext.replace('two','2').replace('to','2')
+        vtext = vtext.replace('one','1')
+        vtext = vtext.replace('zero','0')
+
+        var smallest_num = 3
+        var smallest_val = 100
+        var prev_value = document.getElementById("num_evidence").value
+        var all_difficulty = ['0','1','2','3']
+
+        for(var i = 0; i < all_difficulty.length; i++){
+            var leven_val = levenshtein_distance(all_difficulty[i],vtext)
+            if(leven_val < smallest_val){
+                smallest_val = leven_val 
+                smallest_num = all_difficulty[i]
+            }
+        }
+
+        document.getElementById("num_evidence").value = smallest_num ?? 3
+        if(prev_value != smallest_num){
+            filter()
+            flashMode()
+            saveSettings()
+        }
+
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('show tools') || vtext.startsWith('show filters')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized filter/tool command")
+        console.log(`Heard '${vtext}'`)
+        toggleFilterTools()
     }
     else if(vtext.startsWith('reset cheat sheet') || vtext.startsWith('reset journal')){
         document.getElementById("voice_recognition_status").className = null

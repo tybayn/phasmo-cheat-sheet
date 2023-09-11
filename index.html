@@ -68,17 +68,19 @@
 
             <h3>Voice Commands</h3>
             <div class="info_text">Voice commands allow you to control the cheat sheet via your voice. Once you hit enable, the cheat sheet will begin listening to your voice commands and will persist between resets until you disable it. It will by deafult read from your default microphone, so ensure that it is set correctly. The voice recognition will continue to work even if the page is not in focus and you are using the same microphone in-game.</div>
-            <div class="info_block" style="margin-top: 10px;">
+            <div class="info_block" style="margin-top: 10px; overflow-y: scroll; overflow-x: hidden;">
                 <strong>Evidence:</strong>
                 <ul>
+                    <li>"number of evidence &lt;num&gt;" or "difficulty &lt;num&gt;" -> Set the number of evidence</li>
                     <li>"evidence &lt;evidence&gt;" -> Mark as a found evidence</li>
                     <li>"evidence not &lt;evidence&gt;" -> Mark as not an evidence</li>
-                    <li>"evidence clear &lt;evidence&gt;" -> Reset state of an evidence<br><br></li>
+                    <li>"evidence clear &lt;evidence&gt;" -> Reset state of an evidence</li>
                     <li>"monkey paw &lt;evidence&gt;" -> This will mark the evidence off with monkey paw logic</li>
                 </ul>
                 <hr>
                 <strong>Speed:</strong>
                 <ul>
+                    
                     <li>"speed &lt;speed&gt;" -> Mark specified speed</li>
                     <li>"speed clear &lt;speed&gt;" -> Reset state of specified speed</li>
                 </ul>
@@ -101,10 +103,14 @@
                 <ul>
                     <li>"timer start" -> Start the smudge timer</li>
                     <li>"timer stop " -> Stop the smudge timer</li>
+                    <li>"cooldown start" -> Start the cooldown timer</li>
+                    <li>"cooldown stop " -> Stop the cooldown timer</li>
                 </ul>
                 <hr>
                 <strong>Misc:</strong>
                 <ul>
+                    <li>"show filters" or "show tools" -> Flips the menu to show the filters/tools</li>
+                    <li>"ghost speed &lt;percent&gt;" -> Set ghost speed modifier to 50%, 75%, 100%, 125%, or 150%</li>
                     <li>"reset journal" or "reset cheat sheet" -> Reset the cheat sheet (will save if linked with Discord)</li>
                     <li>"stop listening" -> Stop the voice recognition</li>
                 </ul>
@@ -441,7 +447,7 @@
     <script src="scripts-v3/zn-v3.js"></script>
     <script src="events-v3/events-v1.js"></script>
     <script src="feed-v3/feed-v1.js"></script>
-    <script src="scripts-v3/voice_recognition-v2.js"></script>
+    <script src="scripts-v3/voice_recognition-v3.js"></script>
     <script src="scripts-v3/sparkles-v1.js"></script>
     <script>
         $(window).on('load', function() {
