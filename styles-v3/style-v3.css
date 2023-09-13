@@ -57,7 +57,7 @@ hr{
     color: white;
 }
 
-@media screen and (any-pointer: fine),screen and (any-pointer: coarse) and (min-device-width: 601px) {
+@media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
 
     #blackout, #blackout_voice{
         position: fixed;
