@@ -1,4 +1,4 @@
-@media screen and (any-pointer: coarse) and (max-device-width: 600px) {
+@media screen and (pointer: coarse) and (max-device-width: 600px) {
 
     #blackout{
         position: fixed;
