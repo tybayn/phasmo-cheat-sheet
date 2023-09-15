@@ -1834,7 +1834,7 @@ input{
     opacity: 0.3;
 }
 
-@media screen and (any-pointer: fine),screen and (any-pointer: coarse) and (min-device-width: 601px) {
+@media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
     .tricheck{
         border: 0;
         background:none;

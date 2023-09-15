@@ -656,12 +656,6 @@ function filter(ignore_link=false){
     if (hasLink && !ignore_link){send_state()}
 }
 
-function showGlobe(){
-    $("#world").fadeToggle(400)
-    reloadData()
-    scale()
-}
-
 function showInfo(){
 
     if (!$("#blackout").is(":visible")){
