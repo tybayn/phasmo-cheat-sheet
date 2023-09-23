@@ -272,7 +272,6 @@ function parse_speech(vtext){
                 if(vtext.startsWith(value[i])){vtext = key}
             }
         }
-        console.log(`${prevtext} >> ${vtext}`)
 
         for(var i = 0; i < all_sanity.length; i++){
             var leven_val = levenshtein_distance(all_sanity[i].toLowerCase(),vtext)
