@@ -144,32 +144,34 @@ function tristate(elem,ignore_link=false){
 }
 
 function select(elem,ignore_link=false){
-    if (!$(elem).hasClass("faded")){
-        var on = false
-        if (!ignore_link){
+    if ($(elem).hasClass("faded")){
+        fade(elem,ignore_link)
+    }
 
-            on = $(elem).hasClass("selected")
+    var on = false
+    if (!ignore_link){
 
-            for (const [key, value] of Object.entries(state["ghosts"])){ 
-                if(value == 2){
-                    state['ghosts'][key] = 1
-                    document.getElementById(key).className = "ghost_card"
-                }
+        on = $(elem).hasClass("selected")
+
+        for (const [key, value] of Object.entries(state["ghosts"])){ 
+            if(value == 2){
+                state['ghosts'][key] = 1
+                document.getElementById(key).className = "ghost_card"
             }
         }
-
-        if (on){
-            $(elem).removeClass("selected");
-            state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
-        }
-        else{
-            $(elem).addClass("selected");
-            state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
-        }
-        setCookie("state",JSON.stringify(state),1)
-        if(!ignore_link){filter(ignore_link)}
-
     }
+
+    if (on){
+        $(elem).removeClass("selected");
+        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+    }
+    else{
+        $(elem).addClass("selected");
+        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
+    }
+    setCookie("state",JSON.stringify(state),1)
+    if(!ignore_link){filter(ignore_link)}
+
 }
 
 function fade(elem,ignore_link=false){

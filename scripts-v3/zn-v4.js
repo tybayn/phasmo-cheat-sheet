@@ -146,6 +146,9 @@ function loadAllAndConnect(){
                 }
             }
             for (const [key, value] of Object.entries(start_state["evidence"])){ 
+                if($(document.getElementById(key)).parent().find(".monkey-paw-select").hasClass("monkey-paw-selected"))
+                    monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"))
+
                 if (value == 1){
                     tristate(document.getElementById(key));
                 }

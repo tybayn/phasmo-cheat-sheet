@@ -30,21 +30,11 @@ function reset_voice_status(){
 function parse_speech(vtext){
     vtext = vtext.toLowerCase().trim()
 
-    // Overall common replacments
-    if(["goes to bake"].includes(vtext))
-        vtext = "ghost obake"
-    if(["ghost maroy","ghostman roy"].includes(vtext))
-        vtext = "ghost moroi"
-    if(["does not mimic"].includes(vtext))
-        vtext = "ghost not the mimic"
-    if(["go stay"].includes(vtext))
-        vtext = "ghost thaye"
-    if(["huntsman elite"].includes(vtext))
-        vtext = "sanity late"
-
-    vtext = vtext.replace("saturday","sanity").replace("insanity","sanity").replace("unsanity","sanity").replace("sandy","sanity")
-    vtext = vtext.replace("hunts","hunt")
-    vtext = vtext.replace("go speed","ghost speed")
+    for (const [key, value] of Object.entries(ZNLANG['overall'])) {
+        for (var i = 0; i < value.length; i++) {
+            vtext = vtext.replace(value[i], key);
+        }
+    }
 
     if(vtext.startsWith('ghost speed')){
         document.getElementById("voice_recognition_status").className = null
@@ -90,8 +80,8 @@ function parse_speech(vtext){
         var smallest_ghost = "Spirit"
         var smallest_val = 100
         var vvalue = 0
-        if(vtext.startsWith("not ") || vtext.startsWith("knot ")){
-            vtext = vtext.replace('not ', "").replace('knot ', "").trim()
+        if(vtext.startsWith("not ") || vtext.startsWith("knot ") || vtext.startsWith("knight ")|| vtext.startsWith("night ")){
+            vtext = vtext.replace('knot ', "").replace('not ', "").replace('knight ', "").replace('night ', "").trim()
             vvalue = 0
         }
         else if(vtext.startsWith("undo ") || vtext.startsWith("undue ") || vtext.startsWith("on do ") || vtext.startsWith("on due ") || vtext.startsWith("clear")){
@@ -102,20 +92,18 @@ function parse_speech(vtext){
             vtext = vtext.replace('deselect ', "").replace('select ', "").trim()
             vvalue = 2
         }
-        else if(vtext.startsWith("hide ") || vtext.startsWith("remove ")){
-            vtext = vtext.replace('hide ', "").replace('remove ', "").trim()
+        else if(vtext.startsWith("hide ") || vtext.startsWith("remove ") || vtext.startsWith("removes ")){
+            vtext = vtext.replace('hide ', "").replace('removes ', "").replace('remove ', "").trim()
             vvalue = -1
         }
 
         // Common fixes to ghosts
-        console.log(vtext)
-        if(["race"].includes(vtext)){vtext = "wraith"}
-        if(["ride you","rise you"].includes(vtext)){vtext = "raiju"}
-        if(["on to","onto","on 2"].includes(vtext)){vtext = "hantu"}
-        if(["awake","oh bake","oh backy"].includes(vtext)){vtext = "obake"}
-        if(["say","they","fe","fae","faye"].includes(vtext)){vtext = "thaye"}
-        if(vtext.startsWith("twins")){vtext = "the twins"}
-        if(vtext.startsWith("mimic")){vtext = "the mimic"}
+        var prevtext = vtext;
+        for (const [key, value] of Object.entries(ZNLANG['ghosts'])) {
+            for (var i = 0; i < value.length; i++) {
+                if(vtext.startsWith(value[i])){vtext = key}
+            }
+        }
 
         for(var i = 0; i < all_ghosts.length; i++){
             var leven_val = levenshtein_distance(all_ghosts[i].toLowerCase(),vtext)
@@ -124,6 +112,7 @@ function parse_speech(vtext){
                 smallest_ghost = all_ghosts[i]
             }
         }
+        console.log(`${prevtext} >> ${vtext} >> ${smallest_ghost}`)
 
         if (vvalue == 0){
             fade(document.getElementById(smallest_ghost));
@@ -147,8 +136,8 @@ function parse_speech(vtext){
         var smallest_evidence = "emf 5"
         var smallest_val = 100
         var vvalue = 1
-        if(vtext.startsWith("not ") || vtext.startsWith("knot ")){
-            vtext = vtext.replace('not ', "").replace('knot ', "").trim()
+        if(vtext.startsWith("not ") || vtext.startsWith("knot ") || vtext.startsWith("knight ")|| vtext.startsWith("night ")){
+            vtext = vtext.replace('knot ', "").replace('not ', "").replace('knight ', "").replace('night ', "").trim()
             vvalue = -1
         }
         else if(vtext.startsWith("undo ") || vtext.startsWith("undue ") || vtext.startsWith("on do ") || vtext.startsWith("on due ") || vtext.startsWith("clear")){
@@ -157,12 +146,12 @@ function parse_speech(vtext){
         }
 
         // Common replacements for evidence names
-        vtext = vtext.replace("fingerprints", "ultraviolet")
-        vtext = vtext.replace("uv", "ultraviolet")
-        vtext = vtext.replace("be enough","emf5")
-        vtext = vtext.replace("thoughts","dots")
-        if(vtext.startsWith("orbs"))
-            vtext = "ghost orbs"
+        var prevtext = vtext;
+        for (const [key, value] of Object.entries(ZNLANG['evidence'])) {
+            for (var i = 0; i < value.length; i++) {
+                if(vtext.startsWith(value[i])){vtext = key}
+            }
+        }
 
 
         for(var i = 0; i < all_evidence.length; i++){
@@ -172,6 +161,7 @@ function parse_speech(vtext){
                 smallest_evidence = all_evidence[i]
             }
         }
+        console.log(`${prevtext} >> ${vtext} >> ${smallest_evidence}`)
 
         while (vvalue != {"good":1,"bad":-1,"neutral":0}[document.getElementById(smallest_evidence).querySelector("#checkbox").classList[0]]){
             tristate(document.getElementById(smallest_evidence));
@@ -191,12 +181,12 @@ function parse_speech(vtext){
         var vvalue = 1
 
         // Common replacements for evidence names
-        vtext = vtext.replace("fingerprints", "ultraviolet")
-        vtext = vtext.replace("uv", "ultraviolet")
-        vtext = vtext.replace("be enough","emf5")
-        vtext = vtext.replace("thoughts","dots")
-        if(vtext.startsWith("orbs"))
-            vtext = "ghost orbs"
+        var prevtext = vtext;
+        for (const [key, value] of Object.entries(ZNLANG['evidence'])) {
+            for (var i = 0; i < value.length; i++) {
+                if(vtext.startsWith(value[i])){vtext = key}
+            }
+        }
 
 
         for(var i = 0; i < all_evidence.length; i++){
@@ -206,6 +196,7 @@ function parse_speech(vtext){
                 smallest_evidence = all_evidence[i]
             }
         }
+        console.log(`${prevtext} >> ${vtext} >> ${smallest_evidence}`)
 
         monkeyPawFilter($(document.getElementById(smallest_evidence)).parent().find(".monkey-paw-select"))
 
@@ -222,13 +213,21 @@ function parse_speech(vtext){
         var smallest_speed = "normal"
         var smallest_val = 100
         var vvalue = 1
-        if(vtext.startsWith("not ") || vtext.startsWith("knot ")){
-            vtext = vtext.replace('not ', "").replace('knot ', "").trim()
+        if(vtext.startsWith("not ") || vtext.startsWith("knot ") || vtext.startsWith("knight ")|| vtext.startsWith("night ")){
+            vtext = vtext.replace('knot ', "").replace('not ', "").replace('knight ', "").replace('night ', "").trim()
             vvalue = 0
         }
         else if(vtext.startsWith("undo ") || vtext.startsWith("undue ") || vtext.startsWith("on do ") || vtext.startsWith("on due ") || vtext.startsWith("clear")){
             vtext = vtext.replace('undo ', "").replace('undue ', "").replace("on do ","").replace("on due ","").replace("clear ","").trim()
             vvalue = 0
+        }
+
+        // Common replacements for speed
+        var prevtext = vtext;
+        for (const [key, value] of Object.entries(ZNLANG['speed'])) {
+            for (var i = 0; i < value.length; i++) {
+                if(vtext.startsWith(value[i])){vtext = key}
+            }
         }
 
         for(var i = 0; i < all_speed.length; i++){
@@ -238,6 +237,7 @@ function parse_speech(vtext){
                 smallest_speed = all_speed[i]
             }
         }
+        console.log(`${prevtext} >> ${vtext} >> ${smallest_speed}`)
 
         while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_speed).querySelector("#checkbox").classList[0]]){
             dualstate(document.getElementById(smallest_speed));
@@ -256,8 +256,8 @@ function parse_speech(vtext){
         var smallest_sanity = "Late"
         var smallest_val = 100
         var vvalue = 1
-        if(vtext.startsWith("not ") || vtext.startsWith("knot ")){
-            vtext = vtext.replace('not ', "").replace('knot ', "").trim()
+        if(vtext.startsWith("not ") || vtext.startsWith("knot ") || vtext.startsWith("knight ")|| vtext.startsWith("night ")){
+            vtext = vtext.replace('knot ', "").replace('not ', "").replace('knight ', "").replace('night ', "").trim()
             vvalue = 0
         }
         else if(vtext.startsWith("undo ") || vtext.startsWith("undue ") || vtext.startsWith("on do ") || vtext.startsWith("on due ") || vtext.startsWith("clear")){
@@ -265,8 +265,14 @@ function parse_speech(vtext){
             vvalue = 0
         }
 
-        vtext = vtext.replace("normal","average")
-        vtext = vtext.replace("elite","late")
+        // Common replacements for sanity
+        var prevtext = vtext;
+        for (const [key, value] of Object.entries(ZNLANG['sanity'])) {
+            for (var i = 0; i < value.length; i++) {
+                if(vtext.startsWith(value[i])){vtext = key}
+            }
+        }
+        console.log(`${prevtext} >> ${vtext}`)
 
         for(var i = 0; i < all_sanity.length; i++){
             var leven_val = levenshtein_distance(all_sanity[i].toLowerCase(),vtext)
@@ -275,9 +281,10 @@ function parse_speech(vtext){
                 smallest_sanity = all_sanity[i]
             }
         }
+        console.log(`${prevtext} >> ${vtext} >> ${smallest_sanity}`)
 
         while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_sanity).querySelector("#checkbox").classList[0]]){
-            dualstate(document.getElementById(smallest_sanity));
+            dualstate(document.getElementById(smallest_sanity),false,true);
         }
 
         reset_voice_status()
