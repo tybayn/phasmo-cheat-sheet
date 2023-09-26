@@ -42,7 +42,7 @@ const ZNLANG = {
         "obake":["to bake","awake","oh bake","oh backy","opaque","ibaka","a bucket","obey","tobacco","obama care"],
         "the mimic":["mimic"],
         "moroi":[],
-        "deogen":["the ocean","deion","dion","deodorant","yeojin","geodon","children","deo","dio"],
+        "deogen":["the ocean","deion","dion","deodorant","yeojin","geodon","children","deo","dio","digging"],
         "thaye":["stay","say","they","fe","fae","faye","thing","day","tea"]
     },
     "evidence":{
@@ -50,8 +50,8 @@ const ZNLANG = {
         "dots":["thoughts"],
         "ultraviolet":["fingerprints","uv"],
         "freezing":[],
-        "ghost orbs":["orbs"],
-        "writing":[],
+        "ghost orbs":["orbs","forbes","ghost forbes"],
+        "writing":['righting'],
         "spirit box":["spare box","beer box"]
     },
     "speed":{

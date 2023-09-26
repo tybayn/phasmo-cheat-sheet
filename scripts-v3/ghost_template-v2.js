@@ -67,7 +67,7 @@ class Ghost {
                 <div class="ghost_clear">
                     <span class="check" onclick="select(this.parentElement.parentElement)"></span>
                     <span class="space"></span>
-                    <span class="icon" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)"></span>
+                    <span class="icon" onclick="fade(this.parentElement.parentElement);autoSelect()" ondblclick="remove(this.parentElement.parentElement);autoSelect()"></span>
                 </div>
             </div>
         `

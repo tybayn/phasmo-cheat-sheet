@@ -1557,6 +1557,26 @@ hr{
         z-index: 100;
     }
 
+    .standard_reset:hover{
+        background-color: #ffffff60 !important;
+    }
+
+    .reset_pulse{
+        padding-top:5px !important;
+        animation: blink 0.5s;
+        animation-iteration-count: 3;
+    }
+
+    @keyframes blink { 
+        50% { background-color:rgba(75, 0, 0, 0.705);}  
+    }
+
+    .reset_note{
+        color: #ffffffa0;
+        padding-top:3px;
+        font-size: 12px;
+    }
+
     .ghost_card{
         display: grid;
         width: 510px;
@@ -2041,7 +2061,7 @@ input{
     transform: scale(1.1); 
 }
 
-#reset:hover, #tap:hover{
+#tap:hover{
     background-color: #ffffff60;
 }
 

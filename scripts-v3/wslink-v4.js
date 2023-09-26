@@ -144,9 +144,11 @@ function link_room(){
                 state['ghosts'][key] = value
                 if (value == 0){
                     fade(document.getElementById(key),true);
+                    autoSelect()
                 }
                 else if (value == -1){
                     remove(document.getElementById(key),true);
+                    autoSelect()
                 }
                 else if (value == 2){
                     select(document.getElementById(key),true);
@@ -184,6 +186,7 @@ function link_room(){
             }
             
             filter(true)
+            autoSelect()
 
         } catch (error){
             console.log(error)

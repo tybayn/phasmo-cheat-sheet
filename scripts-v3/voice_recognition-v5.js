@@ -116,16 +116,18 @@ function parse_speech(vtext){
 
         if (vvalue == 0){
             fade(document.getElementById(smallest_ghost));
+            autoSelect()
         }
         else if (vvalue == 2){
             select(document.getElementById(smallest_ghost));
         }
         else if (vvalue == -1){
             remove(document.getElementById(smallest_ghost));
+            autoSelect()
         }
-        
-        reset_voice_status()
 
+        resetResetButton()
+        reset_voice_status()
     }
     else if(vtext.startsWith('evidence')){
         document.getElementById("voice_recognition_status").className = null
@@ -166,7 +168,9 @@ function parse_speech(vtext){
         while (vvalue != {"good":1,"bad":-1,"neutral":0}[document.getElementById(smallest_evidence).querySelector("#checkbox").classList[0]]){
             tristate(document.getElementById(smallest_evidence));
         }
+        autoSelect()
 
+        resetResetButton()
         reset_voice_status()
 
     }
@@ -199,7 +203,9 @@ function parse_speech(vtext){
         console.log(`${prevtext} >> ${vtext} >> ${smallest_evidence}`)
 
         monkeyPawFilter($(document.getElementById(smallest_evidence)).parent().find(".monkey-paw-select"))
+        autoSelect()
 
+        resetResetButton()
         reset_voice_status()
 
     }
@@ -242,7 +248,9 @@ function parse_speech(vtext){
         while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_speed).querySelector("#checkbox").classList[0]]){
             dualstate(document.getElementById(smallest_speed));
         }
+        autoSelect()
 
+        resetResetButton()
         reset_voice_status()
 
     }
@@ -285,7 +293,9 @@ function parse_speech(vtext){
         while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_sanity).querySelector("#checkbox").classList[0]]){
             dualstate(document.getElementById(smallest_sanity),false,true);
         }
+        autoSelect()
 
+        resetResetButton()
         reset_voice_status()
 
     }
@@ -338,6 +348,7 @@ function parse_speech(vtext){
         document.getElementById("num_evidence").value = smallest_num ?? 3
         if(prev_value != smallest_num){
             filter()
+            autoSelect()
             flashMode()
             saveSettings()
         }
@@ -352,6 +363,28 @@ function parse_speech(vtext){
         toggleFilterTools()
     }
     else if(vtext.startsWith('reset cheat sheet') || vtext.startsWith('reset journal')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized reset command")
+        console.log(`Heard '${vtext}'`)
+        if(Object.keys(discord_user).length > 0){
+            if(!hasSelected()){
+                $("#reset").removeClass("standard_reset")
+                $("#reset").addClass("reset_pulse")
+                $("#reset").html("No ghost selected!<div class='reset_note'>(say 'force reset' to save & reset)</div>")
+                $("#reset").prop("onclick",null)
+                $("#reset").prop("ondblclick","reset()")
+                reset_voice_status()
+            }
+            else{
+                reset()
+            }
+        }
+        else{
+            reset()
+        }
+    }
+    else if(vtext.startsWith('force reset')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized reset command")

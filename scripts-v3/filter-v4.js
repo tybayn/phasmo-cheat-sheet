@@ -143,13 +143,13 @@ function tristate(elem,ignore_link=false){
     if(!ignore_link){filter(ignore_link)}
 }
 
-function select(elem,ignore_link=false){
+function select(elem,ignore_link=false,internal=false){
     if ($(elem).hasClass("faded")){
         fade(elem,ignore_link)
     }
 
     var on = false
-    if (!ignore_link){
+    if (!ignore_link || internal){
 
         on = $(elem).hasClass("selected")
 
@@ -492,6 +492,7 @@ function filter(ignore_link=false){
 
         ghosts[i].className = ghosts[i].className.replaceAll(" hidden","");
         if (!keep){
+            ghosts[i].className = ghosts[i].className.replaceAll(" selected","");
             ghosts[i].className += " hidden";
         }
         else{
@@ -653,9 +654,66 @@ function filter(ignore_link=false){
             $(checkbox).find(".label").addClass("disabled-text")
         })
     }
-    
+
     setCookie("state",JSON.stringify(state),1)
     if (hasLink && !ignore_link){send_state()}
+}
+
+function autoSelect(){
+
+    if(Object.keys(discord_user).length > 0){
+        var cur_selected = []
+        var ghosts = document.getElementsByClassName("ghost_card")
+        for (var i = 0; i < ghosts.length; i++){
+            if(!ghosts[i].className.includes("faded") && !ghosts[i].className.includes("hidden") && !ghosts[i].className.includes("permhidden")){
+                cur_selected.push(i)
+            }
+        }
+
+        if (cur_selected.length == 1){
+            select(ghosts[cur_selected[0]],internal=true)
+        }
+
+        setCookie("state",JSON.stringify(state),1)
+    }
+    resetResetButton()
+}
+
+function hasSelected(){
+    if(Object.keys(discord_user).length > 0){
+        var ghosts = document.getElementsByClassName("ghost_card")
+        for (var i = 0; i < ghosts.length; i++){
+            if(ghosts[i].className.includes("selected")){
+                return true
+            }
+        }
+    }
+    return false
+}
+
+function checkResetButton(){
+    if(Object.keys(discord_user).length > 0){
+        if(!hasSelected()){
+            $("#reset").removeClass("standard_reset")
+            $("#reset").addClass("reset_pulse")
+            $("#reset").html("No ghost selected!<div class='reset_note'>(double click to save & reset)</div>")
+            $("#reset").attr("onclick",null)
+            $("#reset").attr("ondblclick","reset()")
+        }
+    }
+}
+
+function resetResetButton(){
+    $("#reset").removeClass("reset_pulse")
+    $("#reset").addClass("standard_reset")
+    if(Object.keys(discord_user).length > 0){
+        $("#reset").html("Save & Reset")
+    }
+    else{
+        $("#reset").html("Reset")
+    }
+    $("#reset").attr("ondblclick",null)
+    $("#reset").attr("onclick","reset()")
 }
 
 function showInfo(){

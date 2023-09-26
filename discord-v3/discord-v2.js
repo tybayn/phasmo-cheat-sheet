@@ -1,5 +1,5 @@
 
-discord_user = {}
+let discord_user = {}
 
 function checkLink(){
     params = new URL(window.location.href).searchParams
