@@ -452,8 +452,8 @@
     <script src="scripts-v3/sparkles-v1.js"></script>
     <script>
         $(window).on('load', function() {
-            loadAllAndConnect()
             checkLink()
+            loadAllAndConnect()
             $(function(){$("#wiki-body").load("wiki-v3/wiki-v3.html")});
             if(getCookie("voice_recognition_on")){
                 start_voice()
