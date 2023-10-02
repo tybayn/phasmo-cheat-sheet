@@ -61,3 +61,19 @@
 #discord_unlink_button:hover{
     background-color: #363c44;
 }
+
+#phasmo-stats{
+    background-color: #5865F2;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 5px 0px 5px;
+    display: inline-flex;
+    cursor: pointer;
+    float: right;
+}
+
+#phasmo-stats:hover{
+    background-color: #303785;
+}
