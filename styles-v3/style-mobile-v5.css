@@ -1052,72 +1052,17 @@
         grid-row: 1 / 4;
         display: flex;
         align-content: center;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: flex-end;
-        padding-right: 18px;
+        padding-right: 14px;
         flex-direction: column;
     }
     
-    .ghost_clear .icon{
-        display:inline-block;
-        width: 35px;
-        height:35px;
-        -ms-transform: rotate(45deg); /* IE 9 */
-        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-        transform: rotate(45deg);
+    .card_icon{
+        width: 40px;
         cursor: pointer;
     }
     
-    .ghost_clear .icon:before{
-        content:"";
-        position: absolute;
-        width:6px;
-        height:30px;
-        background-color:rgb(29, 29, 29);
-        left:16px;
-        top:4px;
-    }
-    
-    .ghost_clear .icon:after{
-        content:"";
-        position: absolute;
-        width:30px;
-        height:6px;
-        background-color:rgb(29, 29, 29);
-        left:4px;
-        top:16px;
-    }
-    
-    .ghost_clear .check{
-        display:inline-block;
-        width: 35px;
-        height:35px;
-        -ms-transform: rotate(45deg); /* IE 9 */
-        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-        transform: rotate(45deg);
-        cursor: pointer;
-    }
-    
-    .ghost_clear .check:before{
-        content:"";
-        position: absolute;
-        width:6px;
-        height:25px;
-        background-color:rgb(29, 29, 29);
-        left:20px;
-        top:5px;
-    }
-    
-    .ghost_clear .check:after{
-        content:"";
-        position: absolute;
-        width:16px;
-        height:6px;
-        background-color:rgb(29, 29, 29);
-        left:10px;
-        top:24px;
-    }
-
     .space{
         height:40px;
     }
@@ -1300,5 +1245,9 @@
 
     .footer_link{
         font-size: large;
+    }
+
+    #eye{
+        display: none;
     }
 }

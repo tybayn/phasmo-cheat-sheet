@@ -88,6 +88,10 @@ function parse_speech(vtext){
             vtext = vtext.replace('undo ', "").replace('undue ', "").replace("on do ","").replace("on due ","").replace("clear ","").trim()
             vvalue = 0
         }
+        else if(vtext.startsWith("guess ")){
+            vtext = vtext.replace('guess ', "").trim()
+            vvalue = 3
+        }
         else if(vtext.startsWith("select ") || vtext.startsWith("deselect ")){
             vtext = vtext.replace('deselect ', "").replace('select ', "").trim()
             vvalue = 2
@@ -96,6 +100,12 @@ function parse_speech(vtext){
             vtext = vtext.replace('hide ', "").replace('removes ', "").replace('remove ', "").trim()
             vvalue = -1
         }
+        else if(vtext.startsWith("dead ") || vtext.startsWith("killed by ") || vtext.startsWith("killed ")){
+            vtext = vtext.replace('dead ', "").replace('killed by ', "").replace('killed ', "").trim()
+            vvalue = -2
+        }
+        
+           
 
         // Common fixes to ghosts
         var prevtext = vtext;
@@ -118,12 +128,18 @@ function parse_speech(vtext){
             fade(document.getElementById(smallest_ghost));
             autoSelect()
         }
+        else if (vvalue == 3){
+            guess(document.getElementById(smallest_ghost));
+        }
         else if (vvalue == 2){
             select(document.getElementById(smallest_ghost));
         }
         else if (vvalue == -1){
             remove(document.getElementById(smallest_ghost));
             autoSelect()
+        }
+        else if (vvalue == -2){
+            died(document.getElementById(smallest_ghost));
         }
 
         resetResetButton()

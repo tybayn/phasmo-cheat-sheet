@@ -154,7 +154,7 @@ function select(elem,ignore_link=false,internal=false){
         on = $(elem).hasClass("selected")
 
         for (const [key, value] of Object.entries(state["ghosts"])){ 
-            if(value == 2){
+            if(value == 2 || value == -2){
                 state['ghosts'][key] = 1
                 document.getElementById(key).className = "ghost_card"
             }
@@ -166,8 +166,73 @@ function select(elem,ignore_link=false,internal=false){
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
     }
     else{
+        $(elem).removeClass(["died","guessed","permhidden"])
         $(elem).addClass("selected");
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
+    }
+    setCookie("state",JSON.stringify(state),1)
+    if(!ignore_link){filter(ignore_link)}
+
+}
+
+function guess(elem,ignore_link=false,internal=false){
+    if ($(elem).hasClass("faded")){
+        fade(elem,ignore_link)
+    }
+
+    var on = false
+    if (!ignore_link || internal){
+
+        on = $(elem).hasClass("guessed")
+
+        for (const [key, value] of Object.entries(state["ghosts"])){ 
+            if(value == 3){
+                state['ghosts'][key] = 1
+                document.getElementById(key).className = "ghost_card"
+            }
+        }
+    }
+
+    if (on){
+        $(elem).removeClass("guessed");
+        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+    }
+    else{
+        $(elem).removeClass(["selected","died","permhidden"])
+        $(elem).addClass("guessed");
+        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 3;
+    }
+    setCookie("state",JSON.stringify(state),1)
+    if(!ignore_link){filter(ignore_link)}
+
+}
+
+function died(elem,ignore_link=false,internal=false){
+    if ($(elem).hasClass("faded")){
+        fade(elem,ignore_link)
+    }
+
+    var on = false
+    if (!ignore_link || internal){
+
+        on = $(elem).hasClass("died")
+
+        for (const [key, value] of Object.entries(state["ghosts"])){ 
+            if(value == 2 || value == -2){
+                state['ghosts'][key] = 1
+                document.getElementById(key).className = "ghost_card"
+            }
+        }
+    }
+
+    if (on){
+        $(elem).removeClass("died");
+        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+    }
+    else{
+        $(elem).removeClass(["selected","guessed","permhidden"])
+        $(elem).addClass("died");
+        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -2;
     }
     setCookie("state",JSON.stringify(state),1)
     if(!ignore_link){filter(ignore_link)}
@@ -184,7 +249,7 @@ function fade(elem,ignore_link=false){
         }
     }
     $(elem).toggleClass("faded");
-    $(elem).removeClass("selected");
+    $(elem).removeClass(["selected","guessed","died"])
     $(elem).find(".ghost_name").toggleClass("strike");
     setCookie("state",JSON.stringify(state),1)
     if (hasLink && !ignore_link){send_state()}
@@ -192,8 +257,20 @@ function fade(elem,ignore_link=false){
 
 function remove(elem,ignore_link=false){
     state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -1;
+    $(elem).removeClass(["selected","guessed","died"]);
     $(elem).addClass("permhidden");
     setCookie("state",JSON.stringify(state),1)
+    if (hasLink && !ignore_link){send_state()}
+}
+
+function revive(ignore_link=false){
+    for (const [key, value] of Object.entries(state["ghosts"])){ 
+        if(value == -1){
+            state['ghosts'][key] = 0
+            document.getElementById(key).className = "ghost_card faded"
+            $(`#${key}`).find(".ghost_name").addClass("strike");
+        }
+    }
     if (hasLink && !ignore_link){send_state()}
 }
 
@@ -683,7 +760,7 @@ function hasSelected(){
     if(Object.keys(discord_user).length > 0){
         var ghosts = document.getElementsByClassName("ghost_card")
         for (var i = 0; i < ghosts.length; i++){
-            if(ghosts[i].className.includes("selected")){
+            if(ghosts[i].className.includes("selected") || ghosts[i].className.includes("died")){
                 return true
             }
         }

@@ -36,6 +36,7 @@ function getLink(){
         document.getElementById("discord_name").innerText = discord_user['username']
         document.getElementById("discord_link_date").innerText = `Last Linked: ${discord_user['last_linked']}`
         $("#discord_link_date").removeClass("hidden")
+        $("#discord_instructions").removeClass("hidden")
         document.getElementById("discord_note").innerText = "You have successfully linked your Discord account! In order for your stats to be most accurate, be sure to select the correct number of evidences and mark the correct ghost before hitting 'Save & Reset'"
         document.getElementById("discord_login_button").innerText = "Relink"
         $("#discord_unlink_button").removeClass("hidden")
@@ -55,10 +56,13 @@ function getLink(){
             for (const g in data['ghost_stats']){
                 stats_info += `<div style="padding:0px 5px;${g == 'Unknown'?'color:#555;':''}">${g}: <span style="float:right;">${data['ghost_stats'][g]}</span></div>`
             }
-            stats_info += `</div><a href="https://zero-network.net/phasmo-stats/?discord-id=${discord_user['id']}-${discord_user['avatar']}&username=${discord_user['username']}" target="_blank"><div id="phasmo-stats">My Stats Explorer &#187;</div></a>`
+            stats_info += '</div>'
 
             document.getElementById("discord_stats").innerHTML = stats_info
             document.getElementById("discord_link_status").className = "connected"
+            $('.card_icon_guess').show()
+            $('.card_icon_died').show()
+            $('.discord_voice_commands').show()
         })
         
     } catch(Error){

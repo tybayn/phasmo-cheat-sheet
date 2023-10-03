@@ -17,7 +17,17 @@ const ZNLANG = {
         "not thaye":["knife"],
         "remove obake":["removal vodka","removal bouquet","removal bakay"],
         "sanity late":["huntsman elite","trinity lake"],
-        "monkey paw":["monkeypad","monkeypod","monkey pot","monkey pox","monkeypox","funky pop","funky paw"]
+        "monkey paw":["monkeypad","monkeypod","monkey pot","monkey pox","monkeypox","funky pop","funky paw"],
+        "guess":["guest","gas","gets","gust","guys","cast","guesss"],
+        "ghost guess":["ghost ghost"],
+        "guess jinn":["question"],
+        "guess oni":["ghazwan","guesscony","guesstoni"],
+        "guess goryo":["guessor oil"],
+        "guess myling":["guy smiling"],
+        "guess obake":[
+            "castle bake a","castle rocky","castle bouquet","guessso bakke","castle bait","castle bait",
+            "guessle bouquet","guessle bake","guessle bucket","guessle vodka","guessle bait"
+        ]
     },
     "ghosts":{
         "spirit":[],
@@ -35,22 +45,22 @@ const ZNLANG = {
         "yokai":[],
         "hantu":["on to","onto","on 2","haunt 2","haunt to","haunt two"],
         "goryo":["oreo","grill","gorio","goryeo"],
-        "myling":["smiling","mylink"],
-        "onryo":["on rio",],
+        "myling":["smiling","mylink","a miley"],
+        "onryo":["on rio","monroe","unreal"],
         "the twins":["twins"],
         "raiju":["ride you","rise you","radio"],
-        "obake":["to bake","awake","oh bake","oh backy","opaque","ibaka","a bucket","obey","tobacco","obama care"],
+        "obake":["to bake","awake","oh bake","oh backy","opaque","ibaka","a bucket","obey","tobacco","obama care","hobby"],
         "the mimic":["mimic"],
-        "moroi":[],
+        "moroi":["mauroy"],
         "deogen":["the ocean","deion","dion","deodorant","yeojin","geodon","children","deo","dio","digging"],
         "thaye":["stay","say","they","fe","fae","faye","thing","day","tea"]
     },
     "evidence":{
         "emf 5":["be enough"],
         "dots":["thoughts"],
-        "ultraviolet":["fingerprints","uv"],
+        "ultraviolet":["fingerprints","uv","evie"],
         "freezing":[],
-        "ghost orbs":["orbs","forbes","ghost forbes"],
+        "ghost orbs":["orbs","forbes","ghost forbes","olives"],
         "writing":['righting'],
         "spirit box":["spare box","beer box"]
     },
