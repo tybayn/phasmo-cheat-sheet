@@ -13,6 +13,8 @@ let znid = getCookie("znid")
 
 let hasLink = false;
 let hasDLLink = false;
+let markedDead = false;
+let polled = false;
 
 function waitForElementById(id){
     let wait_for_element = () => {
@@ -148,31 +150,31 @@ function select(elem,ignore_link=false,internal=false){
         fade(elem,ignore_link)
     }
 
-    var on = false
-    if (!ignore_link || internal){
+    var on = $(elem).hasClass("selected")
+    var switch_type = $(elem).hasClass("died")
 
-        on = $(elem).hasClass("selected")
-
-        for (const [key, value] of Object.entries(state["ghosts"])){ 
-            if(value == 2 || value == -2){
-                state['ghosts'][key] = 1
-                document.getElementById(key).className = "ghost_card"
-            }
+    for (const [key, value] of Object.entries(state["ghosts"])){ 
+        if(value == 2 || value == -2){
+            state['ghosts'][key] = 1
+            document.getElementById(key).className = "ghost_card"
         }
     }
 
     if (on){
-        $(elem).removeClass("selected");
+        $(elem).removeClass(["selected"]);
+        if (!ignore_link || internal) markedDead = false
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
     }
     else{
         $(elem).removeClass(["died","guessed","permhidden"])
         $(elem).addClass("selected");
+        if (!ignore_link || internal) markedDead = false
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
     }
     setCookie("state",JSON.stringify(state),1)
-    if(!ignore_link){filter(ignore_link)}
+    if(!ignore_link && !switch_type){filter(ignore_link)}
 
+    if(polled && !ignore_link){resetResetButton()}
 }
 
 function guess(elem,ignore_link=false,internal=false){
@@ -212,42 +214,41 @@ function died(elem,ignore_link=false,internal=false){
         fade(elem,ignore_link)
     }
 
-    var on = false
-    if (!ignore_link || internal){
+    var on = $(elem).hasClass("died")
+    var switch_type = $(elem).hasClass("selected")
 
-        on = $(elem).hasClass("died")
-
-        for (const [key, value] of Object.entries(state["ghosts"])){ 
-            if(value == 2 || value == -2){
-                state['ghosts'][key] = 1
-                document.getElementById(key).className = "ghost_card"
-            }
+    for (const [key, value] of Object.entries(state["ghosts"])){ 
+        if(value == 2 || value == -2){
+            state['ghosts'][key] = 1
+            document.getElementById(key).className = "ghost_card"
         }
     }
 
     if (on){
-        $(elem).removeClass("died");
+        $(elem).removeClass(["selected","died"]);
+        if (!ignore_link || internal) markedDead = false
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
     }
     else{
         $(elem).removeClass(["selected","guessed","permhidden"])
         $(elem).addClass("died");
+        if (!ignore_link || internal) markedDead = true
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -2;
     }
     setCookie("state",JSON.stringify(state),1)
-    if(!ignore_link){filter(ignore_link)}
+    if(!ignore_link && !switch_type){filter(ignore_link)}
 
+    if(polled && !ignore_link){resetResetButton()}
 }
 
 function fade(elem,ignore_link=false){
-    if(!ignore_link){
-        if (state["ghosts"][$(elem).find(".ghost_name")[0].innerText] != 0){
-            state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
-        }
-        else{
-            state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
-        }
+    if (state["ghosts"][$(elem).find(".ghost_name")[0].innerText] != 0){
+        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
     }
+    else{
+        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+    }
+
     $(elem).toggleClass("faded");
     $(elem).removeClass(["selected","guessed","died"])
     $(elem).find(".ghost_name").toggleClass("strike");
@@ -263,7 +264,7 @@ function remove(elem,ignore_link=false){
     if (hasLink && !ignore_link){send_state()}
 }
 
-function revive(ignore_link=false){
+function revive(){
     for (const [key, value] of Object.entries(state["ghosts"])){ 
         if(value == -1){
             state['ghosts'][key] = 0
@@ -271,7 +272,7 @@ function revive(ignore_link=false){
             $(`#${key}`).find(".ghost_name").addClass("strike");
         }
     }
-    if (hasLink && !ignore_link){send_state()}
+    if (hasLink){send_state()}
 }
 
 function filter(ignore_link=false){
@@ -567,10 +568,11 @@ function filter(ignore_link=false){
             }
         }
 
-        ghosts[i].className = ghosts[i].className.replaceAll(" hidden","");
+        $(ghosts[i]).removeClass("hidden")
         if (!keep){
-            ghosts[i].className = ghosts[i].className.replaceAll(" selected","");
-            ghosts[i].className += " hidden";
+            $(ghosts[i]).removeClass(["selected","died","guessed"])
+            $(ghosts[i]).addClass("hidden")
+            state['ghosts'][name] = $(ghosts[i]).hasClass("faded") ? 0 : 1
         }
         else{
             for (var e = 0; e < evidence.length; e++){
@@ -748,7 +750,7 @@ function autoSelect(){
         }
 
         if (cur_selected.length == 1){
-            select(ghosts[cur_selected[0]],internal=true)
+            guess(ghosts[cur_selected[0]],internal=true)
         }
 
         setCookie("state",JSON.stringify(state),1)
@@ -787,7 +789,7 @@ function resetResetButton(){
         $("#reset").html("Save & Reset")
     }
     else{
-        $("#reset").html("Reset")
+        $("#reset").html(polled ? "Waiting for others..." : "Reset")
     }
     $("#reset").attr("ondblclick",null)
     $("#reset").attr("onclick","reset()")
@@ -1017,19 +1019,26 @@ function setSpeedLogicType(){
 }
 
 function reset(skip_continue_session=false){
-    if(!skip_continue_session){continue_session()}
-    state['settings'] = JSON.stringify(user_settings)
-    saveSettings(true)
 
-    fetch("https://zero-network.net/zn/"+znid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
-    .then((response) => {
-        setCookie("znid",znid,-1)
-        setCookie("state",JSON.stringify(state),-1)
-        location.reload()
-    })
-    .catch((response) => {
-        setCookie("znid",znid,-1)
-        setCookie("state",JSON.stringify(state),-1)
-        location.reload()
-    });
+    var ready = true
+    if(!skip_continue_session){
+        ready = continue_session()
+    }
+
+    if(ready){
+        state['settings'] = JSON.stringify(user_settings)
+        saveSettings(true)
+
+        fetch("https://zero-network.net/zn/"+znid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
+        .then((response) => {
+            setCookie("znid",znid,-1)
+            setCookie("state",JSON.stringify(state),-1)
+            location.reload()
+        })
+        .catch((response) => {
+            setCookie("znid",znid,-1)
+            setCookie("state",JSON.stringify(state),-1)
+            location.reload()
+        });
+    }
 }

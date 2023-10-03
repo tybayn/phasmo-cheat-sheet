@@ -20,27 +20,30 @@ function heartbeat(){
 
 function loadAllAndConnect(){
     let loadZN = new Promise((resolve, reject) => {
+        znid = getCookie("znid")
         if(znid && znid!="no-connection-to-server"){
             getLink()
-            $("#session").text(znid)
-            try {
-                heartbeat()
-            } catch (error){
-                console.warn("Possible latency issues!")
-            }
-            if(znid!="no-connection-to-server"){
-                $('#room_id').val("")
-                $('#room_id').css('color',"#CCC")
-                $('#room_id').prop('disabled',false)
-                $('#room_id_create').show()
-                $('#room_id_link').show()
-                $('#link_id_create').show()
-            }
-            else{
-                $('#room_id').val("Can't Connect!")
-                $('#link_id').val("Can't Connect!")
-            }
-            resolve("Loaded existing session")
+            .then(x => {
+                $("#session").text(znid)
+                try {
+                    heartbeat()
+                } catch (error){
+                    console.warn("Possible latency issues!")
+                }
+                if(znid!="no-connection-to-server"){
+                    $('#room_id').val("")
+                    $('#room_id').css('color',"#CCC")
+                    $('#room_id').prop('disabled',false)
+                    $('#room_id_create').show()
+                    $('#room_id_link').show()
+                    $('#link_id_create').show()
+                }
+                else{
+                    $('#room_id').val("Can't Connect!")
+                    $('#link_id').val("Can't Connect!")
+                }
+                resolve("Loaded existing session")
+            })
         }
         else{
             var id;
@@ -136,19 +139,19 @@ function loadAllAndConnect(){
         
             for (const [key, value] of Object.entries(start_state["ghosts"])){ 
                 if (value == 0){
-                    fade(document.getElementById(key));
+                    fade(document.getElementById(key), true, true);
                 }
                 else if (value == -2){
-                    died(document.getElementById(key));
+                    died(document.getElementById(key), true, true);
                 }
                 else if (value == -1){
-                    remove(document.getElementById(key));
+                    remove(document.getElementById(key), true, true);
                 }
                 else if (value == 2){
-                    select(document.getElementById(key));
+                    select(document.getElementById(key), true, true);
                 }
                 else if (value == 3){
-                    guess(document.getElementById(key));
+                    guess(document.getElementById(key), true, true);
                 }
             }
             for (const [key, value] of Object.entries(start_state["evidence"])){ 
@@ -185,7 +188,6 @@ function loadAllAndConnect(){
             resolve("Ghost data loaded")
         })
         .catch(error => {
-            console.log(error)
             loadSettings()
     
             fetch("backup-data/ghosts_backup.json")
@@ -223,8 +225,10 @@ function loadAllAndConnect(){
         })
     })
 
+    
     Promise.all([loadZN,loadData])
     .then(x => {
+        applyPerms()
         auto_link()
     })
 }

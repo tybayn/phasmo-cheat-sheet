@@ -114,6 +114,26 @@ function link_room(){
                 if (incoming_state['action'].toUpperCase() == "CHANGE"){
                     document.getElementById("room_id_note").innerText = `STATUS: Connected (${incoming_state['players']})`
                 }
+                if (incoming_state['action'].toUpperCase() == "POLL"){
+                    polled = true
+                    if(Object.keys(discord_user).length > 0){
+                        if (hasSelected()){
+                            ws.send('{"action":"READY"}')
+                            $("#reset").html("Waiting for others...")
+                        }
+                        else{
+                            $("#reset").removeClass("standard_reset")
+                            $("#reset").addClass("reset_pulse")
+                            $("#reset").html("No ghost selected!<div class='reset_note'>(double click to save & reset)</div>")
+                            $("#reset").attr("onclick",null)
+                            $("#reset").attr("ondblclick","reset()")
+                        }
+                    }
+                    else{
+                        ws.send('{"action":"READY"}')
+                        $("#reset").html("Waiting for others...")
+                    }
+                }
                 return
             }
 
@@ -139,25 +159,42 @@ function link_room(){
             saveSettings()
 
             for (const [key, value] of Object.entries(incoming_state["ghosts"])){ 
-                document.getElementById(key).className = "ghost_card"
-                document.getElementById(key).querySelector(".ghost_name").className = "ghost_name"
-                state['ghosts'][key] = value
-                if (value == 0){
-                    fade(document.getElementById(key),true);
-                    autoSelect()
-                }
-                else if (value == -2){
-                    died(document.getElementById(key),true);
+                if (value == 0 || value == 1){
+                    if(state['ghosts'][key] == 2){
+                        select(document.getElementById(key),true);
+                        if(value == 0)
+                            fade(document.getElementById(key),true);
+                    }
+                    else if(state['ghosts'][key] == -2){
+                        died(document.getElementById(key),true);
+                        if(value == 0)
+                            fade(document.getElementById(key),true);
+                    }
+                    else if(state['ghosts'][key] == -1){
+                        revive()
+                    }
+                    else if(state['ghosts'][key] != 3){
+                        if((value == 0 && state['ghosts'][key] != 0) || (value == 1 && state['ghosts'][key] != 1)){
+                            fade(document.getElementById(key),true);
+                            autoSelect()
+                        }
+                    }
                 }
                 else if (value == -1){
                     remove(document.getElementById(key),true);
                     autoSelect()
                 }
-                else if (value == 2){
-                    select(document.getElementById(key),true);
-                }
-                else if (value == 3){
-                    guess(document.getElementById(key),true);
+                else if(value == 2 || value == -2){
+                    if(markedDead){
+                        if(state['ghosts'][key] != -2){
+                            died(document.getElementById(key),true);
+                        }
+                    }
+                    else{
+                        if(state['ghosts'][key] != 2){
+                            select(document.getElementById(key),true);
+                        }
+                    }
                 }
             }
 
@@ -269,8 +306,12 @@ function link_link(){
 
 function continue_session(){
     if(hasLink){
-        ws.send('{"action":"RESET"}')
+        ws.send('{"action":"READY"}')
+        polled = true
+        $("#reset").html("Waiting for others...")
+        return false
     }
+    return true
 }
 
 function disconnect_room(reset=false,has_status=false){
