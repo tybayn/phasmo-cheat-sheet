@@ -138,11 +138,17 @@ function loadAllAndConnect(){
                 if (value == 0){
                     fade(document.getElementById(key));
                 }
+                else if (value == -2){
+                    died(document.getElementById(key));
+                }
                 else if (value == -1){
                     remove(document.getElementById(key));
                 }
                 else if (value == 2){
                     select(document.getElementById(key));
+                }
+                else if (value == 3){
+                    guess(document.getElementById(key));
                 }
             }
             for (const [key, value] of Object.entries(start_state["evidence"])){ 

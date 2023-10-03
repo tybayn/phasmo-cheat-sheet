@@ -146,12 +146,18 @@ function link_room(){
                     fade(document.getElementById(key),true);
                     autoSelect()
                 }
+                else if (value == -2){
+                    died(document.getElementById(key),true);
+                }
                 else if (value == -1){
                     remove(document.getElementById(key),true);
                     autoSelect()
                 }
                 else if (value == 2){
                     select(document.getElementById(key),true);
+                }
+                else if (value == 3){
+                    guess(document.getElementById(key),true);
                 }
             }
 

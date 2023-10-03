@@ -1740,92 +1740,25 @@ hr{
         grid-row: 1 / 4;
         display: flex;
         align-content: center;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: flex-end;
-        padding-right: 3px;
+        padding-right: 5px;
         flex-direction: column;
     }
-    
-    .ghost_clear .icon{
-        display:inline-block;
-        width: 25px;
-        height:25px;
-        -ms-transform: rotate(45deg); /* IE 9 */
-        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-        transform: rotate(45deg);
-        cursor: pointer;
-    }
-    
-    .ghost_clear .icon:before{
-        content:"";
-        position: absolute;
-        width:3px;
-        height:17px;
-        background-color:rgb(29, 29, 29);
-        left:11px;
-        top:4px;
-    }
-    
-    .ghost_clear .icon:after{
-        content:"";
-        position: absolute;
-        width:17px;
-        height:3px;
-        background-color:rgb(29, 29, 29);
-        left:4px;
-        top:11px;
-    }
-    
-    .ghost_clear .check{
-        display:inline-block;
-        width: 25px;
-        height:25px;
-        -ms-transform: rotate(45deg); /* IE 9 */
-        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-        transform: rotate(45deg);
-        cursor: pointer;
-    }
-    
-    .ghost_clear .check:before{
-        content:"";
-        position: absolute;
-        width:3px;
-        height:13px;
-        background-color:rgb(29, 29, 29);
-        left:15px;
-        top:5px;
-    }
-    
-    .ghost_clear .check:after{
-        content:"";
-        position: absolute;
-        width:8px;
-        height:3px;
-        background-color:rgb(29, 29, 29);
-        left:10px;
-        top:16px;
-    }
 
+    .card_icon{
+        width: 19px;
+        cursor: pointer;
+    }
+    
     .space{
         height:30px;
     }
 }
 
 
-.ghost_clear .icon:hover:before{
-    background-color:#ccc;
-}
-
-.ghost_clear .icon:hover:after{
-    background-color:#ccc;
-}
-
-.ghost_clear .check:hover:before{
-    background-color:#ccc;
-}
-
-.ghost_clear .check:hover:after{
-    background-color:#ccc;
+.card_icon:hover{
+    filter: invert(1);
 }
 
 .sg{
@@ -2023,6 +1956,22 @@ input{
     .footer_link{
         font-size: inherit;
     }
+
+    #eye{
+        position: fixed;
+        right: 10px;
+        bottom: 3px;
+    }
+
+    #eye img{
+        width: 25px;
+        cursor: pointer;
+        filter: invert(1);
+    }
+
+    #eye img:hover{
+        filter: invert(0);
+    }
 }
 
 .label{
@@ -2067,6 +2016,14 @@ input{
 
 .selected {
     background-color: #353 !important;
+}
+
+.guessed {
+    background-color: rgb(89, 85, 34) !important;
+}
+
+.died {
+    background-color: rgb(71, 31, 31) !important;
 }
 
 .dot-flashing {

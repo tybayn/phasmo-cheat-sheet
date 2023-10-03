@@ -13,10 +13,10 @@
         };
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
-    <script src="scripts-v3/ghost_template-v2.js"></script>
-    <link rel="stylesheet" href="styles-v3/style-v5.css"/>
-    <link rel="stylesheet" href="styles-v3/style-mobile-v4.css"/>
-    <link rel="stylesheet" href="discord-v3/discord-v2.css" >
+    <script src="scripts-v3/ghost_template-v3.js"></script>
+    <link rel="stylesheet" href="styles-v3/style-v6.css"/>
+    <link rel="stylesheet" href="styles-v3/style-mobile-v5.css"/>
+    <link rel="stylesheet" href="discord-v3/discord-v3.css" >
     <link rel="stylesheet" href="wiki-v3/wiki-v2.css" >
     <link rel="stylesheet" href="events-v3/events-v1.css" >
     <link rel="stylesheet" href="feed-v3/feed-v1.css" >
@@ -92,11 +92,13 @@
                 </ul>
                 <hr>
                 <strong>Ghosts:</strong>
-                <ul>
+                <ul id="ghost-commands">
                     <li>"ghost not &lt;ghost&gt;" -> Grey out the specified ghost card</li>
                     <li>"ghost clear &lt;ghost&gt;" -> Reset state of a ghost card (excluding hidden cards)</li>
                     <li>"ghost select &lt;ghost&gt;" -> Select/highlight specified ghost card</li>
                     <li>"ghost remove &lt;ghost&gt;" -> Remove the specified ghost card from the screen</li>
+                    <li class="discord_voice_commands" style="display:none;">"ghost guess &lt;ghost&gt;" -> Mark the ghost as an unconfirmed guess</li>
+                    <li class="discord_voice_commands" style="display:none;">"ghost killed by &lt;ghost&gt;" -> Select the ghost AND mark that it killed you</li>
                 </ul>
                 <hr>
                 <strong>Timer:</strong>
@@ -221,6 +223,43 @@
             <div id="discord_name">Link your Discord</div>
             <div id="discord_link_date" class="hidden"></div>
             <div id="discord_stats" class="discord_note">Linking your Discord account will allow you to record what is input into this Cheat Sheet, allowing you to view statistics about ghosts, evidences, and play style!</div>
+            <div id="discord_instructions" class="hidden">
+                <strong>Collecting Additional Stats</strong>
+                <hr>
+                <ul>
+                    <li>
+                        <div class="discord_instructions_title">
+                            <img src="imgs/select.png"><strong>Select the ghost</strong>
+                        </div>
+                        <div class="discord_instructions_text">
+                            Select the actual ghost (shown on the summary board after leaving).
+                            <i>If you died, mark that the ghost "killed" you instead.</i>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="discord_instructions_title">
+                            <img src="imgs/guess.png"><strong>Guess the ghost</strong>
+                        </div>
+                        <div class="discord_instructions_text">
+                            Select what you think the ghost is (not the actual ghost). 
+                            If correct, "select" the ghost. 
+                            If incorrect, keep your guess and "select" the correct ghost.
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="discord_instructions_title">
+                            <img src="imgs/died.png"><strong>Killed by the ghost</strong>
+                        </div>
+                        <div class="discord_instructions_text">
+                            Select the actual ghost <i>AND</i> indicate that the ghost killed you. 
+                        </div>
+                    </li>
+                </ul>
+                <a href="https://zero-network.net/phasmo-stats/?discord-id=${discord_user['id']}-${discord_user['avatar']}&username=${discord_user['username']}" target="_blank"><div id="phasmo-stats">My Stats Explorer &#187;</div></a>
+                <hr>
+            </div>
             <div id="discord_note" class="discord_note grey">(1) Linking does not maintain an active connection to Discord, you will need to relink every 30 days or if you update your Discord profile. (2) Stats provided are purely from the use of this Cheat Sheet. We do not connect to the Phasmophobia game or Steam in any way.</div>
             <div>
                 <a id="discord_link" href="https://discord.com/api/oauth2/authorize?client_id=1077230568422510602&redirect_uri=https%3A%2F%2Fzero-network.net%2Fanalytics%2Fdiscord-connect&response_type=code&scope=identify">
@@ -438,17 +477,19 @@
         <div id="cards" class="cards"><div class="dot-flashing"></div></div>
     </div>
 
+    <div id="eye" onclick="revive()"><img src="imgs/eye.png"></div>
+
     <script src="scripts-v3/metronome-v2.js"></script>
     <script src="scripts-v3/timer-v1.js"></script>
-    <script src="discord-v3/discord-v3.js"></script>
+    <script src="discord-v3/discord-v4.js"></script>
     <script src="wiki-v3/wiki-v1.js"></script>
-    <script src="scripts-v3/filter-v4.js"></script>
-    <script src="scripts-v3/wslink-v4.js"></script>
-    <script src="scripts-v3/zn-v5.js"></script>
+    <script src="scripts-v3/filter-v5.js"></script>
+    <script src="scripts-v3/wslink-v5.js"></script>
+    <script src="scripts-v3/zn-v6.js"></script>
     <script src="events-v3/events-v1.js"></script>
     <script src="feed-v3/feed-v1.js"></script>
-    <script src="scripts-v3/voice_en-v2.js"></script>
-    <script src="scripts-v3/voice_recognition-v5.js"></script>
+    <script src="scripts-v3/voice_en-v3.js"></script>
+    <script src="scripts-v3/voice_recognition-v6.js"></script>
     <script src="scripts-v3/sparkles-v1.js"></script>
     <script>
         $(window).on('load', function() {
