@@ -59,6 +59,7 @@ function getLink(){
             stats_info += '</div>'
 
             document.getElementById("discord_stats").innerHTML = stats_info
+            document.getElementById("discord-stats-link").href = `https://zero-network.net/phasmo-stats/?discord-id=${discord_user['id']}-${discord_user['avatar']}&username=${discord_user['username']}`
             document.getElementById("discord_link_status").className = "connected"
             $('.card_icon_guess').show()
             $('.card_icon_died').show()
