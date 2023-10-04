@@ -742,14 +742,23 @@ function autoSelect(){
 
     if(Object.keys(discord_user).length > 0){
         var cur_selected = []
+        var has_selected = false
         var ghosts = document.getElementsByClassName("ghost_card")
         for (var i = 0; i < ghosts.length; i++){
-            if(!ghosts[i].className.includes("faded") && !ghosts[i].className.includes("hidden") && !ghosts[i].className.includes("permhidden")){
+            if(ghosts[i].className.includes("died") || ghosts[i].className.includes("selected") || ghosts[i].className.includes("guessed")){
+                has_selected = true
+                break
+            }
+            if(
+                !ghosts[i].className.includes("faded") && 
+                !ghosts[i].className.includes("hidden") && 
+                !ghosts[i].className.includes("permhidden")
+            ){
                 cur_selected.push(i)
             }
         }
 
-        if (cur_selected.length == 1){
+        if (!has_selected && cur_selected.length == 1){
             guess(ghosts[cur_selected[0]],internal=true)
         }
 

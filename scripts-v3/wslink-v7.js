@@ -195,6 +195,7 @@ function link_room(){
                             select(document.getElementById(key),true);
                         }
                     }
+                    autoSelect()
                 }
             }
 
