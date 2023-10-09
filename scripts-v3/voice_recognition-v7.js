@@ -20,6 +20,16 @@ const levenshtein_distance = (str1 = '', str2 = '') => {
     return track[str2.length][str1.length];
  };
 
+ $.fn.isInViewport = function () {
+    let elementTop = $(this).offset().top;
+    let elementBottom = elementTop + $(this).outerHeight();
+  
+    let viewportTop = $(window).scrollTop();
+    let viewportBottom = viewportTop + window.innerHeight;
+  
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+}
+
 function reset_voice_status(){
     setTimeout(function(){
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic.png)";
@@ -171,11 +181,13 @@ function parse_speech(vtext){
         }
         else if (vvalue == 3){
             guess(document.getElementById(smallest_ghost));
-            document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
+            if(!$(document.getElementById(smallest_ghost)).isInViewport())
+                document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
         }
         else if (vvalue == 2){
             select(document.getElementById(smallest_ghost));
-            document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
+            if(!$(document.getElementById(smallest_ghost)).isInViewport())
+                document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
         }
         else if (vvalue == -1){
             remove(document.getElementById(smallest_ghost));
@@ -183,7 +195,8 @@ function parse_speech(vtext){
         }
         else if (vvalue == -2){
             died(document.getElementById(smallest_ghost));
-            document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
+            if(!$(document.getElementById(smallest_ghost)).isInViewport())
+                document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
         }
 
         resetResetButton()
