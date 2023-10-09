@@ -242,23 +242,28 @@ function died(elem,ignore_link=false,internal=false){
 }
 
 function fade(elem,ignore_link=false){
+
+    $(elem).removeClass(["selected","guessed","died"])
+
     if (state["ghosts"][$(elem).find(".ghost_name")[0].innerText] != 0){
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
+        $(elem).addClass("faded");
+        $(elem).find(".ghost_name").addClass("strike");
     }
     else{
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+        $(elem).removeClass("faded");
+        $(elem).find(".ghost_name").removeClass("strike");
     }
 
-    $(elem).toggleClass("faded");
-    $(elem).removeClass(["selected","guessed","died"])
-    $(elem).find(".ghost_name").toggleClass("strike");
     setCookie("state",JSON.stringify(state),1)
     if (!ignore_link){filter(ignore_link)}
 }
 
 function remove(elem,ignore_link=false){
     state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -1;
-    $(elem).removeClass(["selected","guessed","died"]);
+    $(elem).find(".ghost_name").removeClass("strike");
+    $(elem).removeClass(["selected","guessed","died","faded"]);
     $(elem).addClass("permhidden");
     setCookie("state",JSON.stringify(state),1)
     if (!ignore_link){filter(ignore_link)}
@@ -269,7 +274,7 @@ function revive(){
         if(value == -1){
             state['ghosts'][key] = 0
             document.getElementById(key).className = "ghost_card faded"
-            $(`#${key}`).find(".ghost_name").addClass("strike");
+            $(document.getElementById(key)).find(".ghost_name").addClass("strike");
         }
     }
     if (hasLink){send_state()}
