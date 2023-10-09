@@ -7,7 +7,7 @@ const all_speed = ["Slow","Normal","Fast"]
 const all_sanity = ["Late","Average","Early","VeryEarly"]
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{}}
-var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm":0}
+var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0}
 
 let znid = getCookie("znid")
 
@@ -253,7 +253,7 @@ function fade(elem,ignore_link=false){
     $(elem).removeClass(["selected","guessed","died"])
     $(elem).find(".ghost_name").toggleClass("strike");
     setCookie("state",JSON.stringify(state),1)
-    if (hasLink && !ignore_link){send_state()}
+    if (!ignore_link){filter(ignore_link)}
 }
 
 function remove(elem,ignore_link=false){
@@ -261,7 +261,7 @@ function remove(elem,ignore_link=false){
     $(elem).removeClass(["selected","guessed","died"]);
     $(elem).addClass("permhidden");
     setCookie("state",JSON.stringify(state),1)
-    if (hasLink && !ignore_link){send_state()}
+    if (!ignore_link){filter(ignore_link)}
 }
 
 function revive(){
@@ -285,8 +285,8 @@ function filter(ignore_link=false){
 
     // Get values of checkboxes
     var base_speed = 1.7;
+    var ghost_array = [];
     var evi_array = [];
-    
     var not_evi_array = [];
     var spe_array = [];
     var san_array = [];
@@ -330,34 +330,41 @@ function filter(ignore_link=false){
     for (var i = 0; i < all_evidence.length; i++){
         var checkbox = document.getElementById(all_evidence[i]);
         $(checkbox).removeClass("block")
-        $(checkbox).find("#checkbox").removeClass(["block","disabled"])
+        $(checkbox).find("#checkbox").removeClass(["block","disabled","faded"])
         $(checkbox).find(".label").removeClass("disabled-text")
     }
-    // Filter other evidences
+    // Filter other speeds
     for (var i = 0; i < all_speed.length; i++){
         var checkbox = document.getElementById(all_speed[i]);
         $(checkbox).removeClass("block")
-        $(checkbox).find("#checkbox").removeClass(["block","disabled"])
+        $(checkbox).find("#checkbox").removeClass(["block","disabled","faded"])
         $(checkbox).find(".label").removeClass("disabled-text")
     }
-    // Filter other evidences
+    // Filter other sanities
     for (var i = 0; i < all_sanity.length; i++){
         var checkbox = document.getElementById(all_sanity[i]);
         $(checkbox).removeClass("block")
-        $(checkbox).find("#checkbox").removeClass(["block","disabled"])
+        $(checkbox).find("#checkbox").removeClass(["block","disabled","faded"])
         $(checkbox).find(".label").removeClass("disabled-text")
     }
 
     // Get all ghosts
     var ghosts = document.getElementsByClassName("ghost_card")
     var keep_evidence = new Set();
+    var fade_evidence = new Set();
+    var not_fade_evidence = new Set();
     var keep_speed = new Set();
+    var fade_speed = new Set();
+    var not_fade_speed = new Set();
     var keep_sanity = new Set();
+    var fade_sanity = new Set();
+    var not_fade_sanity = new Set();
     var mimic_evi = []
     var mimic_nm_evi = ""
 
     for (var i = 0; i < ghosts.length; i++){
         var keep = true;
+        var marked_not = $(ghosts[i]).hasClass("faded") || $(ghosts[i]).hasClass("permhidden")
         var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
         var evi_objects = ghosts[i].getElementsByClassName("ghost_evidence_item")
         var evidence = []
@@ -543,28 +550,60 @@ function filter(ignore_link=false){
         if (keep){
             if(min_speed < base_speed || name == "The Mimic"){
                 keep_speed.add('Slow')
+                if (marked_not)
+                    fade_speed.add('Slow')
+                else
+                    not_fade_speed.add('Slow')
             }
             if ((speed_type == "range" && min_speed <= base_speed && base_speed <= max_speed) || name == "The Mimic"){
                 keep_speed.add('Normal')
+                if (marked_not)
+                    fade_speed.add('Normal')
+                else
+                    not_fade_speed.add('Normal')
             }
             else if(min_speed === base_speed || max_speed === base_speed){
                 keep_speed.add('Normal')
+                if (marked_not)
+                    fade_speed.add('Normal')
+                else
+                    not_fade_speed.add('Normal')
             }
             if(max_speed > base_speed || name == "The Mimic"){
                 keep_speed.add('Fast')
+                if (marked_not)
+                    fade_speed.add('Fast')
+                else
+                    not_fade_speed.add('Fast')
             }
 
             if(sanity[0] > san_lookup['Late'] || sanity[1] > san_lookup['Late']){
                 keep_sanity.add('Late')
+                if (marked_not)
+                    fade_sanity.add('Late')
+                else
+                    not_fade_sanity.add('Late')
             }
             if(sanity[0] > san_lookup['Average'] || sanity[1] > san_lookup['Average']){
                 keep_sanity.add('Average')
+                if (marked_not)
+                    fade_sanity.add('Average')
+                else
+                    not_fade_sanity.add('Average')
             }
             if(sanity[0] > san_lookup['Early'] || sanity[1] > san_lookup['Early']){
                 keep_sanity.add('Early')
+                if (marked_not)
+                    fade_sanity.add('Early')
+                else
+                    not_fade_sanity.add('Early')
             }
             if(sanity[0] > san_lookup['VeryEarly'] || sanity[1] > san_lookup['VeryEarly']){
                 keep_sanity.add('VeryEarly')
+                if (marked_not)
+                    fade_sanity.add('VeryEarly')
+                else
+                    not_fade_sanity.add('VeryEarly')
             }
         }
 
@@ -575,8 +614,15 @@ function filter(ignore_link=false){
             state['ghosts'][name] = $(ghosts[i]).hasClass("faded") ? 0 : 1
         }
         else{
+            ghost_array.push(name)
             for (var e = 0; e < evidence.length; e++){
                 keep_evidence.add(evidence[e])
+                if (marked_not){
+                    fade_evidence.add(evidence[e])
+                }
+                else{
+                    not_fade_evidence.add(evidence[e])
+                }
             }
         }
     }
@@ -587,7 +633,7 @@ function filter(ignore_link=false){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
-                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
                     $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
                     $(checkbox).find(".label").addClass("disabled-text")
                     $(checkbox).find(".label").removeClass("strike")
@@ -603,7 +649,7 @@ function filter(ignore_link=false){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
-                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
                     $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
                     $(checkbox).find(".label").addClass("disabled-text")
                     $(checkbox).find(".label").removeClass("strike")
@@ -626,7 +672,7 @@ function filter(ignore_link=false){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
-                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
                     $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
                     $(checkbox).find(".label").addClass("disabled-text")
                     $(checkbox).find(".label").removeClass("strike")
@@ -638,7 +684,7 @@ function filter(ignore_link=false){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
-                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
                     $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
                     $(checkbox).find(".label").addClass("disabled-text")
                     $(checkbox).find(".label").removeClass("strike")
@@ -654,7 +700,7 @@ function filter(ignore_link=false){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
-                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
                     $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
                     $(checkbox).find(".label").addClass("disabled-text")
                     $(checkbox).find(".label").removeClass("strike")
@@ -677,7 +723,7 @@ function filter(ignore_link=false){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
-                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
                     $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
                     $(checkbox).find(".label").addClass("disabled-text")
                     $(checkbox).find(".label").removeClass("strike")
@@ -689,7 +735,7 @@ function filter(ignore_link=false){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
-                    $(checkbox).find("#checkbox").removeClass(["good","bad"])
+                    $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
                     $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
                     $(checkbox).find(".label").addClass("disabled-text")
                     $(checkbox).find(".label").removeClass("strike")
@@ -702,17 +748,78 @@ function filter(ignore_link=false){
         all_evidence.filter(evi => evi != 'Ghost Orbs').forEach(function(item){
             var checkbox = document.getElementById(item);
             $(checkbox).addClass("block")
-            $(checkbox).find("#checkbox").removeClass(["good","bad"])
+            $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
             $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
             $(checkbox).find(".label").addClass("disabled-text")
             $(checkbox).find(".label").removeClass("strike")
         })
     }
 
+    // If one ghost, remove fade, remove permhidden
+    if(ghost_array.length == 1){
+        if($(`#${ghost_array[0]}`).hasClass("faded")){
+            fade(document.getElementById(ghost_array[0]),ignore_link)
+            return
+        }
+        if($(`#${ghost_array[0]}`).hasClass("permhidden")){
+            $(`#${ghost_array[0]}`).removeClass("permhidden")
+            filter(ignore_link)
+            return
+        }
+    }
+
+    // Loop through and fade evidence that needs to be faded
+    fade_evidence.forEach(function(item){
+        if(
+            fade_evidence.has(item) && 
+            !not_fade_evidence.has(item) &&
+            keep_evidence.has(item) &&
+            !evi_array.includes(item) &&
+            !not_evi_array.includes(item)
+        ){
+            var checkbox = document.getElementById(item);
+            $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
+            $(checkbox).find("#checkbox").addClass(["neutral","faded"])
+            $(checkbox).find(".label").addClass("disabled-text")
+            $(checkbox).find(".label").removeClass("strike")
+        }
+    })
+
+    fade_speed.forEach(function(item){
+        if(
+            fade_speed.has(item) && 
+            !not_fade_speed.has(item) && 
+            keep_speed.has(item) &&
+            !spe_array.includes(item)
+        ){
+            var checkbox = document.getElementById(item);
+            $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
+            $(checkbox).find("#checkbox").addClass(["neutral","faded"])
+            $(checkbox).find(".label").addClass("disabled-text")
+            $(checkbox).find(".label").removeClass("strike")
+        }
+    })
+
+    fade_sanity.forEach(function(item){
+        if(
+            fade_sanity.has(item) && 
+            !not_fade_sanity.has(item) && 
+            keep_sanity.has(item) &&
+            !san_array.includes(item)
+        ){
+            var checkbox = document.getElementById(item);
+            $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
+            $(checkbox).find("#checkbox").addClass(["neutral","faded"])
+            $(checkbox).find(".label").addClass("disabled-text")
+            $(checkbox).find(".label").removeClass("strike")
+        }
+    })
+
+    // Monkey Checkbox checks
     var monkey_checkbox = document.getElementById(monkey_evi);
     $(monkey_checkbox).addClass("block")
-    $(monkey_checkbox).find("#checkbox").removeClass(["good","bad"])
-    $(monkey_checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
+    $(monkey_checkbox).find("#checkbox").removeClass(["good","bad","faded"])
+    $(monkey_checkbox).find("#checkbox").addClass(["neutral","disabled"])
     $(monkey_checkbox).find(".label").addClass("disabled-text")
     $(monkey_checkbox).find(".label").removeClass("strike")
 
@@ -946,6 +1053,7 @@ function saveSettings(reset = false){
     user_settings['speed_logic_type'] = document.getElementById("speed_logic_type").checked ? 1 : 0;
     user_settings['bpm_type'] = document.getElementById("bpm_type").checked ? 1 : 0;
     user_settings['bpm'] = reset ? 0 : parseInt(document.getElementById('input_bpm').innerHTML.split("<br>")[0])
+    user_settings['domo_side'] = $("#domovoi").hasClass("domovoi-flip") ? 1 : 0;
     setCookie("settings",JSON.stringify(user_settings),30)
 }
 
@@ -953,7 +1061,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0}
+        user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0}
     }
     document.getElementById("modifier_volume").value = user_settings['volume'] ?? 50
     document.getElementById("offset_value").innerText = ` ${user_settings['offset'] ?? 0}% `
@@ -962,6 +1070,10 @@ function loadSettings(){
     document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] ?? 0 == 1
     document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] ?? 0 == 1
     document.getElementById("bpm_type").checked = user_settings['bpm_type'] ?? 0 == 1
+    if (user_settings['domo_side'] == 1){
+        $("#domovoi").addClass("domovoi-flip")
+        $("#domovoi-img").addClass("domovoi-img-flip")
+    }
 
     if ((user_settings['bpm'] ?? 0) > 0){
         document.getElementById('input_bpm').innerHTML = `${user_settings['bpm']}<br>bpm`
