@@ -213,18 +213,18 @@ function link_room(){
                     if(prev_evidence[key] == -2 && !new_mp){
                         monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"),true)
                     }
-                    while (value != {"good":1,"bad":-1,"neutral":0}[document.getElementById(key).querySelector("#checkbox").classList[0]]){
+                    while (!$(document.getElementById(key).querySelector("#checkbox")).hasClass(["bad","neutral","good"][value + 1])){
                         tristate(document.getElementById(key),true);
                     }
                 }
             }
             for (const [key, value] of Object.entries(incoming_state["speed"])){ 
-                while (value != {"good":1,"neutral":0}[document.getElementById(key).querySelector("#checkbox").classList[0]]){
+                while (!$(document.getElementById(key).querySelector("#checkbox")).hasClass(["neutral","good"][value])){
                     dualstate(document.getElementById(key),true);
                 }
             }
             for (const [key, value] of Object.entries(incoming_state["sanity"])){ 
-                while (value != {"good":1,"neutral":0}[document.getElementById(key).querySelector("#checkbox").classList[0]]){
+                while (!$(document.getElementById(key).querySelector("#checkbox")).hasClass(["neutral","good"][value])){
                     dualstate(document.getElementById(key),true,true);
                 }
             }

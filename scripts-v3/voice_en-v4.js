@@ -27,11 +27,12 @@ const ZNLANG = {
         "guess obake":[
             "castle bake a","castle rocky","castle bouquet","guessso bakke","castle bait","castle bait",
             "guessle bouquet","guessle bake","guessle bucket","guessle vodka","guessle bait"
-        ]
+        ],
+        "domo":["demo"]
     },
     "ghosts":{
         "spirit":[],
-        "wraith":["straight","race"],
+        "wraith":["straight","race","reef"],
         "phantom":[],
         "poltergeist":[],
         "banshee":[],
