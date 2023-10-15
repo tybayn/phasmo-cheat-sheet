@@ -13,9 +13,9 @@
         };
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
-    <script src="scripts-v3/ghost_template-v4.js"></script>
-    <link rel="stylesheet" href="styles-v3/style-v7.css"/>
-    <link rel="stylesheet" href="styles-v3/style-mobile-v5.css"/>
+    <script src="scripts-v3/ghost_template-v5.js"></script>
+    <link rel="stylesheet" href="styles-v3/style-v8.css"/>
+    <link rel="stylesheet" href="styles-v3/style-mobile-v6.css"/>
     <link rel="stylesheet" href="discord-v3/discord-v3.css" >
     <link rel="stylesheet" href="wiki-v3/wiki-v2.css" >
     <link rel="stylesheet" href="events-v3/events-v1.css" >
@@ -83,6 +83,9 @@
                     
                     <li>"speed &lt;speed&gt;" -> Mark specified speed</li>
                     <li>"speed clear &lt;speed&gt;" -> Reset state of specified speed</li>
+                    <li>"speed [has] line of sight" -> Mark having standard line-of-sight speed up</li>
+                    <li>"speed not line of sight" -> Mark no standard line-of-sight speed up</li>
+                    <li>"speed clear line of sight" -> Reset line-of-sight filter</li>
                 </ul>
                 <hr>
                 <strong>Hunt Sanity:</strong>
@@ -444,6 +447,11 @@
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
                         <div class="label">Fast</div>
                     </button>
+                    <hr>
+                    <button id="LOS" class="tricheck white" name="los" onclick="tristate(this);autoSelect()" value="LOS">
+                        <div id="checkbox" class="neutral"><span class="icon"></span></div>
+                        <div class="label label-font-s">Std. LOS Speed Up</div>
+                    </button>
                 </div>
                 <div class="hunt_sanity_title yfont white">
                     Hunt Sanity
@@ -479,7 +487,7 @@
 
     <div id="domovoi" style="display: none;">
         <div id="domovoi-text" style="display: none;">Hello! I am Domo!</div>
-        <img id="domovoi-img" src="imgs/domovoi.png" onmouseenter="domovoi_show_last()" onmouseleave="domovoi_hide_last()">
+        <img id="domovoi-img" src="imgs/domovoi.png" onmouseenter="domovoi_show_last()" onmouseleave="domovoi_hide_last()" ondblclick="domovoi_print_logs()">
     </div>
     <div id="eye" onclick="revive()"><img src="imgs/eye.png"></div>
 
@@ -487,13 +495,13 @@
     <script src="scripts-v3/timer-v1.js"></script>
     <script src="discord-v3/discord-v6.js"></script>
     <script src="wiki-v3/wiki-v1.js"></script>
-    <script src="scripts-v3/filter-v8.js"></script>
-    <script src="scripts-v3/wslink-v8.js"></script>
-    <script src="scripts-v3/zn-v7.js"></script>
+    <script src="scripts-v3/filter-v9.js"></script>
+    <script src="scripts-v3/wslink-v9.js"></script>
+    <script src="scripts-v3/zn-v8.js"></script>
     <script src="events-v3/events-v1.js"></script>
     <script src="feed-v3/feed-v1.js"></script>
-    <script src="scripts-v3/voice_en-v4.js"></script>
-    <script src="scripts-v3/voice_recognition-v7.js"></script>
+    <script src="scripts-v3/voice_en-v5.js"></script>
+    <script src="scripts-v3/voice_recognition-v8.js"></script>
     <script src="scripts-v3/sparkles-v1.js"></script>
     <script>
         $(window).on('load', function() {

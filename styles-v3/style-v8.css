@@ -1627,7 +1627,7 @@ hr{
         width: 17px;
     }
 
-    .ghost_nightmare_evidence, .ghost_hunt_high, .ghost_hunt_low{
+    .ghost_nightmare_evidence, .ghost_hunt_high, .ghost_hunt_low, .ghost_has_los{
         display: none;
     }
 
@@ -1788,6 +1788,11 @@ input{
 }
 
 @media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
+
+    .label-font-s{
+        font-size: 15px;
+    }
+    
     .tricheck{
         border: 0;
         background:none;
@@ -2028,6 +2033,7 @@ input{
 
     #domovoi-img{
         height: 25px;
+        cursor: pointer;
     }
 
     .domovoi-img-flip{

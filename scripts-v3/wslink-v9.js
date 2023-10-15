@@ -228,6 +228,12 @@ function link_room(){
                     dualstate(document.getElementById(key),true,true);
                 }
             }
+
+            if(incoming_state.hasOwnProperty("los")){
+                while (!$(document.getElementById("LOS").querySelector("#checkbox")).hasClass(["neutral","bad","good"][incoming_state["los"]+1])){
+                    tristate(document.getElementById("LOS"),true,true);
+                }
+            }
             
             filter(true)
             autoSelect()
@@ -364,6 +370,7 @@ function send_state() {
         var outgoing_state = JSON.stringify({
             'evidence': state['evidence'],
             'speed': state['speed'],
+            'los': state['los'],
             'sanity': state['sanity'],
             'ghosts': state['ghosts'],
             'settings': {

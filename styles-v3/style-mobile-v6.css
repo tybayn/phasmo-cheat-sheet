@@ -272,7 +272,7 @@
         padding: 8px;
         box-shadow: 0px -15px 20px 0px #000;
         z-index: 2;   
-        height: 900px;
+        height: 925px;
     }
 
     .tools-filter-buttons{
@@ -458,8 +458,8 @@
         flex-direction: row;
         flex-wrap: wrap;
         align-content: flex-start;
-        justify-content: space-evenly;
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-start;
         z-index: 2;
         box-shadow: inset 0 0 10px #161615;
         background: rgba(0,0,0,0.25);
@@ -1070,6 +1070,10 @@
 
 @media screen and (pointer: coarse) and (max-device-width: 600px) {
     
+    .label-font-s{
+        font-size: 27px;
+    }
+
     .tricheck{
         border: 0;
         width: 33.3%;

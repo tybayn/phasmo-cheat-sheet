@@ -6,7 +6,7 @@ const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","
 const all_speed = ["Slow","Normal","Fast"]
 const all_sanity = ["Late","Average","Early","VeryEarly"]
 
-var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{}}
+var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{}}
 var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0}
 
 let znid = getCookie("znid")
@@ -15,6 +15,7 @@ let hasLink = false;
 let hasDLLink = false;
 let markedDead = false;
 let polled = false;
+let filter_locked = false;
 
 function waitForElementById(id){
     let wait_for_element = () => {
@@ -122,19 +123,32 @@ function dualstate(elem,ignore_link=false,radio=false){
 function tristate(elem,ignore_link=false){
     var checkbox = $(elem).find("#checkbox");
     var label = $(elem).find(".label");
+    var id  = $(elem).attr("id")
 
-    if (checkbox.hasClass("disabled")){
+    if (checkbox.hasClass("disabled") || checkbox.hasClass("block")){
         return;
     }
 
     if (checkbox.hasClass("neutral")){
         checkbox.removeClass("neutral")
-        checkbox.addClass("good")
+        if(id == "LOS" && all_not_los())
+        {
+            checkbox.addClass("bad")
+            label.addClass("strike")
+        }
+        else
+            checkbox.addClass("good")
     }
     else if (checkbox.hasClass("good")){
         checkbox.removeClass("good")
-        checkbox.addClass("bad")
-        label.addClass("strike")
+        if(id == "LOS" && all_los()){
+            checkbox.addClass("neutral")
+        }
+        else{
+            checkbox.addClass("bad")
+            label.addClass("strike")
+        }
+        
     }
     else if (checkbox.hasClass("bad")){
         checkbox.removeClass("bad")
@@ -287,6 +301,7 @@ function filter(ignore_link=false){
         state["evidence"][all_evidence[i]] = 0
     }
     state["sanity"] = {"Late":0,"Average":0,"Early":0,"VeryEarly":0}
+    state["los"] = -1
 
     // Get values of checkboxes
     var base_speed = 1.7;
@@ -305,6 +320,8 @@ function filter(ignore_link=false){
     var sanity_checkboxes = document.querySelectorAll('[name="hunt-sanity"] .good');
     var num_evidences = document.getElementById("num_evidence").value
     var speed_logic_type = document.getElementById("speed_logic_type").checked ? 1 : 0;
+    var speed_has_los = $("#LOS").find("#checkbox").hasClass("good") ? 1 : $("#LOS").find("#checkbox").hasClass("bad") ? 0 : -1;
+    state['los'] = speed_has_los
 
     for (var i = 0; i < good_checkboxes.length; i++) {
         evi_array.push(good_checkboxes[i].parentElement.value);
@@ -369,6 +386,7 @@ function filter(ignore_link=false){
 
     for (var i = 0; i < ghosts.length; i++){
         var keep = true;
+        var loskeep = true;
         var marked_not = $(ghosts[i]).hasClass("faded") || $(ghosts[i]).hasClass("permhidden")
         var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
         var evi_objects = ghosts[i].getElementsByClassName("ghost_evidence_item")
@@ -376,6 +394,7 @@ function filter(ignore_link=false){
         for (var j = 0; j < evi_objects.length; j++){evidence.push(evi_objects[j].textContent)}
         var nm_evidence = ghosts[i].getElementsByClassName("ghost_nightmare_evidence")[0].textContent;
         var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
+        var has_los = parseInt(ghosts[i].getElementsByClassName("ghost_has_los")[0].textContent)
         var sanity = [
             parseInt(ghosts[i].getElementsByClassName("ghost_hunt_low")[0].textContent),
             parseInt(ghosts[i].getElementsByClassName("ghost_hunt_high")[0].textContent)
@@ -390,6 +409,11 @@ function filter(ignore_link=false){
         //Check for monkey paw filter
         if (evidence.includes(monkey_evi)){
             keep = false
+        }
+
+        //Check for los filter
+        if (name != "The Mimic" && speed_has_los != -1 && speed_has_los != has_los){
+            loskeep = false
         }
         
         // Check for evidences
@@ -552,7 +576,7 @@ function filter(ignore_link=false){
         }
 
         // Check if speed is being kept
-        if (keep){
+        if (keep && loskeep){
             if(min_speed < base_speed || name == "The Mimic"){
                 keep_speed.add('Slow')
                 if (marked_not)
@@ -612,10 +636,13 @@ function filter(ignore_link=false){
             }
         }
 
-        $(ghosts[i]).removeClass("hidden")
-        if (!keep){
+        $(ghosts[i]).removeClass(["hidden","losfiltered"])
+        if (!keep || !loskeep){
             $(ghosts[i]).removeClass(["selected","died","guessed"])
             $(ghosts[i]).addClass("hidden")
+            if (!loskeep && keep){
+                $(ghosts[i]).addClass("losfiltered")
+            }
             state['ghosts'][name] = $(ghosts[i]).hasClass("faded") ? 0 : 1
         }
         else{
@@ -633,7 +660,7 @@ function filter(ignore_link=false){
     }
 
     if (num_evidences == "3"){
-        if (evi_array.length > 0){
+        if (evi_array.length >= 0){
             all_evidence.filter(evi => !keep_evidence.has(evi)).forEach(function(item){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
@@ -821,12 +848,14 @@ function filter(ignore_link=false){
     })
 
     // Monkey Checkbox checks
-    var monkey_checkbox = document.getElementById(monkey_evi);
-    $(monkey_checkbox).addClass("block")
-    $(monkey_checkbox).find("#checkbox").removeClass(["good","bad","faded"])
-    $(monkey_checkbox).find("#checkbox").addClass(["neutral","disabled"])
-    $(monkey_checkbox).find(".label").addClass("disabled-text")
-    $(monkey_checkbox).find(".label").removeClass("strike")
+    if(monkey_evi){
+        var monkey_checkbox = document.getElementById(monkey_evi);
+        $(monkey_checkbox).addClass("block")
+        $(monkey_checkbox).find("#checkbox").removeClass(["good","bad","faded"])
+        $(monkey_checkbox).find("#checkbox").addClass(["neutral","disabled"])
+        $(monkey_checkbox).find(".label").addClass("disabled-text")
+        $(monkey_checkbox).find(".label").removeClass("strike")
+    }
 
     if (evi_array.length > 0 || not_evi_array.length > 0){
         all_speed.filter(spe => !keep_speed.has(spe)).forEach(function(item){
@@ -848,6 +877,34 @@ function filter(ignore_link=false){
 
     setCookie("state",JSON.stringify(state),1)
     if (hasLink && !ignore_link){send_state()}
+}
+
+function all_los(){
+    var ghosts = document.getElementsByClassName("ghost_card")
+    for (var i = 0; i < ghosts.length; i++){
+        var has_los = parseInt(ghosts[i].getElementsByClassName("ghost_has_los")[0].textContent)
+        if(
+            !has_los && (!$(ghosts[i]).hasClass("hidden") || ($(ghosts[i]).hasClass("hidden") && $(ghosts[i]).hasClass("losfiltered")))
+        ){
+            return false
+        }
+    }
+    
+    return true
+}
+
+function all_not_los(){
+    var ghosts = document.getElementsByClassName("ghost_card")
+    for (var i = 0; i < ghosts.length; i++){
+        var has_los = parseInt(ghosts[i].getElementsByClassName("ghost_has_los")[0].textContent)
+        if(
+            has_los && (!$(ghosts[i]).hasClass("hidden") || ($(ghosts[i]).hasClass("hidden") && $(ghosts[i]).hasClass("losfiltered")))
+        ){
+            return false
+        }
+    }
+    
+    return true
 }
 
 function autoSelect(){
