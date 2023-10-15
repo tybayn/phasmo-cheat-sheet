@@ -9,7 +9,11 @@ const ZNLANG = {
         "ghost shade":["goshen"],
         "ghost obake":["coastal bouquet"],
         "ghost not the mimic":["does not mimic"],
-        "select obake":["selecto bouquet","selecto bucket","selector buckeye","selector blocker","selectos bucket","selective walker","selecto bakke"],
+        "select obake":[
+            "selecto bouquet","selecto bucket","selector buckeye","selector blocker",
+            "selectos bucket","selective walker","selecto bakke","selectos barque",
+            "selectos bouquet"
+        ],
         "select jinn":["selection"],
         "select oni":["selectone"],
         "not mare":["nightmare"],
@@ -50,16 +54,16 @@ const ZNLANG = {
         "onryo":["on rio","monroe","unreal"],
         "the twins":["twins"],
         "raiju":["ride you","rise you","radio"],
-        "obake":["to bake","awake","oh bake","oh backy","opaque","ibaka","a bucket","obey","tobacco","obama care","hobby"],
+        "obake":["to bake","awake","oh bake","oh backy","opaque","ibaka","a bucket","obey","tobacco","obama care","hobby","open"],
         "the mimic":["mimic"],
         "moroi":["mauroy"],
         "deogen":["the ocean","deion","dion","deodorant","yeojin","geodon","children","deo","dio","digging"],
-        "thaye":["stay","say","they","fe","fae","faye","thing","day","tea"]
+        "thaye":["stay","say","they","fe","fae","faye","thing","day","tea","the"]
     },
     "evidence":{
         "emf 5":["be enough"],
         "dots":["thoughts"],
-        "ultraviolet":["fingerprints","uv","evie"],
+        "ultraviolet":["fingerprints","uv","evie","tv"],
         "freezing":[],
         "ghost orbs":["orbs","forbes","ghost forbes","olives"],
         "writing":['righting'],

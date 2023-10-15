@@ -179,6 +179,14 @@ function loadAllAndConnect(){
                     $("#"+key)[0].click();
                 }
             }
+
+            if (start_state['los'] == 1){
+                tristate(document.getElementById("LOS"));
+            }
+            else if (start_state['los'] == 0){
+                tristate(document.getElementById("LOS"));
+                tristate(document.getElementById("LOS"));
+            }
             
             loadSettings()
             filter()

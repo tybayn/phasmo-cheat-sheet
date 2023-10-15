@@ -20,6 +20,8 @@ const levenshtein_distance = (str1 = '', str2 = '') => {
     return track[str2.length][str1.length];
  };
 
+ let running_log = []
+
  $.fn.isInViewport = function () {
     let elementTop = $(this).offset().top;
     let elementBottom = elementTop + $(this).outerHeight();
@@ -65,8 +67,29 @@ function domovoi_not_heard(){
     },3000)
 }
 
+function domovoi_print_logs(){
+    console.log("----------------------------------------------------------------")
+    console.log("Domo memory:")
+    running_log.forEach(function (item,idx){
+        console.log(`--${idx}--`)
+        for (const [key, value] of Object.entries(item)) {
+            console.log(`${key}: ${value}`)
+        }
+    })
+    console.log("----------------------------------------------------------------")
+}
+
 function parse_speech(vtext){
     vtext = vtext.toLowerCase().trim()
+    running_log.push({
+        "Time":new Date().toJSON().replace('T', ' ').split('.')[0],
+        "Raw":vtext
+    })
+    if(running_log.length > 5){
+        running_log.shift()
+    }
+    let cur_idx = running_log.length - 1
+
     domovoi_msg = ""
 
     for (const [key, value] of Object.entries(ZNLANG['overall'])) {
@@ -75,10 +98,13 @@ function parse_speech(vtext){
         }
     }
 
+    running_log[cur_idx]["Cleaned"] = vtext
+
     if(vtext.startsWith('ghost speed')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized ghost speed command")
+        running_log[cur_idx]["Type"] = "ghost speed"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('ghost speed', "").trim()
         domovoi_msg += "marked ghost speed as "
@@ -113,12 +139,14 @@ function parse_speech(vtext){
         }
 
         domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
     else if(vtext.startsWith('ghost')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized ghost command")
+        running_log[cur_idx]["Type"] = "ghost"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('ghost', "").trim()
         domovoi_msg += "marked "
@@ -173,6 +201,7 @@ function parse_speech(vtext){
             }
         }
         console.log(`${prevtext} >> ${vtext} >> ${smallest_ghost}`)
+        running_log[cur_idx]["Debug"] = `${prevtext} >> ${vtext} >> ${smallest_ghost}`
         domovoi_msg += smallest_ghost
 
         if (vvalue == 0){
@@ -201,12 +230,14 @@ function parse_speech(vtext){
 
         resetResetButton()
         domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
     else if(vtext.startsWith('evidence')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized evidence command")
+        running_log[cur_idx]["Type"] = "evidence"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('evidence', "").trim()
         domovoi_msg += "marked evidence as "
@@ -242,22 +273,31 @@ function parse_speech(vtext){
             }
         }
         console.log(`${prevtext} >> ${vtext} >> ${smallest_evidence}`)
+        running_log[cur_idx]["Debug"] = `${prevtext} >> ${vtext} >> ${smallest_evidence}`
         domovoi_msg += smallest_evidence
 
-        while (vvalue != {"good":1,"bad":-1,"neutral":0}[document.getElementById(smallest_evidence).querySelector("#checkbox").classList[0]]){
-            tristate(document.getElementById(smallest_evidence));
+        if(!$(document.getElementById(smallest_evidence).querySelector("#checkbox")).hasClass("block")){
+            while (vvalue != {"good":1,"bad":-1,"neutral":0}[document.getElementById(smallest_evidence).querySelector("#checkbox").classList[0]]){
+                tristate(document.getElementById(smallest_evidence));
+            }
+            autoSelect()
         }
-        autoSelect()
+        else{
+            domovoi_msg = `Evidence ${smallest_evidence} is locked!`
+        }
+        
 
         resetResetButton()
         domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
 
     }
     else if(vtext.startsWith('monkey paw')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
-        console.log("Recognized evidence command")
+        console.log("Recognized monkey paw command")
+        running_log[cur_idx]["Type"] = "monkey paw"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('monkey paw', "").trim()
         domovoi_msg += "marked "
@@ -283,6 +323,7 @@ function parse_speech(vtext){
             }
         }
         console.log(`${prevtext} >> ${vtext} >> ${smallest_evidence}`)
+        running_log[cur_idx]["Debug"] = `${prevtext} >> ${vtext} >> ${smallest_evidence}`
         domovoi_msg += `${smallest_evidence} as monkey paw evidence`
 
         monkeyPawFilter($(document.getElementById(smallest_evidence)).parent().find(".monkey-paw-select"))
@@ -290,6 +331,7 @@ function parse_speech(vtext){
 
         resetResetButton()
         domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
 
     }
@@ -297,6 +339,7 @@ function parse_speech(vtext){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized speed command")
+        running_log[cur_idx]["Type"] = "speed"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('speed', "").replace('feed', "").trim()
         domovoi_msg += "marked speed "
@@ -311,42 +354,73 @@ function parse_speech(vtext){
         }
         else if(vtext.startsWith("undo ") || vtext.startsWith("undue ") || vtext.startsWith("on do ") || vtext.startsWith("on due ") || vtext.startsWith("clear")){
             vtext = vtext.replace('undo ', "").replace('undue ', "").replace("on do ","").replace("on due ","").replace("clear ","").trim()
-            vvalue = 0
+            vvalue = -1
             domovoi_msg = "cleared "
         }
 
-        // Common replacements for speed
-        var prevtext = vtext;
-        for (const [key, value] of Object.entries(ZNLANG['speed'])) {
-            for (var i = 0; i < value.length; i++) {
-                if(vtext.startsWith(value[i])){vtext = key}
+        vtext = vtext.replace("has ","")
+        if (vtext.startsWith("line of sight")){
+            console.log(`${vtext} >> Line of Sight`)
+            running_log[cur_idx]["Debug"] = `${vtext} >> Line of Sight`
+
+            if((vvalue==0 && all_los()) || (vvalue==1 && all_not_los())){
+                domovoi_msg = `${vvalue == 0 ? 'All' : 'No'} current ghosts have LOS!`
+            }
+            else{
+                while (!$(document.getElementById("LOS").querySelector("#checkbox")).hasClass(["neutral","bad","good"][vvalue+1])){
+                    tristate(document.getElementById("LOS"));
+                }
+                domovoi_msg = `${vvalue == -1 ? 'cleared' : vvalue == 0 ? 'marked not' : 'marked'} line of sight`
+                autoSelect()
             }
         }
+        else{
 
-        for(var i = 0; i < all_speed.length; i++){
-            var leven_val = levenshtein_distance(all_speed[i].toLowerCase(),vtext)
-            if(leven_val < smallest_val){
-                smallest_val = leven_val 
-                smallest_speed = all_speed[i]
+            if (vvalue == -1){
+                vvalue = 0
+            }
+
+            // Common replacements for speed
+            var prevtext = vtext;
+            for (const [key, value] of Object.entries(ZNLANG['speed'])) {
+                for (var i = 0; i < value.length; i++) {
+                    if(vtext.startsWith(value[i])){vtext = key}
+                }
+            }
+
+            for(var i = 0; i < all_speed.length; i++){
+                var leven_val = levenshtein_distance(all_speed[i].toLowerCase(),vtext)
+                if(leven_val < smallest_val){
+                    smallest_val = leven_val 
+                    smallest_speed = all_speed[i]
+                }
+            }
+            console.log(`${prevtext} >> ${vtext} >> ${smallest_speed}`)
+            running_log[cur_idx]["Debug"] = `${prevtext} >> ${vtext} >> ${smallest_speed}`
+            domovoi_msg += smallest_speed
+
+            if(!$(document.getElementById(smallest_speed).querySelector("#checkbox")).hasClass("block")){
+                while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_speed).querySelector("#checkbox").classList[0]]){
+                    dualstate(document.getElementById(smallest_speed));
+                }
+                autoSelect()
+            }
+            else{
+                domovoi_msg = `Speed ${smallest_speed} is locked!`
             }
         }
-        console.log(`${prevtext} >> ${vtext} >> ${smallest_speed}`)
-        domovoi_msg += smallest_speed
-
-        while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_speed).querySelector("#checkbox").classList[0]]){
-            dualstate(document.getElementById(smallest_speed));
-        }
-        autoSelect()
-
+        
         resetResetButton()
         domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
 
     }
     else if(vtext.startsWith('hunt sanity') || vtext.startsWith('sanity')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
-        console.log("Recognized speed command")
+        console.log("Recognized sanity command")
+        running_log[cur_idx]["Type"] = "sanity"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('hunt sanity', "").replace('sanity', "").trim()
         domovoi_msg += "marked hunt sanity "
@@ -381,15 +455,22 @@ function parse_speech(vtext){
             }
         }
         console.log(`${prevtext} >> ${vtext} >> ${smallest_sanity}`)
+        running_log[cur_idx]["Debug"] = `${prevtext} >> ${vtext} >> ${smallest_sanity}`
         domovoi_msg += smallest_sanity.replace("Average","Normal")
 
-        while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_sanity).querySelector("#checkbox").classList[0]]){
-            dualstate(document.getElementById(smallest_sanity),false,true);
+        if(!$(document.getElementById(smallest_sanity).querySelector("#checkbox")).hasClass("block")){
+            while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_sanity).querySelector("#checkbox").classList[0]]){
+                dualstate(document.getElementById(smallest_sanity),false,true);
+            }
+            autoSelect()
         }
-        autoSelect()
+        else{
+            domovoi_msg = `Sanity ${smallest_sanity} is locked!`
+        }
 
         resetResetButton()
         domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
 
     }
@@ -397,6 +478,7 @@ function parse_speech(vtext){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized timer command")
+        running_log[cur_idx]["Type"] = "timer"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('timer', "").trim()
         domovoi_msg += "toggled smudge timer"
@@ -405,12 +487,14 @@ function parse_speech(vtext){
         send_timer()
 
         domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
     else if(vtext.startsWith('cooldown') || vtext.startsWith('cool down')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
-        console.log("Recognized timer command")
+        console.log("Recognized cooldown command")
+        running_log[cur_idx]["Type"] = "cooldown"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('cooldown', "").replace('cool down', "").trim()
         domovoi_msg += "toggled hunt cooldown timer"
@@ -419,12 +503,14 @@ function parse_speech(vtext){
         send_cooldown_timer()
 
         domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
     else if(vtext.startsWith('number of evidence') || vtext.startsWith('difficulty')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized evidence set command")
+        running_log[cur_idx]["Type"] = "evidence set"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('number of evidence', "").replace('difficulty', "").trim()
         domovoi_msg += "set # of evidence to "
@@ -457,18 +543,21 @@ function parse_speech(vtext){
         }
 
         domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
     else if(vtext.startsWith('show tools') || vtext.startsWith('show filters')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized filter/tool command")
+        running_log[cur_idx]["Type"] = "filter/tool"
         console.log(`Heard '${vtext}'`)
         domovoi_msg += "toggled menu"
 
         toggleFilterTools()
 
         domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
     else if(vtext.startsWith('reset cheat sheet') || vtext.startsWith('reset journal')){
