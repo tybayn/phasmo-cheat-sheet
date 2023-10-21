@@ -47,7 +47,9 @@ var timer_snd = [
     new Audio('assets/standard_smudge.wav'),
     new Audio('assets/demon_smudge.wav'),
     new Audio('assets/demon_cooldown.wav'),
-    new Audio('assets/standard_cooldown.wav')];
+    new Audio('assets/standard_cooldown.wav'),
+    new Audio('assets/start.wav'),
+    new Audio('assets/stop.wav')];
 timer_snd[0].preload = 'auto';
 timer_snd[1].preload = 'auto';
 timer_snd[2].preload = 'auto';
@@ -59,6 +61,8 @@ timer_snd[7].preload = 'auto';
 timer_snd[8].preload = 'auto';
 timer_snd[9].preload = 'auto';
 timer_snd[10].preload = 'auto';
+timer_snd[11].preload = 'auto';
+timer_snd[12].preload = 'auto';
 timer_snd[0].load();
 timer_snd[1].load();
 timer_snd[2].load();
@@ -70,25 +74,59 @@ timer_snd[7].load();
 timer_snd[8].load();
 timer_snd[9].load();
 timer_snd[10].load();
+timer_snd[11].load();
+timer_snd[12].load();
 
 var cur_timer;
 var cur_cooldown_timer;
 
-function toggle_timer(){
-    $("#play_button").toggleClass("playing")
-    $("#play_button").attr('src',$("#play_button").hasClass("playing") ? 'imgs/pause.png' : 'imgs/play.png')
+function toggle_timer(force_start = false, force_stop = false){
 
-    if($("#play_button").hasClass("playing")){
-        $("#play_button").attr('src','imgs/pause.png')
-        start_timer()
+    if(force_start){
+        if($("#play_button").hasClass("playing")){
+            clearTimeout(cur_timer)
+            setTimeout(function() {
+                start_timer();
+            }, 200)
+        }
+        else{
+            $("#play_button").addClass("playing")
+            $("#play_button").attr('src','imgs/pause.png')
+            start_timer()
+        }
     }
-    else{
+
+    else if(force_stop){
+        if($("#play_button").hasClass("playing")){
+            $("#play_button").removeClass("playing")
+            $("#play_button").attr('src','imgs/play.png')
+            clearTimeout(cur_timer)
+        }
+        stop_sound = timer_snd[12].cloneNode()
+        stop_sound.volume = volume
+        stop_sound.play()
+    }
+
+    else if($("#play_button").hasClass("playing")){
+        $("#play_button").removeClass("playing")
         $("#play_button").attr('src','imgs/play.png')
         clearTimeout(cur_timer)
+        stop_sound = timer_snd[12].cloneNode()
+        stop_sound.volume = volume
+        stop_sound.play()
+    }
+
+    else{
+        $("#play_button").addClass("playing")
+        $("#play_button").attr('src','imgs/pause.png')
+        start_timer()
     }
 }
 
 function start_timer(){
+    start_sound = timer_snd[11].cloneNode()
+    start_sound.volume = volume
+    start_sound.play()
 
     var time = 180
 
@@ -163,7 +201,7 @@ function start_timer(){
             }, 1000);
         }
         else{
-            $("#play_button").toggleClass("playing")
+            $("#play_button").removeClass("playing")
             $("#play_button").attr('src','imgs/play.png')
         }
     };
@@ -172,21 +210,51 @@ function start_timer(){
     
 }
 
-function toggle_cooldown_timer(){
-    $("#play_cooldown_button").toggleClass("playing")
-    $("#play_cooldown_button").attr('src',$("#play_cooldown_button").hasClass("playing") ? 'imgs/pause.png' : 'imgs/play.png')
-
-    if($("#play_cooldown_button").hasClass("playing")){
-        $("#play_cooldown_button").attr('src','imgs/pause.png')
-        start_cooldown_timer()
+function toggle_cooldown_timer(force_start = false, force_stop = false){
+    if(force_start){
+        if($("#play_cooldown_button").hasClass("playing")){
+            clearTimeout(cur_cooldown_timer)
+            setTimeout(function() {
+                start_cooldown_timer();
+            }, 200)
+        }
+        else{
+            $("#play_cooldown_button").addClass("playing")
+            $("#play_cooldown_button").attr('src','imgs/pause.png')
+            start_cooldown_timer()
+        }
     }
-    else{
+
+    else if(force_stop){
+        if($("#play_cooldown_button").hasClass("playing")){
+            $("#play_cooldown_button").removeClass("playing")
+            $("#play_cooldown_button").attr('src','imgs/play.png')
+            clearTimeout(cur_cooldown_timer)
+        }
+        stop_sound = timer_snd[12].cloneNode()
+        stop_sound.volume = volume
+        stop_sound.play()
+    }
+
+    else if($("#play_cooldown_button").hasClass("playing")){
+        $("#play_cooldown_button").removeClass("playing")
         $("#play_cooldown_button").attr('src','imgs/play.png')
         clearTimeout(cur_cooldown_timer)
+        stop_sound = timer_snd[12].cloneNode()
+        stop_sound.volume = volume
+        stop_sound.play()
+    }
+    else{
+        $("#play_cooldown_button").addClass("playing")
+        $("#play_cooldown_button").attr('src','imgs/pause.png')
+        start_cooldown_timer()
     }
 }
 
 function start_cooldown_timer(){
+    start_sound = timer_snd[11].cloneNode()
+    start_sound.volume = volume
+    start_sound.play()
 
     var time = 25
 
@@ -247,7 +315,7 @@ function start_cooldown_timer(){
             }, 1000);
         }
         else{
-            $("#play_cooldown_button").toggleClass("playing")
+            $("#play_cooldown_button").removeClass("playing")
             $("#play_cooldown_button").attr('src','imgs/play.png')
         }
     };

@@ -106,10 +106,20 @@ function link_room(){
                     reset(true)
                 }
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
-                    toggle_timer()
+                    if(incoming_state.hasOwnProperty("force_start") && incoming_state.hasOwnProperty("force_stop")){
+                        toggle_timer(incoming_state["force_start"], incoming_state["force_stop"])
+                    }
+                    else{
+                        toggle_timer()
+                    }
                 }
                 if (incoming_state['action'].toUpperCase() == "COOLDOWNTIMER"){
-                    toggle_cooldown_timer()
+                    if(incoming_state.hasOwnProperty("force_start") && incoming_state.hasOwnProperty("force_stop")){
+                        toggle_cooldown_timer(incoming_state["force_start"], incoming_state["force_stop"])
+                    }
+                    else{
+                        toggle_cooldown_timer()
+                    }
                 }
                 if (incoming_state['action'].toUpperCase() == "CHANGE"){
                     document.getElementById("room_id_note").innerText = `STATUS: Connected (${incoming_state['players']})`
@@ -353,15 +363,15 @@ function disconnect_link(reset=false,has_status=false){
     dlws.close()
 }
 
-function send_timer(){
+function send_timer(force_start = false, force_stop = false){
     if(hasLink){
-        ws.send('{"action":"TIMER"}')
+        ws.send(`{"action":"TIMER","force_start":${force_start},"force_stop":${force_stop}}`)
     }
 }
 
-function send_cooldown_timer(){
+function send_cooldown_timer(force_start = false, force_stop = false){
     if(hasLink){
-        ws.send('{"action":"COOLDOWNTIMER"}')
+        ws.send(`{"action":"COOLDOWNTIMER","force_start":${force_start},"force_stop":${force_stop}}}`)
     }
 }
 
