@@ -36,7 +36,7 @@ const ZNLANG = {
     },
     "ghosts":{
         "spirit":[],
-        "wraith":["straight","race","reef"],
+        "wraith":["straight","race","reef","raise"],
         "phantom":[],
         "poltergeist":[],
         "banshee":[],

@@ -481,10 +481,19 @@ function parse_speech(vtext){
         running_log[cur_idx]["Type"] = "timer"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('timer', "").trim()
-        domovoi_msg += "toggled smudge timer"
+        
 
-        toggle_timer()
-        send_timer()
+        if(vtext == "start"){
+            domovoi_msg += "started smudge timer"
+            toggle_timer(true,false)
+            send_timer(true,false)
+        } 
+        else{
+            domovoi_msg += "stopped smudge timer"
+            toggle_timer(false,true)
+            send_timer(false,true)
+        }
+        
 
         domovoi_heard(domovoi_msg)
         running_log[cur_idx]["Domo"] = domovoi_msg
@@ -497,10 +506,17 @@ function parse_speech(vtext){
         running_log[cur_idx]["Type"] = "cooldown"
         console.log(`Heard '${vtext}'`)
         vtext = vtext.replace('cooldown', "").replace('cool down', "").trim()
-        domovoi_msg += "toggled hunt cooldown timer"
-
-        toggle_cooldown_timer()
-        send_cooldown_timer()
+        
+        if(vtext == "start"){
+            domovoi_msg += "started cooldown timer"
+            toggle_cooldown_timer(true,false)
+            send_cooldown_timer(true,false)
+        } 
+        else{
+            domovoi_msg += "stopped cooldowntimer"
+            toggle_cooldown_timer(false,true)
+            send_cooldown_timer(false,true)
+        }
 
         domovoi_heard(domovoi_msg)
         running_log[cur_idx]["Domo"] = domovoi_msg
