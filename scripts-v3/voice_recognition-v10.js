@@ -258,6 +258,7 @@ function parse_speech(vtext){
 
         // Common replacements for evidence names
         var prevtext = vtext;
+        vtext = vtext.replace("ghost ","").trim()
         for (const [key, value] of Object.entries(ZNLANG['evidence'])) {
             for (var i = 0; i < value.length; i++) {
                 if(vtext.startsWith(value[i])){vtext = key}
@@ -308,6 +309,7 @@ function parse_speech(vtext){
 
         // Common replacements for evidence names
         var prevtext = vtext;
+        vtext = vtext.replace("ghost ","").trim()
         for (const [key, value] of Object.entries(ZNLANG['evidence'])) {
             for (var i = 0; i < value.length; i++) {
                 if(vtext.startsWith(value[i])){vtext = key}

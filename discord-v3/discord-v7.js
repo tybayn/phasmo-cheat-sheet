@@ -1,34 +1,6 @@
 
 let discord_user = {}
 
-function checkLink(){
-    return new Promise((resolve, reject) => {
-        params = new URL(window.location.href).searchParams
-
-        if (params.get("id")){
-            discord_link = {
-                "id":params.get("id"),
-                "username":params.get("username"),
-                "avatar":params.get("avatar"),
-                "last_linked":params.get("last_linked")
-            }
-
-            znid = getCookie("znid")
-
-            setCookie("discord_link",JSON.stringify(discord_link),30)
-            fetch(`https://zero-network.net/zn/${znid}/attach/${discord_link['id']}`, {method:"POST",signal: AbortSignal.timeout(6000)})
-            window.location.href = window.location.href.split("?")[0]
-        }
-
-        if (params.get('journal')){
-            setCookie("room_id",params.get('journal'),1)
-            window.location.href = window.location.href.split("?")[0]
-        }
-
-        resolve("URL parsed")
-    })
-}
-
 function getLink(){
     return new Promise((resolve, reject) => {
         try{
