@@ -1,6 +1,44 @@
 function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";");for(let n=0;n<i.length;n++){let o=i[n];for(;" "==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(t))return o.substring(t.length,o.length)}return""}
 function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
 
+function checkLink(){
+    return new Promise((resolve, reject) => {
+        params = new URL(window.location.href).searchParams
+
+        if (params.get("id")){
+            discord_link = {
+                "id":params.get("id"),
+                "username":params.get("username"),
+                "avatar":params.get("avatar"),
+                "last_linked":params.get("last_linked")
+            }
+
+            znid = getCookie("znid")
+
+            setCookie("discord_link",JSON.stringify(discord_link),30)
+            fetch(`https://zero-network.net/zn/${znid}/attach/${discord_link['id']}`, {method:"POST",signal: AbortSignal.timeout(6000)})
+            window.location.href = window.location.href.split("?")[0]
+        }
+
+        if (params.get('journal')){
+            setCookie("room_id",params.get('journal'),1)
+            window.location.href = window.location.href.split("?")[0]
+        }
+
+        if (params.get('lang')){
+            lang = params.get('lang').toLowerCase()
+            if (["tr","fr"].includes(lang)){
+                window.location.href = `https://tybayn.github.io/phasmo-cheat-sheet-${lang}/`
+            }
+            else{
+                console.log("Hey! That language is not yet officially supported by the Zero-Network. If you would like to help translate the website, find me (SeverelyZero) on the Zero-Network Discord: https://discord.gg/afpvC7Bf7Y")
+            }
+        }
+
+        resolve("URL parsed")
+    })
+}
+
 function heartbeat(){
     if(znid != "no-connection-to-server"){
         state['settings'] = JSON.stringify(user_settings)

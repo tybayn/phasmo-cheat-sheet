@@ -1,5 +1,6 @@
 const ZNLANG = {
     "overall":{
+        "evidence":["evident"],
         "sanity":["saturday","insanity","unsanity","sandy"],
         "hunt":["hunts"],
         "ghost ":["go ","goes "],
