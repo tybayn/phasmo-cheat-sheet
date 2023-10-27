@@ -59,7 +59,7 @@ const ZNLANG = {
         "the mimic":["mimic"],
         "moroi":["mauroy"],
         "deogen":["the ocean","deion","dion","deodorant","yeojin","geodon","children","deo","dio","digging"],
-        "thaye":["stay","say","they","fe","fae","faye","thing","day","tea","the"]
+        "thaye":["stay","say","they","fe","fae","faye","thing","day","tea"]
     },
     "evidence":{
         "emf 5":["be enough"],
