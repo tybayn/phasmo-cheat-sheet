@@ -1,6 +1,7 @@
 const ZNLANG = {
     "overall":{
         "evidence":["evident"],
+        "journal":["channel"],
         "sanity":["saturday","insanity","unsanity","sandy"],
         "hunt":["hunts"],
         "ghost ":["go ","goes "],
@@ -33,6 +34,7 @@ const ZNLANG = {
             "castle bake a","castle rocky","castle bouquet","guessso bakke","castle bait","castle bait",
             "guessle bouquet","guessle bake","guessle bucket","guessle vodka","guessle bait"
         ],
+        "start":["stat"],
         "domo":["demo"]
     },
     "ghosts":{
@@ -46,7 +48,7 @@ const ZNLANG = {
         "revenant":[],
         "shade":[],
         "demon":[],
-        "yurei":["your a","your ray","your way","you're a","erie","array","urie","trey","ouray"],
+        "yurei":["your a","your ray","your way","you're a","erie","array","urie","trey","ouray","theory"],
         "oni":["only",],
         "yokai":[],
         "hantu":["on to","onto","on 2","haunt 2","haunt to","haunt two"],
@@ -54,7 +56,7 @@ const ZNLANG = {
         "myling":["smiling","mylink","a miley"],
         "onryo":["on rio","monroe","unreal"],
         "the twins":["twins"],
-        "raiju":["ride you","rise you","radio"],
+        "raiju":["ride you","rise you","radio","redo"],
         "obake":["to bake","awake","oh bake","oh backy","opaque","ibaka","a bucket","obey","tobacco","obama care","hobby","open"],
         "the mimic":["mimic"],
         "moroi":["mauroy"],
@@ -62,12 +64,12 @@ const ZNLANG = {
         "thaye":["stay","say","they","fe","fae","faye","thing","day","tea"]
     },
     "evidence":{
-        "emf 5":["be enough"],
+        "emf 5":["be enough","mi5"],
         "dots":["thoughts"],
-        "ultraviolet":["fingerprints","uv","evie","tv"],
+        "ultraviolet":["fingerprints","uv","evie","tv","heavy"],
         "freezing":[],
-        "ghost orbs":["orbs","forbes","ghost forbes","olives"],
-        "writing":['righting'],
+        "ghost orbs":["orbs","orb","forbes","ghost forbes","olives"],
+        "writing":['righting',"ryhming"],
         "spirit box":["spare box","beer box"]
     },
     "speed":{
