@@ -791,6 +791,10 @@ hr{
         padding: 2px 4px 10px 4px;
     }
 
+    .timer_block{
+        width: 100%;
+    }
+
     .modifier{
         grid-column: 1;
         grid-row: 4;
@@ -1052,6 +1056,10 @@ hr{
         position: relative;
     }
 
+    .vc_link{
+        width:176px; margin-top: 10px;
+    }
+
     .journal_link_buttons{
         width: 100%;
         display: flex;
@@ -1203,7 +1211,7 @@ hr{
         color: rgb(145, 145, 145);
         font-size: 10px;
         display: inline-block;
-        left: 9px;
+        left: 13px;
         bottom: -6px;
         position: absolute;
     }
@@ -1212,7 +1220,7 @@ hr{
         color: rgb(145, 145, 145);
         font-size: 10px;
         display: inline-block;
-        left: 71.666%;
+        left: 74.666%;
         bottom: -6px;
         position: absolute;
     }
@@ -1278,7 +1286,7 @@ hr{
         color: rgb(145, 145, 145);
         font-size: 10px;
         display: inline-block;
-        left: 25%;
+        left: 29%;
         bottom: -6px;
         position: absolute;
     }
@@ -1300,6 +1308,10 @@ hr{
         flex-wrap: nowrap;
         align-items: center;
         justify-content: space-between;
+    }
+
+    #tap:hover{
+        background-color: #ffffff60;
     }
 
     #tap_viz{
@@ -2076,10 +2088,6 @@ input{
 
 .sound:hover { 
     transform: scale(1.1); 
-}
-
-#tap:hover{
-    background-color: #ffffff60;
 }
 
 .selected {
