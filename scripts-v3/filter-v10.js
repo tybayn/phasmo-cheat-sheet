@@ -991,74 +991,102 @@ function showVoiceInfo(){
 }
 
 function showSettings(){
-    if (document.getElementById("settings_box").style.left == "-32px"){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    if (document.getElementById("settings_box").style.left == (mquery.matches ? "calc(-60% - 40px)" : "-32px")){
         document.getElementById("settings_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("settings_tab").style.boxShadow = "-6px 5px 5px -2px #000"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
-        document.getElementById("settings_box").style.zIndex = "2"
-        document.getElementById("settings_box").style.left = "196px"
+        document.getElementById("settings_box").style.zIndex = (mquery.matches ? "10" : "2")
+        document.getElementById("settings_box").style.left = (mquery.matches ? "0px" : "196px")
     }
     else {
-        document.getElementById("settings_box").style.left = "-32px"
+        document.getElementById("settings_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-32px")
         document.getElementById("settings_box").style.boxShadow = "none"
         document.getElementById("settings_tab").style.boxShadow = "none"
+        if(mquery.matches){
+            $("#cards").scrollTop($("#cards").scrollTop() - 1);
+            setTimeout(function(){
+                $("#cards").scrollTop($("#cards").scrollTop() + 1);
+            },500);
+        }
     }
 }
 
 function showDiscordLink(){
-    if (document.getElementById("discord_link_box").style.left == "-32px"){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    if (document.getElementById("discord_link_box").style.left == (mquery.matches ? "calc(-60% - 40px)" : "-32px")){
         document.getElementById("discord_link_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("discord_link_tab").style.boxShadow = "-6px 5px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
-        document.getElementById("discord_link_box").style.zIndex= "2"
-        document.getElementById("discord_link_box").style.left = "196px"
+        document.getElementById("discord_link_box").style.zIndex= (mquery.matches ? "10" : "2")
+        document.getElementById("discord_link_box").style.left = (mquery.matches ? "0px" : "196px")
     }
     else {
-        document.getElementById("discord_link_box").style.left = "-32px"
+        document.getElementById("discord_link_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-32px")
         document.getElementById("discord_link_box").style.boxShadow = "none"
         document.getElementById("discord_link_tab").style.boxShadow = "none"
+        if(mquery.matches){
+            $("#cards").scrollTop($("#cards").scrollTop() - 1);
+            setTimeout(function(){
+                $("#cards").scrollTop($("#cards").scrollTop() + 1);
+            },500);
+        }
     }
 }
 
 function showEvent(){
-    if (document.getElementById("event_box").style.left == "-182px"){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    if (document.getElementById("event_box").style.left == (mquery.matches ? "calc(-60% - 40px)" : "-182px")){
         document.getElementById("event_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("event_tab").style.boxShadow = "-6px 5px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
-        document.getElementById("event_box").style.zIndex= "2"
-        document.getElementById("event_box").style.left = "196px"
+        document.getElementById("event_box").style.zIndex= (mquery.matches ? "10" : "2")
+        document.getElementById("event_box").style.left = (mquery.matches ? "0px" : "196px")
     }
     else {
-        document.getElementById("event_box").style.left = "-182px"
+        document.getElementById("event_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-182px")
         document.getElementById("event_box").style.boxShadow = "none"
         document.getElementById("event_tab").style.boxShadow = "none"
+        if(mquery.matches){
+            $("#cards").scrollTop($("#cards").scrollTop() - 1);
+            setTimeout(function(){
+                $("#cards").scrollTop($("#cards").scrollTop() + 1);
+            },500);
+        }
     }
 }
 
 function showWiki(){
-    if (document.getElementById("wiki_box").style.left == "-182px"){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    if (document.getElementById("wiki_box").style.left == (mquery.matches ? "calc(-60% - 40px)" : "-182px")){
         document.getElementById("wiki_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("wiki_tab").style.boxShadow = "-6px 5px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
-        document.getElementById("wiki_box").style.zIndex= "2"
-        document.getElementById("wiki_box").style.left = "196px"
+        document.getElementById("wiki_box").style.zIndex= (mquery.matches ? "10" : "2")
+        document.getElementById("wiki_box").style.left = (mquery.matches ? "0px" : "196px")
     }
     else {
-        document.getElementById("wiki_box").style.left = "-182px"
+        document.getElementById("wiki_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-182px")
         document.getElementById("wiki_box").style.boxShadow = "none"
         document.getElementById("wiki_tab").style.boxShadow = "none"
+        if(mquery.matches){
+            $("#cards").scrollTop($("#cards").scrollTop() - 1);
+            setTimeout(function(){
+                $("#cards").scrollTop($("#cards").scrollTop() + 1);
+            },500);
+        }
     }
 }
 

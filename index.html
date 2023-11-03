@@ -15,11 +15,11 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v3/ghost_template-v5.js"></script>
-    <link rel="stylesheet" href="styles-v3/style-v8.css"/>
-    <link rel="stylesheet" href="styles-v3/style-mobile-v6.css"/>
-    <link rel="stylesheet" href="discord-v3/discord-v3.css" >
-    <link rel="stylesheet" href="wiki-v3/wiki-v2.css" >
-    <link rel="stylesheet" href="events-v3/events-v1.css" >
+    <link rel="stylesheet" href="styles-v3/style-v9.css"/>
+    <link rel="stylesheet" href="styles-v3/style-mobile-v7.css"/>
+    <link rel="stylesheet" href="discord-v3/discord-v4.css" >
+    <link rel="stylesheet" href="wiki-v3/wiki-v3.css" >
+    <link rel="stylesheet" href="events-v3/events-v2.css" >
     <link rel="stylesheet" href="feed-v3/feed-v1.css" >
     <link rel="stylesheet" href="styles-v3/sparkles-v1.css" >
 </head>
@@ -128,7 +128,7 @@
         </div>
     </div>
 
-    <div id="settings_box" style="left:-32px;">
+    <div id="settings_box" style="left: -1000px;">
         <div id="settings_tab" onclick="showSettings()">
             Settings
             <div id="settings_status"></div>
@@ -179,7 +179,7 @@
             </div>
             <hr>
             <div class="modifier_volume yfont white">Voice Commands</div>
-            <div class="journal_link" style="width:176px; margin-top: 10px;">
+            <div class="journal_link vc_link">
                 <div class="journal_link_buttons">
                     <button id="start_voice" class="journal_link_button" onclick="start_voice()">Enable</button>
                     <button id="stop_voice" class="journal_link_button" onclick="stop_voice()" disabled>Disable</button>
@@ -218,7 +218,7 @@
         <div id="session">-</div>
     </div>
 
-    <div id="discord_link_box" style="left:-32px;">
+    <div id="discord_link_box" style="left: -1000px;">
         <div id="discord_link_tab" onclick="showDiscordLink();getLink();">Discord Link<div id="discord_link_status"></div></div>
         <span class="icon" onclick="showDiscordLink()"></span>
         <div class="settings_title yfont white">Discord Link</div>
@@ -274,7 +274,7 @@
         </div>
     </div>
 
-    <div id="event_box" style="left:-182px;">
+    <div id="event_box" style="left: -1000px;">
         <div id="event_tab" onclick="showEvent()">Current Event</div>
         <span class="icon" onclick="showEvent()"></span>
         <div class="settings_title yfont white">Current Event</div>
@@ -287,14 +287,14 @@
         </div>
     </div>
 
-    <div id="wiki_box" style="left:-182px;">
+    <div id="wiki_box" style="left: -1000px;">
         <div id="wiki_tab" onclick="showWiki();setFlicker();">Guides</div>
         <span class="icon" onclick="showWiki();setFlicker();"></span>
         <div class="settings_title yfont white">Guides</div>
         <div id="wiki-body" class="info_block"></div>
     </div>
 
-    <div id="maps_box" style="left:-388px">
+    <div id="maps_box" style="left: -1000px;">
         <div id="maps_tab" onclick="showMaps()">Maps</div>
         <span class="icon" onclick="showMaps()"></span>
 
@@ -348,41 +348,45 @@
                     Timers
                 </div>
                 <div class="timers">
-                    <div class="modifier_smudge_timer yfont white" onclick="toggle_timer()">Smudge Timer</div>
-                    <div class="line_labels" onclick="toggle_timer();send_timer();">
-                        <div class="spirit_line_label">Spirit</div>
-                        <div class="demon_line_label">Demon</div>
-                    </div>
-                    <div id="progress" onclick="toggle_timer();send_timer();">
-                        <img src="imgs/play.png" id="play_button" class="play_button">
-                        <div id="progressBar">
-                            <div id="progressBarInner" class="bar"></div>
-                            <div class="demon_line"></div>
-                            <div class="ghost_line"></div>
-                            <div class="spirit_line"></div>
+                    <div class="timer_block">
+                        <div class="modifier_smudge_timer yfont white" onclick="toggle_timer()">Smudge Timer</div>
+                        <div class="line_labels" onclick="toggle_timer();send_timer();">
+                            <div class="spirit_line_label">Spirit</div>
+                            <div class="demon_line_label">Demon</div>
                         </div>
+                        <div id="progress" onclick="toggle_timer();send_timer();">
+                            <img src="imgs/play.png" id="play_button" class="play_button">
+                            <div id="progressBar">
+                                <div id="progressBarInner" class="bar"></div>
+                                <div class="demon_line"></div>
+                                <div class="ghost_line"></div>
+                                <div class="spirit_line"></div>
+                            </div>
+                        </div>
+                        <div id="time_left" onclick="toggle_timer();send_timer();">
+                            <span id="minute">03</span>:<span id="second">00</span>
+                        </div>
+                        <div class="modifier_note_2" onclick="toggle_timer();send_timer();">(Press 'T' to start/stop)</div>
                     </div>
-                    <div id="time_left" onclick="toggle_timer();send_timer();">
-                        <span id="minute">03</span>:<span id="second">00</span>
-                    </div>
-                    <div class="modifier_note_2" onclick="toggle_timer();send_timer();">(Press 'T' to start/stop)</div>
                     <hr>
-                    <div class="modifier_smudge_timer yfont white" onclick="toggle_cooldown_timer()">Cooldown Timer</div>
-                    <div class="line_labels" onclick="toggle_cooldown_timer();send_cooldown_timer();">
-                        <div class="cooldown_demon_line_label">Demon</div>
-                    </div>
-                    <div id="cooldownProgress" onclick="toggle_cooldown_timer();send_cooldown_timer();">
-                        <img src="imgs/play.png" id="play_cooldown_button" class="play_button">
-                        <div id="cooldownProgressBar">
-                            <div id="cooldownProgressBarInner" class="bar"></div>
-                            <div class="ghost_line"></div>
-                            <div class="demon_line"></div>
+                    <div class="timer_block">
+                        <div class="modifier_smudge_timer yfont white" onclick="toggle_cooldown_timer()">Cooldown Timer</div>
+                        <div class="line_labels" onclick="toggle_cooldown_timer();send_cooldown_timer();">
+                            <div class="cooldown_demon_line_label">Demon</div>
                         </div>
+                        <div id="cooldownProgress" onclick="toggle_cooldown_timer();send_cooldown_timer();">
+                            <img src="imgs/play.png" id="play_cooldown_button" class="play_button">
+                            <div id="cooldownProgressBar">
+                                <div id="cooldownProgressBarInner" class="bar"></div>
+                                <div class="ghost_line"></div>
+                                <div class="demon_line"></div>
+                            </div>
+                        </div>
+                        <div id="time_left_cooldown" onclick="toggle_cooldown_timer();send_cooldown_timer();">
+                            <span id="minute_cooldown">00</span>:<span id="second_cooldown">25</span>
+                        </div>
+                        <div class="modifier_note_2" onclick="toggle_cooldown_timer();send_cooldown_timer();">(Press 'H' to start/stop)</div>
                     </div>
-                    <div id="time_left_cooldown" onclick="toggle_cooldown_timer();send_cooldown_timer();">
-                        <span id="minute_cooldown">00</span>:<span id="second_cooldown">25</span>
-                    </div>
-                    <div class="modifier_note_2" onclick="toggle_cooldown_timer();send_cooldown_timer();">(Press 'H' to start/stop)</div>
                 </div>
                 <div class="modifier_title yfont white">
                     Tools
@@ -492,14 +496,32 @@
     </div>
     <div id="eye" onclick="revive()"><img src="imgs/eye.png"></div>
 
+
+    <script>
+        mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+        if(mquery.matches){
+            document.getElementById("settings_box").style.left = "calc(-60% - 40px)";
+            document.getElementById("discord_link_box").style.left = "calc(-60% - 40px)";
+            document.getElementById("event_box").style.left = "calc(-60% - 40px)";
+            document.getElementById("wiki_box").style.left = "calc(-60% - 40px)";
+            document.getElementById("maps_box").style.left = "calc(-60% - 40px)";
+        }
+        else{
+            document.getElementById("settings_box").style.left = "-32px";
+            document.getElementById("discord_link_box").style.left = "-32px";
+            document.getElementById("event_box").style.left = "-182px";
+            document.getElementById("wiki_box").style.left = "-182px";
+            document.getElementById("maps_box").style.left = "-388px";
+        }
+    </script>
     <script src="scripts-v3/metronome-v2.js"></script>
     <script src="scripts-v3/timer-v2.js"></script>
     <script src="discord-v3/discord-v7.js"></script>
     <script src="wiki-v3/wiki-v1.js"></script>
-    <script src="scripts-v3/filter-v9.js"></script>
+    <script src="scripts-v3/filter-v10.js"></script>
     <script src="scripts-v3/wslink-v10.js"></script>
     <script src="scripts-v3/zn-v9.js"></script>
-    <script src="events-v3/events-v1.js"></script>
+    <script src="events-v3/events-v2.js"></script>
     <script src="feed-v3/feed-v1.js"></script>
     <script src="scripts-v3/voice_en-v8.js"></script>
     <script src="scripts-v3/voice_recognition-v10.js"></script>
@@ -509,7 +531,7 @@
             checkLink()
             .then(x => {
                 loadAllAndConnect()
-                $(function(){$("#wiki-body").load("wiki-v3/wiki-v3.html")});
+                $(function(){$("#wiki-body").load("wiki-v3/wiki-v4.html")});
                 if(getCookie("voice_recognition_on")){
                     start_voice()
                 }
