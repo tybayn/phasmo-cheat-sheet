@@ -1,4 +1,16 @@
-<div class="wiki_title accordian" onclick="accordian(this)">Hunts</div>
+<div class="wiki_title accordian" onclick="accordian(this)">Additional Ghost Data</div>
+<div class="wiki_details" style="height: 0px;">
+    <h3>Obake Fingerprints</h3>
+    <div class="text">Obake has a 25% chance to <i>not</i> leave UV evidence and has the ability to make UV evidence disappear faster.</div>
+    <div class="text">This ghost also has a chance to leave behind unique finger/handprints:</div>
+    <h4>6 Fingered Handprint (Doors, Windows)</h4>
+    <img src="https://zero-network.net/phasmophobia/static/imgs/wiki/obake_hand.png" style="max-width: 50%; padding: 10px;">
+    <h4>Double Fingerprint (Light Switches)</h4>
+    <img src="https://zero-network.net/phasmophobia/static/imgs/wiki/obake_switch.png" style="max-width: 50%; padding: 10px;">
+    <h4>5 Fingerprint (Keyboards, Cell Doors)</h4>
+    <img src="https://zero-network.net/phasmophobia/static/imgs/wiki/obake_keyboard.png" style="max-width: 50%; padding: 10px;">
+</div>    
+<div class="wiki_title accordian" onclick="accordian(this)">Hunts<div id="hunts_tab_footstep" style="display: none;"></div></div>
 <div class="wiki_details" style="height: 0px;">
     <h3>Flickering</h3>
     <div class="text">During a hunt, ghosts will flicker in and out of existance, alternating between visible and invisible multiple times every few seconds. There are a couple of ghosts that can be identified by their flickering during a hunt: (1) an Oni will be more visible during a hunt and (2) the Phantom will be invisible for longer periods of time.</div>
@@ -23,7 +35,208 @@
             </div>
         </div>
     </div>
+    <hr>
+    <h3>Ghost Speed Breakdowns</h3>
+    <div class="text">Many ghosts have a range of speeds that they can be. These are usually dependant on some other factor (such as sanity or temperature) and will cause the speed to be somewhere in-between the speeds listed on the cards</div>
+    
+    <h4>Hantu Speeds</h4>
+    <table id="hantu_speed_breakdown">
+        <thead>
+            <tr>
+                <th>Temp (C)</th>
+                <th>Temp (F)</th>
+                <th>Speed</th>
+                <th>Example</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>&gt;15°C</td>
+            <td>&gt;59°F</td>
+            <td class="hantu_speed_item">1.4 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.4,'hantu-s1');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>12 - 15°C</td>
+            <td>54 - 59°F</td>
+            <td class="hantu_speed_item">1.75 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.75,'hantu-s2');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>9 - 12°C</td>
+            <td>48 - 54°F</td>
+            <td class="hantu_speed_item">2.1 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.1,'hantu-s3');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>6 - 9°C</td>
+            <td>43 - 48°F</td>
+            <td class="hantu_speed_item">2.3 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.3,'hantu-s4');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>3 - 6°C</td>
+            <td>37 - 43°F</td>
+            <td class="hantu_speed_item">2.4 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.4,'hantu-s5');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>0 - 3°C</td>
+            <td>32 - 37°F</td>
+            <td class="hantu_speed_item">2.5 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.5,'hantu-s6');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>&lt;0°C</td>
+            <td>&lt;32°F</td>
+            <td class="hantu_speed_item">2.7 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.7,'hantu-s7');">&#128266;</span></td>
+        </tr>
+    </table>
 
+    <h4>Moroi Speeds</h4>
+    <table id="moroi_speed_breakdown">
+        <thead>
+            <tr>
+                <th>Average Sanity</th>
+                <th>Speed</th>
+                <th>Example</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>0 - 5%</td>
+            <td class="moroi_speed_item">2.25 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.25,'moroi-s1');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>5 - 10%</td>
+            <td class="moroi_speed_item">2.164 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.164,'moroi-s2');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>10 - 15%</td>
+            <td class="moroi_speed_item">2.081 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.081,'moroi-s3');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>15 - 20%</td>
+            <td class="moroi_speed_item">1.998 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.998,'moroi-s4');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>20 - 25%</td>
+            <td class="moroi_speed_item">1.915 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.915,'moroi-s5');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>25 - 30%</td>
+            <td class="moroi_speed_item">1.832 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.832,'moroi-s6');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>30 - 35%</td>
+            <td class="moroi_speed_item">1.749 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.749,'moroi-s7');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>35 - 40%</td>
+            <td class="moroi_speed_item">1.66 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.66,'moroi-s8');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>40 - 45%</td>
+            <td class="moroi_speed_item">1.583 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.583,'moroi-s9');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>&gt;45%</td>
+            <td class="moroi_speed_item">1.5 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.5,'moroi-s10');">&#128266;</span></td>
+        </tr>
+        
+    </table>
+
+    <h4>Thaye Speeds</h4>
+    <table id="thaye_speed_breakdown">
+        <thead>
+            <tr>
+                <th>Aging Cycles</th>
+                <th>Time Near Ghost</th>
+                <th style="width: 25%;">Speed</th>
+                <th style="width: 25%;">Example</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>+0</td>
+            <td>0m</td>
+            <td class="thaye_speed_item">2.7 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.7,'thaye-s1');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>+1</td>
+            <td>~ 1 - 2m</td>
+            <td class="thaye_speed_item">2.525 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.525,'thaye-s2');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>+2</td>
+            <td>~ 2 - 4m</td>
+            <td class="thaye_speed_item">2.35 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.35,'thaye-s3');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>+3</td>
+            <td>~ 3 - 6m</td>
+            <td class="thaye_speed_item">2.175 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.175,'thaye-s4');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>+4</td>
+            <td>~ 4 - 8m</td>
+            <td class="thaye_speed_item">2.0 m/s</td>
+            <td><span class="sound" onclick="toggleSound(2.0,'thaye-s5');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>+5</td>
+            <td>~ 5 - 10m</td>
+            <td class="thaye_speed_item">1.825 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.825,'thaye-s6');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>+6</td>
+            <td>~ 6 - 12m</td>
+            <td class="thaye_speed_item">1.65m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.65,'thaye-s7');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>+7</td>
+            <td>~ 7 - 14m</td>
+            <td class="thaye_speed_item">1.475 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.475,'thaye-s8');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>+8</td>
+            <td>~ 8 - 16m</td>
+            <td class="thaye_speed_item">1.3 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.3,'thaye-s9');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>+9</td>
+            <td>~ 9 - 18m</td>
+            <td class="thaye_speed_item">1.125 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.125,'thaye-s10');">&#128266;</span></td>
+        </tr>
+        <tr>
+            <td>+10</td>
+            <td>~ 10 - 20m</td>
+            <td class="thaye_speed_item">1.0 m/s</td>
+            <td><span class="sound" onclick="toggleSound(1.0,'thaye-s11');">&#128266;</span></td>
+        </tr>
+        
+    </table>
+    <hr>
+    <h3>Ghost Ranges</h3>
+    <div class="text">During a hunt, many ghosts have different behaviors depending on how far away they are from the player. The following shows a basic radius from the player for many of the ghosts and their abilities. (Sunny Meadows shown)</div>
+    <img src="https://zero-network.net/phasmophobia/static/imgs/wiki/hunt_ranges.png">
 </div>
 
 <div class="wiki_title accordian" onclick="accordian(this)">Monkey Paw</div>

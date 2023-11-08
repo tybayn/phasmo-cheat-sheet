@@ -24,6 +24,7 @@
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
+        position: relative;
     }
 
     .wiki_title:hover, .wiki_active{
@@ -93,6 +94,58 @@
         font-size: 10px;
     }
 
+    .wiki_details table{
+        width: calc(100% - 10px) !important;
+        font-size: 14px;
+        min-width: 0px !important;
+        display: table;
+        border-collapse: collapse;
+        margin: 10px 0px 20px 0px;
+    }
+
+    .wiki_details table td, .wiki_details table th{
+        padding: 3px 2px;
+    }
+
+    .wiki_details table tbody td {
+        color: #E6E6E6;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .wiki_details table tr:nth-child(even) {
+        background: #313248;
+    }
+
+    .wiki_details table tr:last-child {
+        border-bottom: 3px solid #47485f;
+    }
+    
+    .wiki_details table thead {
+        background: #47485f;
+        border-bottom: 3px solid #47485f;
+        font-size: 13px;
+    }
+
+    .wiki_details table th:first-child {
+        border-left: none;
+    }
+
+    .wiki_details table thead th {
+        font-weight: bold;
+        color: #E6E6E6;
+        text-align: center;
+        border-left: 2px solid #313248;
+    }
+
+    .row_select{
+        background-color: #4b4a32 !important;
+    }
+
+    .row_select:nth-child(even){
+        background-color: #636243 !important;
+    }
+
     .square {
         width: 10px;
         height: 10px;
@@ -112,6 +165,16 @@
 
     .smaller-text {
         font-size: 90%;
+    }
+
+    #hunts_tab_footstep{
+        background-image: url(../imgs/footsteps-bpm.png);
+        width: 20px;
+        height: 20px;
+        background-size: cover;
+        position: absolute;
+        bottom: 10px;
+        left: 60px;
     }
 
     .tarot-img {
@@ -146,6 +209,7 @@
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
+        position: relative;
     }
 
     .wiki_title:hover, .wiki_active{
@@ -201,6 +265,10 @@
         font-size: 30px;
     }
 
+    .wiki_details h4{
+        font-size: 25px;
+    }
+
     .wiki_details img{
         width: 100%;
     }
@@ -223,6 +291,58 @@
         font-size: 10px;
     }
 
+    .wiki_details table{
+        width: calc(100% - 10px) !important;
+        font-size: 18px;
+        min-width: 0px !important;
+        display: table;
+        border-collapse: collapse;
+        margin: 10px 0px 20px 0px;
+    }
+
+    .wiki_details table td, .wiki_details table th{
+        padding: 3px 2px;
+    }
+
+    .wiki_details table tbody td {
+        color: #E6E6E6;
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .wiki_details table tr:nth-child(even) {
+        background: #313248;
+    }
+
+    .wiki_details table tr:last-child {
+        border-bottom: 3px solid #47485f;
+    }
+    
+    .wiki_details table thead {
+        background: #47485f;
+        border-bottom: 3px solid #47485f;
+        font-size: 20px;
+    }
+
+    .wiki_details table th:first-child {
+        border-left: none;
+    }
+
+    .wiki_details table thead th {
+        font-weight: bold;
+        color: #E6E6E6;
+        text-align: center;
+        border-left: 2px solid #313248;
+    }
+
+    .row_select{
+        background-color: #4b4a32 !important;
+    }
+
+    .row_select:nth-child(even){
+        background-color: #636243 !important;
+    }
+
     .square {
         width: 10px;
         height: 10px;
@@ -242,6 +362,16 @@
 
     .smaller-text {
         font-size: 90%;
+    }
+
+    #hunts_tab_footstep{
+        background-image: url(../imgs/footsteps-bpm.png);
+        width: 40px;
+        height: 40px;
+        background-size: cover;
+        position: absolute;
+        bottom: 10px;
+        left: 110px;
     }
 
     .tarot-img {
