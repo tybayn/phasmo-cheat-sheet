@@ -578,6 +578,63 @@ function parse_speech(vtext){
         running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
+    else if(vtext.startsWith('show maps') || vtext.startsWith('show map')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized map command")
+        running_log[cur_idx]["Type"] = "maps"
+        console.log(`Heard '${vtext}'`)
+        vtext = vtext.replace('show maps', "").replace('show map', "").trim()
+        domovoi_msg = "showing map"
+
+        var smallest_map = "tanglewood"
+        var smallest_val = 100
+
+        if(vtext != ""){
+
+            // Common replacements for maps
+            var prevtext = vtext;
+            for (const [key, value] of Object.entries(ZNLANG['maps'])) {
+                for (var i = 0; i < value.length; i++) {
+                    if(vtext.includes(value[i])){vtext = vtext.replace(value[i],key)}
+                }
+            }
+
+            var maps = document.getElementsByClassName("maps_button")
+
+            for(var i = 0; i < maps.length; i++){
+                var leven_val = levenshtein_distance(maps[i].id.toLowerCase(),vtext)
+                if(leven_val < smallest_val){
+                    smallest_val = leven_val 
+                    smallest_map = maps[i].id
+                }
+            }
+            console.log(`${prevtext} >> ${vtext} >> ${smallest_map}`)
+            running_log[cur_idx]["Debug"] = `${prevtext} >> ${vtext} >> ${smallest_map}`
+            domovoi_msg += `: ${smallest_map}`
+        }
+
+        changeMap(document.getElementById(smallest_map),`${smallest_map}.png`)
+        showMaps(true,false)
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('close maps') || vtext.startsWith('close map') || vtext.startsWith('hide maps') || vtext.startsWith('hide map')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized map command")
+        running_log[cur_idx]["Type"] = "maps"
+        console.log(`Heard '${vtext}'`)
+        domovoi_msg = "closing map"
+
+        showMaps(false, true)
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
     else if(vtext.startsWith('reset cheat sheet') || vtext.startsWith('reset journal')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"

@@ -234,6 +234,17 @@
         font-size: 30px;
     }
 
+    #guide_tab_footstep{
+        background-image: url(../imgs/footsteps-bpm.png);
+        width: 40px;
+        height: 40px;
+        background-size: cover;
+        transform: rotate(90deg);
+        position: absolute;
+        bottom: 6px;
+        left: 9px;
+    }
+
     #maps_box{
         display: none;
     }

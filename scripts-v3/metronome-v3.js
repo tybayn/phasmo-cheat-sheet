@@ -12,6 +12,8 @@ var running = false
 var start = Date.now()
 var snd_choice = 0
 var offset = 0
+var additional_ghost_data = ["hantu","moroi","thaye"]
+var additional_ghost_var = [0.18,0.085,0.175]
 
 var last_id = "";
 function toggleSound(set_tempo,id){
@@ -111,6 +113,14 @@ function bpm_clear() {
     for (var i = 0; i < ghosts.length; i++){
         ghosts[i].style.boxShadow = 'none'
     }
+    $("#guide_tab_footstep").hide()
+    $("#hunts_tab_footstep").hide()
+    for (var g = 0 ;g < additional_ghost_data.length; g++){
+        var speed_tab = document.getElementById(`${additional_ghost_data[g]}_speed_breakdown`)
+        for (var i = 1, row; row = speed_tab.rows[i]; i++){
+            $(row).removeClass("row_select")
+        }
+    }
 }
 
 function bpm_calc(forced=false) {
@@ -139,10 +149,13 @@ function bpm_calc(forced=false) {
             current_bpm = get_bpm_average(avg_taps, bpm_precision)
         }
         input_bpm = current_bpm;
-        input_ms = document.getElementById("bpm_type").checked ? get_ms(input_bpm) : get_ms_exact(input_bpm)
+        var ex_ms = get_ms_exact(input_bpm)
+        var av_ms = get_ms(input_bpm)
+        input_ms = document.getElementById("bpm_type").checked ? av_ms : ex_ms
         document.getElementById('input_bpm').innerHTML = `${Math.round(input_bpm)}<br>bpm`;
         document.getElementById('input_speed').innerHTML = `${input_ms}<br>m/s`;
         mark_ghosts(input_ms)
+        mark_ghost_details(ex_ms)
         saveSettings()
     }
 }
@@ -166,6 +179,25 @@ function get_ms_exact(bpm){
     var sm = [0.46,0.74,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
     var cur_ms = (Math.sqrt(38400000*(bpm / (sm*(1+(offset/100))))+1687696201)-45341)/(19200)
     return bpm == 0 ? 0.00 : cur_ms.toFixed(2)
+}
+
+function mark_ghost_details(ms)
+{
+    ms = parseFloat(ms)
+    $("#guide_tab_footstep").hide()
+    $("#hunts_tab_footstep").hide()
+    for (var g = 0 ;g < additional_ghost_data.length; g++){
+        var speed_tab = document.getElementById(`${additional_ghost_data[g]}_speed_breakdown`)
+        for (var i = 1, row; row = speed_tab.rows[i]; i++){
+            $(row).removeClass("row_select")
+            var speed = parseFloat(row.getElementsByClassName(`${additional_ghost_data[g]}_speed_item`)[0].textContent.replace(" m/s",""))
+            if(((speed - additional_ghost_var[g]) <= ms && ms <= (speed + additional_ghost_var[g]))){
+                $(row).addClass("row_select")
+                $("#guide_tab_footstep").show()
+                $("#hunts_tab_footstep").show()
+            }
+        }
+    }
 }
 
 function mark_ghosts(ms){

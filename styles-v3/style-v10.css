@@ -290,6 +290,17 @@ hr{
         border-radius: 0px 0px 5px 5px;
     }
 
+    #guide_tab_footstep{
+        background-image: url(../imgs/footsteps-bpm.png);
+        width: 20px;
+        height: 20px;
+        background-size: cover;
+        transform: rotate(90deg);
+        position: absolute;
+        bottom: 2px;
+        left: 5px;
+    }
+
     #maps_box{
         position: fixed;
         top: 0;
