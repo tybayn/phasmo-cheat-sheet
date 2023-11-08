@@ -82,5 +82,10 @@ const ZNLANG = {
         "average":["normal"],
         "early":[],
         "very early":[]
+    },
+    "maps":{
+        "sunnymeadows":["sm"],
+        "brownstone":["high school"],
+        "":["restricted ","street","drive","road","farmhouse"," high school","campsite","camp","wing"]
     }
 }

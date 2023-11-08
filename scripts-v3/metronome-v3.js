@@ -113,6 +113,8 @@ function bpm_clear() {
     for (var i = 0; i < ghosts.length; i++){
         ghosts[i].style.boxShadow = 'none'
     }
+    $("#guide_tab_footstep").hide()
+    $("#hunts_tab_footstep").hide()
     for (var g = 0 ;g < additional_ghost_data.length; g++){
         var speed_tab = document.getElementById(`${additional_ghost_data[g]}_speed_breakdown`)
         for (var i = 1, row; row = speed_tab.rows[i]; i++){

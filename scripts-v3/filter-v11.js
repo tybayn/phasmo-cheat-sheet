@@ -1091,8 +1091,13 @@ function showWiki(){
 }
 
 
-function showMaps(){
-    if (document.getElementById("maps_box").style.left == "-388px"){
+function showMaps(forceOpen = false, forceClose = false){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    if(mquery.matches){
+        return
+    }
+
+    if (document.getElementById("maps_box").style.left == "-388px" && !forceClose){
         document.getElementById("maps_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("maps_box").style.boxShadow = "-6px 5px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1103,7 +1108,7 @@ function showMaps(){
         document.getElementById("maps_box").style.left = "196px"
         document.getElementById("maps_box").style.width = "calc(100% - 256px)"
     }
-    else {
+    else if(!forceOpen) {
         document.getElementById("maps_box").style.width = "556px"
         document.getElementById("maps_box").style.left = "-388px"
         document.getElementById("maps_box").style.boxShadow = "none"
@@ -1170,6 +1175,7 @@ function loadSettings(){
         var cms = document.getElementById("bpm_type").checked ? get_ms(user_settings['bpm']) : get_ms_exact(user_settings['bpm'])
         document.getElementById('input_speed').innerHTML = `${cms}<br>m/s`;
         mark_ghosts(cms)
+        mark_ghost_details(cms)
     }
 
     setCookie("settings",JSON.stringify(user_settings),30)
