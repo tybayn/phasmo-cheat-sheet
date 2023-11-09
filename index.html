@@ -531,8 +531,10 @@
     <script>
         $(window).on('load', function() {
             checkLink()
-            .then(x => {
+            .then(x =>{
                 $(function(){$("#wiki-body").load("wiki-v3/wiki-v5.html")});
+            })
+            .then(x => {
                 loadAllAndConnect()
                 if(getCookie("voice_recognition_on")){
                     start_voice()
