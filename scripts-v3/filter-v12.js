@@ -5,6 +5,7 @@ const all_evidence = ["DOTs","EMF 5","Ultraviolet","Freezing","Ghost Orbs","Writ
 const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","Mare","Revenant","Shade","Demon","Yurei","Oni","Yokai","Hantu","Goryo","Myling","Onryo","The Twins","Raiju","Obake","The Mimic","Moroi","Deogen","Thaye"]
 const all_speed = ["Slow","Normal","Fast"]
 const all_sanity = ["Late","Average","Early","VeryEarly"]
+let bpm_list = []
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{}}
 var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0}
@@ -883,7 +884,7 @@ function filter(ignore_link=false){
 
     setCookie("state",JSON.stringify(state),1)
     if (hasLink && !ignore_link){send_state()}
-    if (hasDLLink){send_evidence_link()}
+    if (hasDLLink){send_evidence_link(); send_ghosts_link();}
 }
 
 function all_los(){
