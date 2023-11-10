@@ -156,6 +156,7 @@ function bpm_calc(forced=false) {
         document.getElementById('input_speed').innerHTML = `${input_ms}<br>m/s`;
         mark_ghosts(input_ms)
         mark_ghost_details(ex_ms)
+        send_bpm_link(Math.round(input_bpm).toString(),input_ms.toString(),["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
         saveSettings()
     }
 }
