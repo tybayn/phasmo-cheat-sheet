@@ -122,6 +122,7 @@ function bpm_clear() {
             $(row).removeClass("row_select")
         }
     }
+    send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
     send_ghosts_link()
 }
 
