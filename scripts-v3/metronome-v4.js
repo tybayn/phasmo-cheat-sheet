@@ -106,6 +106,7 @@ function bpm_tap(){
 
 function bpm_clear() {
     taps = []
+    bpm_list = []
     document.getElementById('input_bpm').innerHTML = `0<br>bpm`;
     document.getElementById('input_speed').innerHTML = `0<br>m/s`;
     document.getElementById('tap_viz').innerHTML = ""
@@ -121,6 +122,8 @@ function bpm_clear() {
             $(row).removeClass("row_select")
         }
     }
+    send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
+    send_ghosts_link()
 }
 
 function bpm_calc(forced=false) {
@@ -156,6 +159,7 @@ function bpm_calc(forced=false) {
         document.getElementById('input_speed').innerHTML = `${input_ms}<br>m/s`;
         mark_ghosts(input_ms)
         mark_ghost_details(ex_ms)
+        send_bpm_link(Math.round(input_bpm).toString(),input_ms.toString(),["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
         saveSettings()
     }
 }
@@ -202,6 +206,7 @@ function mark_ghost_details(ms)
 
 function mark_ghosts(ms){
     ms = parseFloat(ms)
+    bpm_list = []
     var ghosts = document.getElementsByClassName("ghost_card")
     for (var i = 0; i < ghosts.length; i++){
         ghosts[i].style.boxShadow = 'none'
@@ -236,19 +241,24 @@ function mark_ghosts(ms){
             if(document.getElementById("bpm_type").checked){
                 if ((speed_type == "range" && min_speed <= ms && ms <= max_speed) || name == "The Mimic"){
                     ghosts[i].style.boxShadow = '0px 0px 10px 0px #dbd994'
+                    bpm_list.push(ghosts[i].id)
                 }
                 else if(min_speed === ms || max_speed === ms){
                     ghosts[i].style.boxShadow = '0px 0px 10px 0px #dbd994'
+                    bpm_list.push(ghosts[i].id)
                 }
             }
             else{
                 if ((speed_type == "range" && (min_speed - 0.05) <= ms && ms <= (max_speed + 0.05)) || name == "The Mimic"){
                     ghosts[i].style.boxShadow = '0px 0px 10px 0px #dbd994'
+                    bpm_list.push(ghosts[i].id)
                 }
                 else if(((min_speed - 0.05) <= ms && ms <= (min_speed + 0.05)) || ((max_speed - 0.05) <= ms && ms <= (max_speed + 0.05))){
                     ghosts[i].style.boxShadow = '0px 0px 10px 0px #dbd994'
+                    bpm_list.push(ghosts[i].id)
                 }
             }
+            send_ghosts_link()
         }
     }
 }

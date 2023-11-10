@@ -188,9 +188,13 @@ function start_timer(){
             cur_sound.play()
         }
 
+        min_val = t<0 ? "00" : zeroPad(minutes,2);
+        sec_val = t<0 ? "00" : zeroPad(seconds,2);
 
-        min_obj.innerHTML = t<0 ? "00" : zeroPad(minutes,2);
-        sec_obj.innerHTML = t<0 ? "00" : zeroPad(seconds,2);
+        send_timer_link("TIMER_VAL",`${min_val[1]}:${sec_val}`)
+
+        min_obj.innerHTML = min_val
+        sec_obj.innerHTML = sec_val
 
         var progressBarWidth = timeleft * progress_bar.width() / timetotal;
         progress_bar_inner.style.width = progressBarWidth;
@@ -302,9 +306,13 @@ function start_cooldown_timer(){
             cur_sound.play()
         }
 
+        min_val = t<0 ? "00" : zeroPad(minutes,2);
+        sec_val = t<0 ? "00" : zeroPad(seconds,2);
 
-        min_obj.innerHTML = t<0 ? "00" : zeroPad(minutes,2);
-        sec_obj.innerHTML = t<0 ? "00" : zeroPad(seconds,2);
+        send_timer_link("COOLDOWN_VAL",`${min_val[1]}:${sec_val}`)
+
+        min_obj.innerHTML = min_val
+        sec_obj.innerHTML = sec_val
 
         var progressBarWidth = timeleft * progress_bar.width() / timetotal;
         progress_bar_inner.style.width = progressBarWidth;

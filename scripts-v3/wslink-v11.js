@@ -289,6 +289,12 @@ function link_link(){
                 if (incoming_state['action'].toUpperCase() == "LINKED"){
                     document.getElementById("link_id_note").innerText = `STATUS: Linked`
                     document.getElementById("dllink_status").className = "connected"
+                    send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
+                    send_timer_link("TIMER_VAL","0:00")
+                    send_timer_link("COOLDOWN_VAL","0:00")
+                    send_evidence_link()
+                    send_ghosts_link()
+                    autoSelect()
                 }
                 if (incoming_state['action'].toUpperCase() == "UNLINKED"){
                     disconnect_link()
@@ -302,6 +308,13 @@ function link_link(){
                 }
                 if (incoming_state['action'].toUpperCase() == "MENUFLIP"){
                     toggleFilterTools()
+                }
+
+                if (incoming_state['action'].toUpperCase() == "EVIDENCE"){
+                    if(!$(document.getElementById(incoming_state['evidence']).querySelector("#checkbox")).hasClass("block")){
+                        tristate(document.getElementById(incoming_state['evidence']))
+                        autoSelect()
+                    }
                 }
                 return
             }
@@ -343,6 +356,49 @@ function disconnect_room(reset=false,has_status=false){
         }
         setCookie("room_id","",-1)
         hasLink=false
+    }
+}
+
+function send_bpm_link(bpm,speed,modifer){
+    if(hasDLLink){
+        dlws.send(`{"action":"BPM","bpm":"${bpm}","speed":"${speed}","modifier":"${modifer}"}`)
+    }
+}
+
+function send_timer_link(timer,value){
+    if(hasDLLink){
+        dlws.send(`{"action":"${timer}","timer_val":"${value}"}`)
+    }
+}
+
+function send_ghost_link(ghost,value){
+    if(hasDLLink){
+        dlws.send(`{"action":"GHOST","ghost":"${ghost}","status":${value}}`)
+    }
+}
+
+function send_evidence_link(){
+    if(hasDLLink){
+        var evi_list = [];
+        for (const [key, value] of Object.entries(state['evidence'])){ 
+            evi_list.push(`${key}:${value}`)
+        }
+        dlws.send(`{"action":"EVIDENCE","evidences":"${evi_list}"}`)
+    }
+}
+
+function send_ghosts_link(){
+    if(hasDLLink){
+        var ghost_list = [];
+        for (const [key, value] of Object.entries(state['ghosts'])){ 
+            if($(document.getElementById(key)).hasClass("hidden")){
+                ghost_list.push(`${key}:-1:${bpm_list.includes(key) ? 1 : 0}`)
+            }
+            else{
+                ghost_list.push(`${key}:${value}:${bpm_list.includes(key) ? 1 : 0}`)
+            }
+        }
+        dlws.send(`{"action":"GHOSTS","ghost":"${ghost_list}"}`)
     }
 }
 
