@@ -420,7 +420,7 @@ function send_timer(force_start = false, force_stop = false){
 
 function send_cooldown_timer(force_start = false, force_stop = false){
     if(hasLink){
-        ws.send(`{"action":"COOLDOWNTIMER","force_start":${force_start},"force_stop":${force_stop}}}`)
+        ws.send(`{"action":"COOLDOWNTIMER","force_start":${force_start},"force_stop":${force_stop}}`)
     }
 }
 
