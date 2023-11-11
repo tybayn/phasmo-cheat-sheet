@@ -288,8 +288,7 @@ function link_link(){
                     send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
                     send_timer_link("TIMER_VAL","0:00")
                     send_timer_link("COOLDOWN_VAL","0:00")
-                    send_evidence_link()
-                    send_ghosts_link()
+                    filter()
                 }
                 if (incoming_state['action'].toUpperCase() == "UNLINKED"){
                     disconnect_link()
