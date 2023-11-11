@@ -14,7 +14,7 @@
         };
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
-    <script src="scripts-v3/ghost_template-v5.js"></script>
+    <script src="scripts-v3/ghost_template-v6.js"></script>
     <link rel="stylesheet" href="styles-v3/style-v10.css"/>
     <link rel="stylesheet" href="styles-v3/style-mobile-v8.css"/>
     <link rel="stylesheet" href="discord-v3/discord-v4.css" >
@@ -163,7 +163,7 @@
             <div class="modifier_volume yfont white">Speed Filter Logic</div>
             <div class="speed_logic_select">
                 <span>OR</span>
-                <label for="speed_logic_type" onchange="filter();autoSelect();saveSettings();">
+                <label for="speed_logic_type" onchange="filter();saveSettings();">
                     <input type="checkbox" name="" id="speed_logic_type">
                     <div class="toggle"></div>
                 </label>
@@ -426,7 +426,7 @@
             </div>
             <div id="filter-content" class="filter-content">
                 <div class="evidence_title yfont white">
-                    Evidence <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="filter();autoSelect();flashMode();saveSettings();">
+                    Evidence <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="filter();flashMode();saveSettings();">
                         <option value="3">3</option>
                         <option value="2">2</option>
                         <option value="1">1</option>
@@ -442,20 +442,20 @@
                     Speed
                 </div>
                 <div class="speed">
-                    <button id="Slow" class="tricheck white" name="speed" onclick="dualstate(this);autoSelect()" value="Slow">
+                    <button id="Slow" class="tricheck white" name="speed" onclick="dualstate(this)" value="Slow">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
                         <div class="label">Slow</div>
                     </button>
-                    <button id="Normal" class="tricheck white" name="speed" onclick="dualstate(this);autoSelect()" value="Normal">
+                    <button id="Normal" class="tricheck white" name="speed" onclick="dualstate(this)" value="Normal">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
                         <div class="label">Normal</div>
                     </button>
-                    <button id="Fast" class="tricheck white" name="speed" onclick="dualstate(this);autoSelect()" value="Fast">
+                    <button id="Fast" class="tricheck white" name="speed" onclick="dualstate(this)" value="Fast">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
                         <div class="label">Fast</div>
                     </button>
                     <hr>
-                    <button id="LOS" class="tricheck white" name="los" onclick="tristate(this);autoSelect()" value="LOS">
+                    <button id="LOS" class="tricheck white" name="los" onclick="tristate(this)" value="LOS">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
                         <div class="label label-font-s">Std. LOS Speed Up</div>
                     </button>
@@ -464,19 +464,19 @@
                     Hunt Sanity
                 </div>
                 <div class="hunt_sanity">
-                    <button id="Late" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true);autoSelect()" value="Late">
+                    <button id="Late" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Late">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
                         <div class="label">Late <span class="hunt_sanity_num">(&lt;40%)</span></div>
                     </button>
-                    <button id="Average" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true);autoSelect()" value="Average">
+                    <button id="Average" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Average">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
                         <div class="label">Normal <span class="hunt_sanity_num">(>40%)</span></div>
                     </button>
-                    <button id="Early" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true);autoSelect()" value="Early">
+                    <button id="Early" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Early">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
                         <div class="label">Early <span class="hunt_sanity_num">(>50%)</span></div>
                     </button>
-                    <button id="VeryEarly" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true);autoSelect()" value="VeryEarly">
+                    <button id="VeryEarly" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="VeryEarly">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
                         <div class="label">Very Early <span class="hunt_sanity_num">(>75%)</span></div>
                     </button>
@@ -520,13 +520,13 @@
     <script src="scripts-v3/timer-v3.js"></script>
     <script src="discord-v3/discord-v7.js"></script>
     <script src="wiki-v3/wiki-v1.js"></script>
-    <script src="scripts-v3/filter-v12.js"></script>
-    <script src="scripts-v3/wslink-v11.js"></script>
-    <script src="scripts-v3/zn-v9.js"></script>
+    <script src="scripts-v3/filter-v13.js"></script>
+    <script src="scripts-v3/wslink-v12.js"></script>
+    <script src="scripts-v3/zn-v10.js"></script>
     <script src="events-v3/events-v2.js"></script>
     <script src="feed-v3/feed-v1.js"></script>
     <script src="scripts-v3/voice_en-v9.js"></script>
-    <script src="scripts-v3/voice_recognition-v11.js"></script>
+    <script src="scripts-v3/voice_recognition-v12.js"></script>
     <script src="scripts-v3/sparkles-v1.js"></script>
     <script>
         $(window).on('load', function() {

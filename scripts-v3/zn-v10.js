@@ -140,11 +140,11 @@ function loadAllAndConnect(){
                 evidence_list.innerHTML += `
                 <div class="evidence-row">
                     <img class="monkey-smudge" style="display:none;" src="imgs/smudge.png">
-                    <button id="${data.evidence[i]}" class="tricheck white" name="evidence" onclick="tristate(this);autoSelect()" value="${data.evidence[i]}">
+                    <button id="${data.evidence[i]}" class="tricheck white" name="evidence" onclick="tristate(this)" value="${data.evidence[i]}">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
                         <div class="label">${data.evidence[i]}</div>
                     </button>
-                    <img class="monkey-paw-select" src="imgs/paw-icon.png" onclick="monkeyPawFilter(this);autoSelect()">
+                    <img class="monkey-paw-select" src="imgs/paw-icon.png" onclick="monkeyPawFilter(this)">
                 </div>
                 `
             }
@@ -248,11 +248,11 @@ function loadAllAndConnect(){
                     evidence_list.innerHTML += `
                     <div class="evidence-row">
                         <img class="monkey-smudge" style="display:none;" src="imgs/smudge.png">
-                        <button id="${data.evidence[i]}" class="tricheck white" name="evidence" onclick="tristate(this);autoSelect()" value="${data.evidence[i]}">
+                        <button id="${data.evidence[i]}" class="tricheck white" name="evidence" onclick="tristate(this)" value="${data.evidence[i]}">
                             <div id="checkbox" class="neutral"><span class="icon"></span></div>
                             <div class="label">${data.evidence[i]}</div>
                         </button>
-                        <img class="monkey-paw-select" src="imgs/paw-icon.png" onclick="monkeyPawFilter(this);autoSelect()">
+                        <img class="monkey-paw-select" src="imgs/paw-icon.png" onclick="monkeyPawFilter(this)">
                     </div>
                     `
                 }

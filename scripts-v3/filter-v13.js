@@ -179,14 +179,12 @@ function select(elem,ignore_link=false,internal=false){
         $(elem).removeClass(["selected"]);
         if (!ignore_link || internal) markedDead = false
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
-        send_ghost_link("",0)
     }
     else{
         $(elem).removeClass(["died","guessed","permhidden"])
         $(elem).addClass("selected");
         if (!ignore_link || internal) markedDead = false
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
-        send_ghost_link($(elem).find(".ghost_name")[0].innerText,2)
     }
     setCookie("state",JSON.stringify(state),1)
     if(!ignore_link && !switch_type){filter(ignore_link)}
@@ -215,13 +213,11 @@ function guess(elem,ignore_link=false,internal=false){
     if (on){
         $(elem).removeClass("guessed");
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
-        send_ghost_link("",0)
     }
     else{
         $(elem).removeClass(["selected","died","permhidden"])
         $(elem).addClass("guessed");
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 3;
-        send_ghost_link($(elem).find(".ghost_name")[0].innerText,1)
     }
     setCookie("state",JSON.stringify(state),1)
     if(!ignore_link){filter(ignore_link)}
@@ -247,14 +243,12 @@ function died(elem,ignore_link=false,internal=false){
         $(elem).removeClass(["selected","died"]);
         if (!ignore_link || internal) markedDead = false
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
-        send_ghost_link("",0)
     }
     else{
         $(elem).removeClass(["selected","guessed","permhidden"])
         $(elem).addClass("died");
         if (!ignore_link || internal) markedDead = true
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -2;
-        send_ghost_link($(elem).find(".ghost_name")[0].innerText,2)
     }
     setCookie("state",JSON.stringify(state),1)
     if(!ignore_link && !switch_type){filter(ignore_link)}
@@ -882,6 +876,7 @@ function filter(ignore_link=false){
         })
     }
 
+    autoSelect()
     setCookie("state",JSON.stringify(state),1)
     if (hasLink && !ignore_link){send_state()}
     if (hasDLLink){send_evidence_link(); send_ghosts_link();}
@@ -920,23 +915,22 @@ function autoSelect(){
     if(Object.keys(discord_user).length > 0 || hasDLLink){
         var cur_selected = []
         var has_selected = false
+        var selected = "";
+        var guessed = "";
         var ghosts = document.getElementsByClassName("ghost_card")
-        send_ghost_link("",0)
         for (var i = 0; i < ghosts.length; i++){
-            if(ghosts[i].className.includes("died") || ghosts[i].className.includes("selected") || ghosts[i].className.includes("guessed")){
+            if($(ghosts[i]).hasClass("died") || $(ghosts[i]).hasClass("selected")){
                 has_selected = true
-                if(Object.keys(discord_user).length > 0 && hosts[i].className.includes("guessed")){
-                    send_ghost_link($(ghosts[i]).find(".ghost_name")[0].innerText,1)
-                }
-                else{
-                    send_ghost_link($(ghosts[i]).find(".ghost_name")[0].innerText,2)
-                }
-                break
+                selected = ghosts[i].id;
             }
-            if(
-                !ghosts[i].className.includes("faded") && 
-                !ghosts[i].className.includes("hidden") && 
-                !ghosts[i].className.includes("permhidden")
+            else if($(ghosts[i]).hasClass("guessed")){
+                has_selected = true
+                guessed = ghosts[i].id;
+            }
+            else if(
+                !$(ghosts[i]).hasClass("faded") && 
+                !$(ghosts[i]).hasClass("hidden") && 
+                !$(ghosts[i]).hasClass("permhidden")
             ){
                 cur_selected.push(i)
             }
@@ -945,10 +939,21 @@ function autoSelect(){
         if (!has_selected && cur_selected.length == 1){
             if(Object.keys(discord_user).length > 0){
                 guess(ghosts[cur_selected[0]],internal=true)
-                send_ghost_link($(ghosts[cur_selected[0]]).find(".ghost_name")[0].innerText,1)
+                send_ghost_link(ghosts[cur_selected[0]].id,1)
             }
             else{
-                send_ghost_link($(ghosts[cur_selected[0]]).find(".ghost_name")[0].innerText,2)
+                send_ghost_link(ghosts[cur_selected[0]].id,2)
+            }
+        }
+        else{
+            if (selected != ""){
+                send_ghost_link(selected,2)
+            }
+            else if (guessed != ""){
+                send_ghost_link(guessed,1)
+            }
+            else{
+                send_ghost_link("",0)
             }
         }
 

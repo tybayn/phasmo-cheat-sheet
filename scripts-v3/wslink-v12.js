@@ -186,13 +186,11 @@ function link_room(){
                     else if(state['ghosts'][key] != 3){
                         if((value == 0 && state['ghosts'][key] != 0) || (value == 1 && state['ghosts'][key] != 1)){
                             fade(document.getElementById(key),true);
-                            autoSelect()
                         }
                     }
                 }
                 else if (value == -1){
                     remove(document.getElementById(key),true);
-                    autoSelect()
                 }
                 else if(value == 2 || value == -2){
                     if(markedDead){
@@ -205,7 +203,6 @@ function link_room(){
                             select(document.getElementById(key),true);
                         }
                     }
-                    autoSelect()
                 }
             }
 
@@ -246,7 +243,6 @@ function link_room(){
             }
             
             filter(true)
-            autoSelect()
 
         } catch (error){
             console.log(error)
@@ -294,7 +290,6 @@ function link_link(){
                     send_timer_link("COOLDOWN_VAL","0:00")
                     send_evidence_link()
                     send_ghosts_link()
-                    autoSelect()
                 }
                 if (incoming_state['action'].toUpperCase() == "UNLINKED"){
                     disconnect_link()
@@ -313,7 +308,6 @@ function link_link(){
                 if (incoming_state['action'].toUpperCase() == "EVIDENCE"){
                     if(!$(document.getElementById(incoming_state['evidence']).querySelector("#checkbox")).hasClass("block")){
                         tristate(document.getElementById(incoming_state['evidence']))
-                        autoSelect()
                     }
                 }
                 return

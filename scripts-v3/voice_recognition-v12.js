@@ -206,7 +206,6 @@ function parse_speech(vtext){
 
         if (vvalue == 0){
             fade(document.getElementById(smallest_ghost));
-            autoSelect()
         }
         else if (vvalue == 3){
             guess(document.getElementById(smallest_ghost));
@@ -220,7 +219,6 @@ function parse_speech(vtext){
         }
         else if (vvalue == -1){
             remove(document.getElementById(smallest_ghost));
-            autoSelect()
         }
         else if (vvalue == -2){
             died(document.getElementById(smallest_ghost));
@@ -281,7 +279,6 @@ function parse_speech(vtext){
             while (vvalue != {"good":1,"bad":-1,"neutral":0}[document.getElementById(smallest_evidence).querySelector("#checkbox").classList[0]]){
                 tristate(document.getElementById(smallest_evidence));
             }
-            autoSelect()
         }
         else{
             domovoi_msg = `Evidence ${smallest_evidence} is locked!`
@@ -329,7 +326,6 @@ function parse_speech(vtext){
         domovoi_msg += `${smallest_evidence} as monkey paw evidence`
 
         monkeyPawFilter($(document.getElementById(smallest_evidence)).parent().find(".monkey-paw-select"))
-        autoSelect()
 
         resetResetButton()
         domovoi_heard(domovoi_msg)
@@ -373,7 +369,6 @@ function parse_speech(vtext){
                     tristate(document.getElementById("LOS"));
                 }
                 domovoi_msg = `${vvalue == -1 ? 'cleared' : vvalue == 0 ? 'marked not' : 'marked'} line of sight`
-                autoSelect()
             }
         }
         else{
@@ -405,7 +400,6 @@ function parse_speech(vtext){
                 while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_speed).querySelector("#checkbox").classList[0]]){
                     dualstate(document.getElementById(smallest_speed));
                 }
-                autoSelect()
             }
             else{
                 domovoi_msg = `Speed ${smallest_speed} is locked!`
@@ -464,7 +458,6 @@ function parse_speech(vtext){
             while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_sanity).querySelector("#checkbox").classList[0]]){
                 dualstate(document.getElementById(smallest_sanity),false,true);
             }
-            autoSelect()
         }
         else{
             domovoi_msg = `Sanity ${smallest_sanity} is locked!`
@@ -555,7 +548,6 @@ function parse_speech(vtext){
         document.getElementById("num_evidence").value = smallest_num ?? 3
         if(prev_value != smallest_num){
             filter()
-            autoSelect()
             flashMode()
             saveSettings()
         }
