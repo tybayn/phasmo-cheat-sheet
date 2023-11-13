@@ -1269,6 +1269,7 @@ function reset(skip_continue_session=false){
     }
 
     if(ready){
+        send_reset_link()
         state['settings'] = JSON.stringify(user_settings)
         saveSettings(true)
 

@@ -370,28 +370,39 @@ function send_ghost_link(ghost,value){
     }
 }
 
-function send_evidence_link(){
+function send_evidence_link(reset = false){
     if(hasDLLink){
         var evi_list = [];
         for (const [key, value] of Object.entries(state['evidence'])){ 
-            evi_list.push(`${key}:${value}`)
+            evi_list.push(`${key}:${reset ? 0 : value}`)
         }
         dlws.send(`{"action":"EVIDENCE","evidences":"${evi_list}"}`)
     }
 }
 
-function send_ghosts_link(){
+function send_ghosts_link(reset = false){
     if(hasDLLink){
         var ghost_list = [];
         for (const [key, value] of Object.entries(state['ghosts'])){ 
             if($(document.getElementById(key)).hasClass("hidden")){
-                ghost_list.push(`${key}:-1:${bpm_list.includes(key) ? 1 : 0}`)
+                ghost_list.push(`${key}:${reset ? 1 : -1}:${bpm_list.includes(key) && !reset ? 1 : 0}`)
             }
             else{
-                ghost_list.push(`${key}:${value}:${bpm_list.includes(key) ? 1 : 0}`)
+                ghost_list.push(`${key}:${reset ? 1 :value}:${bpm_list.includes(key) && !reset  ? 1 : 0}`)
             }
         }
         dlws.send(`{"action":"GHOSTS","ghost":"${ghost_list}"}`)
+    }
+}
+
+function send_reset_link(){
+    if(hasDLLink){
+        send_ghost_link("",0)
+        send_ghosts_link(true)
+        send_evidence_link(true)
+        send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
+        send_timer_link("TIMER_VAL","0:00")
+        send_timer_link("COOLDOWN_VAL","0:00")
     }
 }
 
