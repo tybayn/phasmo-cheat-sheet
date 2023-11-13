@@ -916,12 +916,17 @@ function autoSelect(){
         var cur_selected = []
         var has_selected = false
         var selected = "";
+        var died = "";
         var guessed = "";
         var ghosts = document.getElementsByClassName("ghost_card")
         for (var i = 0; i < ghosts.length; i++){
-            if($(ghosts[i]).hasClass("died") || $(ghosts[i]).hasClass("selected")){
+            if($(ghosts[i]).hasClass("selected")){
                 has_selected = true
                 selected = ghosts[i].id;
+            }
+            else if($(ghosts[i]).hasClass("died")){
+                has_selected = true
+                died = ghosts[i].id;
             }
             else if($(ghosts[i]).hasClass("guessed")){
                 has_selected = true
@@ -948,6 +953,9 @@ function autoSelect(){
         else{
             if (selected != ""){
                 send_ghost_link(selected,2)
+            }
+            else if(died != ""){
+                send_ghost_link(died,-1)
             }
             else if (guessed != ""){
                 send_ghost_link(guessed,1)

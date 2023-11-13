@@ -285,6 +285,7 @@ function link_link(){
                 if (incoming_state['action'].toUpperCase() == "LINKED"){
                     document.getElementById("link_id_note").innerText = `STATUS: Linked`
                     document.getElementById("dllink_status").className = "connected"
+                    dlws.send('{"action":"LINK"}')
                     send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
                     send_timer_link("TIMER_VAL","0:00")
                     send_timer_link("COOLDOWN_VAL","0:00")
@@ -374,7 +375,7 @@ function send_evidence_link(reset = false){
     if(hasDLLink){
         var evi_list = [];
         for (const [key, value] of Object.entries(state['evidence'])){ 
-            evi_list.push(`${key}:${reset ? 0 : value}`)
+            evi_list.push(`${key}:${reset ? 0 : $(document.getElementById(key)).hasClass("block")? -2 : value}`)
         }
         dlws.send(`{"action":"EVIDENCE","evidences":"${evi_list}"}`)
     }
@@ -403,6 +404,7 @@ function send_reset_link(){
         send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
         send_timer_link("TIMER_VAL","0:00")
         send_timer_link("COOLDOWN_VAL","0:00")
+        dlws.send('{"action":"UNLINK"}')
     }
 }
 
