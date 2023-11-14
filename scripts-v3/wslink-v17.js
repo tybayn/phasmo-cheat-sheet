@@ -1,6 +1,9 @@
 let ws = null
 let dlws = null
 
+var ws_ping;
+var dlws_ping;
+
 function auto_link(){
     var room_id = getCookie("room_id")
     var link_id = getCookie("link_id")
@@ -86,6 +89,9 @@ function link_room(){
         $("#room_id_disconnect").show()
         document.getElementById("room_id_note").innerText = "STATUS: Connected"
         document.getElementById("settings_status").className = "connected"
+        ws_ping = setInterval(function(){
+            send_ping()
+        }, 30000)
     }
     ws.onerror = function(event){
         document.getElementById("room_id_note").innerText = "ERROR: Could not connect!"
@@ -290,6 +296,9 @@ function link_link(){
                     send_timer_link("TIMER_VAL","0:00")
                     send_timer_link("COOLDOWN_VAL","0:00")
                     filter()
+                    dlws_ping = setInterval(function(){
+                        send_ping_link()
+                    }, 30000)
                 }
                 if (incoming_state['action'].toUpperCase() == "UNLINKED"){
                     disconnect_link()
@@ -340,6 +349,7 @@ function continue_session(){
 
 function disconnect_room(reset=false,has_status=false){
     ws.close()
+    clearInterval(ws_ping)
     if (!reset){
         $("#room_id_create").show()
         $("#room_id_link").show()
@@ -396,6 +406,12 @@ function send_ghosts_link(reset = false){
     }
 }
 
+function send_ping_link(){
+    if(hasDLLink){
+        dlws.send('{"action":"PING"}')
+    }
+}
+
 function send_reset_link(){
     if(hasDLLink){
         send_ghost_link("",0)
@@ -409,6 +425,7 @@ function send_reset_link(){
 }
 
 function disconnect_link(reset=false,has_status=false){
+    clearInterval(dlws_ping)
     if(!reset){
         if(hasDLLink){
             dlws.send('{"action":"KILL"}')
@@ -434,6 +451,12 @@ function send_timer(force_start = false, force_stop = false){
 function send_cooldown_timer(force_start = false, force_stop = false){
     if(hasLink){
         ws.send(`{"action":"COOLDOWNTIMER","force_start":${force_start},"force_stop":${force_stop}}`)
+    }
+}
+
+function send_ping(){
+    if(hasLink){
+        ws.send('{"action":"PING"}')
     }
 }
 
