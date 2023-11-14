@@ -37,19 +37,19 @@ document.body.onkeyup = function(e) {
 }
 
 var timer_snd = [
-    new Audio('assets/finish.wav'),
-    new Audio('assets/1.wav'),
-    new Audio('assets/2.wav'),
-    new Audio('assets/3.wav'),
-    new Audio('assets/4.wav'),
-    new Audio('assets/5.wav'),
-    new Audio('assets/spirit_smudge.wav'),
-    new Audio('assets/standard_smudge.wav'),
-    new Audio('assets/demon_smudge.wav'),
-    new Audio('assets/demon_cooldown.wav'),
-    new Audio('assets/standard_cooldown.wav'),
-    new Audio('assets/start.wav'),
-    new Audio('assets/stop.wav')];
+    new Audio('assets/finish.mp3'),
+    new Audio('assets/1.mp3'),
+    new Audio('assets/2.mp3'),
+    new Audio('assets/3.mp3'),
+    new Audio('assets/4.mp3'),
+    new Audio('assets/5.mp3'),
+    new Audio('assets/spirit_smudge.mp3'),
+    new Audio('assets/standard_smudge.mp3'),
+    new Audio('assets/demon_smudge.mp3'),
+    new Audio('assets/demon_cooldown.mp3'),
+    new Audio('assets/standard_cooldown.mp3'),
+    new Audio('assets/start.mp3'),
+    new Audio('assets/stop.mp3')];
 timer_snd[0].preload = 'auto';
 timer_snd[1].preload = 'auto';
 timer_snd[2].preload = 'auto';
