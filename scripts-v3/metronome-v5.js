@@ -258,9 +258,9 @@ function mark_ghosts(ms){
                     bpm_list.push(ghosts[i].id)
                 }
             }
-            send_ghosts_link()
         }
     }
+    send_ghosts_link()
 }
 
 function get_bpm_average(values, precision) {

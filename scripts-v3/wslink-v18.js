@@ -3,6 +3,7 @@ let dlws = null
 
 var ws_ping;
 var dlws_ping;
+var await_dlws_pong = false
 
 function auto_link(){
     var room_id = getCookie("room_id")
@@ -280,6 +281,9 @@ function link_link(){
             var incoming_state = JSON.parse(event.data)
 
             if (incoming_state.hasOwnProperty("action")){
+                if (incoming_state['action'].toUpperCase() == "PONG"){
+                    await_dlws_pong = false
+                }
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
                     toggle_timer()
                     send_timer()
@@ -297,7 +301,21 @@ function link_link(){
                     send_timer_link("COOLDOWN_VAL","0:00")
                     filter()
                     dlws_ping = setInterval(function(){
-                        send_ping_link()
+                        if (await_dlws_pong){
+                            clearInterval(dlws_ping)
+                            dlws.send('{"action":"PINGKILL"}')
+                            $("#link_id_create").show()
+                            $("#link_id_disconnect").hide()
+                            document.getElementById("link_id_note").innerText = "ERROR: Link Lost Connection!"
+                            document.getElementById("dllink_status").className = "error"
+                            setCookie("link_id","",-1)
+                            hasDLLink=false
+                            dlws.close()
+                        }
+                        else{
+                            send_ping_link()
+                            await_dlws_pong = true
+                        }
                     }, 30000)
                 }
                 if (incoming_state['action'].toUpperCase() == "UNLINKED"){
