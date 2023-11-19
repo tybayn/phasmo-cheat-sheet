@@ -375,6 +375,7 @@ function disconnect_room(reset=false,has_status=false){
         if(!has_status){
             document.getElementById("room_id_note").innerText = "STATUS: Not connected"
             document.getElementById("settings_status").className = null
+            document.getElementById("room_id").value = ""
         }
         setCookie("room_id","",-1)
         hasLink=false
@@ -453,6 +454,7 @@ function disconnect_link(reset=false,has_status=false){
         if(!has_status){
             document.getElementById("link_id_note").innerText = "STATUS: Not linked"
             document.getElementById("dllink_status").className = null
+            document.getElementById("link_id").value = ""
         }
         setCookie("link_id","",-1)
         hasDLLink=false
