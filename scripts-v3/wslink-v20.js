@@ -331,6 +331,25 @@ function link_link(){
                 if (incoming_state['action'].toUpperCase() == "MENUFLIP"){
                     toggleFilterTools()
                 }
+                if(incoming_state['action'].toUpperCase() == "SAVERESET"){
+                    if(Object.keys(discord_user).length > 0){
+                        if(!hasSelected()){
+                            send_ghost_link("None Selected!",-1)
+                            $("#reset").removeClass("standard_reset")
+                            $("#reset").addClass("reset_pulse")
+                            $("#reset").html("No ghost selected!<div class='reset_note'>(say 'force reset' to save & reset)</div>")
+                            $("#reset").prop("onclick",null)
+                            $("#reset").prop("ondblclick","reset()")
+                            reset_voice_status()
+                        }
+                        else{
+                            reset()
+                        }
+                    }
+                    else{
+                        reset()
+                    }
+                }
 
                 if (incoming_state['action'].toUpperCase() == "EVIDENCE"){
                     if(!$(document.getElementById(incoming_state['evidence']).querySelector("#checkbox")).hasClass("block")){

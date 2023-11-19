@@ -184,6 +184,11 @@ function parse_speech(vtext){
             vvalue = -2
             domovoi_msg = "killed by "
         }
+        else if(vtext.startsWith("show ") || vtext.startsWith("data ") || vtext.startsWith("info ")){
+            vtext = vtext.replace('show ', "").replace('data ', "").replace('info ', "").trim()
+            vvalue = -10
+            domovoi_msg = "showing info for "
+        }
 
         // Common fixes to ghosts
         var prevtext = vtext;
@@ -222,6 +227,10 @@ function parse_speech(vtext){
         }
         else if (vvalue == -2){
             died(document.getElementById(smallest_ghost));
+            if(!$(document.getElementById(smallest_ghost)).isInViewport())
+                document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
+        }
+        else if(vvalue == -10){
             if(!$(document.getElementById(smallest_ghost)).isInViewport())
                 document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
         }
