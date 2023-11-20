@@ -6,6 +6,7 @@ const ZNLANG = {
         "hunt":["hunts"],
         "ghost ":["go ","goes "],
         "remove":["removes","removed","or move"],
+        "select":["like"],
         "ghost remove":["coaster move","coaster movie"],
         "ghost moroi":["ghostman roy"],
         "ghost shade":["goshen"],
