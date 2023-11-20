@@ -25,8 +25,8 @@ const ZNLANG = {
         "remove obake":["removal vodka","removal bouquet","removal bakay"],
         "sanity late":["huntsman elite","trinity lake"],
         "monkey paw":["monkeypad","monkeypod","monkey pot","monkey pox","monkeypox","funky pop","funky paw"],
-        "guess":["guest","gas","gets","gust","guys","cast","guesss"],
-        "ghost guess":["ghost ghost"],
+        "guess":["guest","gas","gets","gust","guys","cast","guesss","kiss"],
+        "ghost guess":["ghost ghost", "ghostbusters"],
         "guess jinn":["question"],
         "guess oni":["ghazwan","guesscony","guesstoni"],
         "guess goryo":["guessor oil"],
@@ -35,6 +35,7 @@ const ZNLANG = {
             "castle bake a","castle rocky","castle bouquet","guessso bakke","castle bait","castle bait",
             "guessle bouquet","guessle bake","guessle bucket","guessle vodka","guessle bait"
         ],
+        "guess thaye":["guessing"],
         "start":["stat"],
         "domo":["demo"]
     },
