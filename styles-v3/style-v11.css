@@ -428,6 +428,12 @@ hr{
         border-radius: 5px;
     }
 
+    .settings_check{
+        margin-left: 0 !important;
+        height: 10px;
+        cursor: pointer;
+    }
+
     #news_box .info_block {
         display: flex;
         flex-direction: column;
@@ -857,6 +863,8 @@ hr{
         font-size: 10px;
         padding-top: 10px;
         margin: 0px 10px;
+        display: flex;
+        align-items: center;
     }
 
     .modifier_note_2{

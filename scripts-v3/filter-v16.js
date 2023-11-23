@@ -8,7 +8,7 @@ const all_sanity = ["Late","Average","Early","VeryEarly"]
 let bpm_list = []
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{}}
-var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0}
+var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0}
 
 let znid = getCookie("znid")
 
@@ -1175,6 +1175,8 @@ function flashMode(){
 
 function saveSettings(reset = false){
     user_settings['volume'] = parseInt(document.getElementById("modifier_volume").value)
+    user_settings['mute_timer_toggle'] = document.getElementById("mute_timer_toggle").checked ? 1 : 0;
+    user_settings['mute_timer_countdown'] = document.getElementById("mute_timer_countdown").checked ? 1 : 0;
     user_settings['offset'] = parseInt(document.getElementById("offset_value").innerText.replace(/\d+(?:-\d+)+/g,""))
     user_settings['ghost_modifier'] = parseInt(document.getElementById("ghost_modifier_speed").value)
     user_settings['num_evidences'] = parseInt(document.getElementById("num_evidence").value)
@@ -1190,9 +1192,11 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0}
+        user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0}
     }
     document.getElementById("modifier_volume").value = user_settings['volume'] ?? 50
+    document.getElementById("mute_timer_toggle").checked = user_settings['mute_timer_toggle'] ?? 0 == 1
+    document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] ?? 0 == 1
     document.getElementById("offset_value").innerText = ` ${user_settings['offset'] ?? 0}% `
     document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier'] ?? 2
     document.getElementById("num_evidence").value = user_settings['num_evidences'] ?? 3
@@ -1222,8 +1226,10 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0}
+    user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"offset":0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0}
     document.getElementById("modifier_volume").value = user_settings['volume']
+    document.getElementById("mute_timer_toggle").checked = user_settings['mute_timer_toggle'] == 1
+    document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] == 1
     document.getElementById("offset_value").innerText = ` ${user_settings['offset']}% `
     document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier']
     document.getElementById("num_evidence").value = user_settings['num_evidences']

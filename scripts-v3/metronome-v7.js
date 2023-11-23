@@ -8,6 +8,8 @@ snd[1].load();
 var speed = 1.7
 var tempo = 115
 var volume = 0.5
+var muteTimerToggle = false
+var muteTimerCountdown = false
 var running = false
 var start = Date.now()
 var snd_choice = 0
@@ -16,6 +18,16 @@ var additional_ghost_data = ["hantu","moroi","thaye"]
 var additional_ghost_var = [0.18,0.085,0.175]
 
 var last_id = "";
+
+function mute(type){
+    if(type == "toggle"){
+        muteTimerToggle = document.getElementById("mute_timer_toggle").checked
+    }
+    if(type == "countdown"){
+        muteTimerCountdown = document.getElementById("mute_timer_countdown").checked
+    }
+}
+
 function toggleSound(set_tempo,id){
     adjustOffset(0)
     speed = set_tempo

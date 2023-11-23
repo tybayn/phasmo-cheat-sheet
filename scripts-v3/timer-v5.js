@@ -102,18 +102,22 @@ function toggle_timer(force_start = false, force_stop = false){
             $("#play_button").attr('src','imgs/play.png')
             clearTimeout(cur_timer)
         }
-        stop_sound = timer_snd[12].cloneNode()
-        stop_sound.volume = volume
-        stop_sound.play()
+        if(!muteTimerToggle){
+            stop_sound = timer_snd[12].cloneNode()
+            stop_sound.volume = volume
+            stop_sound.play()
+        }
     }
 
     else if($("#play_button").hasClass("playing")){
         $("#play_button").removeClass("playing")
         $("#play_button").attr('src','imgs/play.png')
         clearTimeout(cur_timer)
-        stop_sound = timer_snd[12].cloneNode()
-        stop_sound.volume = volume
-        stop_sound.play()
+        if(!muteTimerToggle){
+            stop_sound = timer_snd[12].cloneNode()
+            stop_sound.volume = volume
+            stop_sound.play()
+        }
     }
 
     else{
@@ -124,9 +128,11 @@ function toggle_timer(force_start = false, force_stop = false){
 }
 
 function start_timer(){
-    start_sound = timer_snd[11].cloneNode()
-    start_sound.volume = volume
-    start_sound.play()
+    if(!muteTimerToggle){
+        start_sound = timer_snd[11].cloneNode()
+        start_sound.volume = volume
+        start_sound.play()
+    }
 
     var time = 180
 
@@ -142,50 +148,52 @@ function start_timer(){
         var seconds = Math.floor((t % (1000 * 60)) / 1000);
         var timeleft = Math.floor(t / 1000);
 
-        if (timeleft == 128){
-            cur_sound = timer_snd[8].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 98){
-            cur_sound = timer_snd[7].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 8){
-            cur_sound = timer_snd[6].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 125 || timeleft == 95 || timeleft == 5){
-            cur_sound = timer_snd[5].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 124 || timeleft == 94 || timeleft == 4){
-            cur_sound = timer_snd[4].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 123 || timeleft == 93 || timeleft == 3){
-            cur_sound = timer_snd[3].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 122 || timeleft == 92 || timeleft == 2){
-            cur_sound = timer_snd[2].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 121 || timeleft == 91 || timeleft == 1){
-            cur_sound = timer_snd[1].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 120 || timeleft == 90 || timeleft == 0){
-            cur_sound = timer_snd[0].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
+        if(!muteTimerCountdown){
+            if (timeleft == 128){
+                cur_sound = timer_snd[8].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 98){
+                cur_sound = timer_snd[7].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 8){
+                cur_sound = timer_snd[6].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 125 || timeleft == 95 || timeleft == 5){
+                cur_sound = timer_snd[5].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 124 || timeleft == 94 || timeleft == 4){
+                cur_sound = timer_snd[4].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 123 || timeleft == 93 || timeleft == 3){
+                cur_sound = timer_snd[3].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 122 || timeleft == 92 || timeleft == 2){
+                cur_sound = timer_snd[2].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 121 || timeleft == 91 || timeleft == 1){
+                cur_sound = timer_snd[1].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 120 || timeleft == 90 || timeleft == 0){
+                cur_sound = timer_snd[0].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
         }
 
         min_val = t<0 ? "00" : zeroPad(minutes,2);
@@ -235,18 +243,22 @@ function toggle_cooldown_timer(force_start = false, force_stop = false){
             $("#play_cooldown_button").attr('src','imgs/play.png')
             clearTimeout(cur_cooldown_timer)
         }
-        stop_sound = timer_snd[12].cloneNode()
-        stop_sound.volume = volume
-        stop_sound.play()
+        if(!muteTimerToggle){
+            stop_sound = timer_snd[12].cloneNode()
+            stop_sound.volume = volume
+            stop_sound.play()
+        }
     }
 
     else if($("#play_cooldown_button").hasClass("playing")){
         $("#play_cooldown_button").removeClass("playing")
         $("#play_cooldown_button").attr('src','imgs/play.png')
         clearTimeout(cur_cooldown_timer)
-        stop_sound = timer_snd[12].cloneNode()
-        stop_sound.volume = volume
-        stop_sound.play()
+        if(!muteTimerToggle){
+            stop_sound = timer_snd[12].cloneNode()
+            stop_sound.volume = volume
+            stop_sound.play()
+        }
     }
     else{
         $("#play_cooldown_button").addClass("playing")
@@ -256,9 +268,11 @@ function toggle_cooldown_timer(force_start = false, force_stop = false){
 }
 
 function start_cooldown_timer(){
-    start_sound = timer_snd[11].cloneNode()
-    start_sound.volume = volume
-    start_sound.play()
+    if(!muteTimerToggle){
+        start_sound = timer_snd[11].cloneNode()
+        start_sound.volume = volume
+        start_sound.play()
+    }
 
     var time = 25
 
@@ -274,36 +288,38 @@ function start_cooldown_timer(){
         var seconds = Math.floor((t % (1000 * 60)) / 1000);
         var timeleft = Math.floor(t / 1000);
 
-        if (timeleft == 10){
-            cur_sound = timer_snd[9].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 5){
-            cur_sound = timer_snd[10].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-       
-        if (timeleft == 8 || timeleft == 3){
-            cur_sound = timer_snd[3].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 7 || timeleft == 2){
-            cur_sound = timer_snd[2].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 6 || timeleft == 1){
-            cur_sound = timer_snd[1].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
-        }
-        if (timeleft == 5 || timeleft == 0){
-            cur_sound = timer_snd[0].cloneNode()
-            cur_sound.volume = volume
-            cur_sound.play()
+        if(!muteTimerCountdown){
+            if (timeleft == 10){
+                cur_sound = timer_snd[9].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 5){
+                cur_sound = timer_snd[10].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+        
+            if (timeleft == 8 || timeleft == 3){
+                cur_sound = timer_snd[3].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 7 || timeleft == 2){
+                cur_sound = timer_snd[2].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 6 || timeleft == 1){
+                cur_sound = timer_snd[1].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
+            if (timeleft == 5 || timeleft == 0){
+                cur_sound = timer_snd[0].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+            }
         }
 
         min_val = t<0 ? "00" : zeroPad(minutes,2);

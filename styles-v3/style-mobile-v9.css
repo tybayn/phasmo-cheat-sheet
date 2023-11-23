@@ -995,6 +995,8 @@
         font-size: 18px;
         padding-top: 15px;
         margin: 0px 10px;
+        display: flex;
+        align-items: center;
     }
 
     .modifier_note_2{
