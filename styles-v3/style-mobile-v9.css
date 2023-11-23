@@ -32,6 +32,18 @@
         transition: left 0.5s ease;
     }
 
+    .less_pad{
+        padding-top: 10px !important;
+    }
+
+    .settings_check{
+        margin-left: 0 !important;
+        height: 26px;
+        width: 26px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
     #settings_tab{
         position: absolute;
         transform: rotate(-90deg);
@@ -992,7 +1004,7 @@
 
     .modifier_note{
         color: #ffffffa0;
-        font-size: 18px;
+        font-size: 21px;
         padding-top: 15px;
         margin: 0px 10px;
         display: flex;

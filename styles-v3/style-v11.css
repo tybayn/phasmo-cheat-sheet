@@ -428,6 +428,10 @@ hr{
         border-radius: 5px;
     }
 
+    .less_pad{
+        padding-top: 0px !important;
+    }
+
     .settings_check{
         margin-left: 0 !important;
         height: 10px;
