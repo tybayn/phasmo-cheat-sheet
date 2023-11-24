@@ -169,8 +169,17 @@ function bpm_calc(forced=false) {
         input_ms = document.getElementById("bpm_type").checked ? av_ms : ex_ms
         document.getElementById('input_bpm').innerHTML = `${Math.round(input_bpm)}<br>bpm`;
         document.getElementById('input_speed').innerHTML = `${input_ms}<br>m/s`;
-        mark_ghosts(input_ms)
-        mark_ghost_details(ex_ms)
+        
+        try{
+            mark_ghosts(input_ms)
+        } catch(Error){
+            // Om nom nom
+        }
+        try{
+            mark_ghost_details(ex_ms)
+        } catch(Error){
+            // Om nom nom
+        }
         send_bpm_link(Math.round(input_bpm).toString(),input_ms.toString(),["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
         saveSettings()
     }
