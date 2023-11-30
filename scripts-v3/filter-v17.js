@@ -1212,8 +1212,16 @@ function loadSettings(){
         document.getElementById('input_bpm').innerHTML = `${user_settings['bpm']}<br>bpm`
         var cms = document.getElementById("bpm_type").checked ? get_ms(user_settings['bpm']) : get_ms_exact(user_settings['bpm'])
         document.getElementById('input_speed').innerHTML = `${cms}<br>m/s`;
-        mark_ghosts(cms)
-        mark_ghost_details(cms)
+        try{
+            mark_ghosts(cms)
+        } catch(Error){
+            // Om nom nom
+        }
+        try{
+            mark_ghost_details(cms)
+        } catch(Error){
+            // Om nom nom
+        }
     }
 
     setCookie("settings",JSON.stringify(user_settings),30)
