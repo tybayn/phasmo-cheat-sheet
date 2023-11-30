@@ -187,7 +187,7 @@ function select(elem,ignore_link=false,internal=false){
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
     }
     setCookie("state",JSON.stringify(state),1)
-    if(!ignore_link && !switch_type){filter(ignore_link)}
+    if(!ignore_link){filter(ignore_link)}
 
     if(polled && !ignore_link){resetResetButton()}
 }
@@ -251,7 +251,7 @@ function died(elem,ignore_link=false,internal=false){
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -2;
     }
     setCookie("state",JSON.stringify(state),1)
-    if(!ignore_link && !switch_type){filter(ignore_link)}
+    if(!ignore_link){filter(ignore_link)}
 
     if(polled && !ignore_link){resetResetButton()}
 }
