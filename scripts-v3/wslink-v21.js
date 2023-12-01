@@ -322,7 +322,12 @@ function link_link(){
                     disconnect_link()
                 }
                 if (incoming_state['action'].toUpperCase() == "DL_STEP"){
-                    bpm_tap()
+                    if (incoming_state.hasOwnProperty("timestamp")){
+                        bpm_tap(incoming_state["timestamp"])
+                    }
+                    else{
+                        bpm_tap()
+                    }
                 }
                 if (incoming_state['action'].toUpperCase() == "DL_RESET"){
                     bpm_clear()

@@ -101,8 +101,13 @@ let taps = [];
 var bpm_speeds = new Set()
 var hit = 0
 
-function bpm_tap(){
-    if (Date.now() - taps[taps.length-1] > (5000)){
+function bpm_tap(ts=-1){
+
+    if (ts == -1){
+        ts = Date.now();
+    }
+
+    if (ts - taps[taps.length-1] > (5000)){
         taps = []
         hit = 0
         document.getElementById('input_bpm').innerHTML = `0<br>bpm`;
@@ -112,7 +117,7 @@ function bpm_tap(){
     document.getElementById('tap_viz').innerHTML += (hit == 0 ? " ." : ".")
     hit = (hit + 1) % 4
     taps.length
-    taps.push( Date.now() );
+    taps.push( ts );
     bpm_calc();
 }
 
