@@ -66,6 +66,11 @@
         text-align: center;
         padding: 20px;
     }
+
+    #event_details .embed{
+        width: 338px;
+        height: 190px;
+    }
 }
 
 @media screen and (pointer: coarse) and (max-device-width: 600px) {
@@ -141,5 +146,10 @@
     #event_details .solution{
         text-align: center;
         padding: 20px;
+    }
+
+    #event_details .embed{
+        width: 554px;
+        height: 312px;
     }
 }
