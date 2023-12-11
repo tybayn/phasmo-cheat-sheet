@@ -371,6 +371,50 @@ hr{
         border-radius: 5px 0px 0px 5px;
     }
 
+    #lang_blackout{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        left: 0;
+        top: 0;
+        z-index: 10;
+    }
+
+    #language_box{
+        position: fixed;
+        top: 46px;
+        z-index: 1;
+        width: 160px;
+        height: 24px;
+        background-color: #313248;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: stretch;
+        align-items: flex-start;
+        color: #fff;
+        padding: 5px 8px 5px 8px;
+        font-size: 14px;
+        transition: right 0.5s ease;
+    }
+
+    #language_tab{
+        position: absolute;
+        height: 24px;
+        width: 24px;
+        text-align: center;
+        top: 0px;
+        left: -35px;
+        background-color: #313248;
+        padding: 5px;
+        cursor: pointer;
+        border-style: solid;
+        border-color: #ccc;
+        border-width: 1px 0px 1px 1px;
+        border-radius: 5px 0px 0px 5px;
+    }
+
     /* #settings_tab:hover, #discord_link_tab:hover, #event_tab:hover, #wiki_tab:hover, #maps_tab:hover{
         background-color: #ffffff60;
     } */
@@ -380,7 +424,7 @@ hr{
         margin: 2px 0px 10px 0px;
     }
 
-    #settings_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon{
+    #settings_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon, #language_box .icon{
         position: absolute;
         top: 5px;
         right: 4px;
@@ -392,7 +436,7 @@ hr{
         cursor: pointer;
     }
 
-    #settings_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #news_box .icon:before{
+    #settings_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #news_box .icon:before, #language_box .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -402,7 +446,7 @@ hr{
         top:4px;
     }
 
-    #settings_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #news_box .icon:after{
+    #settings_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #news_box .icon:after, #language_box .icon:after{
         content:"";
         position: absolute;
         width:15px;
