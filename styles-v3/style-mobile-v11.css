@@ -273,6 +273,18 @@
         display: none;
     }
 
+    #lang_blackout{
+        display: none;
+    }
+
+    #language_box{
+        display: none;
+    }
+
+    #language_tab{
+        display: none;
+    }
+
     .settings_title{
         font-size: 40px;
         margin: 10px 0px 10px 0px;
