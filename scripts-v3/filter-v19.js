@@ -1152,6 +1152,8 @@ function showMaps(forceOpen = false, forceClose = false){
 
 function showNews(){
     if (document.getElementById("news_box").style.right == "-366px"){
+        document.getElementById("language_box").style.zIndex = "9"
+        document.getElementById("news_box").style.zIndex = "11"
         document.getElementById("news_box").style.boxShadow = "-5px 0px 10px 0px #000"
         document.getElementById("news_tab").style.boxShadow = "-5px 6px 5px -2px #000"
         document.getElementById("news_box").style.right = "0px"
@@ -1161,6 +1163,23 @@ function showNews(){
         document.getElementById("news_box").style.right = "-366px"
         document.getElementById("news_box").style.boxShadow = "none"
         document.getElementById("news_box").style.boxShadow = "none"
+    }
+}
+
+function showLanguage(){
+    if (document.getElementById("language_box").style.right == "-176px"){
+        document.getElementById("news_box").style.zIndex = "9"
+        document.getElementById("language_box").style.zIndex = "11"
+        document.getElementById("language_box").style.boxShadow = "-5px 0px 10px 0px #000"
+        document.getElementById("language_tab").style.boxShadow = "-5px 6px 5px -2px #000"
+        document.getElementById("language_box").style.right = "0px"
+        $("#lang_blackout").fadeIn(500)
+    }
+    else {
+        document.getElementById("language_box").style.right = "-176px"
+        document.getElementById("language_box").style.boxShadow = "none"
+        document.getElementById("language_box").style.boxShadow = "none"
+        $("#lang_blackout").fadeOut(500)
     }
 }
 

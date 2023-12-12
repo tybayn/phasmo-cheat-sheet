@@ -27,7 +27,7 @@ function checkLink(){
 
         if (params.get('lang')){
             lang = params.get('lang').toLowerCase()
-            if (["tr","fr"].includes(lang)){
+            if (["tr","fr","ru"].includes(lang)){
                 window.location.href = `https://tybayn.github.io/phasmo-cheat-sheet-${lang}/`
             }
             else{
@@ -37,6 +37,13 @@ function checkLink(){
 
         resolve("URL parsed")
     })
+}
+
+function loadLanguage(){
+    var lang = document.getElementById("language").value
+    if(lang != "en"){
+        window.location.href = `https://tybayn.github.io/phasmo-cheat-sheet-${lang}/`
+    }
 }
 
 function heartbeat(){
