@@ -266,7 +266,6 @@ function link_link(){
 
     dlws.onopen = function(event){
         hasDLLink = true;
-        await_dlws_pong = true
         $("#link_id_create").hide()
         $("#link_id_disconnect").show()
         document.getElementById("link_id_note").innerText = "STATUS: Awaiting Desktop Link"
@@ -301,6 +300,7 @@ function link_link(){
                     send_timer_link("TIMER_VAL","0:00")
                     send_timer_link("COOLDOWN_VAL","0:00")
                     filter()
+                    await_dlws_pong = false
                     dlws_ping = setInterval(function(){
                         if (await_dlws_pong){
                             clearInterval(dlws_ping)
