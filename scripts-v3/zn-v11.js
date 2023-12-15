@@ -27,7 +27,7 @@ function checkLink(){
 
         if (params.get('lang')){
             lang = params.get('lang').toLowerCase()
-            if (["tr","fr","ru","de"].includes(lang)){
+            if (["tr","fr","ru","de","pl"].includes(lang)){
                 window.location.href = `https://tybayn.github.io/phasmo-cheat-sheet-${lang}/`
             }
             else{
