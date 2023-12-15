@@ -266,6 +266,7 @@ function link_link(){
 
     dlws.onopen = function(event){
         hasDLLink = true;
+        await_dlws_pong = true
         $("#link_id_create").hide()
         $("#link_id_disconnect").show()
         document.getElementById("link_id_note").innerText = "STATUS: Awaiting Desktop Link"
@@ -308,6 +309,7 @@ function link_link(){
                             $("#link_id_disconnect").hide()
                             document.getElementById("link_id_note").innerText = "ERROR: Link Lost Connection!"
                             document.getElementById("dllink_status").className = "error"
+                            document.getElementById("link_id").value = ""
                             setCookie("link_id","",-1)
                             hasDLLink=false
                             dlws.close()
