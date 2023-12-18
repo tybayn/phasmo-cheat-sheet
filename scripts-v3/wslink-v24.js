@@ -432,7 +432,7 @@ function send_evidence_link(reset = false){
         for (const [key, value] of Object.entries(state['evidence'])){ 
             evi_list.push(`${key}:${reset ? 0 : $(document.getElementById(key)).hasClass("block")? -2 : value}`)
         }
-        dlws.send(`{"action":"EVIDENCE","evidences":"${evi_list}"}`)
+        dlws.send(`{"action":"EVIDENCE","evidences":"${evi_list}","num_evidence":${document.getElementById("num_evidence").value}}`)
     }
 }
 
