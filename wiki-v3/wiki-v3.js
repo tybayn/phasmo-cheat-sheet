@@ -19,19 +19,25 @@ let ghost_flicker_data = {
         "vis_max":0.30,
         "vis_min":0.08,
         "invis_max":0.92,
-        "invis_min":0.10
+        "invis_min":0.10,
+        "flicker_max":1.00,
+        "flicker_min":0.30
     },
     "Phantom":{
         "vis_max":0.30,
         "vis_min":0.08,
         "invis_max":1.92,
-        "invis_min":0.70
+        "invis_min":0.70,
+        "flicker_max":2.00,
+        "flicker_min":1.00
     },
     "Oni":{
         "vis_max":0.50,
         "vis_min":0.02,
         "invis_max":0.50,
-        "invis_min":0.01
+        "invis_min":0.01,
+        "flicker_max":1.00,
+        "flicker_min":0.30
     }
 }
 
@@ -44,19 +50,23 @@ function startFlicker(elem){
     let vis_max = ghost_flicker_data[ghost].vis_max
     let invis_min = ghost_flicker_data[ghost].invis_min
     let invis_max = ghost_flicker_data[ghost].invis_max
+    let flicker_min = ghost_flicker_data[ghost].flicker_min
+    let flicker_max = ghost_flicker_data[ghost].flicker_max
 
     function flickerOn(){
         if (flickering){
             $(obj).show()
             r = Math.floor((Math.random() * (vis_max - vis_min) + vis_min) * 1000)
-            setTimeout(flickerOff,r)
+            setTimeout(flickerOff,r,r/1000)
         }
     }
 
-    function flickerOff(){
+    function flickerOff(on){
         if (flickering){
             $(obj).hide()
-            r = Math.floor((Math.random() * (invis_max - invis_min) + invis_min) * 1000)
+            t_max = Math.min(flicker_max - on, invis_max)
+            t_min = Math.max(flicker_min - on, invis_min)
+            r = Math.floor((Math.random() * (t_max - t_min) + t_min) * 1000)
             setTimeout(flickerOn,r)
         }
     }
@@ -64,7 +74,7 @@ function startFlicker(elem){
     r = Math.floor((Math.random() * (vis_max - vis_min) + vis_min) * 1000)
     $(obj).show()
     flickering = true
-    setTimeout(flickerOff,r)
+    setTimeout(flickerOff,r,r)
 }
 
 function setFlicker(){
