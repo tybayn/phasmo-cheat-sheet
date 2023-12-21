@@ -16,22 +16,22 @@ function accordian(elem){
 // -----------------------------------------------
 let ghost_flicker_data = {
     "Normal":{
-        "vis_max":0.3,
+        "vis_max":0.30,
         "vis_min":0.08,
-        "invis_max":1.0,
-        "invis_min":0.3
+        "invis_max":0.92,
+        "invis_min":0.10
     },
     "Phantom":{
-        "vis_max":0.3,
+        "vis_max":0.30,
         "vis_min":0.08,
-        "invis_max":2.0,
-        "invis_min":1.0
+        "invis_max":1.92,
+        "invis_min":0.70
     },
     "Oni":{
-        "vis_max":1.0,
-        "vis_min":0.3,
-        "invis_max":0.3,
-        "invis_min":0.08
+        "vis_max":0.50,
+        "vis_min":0.02,
+        "invis_max":0.50,
+        "invis_min":0.01
     }
 }
 
