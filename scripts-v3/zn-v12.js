@@ -235,7 +235,6 @@ function loadAllAndConnect(){
             
             loadSettings()
             filter()
-    
         })
         .then(data => {
             resolve("Ghost data loaded")

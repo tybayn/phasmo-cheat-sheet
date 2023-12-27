@@ -98,6 +98,8 @@ function startMetronome() {
 const bpm_precision = 5;
 let input_bpm = 0;
 let taps = [];
+let bpm_hist = [];
+let start_ts = 0
 var bpm_speeds = new Set()
 var hit = 0
 
@@ -107,21 +109,122 @@ function bpm_tap(ts=-1){
         ts = Date.now();
     }
 
+    if (taps.length == 0){
+        draw_graph()
+    }
+
     if (ts - taps[taps.length-1] > (5000)){
+        draw_graph();
         taps = []
+        bpm_hist = []
         hit = 0
         document.getElementById('input_bpm').innerHTML = `0<br>bpm`;
         document.getElementById('input_speed').innerHTML = `0<br>m/s`;
         document.getElementById('tap_viz').innerHTML = ""
     }
-    document.getElementById('tap_viz').innerHTML += (hit == 0 ? " ." : ".")
+    if(document.getElementById('tap_viz').innerHTML.length < 33)
+        document.getElementById('tap_viz').innerHTML += (hit == 0 ? " ." : ".")
+    else
+        document.getElementById('tap_viz').innerHTML = (hit == 0 ? document.getElementById('tap_viz').innerHTML.substring(2) + " ." : document.getElementById('tap_viz').innerHTML.substring(1) + ".")
     hit = (hit + 1) % 4
-    taps.length
     taps.push( ts );
     bpm_calc();
+
+    if (taps.length >= 5)
+        graph_bpm();
+    else
+        bpm_hist = []
+}
+
+function draw_graph(clear = true){
+    var graph = $('#bpm_hist')
+    var c = graph[0].getContext('2d');
+
+    c.reset()
+
+    c.lineWidth = 0.5;
+    c.strokeStyle = '#fff'
+    c.beginPath();
+    c.moveTo(15,5)
+    c.lineTo(15,graph.height() - 15)
+    c.lineTo(graph.width(),graph.height() - 15)
+    c.stroke();
+
+    // Draw x axis
+    c.textAlign = "center"
+    c.font = "6pt Calibri"
+    c.fillStyle = "#777"
+    c.strokeStyle = '#444'
+    for (var i = 0; i <= 45; i+=10){
+        c.fillText(i, (graph.width()-15) / 45 * i + 15, graph.height() - 5)
+        c.beginPath();
+        c.setLineDash([2,1])
+        c.moveTo((graph.width()-15) / 45 * i + 15,graph.height() - 5)
+        c.lineTo((graph.width()-15) / 45 * i + 15,5)
+        c.stroke();
+    }
+
+    // Draw y axis
+    c.textAlign = "right"
+    c.textBaseline = "middle"
+    c.font = "6pt Calibri"
+    c.fillStyle = "#777"
+    c.strokeStyle = '#444'
+
+    for (var i = 0; i <= 4.0; i+=0.5){
+        c.fillText(i, 10, (graph.height()-20) - ((graph.height()-20) / 4 * i) + 5)
+        c.beginPath();
+        c.setLineDash([2,1])
+        c.moveTo(15,(graph.height()-20) - ((graph.height()-20) / 4 * i) + 5)
+        c.lineTo(graph.width(),(graph.height()-20) - ((graph.height()-20) / 4 * i) + 5)
+        c.stroke();
+    }
+
+    // Draw previous graph
+    if(bpm_hist.length > 0){
+        c.lineWidth = 1;
+        c.strokeStyle = clear ? "#700" : "#f00"
+        c.beginPath();
+        if(clear)
+            c.setLineDash([2,2])
+        else
+            c.setLineDash([1,0])
+        c.moveTo(15,(graph.height()-20) - ((graph.height()-20) / 4 * bpm_hist[0]) + 5)
+        for(var i = 1; i < bpm_hist.length; i++){
+            var cur_x = (graph.width()-15) / 45 * bpm_hist[i]['seconds'] + 15
+            var cur_y = (graph.height()-20) - ((graph.height()-20) / 4 * bpm_hist[i]['speed']) + 5
+            c.lineTo(cur_x,cur_y)
+        }
+        c.stroke()
+    }
+}
+
+function graph_bpm(){
+    var graph = $('#bpm_hist')
+    var c = graph[0].getContext('2d');
+
+    c.lineWidth = 1;
+    c.strokeStyle = "#f00"
+    c.beginPath();
+    c.setLineDash([1,0])
+    
+    var cur_x = (graph.width()-15) / 45 * (bpm_hist[bpm_hist.length - 1]['seconds']) + 15
+    var cur_y = (graph.height()-20) - ((graph.height()-20) / 4 * bpm_hist[bpm_hist.length - 1]['speed']) + 5
+    if(bpm_hist.length > 1){
+        var prev_x = (graph.width()-15) / 45 * (bpm_hist[bpm_hist.length - 2]['seconds']) + 15
+        var prev_y = (graph.height()-20) - ((graph.height()-20) / 4 * bpm_hist[bpm_hist.length - 2]['speed']) + 5
+    }
+    else{
+        var prev_x = cur_x
+        var prev_y = cur_y
+    }
+    c.moveTo(prev_x,prev_y)
+    c.lineTo(cur_x,cur_y)
+    c.stroke()
 }
 
 function bpm_clear() {
+    draw_graph()
     taps = []
     bpm_list = []
     document.getElementById('input_bpm').innerHTML = `0<br>bpm`;
@@ -133,6 +236,7 @@ function bpm_clear() {
     }
     $("#guide_tab_footstep").hide()
     $("#hunts_tab_footstep").hide()
+    $("#hunts_tab_indent_footstep").hide()
     for (var g = 0 ;g < additional_ghost_data.length; g++){
         var speed_tab = document.getElementById(`${additional_ghost_data[g]}_speed_breakdown`)
         for (var i = 1, row; row = speed_tab.rows[i]; i++){
@@ -146,6 +250,10 @@ function bpm_clear() {
 function bpm_calc(forced=false) {
     let current_bpm = 0;
     let avg_taps = [];
+
+    if (taps.length == 5) {
+        start_ts = taps[taps.length - 1]
+    }
 
     if (taps.length >= 2) {
         
@@ -174,6 +282,8 @@ function bpm_calc(forced=false) {
         input_ms = document.getElementById("bpm_type").checked ? av_ms : ex_ms
         document.getElementById('input_bpm').innerHTML = `${Math.round(input_bpm)}<br>bpm`;
         document.getElementById('input_speed').innerHTML = `${input_ms}<br>m/s`;
+
+        bpm_hist.push({"speed":input_ms,"seconds":(taps[taps.length - 1] - start_ts)/1000});
         
         try{
             mark_ghosts(input_ms)
@@ -216,6 +326,7 @@ function mark_ghost_details(ms)
     ms = parseFloat(ms)
     $("#guide_tab_footstep").hide()
     $("#hunts_tab_footstep").hide()
+    $("#hunts_tab_indent_footstep").hide()
     for (var g = 0 ;g < additional_ghost_data.length; g++){
         var speed_tab = document.getElementById(`${additional_ghost_data[g]}_speed_breakdown`)
         for (var i = 1, row; row = speed_tab.rows[i]; i++){
@@ -225,6 +336,7 @@ function mark_ghost_details(ms)
                 $(row).addClass("row_select")
                 $("#guide_tab_footstep").show()
                 $("#hunts_tab_footstep").show()
+                $("#hunts_tab_indent_footstep").show()
             }
         }
     }
@@ -239,7 +351,8 @@ function mark_ghosts(ms){
         
         if(ms != 0.00){
             var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
-            var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent
+            var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
+            var has_los = ghosts[i].getElementsByClassName("ghost_has_los")[0].textContent == '1';
 
             //Parse Ghost speeds
             if (speed.includes('|')){
@@ -264,23 +377,36 @@ function mark_ghosts(ms){
                 var max_speed = min_speed
             }
 
+            if(has_los){
+                if(["Raiju","Jinn"].includes(name)){
+                    if(min_speed <= ms && ms <= (min_speed * 1.65)){
+                        ghosts[i].style.boxShadow = '-6px 0px 5px -4px #dbd994'
+                    }
+                }
+                else{
+                    if(min_speed <= ms && ms <= (max_speed * 1.65)){
+                        ghosts[i].style.boxShadow = '-6px 0px 5px -4px #dbd994'
+                    }
+                }
+            }
+
             if(document.getElementById("bpm_type").checked){
                 if ((speed_type == "range" && min_speed <= ms && ms <= max_speed) || name == "The Mimic"){
-                    ghosts[i].style.boxShadow = '0px 0px 10px 0px #dbd994'
+                    ghosts[i].style.boxShadow = '0px 0px 10px 2px #dbd994'
                     bpm_list.push(ghosts[i].id)
                 }
                 else if(min_speed === ms || max_speed === ms){
-                    ghosts[i].style.boxShadow = '0px 0px 10px 0px #dbd994'
+                    ghosts[i].style.boxShadow = '0px 0px 10px 2px #dbd994'
                     bpm_list.push(ghosts[i].id)
                 }
             }
             else{
                 if ((speed_type == "range" && (min_speed - 0.05) <= ms && ms <= (max_speed + 0.05)) || name == "The Mimic"){
-                    ghosts[i].style.boxShadow = '0px 0px 10px 0px #dbd994'
+                    ghosts[i].style.boxShadow = '0px 0px 10px 2px #dbd994'
                     bpm_list.push(ghosts[i].id)
                 }
                 else if(((min_speed - 0.05) <= ms && ms <= (min_speed + 0.05)) || ((max_speed - 0.05) <= ms && ms <= (max_speed + 0.05))){
-                    ghosts[i].style.boxShadow = '0px 0px 10px 0px #dbd994'
+                    ghosts[i].style.boxShadow = '0px 0px 10px 2px #dbd994'
                     bpm_list.push(ghosts[i].id)
                 }
             }

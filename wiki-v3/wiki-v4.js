@@ -38,6 +38,14 @@ let ghost_flicker_data = {
         "invis_min":0.01,
         "flicker_max":1.00,
         "flicker_min":0.30
+    },
+    "Deogen":{
+        "vis_max":0.30,
+        "vis_min":0.20,
+        "invis_max":0.40,
+        "invis_min":0.01,
+        "flicker_max":0.60,
+        "flicker_min":0.30
     }
 }
 
@@ -85,5 +93,6 @@ function setFlicker(){
         startFlicker(document.getElementById("phantom-flicker"))
         startFlicker(document.getElementById("normal-flicker"))
         startFlicker(document.getElementById("oni-flicker"))
+        // startFlicker(document.getElementById("deogen-flicker"))
     }
 }

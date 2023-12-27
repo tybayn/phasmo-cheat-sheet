@@ -62,6 +62,7 @@ function toggleFilterTools(){
             $('#filter-content').removeClass('spin_hide')
             $('#tools-content').addClass('spin_show')
             $('#tools-content').toggle()
+            draw_graph(false)
         },150)
     }
 }

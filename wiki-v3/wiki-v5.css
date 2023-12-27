@@ -18,7 +18,7 @@
         font-size: 18px;
         cursor: pointer;
         border-bottom: 1px dashed rgba(204, 204, 204, 0.26);
-        width: 95%;
+        width: calc(100% - 20px);
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -41,8 +41,8 @@
     }
 
     .wiki_details{
-        padding: 0px 3px 5px 15px;
-        width: 95%;
+        padding: 0px 10px 5px 10px;
+        width: calc(100% - 20px);
         overflow: hidden;
         display: none;
         box-shadow: inset 0 0 10px #161615;
@@ -177,6 +177,16 @@
         left: 60px;
     }
 
+    #hunts_tab_indent_footstep{
+        background-image: url(../imgs/footsteps-bpm.png);
+        width: 20px;
+        height: 20px;
+        background-size: cover;
+        position: absolute;
+        bottom: 10px;
+        left: 215px;
+    }
+
     .tarot-img {
         width: 60px!important;
         height: 100px;
@@ -203,7 +213,7 @@
         font-size: 35px;
         cursor: pointer;
         border-bottom: 1px dashed rgba(204, 204, 204, 0.26);
-        width: 95%;
+        width: calc(100% - 20px);
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -226,8 +236,8 @@
     }
 
     .wiki_details{
-        padding: 0px 3px 5px 15px;
-        width: 95%;
+        padding: 0px 10px 5px 10px;
+        width: calc(100% - 20px);
         overflow: hidden;
         display: none;
         box-shadow: inset 0 0 10px #161615;
@@ -372,6 +382,16 @@
         position: absolute;
         bottom: 10px;
         left: 110px;
+    }
+
+    #hunts_tab_indent_footstep{
+        background-image: url(../imgs/footsteps-bpm.png);
+        width: 40px;
+        height: 40px;
+        background-size: cover;
+        position: absolute;
+        bottom: 10px;
+        left: 410px;
     }
 
     .tarot-img {
