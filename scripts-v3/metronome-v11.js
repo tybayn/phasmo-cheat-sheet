@@ -104,7 +104,6 @@ var bpm_speeds = new Set()
 var hit = 0
 
 function bpm_tap(ts=-1){
-
     if (ts == -1){
         ts = Date.now();
     }
@@ -140,7 +139,11 @@ function draw_graph(clear = true){
     var graph = $('#bpm_hist')
     var c = graph[0].getContext('2d');
 
-    c.reset()
+    try{
+        c.reset()
+    } catch(e){
+        c.width = c.width + 0
+    }
 
     c.lineWidth = 0.5;
     c.strokeStyle = '#fff'
