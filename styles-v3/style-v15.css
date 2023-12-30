@@ -419,6 +419,7 @@ hr{
         position: fixed;
         height: 24px;
         width: 24px;
+        z-index: 1;
         display: flex;
         align-items: center;
         align-content: center;
@@ -758,6 +759,7 @@ hr{
         grid-column: 1;
         display: grid;
         width:100%;
+        max-height: calc(100vh - 16px);
         grid-template-rows: 40px auto 55px 20px 20px;
         background-color: #313248;
         margin: -8px;
@@ -812,6 +814,7 @@ hr{
         display: grid;
         width:100%;
         grid-template-rows: 32px min-content 40px auto;
+        overflow-y: auto;
     }
 
     .spin_hide{
