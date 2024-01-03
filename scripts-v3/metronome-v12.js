@@ -230,6 +230,7 @@ function bpm_clear() {
     draw_graph()
     taps = []
     bpm_list = []
+    bpm_los_list = []
     document.getElementById('input_bpm').innerHTML = `0<br>bpm`;
     document.getElementById('input_speed').innerHTML = `0<br>m/s`;
     document.getElementById('tap_viz').innerHTML = ""
@@ -348,6 +349,7 @@ function mark_ghost_details(ms)
 function mark_ghosts(ms){
     ms = parseFloat(ms)
     bpm_list = []
+    bpm_los_list = []
     var ghosts = document.getElementsByClassName("ghost_card")
     for (var i = 0; i < ghosts.length; i++){
         ghosts[i].style.boxShadow = 'none'
@@ -384,11 +386,13 @@ function mark_ghosts(ms){
                 if(["Raiju","Jinn"].includes(name)){
                     if(min_speed <= ms && ms <= (min_speed * 1.65)){
                         ghosts[i].style.boxShadow = '-6px 0px 5px -4px #dbd994'
+                        bpm_los_list.push(ghosts[i].id)
                     }
                 }
                 else{
                     if(min_speed <= ms && ms <= (max_speed * 1.65)){
                         ghosts[i].style.boxShadow = '-6px 0px 5px -4px #dbd994'
+                        bpm_los_list.push(ghosts[i].id)
                     }
                 }
             }

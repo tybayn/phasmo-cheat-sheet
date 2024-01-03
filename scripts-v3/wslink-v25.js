@@ -441,10 +441,10 @@ function send_ghosts_link(reset = false){
         var ghost_list = [];
         for (const [key, value] of Object.entries(state['ghosts'])){ 
             if($(document.getElementById(key)).hasClass("hidden")){
-                ghost_list.push(`${key}:${reset ? 1 : -1}:${bpm_list.includes(key) && !reset ? 1 : 0}`)
+                ghost_list.push(`${key}:${reset ? 1 : -1}:${bpm_list.includes(key) && !reset ? 1 : bpm_los_list.includes(key) ? 2 : 0}`)
             }
             else{
-                ghost_list.push(`${key}:${reset ? 1 :value}:${bpm_list.includes(key) && !reset  ? 1 : 0}`)
+                ghost_list.push(`${key}:${reset ? 1 :value}:${bpm_list.includes(key) && !reset  ? 1 : bpm_los_list.includes(key) ? 2 : 0}`)
             }
         }
         dlws.send(`{"action":"GHOSTS","ghost":"${ghost_list}"}`)
