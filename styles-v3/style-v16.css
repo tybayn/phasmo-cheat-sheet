@@ -993,6 +993,11 @@ hr{
         cursor: pointer;
     }
 
+    .num_evidence option{
+        background-color: #161615;
+        cursor: pointer;
+    }
+
     #game_mode{
         grid-column: 1;
         grid-row: 2;
@@ -1082,7 +1087,17 @@ hr{
     }
 
     #modifier_sound_type {
-        display: none;
+        border: none;
+        color: #ccc;
+        box-shadow: inset 0 0 10px #161615;
+        background: rgba(0,0,0,0.25);
+        font-size: 11px;
+        cursor: pointer;
+    }
+
+    #modifier_sound_type option{
+        background-color: #161615;
+        cursor: pointer;
     }
 
     .speed_logic_select{

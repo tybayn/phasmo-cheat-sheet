@@ -1,9 +1,33 @@
 
-var snd = [new Audio('https://zero-network.net/phasmophobia/static/assets/footstep.mp3'),new Audio('assets/click.mp3')];
-snd[0].preload = 'auto';
-snd[1].preload = 'auto';
-snd[0].load();
-snd[1].load();
+var snd = {
+    0:[new Audio('https://zero-network.net/phasmophobia/static/assets/footstep.mp3')],
+    1:[new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_asphalt_2.mp3'),new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_asphalt_3.mp3')],
+    2:[new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_carpet_2.mp3'),new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_carpet_3.mp3')],
+    3:[new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_gravel.mp3'),new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_gravel_2.mp3')],
+    4:[new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_wood_2.mp3'),new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_wood_3.mp3')],
+    5:[new Audio('assets/click.mp3')]
+}
+snd[0][0].preload = 'auto';
+snd[1][0].preload = 'auto';
+snd[1][1].preload = 'auto';
+snd[2][0].preload = 'auto';
+snd[2][1].preload = 'auto';
+snd[3][0].preload = 'auto';
+snd[3][1].preload = 'auto';
+snd[4][0].preload = 'auto';
+snd[4][1].preload = 'auto';
+snd[5][0].preload = 'auto';
+
+snd[0][0].load();
+snd[1][0].load();
+snd[1][1].load();
+snd[2][0].load();
+snd[2][1].load();
+snd[3][0].load();
+snd[3][1].load();
+snd[4][0].load();
+snd[4][1].load();
+snd[5][0].load();
 
 var speed = 1.7
 var tempo = 115
@@ -12,7 +36,9 @@ var muteTimerToggle = false
 var muteTimerCountdown = false
 var running = false
 var start = Date.now()
+var step_cnt = 0
 var snd_choice = 0
+var prev_r = 0
 var offset = 0
 var additional_ghost_data = ["hantu","moroi","thaye"]
 var additional_ghost_var = [0.18,0.085,0.175]
@@ -53,7 +79,8 @@ function toggleSound(set_tempo,id){
 }
 
 function setSoundType(){
-    snd_choice = document.getElementById("modifier_sound_type").checked ? 1 : 0;
+    snd_choice = document.getElementById("modifier_sound_type").value;
+    step_cnt = 0
 }
 
 function setTempo(){
@@ -75,14 +102,28 @@ function adjustOffset(v){
 function startMetronome() {
     running = true
     var interval = 1000 / (tempo / 60)
-    var footstep = snd[snd_choice].cloneNode()
+    var r = Math.round(Math.random() * (snd[snd_choice].length-1) )
+    prev_r = r
+    var footstep = snd[snd_choice][r].cloneNode()
     footstep.volume = volume
     footstep.play();
     setTimeout(step, interval);
     function step() {
         if (Date.now() - start <= 5000) {
             var interval = 1000 / (tempo / 60)
-            var footstep = snd[snd_choice].cloneNode()
+            if(step_cnt > 2){
+                var r = Math.round(Math.random() * (snd[snd_choice].length-1) )
+                if (prev_r != r){
+                    prev_r = r
+                    step_cnt = 0
+                }
+                var footstep = snd[snd_choice][r].cloneNode()
+            }
+            else{
+                var footstep = snd[snd_choice][prev_r].cloneNode()
+                step_cnt += 1
+            }
+            
             footstep.volume = volume
             footstep.play();
             setTimeout(step, interval);

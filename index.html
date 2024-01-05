@@ -15,7 +15,7 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v3/ghost_template-v6.js"></script>
-    <link rel="stylesheet" href="styles-v3/style-v15.css"/>
+    <link rel="stylesheet" href="styles-v3/style-v16.css"/>
     <link rel="stylesheet" href="styles-v3/style-mobile-v13.css"/>
     <link rel="stylesheet" href="discord-v3/discord-v4.css" >
     <link rel="stylesheet" href="wiki-v3/wiki-v5.css" >
@@ -435,11 +435,14 @@
                     </div>
                     <div class="modifier_sound_select">
                         <img src="imgs/footsteps.png">
-                        <label for="modifier_sound_type" onchange="setSoundType();saveSettings();">
-                            <input type="checkbox" name="" id="modifier_sound_type">
-                            <div class="toggle"></div>
-                        </label>
-                        <img src="imgs/metronome.png">
+                        <select id="modifier_sound_type" onchange="setSoundType();saveSettings();">
+                            <option value=0 selected>Default</option>
+                            <option value=1>Asphalt / Concrete</option>
+                            <option value=2>Carpet</option>
+                            <option value=3>Gravel / Grass</option>
+                            <option value=4>Wood</option>
+                            <option value=5>Metronome</option>
+                        </select>
                     </div>
                     <div class="modifier_note">(Click <span class="sound" onclick="toggleSound(1.7,'spirit0')">&#128266;</span> on cards to hear speed)</div>
                     <hr>
@@ -555,17 +558,17 @@
             document.getElementById("maps_box").style.left = "-388px";
         }
     </script>
-    <script src="scripts-v3/metronome-v12.js"></script>
+    <script src="scripts-v3/metronome-v13.js"></script>
     <script src="scripts-v3/timer-v5.js"></script>
     <script src="discord-v3/discord-v7.js"></script>
-    <script src="wiki-v3/wiki-v4.js"></script>
-    <script src="scripts-v3/filter-v21.js"></script>
+    <script src="wiki-v3/wiki-v5.js"></script>
+    <script src="scripts-v3/filter-v22.js"></script>
     <script src="scripts-v3/wslink-v25.js"></script>
     <script src="scripts-v3/zn-v12.js"></script>
     <script src="events-v3/events-v2.js"></script>
     <script src="feed-v3/feed-v2.js"></script>
-    <script src="scripts-v3/voice_en-v12.js"></script>
-    <script src="scripts-v3/voice_recognition-v13.js"></script>
+    <script src="scripts-v3/voice_en-v13.js"></script>
+    <script src="scripts-v3/voice_recognition-v14.js"></script>
     <script src="scripts-v3/sparkles-v1.js"></script>
     <script>
         $(window).on('load', function() {

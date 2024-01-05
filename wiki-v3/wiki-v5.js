@@ -64,7 +64,7 @@ function startFlicker(elem){
     function flickerOn(){
         if (flickering){
             $(obj).show()
-            r = Math.floor((Math.random() * (vis_max - vis_min) + vis_min) * 1000)
+            r = Math.round((Math.random() * (vis_max - vis_min) + vis_min) * 1000)
             setTimeout(flickerOff,r,r/1000)
         }
     }
@@ -74,7 +74,7 @@ function startFlicker(elem){
             $(obj).hide()
             t_max = Math.min(flicker_max - on, invis_max)
             t_min = Math.max(flicker_min - on, invis_min)
-            r = Math.floor((Math.random() * (t_max - t_min) + t_min) * 1000)
+            r = Math.round((Math.random() * (t_max - t_min) + t_min) * 1000)
             setTimeout(flickerOn,r)
         }
     }

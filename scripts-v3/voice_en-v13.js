@@ -38,6 +38,7 @@ const ZNLANG = {
         ],
         "guess thaye":["guessing"],
         "start":["stat"],
+        "timer":["i'm a","im a"],
         "domo":["demo"]
     },
     "ghosts":{

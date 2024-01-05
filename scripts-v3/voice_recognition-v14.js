@@ -712,8 +712,25 @@ function parse_speech(vtext){
 }
 
 if (("webkitSpeechRecognition" in window || "speechRecognition" in window) && !navigator.userAgent.toLowerCase().match(/firefox|fxios|opr/) && !('brave' in navigator)) {
-    let speechRecognition = new webkitSpeechRecognition() || new speechRecognition();
+    let speechRecognition = new webkitSpeechRecognition() || new SpeechRecognition();
+    let speechRecognitionList = new webkitSpeechGrammarList() || new SpeechGrammarList();
     let stop_listen = true
+
+    let ghost_grammar = `#JSGF V1.0; grammar ghosts; public <ghost> = ${all_ghosts.join(" | ")}`
+    let evidence_grammar = `#JSGF V1.0; grammar evidence; public <evidence> = ${all_evidence.join(" | ")}`
+    let speed_grammar = `#JSGF V1.0; grammar speed; pubilc <speed> = ${all_speed.join(" | ")}`
+    let sanity_grammar = `#JSGF V1.0; grammar sanity; public <sanity> = ${all_sanity.join(" | ")}`
+    let maps_grammar = `#JSGF V1.0; grammar maps; public <map> = tanglewood | edgefield | ridgeview | grafton | willow | brownstone | bleasdale | sunny meadows | sm | restricted | courtyard | male | female | wing | hospital | prison | maple lodge | woodwind | drive | road | court | farmhouse | high school | campsite | camp`
+    let command_grammar = `#JSGF V1.0; grammar commands; public <command> = evidence | speed | sanity | not | clear | select | remove | undo | timer | cooldown | start | stop | number | of | difficulty | monkey paw | has | line of sight | show | info | filters | tools | percent | map | maps | reset | journal | cheat sheet | stop | listening`
+
+    speechRecognitionList.addFromString(ghost_grammar,1)
+    speechRecognitionList.addFromString(evidence_grammar,1)
+    speechRecognitionList.addFromString(speed_grammar,1)
+    speechRecognitionList.addFromString(sanity_grammar,1)
+    speechRecognitionList.addFromString(maps_grammar,1)
+    speechRecognitionList.addFromString(command_grammar,1)
+
+    speechRecognition.grammars = speechRecognitionList
   
     speechRecognition.continuous = false;
     speechRecognition.interimResults = false;
