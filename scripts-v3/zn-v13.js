@@ -137,10 +137,14 @@ function loadAllAndConnect(){
         .then(data => data.json())
         .then(data => {
             loadSettings()
-    
+
+            all_ghosts = data.ghosts.map(a => a.ghost)
+            all_evidence = data.evidence
+
             var cards = document.getElementById('cards')
             var cur_version = document.getElementById('current-version-label')
             var evidence_list = document.getElementById('evidence')
+
     
             evidence_list.innerHTML = "";
             for(var i = 0; i < data.evidence.length; i++){
@@ -245,6 +249,10 @@ function loadAllAndConnect(){
             fetch("backup-data/ghosts_backup.json")
             .then(data => data.json())
             .then(data => {
+
+                all_ghosts = data.ghosts.map(a => a.ghost)
+                all_evidence = data.evidence
+            
                 var cards = document.getElementById('cards')
                 var cur_version = document.getElementById('current-version-label')
                 var evidence_list = document.getElementById('evidence')

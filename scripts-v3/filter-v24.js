@@ -1,10 +1,11 @@
 function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";");for(let n=0;n<i.length;n++){let o=i[n];for(;" "==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(t))return o.substring(t.length,o.length)}return""}
 function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
 
-const all_evidence = ["DOTs","EMF 5","Ultraviolet","Freezing","Ghost Orbs","Writing","Spirit Box"]
-const all_ghosts = ["Spirit","Wraith","Phantom","Poltergeist","Banshee","Jinn","Mare","Revenant","Shade","Demon","Yurei","Oni","Yokai","Hantu","Goryo","Myling","Onryo","The Twins","Raiju","Obake","The Mimic","Moroi","Deogen","Thaye"]
 const all_speed = ["Slow","Normal","Fast"]
 const all_sanity = ["Late","Average","Early","VeryEarly"]
+
+let all_evidence = []
+let all_ghosts = []
 let bpm_list = []
 let bpm_los_list = []
 
