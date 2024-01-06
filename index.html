@@ -15,7 +15,7 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v3/ghost_template-v6.js"></script>
-    <link rel="stylesheet" href="styles-v3/style-v16.css"/>
+    <link rel="stylesheet" href="styles-v3/style-v17.css"/>
     <link rel="stylesheet" href="styles-v3/style-mobile-v13.css"/>
     <link rel="stylesheet" href="discord-v3/discord-v4.css" >
     <link rel="stylesheet" href="wiki-v3/wiki-v5.css" >
@@ -25,6 +25,12 @@
 </head>
 
 <body>
+    <div id="resetMenu" style="display: none;">
+        <button onclick="resetGhosts()">Reset Ghosts</button>
+        <button onclick="resetFilters()">Reset Filters</button>
+        <button onclick="resetNoSave()">Reset All without saving</button>
+    </div>
+
     <div id="blackout" style="display: none;">
         <div id="info_box">
             <span class="icon" onclick="showInfo()"></span>
@@ -560,9 +566,9 @@
     </script>
     <script src="scripts-v3/metronome-v13.js"></script>
     <script src="scripts-v3/timer-v5.js"></script>
-    <script src="discord-v3/discord-v7.js"></script>
+    <script src="discord-v3/discord-v8.js"></script>
     <script src="wiki-v3/wiki-v5.js"></script>
-    <script src="scripts-v3/filter-v22.js"></script>
+    <script src="scripts-v3/filter-v23.js"></script>
     <script src="scripts-v3/wslink-v25.js"></script>
     <script src="scripts-v3/zn-v12.js"></script>
     <script src="events-v3/events-v2.js"></script>
@@ -571,9 +577,12 @@
     <script src="scripts-v3/voice_recognition-v14.js"></script>
     <script src="scripts-v3/sparkles-v1.js"></script>
     <script>
+        document.getElementById('reset').oncontextmenu = showResetMenu;
+        document.onclick = hideResetMenu;
+
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v3/wiki-v7.html")
+                $("#wiki-body").load("wiki-v3/wiki-v8.html")
                 resolve("Ghost data loaded")
             })
             Promise.all([load_wiki,checkLink()])

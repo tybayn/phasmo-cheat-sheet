@@ -243,6 +243,74 @@
         <div class="text">During a hunt, many ghosts have different behaviors depending on how far away they are from the player. The following shows a basic radius from the player for many of the ghosts and their abilities. (Sunny Meadows shown)</div>
         <img src="https://zero-network.net/phasmophobia/static/imgs/wiki/hunt_ranges.png">
     </div>
+    <div class="wiki_title accordian" onclick="accordian(this)">Hunt Duration</div>
+    <div class="wiki_details" style="height: 0px;">
+        <div class="text">The time that a ghost hunts depends on many factors including the Hunt Duration setting and the size of the map. Harder difficulties and larger maps result in longer hunt times.</div>
+        
+        <table id="hantu_speed_breakdown">
+            <thead>
+                <tr>
+                    <th>Difficulty<br><span style="color: #999">(Duration)</span></th>
+                    <th>Small Map</th>
+                    <th>Med. Map</th>
+                    <th>Large Map</th>
+                    <th>Cursed Hunt</th>
+                </tr>
+            </thead>
+            <tr>
+                <td style="text-align: left; width:30%; padding-left: 5px;">- Amateur<br><span style="color: #999">- (Low)</span></td>
+                <td>15s</td>
+                <td>30s</td>
+                <td>40s</td>
+                <td>+20s</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; width:30%; padding-left: 5px;">- Intermediate<br><span style="color: #999">- (Medium)</span></td>
+                <td>20s</td>
+                <td>40s</td>
+                <td>50s</td>
+                <td>+20s</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; width:30%; padding-left: 5px;">- Professional<br>- Nightmare<br>- Insanity<br><span style="color: #999">- (High)</span></td>
+                <td>30s</td>
+                <td>50s</td>
+                <td>60s</td>
+                <td>+20s</td>
+            </tr>
+        </table>
+
+        <h4>Cursed Hunts</h4>
+        <div class="text">Using any Cursed Object to start a hunt will result in a cursed hunt that will extend the hunt for 20s regardless of the original length. All hunts following the first cursed hunt are also cursed.</div>
+
+        <h4>Kills Extend Hunts</h4>
+        <div class="text">This setting will lengthen a hunt each time it kills a player, causing the duration to increase for that hunt only. The duration that a hunt is extended is also dependant on difficulty.</div>
+
+        <table id="hantu_speed_breakdown">
+            <thead>
+                <tr>
+                    <th>Difficulty<br><span style="color: #999">(Duration)</span></th>
+                    <th>Kills Extend Hunt</th>
+                </tr>
+            </thead>
+            <tr>
+                <td style="text-align: left; width:35%; padding-left: 5px;">- Amateur<br>- Intermediate<br> - Professional<br><span style="color: #999">- (Off)</span></td>
+                <td>Ends Hunt</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; width:35%; padding-left: 5px;">- Nightmare<br>- Insanity<br><span style="color: #999">- (Low)</span></td>
+                <td>+15s</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; width:35%; padding-left: 5px;"><span style="color: #999">- (Medium)</span></td>
+                <td>+25s</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; width:35%; padding-left: 5px;"><span style="color: #999">- (High)</span></td>
+                <td>+35s</td>
+            </tr>
+        </table>
+    </div>
     <div class="wiki_title accordian" onclick="accordian(this)">Speed & Line-of-sight (LOS)</div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">Most ghosts will gradually increase their speed while they have line-of-sight (LOS) on a player up to a maximum of 1.65x their base speed. After breaking LOS, the ghost will maintain the increased speed until it reaches the last known player position. If it does not regain LOS at this point, the ghost will very slowly lose the increased speed.</div>
@@ -723,7 +791,7 @@
             <li>Event frequency: Low</li>
             <li>Friendly ghost: Off</li>
             <li>Grace period (s): 0</li>
-            <li>Hunt duration (s): Medium</li>
+            <li>Hunt duration: Medium</li>
             <li>Evidence Given: 0</li>
         </ul>
         <b>Contract:</b>

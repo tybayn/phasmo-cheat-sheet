@@ -1000,7 +1000,7 @@ function resetResetButton(){
     $("#reset").removeClass("reset_pulse")
     $("#reset").addClass("standard_reset")
     if(Object.keys(discord_user).length > 0){
-        $("#reset").html("Save & Reset")
+        $("#reset").html("Save & Reset<div class='reset_note'>(right click for more options)</div>")
     }
     else{
         $("#reset").html(polled ? "Waiting for others..." : "Reset")
@@ -1302,6 +1302,89 @@ function playSound(resource){
 
 function setSpeedLogicType(){
     snd_choice = document.getElementById("speed_logic_type").checked ? 1 : 0;
+}
+
+function showResetMenu(event){
+
+    if(Object.keys(discord_user).length > 0){
+        event.preventDefault()
+        event.stopPropagation() //important!!
+
+        let resetMenu = $("#resetMenu");
+        resetMenu.css({top: event.y - resetMenu.height(), left: event.x, position:'absolute'})
+        resetMenu.show()
+    }
+}
+
+function hideResetMenu(event) {
+    if(event.target.id !== 'resetMenu'){
+        let resetMenu = $("#resetMenu");
+        resetMenu.hide()
+      }
+}
+
+function resetGhosts(skip_filter=false){
+    var ghosts = document.getElementsByClassName("ghost_card")
+    for (var i = 0; i < ghosts.length; i++){
+        state['ghosts'][ghosts[i].id] = 1
+        $(ghosts[i]).removeClass(['permhidden',"selected","guessed","died","faded"])
+        $(ghosts[i].querySelector(".ghost_name")).removeClass(["strike"])
+    }
+
+    if(!skip_filter){
+        setCookie("state",JSON.stringify(state),1)
+        filter()
+    }
+}
+
+function resetFilters(skip_filter=false){
+    for(var i = 0; i < all_evidence.length; i++){
+        let e = document.getElementById(all_evidence[i])
+        $(e).removeClass(["block"])
+        e.querySelector("#checkbox").className = "neutral"
+        $(e.querySelector(".label")).removeClass(["strike","disabled-text"]);
+        $(e).siblings(".monkey-paw-select").removeClass(["monkey-paw-selected"]);
+        $(e).siblings(".monkey-smudge").hide()
+
+        state['evidence'][all_evidence[i]] = 0
+    }
+
+    for(var i = 0; i < all_speed.length; i++){
+        let e = document.getElementById(all_speed[i])
+        $(e).removeClass(["block"])
+        e.querySelector("#checkbox").className = "neutral"
+        $(e.querySelector(".label")).removeClass(["strike","disabled-text"]);
+
+        state['speed'][all_evidence[i]] = 0
+    }
+
+    for(var i = 0; i < all_sanity.length; i++){
+        let e = document.getElementById(all_sanity[i])
+        $(e).removeClass(["block"])
+        e.querySelector("#checkbox").className = "neutral"
+        $(e.querySelector(".label")).removeClass(["strike","disabled-text"]);
+
+        state['sanity'][all_evidence[i]] = 0
+    }
+
+    let e = document.getElementById("LOS")
+    $(e).removeClass(["block"])
+    e.querySelector("#checkbox").className = "neutral"
+    $(e.querySelector(".label")).removeClass(["strike","disabled-text"]);
+
+    state['los'] = -1
+
+    if(!skip_filter){
+        setCookie("state",JSON.stringify(state),1)
+        filter()
+    }
+}
+
+function resetNoSave(){
+    resetGhosts(true)
+    resetFilters(true)
+    setCookie("state",JSON.stringify(state),1)
+    filter()
 }
 
 function reset(skip_continue_session=false){

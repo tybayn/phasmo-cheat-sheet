@@ -16,7 +16,7 @@ function getLink(){
             document.getElementById("discord_note").innerText = "You have successfully linked your Discord account! In order for your stats to be most accurate, be sure to select the correct number of evidences and mark the correct ghost before hitting 'Save & Reset'"
             document.getElementById("discord_login_button").innerText = "Relink"
             $("#discord_unlink_button").removeClass("hidden")
-            document.getElementById("reset").innerText = "Save & Reset"
+            document.getElementById("reset").innerHTML = "Save & Reset<div class='reset_note'>(right click for more options)</div>"
             fetch(`https://zero-network.net/zn/${znid}/${discord_user['id']}`, {signal: AbortSignal.timeout(6000)})
             .then(data => data.json())
             .then(data => {

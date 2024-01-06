@@ -59,6 +59,37 @@ hr{
 
 @media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
 
+    #resetMenu{
+        width: 225px;
+        height: auto;
+        background-color: #313248;
+        box-shadow: rgb(0, 0, 0) 0px 0px 10px 3px;
+        border-radius: 5px;
+        border: 2px #313248 outset;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    #resetMenu button{
+        font-size: 20px;
+        color: #ccc;
+        border: none;
+        background: none;
+        padding: 10px;
+        width: 100%;
+        cursor: pointer;
+        font-family: 'Yahfie';
+    }
+    #resetMenu button~button{
+        border-top: 1px dotted #ccc;
+    }
+
+    #resetMenu button:hover{
+        background-color: #ffffff60;
+    }
+
     #blackout, #blackout_voice{
         position: fixed;
         background: rgba(0,0,0,0.9);
@@ -1689,10 +1720,13 @@ hr{
         border: 2px solid #ccc;
         background: none;
         border-radius: 5px;
-        padding: 10px;
         margin: 5px;
         cursor: pointer;
         z-index: 100;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .standard_reset:hover{
