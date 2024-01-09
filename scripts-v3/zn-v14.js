@@ -40,10 +40,8 @@ function checkLink(){
 }
 
 function loadLanguage(){
-    var lang = document.getElementById("language").value
-    if(lang != "en"){
-        window.location.href = `https://tybayn.github.io/phasmo-cheat-sheet-${lang}/`
-    }
+    var lang_url = document.getElementById("language").value
+    window.location.href = lang_url
 }
 
 function heartbeat(){
@@ -285,8 +283,46 @@ function loadAllAndConnect(){
         })
     })
 
+    let loadMaps = new Promise((resolve, reject) => {
+        fetch("https://zero-network.net/phasmophobia/data/maps", {signal: AbortSignal.timeout(6000)})
+        .then(data => data.json())
+        .then(data => {
+            var map_html = ""
+            var first = true
+            for(var i = 0; i < data.length; i++) {
+                map_html += `<button class="maps_button${first ? " selected_map" : ""}" id="${data[i]['div_id']}" onclick="changeMap(this,'${data[i]['file_url']}')"><div class="map_size ${data[i]['size'].toLowerCase()}">${data[i]['size']}</div>${data[i]['name']}</button>`
+                first = false
+            }
+            $("#maps_list").html(map_html)
+
+            resolve("Map data loaded")
+        })
+        .catch(error => {
+            reject("Failed to load map data")
+        })
+
+    })
+
+    let loadLanguages = new Promise((resolve, reject) => {
+        fetch("https://zero-network.net/phasmophobia/languages", {signal: AbortSignal.timeout(6000)})
+        .then(data => data.json())
+        .then(data => {
+            var lang_html = ""
+            for(let i = 0; i < data.length; i++){
+                lang_html += `<option value=${data[i]['url']} ${data[i]['lang'] == lang ? "selected" : ""}>${data[i]['lang_option']}</option>`
+            }
+            $("#language").html(lang_html)
+
+            resolve("Language data loaded")
+        })
+        .catch(error => {
+            reject("Failed to load language data")
+        })
+
+    })
+
     
-    Promise.all([loadZN,loadData])
+    Promise.all([loadZN,loadData,loadMaps,loadLanguages])
     .then(x => {
         applyPerms()
         auto_link()

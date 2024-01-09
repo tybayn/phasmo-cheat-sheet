@@ -317,24 +317,7 @@
             <div class="hover_zoom">+ Hover to zoom</div>
         </div>
         <div class="maps_credit">Map images belong to <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">Images</a>)</div>
-        <div class="maps_buttons">
-            <button class="maps_button selected_map" id="tanglewood" onclick="changeMap(this,'tanglewood.png')"><div class="map_size s">S</div>6 Tanglewood Drive</button>
-            <button class="maps_button" id="edgefield" onclick="changeMap(this,'edgefield.png')"><div class="map_size s">S</div>42 Edgefield Road</button>
-            <button class="maps_button" id="ridgeview" onclick="changeMap(this,'ridgeview.png')"><div class="map_size s">S</div>10 Ridgeview Court</button>
-            <button class="maps_button" id="grafton" onclick="changeMap(this,'grafton.png')"><div class="map_size s">S</div>Grafton Farmhouse</button>
-            <button class="maps_button" id="willow" onclick="changeMap(this,'willow.png')"><div class="map_size s">S</div>13 Willow Street</button>
-            <button class="maps_button" id="brownstone" onclick="changeMap(this,'brownstone.png')"><div class="map_size l">L</div>Brownstone High School</button>
-            <button class="maps_button" id="bleasdale" onclick="changeMap(this,'bleasdale.png')"><div class="map_size s">S</div>Bleasdale Farmhouse</button>
-            <button class="maps_button" id="sunnymeadows" onclick="changeMap(this,'sunnymeadows.png')"><div class="map_size l">L</div>Sunny Meadows</button>
-            <button class="maps_button" id="sunnymeadows_courtyard" onclick="changeMap(this,'sunnymeadows_courtyard.png')"><div class="map_size s">S</div>SM Restricted - Courtyard</button>
-            <button class="maps_button" id="sunnymeadows_male" onclick="changeMap(this,'sunnymeadows_male.png')"><div class="map_size s">S</div>SM Restricted - Male Wing</button>
-            <button class="maps_button" id="sunnymeadows_female" onclick="changeMap(this,'sunnymeadows_female.png')"><div class="map_size s">S</div>SM Restricted - Female Wing</button>
-            <button class="maps_button" id="sunnymeadows_hospital" onclick="changeMap(this,'sunnymeadows_hospital.png')"><div class="map_size s">S</div>SM Restricted - Hospital</button>
-            <button class="maps_button" id="sunnymeadows_restricted" onclick="changeMap(this,'sunnymeadows_restricted.png')"><div class="map_size s">S</div>SM Restricted - Restricted</button>
-            <button class="maps_button" id="prison" onclick="changeMap(this,'prison.png')"><div class="map_size m">M</div>Prison</button>
-            <button class="maps_button" id="maplelodge" onclick="changeMap(this,'maplelodge.png')"><div class="map_size m">M</div>Maple Lodge Campsite</button>
-            <button class="maps_button" id="woodwind" onclick="changeMap(this,'woodwind.png')"><div class="map_size s">S</div>Camp Woodwind</button>
-        </div>
+        <div id="maps_list" class="maps_buttons"></div>
     </div>
 
     <div id="news_box" style="right:-366px;">
@@ -358,12 +341,6 @@
         <span class="icon" onclick="showLanguage()"></span>
         <div class="settings_title yfont white">
             <select name="language" id="language" class="language" onchange="loadLanguage();">
-                <option value="en" selected>English 🇺🇸 / 🇬🇧 / 🇦🇺</option>
-                <option value="fr">French 🇫🇷</option>
-                <option value="de">German 🇩🇪</option>
-                <option value="pl">Polish 🇵🇱</option>
-                <option value="ru">Russian 🇷🇺</option>
-                <option value="tr">Turkish 🇹🇷</option>
             </select>
         </div>
     </div>
@@ -568,9 +545,9 @@
     <script src="scripts-v3/timer-v5.js"></script>
     <script src="discord-v3/discord-v8.js"></script>
     <script src="wiki-v3/wiki-v5.js"></script>
-    <script src="scripts-v3/filter-v24.js"></script>
-    <script src="scripts-v3/wslink-v25.js"></script>
-    <script src="scripts-v3/zn-v13.js"></script>
+    <script src="scripts-v3/filter-v25.js"></script>
+    <script src="scripts-v3/wslink-v26.js"></script>
+    <script src="scripts-v3/zn-v14.js"></script>
     <script src="events-v3/events-v2.js"></script>
     <script src="feed-v3/feed-v2.js"></script>
     <script src="scripts-v3/voice_en-v13.js"></script>

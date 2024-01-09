@@ -1273,7 +1273,7 @@ function changeMap(elem,map){
 
     $(".maps_button").removeClass("selected_map")
     $(elem).addClass("selected_map")
-    $(".map_image").css("background-image","url(https://zero-network.net/phasmophobia/static/imgs/maps/"+map+")")
+    $(".map_image").css("background-image","url("+map+")")
 }
 
 function zoomMap(elem){
