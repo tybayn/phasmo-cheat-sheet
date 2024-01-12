@@ -290,6 +290,7 @@ function loadAllAndConnect(){
             var map_html = ""
             var first = true
             for(var i = 0; i < data.length; i++) {
+                all_maps[data[i]['div_id']] = data[i]['file_url']
                 map_html += `<button class="maps_button${first ? " selected_map" : ""}" id="${data[i]['div_id']}" onclick="changeMap(this,'${data[i]['file_url']}')"><div class="map_size ${data[i]['size'].toLowerCase()}">${data[i]['size']}</div>${data[i]['name']}</button>`
                 first = false
             }

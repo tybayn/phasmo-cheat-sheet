@@ -615,7 +615,7 @@ function parse_speech(vtext){
             domovoi_msg += `: ${smallest_map}`
         }
 
-        changeMap(document.getElementById(smallest_map),`${smallest_map}.png`)
+        changeMap(document.getElementById(smallest_map),all_maps[smallest_map])
         showMaps(true,false)
 
         domovoi_heard(domovoi_msg)

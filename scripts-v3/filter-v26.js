@@ -6,6 +6,7 @@ const all_sanity = ["Late","Average","Early","VeryEarly"]
 
 let all_evidence = []
 let all_ghosts = []
+let all_maps = {}
 let bpm_list = []
 let bpm_los_list = []
 
