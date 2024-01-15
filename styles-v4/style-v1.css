@@ -501,6 +501,7 @@ hr{
 
     .language, .theme{
         width: 135px;
+        cursor: pointer;
     }
 
     #discord_tab{
