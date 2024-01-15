@@ -2328,17 +2328,17 @@ input{
 
 .selected {
     background-color: #353 !important;
-    background: linear-gradient(45deg, rgba(34,52,34,1) 0%, rgba(60,111,60,1) 100%) !important;
+    background: linear-gradient(45deg, rgb(47, 71, 47) 0%, rgba(60,111,60,1) 100%) !important;
 }
 
 .guessed {
     background-color: rgb(89, 85, 34) !important;
-    background: linear-gradient(45deg, rgba(73,69,28,1) 0%, rgba(135,130,53,1) 100%) !important;
+    background: linear-gradient(45deg, rgb(95, 90, 37) 0%, rgba(135,130,53,1) 100%) !important;
 }
 
 .died {
     background-color: rgb(71, 31, 31) !important;
-    background: linear-gradient(45deg, rgba(59,25,25,1) 0%, rgba(119,37,37,1) 100%) !important;
+    background: linear-gradient(45deg, rgb(78, 33, 33) 0%, rgba(119,37,37,1) 100%) !important;
 }
 
 .dot-flashing {
