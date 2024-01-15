@@ -1187,7 +1187,9 @@ function showLanguage(){
         document.getElementById("language_box").style.boxShadow = "none"
         document.getElementById("language_box").style.boxShadow = "none"
         $("#lang_blockout").fadeOut(500)
-        document.getElementById("lang_blockout").style.zIndex = "-999"
+        setTimeout(()=>{
+            document.getElementById("lang_blockout").style.zIndex = "-999"
+        },500)
     }
 }
 
@@ -1207,7 +1209,9 @@ function showTheme(){
         document.getElementById("theme_box").style.boxShadow = "none"
         document.getElementById("theme_box").style.boxShadow = "none"
         $("#theme_blockout").fadeOut(500)
-        document.getElementById("theme_blockout").style.zIndex = "-999"
+        setTimeout(()=>{
+            document.getElementById("theme_blockout").style.zIndex = "-999"
+        },500)
     }
 }
 
@@ -1238,7 +1242,7 @@ function saveSettings(reset = false){
 
 function loadSettings(){
     loadThemes()
-    
+
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
