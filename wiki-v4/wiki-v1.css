@@ -28,7 +28,7 @@
     }
 
     .wiki_title:hover, .wiki_active{
-        background-color: #414256;
+        background-color: rgba(255,255,255,0.2);
     }
 
     .wiki_title:after {
@@ -114,16 +114,20 @@
     }
 
     .wiki_details table tr:nth-child(even) {
-        background: #313248;
+        background: rgba(0,0,0,0.1);
+    }
+
+    .wiki_details table tr:nth-child(odd) {
+        background: rgba(255,255,255,0.1);
     }
 
     .wiki_details table tr:last-child {
-        border-bottom: 3px solid #47485f;
+        border-bottom: 3px solid rgba(255,255,255,0.2);
     }
     
     .wiki_details table thead {
-        background: #47485f;
-        border-bottom: 3px solid #47485f;
+        background: rgba(255,255,255,0.2);
+        border-bottom: 3px solid rgba(255,255,255,0.2);
         font-size: 13px;
     }
 
@@ -168,7 +172,9 @@
     }
 
     #hunts_tab_footstep{
-        background-image: url(../imgs/footsteps-bpm.png);
+        background-image: url(../imgs/footsteps.png);
+        filter: invert(1);
+        opacity: 0.5;
         width: 20px;
         height: 20px;
         background-size: cover;
@@ -178,7 +184,9 @@
     }
 
     #hunts_tab_indent_footstep{
-        background-image: url(../imgs/footsteps-bpm.png);
+        background-image: url(../imgs/footsteps.png);
+        filter: invert(1);
+        opacity: 0.5;
         width: 20px;
         height: 20px;
         background-size: cover;
@@ -223,7 +231,7 @@
     }
 
     .wiki_title:hover, .wiki_active{
-        background-color: #414256;
+        background-color: rgba(255,255,255,0.2);
     }
 
     .wiki_title:after {
@@ -321,16 +329,20 @@
     }
 
     .wiki_details table tr:nth-child(even) {
-        background: #313248;
+        background: rgba(0,0,0,0.1);
+    }
+
+    .wiki_details table tr:nth-child(odd) {
+        background: rgba(255,255,255,0.1);
     }
 
     .wiki_details table tr:last-child {
-        border-bottom: 3px solid #47485f;
+        border-bottom: 3px solid rgba(255,255,255,0.2);
     }
     
     .wiki_details table thead {
-        background: #47485f;
-        border-bottom: 3px solid #47485f;
+        background: rgba(255,255,255,0.2);
+        border-bottom: 3px solid rgba(255,255,255,0.2);
         font-size: 20px;
     }
 
@@ -375,7 +387,9 @@
     }
 
     #hunts_tab_footstep{
-        background-image: url(../imgs/footsteps-bpm.png);
+        background-image: url(../imgs/footsteps.png);
+        filter: invert(1);
+        opacity: 0.5;
         width: 40px;
         height: 40px;
         background-size: cover;
@@ -385,7 +399,9 @@
     }
 
     #hunts_tab_indent_footstep{
-        background-image: url(../imgs/footsteps-bpm.png);
+        background-image: url(../imgs/footsteps.png);
+        filter: invert(1);
+        opacity: 0.5;
         width: 40px;
         height: 40px;
         background-size: cover;

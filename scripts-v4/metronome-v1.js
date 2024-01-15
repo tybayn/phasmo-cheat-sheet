@@ -1,47 +1,40 @@
 
-var snd = {
-    0:[new Audio('https://zero-network.net/phasmophobia/static/assets/footstep.mp3')],
-    1:[new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_asphalt_2.mp3'),new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_asphalt_3.mp3')],
-    2:[new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_carpet_2.mp3'),new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_carpet_3.mp3')],
-    3:[new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_gravel.mp3'),new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_gravel_2.mp3')],
-    4:[new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_wood_2.mp3'),new Audio('https://zero-network.net/phasmophobia/static/assets/footstep_wood_3.mp3')],
-    5:[new Audio('assets/click.mp3')]
-}
-snd[0][0].preload = 'auto';
-snd[1][0].preload = 'auto';
-snd[1][1].preload = 'auto';
-snd[2][0].preload = 'auto';
-snd[2][1].preload = 'auto';
-snd[3][0].preload = 'auto';
-snd[3][1].preload = 'auto';
-snd[4][0].preload = 'auto';
-snd[4][1].preload = 'auto';
-snd[5][0].preload = 'auto';
-
-snd[0][0].load();
-snd[1][0].load();
-snd[1][1].load();
-snd[2][0].load();
-snd[2][1].load();
-snd[3][0].load();
-snd[3][1].load();
-snd[4][0].load();
-snd[4][1].load();
-snd[5][0].load();
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep.mp3',0)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_asphalt_2.mp3',1)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_asphalt_3.mp3',1)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_carpet_2.mp3',2)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_carpet_3.mp3',2)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_gravel.mp3',3)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_gravel_2.mp3',3)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_wood_2.mp3',4)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_wood_3.mp3',4)
+loadSound('assets/click.mp3',5)
 
 var speed = 1.7
-var tempo = 115
-var volume = 0.5
 var muteTimerToggle = false
 var muteTimerCountdown = false
-var running = false
-var start = Date.now()
-var step_cnt = 0
-var snd_choice = 0
-var prev_r = 0
+
 var offset = 0
+var step_duration = 5 * 1000
+
 var additional_ghost_data = ["hantu","moroi","thaye"]
 var additional_ghost_var = [0.18,0.085,0.175]
+
+let speedToBpm = {
+    0:(x) => (-2.55*Math.pow(x,3))+(15.4*Math.pow(x, 2))+(4.95*x)+13.1,
+    1:(x) => (-1.54*Math.pow(x,3))+(10.4*Math.pow(x,2))+(33.3*x)+4.81,
+    2:(x) => (-7.82*Math.pow(x,3))+(48.4*Math.pow(x,2))-(15.4*x)+39,
+    3:(x) => (-8.32*Math.pow(x,3))+(58.7*Math.pow(x,2))-(17.8*x)+49.4,
+    4:(x) => (15.7*Math.pow(x,3))-(75.1*Math.pow(x,2))+(240*x)-81.7
+}
+
+let bpmToSpeed = {
+    0:(x) => -0.318 + 0.0527 * (x * (1+(offset/100))) - 3.86e-04 * Math.pow((x * (1+(offset/100))), 2) + 1.98e-06 * Math.pow((x * (1+(offset/100))), 3),
+    1:(x) => -0.0355 + 0.0245 * (x * (1+(offset/100))) - 5.95e-05 * Math.pow((x * (1+(offset/100))), 2) + 1.72e-07 * Math.pow((x * (1+(offset/100))), 3),
+    2:(x) => -0.32 + 0.0259 * (x * (1+(offset/100))) - 9.73e-05 * Math.pow((x * (1+(offset/100))), 2) + 2.23e-07 * Math.pow((x * (1+(offset/100))), 3),
+    3:(x) => -0.215 + 0.0179 * (x * (1+(offset/100))) - 4.3e-05 * Math.pow((x * (1+(offset/100))), 2) + 6.34e-08 * Math.pow((x * (1+(offset/100))), 3),
+    4:(x) => 0.291 + 6.24e-03 * (x * (1+(offset/100))) + 1.19e-05 * Math.pow((x * (1+(offset/100))), 2) - 2.57e-08 * Math.pow((x * (1+(offset/100))), 3)
+}
 
 var last_id = "";
 
@@ -54,38 +47,15 @@ function mute(type){
     }
 }
 
-function toggleSound(set_tempo,id){
-    adjustOffset(0)
-    speed = set_tempo
-    var speed_modifier = [0.46,0.74,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
-    if (last_id != id){
-        last_id = id
-        tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier) * (1+(offset/100))
-        start = Date.now()
-        if (!running){
-            startMetronome()
-        }
-    }
-    else if (!running){
-        tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier) * (1+(offset/100))
-        start = Date.now()
-        if (!running){
-            startMetronome()
-        }
-    }
-    else{
-        start = Date.now() - 6000
-    }
-}
-
 function setSoundType(){
     snd_choice = document.getElementById("modifier_sound_type").value;
+    prev_r = 0
     step_cnt = 0
 }
 
 function setTempo(){
-    var speed_modifier = [0.46,0.74,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
-    tempo = Math.ceil(((9.6*Math.pow(speed,2)) + (45.341*speed) + 9.5862) * speed_modifier) * (1+(offset/100))
+    var speed_idx = parseInt($("#ghost_modifier_speed").val())
+    tempo = speedToBpm[speed_idx](speed) * (1+(offset/100))
 }
 
 function setVolume(){
@@ -94,44 +64,38 @@ function setVolume(){
 
 function adjustOffset(v){
     var cur_offset = document.getElementById("offset_value").innerText
-    offset = parseInt(cur_offset.replace(/\d+(?:-\d+)+/g,"")) + parseInt(v)
+    offset = parseFloat(cur_offset.replace(/\d+(?:-\d+)+/g,"")) + parseFloat(v)
     offset = offset > 15 ? 15 : offset < -15 ? -15 : offset;
-    document.getElementById("offset_value").innerText = ` ${offset}% `
+    document.getElementById("offset_value").innerText = ` ${offset.toFixed(1)}% `
 }
 
-function startMetronome() {
-    running = true
-    var interval = 1000 / (tempo / 60)
-    var r = Math.round(Math.random() * (snd[snd_choice].length-1) )
-    prev_r = r
-    var footstep = snd[snd_choice][r].cloneNode()
-    footstep.volume = volume
-    footstep.play();
-    setTimeout(step, interval);
-    function step() {
-        if (Date.now() - start <= 5000) {
-            var interval = 1000 / (tempo / 60)
-            if(step_cnt > 2){
-                var r = Math.round(Math.random() * (snd[snd_choice].length-1) )
-                if (prev_r != r){
-                    prev_r = r
-                    step_cnt = 0
-                }
-                var footstep = snd[snd_choice][r].cloneNode()
+function toggleSound(set_tempo,id){
+    adjustOffset(0)
+    speed = set_tempo
+    var speed_idx = parseInt($("#ghost_modifier_speed").val())
+    tempo = speedToBpm[speed_idx](speed) * (1+(offset/100))
+    if(!isPlaying){
+        step()
+        timerStop = setTimeout(function(){
+            if(isPlaying){
+                isPlaying = !isPlaying;
+                window.clearTimeout(timerID);
             }
-            else{
-                var footstep = snd[snd_choice][prev_r].cloneNode()
-                step_cnt += 1
-            }
-            
-            footstep.volume = volume
-            footstep.play();
-            setTimeout(step, interval);
-        }
-        else{
-            running = false
-        }
+        },step_duration)
     }
+    else if(last_id == id){
+        step()
+    }
+    else{
+        window.clearTimeout(timerStop)
+        timerStop = setTimeout(function(){
+            if(isPlaying){
+                isPlaying = !isPlaying;
+                window.clearTimeout(timerID);
+            }
+        },step_duration)
+    }
+    last_id = id
 }
 
 // ------------------------------------------------------------------------------
@@ -197,8 +161,8 @@ function draw_graph(clear = true){
     // Draw x axis
     c.textAlign = "center"
     c.font = "6pt Calibri"
-    c.fillStyle = "#777"
-    c.strokeStyle = '#444'
+    c.fillStyle = "#999"
+    c.strokeStyle = '#666'
     for (var i = 0; i <= 45; i+=10){
         c.fillText(i, (graph.width()-15) / 45 * i + 15, graph.height() - 5)
         c.beginPath();
@@ -212,8 +176,8 @@ function draw_graph(clear = true){
     c.textAlign = "right"
     c.textBaseline = "middle"
     c.font = "6pt Calibri"
-    c.fillStyle = "#777"
-    c.strokeStyle = '#444'
+    c.fillStyle = "#999"
+    c.strokeStyle = '#666'
 
     for (var i = 0; i <= 4.0; i+=0.5){
         c.fillText(i, 10, (graph.height()-20) - ((graph.height()-20) / 4 * i) + 5)
@@ -346,11 +310,11 @@ function bpm_calc(forced=false) {
 }
 
 function get_ms(bpm){
-    var sm = [0.46,0.74,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
+    var speed_idx = parseInt($("#ghost_modifier_speed").val())
     var cur_ms = 0
     var cur_offset = 1000
     bpm_speeds.forEach(function(m){
-        var t = Math.ceil(((9.6*Math.pow(m,2)) + (45.341*m) + 9.5862) * sm) * (1+(offset/100))
+        var t = speedToBpm[speed_idx](m) * (1+((offset)/100))
         if (Math.abs(bpm-t) < cur_offset){
             cur_offset = Math.abs(bpm-t)
             cur_ms = m
@@ -361,8 +325,8 @@ function get_ms(bpm){
 }
 
 function get_ms_exact(bpm){
-    var sm = [0.46,0.74,1.00,1.29,1.62][parseInt($("#ghost_modifier_speed").val())]
-    var cur_ms = (Math.sqrt(38400000*(bpm / (sm*(1+(offset/100))))+1687696201)-45341)/(19200)
+    var speed_idx = parseInt($("#ghost_modifier_speed").val())
+    var cur_ms = bpmToSpeed[speed_idx](bpm) *(1+((offset)/100))
     return bpm == 0 ? 0.00 : cur_ms.toFixed(2)
 }
 
