@@ -321,7 +321,6 @@ function loadAllAndConnect(){
         })
 
     })
-
     
     Promise.all([loadZN,loadData,loadMaps,loadLanguages])
     .then(x => {

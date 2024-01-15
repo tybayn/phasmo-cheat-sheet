@@ -1,0 +1,64 @@
+.theme-default{
+    background: #313248;
+    background-attachment: inherit;
+}
+
+.theme-berry{
+    background: linear-gradient(45deg, rgba(79,21,74,1) 0%, rgba(71,94,102,1) 33%, rgba(73,32,32,1) 66%, rgba(88,40,73,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-black-white{
+    background: linear-gradient(45deg, rgba(33,33,33,1) 0%, rgba(111,111,111,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-dusk{
+    background: linear-gradient(45deg, rgba(75,98,102,1) 0%, rgba(68,55,83,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-frost{
+    background: linear-gradient(45deg, rgba(44,68,88,1) 0%, rgba(92,89,89,1) 50%, rgba(44,68,88,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-halloween{
+    background: linear-gradient(45deg, rgba(62,85,63,1) 0%, rgba(82,68,50,1) 50%, rgba(68,55,83,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-northern-lights{
+    background: linear-gradient(45deg, rgba(45,47,75,1) 0%, rgba(44,73,72,1) 33%, rgba(56,39,69,1) 66%, rgba(45,47,75,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-pride{
+    background: linear-gradient(45deg, rgba(65,39,39,1) 0%, rgba(74,58,40,1) 20%, rgba(92,92,50,1) 40%, rgba(46,74,46,1) 60%, rgba(44,48,77,1) 80%, rgba(71,44,88,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-spruce{
+    background: linear-gradient(45deg, rgba(26,57,57,1) 0%, rgba(64,53,30,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-steel{
+    background: linear-gradient(46deg, rgba(55,80,99,1) 0%, rgba(49,50,72,1) 50%, rgba(55,80,99,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-sunset{
+    background: linear-gradient(45deg, rgba(71,49,0,1) 0%, rgba(65,45,88,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-twilight{
+    background: linear-gradient(45deg, rgba(4,32,51,1) 0%, rgba(103,94,117,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-zn{
+    background: linear-gradient(45deg, rgba(66,49,72,1) 0%, rgba(55,89,99,1) 100%);
+    background-attachment: inherit;
+}

@@ -6,6 +6,13 @@
     <meta name="Description" content="The Unofficial Phasmo Cheat Sheet is the ultimate cheat sheet for the popular horror video game Phasmophobia. It includes features such as BPM Finder, Shared Journal Link, Desktop Link, and more to help make you more successful in your ghost hunting endeavors" />
     <meta name="keywords" content="phasmphobia, phasmo, phasmophobia cheat sheet, phasmo cheat sheet, phasmophobia info, phasmo info, phasmophobia guide, phasmo guide, phasmophobia help, phasmo help, phasmophobia tool, phasmo tools, phasmophobia tools, phasmo tools, phasmophobia github, phasmo github" />
     <meta name="viewport" content="user-scalable=0">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tybayn.github.io/phasmo-cheat-sheet/">
+    <meta property="og:title" content="Zero-Network | Unofficial Phasmo Cheat Sheet">
+    <meta property="og:description" content="The ultimate Phasmo Cheat Sheet! Smart filters, ghost behaviors, footstep speeds, bpm finder, maps, and more!">
+    <meta property="og:image" content="https://i.imgur.com/8PJDBnm.png">
+
     <script>
         AbortSignal.timeout = ms => {
             const controller = new AbortController();
@@ -14,14 +21,15 @@
         };
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
-    <script src="scripts-v3/ghost_template-v6.js"></script>
-    <link rel="stylesheet" href="styles-v3/style-v17.css"/>
-    <link rel="stylesheet" href="styles-v3/style-mobile-v13.css"/>
-    <link rel="stylesheet" href="discord-v3/discord-v4.css" >
-    <link rel="stylesheet" href="wiki-v3/wiki-v5.css" >
-    <link rel="stylesheet" href="events-v3/events-v3.css" >
-    <link rel="stylesheet" href="feed-v3/feed-v2.css" >
-    <link rel="stylesheet" href="styles-v3/sparkles-v1.css" >
+    <script src="scripts-v4/ghost_template-v1.js"></script>
+    <link rel="stylesheet" href="styles-v4/style-v1.css"/>
+    <link rel="stylesheet" href="styles-v4/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="themes-v4/themes-v1.css"/>
+    <link rel="stylesheet" href="discord-v4/discord-v1.css" >
+    <link rel="stylesheet" href="wiki-v4/wiki-v1.css" >
+    <link rel="stylesheet" href="events-v4/events-v1.css" >
+    <link rel="stylesheet" href="feed-v4/feed-v1.css" >
+    <link rel="stylesheet" href="styles-v4/sparkles-v1.css" >
 </head>
 
 <body>
@@ -37,7 +45,7 @@
 
             <h3>Data Accuracy</h3>
             <div class="info_text">The data was last corrected and verified by Phasmophobia Discord Moderator "Shuee01" on 2023-01-04 (v0.8.0.5). Data is kept up to date with the verified information in the official Phasmophobia Discord #ghost-huntin-resources channel, which is maintained and kept accurate by "Shuee01".</div>
-            <div class="info_text" style="padding-top: 15px;">Graphics settings and GPU/CPU load will impact the speed of footstep sounds in game. What you hear in game may differ and not match exactly with what is heard on this guide. You can adjust the "Speed Offset" in settings to more accurately align the footstep sounds to what you hear in game.</div>
+            <div class="info_text" style="padding-top: 15px;">Graphics settings and GPU/CPU load will impact the speed of footstep sounds in game. What you hear in game may differ and not match exactly with what is heard on this guide. You can adjust the "Speed Offset" in settings to more accurately align the footstep sounds to what you hear in game. When comparing footsteps via sound examples: double footsteps, stairs, and turning around can cause the audio to appear slightly offset.</div>
             <h3>Copyright and Disclaimers</h3>
             <div class="info_block">Phasmophobia, the Phasmophobia logo, and any game related info, images, or sounds (specifically footstep sounds, banshee scream, and deogen breathing) are either ® or TM, Kinetic Games Limited. Any assets used within this site are used with direct permission from Kinetic Games.<br><br>
                 The Zero-Network "Unofficial Phasmophobia Cheat Sheet" is not created by nor affiliated with Kinetic Games, its developers, or partners. This service is created by an independent third party.<br><br>
@@ -138,7 +146,7 @@
 
     <div id="settings_box" style="left: -1000px;">
         <div id="settings_tab" onclick="showSettings()">
-            Settings
+            <div class="tab_rotate">Settings</div>
             <div id="settings_status"></div>
             <div id="dllink_status"></div>
             <div id="voice_recognition_status" class="pulse_animation" style="display:none; background-image: url(imgs/mic.png);"></div>
@@ -166,9 +174,12 @@
             <hr>
             <div class="modifier_volume yfont white">Speed Offset</div>
             <div id="speed_offset">
-                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-1);setTempo();saveSettings();">-</span>
-                <span id="offset_value"> 0% </span>
-                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(1);setTempo();saveSettings();">+</span></div>
+                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-1);setTempo();saveSettings();">-1</span>
+                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-0.1);setTempo();saveSettings();">-.1</span>
+                <span id="offset_value"> 0.0% </span>
+                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(0.1);setTempo();saveSettings();">+.1</span>
+                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(1);setTempo();saveSettings();">+1</span>
+            </div>
             <div class="modifier_note">(Adjust speed of footsteps)</div>
             <hr>
             <div class="modifier_volume yfont white">Speed Filter Logic</div>
@@ -232,7 +243,10 @@
     </div>
 
     <div id="discord_link_box" style="left: -1000px;">
-        <div id="discord_link_tab" onclick="showDiscordLink();getLink();">Discord Link<div id="discord_link_status"></div></div>
+        <div id="discord_link_tab" onclick="showDiscordLink();getLink();">
+            <div class="tab_rotate">Discord Link</div>
+            <div id="discord_link_status"></div>
+        </div>
         <span class="icon" onclick="showDiscordLink()"></span>
         <div class="settings_title yfont white">Discord Link</div>
         <div class="info_block">
@@ -288,7 +302,9 @@
     </div>
 
     <div id="event_box" style="left: -1000px;">
-        <div id="event_tab" onclick="showEvent()">Current Event</div>
+        <div id="event_tab" onclick="showEvent()">
+            <div class="tab_rotate">Current Event</div>
+        </div>
         <span class="icon" onclick="showEvent()"></span>
         <div class="settings_title yfont white">Current Event</div>
         <div class="info_block">
@@ -301,14 +317,19 @@
     </div>
 
     <div id="wiki_box" style="left: -1000px;">
-        <div id="wiki_tab" onclick="showWiki();setFlicker();">Guides<div id="guide_tab_footstep" style="display: none;"></div></div>
+        <div id="wiki_tab" onclick="showWiki();setFlicker();">
+            <div class="tab_rotate">Guides</div>
+            <div id="guide_tab_footstep" style="display: none;"></div>
+        </div>
         <span class="icon" onclick="showWiki();setFlicker();"></span>
         <div class="settings_title yfont white">Guides</div>
         <div id="wiki-body" class="info_block"></div>
     </div>
 
     <div id="maps_box" style="left: -1000px;">
-        <div id="maps_tab" onclick="showMaps()">Maps</div>
+        <div id="maps_tab" onclick="showMaps()">
+            <div class="tab_rotate">Maps</div>
+        </div>
         <span class="icon" onclick="showMaps()"></span>
 
         <div class="maps_title yfont white">Maps</div>
@@ -333,7 +354,7 @@
         </a>
     </div>
 
-    <div id="lang_blackout" style="display: none;"></div>
+    <div id="lang_blockout" class="blockout" style="display: none;" onclick="showLanguage()"></div>
     <div id="language_box" style="right:-176px;">
         <div id="language_tab" onclick="showLanguage();">
             <img src="imgs/langauge.png" width="24px" id="feed_icon_img"/>
@@ -341,6 +362,18 @@
         <span class="icon" onclick="showLanguage()"></span>
         <div class="settings_title yfont white">
             <select name="language" id="language" class="language" onchange="loadLanguage();">
+            </select>
+        </div>
+    </div>
+
+    <div id="theme_blockout" class="blockout" style="display: none;" onclick="showTheme()"></div>
+    <div id="theme_box" style="right:-176px;">
+        <div id="theme_tab" onclick="showTheme();">
+            <img src="imgs/theme.png" width="24px" id="feed_icon_img"/>
+        </div>
+        <span class="icon" onclick="showTheme()"></span>
+        <div class="settings_title yfont white">
+            <select name="theme" id="theme" class="theme" onchange="changeTheme();saveSettings();">
             </select>
         </div>
     </div>
@@ -541,25 +574,27 @@
             document.getElementById("maps_box").style.left = "-388px";
         }
     </script>
-    <script src="scripts-v3/metronome-v13.js"></script>
-    <script src="scripts-v3/timer-v5.js"></script>
-    <script src="discord-v3/discord-v8.js"></script>
-    <script src="wiki-v3/wiki-v5.js"></script>
-    <script src="scripts-v3/filter-v26.js"></script>
-    <script src="scripts-v3/wslink-v26.js"></script>
-    <script src="scripts-v3/zn-v15.js"></script>
-    <script src="events-v3/events-v2.js"></script>
-    <script src="feed-v3/feed-v2.js"></script>
-    <script src="scripts-v3/voice_en-v13.js"></script>
-    <script src="scripts-v3/voice_recognition-v15.js"></script>
-    <script src="scripts-v3/sparkles-v1.js"></script>
+    <script src="themes-v4/themes-v1.js"></script>
+    <script src="scripts-v4/audio_controller-v1.js"></script>
+    <script src="scripts-v4/metronome-v1.js"></script>
+    <script src="scripts-v4/timer-v1.js"></script>
+    <script src="discord-v4/discord-v1.js"></script>
+    <script src="wiki-v4/wiki-v1.js"></script>
+    <script src="scripts-v4/filter-v1.js"></script>
+    <script src="scripts-v4/wslink-v1.js"></script>
+    <script src="scripts-v4/zn-v1.js"></script>
+    <script src="events-v4/events-v1.js"></script>
+    <script src="feed-v4/feed-v1.js"></script>
+    <script src="scripts-v4/voice_en-v1.js"></script>
+    <script src="scripts-v4/voice_recognition-v1.js"></script>
+    <script src="scripts-v4/sparkles-v1.js"></script>
     <script>
         document.getElementById('reset').oncontextmenu = showResetMenu;
         document.onclick = hideResetMenu;
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v3/wiki-v8.html")
+                $("#wiki-body").load("wiki-v4/wiki-v1.html")
                 resolve("Ghost data loaded")
             })
             Promise.all([load_wiki,checkLink()])
