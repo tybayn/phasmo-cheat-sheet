@@ -29,7 +29,8 @@ function changeTheme(name = null){
         "#discord_link_box","#discord_link_tab","#event_box","#event_tab",
         "#wiki_box","#wiki_tab","#maps_box","#maps_tab",
         "#news_box","#news_tab","#language_box","#language_tab",
-        "#theme_box","#theme_tab","#discord_tab","#info_box","#info_box_voice"
+        "#theme_box","#theme_tab","#discord_tab","#info_box","#info_box_voice",
+        "#resetMenu"
     ]
 
     let theme_name = name != null ? name : $("#theme").val()
