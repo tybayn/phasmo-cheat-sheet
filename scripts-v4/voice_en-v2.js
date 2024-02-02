@@ -1,10 +1,10 @@
 const ZNLANG = {
     "overall":{
-        "evidence":["evident","providence"],
+        "evidence":["evident","providence","eminems","eminem's"],
         "journal":["channel"],
         "sanity":["saturday","insanity","unsanity","sandy"],
         "hunt":["hunts"],
-        "ghost ":["go ","goes ","just "],
+        "ghost ":["go ","goes ","just ","gross "],
         "remove":["removes","removed","or move"],
         "select":["like"],
         "ghost remove":["coaster move","coaster movie"],
@@ -37,8 +37,13 @@ const ZNLANG = {
             "guessle bakke"
         ],
         "guess thaye":["guessing"],
+        "timer start":["thermostat"],
+        "hunt duration":["punctuation"],
+        "hunt start":["don't start","can't start"],
+        "hunt stop":["don't stop","can't stop"],
         "start":["stat"],
         "timer":["i'm a","im a"],
+        "cooldown":["pull down"],
         "domo":["demo"]
     },
     "ghosts":{
@@ -70,9 +75,9 @@ const ZNLANG = {
     "evidence":{
         "emf 5":["be enough","mi5"],
         "dots":["thoughts"],
-        "ultraviolet":["fingerprints","uv","evie","tv","heavy"],
+        "ultraviolet":["fingerprints","uv","evie","tv","heavy","you be"],
         "freezing":[],
-        "ghost orbs":["orbs","orb","forbes","ghost forbes","olives"],
+        "ghost orbs":["orbs","orb","forbes","ghost forbes","olives","knobs","stops"],
         "writing":['righting',"ryhming"],
         "spirit box":["spare box","beer box"]
     },

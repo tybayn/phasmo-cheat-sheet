@@ -517,7 +517,7 @@ function parse_speech(vtext){
             send_cooldown_timer(true,false)
         } 
         else{
-            domovoi_msg += "stopped cooldowntimer"
+            domovoi_msg += "stopped cooldown timer"
             toggle_cooldown_timer(false,true)
             send_cooldown_timer(false,true)
         }
@@ -526,13 +526,54 @@ function parse_speech(vtext){
         running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
-    else if(vtext.startsWith('number of evidence') || vtext.startsWith('difficulty')){
+    else if(vtext.startsWith('hunt duration') || vtext.startsWith('hunt length')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
-        console.log("Recognized evidence set command")
-        running_log[cur_idx]["Type"] = "evidence set"
+        console.log("Recognized hunt duration set command")
+        running_log[cur_idx]["Type"] = "hunt duration set"
         console.log(`Heard '${vtext}'`)
-        vtext = vtext.replace('number of evidence', "").replace('difficulty', "").trim()
+        vtext = vtext.replace('hunt duration ', "").replace('hunt length ', "").trim()
+        domovoi_msg += "set hunt duration to "
+
+        if(document.getElementById("num_evidence").value == "-1"){
+
+            var smallest_num = "3"
+            var smallest_val = 100
+            var prev_value = document.getElementById("cust_hunt_length").value
+            var all_hunt_length = ["short","low","medium","long","high"]
+
+            for(var i = 0; i < all_hunt_length.length; i++){
+                var leven_val = levenshtein_distance(all_hunt_length[i],vtext)
+                if(leven_val < smallest_val){
+                    smallest_val = leven_val 
+                    smallest_num = all_hunt_length[i]
+                }
+            }
+            domovoi_msg += smallest_num
+
+            smallest_num = {"short":"3A","low":"3A","medium":"3I","long":"3","high":"3"}[smallest_num]
+            document.getElementById("cust_hunt_length").value = smallest_num
+            if(prev_value != smallest_num){
+                filter()
+                updateMapDifficulty(smallest_num)
+                saveSettings()
+            }
+        }
+        else{
+            domovoi_msg = "custom difficulty not selected"
+        }
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('number of evidence')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized number of evidence set command")
+        running_log[cur_idx]["Type"] = "number of evidence set"
+        console.log(`Heard '${vtext}'`)
+        vtext = vtext.replace('number of evidence', "").trim()
         domovoi_msg += "set # of evidence to "
 
         vtext = vtext.replace('three','3')
@@ -540,10 +581,73 @@ function parse_speech(vtext){
         vtext = vtext.replace('one','1')
         vtext = vtext.replace('zero','0')
 
-        var smallest_num = 3
+        if(document.getElementById("num_evidence").value == "-1"){
+
+            var smallest_num = '3'
+            var smallest_val = 100
+            var prev_value = document.getElementById("cust_num_evidence").value
+            var all_difficulty = ['0','1','2','3']
+
+            for(var i = 0; i < all_difficulty.length; i++){
+                var leven_val = levenshtein_distance(all_difficulty[i],vtext)
+                if(leven_val < smallest_val){
+                    smallest_val = leven_val 
+                    smallest_num = all_difficulty[i]
+                }
+            }
+            domovoi_msg += smallest_num
+
+            document.getElementById("cust_num_evidence").value = smallest_num ?? "3"
+            if(prev_value != smallest_num){
+                filter()
+                flashMode()
+                saveSettings()
+            }
+        }
+        else{
+            domovoi_msg = "custom difficulty not selected"
+        }
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('hunt')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized hunt command")
+        running_log[cur_idx]["Type"] = "hunt"
+        console.log(`Heard '${vtext}'`)
+        vtext = vtext.replace('hunt', "").trim()
+        
+        if(vtext == "start"){
+            domovoi_msg += "started hunt timer"
+            toggle_hunt_timer(true,false)
+            send_hunt_timer(true,false)
+        } 
+        else{
+            domovoi_msg += "stopped hunt timer"
+            toggle_hunt_timer(false,true)
+            send_hunt_timer(false,true)
+        }
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('difficulty')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized evidence set command")
+        running_log[cur_idx]["Type"] = "evidence set"
+        console.log(`Heard '${vtext}'`)
+        vtext = vtext.replace('difficulty', "").trim()
+        domovoi_msg += "set difficulty to "
+
+        var smallest_num = "3"
         var smallest_val = 100
         var prev_value = document.getElementById("num_evidence").value
-        var all_difficulty = ['0','1','2','3']
+        var all_difficulty = ["custom","apocolypse","insanity","nightmare","professional","intermediate","amateur"]
 
         for(var i = 0; i < all_difficulty.length; i++){
             var leven_val = levenshtein_distance(all_difficulty[i],vtext)
@@ -554,9 +658,12 @@ function parse_speech(vtext){
         }
         domovoi_msg += smallest_num
 
-        document.getElementById("num_evidence").value = smallest_num ?? 3
+        smallest_num = {"custom":"-1","apocolypse":"0","insanity":"1","nightmare":"2","professional":"3","intermediate":"3I","amateur":"3A"}[smallest_num]
+        document.getElementById("num_evidence").value =  smallest_num
         if(prev_value != smallest_num){
             filter()
+            updateMapDifficulty(smallest_num)
+            showCustom()
             flashMode()
             saveSettings()
         }
@@ -585,7 +692,7 @@ function parse_speech(vtext){
         console.log("Recognized map command")
         running_log[cur_idx]["Type"] = "maps"
         console.log(`Heard '${vtext}'`)
-        vtext = vtext.replace('show maps', "").replace('show map', "").trim()
+        vtext = vtext.replace('show maps', "").replace('show map', "").replace('select map', "").trim()
         domovoi_msg = "showing map"
 
         var smallest_map = "tanglewood"
@@ -617,6 +724,48 @@ function parse_speech(vtext){
 
         changeMap(document.getElementById(smallest_map),all_maps[smallest_map])
         showMaps(true,false)
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('select map')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized map command")
+        running_log[cur_idx]["Type"] = "maps"
+        console.log(`Heard '${vtext}'`)
+        vtext = vtext.replace('show maps', "").replace('show map', "").replace('select map', "").trim()
+        domovoi_msg = "selecting map"
+
+        var smallest_map = "tanglewood"
+        var smallest_val = 100
+
+        if(vtext != ""){
+
+            // Common replacements for maps
+            var prevtext = vtext;
+            for (const [key, value] of Object.entries(ZNLANG['maps'])) {
+                for (var i = 0; i < value.length; i++) {
+                    if(vtext.includes(value[i])){vtext = vtext.replace(value[i],key)}
+                }
+            }
+
+            var maps = document.getElementsByClassName("maps_button")
+
+            for(var i = 0; i < maps.length; i++){
+                var leven_val = levenshtein_distance(maps[i].id.toLowerCase(),vtext)
+                if(leven_val < smallest_val){
+                    smallest_val = leven_val 
+                    smallest_map = maps[i].id
+                }
+            }
+            console.log(`${prevtext} >> ${vtext} >> ${smallest_map}`)
+            running_log[cur_idx]["Debug"] = `${prevtext} >> ${vtext} >> ${smallest_map}`
+            domovoi_msg += `: ${smallest_map}`
+        }
+
+        changeMap(document.getElementById(smallest_map),all_maps[smallest_map])
 
         domovoi_heard(domovoi_msg)
         running_log[cur_idx]["Domo"] = domovoi_msg

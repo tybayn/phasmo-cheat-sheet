@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v4/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v4/style-v1.css"/>
-    <link rel="stylesheet" href="styles-v4/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="styles-v4/style-v2.css"/>
+    <link rel="stylesheet" href="styles-v4/style-mobile-v2.css"/>
     <link rel="stylesheet" href="themes-v4/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v4/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v4/wiki-v1.css" >
@@ -85,7 +85,9 @@
             <div class="info_block" style="margin-top: 10px; overflow-y: scroll; overflow-x: hidden;">
                 <strong>Evidence:</strong>
                 <ul>
-                    <li>"number of evidence &lt;num&gt;" or "difficulty &lt;num&gt;" -> Set the number of evidence</li>
+                    <li>"difficulty &lt;difficulty&gt;" -> Set the difficulty</li>
+                    <li>"number of evidence &lt;num&gt;" -> Custom: Set number of evidence</li>
+                    <li>"hunt duration &lt;duration&gt;" -> Custom: Set hunt duration</li>
                     <li>"evidence &lt;evidence&gt;" -> Mark as a found evidence</li>
                     <li>"evidence not &lt;evidence&gt;" -> Mark as not an evidence</li>
                     <li>"evidence clear &lt;evidence&gt;" -> Reset state of an evidence</li>
@@ -125,12 +127,15 @@
                     <li>"timer stop " -> Stop the smudge timer</li>
                     <li>"cooldown start" -> Start the cooldown timer</li>
                     <li>"cooldown stop " -> Stop the cooldown timer</li>
+                    <li>"hunt start" -> Start the hunt timer</li>
+                    <li>"hunt stop " -> Stop the hunt timer</li>
                 </ul>
                 <hr>
                 <strong>Misc:</strong>
                 <ul>
                     <li>"show filters" or "show tools" -> Flips the menu to show the filters/tools</li>
                     <li>"ghost speed &lt;percent&gt;" -> Set ghost speed modifier to 50%, 75%, 100%, 125%, or 150%</li>
+                    <li>"select map &lt;map name&gt;" -> Selects the specified map</li>
                     <li>"show map [&lt;map name&gt;]" -> Opens the map tab and displays map</li>
                     <li>"close map" or "hide map" -> Closes the map tab</li>
                     <li>"reset journal" or "reset cheat sheet" -> Reset the cheat sheet (will save if linked with Discord)</li>
@@ -155,7 +160,7 @@
 
         <div class="settings_title yfont white">Settings</div>
         <div class="info_block">
-            <div class="modifier_volume yfont white">Volume</div>
+            <div class="modifier_volume yfont white">Volume & Timers</div>
             <input type="range" id="modifier_volume" name="volume" 
                 min="0" max="100" step="2" default="50" onchange="setVolume();saveSettings();">
             <div class="modifier_volume_labels">
@@ -170,6 +175,9 @@
             </div>
             <div class="modifier_note less_pad">
                 <input type="checkbox" id="mute_timer_toggle" name="mute_timer_toggle" class="settings_check" onclick="mute('toggle');saveSettings();"><label for="mute_timer_toggle">Mute Timer Toggle</label>
+            </div>
+            <div class="modifier_note less_pad">
+                <input type="checkbox" id="timer_count_up" name="timer_count_up" class="settings_check" onclick="toggleCountup();saveSettings();"><label for="timer_count_up">Timer Count Up</label>
             </div>
             <hr>
             <div class="modifier_volume yfont white">Speed Offset</div>
@@ -226,7 +234,7 @@
             <hr>
             <div class="modifier_volume yfont white">
                 Desktop Link
-                <a class="download" href="assets/ZN-Desktop-Link-Installer-v2.6.1.msi" download="ZN-Desktop-Link-Installer-v2.6.1.msi"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
+                <a class="download" href="assets/ZN-Desktop-Link-Installer-v2.7.0.msi" download="ZN-Desktop-Link-Installer-v2.7.0.msi"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
             </div>
             <div class="journal_link">
                 <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
@@ -333,9 +341,9 @@
         <span class="icon" onclick="showMaps()"></span>
 
         <div class="maps_title yfont white">Maps</div>
-        <div class="maps_image" onmouseenter="zoomMap(this)" onmouseleave="unZoomMap(this)" onmousemove="moveZoom(this,event)">
+        <div class="maps_image" onpointerenter="zoomMap(this)" onpointerleave="unZoomMap(this)" onpointermove="moveZoom(this,event)">
             <div class="map_image"></div>
-            <div class="hover_zoom">+ Hover to zoom</div>
+            <div class="hover_zoom">+ Hover/Touch to zoom</div>
         </div>
         <div class="maps_credit">Map images belong to <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">Images</a>)</div>
         <div id="maps_list" class="maps_buttons"></div>
@@ -385,10 +393,10 @@
     </a>
     
     <div class="data">
-        <div class="menu">
+        <div id="menu" class="menu">
             <div class="tools-filter-buttons">
-                <button id="show_filter_button" class="filter_tool_button filter_tool_button_live">Filters</button>
-                <button id="show_tool_button" class="filter_tool_button filter_tool_button_back" onclick="toggleFilterTools()">Tools</button>
+                <button id="show_filter_button" class="filter_tool_button filter_tool_button_live" onclick="showMenu()">Filters</button>
+                <button id="show_tool_button" class="filter_tool_button filter_tool_button_back" onclick="toggleFilterTools();showMenu();">Tools</button>
             </div>
             <div id="tools-content" class="tools-content" style="display: none;">
                 <div class="timer_title yfont white">
@@ -396,7 +404,10 @@
                 </div>
                 <div class="timers">
                     <div class="timer_block">
-                        <div class="modifier_smudge_timer yfont white" onclick="toggle_timer()">Smudge Timer</div>
+                        <div class="modifier_smudge_timer yfont white" onclick="toggle_timer();send_timer();">
+                            Smudge
+                            <div class="modifier_note_2">('T' to start/stop)</div>
+                        </div>
                         <div class="line_labels" onclick="toggle_timer();send_timer();">
                             <div class="spirit_line_label">Spirit</div>
                             <div class="demon_line_label">Demon</div>
@@ -413,11 +424,13 @@
                         <div id="time_left" onclick="toggle_timer();send_timer();">
                             <span id="minute">03</span>:<span id="second">00</span>
                         </div>
-                        <div class="modifier_note_2" onclick="toggle_timer();send_timer();">(Press 'T' to start/stop)</div>
                     </div>
                     <hr>
                     <div class="timer_block">
-                        <div class="modifier_smudge_timer yfont white" onclick="toggle_cooldown_timer()">Cooldown Timer</div>
+                        <div class="modifier_smudge_timer yfont white" onclick="toggle_cooldown_timer();send_cooldown_timer();">
+                            Cooldown
+                            <div class="modifier_note_2">('C' to start/stop)</div>
+                        </div>
                         <div class="line_labels" onclick="toggle_cooldown_timer();send_cooldown_timer();">
                             <div class="cooldown_demon_line_label">Demon</div>
                         </div>
@@ -432,7 +445,30 @@
                         <div id="time_left_cooldown" onclick="toggle_cooldown_timer();send_cooldown_timer();">
                             <span id="minute_cooldown">00</span>:<span id="second_cooldown">25</span>
                         </div>
-                        <div class="modifier_note_2" onclick="toggle_cooldown_timer();send_cooldown_timer();">(Press 'H' to start/stop)</div>
+                        
+                    </div>
+                    <hr>
+                    <div class="timer_block">
+                        <div class="modifier_smudge_timer yfont white" onclick="toggle_hunt_timer();send_hunt_timer();">
+                            Hunt
+                            <div class="modifier_note_2">('H' to start/stop)</div>
+                        </div>
+                        <div class="line_labels" onclick="toggle_hunt_timer();send_hunt_timer();">
+                            <div class="hunt_cursed_line_label">Cursed</div>
+                            <div class="hunt_size_label">Map: S, Hunt: L</div>
+                        </div>
+                        <div id="huntProgress" onclick="toggle_hunt_timer();send_hunt_timer();">
+                            <img src="imgs/play.png" id="play_hunt_button" class="play_button">
+                            <div id="huntProgressBar">
+                                <div id="huntProgressBarInner" class="bar"></div>
+                                <div class="normal_line"></div>
+                                <div class="cursed_line"></div>
+                            </div>
+                        </div>
+                        <div id="time_left_hunt" onclick="toggle_hunt_timer();send_hunt_timer();">
+                            <span id="minute_hunt">00</span>:<span id="second_hunt">50</span>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="modifier_title yfont white">
@@ -484,13 +520,33 @@
             </div>
             <div id="filter-content" class="filter-content">
                 <div class="evidence_title yfont white">
-                    Evidence <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="filter();flashMode();saveSettings();">
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                        <option value="1">1</option>
-                        <option value="0">0</option>
+                    Evidence 
+                </div>
+
+                <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="showCustom();filter();flashMode();updateMapDifficulty(this.value);saveSettings();">
+                    <option value="3A">Amateur (3)</option>
+                    <option value="3I">Intermediate (3)</option>
+                    <option value="3">Professional (3)</option>
+                    <option value="2">Nightmare (2)</option>
+                    <option value="1">Insanity (1)</option>
+                    <option value="0">Apocalypse (0)</option>
+                    <option value="-1">Custom (?)</option>
+                </select>
+
+                <div id="custom_options" style="display: none;">
+                    <select name="cust_num_evidence" id="cust_num_evidence" class="cust_num_evidence" style="width: calc(50% - 2px); margin-right: 2px;" onchange="filter();flashMode();saveSettings();">
+                        <option value="3">Evi: 3</option>
+                        <option value="2">Evi: 2</option>
+                        <option value="1">Evi: 1</option>
+                        <option value="0">Evi: 0</option>
+                    </select>
+                    <select name="cust_hunt_length" id="cust_hunt_length" class="cust_num_evidence"  style="width: calc(50% - 2px); margin-left: 2px;" onchange="filter();updateMapDifficulty(this.value);saveSettings();">
+                        <option value="3A">Hunt: Low</option>
+                        <option value="3I">Hunt: Med</option>
+                        <option value="3">Hunt: High</option>
                     </select>
                 </div>
+                
                 <div id="game_mode" class="yfont white" style="display:none;">Insanity</div>
                 <div id="evidence" class="evidence">
                     <div class="dot-flashing"></div>
@@ -543,6 +599,7 @@
             </div>
             <div id="active-users"><span id="current-version-label"></span> | <span id="active-users-label">Active Users: -</span></div>
             <div class="copyright" onclick="showInfo()"><img class="question" src="imgs/question.png"> Info / Copyright</div>
+            <div id="close-menu-button" onclick="closeMenu()"></div>
             <button id="reset" class="yfont standard_reset" onclick="reset()" onmouseenter="checkResetButton()" onmouseleave="resetResetButton()">Reset</button>
 
         </div>
@@ -564,7 +621,7 @@
             document.getElementById("discord_link_box").style.left = "calc(-60% - 40px)";
             document.getElementById("event_box").style.left = "calc(-60% - 40px)";
             document.getElementById("wiki_box").style.left = "calc(-60% - 40px)";
-            document.getElementById("maps_box").style.left = "calc(-60% - 40px)";
+            document.getElementById("maps_box").style.left = "calc(-100% + 60px)";
         }
         else{
             document.getElementById("settings_box").style.left = "-32px";
@@ -577,16 +634,16 @@
     <script src="themes-v4/themes-v2.js"></script>
     <script src="scripts-v4/audio_controller-v1.js"></script>
     <script src="scripts-v4/metronome-v2.js"></script>
-    <script src="scripts-v4/timer-v1.js"></script>
+    <script src="scripts-v4/timer-v2.js"></script>
     <script src="discord-v4/discord-v1.js"></script>
     <script src="wiki-v4/wiki-v1.js"></script>
-    <script src="scripts-v4/filter-v2.js"></script>
-    <script src="scripts-v4/wslink-v1.js"></script>
-    <script src="scripts-v4/zn-v1.js"></script>
+    <script src="scripts-v4/filter-v3.js"></script>
+    <script src="scripts-v4/wslink-v2.js"></script>
+    <script src="scripts-v4/zn-v2.js"></script>
     <script src="events-v4/events-v1.js"></script>
     <script src="feed-v4/feed-v1.js"></script>
-    <script src="scripts-v4/voice_en-v1.js"></script>
-    <script src="scripts-v4/voice_recognition-v1.js"></script>
+    <script src="scripts-v4/voice_en-v2.js"></script>
+    <script src="scripts-v4/voice_recognition-v2.js"></script>
     <script src="scripts-v4/sparkles-v1.js"></script>
     <script>
         document.getElementById('reset').oncontextmenu = showResetMenu;

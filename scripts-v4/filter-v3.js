@@ -10,8 +10,8 @@ let all_maps = {}
 let bpm_list = []
 let bpm_los_list = []
 
-var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{}}
-var user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"theme":"Default"}
+var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood"}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"map":"6 Tanglewood Drive","theme":"Default"}
 
 let znid = getCookie("znid")
 
@@ -34,12 +34,34 @@ function waitForElementById(id){
     return wait_for_element()
 }
 
+function closeMenu(){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    var is_c = document.getElementById("num_evidence").value == "-1"
+    if(mquery.matches){
+        document.getElementById("menu").style.marginBottom = is_c ? "-640px" : "-585px";
+        $("#domovoi").removeClass("domovoi-custom")
+        $("#domovoi").addClass("domovoi-menu-hidden")
+    }
+}
+
+function showMenu(){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    var is_c = document.getElementById("num_evidence").value == "-1"
+    if(mquery.matches){
+        if(is_c)
+            $("#domovoi").addClass("domovoi-custom")
+        $("#domovoi").removeClass("domovoi-menu-hidden")
+        document.getElementById("menu").style.marginBottom = "-8px";
+    }
+}
+
 function toggleFilterTools(){
+
     if($('#tools-content').is(':visible')){
-        $('#show_tool_button').attr('onclick',"toggleFilterTools()")
+        $('#show_tool_button').attr('onclick',"toggleFilterTools();showMenu();")
         $('#show_tool_button').addClass('filter_tool_button_back')
         $('#show_tool_button').removeClass('filter_tool_button_live')
-        $('#show_filter_button').removeAttr('onclick')
+        $('#show_filter_button').attr('onclick',"showMenu()")
         $('#show_filter_button').addClass('filter_tool_button_live')
         $('#show_filter_button').removeClass('filter_tool_button_back')
         $('#tools-content').removeClass('spin_show')
@@ -52,10 +74,10 @@ function toggleFilterTools(){
         },150)
     }
     else{
-        $('#show_tool_button').removeAttr('onclick')
+        $('#show_tool_button').attr('onclick',"showMenu()")
         $('#show_tool_button').addClass('filter_tool_button_live')
         $('#show_tool_button').removeClass('filter_tool_button_back')
-        $('#show_filter_button').attr('onclick',"toggleFilterTools()")
+        $('#show_filter_button').attr('onclick',"toggleFilterTools();showMenu();")
         $('#show_filter_button').addClass('filter_tool_button_back')
         $('#show_filter_button').removeClass('filter_tool_button_live')
         $('#filter-content').removeClass('spin_show')
@@ -325,6 +347,7 @@ function filter(ignore_link=false){
     var speed_checkboxes = document.querySelectorAll('[name="speed"] .good');
     var sanity_checkboxes = document.querySelectorAll('[name="hunt-sanity"] .good');
     var num_evidences = document.getElementById("num_evidence").value
+    num_evidences = num_evidences == "-1" ? document.getElementById("cust_num_evidence").value : num_evidences;
     var speed_logic_type = document.getElementById("speed_logic_type").checked ? 1 : 0;
     var speed_has_los = $("#LOS").find("#checkbox").hasClass("good") ? 1 : $("#LOS").find("#checkbox").hasClass("bad") ? 0 : -1;
     state['los'] = speed_has_los
@@ -424,7 +447,7 @@ function filter(ignore_link=false){
         
         // Check for evidences
         // Standard
-        if (num_evidences == "3"){
+        if (["3","3I","3A"].includes(num_evidences)){
 
             if (evi_array.length > 0){
                 evi_array.forEach(function (item,index){
@@ -665,7 +688,7 @@ function filter(ignore_link=false){
         }
     }
 
-    if (num_evidences == "3"){
+    if (["3","3I","3A"].includes(num_evidences)){
         if (evi_array.length >= 0){
             all_evidence.filter(evi => !keep_evidence.has(evi)).forEach(function(item){
                 if (!not_evi_array.includes(item)){
@@ -1132,24 +1155,20 @@ function showWiki(){
 
 function showMaps(forceOpen = false, forceClose = false){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if(mquery.matches){
-        return
-    }
-
-    if (document.getElementById("maps_box").style.left == "-388px" && !forceClose){
+    if (document.getElementById("maps_box").style.left == (mquery.matches ? "calc(-100% + 60px)" : "-388px") && !forceClose){
         document.getElementById("maps_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("maps_box").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
-        document.getElementById("maps_box").style.zIndex= "2"
-        document.getElementById("maps_box").style.left = "196px"
-        document.getElementById("maps_box").style.width = "calc(100% - 265px)"
+        document.getElementById("maps_box").style.zIndex= (mquery.matches ? "10" : "2")
+        document.getElementById("maps_box").style.left = (mquery.matches ? "0px" : "196px")
+        document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 100px)" : "calc(100% - 265px)")
     }
     else if(!forceOpen) {
-        document.getElementById("maps_box").style.width = "556px"
-        document.getElementById("maps_box").style.left = "-388px"
+        document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 100px)" : "556px")
+        document.getElementById("maps_box").style.left = (mquery.matches ? "calc(-100% + 60px)" : "-388px")
         document.getElementById("maps_box").style.boxShadow = "none"
         document.getElementById("maps_box").style.boxShadow = "none"
     }
@@ -1217,9 +1236,9 @@ function showTheme(){
 }
 
 function flashMode(){
-    var cur_evidence = parseInt(document.getElementById("num_evidence").value)
-    var mode_text = ["Apocalypse","Insanity","Nightmare","Professional"][cur_evidence]
-    document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${cur_evidence} evidence)</span>`
+    var cur_evidence = document.getElementById("num_evidence").value
+    var mode_text = {"-1":"Custom","0":"Apocalypse","1":"Insanity","2":"Nightmare","3":"Professional","3I":"Intermediate","3A":"Amateur"}[cur_evidence]
+    document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} evidence)</span>`.replace("-1",document.getElementById("cust_num_evidence").value)
     $("#game_mode").fadeIn(500,function () {
         $("#game_mode").delay(500).fadeOut(500);
       });
@@ -1229,14 +1248,18 @@ function saveSettings(reset = false){
     user_settings['volume'] = parseInt(document.getElementById("modifier_volume").value)
     user_settings['mute_timer_toggle'] = document.getElementById("mute_timer_toggle").checked ? 1 : 0;
     user_settings['mute_timer_countdown'] = document.getElementById("mute_timer_countdown").checked ? 1 : 0;
+    user_settings['timer_count_up'] = document.getElementById("timer_count_up").checked ? 1 : 0;
     user_settings['offset'] = parseFloat(document.getElementById("offset_value").innerText.replace(/\d+(?:-\d+)+/g,"")).toFixed(1)
     user_settings['ghost_modifier'] = parseInt(document.getElementById("ghost_modifier_speed").value)
-    user_settings['num_evidences'] = parseInt(document.getElementById("num_evidence").value)
+    user_settings['num_evidences'] = document.getElementById("num_evidence").value
+    user_settings['cust_num_evidences'] = document.getElementById("cust_num_evidence").value
+    user_settings['cust_hunt_length'] = document.getElementById("cust_hunt_length").value
     user_settings['sound_type'] = document.getElementById("modifier_sound_type").value;
     user_settings['speed_logic_type'] = document.getElementById("speed_logic_type").checked ? 1 : 0;
     user_settings['bpm_type'] = document.getElementById("bpm_type").checked ? 1 : 0;
     user_settings['bpm'] = reset ? 0 : parseInt(document.getElementById('input_bpm').innerHTML.split("<br>")[0])
     user_settings['domo_side'] = $("#domovoi").hasClass("domovoi-flip") ? 1 : 0;
+    user_settings['map'] = $(".selected_map")[0].id
     user_settings['theme'] = $("#theme").val();
     setCookie("settings",JSON.stringify(user_settings),30)
 }
@@ -1247,14 +1270,17 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"theme":"Default"}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"map":"6 Tanglewood Drive","theme":"Default"}
     }
     document.getElementById("modifier_volume").value = user_settings['volume'] ?? 50
     document.getElementById("mute_timer_toggle").checked = user_settings['mute_timer_toggle'] ?? 0 == 1
     document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] ?? 0 == 1
+    document.getElementById("timer_count_up").checked = user_settings['timer_count_up'] ?? 0 == 1
     document.getElementById("offset_value").innerText = ` ${user_settings['offset'] ?? 0.0}% `
     document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier'] ?? 2
-    document.getElementById("num_evidence").value = user_settings['num_evidences'] ?? 3
+    document.getElementById("num_evidence").value = user_settings['num_evidences'] ?? "3"
+    document.getElementById("cust_num_evidence").value = user_settings['cust_num_evidences'] ?? "3"
+    document.getElementById("cust_hunt_length").value = user_settings['cust_hunt_length'] ?? "3"
     document.getElementById("modifier_sound_type").value = user_settings['sound_type'] ?? 0
     document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] ?? 0 == 1
     document.getElementById("bpm_type").checked = user_settings['bpm_type'] ?? 0 == 1
@@ -1262,6 +1288,16 @@ function loadSettings(){
         $("#domovoi").addClass("domovoi-flip")
         $("#domovoi-img").addClass("domovoi-img-flip")
     }
+    
+    
+    var map_exists = setInterval(function(){
+        if(document.getElementById(user_settings['map']) != null){
+            var map_elem = document.getElementById(user_settings['map'])
+            changeMap(map_elem,map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
+            clearInterval(map_exists)
+        }
+    },500)
+    
 
     document.getElementById("theme").value = user_settings['theme']
 
@@ -1285,32 +1321,83 @@ function loadSettings(){
 
     changeTheme(user_settings['theme'])
     setVolume()
+    mute("toggle")
+    mute("countdown")
+    toggleCountup()
     adjustOffset(0)
     setTempo()
     setSoundType()
+    updateMapDifficulty(user_settings['num_evidences'])
+    showCustom()
     flashMode()
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":3,"ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"theme":"Default"}
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"map":"6 Tanglewood Drive","theme":"Default"}
     document.getElementById("modifier_volume").value = user_settings['volume']
     document.getElementById("mute_timer_toggle").checked = user_settings['mute_timer_toggle'] == 1
     document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] == 1
+    document.getElementById("timer_count_up").checked = user_settings['timer_count_up'] == 1
     document.getElementById("offset_value").innerText = ` ${user_settings['offset'].toFixed(1)}% `
     document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier']
     document.getElementById("num_evidence").value = user_settings['num_evidences']
+    document.getElementById("cust_num_evidence").value = user_settings['cust_num_evidences']
+    document.getElementById("cust_hunt_length").value = user_settings['cust_hunt_length']
     document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] == 1
     document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] == 1
     document.getElementById("bpm_type").checked = user_settings['bpm_type'] == 1
+    document.getElementById("tanglewood").click()
     document.getElementById("theme").value = user_settings['theme']
     setCookie("settings",JSON.stringify(user_settings),30)
 }
 
-function changeMap(elem,map){
+function showCustom(){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    var is_h = ![null,"","-8px"].includes(document.getElementById("menu").style.marginBottom)
+    if(document.getElementById("num_evidence").value == "-1"){
+        if(mquery.matches){
+            document.getElementById("menu").style.height="675px";
+            if(is_h){
+                document.getElementById("menu").style.marginBottom = "-640px";
+                $("#domovoi").removeClass("domovoi-custom")
+                $("#domovoi").addClass("domovoi-menu-hidden")
+            }
+            else{
+                $("#domovoi").addClass("domovoi-custom")
+                $("#domovoi").removeClass("domovoi-menu-hidden")
+            }
+        }
+        document.getElementById("evidence").style.marginTop = "56px";
+        $("#custom_options").show()
+    }
+    else{
+        $("#custom_options").hide()
+        document.getElementById("evidence").style.marginTop = mquery.matches ? "0px" : "28px";
+        if(mquery.matches){
+            if(is_h){
+                document.getElementById("menu").style.marginBottom = "-585px";
+                $("#domovoi").removeClass("domovoi-custom")
+                $("#domovoi").addClass("domovoi-menu-hidden")
+            }
+            else{
+                $("#domovoi").removeClass(["domovoi-custom","domovoi-menu-hidden"])
+            }
+            document.getElementById("menu").style.height="620px";
+        }
+    }
+}
+
+function changeMap(elem,map,ignore_link=false){
 
     $(".maps_button").removeClass("selected_map")
     $(elem).addClass("selected_map")
     $(".map_image").css("background-image","url("+map+")")
+    state['map'] = elem.id
+    setCookie("state",JSON.stringify(state),1)
+    updateMapSize(elem.innerText.split('\n')[0])
+    if(!ignore_link){
+        send_state()
+    }
 }
 
 function zoomMap(elem){
@@ -1326,8 +1413,15 @@ function unZoomMap(elem){
 }
 
 function moveZoom(elem,e){
-    mpx = (e.clientX - $(elem).offset().left) / $(elem).width()
-    mpy = (e.clientY - $(elem).offset().top) / $(elem).height()
+    if(e.hasOwnProperty("touches")){
+        mpx = (e.touches[0].clientX - $(elem).offset().left) / $(elem).width()
+        mpy = (e.touches[0].clientY - $(elem).offset().top) / $(elem).height()
+    }
+    else{
+        mpx = (e.clientX - $(elem).offset().left) / $(elem).width()
+        mpy = (e.clientY - $(elem).offset().top) / $(elem).height()
+    }
+
     $(".map_image").css("left",`-${(mpx*120)-10}%`)
     $(".map_image").css("top",`-${(mpy*120)-10}%`)
 }

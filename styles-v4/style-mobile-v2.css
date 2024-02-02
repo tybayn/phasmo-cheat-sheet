@@ -1,5 +1,9 @@
 @media screen and (pointer: coarse) and (max-device-width: 600px) {
 
+    body{
+        overflow: hidden;
+    }
+
     #blackout, #blackout_voice{
         position: fixed;
         background: rgba(0,0,0,0.9);
@@ -93,8 +97,8 @@
         background-repeat: no-repeat;
         width: 30px;
         height: 30px;
-        bottom: 6px;
-        left: 9px;
+        bottom: 10px;
+        left: 12px;
         position: absolute;
         
     }
@@ -275,11 +279,41 @@
     }
 
     #maps_box{
-        display: none;
+        position: fixed;
+        top: 0;
+        width: calc(100% - 100px);
+        height: 100%;
+        background-color: #313248;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: stretch;
+        align-items: flex-start;
+        color: #fff;
+        padding: 5px 20px 38px 20px;
+        font-size: 40px;
+        transition: left 0.5s ease;
     }
 
     #maps_tab{
-        display: none;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 40px;
+        height: 200px;
+        text-align: center;
+        top: 932px;
+        right: -51px;
+        background-color: #313248;
+        padding: 5px;
+        cursor: pointer;
+        border-style: solid;
+        border-color: #ccc;
+        border-width: 3px 3px 3px 0px;
+        border-radius: 0px 20px 20px 0px;
+        font-size: 30px;
     }
 
     #news_box{
@@ -594,10 +628,12 @@
         grid-template-rows: 60px auto 35px 35px;
         background-color: #313248;
         margin: -8px;
+        margin-bottom: -8px;
         padding: 8px;
         box-shadow: 0px -15px 20px 0px #000;
         z-index: 2;   
         height: 620px;
+        transition: margin 500ms;
     }
 
     .tools-filter-buttons{
@@ -734,6 +770,8 @@
     }
 
     .num_evidence{
+        grid-column: 1;
+        grid-row: 1;
         border: none;
         color: #FFF;
         background: rgba(0,0,0,0.25);
@@ -741,8 +779,30 @@
         height: 45px;
         font-size: 35px;
         padding: 2px 10px;
-        margin: 10px;
-        font-family: 'October Crow';
+        margin: 2px 10px;
+        font-family: 'Yahfie';
+        width: 33%;
+        position: absolute;
+        right: 0;
+        z-index: 2;
+    }
+
+    #custom_options{
+        grid-column: 1;
+        grid-row: 1;
+        margin-top: 56px;
+    }
+
+    .cust_num_evidence{
+        border: none;
+        color: #FFF;
+        background: rgba(0,0,0,0.25);
+        box-shadow: inset 0 0 10px #161615;
+        height: 45px;
+        font-size: 35px;
+        padding: 2px 10px;
+        font-family: 'Yahfie';
+        width: calc(50% - 5px) !important;
     }
 
     #game_mode{
@@ -1226,6 +1286,78 @@
         position: absolute;
     }
 
+    #time_left_hunt{
+        color: #fff;
+        width: calc(100% - 18px);
+        font-size: 20px;
+        text-align: end;
+        position: relative;
+    }
+
+    #huntProgress {
+        width: calc(100% - 5px);
+        position: relative;
+    }
+
+    #huntProgressBar {
+        width: calc(100% - 70px);
+        margin: 20px 0px;
+        height: 15px;
+        box-shadow: inset 0 0 10px #161615;
+        background: rgba(0,0,0,0.25);
+        display: inline-block;
+        position: relative;
+    }
+      
+    #huntProgressBar .bar {
+        height: 15px;
+        text-align: right;
+        line-height: 15px;
+        width: 0;
+        background-color: #ffffff60;
+        box-sizing: border-box;
+        position: absolute;
+        float: left;
+    }
+
+    #huntProgressBar .cursed_line {
+        height: 25px;
+        border-left: 5px #fff dotted;
+        left: 0;
+        width: 0;
+        top: -10px;
+        position: absolute;
+        float: left;
+    }
+
+    #huntProgressBar .normal_line {
+        height: 35px;
+        border-left: 5px #fff solid;
+        left: 20%;
+        width: 0;
+        top: -10px;
+        position: absolute;
+        float: left;
+    }
+
+    .hunt_cursed_line_label{
+        color: rgb(145, 145, 145);
+        font-size: 22px;
+        display: inline-block;
+        left: 0;
+        bottom: -12px;
+        position: absolute;
+    }
+
+    .hunt_size_label{
+        color: rgb(145, 145, 145);
+        font-size: 22px;
+        display: inline-block;
+        right: 10px;
+        bottom: -12px;
+        position: absolute;
+    }
+
     #tap{
         font-size: 35px;
         color: #ccc;
@@ -1308,6 +1440,7 @@
     .copyright{
         grid-column: 1;
         grid-row: 4;
+        width: 30%;
         text-align: left;
         z-index: 2;
         color: #FFF;
@@ -1331,19 +1464,127 @@
         filter: opacity(0.5)
     }
 
-    .active_title,.info_title{
+    .active_title,.info_title,.maps_title{
         font-size: 50px;
         height: 50px;
         padding: 15px;
     }
 
+    .maps_image{
+        width: calc(100% - 20px);
+        height: calc(55%);
+        margin: 0px 0px 50px 10px;
+        background-color: #000;
+        overflow: hidden;
+        position: relative;
+        cursor: zoom-in;
+        touch-action:none;
+    }
+
+    .map_image{
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        background-image: url(https://zero-network.net/phasmophobia/static/imgs/maps/tanglewood.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: absolute;
+    }
+
     .hover_zoom{
-        display: none;
+        color: white;
+        position: absolute;
+        background: rgba(255,255,255,0.2);
+        padding: 5px;
+        font-size: 25px;
+        border-radius: 10px;
+        filter: opacity(0.8);
+        bottom: 5px;
+        left: 5px;
+    }
+
+    .maps_credit{
+        color: #FFF;
+        text-align: right;
+        position: absolute;
+        top: calc(55% + 72px);
+        right: 35px;
+        font-size: 20px;
+    }
+
+    .maps_credit a{
+        text-decoration: none;
+        color:#00aa2b;
+    }
+
+    .maps_buttons{
+        display: flex;
+        height: 35%;
+        width: calc(100% - 20px);
+        margin: 0px 0px 30px 10px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: stretch;
+    }
+
+    .maps_button{
+        background: none;
+        cursor: pointer;
+        border: 1px solid #FFF;
+        color: #fff;
+        border-radius: 5px;
+        margin: 10px;
+        padding: 10px 0px;
+        position: relative;
+        font-size: 25px;
+        width: calc(50% - 20px);
+    }
+
+    .selected_map{
+        background-color: #FFF;
+        border: 1px solid #FFF;
+        color: #313248;
+    }
+
+    .maps_button:hover{
+        background-color: #ffffff60;
+    }
+
+    .map_size{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 30px;
+        display: flex;
+        border-radius: 4px 0px 0px 4px;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        font-size: 25px;
+    }
+
+    .maps_button .s{
+        background-color: #1d8100;
+        color: #fff;
+    }
+
+    .maps_button .m{
+        background-color: #d1cc00;
+        color: #000;
+    }
+
+    .maps_button .l{
+        background-color: #e90000;
+        color: #fff;
     }
 
     #active-users{
         grid-column: 1;
         grid-row: 3;
+        width: 30%;
         text-align: left;
         z-index: 2;
         font-size: 18px;
@@ -1366,6 +1607,19 @@
         text-align: center;
         align-self: center;
         width: 100%;
+    }
+
+    #close-menu-button{
+        grid-column: 1;
+        grid-row: 3 / 5;
+        width: 30px;
+        height: 30px;
+        margin: 20px;
+        justify-self: center;
+        border-right: solid 5px #CCC;
+        border-bottom: solid 5px #CCC;
+        transform: rotate(45deg);
+        z-index: 110;
     }
 
     #reset{
@@ -1781,9 +2035,15 @@
     .domovoi-flip{
         align-items: flex-start !important;
         left: 205px !important;
-        animation: domovoi-float-flip 2s cubic-bezier(0.1, -0.6, 0.2, 0) infinite !important;
     }
 
+    .domovoi-menu-hidden{
+        animation: domovoi-float-menu-hidden 2s cubic-bezier(0.1, -0.6, 0.2, 0) infinite !important;
+    }
+
+    .domovoi-custom{
+        animation: domovoi-float-menu-custom 2s cubic-bezier(0.1, -0.6, 0.2, 0) infinite !important;
+    }
 
     @keyframes domovoi-float {
         0% {
@@ -1797,15 +2057,27 @@
         }
     }
 
-    @keyframes domovoi-float-flip {
+    @keyframes domovoi-float-menu-hidden {
         0% {
-            bottom: 660px;
+            bottom: 70px;
         }
         50% {
-            bottom: 665px;
+            bottom: 75px;
         }
         100% {
-            bottom: 660px;
+            bottom: 70px;
+        }
+    }
+
+    @keyframes domovoi-float-menu-custom {
+        0% {
+            bottom: 705px;
+        }
+        50% {
+            bottom: 710px;
+        }
+        100% {
+            bottom: 705px;
         }
     }
 
