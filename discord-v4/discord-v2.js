@@ -22,10 +22,13 @@ function getLink(){
             .then(data => {
                 var stats_info = `<strong>Total Games</strong>: ${data.total_games}<hr><div style="display:grid; grid-template-columns: 60%;">`
 
+                stats_info += `<div style="padding:0px 5px;">Amateur: <span style="float:right;">${data['game_evidence']['3A']}</span></div>`
+                stats_info += `<div style="padding:0px 5px;">Intermediate: <span style="float:right;">${data['game_evidence']['3I']}</span></div>`
                 stats_info += `<div style="padding:0px 5px;">Professional: <span style="float:right;">${data['game_evidence']['3']}</span></div>`
                 stats_info += `<div style="padding:0px 5px;">Nightmare: <span style="float:right;">${data['game_evidence']['2']}</span></div>`
                 stats_info += `<div style="padding:0px 5px;">Insanity: <span style="float:right;">${data['game_evidence']['1']}</span></div>`
                 stats_info += `<div style="padding:0px 5px;">Apocalypse: <span style="float:right;">${data['game_evidence']['0']}</span></div>`
+                stats_info += `<div style="padding:0px 5px;">Custom: <span style="float:right;">${data['game_evidence']['-1']}</span></div>`
 
 
                 stats_info += '</div><br><strong>Ghosts</strong><hr><div style="display:grid; grid-template-columns: 50% 50%;">'
