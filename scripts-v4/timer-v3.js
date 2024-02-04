@@ -90,9 +90,9 @@ timer_snd[12].load();
 timer_snd[13].load();
 timer_snd[14].load();
 
-var cur_timer;
-var cur_cooldown_timer;
-var cur_hunt_timer;
+var smudge_worker;
+var cooldown_worker;
+var hunt_worker;
 
 var count_direction = 0;
 var map_size = 0;
@@ -130,10 +130,8 @@ function toggle_timer(force_start = false, force_stop = false){
 
     if(force_start){
         if($("#play_button").hasClass("playing")){
-            clearTimeout(cur_timer)
-            setTimeout(function() {
-                start_timer();
-            }, 200)
+            smudge_worker.terminate();
+            start_timer()
         }
         else{
             $("#play_button").addClass("playing")
@@ -146,7 +144,7 @@ function toggle_timer(force_start = false, force_stop = false){
         if($("#play_button").hasClass("playing")){
             $("#play_button").removeClass("playing")
             $("#play_button").attr('src','imgs/play.png')
-            clearTimeout(cur_timer)
+            smudge_worker.terminate();
         }
         if(!muteTimerToggle){
             stop_sound = timer_snd[14].cloneNode()
@@ -158,7 +156,7 @@ function toggle_timer(force_start = false, force_stop = false){
     else if($("#play_button").hasClass("playing")){
         $("#play_button").removeClass("playing")
         $("#play_button").attr('src','imgs/play.png')
-        clearTimeout(cur_timer)
+        smudge_worker.terminate();
         if(!muteTimerToggle){
             stop_sound = timer_snd[14].cloneNode()
             stop_sound.volume = volume
@@ -180,7 +178,7 @@ function start_timer(){
         start_sound.play()
     }
 
-    var time = 180
+    var time = 180 +1
     var snds_played = [0,0,0,0,0,0,0]
 
     var deadline = new Date(Date.now() + time *1000);
@@ -189,7 +187,7 @@ function start_timer(){
     var progress_bar = $('#progressBar')
     var progress_bar_inner = document.getElementById('progressBarInner')
     
-    function progress(timetotal) {
+    function progress() {
         var t = deadline - Date.now();
         var timeleft = Math.floor(t / 1000);
         if (count_direction == 1)
@@ -290,31 +288,29 @@ function start_timer(){
         min_obj.innerHTML = min_val
         sec_obj.innerHTML = sec_val
 
-        var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / timetotal : (180 - timeleft) * progress_bar.width() / timetotal;
+        var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / (time-1) : (180 - timeleft) * progress_bar.width() / (time-1);
         progress_bar_inner.style.width = progressBarWidth;
-        
-        if(timeleft > 0) {
-            cur_timer = setTimeout(function() {
-                progress(timetotal);
-            }, 100);
-        }
-        else{
+
+        if(timeleft <= 0){
+            smudge_worker.terminate();
             $("#play_button").removeClass("playing")
             $("#play_button").attr('src','imgs/play.png')
         }
     };
 
-    progress(time);
-    
+    const blob = new Blob([`(function(e){setInterval(function(){this.postMessage(null)},100)})()`])
+    const url = window.URL.createObjectURL(blob)
+    smudge_worker = new Worker(url)
+    smudge_worker.onmessage = () => {
+        progress()
+    }
 }
 
 function toggle_cooldown_timer(force_start = false, force_stop = false){
     if(force_start){
         if($("#play_cooldown_button").hasClass("playing")){
-            clearTimeout(cur_cooldown_timer)
-            setTimeout(function() {
-                start_cooldown_timer();
-            }, 200)
+            cooldown_worker.terminate();
+            start_cooldown_timer();
         }
         else{
             $("#play_cooldown_button").addClass("playing")
@@ -327,7 +323,7 @@ function toggle_cooldown_timer(force_start = false, force_stop = false){
         if($("#play_cooldown_button").hasClass("playing")){
             $("#play_cooldown_button").removeClass("playing")
             $("#play_cooldown_button").attr('src','imgs/play.png')
-            clearTimeout(cur_cooldown_timer)
+            cooldown_worker.terminate();
         }
         if(!muteTimerToggle){
             stop_sound = timer_snd[14].cloneNode()
@@ -339,7 +335,7 @@ function toggle_cooldown_timer(force_start = false, force_stop = false){
     else if($("#play_cooldown_button").hasClass("playing")){
         $("#play_cooldown_button").removeClass("playing")
         $("#play_cooldown_button").attr('src','imgs/play.png')
-        clearTimeout(cur_cooldown_timer)
+        cooldown_worker.terminate();
         if(!muteTimerToggle){
             stop_sound = timer_snd[14].cloneNode()
             stop_sound.volume = volume
@@ -360,7 +356,7 @@ function start_cooldown_timer(){
         start_sound.play()
     }
 
-    var time = 25
+    var time = 25 +1
     var snds_played = [0,0,0,0,0]
 
     var deadline = new Date(Date.now() + time *1000);
@@ -369,7 +365,7 @@ function start_cooldown_timer(){
     var progress_bar = $('#cooldownProgressBar')
     var progress_bar_inner = document.getElementById('cooldownProgressBarInner')
     
-    function progress(timetotal) {
+    function progress() {
         var t = deadline - Date.now();
         var timeleft = Math.floor(t / 1000);
         if (count_direction == 1)
@@ -445,31 +441,29 @@ function start_cooldown_timer(){
         min_obj.innerHTML = min_val
         sec_obj.innerHTML = sec_val
 
-        var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / timetotal : (25 - timeleft) * progress_bar.width() / timetotal;
+        var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / (time-1) : (25 - timeleft) * progress_bar.width() / (time-1);
         progress_bar_inner.style.width = progressBarWidth;
-        
-        if(timeleft > 0) {
-            cur_cooldown_timer = setTimeout(function() {
-                progress(timetotal);
-            }, 100);
-        }
-        else{
+
+        if(timeleft <= 0){
+            clearInterval(cooldown_interval)
             $("#play_cooldown_button").removeClass("playing")
             $("#play_cooldown_button").attr('src','imgs/play.png')
         }
     };
 
-    progress(time);
-    
+    const blob = new Blob([`(function(e){setInterval(function(){this.postMessage(null)},100)})()`])
+    const url = window.URL.createObjectURL(blob)
+    cooldown_worker = new Worker(url)
+    cooldown_worker.onmessage = () => {
+        progress()
+    }
 }
 
 function toggle_hunt_timer(force_start = false, force_stop = false){
     if(force_start){
         if($("#play_hunt_button").hasClass("playing")){
-            clearTimeout(cur_hunt_timer)
-            setTimeout(function() {
-                start_hunt_timer();
-            }, 200)
+            hunt_worker.terminate();
+            start_hunt_timer();
         }
         else{
             $("#play_hunt_button").addClass("playing")
@@ -482,7 +476,7 @@ function toggle_hunt_timer(force_start = false, force_stop = false){
         if($("#play_hunt_button").hasClass("playing")){
             $("#play_hunt_button").removeClass("playing")
             $("#play_hunt_button").attr('src','imgs/play.png')
-            clearTimeout(cur_hunt_timer)
+            hunt_worker.terminate();
         }
         if(!muteTimerToggle){
             stop_sound = timer_snd[14].cloneNode()
@@ -494,7 +488,7 @@ function toggle_hunt_timer(force_start = false, force_stop = false){
     else if($("#play_hunt_button").hasClass("playing")){
         $("#play_hunt_button").removeClass("playing")
         $("#play_hunt_button").attr('src','imgs/play.png')
-        clearTimeout(cur_hunt_timer)
+        hunt_worker.terminate();
         if(!muteTimerToggle){
             stop_sound = timer_snd[14].cloneNode()
             stop_sound.volume = volume
@@ -515,7 +509,7 @@ function start_hunt_timer(){
         start_sound.play()
     }
 
-    var time = map_hunt_lengths[map_difficulty][map_size];
+    var time = map_hunt_lengths[map_difficulty][map_size] +1;
     var snds_played = [0,0,0,0,0,0,0]
 
     var deadline = new Date(Date.now() + time *1000);
@@ -524,7 +518,7 @@ function start_hunt_timer(){
     var progress_bar = $('#huntProgressBar')
     var progress_bar_inner = document.getElementById('huntProgressBarInner')
     
-    function progress(timetotal) {
+    function progress() {
         var t = deadline - Date.now();
         var timeleft = Math.floor(t / 1000);
         if (count_direction == 1)
@@ -619,20 +613,20 @@ function start_hunt_timer(){
         min_obj.innerHTML = min_val
         sec_obj.innerHTML = sec_val
 
-        var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / timetotal : (map_hunt_lengths[map_difficulty][map_size] - timeleft) * progress_bar.width() / timetotal;
+        var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / (time-1) : (map_hunt_lengths[map_difficulty][map_size] - timeleft) * progress_bar.width() / (time-1);
         progress_bar_inner.style.width = progressBarWidth;
-        
-        if(timeleft > 0) {
-            cur_hunt_timer = setTimeout(function() {
-                progress(timetotal);
-            }, 100);
-        }
-        else{
+
+        if(timeleft <= 0){
+            clearInterval(hunt_interval)
             $("#play_hunt_button").removeClass("playing")
             $("#play_hunt_button").attr('src','imgs/play.png')
         }
     };
 
-    progress(time);
-    
+    const blob = new Blob([`(function(e){setInterval(function(){this.postMessage(null)},100)})()`])
+    const url = window.URL.createObjectURL(blob)
+    hunt_worker = new Worker(url)
+    hunt_worker.onmessage = () => {
+        progress()
+    }
 }
