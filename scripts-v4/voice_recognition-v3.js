@@ -720,9 +720,10 @@ function parse_speech(vtext){
             console.log(`${prevtext} >> ${vtext} >> ${smallest_map}`)
             running_log[cur_idx]["Debug"] = `${prevtext} >> ${vtext} >> ${smallest_map}`
             domovoi_msg += `: ${smallest_map}`
+
+            changeMap(document.getElementById(smallest_map),all_maps[smallest_map])
         }
 
-        changeMap(document.getElementById(smallest_map),all_maps[smallest_map])
         showMaps(true,false)
 
         domovoi_heard(domovoi_msg)
