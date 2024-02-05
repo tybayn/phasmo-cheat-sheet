@@ -445,7 +445,7 @@ function start_cooldown_timer(){
         progress_bar_inner.style.width = progressBarWidth;
 
         if(timeleft <= 0){
-            clearInterval(cooldown_interval)
+            cooldown_worker.terminate();
             $("#play_cooldown_button").removeClass("playing")
             $("#play_cooldown_button").attr('src','imgs/play.png')
         }
@@ -617,7 +617,7 @@ function start_hunt_timer(){
         progress_bar_inner.style.width = progressBarWidth;
 
         if(timeleft <= 0){
-            clearInterval(hunt_interval)
+            hunt_worker.terminate();
             $("#play_hunt_button").removeClass("playing")
             $("#play_hunt_button").attr('src','imgs/play.png')
         }
