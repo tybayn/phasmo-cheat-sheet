@@ -346,6 +346,10 @@ function filter(ignore_link=false){
     var bad_checkboxes = document.querySelectorAll('[name="evidence"] .bad');
     var speed_checkboxes = document.querySelectorAll('[name="speed"] .good');
     var sanity_checkboxes = document.querySelectorAll('[name="hunt-sanity"] .good');
+    if(document.getElementById("cust_num_evidence").value == "")
+        document.getElementById("cust_num_evidence").value = "3"
+    if(document.getElementById("cust_hunt_length").value == "")
+        document.getElementById("cust_hunt_length").value = "3"
     var num_evidences = document.getElementById("num_evidence").value
     num_evidences = num_evidences == "-1" ? document.getElementById("cust_num_evidence").value : num_evidences;
     var speed_logic_type = document.getElementById("speed_logic_type").checked ? 1 : 0;
@@ -1272,6 +1276,12 @@ function loadSettings(){
     } catch (error) {
         user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"map":"6 Tanglewood Drive","theme":"Default"}
     }
+
+    user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
+    user_settings['cust_num_evidences'] = user_settings['cust_num_evidences'] == "" ? "3" : user_settings['cust_num_evidences']
+    user_settings['cust_hunt_length'] = user_settings['cust_hunt_length'] == "" ? "3" : user_settings['cust_hunt_length']
+
+
     document.getElementById("modifier_volume").value = user_settings['volume'] ?? 50
     document.getElementById("mute_timer_toggle").checked = user_settings['mute_timer_toggle'] ?? 0 == 1
     document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] ?? 0 == 1

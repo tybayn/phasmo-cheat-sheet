@@ -47,10 +47,14 @@ function create_room(){
     var outgoing_state = {
         'evidence': state['evidence'],
         'speed': state['speed'],
+        'los': state['los'],
         'sanity': state['sanity'],
         'ghosts': state['ghosts'],
+        "map": state['map'],
         'settings': {
             "num_evidences":document.getElementById("num_evidence").value,
+            "cust_num_evidences":document.getElementById("cust_num_evidence").value,
+            "cust_hunt_length":document.getElementById("cust_hunt_length").value,
             "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
         }
     }
@@ -179,10 +183,12 @@ function link_room(){
                 document.getElementById("cust_num_evidence").value != incoming_state['settings']['cust_num_evidences'] ||
                 document.getElementById("cust_hunt_length").value != incoming_state['settings']['cust_hunt_length']
             ){
-                document.getElementById("num_evidence").value = incoming_state['settings']['num_evidences']
-                document.getElementById("cust_num_evidence").value = incoming_state['settings']['cust_num_evidences']
-                document.getElementById("cust_hunt_length").value = incoming_state['settings']['cust_hunt_length']
-                console.log(incoming_state['settings']['num_evidences'])
+                if(incoming_state['settings']['num_evidences'] != "")
+                    document.getElementById("num_evidence").value = incoming_state['settings']['num_evidences']
+                if(incoming_state['settings']['cust_num_evidences'] != "")
+                    document.getElementById("cust_num_evidence").value = incoming_state['settings']['cust_num_evidences']
+                if(incoming_state['settings']['cust_hunt_length'] != "")
+                    document.getElementById("cust_hunt_length").value = incoming_state['settings']['cust_hunt_length']
                 updateMapDifficulty(incoming_state['settings']['num_evidences'])
                 showCustom()
                 flashMode()
@@ -564,5 +570,6 @@ function send_state() {
             }
         })
         ws.send(outgoing_state)
+
     }
 }
