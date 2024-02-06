@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="styles-v4/style-mobile-v2.css"/>
     <link rel="stylesheet" href="themes-v4/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v4/discord-v1.css" >
-    <link rel="stylesheet" href="wiki-v4/wiki-v1.css" >
+    <link rel="stylesheet" href="wiki-v4/wiki-v2.css" >
     <link rel="stylesheet" href="events-v4/events-v1.css" >
     <link rel="stylesheet" href="feed-v4/feed-v1.css" >
     <link rel="stylesheet" href="styles-v4/sparkles-v1.css" >
@@ -636,7 +636,7 @@
     <script src="scripts-v4/metronome-v2.js"></script>
     <script src="scripts-v4/timer-v4.js"></script>
     <script src="discord-v4/discord-v2.js"></script>
-    <script src="wiki-v4/wiki-v1.js"></script>
+    <script src="wiki-v4/wiki-v2.js"></script>
     <script src="scripts-v4/filter-v4.js"></script>
     <script src="scripts-v4/wslink-v3.js"></script>
     <script src="scripts-v4/zn-v2.js"></script>
@@ -651,7 +651,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v4/wiki-v1.html")
+                $("#wiki-body").load("wiki-v4/wiki-v2.html")
                 resolve("Ghost data loaded")
             })
             Promise.all([load_wiki,checkLink()])

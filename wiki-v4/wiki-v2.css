@@ -7,9 +7,9 @@
 
     .wiki-img-block{
         display: inline; 
-        padding:20px; 
-        width: 60px;
-        height: 100px;
+        padding: 5px; 
+        width: calc(25% - 10px);
+        height: 125px;
         text-align: center;
     }
 
