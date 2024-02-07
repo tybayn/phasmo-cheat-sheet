@@ -210,8 +210,8 @@
 
     .wiki-img-block{
         display: inline; 
-        padding:20px; 
-        width: 140px;
+        padding: 10px; 
+        width: calc(25% - 20px);
         height: 230px;
         text-align: center;
     }
