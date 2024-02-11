@@ -750,7 +750,7 @@ hr{
 
     #info_box .thankyou_text, #info_box_voice .thankyou_text{
         color: #ffffffa0;
-        margin-top: 25px;
+        margin: 15px 10px 0px 10px;
         text-align: center;
         align-self: center;
         font-size: 10px;
