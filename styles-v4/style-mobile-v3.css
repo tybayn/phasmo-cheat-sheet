@@ -437,7 +437,7 @@
         color: #fff;
         padding: 20px;
         overflow-y: scroll;
-        font-size: 12px;
+        font-size: 22px;
     }
 
     #info_box .icon, #info_box_voice .icon{
@@ -511,7 +511,7 @@
         margin-top: 20px;
         text-align: center;
         align-self: center;
-        font-size: 10px;
+        font-size: 18px;
         width: 100%;
     }
 
@@ -520,7 +520,7 @@
         margin-top: 40px;
         text-align: center;
         align-self: center;
-        font-size: 9px;
+        font-size: 20px;
         width: 100%;
     }
 
