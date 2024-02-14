@@ -233,6 +233,8 @@ function parse_speech(vtext){
         else if(vvalue == -10){
             if(!$(document.getElementById(smallest_ghost)).isInViewport())
                 document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
+
+            send_ghost_data_link(smallest_ghost)
         }
 
         resetResetButton()

@@ -319,6 +319,12 @@ function link_link(){
                 if (incoming_state['action'].toUpperCase() == "PONG"){
                     await_dlws_pong = false
                 }
+                if (incoming_state['action'].toUpperCase() == "GHOSTDATA"){
+                    send_ghost_data_link(incoming_state['ghost'])
+                }
+                if (incoming_state['action'].toUpperCase() == "GHOSTSELECT"){
+                    select(document.getElementById(incoming_state['ghost']))
+                }
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
                     toggle_timer()
                     send_timer()
@@ -465,6 +471,38 @@ function send_ghost_link(ghost,value){
     }
 }
 
+function send_ghost_data_link(ghost){
+    if(hasDLLink){
+        var readd_classes = []
+        if($(document.getElementById(ghost)).hasClass("hidden"))
+            readd_classes.push("hidden")
+        if($(document.getElementById(ghost)).hasClass("permhidden"))
+            readd_classes.push("permhidden")
+
+        $(document.getElementById(ghost)).removeClass(readd_classes)
+        data = `<b>${ghost}:<b>\n`
+        data += document.getElementById(ghost).querySelector(".ghost_evidence").innerText.trim().replaceAll("\n",", ") + (ghost == "The Mimic" ? ", *Ghost Orbs" : "") + "\n"
+        data += document.getElementById(ghost).querySelector(".ghost_behavior").innerText
+        data = data.replace("Tells","\n<b>Tells:<b>\n")
+        data = data.replace("Behaviors","\n<b>Behaviors:<b>\n")
+        data = data.replace("Hunt Sanity","\n<b>Hunt Sanity:<b>\n")
+        data = data.replace("Hunt Speed","\n<b>Hunt Speed:<b>\n")
+        data = data.replace("Evidence","\n<b>Evidence:<b>\n")
+        data = data.replace("🔊","")
+        data = data.replaceAll("<b>\n\n","<b>\n")
+        data = data.replace(/[ ]+/g,' ').trim()
+        $(document.getElementById(ghost)).addClass(readd_classes)
+        
+        dlws.send(JSON.stringify({"action":"GHOSTDATA","ghost":`${ghost}|${data}`}))
+    }
+}
+
+function send_empty_data_link(){
+    if(hasDLLink){
+        dlws.send(JSON.stringify({"action":"GHOSTDATA","ghost":`None|<i>Click a ghost to see its tells and behaviors\n(Use ' [ ' and ' ] ' to cycle through ghosts)<i>`}))
+    }
+}
+
 function send_evidence_link(reset = false){
     if(hasDLLink){
         var evi_list = [];
@@ -500,6 +538,7 @@ function send_ping_link(){
 
 function send_reset_link(){
     if(hasDLLink){
+        send_empty_data_link()
         send_ghost_link("",0)
         send_ghosts_link(true)
         send_evidence_link(true)
