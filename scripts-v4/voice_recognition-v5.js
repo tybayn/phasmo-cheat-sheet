@@ -667,6 +667,7 @@ function parse_speech(vtext){
             updateMapDifficulty(smallest_num)
             showCustom()
             flashMode()
+            bpm_calc(true)
             saveSettings()
         }
 

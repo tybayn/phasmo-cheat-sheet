@@ -304,7 +304,11 @@ function bpm_calc(forced=false) {
         } catch(Error){
             // Om nom nom
         }
-        send_bpm_link(Math.round(input_bpm).toString(),input_ms.toString(),["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
+        send_bpm_link(
+            (Math.round(input_bpm) == 0 ? "-" : Math.round(input_bpm)).toString(),
+            (input_ms == 0 ? "-" : input_ms).toString(),
+            ["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())]
+        )
         saveSettings()
     }
 }
