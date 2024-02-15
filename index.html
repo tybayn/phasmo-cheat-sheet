@@ -523,13 +523,13 @@
                     Evidence 
                 </div>
 
-                <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="showCustom();filter();flashMode();updateMapDifficulty(this.value);saveSettings();">
+                <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="showCustom();filter();flashMode();setGhostSpeedFromDifficulty(this.value);updateMapDifficulty(this.value);saveSettings();">
                     <option value="3A">Amateur (3)</option>
                     <option value="3I">Intermediate (3)</option>
                     <option value="3">Professional (3)</option>
                     <option value="2">Nightmare (2)</option>
                     <option value="1">Insanity (1)</option>
-                    <option value="0">Apocalypse (0)</option>
+                    <option value="0">Apocalypse III (0)</option>
                     <option value="-1">Custom (?)</option>
                 </select>
 
@@ -637,7 +637,7 @@
     <script src="scripts-v4/timer-v4.js"></script>
     <script src="discord-v4/discord-v2.js"></script>
     <script src="wiki-v4/wiki-v2.js"></script>
-    <script src="scripts-v4/filter-v4.js"></script>
+    <script src="scripts-v4/filter-v5.js"></script>
     <script src="scripts-v4/wslink-v4.js"></script>
     <script src="scripts-v4/zn-v2.js"></script>
     <script src="events-v4/events-v1.js"></script>

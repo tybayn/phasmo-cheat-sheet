@@ -1241,7 +1241,7 @@ function showTheme(){
 
 function flashMode(){
     var cur_evidence = document.getElementById("num_evidence").value
-    var mode_text = {"-1":"Custom","0":"Apocalypse","1":"Insanity","2":"Nightmare","3":"Professional","3I":"Intermediate","3A":"Amateur"}[cur_evidence]
+    var mode_text = {"-1":"Custom","0":"Apocalypse III","1":"Insanity","2":"Nightmare","3":"Professional","3I":"Intermediate","3A":"Amateur"}[cur_evidence]
     document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} evidence)</span>`.replace("-1",document.getElementById("cust_num_evidence").value)
     $("#game_mode").fadeIn(500,function () {
         $("#game_mode").delay(500).fadeOut(500);
@@ -1444,6 +1444,11 @@ function playSound(resource){
 
 function setSpeedLogicType(){
     snd_choice = document.getElementById("speed_logic_type").checked ? 1 : 0;
+}
+
+function setGhostSpeedFromDifficulty(dif){
+    speed = {"-1":2,"0":4,"1":2,"2":2,"3":2,"3I":2,"3A":2}[dif]
+    document.getElementById("ghost_modifier_speed").value = speed;
 }
 
 function showResetMenu(event){
