@@ -342,8 +342,6 @@ function link_link(){
                     document.getElementById("dllink_status").className = "connected"
                     dlws.send('{"action":"LINK"}')
                     send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
-                    send_timer_link("TIMER_VAL","0:00")
-                    send_timer_link("COOLDOWN_VAL","0:00")
                     filter()
                     await_dlws_pong = false
                     dlws_ping = setInterval(function(){
@@ -538,13 +536,14 @@ function send_ping_link(){
 
 function send_reset_link(){
     if(hasDLLink){
-        send_empty_data_link()
         send_ghost_link("",0)
         send_ghosts_link(true)
         send_evidence_link(true)
         send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
         send_timer_link("TIMER_VAL","0:00")
         send_timer_link("COOLDOWN_VAL","0:00")
+        send_timer_link("HUNT_VAL","0:00")
+        send_empty_data_link()
         dlws.send('{"action":"UNLINK"}')
     }
 }
