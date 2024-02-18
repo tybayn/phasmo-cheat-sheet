@@ -11,7 +11,7 @@ let bpm_list = []
 let bpm_los_list = []
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood"}
-var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"map":"6 Tanglewood Drive","theme":"Default"}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
 
 let znid = getCookie("znid")
 
@@ -319,6 +319,7 @@ function revive(){
             $(document.getElementById(key)).find(".ghost_name").addClass("strike");
         }
     }
+    setCookie("state",JSON.stringify(state),1)
     if (hasLink){send_state()}
 }
 
@@ -908,10 +909,35 @@ function filter(ignore_link=false){
         })
     }
 
+    prioritySort()
     autoSelect()
     setCookie("state",JSON.stringify(state),1)
     if (hasLink && !ignore_link){send_state()}
     if (hasDLLink){send_evidence_link(); send_ghosts_link();}
+}
+
+function prioritySort(){
+    var sortParentElement = document.getElementById("cards")
+    var sortElements = [...document.querySelectorAll(".ghost_card")]
+
+    if(document.getElementById("priority_sort").checked){
+        $("#sort_img").attr("src","imgs/sort-icon.png")
+        sortElements.sort((a,b) => {
+            return all_ghosts.indexOf(a.id) - all_ghosts.indexOf(b.id)
+        }).sort((a,b) => {
+            if ($(a).hasClass("faded") && !$(b).hasClass("faded"))
+                return 1
+            else if ($(a).hasClass("faded") == $(b).hasClass("faded"))
+                return 0
+            return -1
+        }).forEach(gcard => sortParentElement.appendChild(gcard))
+    }
+    else{
+        $("#sort_img").attr("src","imgs/not-sort-icon.png")
+        sortElements.sort((a,b) => {
+            return all_ghosts.indexOf(a.id) - all_ghosts.indexOf(b.id)
+        }).forEach(gcard => sortParentElement.appendChild(gcard))
+    }
 }
 
 function all_los(){
@@ -1263,6 +1289,7 @@ function saveSettings(reset = false){
     user_settings['bpm_type'] = document.getElementById("bpm_type").checked ? 1 : 0;
     user_settings['bpm'] = reset ? 0 : parseInt(document.getElementById('input_bpm').innerHTML.split("<br>")[0])
     user_settings['domo_side'] = $("#domovoi").hasClass("domovoi-flip") ? 1 : 0;
+    user_settings['priority_sort'] = document.getElementById("priority_sort").checked ? 1 : 0;
     user_settings['map'] = $(".selected_map")[0].id
     user_settings['theme'] = $("#theme").val();
     setCookie("settings",JSON.stringify(user_settings),30)
@@ -1274,7 +1301,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"map":"6 Tanglewood Drive","theme":"Default"}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
     }
 
     user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
@@ -1298,6 +1325,7 @@ function loadSettings(){
         $("#domovoi").addClass("domovoi-flip")
         $("#domovoi-img").addClass("domovoi-img-flip")
     }
+    document.getElementById("priority_sort").checked = user_settings['priority_sort'] ?? 0 == 1;
     
     
     var map_exists = setInterval(function(){
@@ -1343,7 +1371,7 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"map":"6 Tanglewood Drive","theme":"Default"}
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
     document.getElementById("modifier_volume").value = user_settings['volume']
     document.getElementById("mute_timer_toggle").checked = user_settings['mute_timer_toggle'] == 1
     document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] == 1
