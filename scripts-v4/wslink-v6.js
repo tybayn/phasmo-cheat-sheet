@@ -326,21 +326,27 @@ function link_link(){
                     select(document.getElementById(incoming_state['ghost']))
                 }
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
-                    toggle_timer()
-                    send_timer()
+                    let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
+                    toggle_timer(force_start)
+                    send_timer(force_start)
                 }
                 if (incoming_state['action'].toUpperCase() == "COOLDOWNTIMER"){
-                    toggle_cooldown_timer()
-                    send_cooldown_timer()
+                    let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
+                    toggle_cooldown_timer(force_start)
+                    send_cooldown_timer(force_start)
                 }
                 if (incoming_state['action'].toUpperCase() == "HUNTTIMER"){
-                    toggle_hunt_timer()
-                    send_hunt_timer()
+                    let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
+                    toggle_hunt_timer(force_start)
+                    send_hunt_timer(force_start)
                 }
                 if (incoming_state['action'].toUpperCase() == "LINKED"){
                     document.getElementById("link_id_note").innerText = `STATUS: Linked`
                     document.getElementById("dllink_status").className = "connected"
                     dlws.send('{"action":"LINK"}')
+                    send_timer_link("TIMER_VAL","0:00")
+                    send_timer_link("COOLDOWN_VAL","0:00")
+                    send_timer_link("HUNT_VAL","0:00")
                     send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
                     filter()
                     await_dlws_pong = false
@@ -457,9 +463,9 @@ function send_bpm_link(bpm,speed,modifer){
     }
 }
 
-function send_timer_link(timer,value){
+function send_timer_link(timer,value,alt_color = 0){
     if(hasDLLink){
-        dlws.send(`{"action":"${timer}","timer_val":"${value}"}`)
+        dlws.send(`{"action":"${timer}","timer_val":"${value}","status":${alt_color}}`)
     }
 }
 
