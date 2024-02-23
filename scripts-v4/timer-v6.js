@@ -196,14 +196,14 @@ function start_timer(){
 
         var is_demon = timeleft <= 120 && timeleft > 90;
         var is_spirit = timeleft <= 90;
+        var is_split = document.getElementById("timer_split").checked
         if (count_direction == 1){
             t = (181*1000) - t
             dt = t
         }
         else{
-            dt = !is_spirit ? t - (90*1000) : t
+            dt = !is_spirit && is_split ? t - (90*1000) : t
         }
-
 
         var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((t % (1000 * 60)) / 1000);
@@ -299,7 +299,7 @@ function start_timer(){
         d_min_val = t<0 ? "00" : zeroPad(d_minutes,2);
         d_sec_val = t<0 ? "00" : zeroPad(d_seconds,2);
 
-        send_timer_link("TIMER_VAL",`${d_min_val[1]}:${d_sec_val}`,is_spirit ? 2 : is_demon ? 1 : 0)
+        send_timer_link("TIMER_VAL",`${d_min_val[1]}:${d_sec_val}`,is_split && is_spirit ? 2 : is_split && is_demon ? 1 : 0)
 
         min_obj.innerHTML = min_val
         sec_obj.innerHTML = sec_val
@@ -386,6 +386,8 @@ function start_cooldown_timer(){
         var timeleft = Math.floor(t / 1000);
 
         var is_demon = timeleft <= 5;
+        var is_split = document.getElementById("timer_split").checked
+
         if (count_direction == 1)
             t = (26*1000) - t
 
@@ -454,7 +456,7 @@ function start_cooldown_timer(){
         min_val = t<0 ? "00" : zeroPad(minutes,2);
         sec_val = t<0 ? "00" : zeroPad(seconds,2);
 
-        send_timer_link("COOLDOWN_VAL",`${min_val[1]}:${sec_val}`,is_demon ? 1 : 0)
+        send_timer_link("COOLDOWN_VAL",`${min_val[1]}:${sec_val}`,is_split && is_demon ? 1 : 0)
 
         min_obj.innerHTML = min_val
         sec_obj.innerHTML = sec_val
@@ -541,12 +543,13 @@ function start_hunt_timer(){
         var dt = t;
         var timeleft = Math.floor(t / 1000);
         var is_cursed = timeleft <= cursed_hunt;
+        var is_split = document.getElementById("timer_split").checked
         if (count_direction == 1){
             t = ((map_hunt_lengths[map_difficulty][map_size]+1)*1000) - t
             dt = t
         }
         else{
-            dt = !is_cursed ? t - (cursed_hunt*1000) : t
+            dt = !is_cursed && is_split ? t - (cursed_hunt*1000) : t
         }
 
         var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
@@ -637,7 +640,7 @@ function start_hunt_timer(){
         d_min_val = t<0 ? "00" : zeroPad(d_minutes,2);
         d_sec_val = t<0 ? "00" : zeroPad(d_seconds,2);
 
-        send_timer_link("HUNT_VAL",`${d_min_val[1]}:${d_sec_val}`,is_cursed ? 1 : 0)
+        send_timer_link("HUNT_VAL",`${d_min_val[1]}:${d_sec_val}`,is_split && is_cursed ? 1 : 0)
 
         min_obj.innerHTML = min_val
         sec_obj.innerHTML = sec_val
