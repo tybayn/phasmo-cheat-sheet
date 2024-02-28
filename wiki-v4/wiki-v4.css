@@ -199,6 +199,22 @@
         width: 60px!important;
         height: 100px;
     }
+
+    #map-explorer{
+        background-color: #ccc;
+        color: black;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 0px 5px 10px 5px;
+        display: inline-flex;
+        cursor: pointer;
+        float: right;
+    }
+
+    #map-explorer:hover{
+        background-color: rgb(128,128,128);
+    }
 }
 
 @media screen and (pointer: coarse) and (max-device-width: 600px) {
@@ -412,5 +428,22 @@
 
     .tarot-img {
         width: 100px !important;
+    }
+
+    #map-explorer{
+        background-color: #ccc;
+        color: black;
+        text-decoration: none;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 0px 5px 10px 5px;
+        display: inline-flex;
+        cursor: pointer;
+        float: right;
+        font-size: 30px;
+    }
+
+    #map-explorer:hover{
+        background-color: rgb(128,128,128);
     }
 }
