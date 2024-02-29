@@ -1475,6 +1475,31 @@
         filter: opacity(0.5)
     }
 
+    .flex-holder-right{
+        display: flex;
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        justify-content: flex-end;
+    }
+
+    .button-gray{
+        background-color: #ccc;
+        color: black;
+        text-decoration: none;
+        padding: 17px;
+        border: none;
+        border-radius: 15px;
+        margin: 0px 0px 25px 0px;
+        display: inline-flex;
+        cursor: pointer;
+        float: right;
+        font-size: 33px;
+    }
+
+    .button-gray:hover{
+        background-color: rgb(128,128,128);
+    }
+
     .active_title,.info_title,.maps_title{
         font-size: 50px;
         height: 50px;
@@ -1483,8 +1508,8 @@
 
     .maps_image{
         width: calc(100% - 20px);
-        height: calc(55%);
-        margin: 0px 0px 50px 10px;
+        height: 60%;
+        margin: 0px 0px 10px 10px;
         background-color: #000;
         overflow: hidden;
         position: relative;
@@ -1518,10 +1543,9 @@
     .maps_credit{
         color: #FFF;
         text-align: right;
-        position: absolute;
-        top: calc(55% + 72px);
         right: 35px;
         font-size: 20px;
+        margin-bottom: 15px;
     }
 
     .maps_credit a{
@@ -1533,7 +1557,7 @@
         display: flex;
         height: 35%;
         width: calc(100% - 20px);
-        margin: 0px 0px 30px 10px;
+        margin: 0px 0px 10px 10px;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: flex-start;
