@@ -134,7 +134,6 @@ function loadAllAndConnect(){
         fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(6000)})
         .then(data => data.json())
         .then(data => {
-            loadSettings()
 
             all_ghosts = data.ghosts.map(a => a.ghost)
             all_evidence = data.evidence
@@ -243,7 +242,6 @@ function loadAllAndConnect(){
                     state['ghosts'][key] = value
                 }
             }
-
             loadSettings()
             filter()
         })
@@ -252,7 +250,6 @@ function loadAllAndConnect(){
         })
         .catch(error => {
             console.error(error)
-            loadSettings()
     
             fetch("backup-data/ghosts_backup.json")
             .then(data => data.json())

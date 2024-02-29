@@ -4,6 +4,8 @@ let dlws = null
 var ws_ping;
 var dlws_ping;
 var await_dlws_pong = false
+
+var state_received = false
 const lang = "en"
 
 function auto_link(){
@@ -167,7 +169,7 @@ function link_room(){
                 return
             }
 
-            if (incoming_state.hasOwnProperty("error")){
+            else if (incoming_state.hasOwnProperty("error")){
                 console.log(incoming_state)
                 document.getElementById("room_id_note").innerText = `ERROR: ${incoming_state['error']}!`
                 document.getElementById("settings_status").className = "error"
@@ -177,114 +179,117 @@ function link_room(){
                 return
             }
 
+            else{
+                if (
+                    document.getElementById("num_evidence").value != incoming_state['settings']['num_evidences'] ||
+                    document.getElementById("cust_num_evidence").value != incoming_state['settings']['cust_num_evidences'] ||
+                    document.getElementById("cust_hunt_length").value != incoming_state['settings']['cust_hunt_length']
+                ){
+                    if(incoming_state['settings']['num_evidences'] != "")
+                        document.getElementById("num_evidence").value = incoming_state['settings']['num_evidences']
+                    if(incoming_state['settings']['cust_num_evidences'] != "")
+                        document.getElementById("cust_num_evidence").value = incoming_state['settings']['cust_num_evidences']
+                    if(incoming_state['settings']['cust_hunt_length'] != "")
+                        document.getElementById("cust_hunt_length").value = incoming_state['settings']['cust_hunt_length']
+                    updateMapDifficulty(incoming_state['settings']['num_evidences'])
+                    showCustom()
+                    flashMode()
+                }
+                if(document.getElementById("ghost_modifier_speed").value != incoming_state['settings']['ghost_modifier']){
+                    document.getElementById("ghost_modifier_speed").value = incoming_state['settings']['ghost_modifier']
+                }
 
-            if (
-                document.getElementById("num_evidence").value != incoming_state['settings']['num_evidences'] ||
-                document.getElementById("cust_num_evidence").value != incoming_state['settings']['cust_num_evidences'] ||
-                document.getElementById("cust_hunt_length").value != incoming_state['settings']['cust_hunt_length']
-            ){
-                if(incoming_state['settings']['num_evidences'] != "")
-                    document.getElementById("num_evidence").value = incoming_state['settings']['num_evidences']
-                if(incoming_state['settings']['cust_num_evidences'] != "")
-                    document.getElementById("cust_num_evidence").value = incoming_state['settings']['cust_num_evidences']
-                if(incoming_state['settings']['cust_hunt_length'] != "")
-                    document.getElementById("cust_hunt_length").value = incoming_state['settings']['cust_hunt_length']
-                updateMapDifficulty(incoming_state['settings']['num_evidences'])
-                showCustom()
-                flashMode()
-            }
-            if(document.getElementById("ghost_modifier_speed").value != incoming_state['settings']['ghost_modifier']){
-                document.getElementById("ghost_modifier_speed").value = incoming_state['settings']['ghost_modifier']
-            }
+                saveSettings()
 
-            saveSettings()
-
-            for (const [key, value] of Object.entries(incoming_state["ghosts"])){ 
-                if (value == 0 || value == 1){
-                    if(state['ghosts'][key] == 2){
-                        select(document.getElementById(key),true);
-                        if(value == 0)
-                            fade(document.getElementById(key),true);
+                for (const [key, value] of Object.entries(incoming_state["ghosts"])){ 
+                    if (value == 0 || value == 1){
+                        if(state['ghosts'][key] == 2){
+                            select(document.getElementById(key),true);
+                            if(value == 0)
+                                fade(document.getElementById(key),true);
+                        }
+                        else if(state['ghosts'][key] == -2){
+                            died(document.getElementById(key),true);
+                            if(value == 0)
+                                fade(document.getElementById(key),true);
+                        }
+                        else if(state['ghosts'][key] == -1){
+                            revive()
+                        }
+                        else if(state['ghosts'][key] != 3){
+                            if((value == 0 && state['ghosts'][key] != 0) || (value == 1 && state['ghosts'][key] != 1)){
+                                fade(document.getElementById(key),true);
+                            }
+                        }
                     }
-                    else if(state['ghosts'][key] == -2){
-                        died(document.getElementById(key),true);
-                        if(value == 0)
-                            fade(document.getElementById(key),true);
+                    else if (value == -1){
+                        remove(document.getElementById(key),true);
                     }
-                    else if(state['ghosts'][key] == -1){
-                        revive()
-                    }
-                    else if(state['ghosts'][key] != 3){
-                        if((value == 0 && state['ghosts'][key] != 0) || (value == 1 && state['ghosts'][key] != 1)){
-                            fade(document.getElementById(key),true);
+                    else if(value == 2 || value == -2){
+                        if(markedDead){
+                            if(state['ghosts'][key] != -2){
+                                died(document.getElementById(key),true);
+                            }
+                        }
+                        else{
+                            if(state['ghosts'][key] != 2){
+                                select(document.getElementById(key),true);
+                            }
                         }
                     }
                 }
-                else if (value == -1){
-                    remove(document.getElementById(key),true);
+
+                if(incoming_state.hasOwnProperty("map")){
+                    state['map'] = incoming_state['map'];
+                    var map_exists = setInterval(function(){
+                        if(document.getElementById(incoming_state['map']) != null){
+                            var map_elem = document.getElementById(incoming_state["map"])
+                            changeMap(map_elem,map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
+                            saveSettings()
+                            clearInterval(map_exists)
+                        }
+                    },500)
                 }
-                else if(value == 2 || value == -2){
-                    if(markedDead){
-                        if(state['ghosts'][key] != -2){
-                            died(document.getElementById(key),true);
+
+                var prev_evidence = state['evidence']
+                var new_mp = false
+                for (const [key, value] of Object.entries(incoming_state["evidence"])){ 
+
+                    if(value == -2){
+                        if(prev_evidence[key] != -2){
+                            monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"),true)
+                            new_mp = true
                         }
                     }
                     else{
-                        if(state['ghosts'][key] != 2){
-                            select(document.getElementById(key),true);
+                        if(prev_evidence[key] == -2 && !new_mp){
+                            monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"),true)
+                        }
+                        while (!$(document.getElementById(key).querySelector("#checkbox")).hasClass(["bad","neutral","good"][value + 1])){
+                            tristate(document.getElementById(key),true);
                         }
                     }
                 }
-            }
-
-            if(incoming_state.hasOwnProperty("map")){
-                var map_exists = setInterval(function(){
-                    if(document.getElementById(incoming_state['map']) != null){
-                        var map_elem = document.getElementById(incoming_state["map"])
-                        changeMap(map_elem,map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
-                        saveSettings()
-                        clearInterval(map_exists)
-                    }
-                },500)
-            }
-
-            var prev_evidence = state['evidence']
-            var new_mp = false
-            for (const [key, value] of Object.entries(incoming_state["evidence"])){ 
-
-                if(value == -2){
-                    if(prev_evidence[key] != -2){
-                        monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"),true)
-                        new_mp = true
+                for (const [key, value] of Object.entries(incoming_state["speed"])){ 
+                    while (!$(document.getElementById(key).querySelector("#checkbox")).hasClass(["neutral","good"][value])){
+                        dualstate(document.getElementById(key),true);
                     }
                 }
-                else{
-                    if(prev_evidence[key] == -2 && !new_mp){
-                        monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"),true)
-                    }
-                    while (!$(document.getElementById(key).querySelector("#checkbox")).hasClass(["bad","neutral","good"][value + 1])){
-                        tristate(document.getElementById(key),true);
+                for (const [key, value] of Object.entries(incoming_state["sanity"])){ 
+                    while (!$(document.getElementById(key).querySelector("#checkbox")).hasClass(["neutral","good"][value])){
+                        dualstate(document.getElementById(key),true,true);
                     }
                 }
-            }
-            for (const [key, value] of Object.entries(incoming_state["speed"])){ 
-                while (!$(document.getElementById(key).querySelector("#checkbox")).hasClass(["neutral","good"][value])){
-                    dualstate(document.getElementById(key),true);
-                }
-            }
-            for (const [key, value] of Object.entries(incoming_state["sanity"])){ 
-                while (!$(document.getElementById(key).querySelector("#checkbox")).hasClass(["neutral","good"][value])){
-                    dualstate(document.getElementById(key),true,true);
-                }
-            }
 
-            if(incoming_state.hasOwnProperty("los")){
-                while (!$(document.getElementById("LOS").querySelector("#checkbox")).hasClass(["neutral","bad","good"][incoming_state["los"]+1])){
-                    tristate(document.getElementById("LOS"),true,true);
+                if(incoming_state.hasOwnProperty("los")){
+                    while (!$(document.getElementById("LOS").querySelector("#checkbox")).hasClass(["neutral","bad","good"][incoming_state["los"]+1])){
+                        tristate(document.getElementById("LOS"),true,true);
+                    }
                 }
+                
+                filter(true)
+                state_received = true
             }
-            
-            filter(true)
 
         } catch (error){
             console.log(error)
@@ -598,7 +603,7 @@ function send_ping(){
 }
 
 function send_state() {
-    if (hasLink){
+    if (hasLink && state_received){
         var outgoing_state = JSON.stringify({
             'evidence': state['evidence'],
             'speed': state['speed'],
