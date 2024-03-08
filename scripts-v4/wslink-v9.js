@@ -375,7 +375,7 @@ function link_link(){
                         }
                     }, 30000)
                 }
-                if (incoming_state['action'].toUpperCase() == "UNLINKED"){
+                if (incoming_state['action'].toUpperCase() == "UNLINK"){
                     disconnect_link()
                 }
                 if (incoming_state['action'].toUpperCase() == "DL_STEP"){
