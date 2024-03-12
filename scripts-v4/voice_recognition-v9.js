@@ -480,7 +480,7 @@ function parse_speech(vtext){
         reset_voice_status()
 
     }
-    else if(vtext.startsWith('timer start') || vtext.startsWith('timer stop')){
+    else if(vtext == 'timer start' || vtext == 'timer stop'){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized timer command")
@@ -504,7 +504,7 @@ function parse_speech(vtext){
         running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
-    else if(vtext.startsWith('cooldown start') || vtext.startsWith('cool down start') || vtext.startsWith('cooldown stop') || vtext.startsWith('cool down stop')){
+    else if(vtext == 'cooldown start' || vtext == 'cool down start' || vtext == 'cooldown stop' || vtext == 'cool down stop'){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized cooldown command")
@@ -613,7 +613,7 @@ function parse_speech(vtext){
         running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
-    else if(vtext.startsWith('hunt start') || vtext.startsWith('hunt stop')){
+    else if(vtext == 'hunt start' || vtext == 'hunt stop'){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized hunt command")
