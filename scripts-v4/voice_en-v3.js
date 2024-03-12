@@ -1,6 +1,7 @@
 const ZNLANG = {
     "overall":{
-        "evidence":["evident","providence","eminems","eminem's"],
+        "evidence":["evident","providence","eminems","eminem's","eminent"],
+        "evidence emf5":["evan ncma 5"],
         "journal":["channel"],
         "sanity":["saturday","insanity","unsanity","sandy"],
         "hunt":["hunts"],
@@ -47,7 +48,7 @@ const ZNLANG = {
         "domo":["demo"]
     },
     "ghosts":{
-        "spirit":[],
+        "spirit":["strip"],
         "wraith":["straight","race","reef","raise"],
         "phantom":[],
         "poltergeist":[],
@@ -79,7 +80,7 @@ const ZNLANG = {
         "freezing":[],
         "ghost orbs":["orbs","orb","forbes","ghost forbes","olives","knobs","stops"],
         "writing":['righting',"ryhming"],
-        "spirit box":["spare box","beer box"]
+        "spirit box":["spare box","beer box","red box","redbox","strip","strip box","spare parts"]
     },
     "speed":{
         "slow":[],

@@ -480,7 +480,7 @@ function parse_speech(vtext){
         reset_voice_status()
 
     }
-    else if(vtext.startsWith('timer')){
+    else if(vtext.startsWith('timer start') || vtext.startsWith('timer stop')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized timer command")
@@ -494,18 +494,17 @@ function parse_speech(vtext){
             toggle_timer(true,false)
             send_timer(true,false)
         } 
-        else{
+        else if(vtext == "stop"){
             domovoi_msg += "stopped smudge timer"
             toggle_timer(false,true)
             send_timer(false,true)
         }
-        
 
         domovoi_heard(domovoi_msg)
         running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
-    else if(vtext.startsWith('cooldown') || vtext.startsWith('cool down')){
+    else if(vtext.startsWith('cooldown start') || vtext.startsWith('cool down start') || vtext.startsWith('cooldown stop') || vtext.startsWith('cool down stop')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized cooldown command")
@@ -518,7 +517,7 @@ function parse_speech(vtext){
             toggle_cooldown_timer(true,false)
             send_cooldown_timer(true,false)
         } 
-        else{
+        else (vtext == "stop"){
             domovoi_msg += "stopped cooldown timer"
             toggle_cooldown_timer(false,true)
             send_cooldown_timer(false,true)
@@ -614,7 +613,7 @@ function parse_speech(vtext){
         running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
-    else if(vtext.startsWith('hunt')){
+    else if(vtext.startsWith('hunt start') || vtext.startsWith('hunt stop')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized hunt command")
@@ -627,7 +626,7 @@ function parse_speech(vtext){
             toggle_hunt_timer(true,false)
             send_hunt_timer(true,false)
         } 
-        else{
+        else if(vtext == "stop"){
             domovoi_msg += "stopped hunt timer"
             toggle_hunt_timer(false,true)
             send_hunt_timer(false,true)
