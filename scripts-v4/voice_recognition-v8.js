@@ -517,7 +517,7 @@ function parse_speech(vtext){
             toggle_cooldown_timer(true,false)
             send_cooldown_timer(true,false)
         } 
-        else (vtext == "stop"){
+        else if(vtext == "stop"){
             domovoi_msg += "stopped cooldown timer"
             toggle_cooldown_timer(false,true)
             send_cooldown_timer(false,true)
