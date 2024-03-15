@@ -288,8 +288,9 @@ function parse_speech(vtext){
 
         if(!$(document.getElementById(smallest_evidence).querySelector("#checkbox")).hasClass("block")){
             while (vvalue != {"good":1,"bad":-1,"neutral":0}[document.getElementById(smallest_evidence).querySelector("#checkbox").classList[0]]){
-                tristate(document.getElementById(smallest_evidence));
+                tristate(document.getElementById(smallest_evidence),true);
             }
+            filter();
         }
         else{
             domovoi_msg = `Evidence ${smallest_evidence} is locked!`
