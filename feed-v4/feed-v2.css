@@ -18,6 +18,22 @@
     padding: 10px 10px 10px 20px;
 }
 
+#feed_description a:link{
+    color: #ffff00;
+}
+
+#feed_description a:visited{
+    color: #ffff00;
+}
+
+#feed_description a:hover{
+    color: #ff9100;
+}
+
+#feed_description a:active{
+    color: #00ff00;
+}
+
 #feed_notes{
     padding: 0px 10px 10px 20px;
     font-size: 10px;
