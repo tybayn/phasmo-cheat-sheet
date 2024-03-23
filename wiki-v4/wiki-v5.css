@@ -40,6 +40,16 @@
         content: "\2796";
     }
 
+    .wiki_subtitle{
+        display: flex;
+    }
+
+    .wiki_crumb{
+        color:rgba(204, 204, 204, 0.26);
+        margin-left: -13px;
+        padding-right: 5px;
+    }
+
     .wiki_details{
         padding: 0px 10px 5px 10px;
         width: calc(100% - 20px);
@@ -192,7 +202,7 @@
         background-size: cover;
         position: absolute;
         bottom: 10px;
-        left: 215px;
+        left: 230px;
     }
 
     .tarot-img {
@@ -257,6 +267,16 @@
 
     .wiki_active:after {
         content: "\2796";
+    }
+
+    .wiki_subtitle{
+        display: flex;
+    }
+
+    .wiki_crumb{
+        color:rgba(204, 204, 204, 0.26);
+        margin-left: -15px;
+        padding-right: 10px;
     }
 
     .wiki_details{
@@ -423,7 +443,7 @@
         background-size: cover;
         position: absolute;
         bottom: 10px;
-        left: 410px;
+        left: 440px;
     }
 
     .tarot-img {
