@@ -1707,6 +1707,10 @@
         align-items: center;
     }
 
+    .ghost_card_hidden{
+        grid-template-rows: auto 0px auto auto !important;
+    }
+
     .ghost_name{
         grid-column: 1;
         grid-row: 1;
@@ -1810,6 +1814,10 @@
         overflow-y: scroll;
         background: rgba(0,0,0,0.25);
         height: calc(100% - 30px);
+    }
+
+    .ghost_behavior_hidden{
+        display: none !important;
     }
     
     .ghost_behavior_item{

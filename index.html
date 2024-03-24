@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v4/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v4/style-v6.css"/>
-    <link rel="stylesheet" href="styles-v4/style-mobile-v6.css"/>
+    <link rel="stylesheet" href="styles-v4/style-v7.css"/>
+    <link rel="stylesheet" href="styles-v4/style-mobile-v7.css"/>
     <link rel="stylesheet" href="themes-v4/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v4/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v4/wiki-v5.css" >
@@ -134,6 +134,8 @@
                 <strong>Misc:</strong>
                 <ul>
                     <li>"show filters" or "show tools" -> Flips the menu to show the filters/tools</li>
+                    <li>"show descriptions" or "show behaviors" -> Shows ghost behavior on the ghost cards</li>
+                    <li>"hide descriptions" or "hide behaviors" -> Hides ghost behavior on the ghost cards</li>
                     <li>"ghost speed &lt;percent&gt;" -> Set ghost speed modifier to 50%, 75%, 100%, 125%, or 150%</li>
                     <li>"select map &lt;map name&gt;" -> Selects the specified map</li>
                     <li>"show map [&lt;map name&gt;]" -> Opens the map tab and displays map</li>
@@ -249,7 +251,16 @@
             </div>
             <div class="modifier_option less_pad">
                 <input type="checkbox" id="timer_split" name="timer_split" class="settings_check" onclick="saveSettings();"><label for="timer_split">Split Timer Parts (Desktop Link)</label>
-            </div>        
+            </div>  
+            <hr>
+            <div class="modifier_volume yfont white">Ghost Cards</div>      
+            <div class="modifier_option less_pad">
+                <input type="checkbox" id="hide_descriptions" name="hide_descriptions" class="settings_check" onclick="toggleDescriptions();saveSettings();"><label for="hide_descriptions">Hide Behaviors</label>
+            </div>
+            <div class="modifier_option less_pad">
+                <input type="checkbox" id="compact_cards" name="compact_cards" class="settings_check" onclick="toggleCompact();saveSettings();"><label for="compact_cards">Compact View</label>
+            </div>
+            <div class="modifier_note">(Compact View has no effect on mobile)</div>
         </div>
         <div id="session">-</div>
     </div>
@@ -649,13 +660,13 @@
     <script src="scripts-v4/timer-v6.js"></script>
     <script src="discord-v4/discord-v2.js"></script>
     <script src="wiki-v4/wiki-v2.js"></script>
-    <script src="scripts-v4/filter-v8.js"></script>
+    <script src="scripts-v4/filter-v9.js"></script>
     <script src="scripts-v4/wslink-v9.js"></script>
     <script src="scripts-v4/zn-v4.js"></script>
     <script src="events-v4/events-v1.js"></script>
     <script src="feed-v4/feed-v1.js"></script>
     <script src="scripts-v4/voice_en-v3.js"></script>
-    <script src="scripts-v4/voice_recognition-v10.js"></script>
+    <script src="scripts-v4/voice_recognition-v11.js"></script>
     <script src="scripts-v4/sparkles-v1.js"></script>
     <script>
         document.getElementById('reset').oncontextmenu = showResetMenu;

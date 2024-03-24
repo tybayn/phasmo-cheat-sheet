@@ -11,7 +11,7 @@ let bpm_list = []
 let bpm_los_list = []
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood"}
-var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
 
 let znid = getCookie("znid")
 
@@ -1280,6 +1280,8 @@ function saveSettings(reset = false){
     user_settings['mute_timer_countdown'] = document.getElementById("mute_timer_countdown").checked ? 1 : 0;
     user_settings['timer_count_up'] = document.getElementById("timer_count_up").checked ? 1 : 0;
     user_settings['timer_split'] = document.getElementById("timer_split").checked ? 1 : 0;
+    user_settings['hide_descriptions'] = document.getElementById("hide_descriptions").checked ? 1 : 0;
+    user_settings['compact_cards'] = document.getElementById("compact_cards").checked ? 1 : 0;
     user_settings['offset'] = parseFloat(document.getElementById("offset_value").innerText.replace(/\d+(?:-\d+)+/g,"")).toFixed(1)
     user_settings['ghost_modifier'] = parseInt(document.getElementById("ghost_modifier_speed").value)
     user_settings['num_evidences'] = document.getElementById("num_evidence").value
@@ -1302,7 +1304,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
     }
 
     user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
@@ -1315,6 +1317,8 @@ function loadSettings(){
     document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] ?? 0 == 1
     document.getElementById("timer_count_up").checked = user_settings['timer_count_up'] ?? 0 == 1
     document.getElementById("timer_split").checked = user_settings['timer_split'] ?? 0 == 1
+    document.getElementById("hide_descriptions").checked = user_settings['hide_descriptions'] ?? 0 == 1
+    document.getElementById("compact_cards").checked = user_settings['compact_cards'] ?? 0 == 1
     document.getElementById("offset_value").innerText = ` ${user_settings['offset'] ?? 0.0}% `
     document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier'] ?? 2
     document.getElementById("num_evidence").value = user_settings['num_evidences'] ?? "3"
@@ -1359,6 +1363,8 @@ function loadSettings(){
 
     setCookie("settings",JSON.stringify(user_settings),30)
 
+    toggleDescriptions()
+    toggleCompact()
     changeTheme(user_settings['theme'])
     setVolume()
     mute("toggle")
@@ -1373,12 +1379,14 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
     document.getElementById("modifier_volume").value = user_settings['volume']
     document.getElementById("mute_timer_toggle").checked = user_settings['mute_timer_toggle'] == 1
     document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] == 1
     document.getElementById("timer_count_up").checked = user_settings['timer_count_up'] == 1
     document.getElementById("timer_split").checked = user_settings['timer_split'] == 1
+    document.getElementById("hide_descriptions").checked = user_settings['hide_descriptions'] == 1
+    document.getElementById("compact_cards").checked = user_settings['compact_cards'] == 1
     document.getElementById("offset_value").innerText = ` ${user_settings['offset'].toFixed(1)}% `
     document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier']
     document.getElementById("num_evidence").value = user_settings['num_evidences']
@@ -1480,6 +1488,45 @@ function setSpeedLogicType(){
 function setGhostSpeedFromDifficulty(dif){
     speed = {"-1":2,"0":4,"1":2,"2":2,"3":2,"3I":2,"3A":2}[dif]
     document.getElementById("ghost_modifier_speed").value = speed;
+}
+
+function toggleDescriptions(forced = null){
+
+    if (forced == true){
+        document.getElementById("hide_descriptions").checked = false
+    }
+    else if (forced == false){
+        document.getElementById("hide_descriptions").checked = true
+    }
+
+    $(".ghost_card").removeClass(["ghost_card_hidden","ghost_card_compact"])
+    $(".ghost_behavior").removeClass(["ghost_behavior_hidden","ghost_behavior_compact"])
+    $(".ghost_clear").removeClass(["ghost_clear_compact"])
+
+    if(document.getElementById("hide_descriptions").checked){
+        $(".ghost_card").addClass(["ghost_card_hidden"])
+        $(".ghost_behavior").addClass(["ghost_behavior_hidden"])
+    }
+    else if(document.getElementById("compact_cards").checked){
+        $(".ghost_card").addClass(["ghost_card_compact"])
+        $(".ghost_behavior").addClass(["ghost_behavior_compact"])
+        $(".ghost_clear").addClass(["ghost_clear_compact"])
+    }
+}
+
+function toggleCompact(){
+    if(!document.getElementById("hide_descriptions").checked){
+        if(document.getElementById("compact_cards").checked){
+            $(".ghost_card").addClass(["ghost_card_compact"])
+            $(".ghost_behavior").addClass(["ghost_behavior_compact"])
+            $(".ghost_clear").addClass(["ghost_clear_compact"])
+        }
+        else{
+            $(".ghost_card").removeClass(["ghost_card_compact"])
+            $(".ghost_behavior").removeClass(["ghost_behavior_compact"])
+            $(".ghost_clear").removeClass(["ghost_clear_compact"])
+        }
+    }
 }
 
 function showResetMenu(event){

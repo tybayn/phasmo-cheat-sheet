@@ -1034,7 +1034,7 @@ hr{
     .modifier_note{
         color: #ffffffa0;
         font-size: 10px;
-        padding-top: 10px;
+        padding-top: 5px;
         margin: 0px 10px;
         display: flex;
         align-items: center;
@@ -1966,6 +1966,19 @@ hr{
         flex:1;
     }
 
+    .ghost_card_hidden{
+        max-width: 271px !important;
+        min-width: 271px !important;
+    }
+
+    .ghost_card_compact{
+        max-width: 245px !important;
+        min-width: 245px !important;
+        grid-template-columns: 245px !important;
+        grid-template-rows: 45px 35px 45px 125px !important;
+        height: 250px !important;
+    }
+
     .ghost_name{
         grid-column: 1;
         grid-row: 1;
@@ -2076,6 +2089,16 @@ hr{
         margin-bottom: 3px;
         z-index: 0;
     }
+
+    .ghost_behavior_hidden{
+        display: none !important;
+    }
+
+    .ghost_behavior_compact{
+        grid-column: 1 !important;
+        grid-row: 4 !important;
+        margin-left: 5px !important;
+    }
     
     .ghost_behavior_item{
         line-height: 18px;
@@ -2119,6 +2142,11 @@ hr{
         align-items: flex-end;
         padding-right: 5px;
         flex-direction: column;
+    }
+
+    .ghost_clear_compact{
+        grid-column: 1 !important;
+        grid-row: 4 !important;
     }
 
     .card_icon{

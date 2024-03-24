@@ -790,6 +790,34 @@ function parse_speech(vtext){
         running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
+    else if(vtext.startsWith('show description') || vtext.startsWith('show behavior')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized behavior command")
+        running_log[cur_idx]["Type"] = "description/behavior"
+        console.log(`Heard '${vtext}'`)
+        domovoi_msg = "showing ghost behaviors"
+
+        toggleDescriptions(true)
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('hide description') || vtext.startsWith('hide behavior')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized behavior command")
+        running_log[cur_idx]["Type"] = "description/behavior"
+        console.log(`Heard '${vtext}'`)
+        domovoi_msg = "hiding ghost behaviors"
+
+        toggleDescriptions(false)
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
     else if(vtext.startsWith('reset cheat sheet') || vtext.startsWith('reset journal')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
