@@ -433,16 +433,18 @@ function filter(ignore_link=false){
             parseInt(ghosts[i].getElementsByClassName("ghost_hunt_low")[0].textContent),
             parseInt(ghosts[i].getElementsByClassName("ghost_hunt_high")[0].textContent)
         ]
+
+        //Check for monkey paw filter
+        if (evidence.includes(monkey_evi)){
+            keep = false
+        }
+
+        //Logic for mimic
         if (name == "The Mimic"){
             evidence.push("Ghost Orbs")
             mimic_evi = evidence
             nm_evidence = "Ghost Orbs"
             mimic_nm_evi = "Ghost Orbs"
-        }
-
-        //Check for monkey paw filter
-        if (evidence.includes(monkey_evi)){
-            keep = false
         }
 
         //Check for los filter
