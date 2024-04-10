@@ -25,7 +25,7 @@ $(window).on('load', function() {
             var feed_html = `
             <div id="feed_title">${data[i]['title']}</div>
             <div id="feed_date">${data[i]['start_date'].replace('T',' ')}</div>
-            <img src="${data[i]['thumbnail']}" id="feed_image" onerror="this.style.display='none'" onload="this.style.display='block'">
+            <img loading="lazy" src="${data[i]['thumbnail']}" id="feed_image" onerror="this.style.display='none'" onload="this.style.display='block'">
             <div id="feed_description">${data[i]['description']}</div>
             <div id="feed_notes">${data[i]['notes']}</div>
             <div id="feed_sentiment">

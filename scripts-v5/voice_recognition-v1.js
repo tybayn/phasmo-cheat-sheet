@@ -189,6 +189,11 @@ function parse_speech(vtext){
             vvalue = -10
             domovoi_msg = "showing info for "
         }
+        else if(vtext.startsWith("test ") || vtext.startsWith("tests ")){
+            vtext = vtext.replace('tests ', "").replace('test ', "").trim()
+            vvalue = -11
+            domovoi_msg = "showing tests for "
+        }
 
         // Common fixes to ghosts
         var prevtext = vtext;
@@ -235,6 +240,13 @@ function parse_speech(vtext){
                 document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
 
             send_ghost_data_link(smallest_ghost)
+        }
+        else if(vvalue == -11){
+            if(!$(document.getElementById(smallest_ghost)).isInViewport())
+                document.getElementById(smallest_ghost).scrollIntoView({alignToTop:true,behavior:"smooth"})
+
+            openGhostInfo(smallest_ghost)
+            send_ghost_tests_link(smallest_ghost)
         }
 
         resetResetButton()

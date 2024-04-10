@@ -13,6 +13,11 @@
     background-attachment: inherit;
 }
 
+.theme-coral{
+    background: linear-gradient(45deg, rgba(106,23,32,1) 0%, rgba(6,102,100,1) 51%, rgba(106,23,32,1) 100%);
+    background-attachment: inherit;
+}
+
 .theme-dusk{
     background: linear-gradient(45deg, rgba(75,98,102,1) 0%, rgba(68,55,83,1) 100%);
     background-attachment: inherit;

@@ -1095,11 +1095,13 @@ function showSettings(){
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("settings_box").style.zIndex = (mquery.matches ? "10" : "2")
         document.getElementById("settings_box").style.left = (mquery.matches ? "0px" : "196px")
+        $("#settings_box").addClass("tab-open")
     }
     else {
         document.getElementById("settings_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-32px")
         document.getElementById("settings_box").style.boxShadow = "none"
         document.getElementById("settings_tab").style.boxShadow = "none"
+        $("#settings_box").removeClass("tab-open")
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
             setTimeout(function(){
@@ -1120,11 +1122,13 @@ function showDiscordLink(){
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("discord_link_box").style.zIndex= (mquery.matches ? "10" : "2")
         document.getElementById("discord_link_box").style.left = (mquery.matches ? "0px" : "196px")
+        $("#discord_link_box").addClass("tab-open")
     }
     else {
         document.getElementById("discord_link_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-32px")
         document.getElementById("discord_link_box").style.boxShadow = "none"
         document.getElementById("discord_link_tab").style.boxShadow = "none"
+        $("#discord_link_box").removeClass("tab-open")
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
             setTimeout(function(){
@@ -1145,11 +1149,13 @@ function showEvent(){
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= (mquery.matches ? "10" : "2")
         document.getElementById("event_box").style.left = (mquery.matches ? "0px" : "196px")
+        $("#event_box").addClass("tab-open")
     }
     else {
         document.getElementById("event_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-182px")
         document.getElementById("event_box").style.boxShadow = "none"
         document.getElementById("event_tab").style.boxShadow = "none"
+        $("#event_box").removeClass("tab-open")
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
             setTimeout(function(){
@@ -1170,11 +1176,13 @@ function showWiki(){
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= (mquery.matches ? "10" : "2")
         document.getElementById("wiki_box").style.left = (mquery.matches ? "0px" : "196px")
+        $("#wiki_box").addClass("tab-open")
     }
     else {
         document.getElementById("wiki_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-182px")
         document.getElementById("wiki_box").style.boxShadow = "none"
         document.getElementById("wiki_tab").style.boxShadow = "none"
+        $("#wiki_box").removeClass("tab-open")
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
             setTimeout(function(){
@@ -1197,12 +1205,14 @@ function showMaps(forceOpen = false, forceClose = false){
         document.getElementById("maps_box").style.zIndex= (mquery.matches ? "10" : "2")
         document.getElementById("maps_box").style.left = (mquery.matches ? "0px" : "196px")
         document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 100px)" : "calc(100% - 265px)")
+        $("#maps_box").addClass("tab-open")
     }
     else if(!forceOpen) {
         document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 100px)" : "556px")
         document.getElementById("maps_box").style.left = (mquery.matches ? "calc(-100% + 60px)" : "-388px")
         document.getElementById("maps_box").style.boxShadow = "none"
         document.getElementById("maps_box").style.boxShadow = "none"
+        $("#maps_box").removeClass("tab-open")
     }
 }
 

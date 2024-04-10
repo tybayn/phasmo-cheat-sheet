@@ -2,6 +2,7 @@ const themes = {
     "Default": "theme-default",
     "Berry": "theme-berry",
     "Black & White": "theme-black-white",
+    "Coral": "theme-coral",
     "Dusk": "theme-dusk",
     "Frost": "theme-frost",
     "Halloween": "theme-halloween",

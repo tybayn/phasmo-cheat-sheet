@@ -1,6 +1,20 @@
 
 function accordian(elem){
     var panel = elem.nextElementSibling;
+    var all_titles = $(elem).siblings(".wiki_title")
+    var all_details = $(elem).siblings(".wiki_details")
+
+    for(let i = 0; i < all_titles.length; i++){
+        if (all_titles[i] != elem){
+            all_titles[i].classList.remove("wiki_active")
+        }
+    }
+    for(let i = 0; i < all_details.length; i++){
+        if (all_details[i] != panel){
+            all_details[i].style.height = "0px"
+            all_details[i].style.display = "none"
+        }
+    }
 
     if (panel.style.height == '' || panel.style.height != '0px') {
         elem.classList.remove("wiki_active");
@@ -11,6 +25,8 @@ function accordian(elem){
         panel.style.display = "table";
         panel.style.height = "auto"
     }
+
+    
 }
 
 // -----------------------------------------------
@@ -95,4 +111,41 @@ function setFlicker(){
         startFlicker(document.getElementById("oni-flicker"))
         startFlicker(document.getElementById("deogen-flicker"))
     }
+}
+
+function highLightBPMFinder(){
+    var hidden = $("#show_tool_button").hasClass("filter_tool_button_back")
+    if(hidden){
+        toggleFilterTools()
+    }
+
+    setTimeout(() => {
+        $("#tools-content").children(".modifier").addClass("focus-flash")
+        setTimeout(() =>{
+            $("#tools-content").children(".modifier").removeClass("focus-flash")
+        },2000)
+    },hidden ? 500 : 1)
+}
+
+function openGhostInfo(ghost){
+    if(!$("#wiki_box").hasClass("tab-open"))
+        showWiki()
+    if(!$("#wiki-0-evidence").hasClass("wiki_active"))
+        accordian(document.getElementById("wiki-0-evidence"))
+    if(!$(`#wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).hasClass("wiki_active"))
+        accordian(document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`))
+    document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).scrollIntoView({alignToTop:true,behavior:"smooth"})
+}
+
+function zoomImage(elem){
+    $("#zoom_image").attr("src",$(elem).attr("src"))
+    $("#blackout_image").show()
+    document.getElementById("blackout_image").style.opacity = 1
+}
+
+function zoomOutImage(){
+    document.getElementById("blackout_image").style.opacity = 0
+    setTimeout(() => {
+        $("#blackout_image").hide()
+    },500)
 }

@@ -328,6 +328,9 @@ function link_link(){
                 if (incoming_state['action'].toUpperCase() == "GHOSTDATA"){
                     send_ghost_data_link(incoming_state['ghost'])
                 }
+                if (incoming_state['action'].toUpperCase() == "GHOSTTESTS"){
+                    send_ghost_tests_link(incoming_state['ghost'])
+                }
                 if (incoming_state['action'].toUpperCase() == "GHOSTSELECT"){
                     select(document.getElementById(incoming_state['ghost']))
                 }
@@ -498,11 +501,32 @@ function send_ghost_data_link(ghost){
         data = data.replace("Hunt Sanity","\n<b>Hunt Sanity:<b>\n")
         data = data.replace("Hunt Speed","\n<b>Hunt Speed:<b>\n")
         data = data.replace("Evidence","\n<b>Evidence:<b>\n")
+        data = data.replace("Tests >>\n","")
         data = data.replace("🔊","")
         data = data.replaceAll("<b>\n\n","<b>\n")
         data = data.replace(/[ ]+/g,' ').trim()
         $(document.getElementById(ghost)).addClass(readd_classes)
         
+        dlws.send(JSON.stringify({"action":"GHOSTDATA","ghost":`${ghost}|${data}`}))
+    }
+}
+
+function send_ghost_tests_link(ghost){
+    if(hasDLLink){
+        data = `<b>${ghost} Tests:<b>\n`
+        data += document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).nextElementSibling.innerText
+        data = data.replace("Abilities, Behaviors, & Tells","<b>Abilities, Behaviors, & Tells:<b>")
+        data = data.replace("Confirmation Test(s)","<b>Confirmation Test(s):<b>")
+        data = data.replace("Elimination Test(s)","<b>Elimination Test(s):<b>")
+        data = data.replaceAll(/-.+?-/g,"")
+        data = data.replace(/[ ]+/g,' ')
+        data = data.replaceAll("\n ","\n")
+        data = data.replaceAll("\n\nT","\nT")
+        data = data.replaceAll("\n\nB","\nB")
+        data = data.replaceAll("\n\nA","\nA")
+        data = data.replaceAll("<b>\n\n","<b>\n").trim()
+        
+
         dlws.send(JSON.stringify({"action":"GHOSTDATA","ghost":`${ghost}|${data}`}))
     }
 }

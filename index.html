@@ -21,15 +21,15 @@
         };
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
-    <script src="scripts-v4/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v4/style-v7.css"/>
-    <link rel="stylesheet" href="styles-v4/style-mobile-v7.css"/>
-    <link rel="stylesheet" href="themes-v4/themes-v1.css"/>
-    <link rel="stylesheet" href="discord-v4/discord-v1.css" >
-    <link rel="stylesheet" href="wiki-v4/wiki-v5.css" >
-    <link rel="stylesheet" href="events-v4/events-v1.css" >
-    <link rel="stylesheet" href="feed-v4/feed-v2.css" >
-    <link rel="stylesheet" href="styles-v4/sparkles-v1.css" >
+    <script src="scripts-v5/ghost_template-v1.js"></script>
+    <link rel="stylesheet" href="styles-v5/style-v1.css"/>
+    <link rel="stylesheet" href="styles-v5/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="themes-v5/themes-v1.css"/>
+    <link rel="stylesheet" href="discord-v5/discord-v1.css" >
+    <link rel="stylesheet" href="wiki-v5/wiki-v1.css" >
+    <link rel="stylesheet" href="events-v5/events-v1.css" >
+    <link rel="stylesheet" href="feed-v5/feed-v1.css" >
+    <link rel="stylesheet" href="styles-v5/sparkles-v1.css" >
 </head>
 
 <body>
@@ -119,6 +119,7 @@
                     <li class="discord_voice_commands" style="display:none;">"ghost guess &lt;ghost&gt;" -> Mark the ghost as an unconfirmed guess</li>
                     <li class="discord_voice_commands" style="display:none;">"ghost killed by &lt;ghost&gt;" -> Select the ghost AND mark that it killed you</li>
                     <li>"ghost show|info &lt;ghost&gt;" -> Scroll the specified ghost card into view</li>
+                    <li>"ghost tests &lt;ghost&gt;" -> Show the 0 evidence tests for the specified ghost in the guide</li>
                 </ul>
                 <hr>
                 <strong>Timer:</strong>
@@ -150,6 +151,10 @@
             <div class="copyright_text">Copyright © 2023-2024 Ty Bayn (Zero-Network)</div>
             
         </div>
+    </div>
+
+    <div id="blackout_image" style="display: none;" onclick="zoomOutImage()">
+        <img loading="lazy" id="zoom_image" src="" onclick="zoomOutImage()">
     </div>
 
     <div id="settings_box" style="left: -1000px;">
@@ -187,7 +192,7 @@
             <hr>
             <div class="modifier_volume yfont white">
                 Desktop Link
-                <a class="download" href="assets/ZN-Desktop-Link-Installer-v2.9.0.msi" download="ZN-Desktop-Link-Installer-v2.9.0.msi"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
+                <a class="download" href="assets/ZN-Desktop-Link-Installer-v2.10.0.msi" download="ZN-Desktop-Link-Installer-v2.10.0.msi"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
             </div>
             <div class="journal_link">
                 <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
@@ -654,27 +659,27 @@
             document.getElementById("maps_box").style.left = "-388px";
         }
     </script>
-    <script src="themes-v4/themes-v2.js"></script>
-    <script src="scripts-v4/audio_controller-v1.js"></script>
-    <script src="scripts-v4/metronome-v3.js"></script>
-    <script src="scripts-v4/timer-v6.js"></script>
-    <script src="discord-v4/discord-v2.js"></script>
-    <script src="wiki-v4/wiki-v2.js"></script>
-    <script src="scripts-v4/filter-v10.js"></script>
-    <script src="scripts-v4/wslink-v9.js"></script>
-    <script src="scripts-v4/zn-v4.js"></script>
-    <script src="events-v4/events-v1.js"></script>
-    <script src="feed-v4/feed-v1.js"></script>
-    <script src="scripts-v4/voice_en-v3.js"></script>
-    <script src="scripts-v4/voice_recognition-v11.js"></script>
-    <script src="scripts-v4/sparkles-v1.js"></script>
+    <script src="themes-v5/themes-v1.js"></script>
+    <script src="scripts-v5/audio_controller-v1.js"></script>
+    <script src="scripts-v5/metronome-v1.js"></script>
+    <script src="scripts-v5/timer-v1.js"></script>
+    <script src="discord-v5/discord-v1.js"></script>
+    <script src="wiki-v5/wiki-v1.js"></script>
+    <script src="scripts-v5/filter-v1.js"></script>
+    <script src="scripts-v5/wslink-v1.js"></script>
+    <script src="scripts-v5/zn-v1.js"></script>
+    <script src="events-v5/events-v1.js"></script>
+    <script src="feed-v5/feed-v1.js"></script>
+    <script src="scripts-v5/voice_en-v1.js"></script>
+    <script src="scripts-v5/voice_recognition-v1.js"></script>
+    <script src="scripts-v5/sparkles-v1.js"></script>
     <script>
         document.getElementById('reset').oncontextmenu = showResetMenu;
         document.onclick = hideResetMenu;
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v4/wiki-v7.html")
+                $("#wiki-body").load("wiki-v5/wiki-v1.html")
                 resolve("Ghost data loaded")
             })
             Promise.all([load_wiki,checkLink()])

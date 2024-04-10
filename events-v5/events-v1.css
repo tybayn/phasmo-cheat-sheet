@@ -84,6 +84,7 @@
         transform: translateZ(0);
         -webkit-transform: translateZ(0);
         will-change: transform;
+        font-size: 16px;
     }
 
     #event_details .spoilers{

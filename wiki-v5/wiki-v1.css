@@ -1,3 +1,26 @@
+.non-definitive{
+    color: rgba(204,204,204,0.8);
+}
+
+.focus-flash{
+    animation-name: yellow-flash;
+    animation-duration: 0.5s;
+    animation-iteration-count: 3;
+    animation-fill-mode: forwards;
+}
+
+@keyframes yellow-flash {
+    0% {
+        box-shadow: inset 0 0 10px #161615;
+    }
+    50% {
+        box-shadow: inset 0 0 10px #ffff00;
+    }
+    100% {
+        box-shadow: inset 0 0 10px #161615;
+    }
+}
+
 @media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
     .wiki-flex{
         display: flex;
@@ -56,7 +79,6 @@
         overflow: hidden;
         display: none;
         box-shadow: inset 0 0 10px #161615;
-        transition: max-height 0.2s ease-out;
     }
 
     .wiki_details ul{
@@ -65,7 +87,53 @@
     }
 
     .wiki_details li{
-        padding-bottom: 4px;
+        margin: 5px 0px;
+        padding: 3px;
+    }
+
+    .wiki_details li:not(:first-child){
+        border-top: 0.5px solid rgba(204,204,204,0.2);
+    }
+
+    .wiki_details_note{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid rgba(204, 204, 204, 0.26);
+        padding-top: 5px;
+        font-size: 12px;
+    }
+
+    .wiki_details_note i{
+        padding-top: 5px;
+    }
+
+    .wiki_details_note a:link{
+        color: #ffff00;
+    }
+    
+    .wiki_details_note a:visited{
+        color: #ffff00;
+    }
+    
+    .wiki_details_note a:hover{
+        color: #ff9100;
+    }
+    
+    .wiki_details_note a:active{
+        color: #00ff00;
+    }
+
+    .wiki_mark_ghost{
+        text-align: right;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
+    .wiki_mark_ghost:hover{
+        font-weight: 500;
     }
 
     .flicker-img{
@@ -96,7 +164,7 @@
         padding-top: 10px;
         padding-bottom: 5px;
         font-size: 14px;
-        font-weight: lighter;
+        font-weight: 300;
     }
 
     .wiki_details .caption{
@@ -294,7 +362,12 @@
     }
 
     .wiki_details li{
-        padding-bottom: 4px;
+        margin: 5px 0px;
+        padding: 3px;
+    }
+
+    .wiki_details li:not(:first-child){
+        border-top: 0.5px solid rgba(204,204,204,0.2);
     }
 
     .flicker-img{
@@ -337,7 +410,7 @@
         padding-top: 10px;
         padding-bottom: 5px;
         font-size: 25px;
-        font-weight: lighter;
+        font-weight: 300;
     }
 
     .wiki_details .caption{
@@ -391,6 +464,47 @@
         color: #E6E6E6;
         text-align: center;
         border-left: 2px solid #313248;
+    }
+
+    .wiki_details_note{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid rgba(204, 204, 204, 0.26);
+        padding-top: 5px;
+        font-size: 22px;
+    }
+
+    .wiki_details_note i{
+        padding-top: 10px;
+    }
+
+    .wiki_details_note a:link{
+        color: #ffff00;
+    }
+    
+    .wiki_details_note a:visited{
+        color: #ffff00;
+    }
+    
+    .wiki_details_note a:hover{
+        color: #ff9100;
+    }
+    
+    .wiki_details_note a:active{
+        color: #00ff00;
+    }
+
+    .wiki_mark_ghost{
+        text-align: right;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
+    .wiki_mark_ghost:hover{
+        font-weight: 500;
     }
 
     .row_select{
