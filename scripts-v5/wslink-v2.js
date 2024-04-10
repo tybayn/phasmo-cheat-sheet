@@ -521,6 +521,8 @@ function send_ghost_tests_link(ghost){
         data = data.replaceAll(/-.+?-/g,"")
         data = data.replace(/[ ]+/g,' ')
         data = data.replaceAll("\n ","\n")
+        data = data.replaceAll("\n✔ Mark Ghost","")
+        data = data.replaceAll("\n✗ Mark Ghost","")
         data = data.replaceAll("\n\nT","\nT")
         data = data.replaceAll("\n\nB","\nB")
         data = data.replaceAll("\n\nA","\nA")
