@@ -72,13 +72,17 @@ function create_room(){
     });
 }
 
-function create_link(){
+function create_link(auto_link = false){
     fetch(`https://zero-network.net/phasmophobia/create-link/${znid}`,{method:"POST",Accept:"application/json",signal: AbortSignal.timeout(6000)})
     .then(response => response.json())
     .then(data => {
         var link_id = data['link_id']
         document.getElementById("link_id").value = link_id
         link_link()
+        if(auto_link){
+            var url = `zndl:${link_id}`
+            $('<iframe src="' + url + '" width="1px" height="1px" style="display:none;">').appendTo('body');
+        }
     })
     .catch(response => {
         console.error(response)
@@ -308,6 +312,7 @@ function link_link(){
     dlws.onopen = function(event){
         hasDLLink = true;
         $("#link_id_create").hide()
+        $("#link_id_create_launch").hide()
         $("#link_id_disconnect").show()
         document.getElementById("link_id_note").innerText = "STATUS: Awaiting Desktop Link"
         document.getElementById("dllink_status").className = "pending"
@@ -364,6 +369,7 @@ function link_link(){
                             clearInterval(dlws_ping)
                             dlws.send('{"action":"PINGKILL"}')
                             $("#link_id_create").show()
+                            $("#link_id_create_launch").show()
                             $("#link_id_disconnect").hide()
                             document.getElementById("link_id_note").innerText = "ERROR: Link Lost Connection!"
                             document.getElementById("dllink_status").className = "error"
@@ -593,6 +599,7 @@ function disconnect_link(reset=false,has_status=false){
             dlws.send('{"action":"KILL"}')
         }
         $("#link_id_create").show()
+        $("#link_id_create_launch").show()
         $("#link_id_disconnect").hide()
         if(!has_status){
             document.getElementById("link_id_note").innerText = "STATUS: Not linked"
