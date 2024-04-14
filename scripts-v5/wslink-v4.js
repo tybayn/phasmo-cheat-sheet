@@ -421,6 +421,9 @@ function link_link(){
                         reset()
                     }
                 }
+                if(incoming_state['action'].toUpperCase() == "FORCERESET"){
+                    reset()
+                }
 
                 if (incoming_state['action'].toUpperCase() == "EVIDENCE"){
                     if(!$(document.getElementById(incoming_state['evidence']).querySelector("#checkbox")).hasClass("block")){
