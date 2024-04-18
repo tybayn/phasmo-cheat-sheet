@@ -42,7 +42,14 @@ class Ghost {
         <div class="ghost_card" id="${data.ghost}">
             <div class="ghost_name">${data.ghost}</div>
             <div class="ghost_hunt_info">
-                <div class="ghost_hunt ${parseInt(data.hunt_sanity_high) > 50 ?'high':parseInt(data.hunt_sanity_high) < 50 ? 'low':'average'}"><img src="imgs/sanity.png">${parseInt(data.hunt_sanity_low) < parseInt(data.hunt_sanity) ? ('<div class="ghost_hunt_alt">' + data.hunt_sanity_low + '</div><br>') : ''}${data.hunt_sanity}${parseInt(data.hunt_sanity_high) > parseInt(data.hunt_sanity) ? ('<br><div class="ghost_hunt_alt">' + data.hunt_sanity_high + '</div>') : ''}</div>
+                <div class="ghost_hunt ${parseInt(data.hunt_sanity_high) > 50 ?'high':parseInt(data.hunt_sanity_high) < 50 ? 'low':'average'}">
+                    <img src="imgs/sanity.png">
+                    <div class="ghost_hunt_values">
+                        ${parseInt(data.hunt_sanity_low) < parseInt(data.hunt_sanity) ? ('<div class="ghost_hunt_alt">' + data.hunt_sanity_low + '</div>') : ''}
+                        <div>${data.hunt_sanity}</div>
+                        ${parseInt(data.hunt_sanity_high) > parseInt(data.hunt_sanity) ? ('<div class="ghost_hunt_alt">' + data.hunt_sanity_high + '</div>') : ''}
+                    </div>
+                </div>
                 <div class="ghost_speed">
                     <img src="imgs/footsteps.png">
                     <div class="ghost_speed_values">
