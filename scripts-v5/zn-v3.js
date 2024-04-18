@@ -141,6 +141,7 @@ function loadAllAndConnect(){
             all_evidence = data.evidence
 
             var cards = document.getElementById('cards')
+            var wiki = document.getElementById('wiki-0-evidence-data')
             var cur_version = document.getElementById('current-version-label')
             var evidence_list = document.getElementById('evidence')
 
@@ -160,12 +161,14 @@ function loadAllAndConnect(){
             }
     
             cards.innerHTML = "";
+            wiki.innerHTML = "";
             for(var i = 0; i < data.ghosts.length; i++){
                 bpm_speeds.add(data.ghosts[i].min_speed)
                 if(data.ghosts[i].max_speed != null){bpm_speeds.add(data.ghosts[i].max_speed)}
                 if(data.ghosts[i].alt_speed != null){bpm_speeds.add(data.ghosts[i].alt_speed)}
                 var ghost = new Ghost(data.ghosts[i]);
                 cards.innerHTML += `${ghost.ghostTemplate}`
+                wiki.innerHTML += (i == data.ghosts.length-1 ? `${ghost.wikiTemplate.replace("&#9500;","&#9492;")}` : `${ghost.wikiTemplate}`)
             }
             cur_version.innerHTML = `${data.version}`
             
@@ -261,6 +264,7 @@ function loadAllAndConnect(){
                 all_evidence = data.evidence
             
                 var cards = document.getElementById('cards')
+                var wiki = document.getElementById('wiki-0-evidence-data')
                 var cur_version = document.getElementById('current-version-label')
                 var evidence_list = document.getElementById('evidence')
     
@@ -278,9 +282,11 @@ function loadAllAndConnect(){
                     `
                 }
                 cards.innerHTML = "";
+                wiki.innerHTML = "";
                 for(var i = 0; i < data.ghosts.length; i++){
                     var ghost = new Ghost(data.ghosts[i]);
                     cards.innerHTML += `${ghost.ghostTemplate}`
+                    wiki.innerHTML += (i == data.ghosts.length-1 ? `${ghost.wikiTemplate.replace("&#9500;","&#9492;")}` : `${ghost.wikiTemplate}`)
                 }
                 cur_version.innerHTML = `${data.version}`
                 loadSettings()
