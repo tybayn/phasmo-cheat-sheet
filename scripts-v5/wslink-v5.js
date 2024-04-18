@@ -525,13 +525,13 @@ function send_ghost_tests_link(ghost){
         data = `<b>${ghost} Tests:<b>\n`
         data += document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).nextElementSibling.innerText
         data = data.replace("Abilities, Behaviors, & Tells","<b>Abilities, Behaviors, & Tells:<b>")
-        data = data.replace("Confirmation Test(s)","<b>Confirmation Test(s):<b>")
-        data = data.replace("Elimination Test(s)","<b>Elimination Test(s):<b>")
+        data = data.replace("Confirmation Test(s)","\n<b>Confirmation Test(s):<b>")
+        data = data.replace("Elimination Test(s)","\n<b>Elimination Test(s):<b>")
         data = data.replaceAll(/-.+?-/g,"")
         data = data.replace(/[ ]+/g,' ')
         data = data.replaceAll("\n ","\n")
-        data = data.replaceAll("\n✔ Mark Ghost","")
-        data = data.replaceAll("\n✗ Mark Ghost","")
+        data = data.replaceAll("✔ Mark Ghost","")
+        data = data.replaceAll("✗ Mark Ghost","")
         data = data.replaceAll("\n\nT","\nT")
         data = data.replaceAll("\n\nB","\nB")
         data = data.replaceAll("\n\nA","\nA")
