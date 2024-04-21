@@ -26,7 +26,7 @@ function accordian(elem){
         panel.style.height = "auto"
     }
 
-    
+    setFlicker()
 }
 
 // -----------------------------------------------
@@ -102,7 +102,7 @@ function startFlicker(elem){
 }
 
 function setFlicker(){
-    if (flickering){
+    if (document.getElementById("wiki_flicker").style.height == "0px" && flickering){
         flickering=false
     }
     else{

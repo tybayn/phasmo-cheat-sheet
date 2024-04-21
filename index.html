@@ -346,11 +346,11 @@
     </div>
 
     <div id="wiki_box" style="left: -1000px;">
-        <div id="wiki_tab" onclick="showWiki();setFlicker();">
+        <div id="wiki_tab" onclick="showWiki();">
             <div class="tab_rotate">Guides</div>
             <div id="guide_tab_footstep" style="display: none;"></div>
         </div>
-        <span class="icon" onclick="showWiki();setFlicker();"></span>
+        <span class="icon" onclick="showWiki();"></span>
         <div class="settings_title yfont white">Guides</div>
         <div id="wiki-body" class="info_block"></div>
     </div>
@@ -665,7 +665,7 @@
     <script src="scripts-v5/metronome-v1.js"></script>
     <script src="scripts-v5/timer-v1.js"></script>
     <script src="discord-v5/discord-v1.js"></script>
-    <script src="wiki-v5/wiki-v1.js"></script>
+    <script src="wiki-v5/wiki-v2.js"></script>
     <script src="scripts-v5/filter-v1.js"></script>
     <script src="scripts-v5/wslink-v5.js"></script>
     <script src="scripts-v5/zn-v3.js"></script>
@@ -680,7 +680,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v5/wiki-v5.html",() => {
+                $("#wiki-body").load("wiki-v5/wiki-v6.html",() => {
                     resolve("Ghost data loaded")
                 })
             })
