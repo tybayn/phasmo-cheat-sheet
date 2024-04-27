@@ -68,7 +68,7 @@ class Ghost {
             <div class="ghost_has_los">${data.has_los}</div>
 
             <div class="ghost_behavior">
-                <div class="ghost_tests_button" onClick="openGhostInfo('${data.ghost}')">Tests >></div>
+                <div class="ghost_tests_button" onClick="openGhostInfo('${data.ghost}')">0 Evidence Tests >></div>
                 ${this.behavior(data.wiki)}
             </div>
             <div class="ghost_clear">
