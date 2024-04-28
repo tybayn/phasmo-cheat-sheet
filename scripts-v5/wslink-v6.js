@@ -8,6 +8,8 @@ var await_dlws_pong = false
 var state_received = false
 const lang = "en"
 
+my_pos = 0
+
 function auto_link(){
     var room_id = getCookie("room_id")
     var link_id = getCookie("link_id")
@@ -119,8 +121,10 @@ function link_room(){
                 return
             }
             var incoming_state = JSON.parse(event.data)
-
-            if (incoming_state.hasOwnProperty("action")){
+            if (incoming_state.hasOwnProperty("setpos")){
+                my_pos = incoming_state["setpos"]
+            }
+            else if (incoming_state.hasOwnProperty("action")){
                 if (incoming_state['action'].toUpperCase() == "RESET"){
                     reset(true)
                 }
