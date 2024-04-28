@@ -58,9 +58,10 @@ class Ghost {
                 </div>
             </div>
             <div class="ghost_evidence">
-                <div class="ghost_evidence_item" ${data.evidence[0] in evi_color ? 'style=\"color:' + evi_color[data.evidence[0]] + ' !important;\"' : ''}><img src="${evi_icons[data.evidence[0]]}">${data.evidence[0]}</div>
-                <div class="ghost_evidence_item" ${data.evidence[1] in evi_color ? 'style=\"color:' + evi_color[data.evidence[1]] + ' !important;\"' : ''}><img src="${evi_icons[data.evidence[1]]}">${data.evidence[1]}</div>
-                <div class="ghost_evidence_item" ${data.evidence[2] in evi_color ? 'style=\"color:' + evi_color[data.evidence[2]] + ' !important;\"' : ''}><img src="${evi_icons[data.evidence[2]]}">${data.evidence[2]}</div>
+                ${this.build_evidence_item(data.evidence[0])}
+                ${this.build_evidence_item(data.evidence[1])}
+                ${this.build_evidence_item(data.evidence[2])}
+                ${data.ghost == "The Mimic" ? this.build_evidence_item('Ghost Orbs') : ''}
             </div>
             <div class="ghost_nightmare_evidence">${data.nightmare_evidence?data.nightmare_evidence:''}</div>
             <div class="ghost_hunt_high">${data.hunt_sanity_high}</div>
@@ -97,6 +98,10 @@ class Ghost {
             </div>
         </div>
         `
+    }
+
+    build_evidence_item(evidence){
+        return `<div class="ghost_evidence_item" ${evidence in evi_color ? 'style=\"color:' + evi_color[evidence] + ' !important;\"' : ''}><img src="${evi_icons[evidence]}">${evidence}</div>`
     }
 
     build_tells(tells,behavior,abilities){

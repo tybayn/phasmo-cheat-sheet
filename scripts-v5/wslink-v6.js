@@ -8,6 +8,8 @@ var await_dlws_pong = false
 var state_received = false
 const lang = "en"
 
+var my_pos = 0
+
 function auto_link(){
     var room_id = getCookie("room_id")
     var link_id = getCookie("link_id")
@@ -99,6 +101,7 @@ function link_room(){
         $("#room_id_create").hide()
         $("#room_id_link").hide()
         $("#room_id_disconnect").show()
+        $('.card_icon_guess').show()
         document.getElementById("room_id_note").innerText = "STATUS: Connected"
         document.getElementById("settings_status").className = "connected"
         ws_ping = setInterval(function(){
@@ -120,7 +123,10 @@ function link_room(){
             }
             var incoming_state = JSON.parse(event.data)
 
-            if (incoming_state.hasOwnProperty("action")){
+            if (incoming_state.hasOwnProperty("setpos")){
+                my_pos = incoming_state["setpos"]
+            }
+            else if (incoming_state.hasOwnProperty("action")){
                 if (incoming_state['action'].toUpperCase() == "RESET"){
                     reset(true)
                 }
@@ -630,6 +636,14 @@ function send_cooldown_timer(force_start = false, force_stop = false){
 function send_hunt_timer(force_start = false, force_stop = false){
     if(hasLink){
         ws.send(`{"action":"HUNTTIMER","force_start":${force_start},"force_stop":${force_stop}}`)
+    }
+}
+
+function send_guess(elem){
+    if(hasLink){
+        ds_name = 
+        ds_image
+        g_name = elem.parent.parent.id
     }
 }
 
