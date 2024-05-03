@@ -239,15 +239,16 @@ function guess(elem,ignore_link=false,internal=false){
     if (on){
         $(elem).removeClass("guessed");
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+        send_guess("")
     }
     else{
         $(elem).removeClass(["selected","died","permhidden"])
         $(elem).addClass("guessed");
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 3;
+        send_guess(elem.id)
     }
     setCookie("state",JSON.stringify(state),1)
     if(!ignore_link){filter(ignore_link)}
-
 }
 
 function died(elem,ignore_link=false,internal=false){

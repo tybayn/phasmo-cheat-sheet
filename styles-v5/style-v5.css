@@ -1297,6 +1297,19 @@ hr{
         filter: opacity(1.0);
     }
 
+    #link_pos{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 16px;
+        left: 5px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 1px;
+    }
+
     .copy_cover{
         background-color: #ffffffaa;
         color: #000000;
@@ -1992,7 +2005,6 @@ hr{
         background-color: #313248;
         margin: 20px 5px 0px 5px;
         height: 125px;
-        overflow: hidden;
         position: relative;
         flex:1;
     }
@@ -2039,7 +2051,8 @@ hr{
     }
 
     .ghost_evidence_not{
-        display: none !important;
+        opacity: 0.2;
+        text-decoration: line-through;
     }
 
     .ghost_evidence_item{
@@ -2212,6 +2225,40 @@ hr{
     .ghost_clear_compact{
         grid-column: 1 !important;
         grid-row: 4 !important;
+    }
+
+    .ghost_guesses{
+        position: absolute;
+        height: 30px;
+        width: calc(100% - 10px);
+        top: -30px;
+        right: 0px;
+        padding-right: 10px;
+        z-index: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+
+    .ghost_guess{
+        width: 24px;
+        height: 24px;
+        background-size: contain;
+        border-radius: 14px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin-bottom: -14px;
+        cursor: pointer;
+        margin-right: -2px;
+        font-size: 12px;
+        transition: margin-bottom 0.25s;
+    }
+
+    .ghost_guess:hover{
+        margin-bottom: -10px;
     }
 
     .card_icon{

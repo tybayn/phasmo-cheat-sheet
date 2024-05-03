@@ -974,6 +974,18 @@
         filter: opacity(0.4);
     }
 
+    #link_pos{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 16px;
+        left: 5px;
+        border-radius: 30px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
     .copy_cover{
         background-color: #ffffffaa;
         color: #000000;
@@ -1727,10 +1739,9 @@
         grid-template-rows: auto 250px auto auto;
         color: white;
         background-color: #313248;
-        margin-top: 20px;
+        margin-top: 75px;
         padding-top: 5px;
         height: auto;
-        overflow: hidden;
         position: relative;
         align-items: center;
     }
@@ -1767,7 +1778,8 @@
     }
 
     .ghost_evidence_not{
-        display: none !important;
+        opacity: 0.2;
+        text-decoration: line-through;
     }
 
     .ghost_evidence_item{
@@ -1922,6 +1934,40 @@
         align-items: center;
         padding-bottom: 10px;
         flex-direction: row-reverse;
+    }
+
+    .ghost_guesses{
+        position: absolute;
+        height: 70px;
+        width: calc(100% - 20px);
+        top: -70px;
+        right: 0px;
+        padding-right: 20px;
+        z-index: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+
+    .ghost_guess{
+        width: 75px;
+        height: 75px;
+        background-size: contain;
+        border-radius: 40px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin-bottom: -35px;
+        cursor: pointer;
+        margin-right: -2px;
+        font-size: 35px;
+        transition: margin-bottom 0.25s;
+    }
+
+    .ghost_guess:hover{
+        margin-bottom: -10px;
     }
     
     .card_icon{
