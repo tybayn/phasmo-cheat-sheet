@@ -11,7 +11,7 @@ let bpm_list = []
 let bpm_los_list = []
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood"}
-var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
 
 let znid = getCookie("znid")
 
@@ -239,15 +239,16 @@ function guess(elem,ignore_link=false,internal=false){
     if (on){
         $(elem).removeClass("guessed");
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+        send_guess("")
     }
     else{
         $(elem).removeClass(["selected","died","permhidden"])
         $(elem).addClass("guessed");
         state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 3;
+        send_guess(elem.id)
     }
     setCookie("state",JSON.stringify(state),1)
     if(!ignore_link){filter(ignore_link)}
-
 }
 
 function died(elem,ignore_link=false,internal=false){
@@ -425,7 +426,10 @@ function filter(ignore_link=false){
         var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
         var evi_objects = ghosts[i].getElementsByClassName("ghost_evidence_item")
         var evidence = []
-        for (var j = 0; j < evi_objects.length; j++){evidence.push(evi_objects[j].textContent)}
+        for (var j = 0; j < evi_objects.length; j++){
+            $(evi_objects[j]).removeClass(["ghost_evidence_found","ghost_evidence_not"])
+            evidence.push(evi_objects[j].textContent)
+        }
         var nm_evidence = ghosts[i].getElementsByClassName("ghost_nightmare_evidence")[0].textContent;
         var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
         var has_los = parseInt(ghosts[i].getElementsByClassName("ghost_has_los")[0].textContent)
@@ -441,7 +445,6 @@ function filter(ignore_link=false){
 
         //Logic for mimic
         if (name == "The Mimic"){
-            evidence.push("Ghost Orbs")
             mimic_evi = evidence
             nm_evidence = "Ghost Orbs"
             mimic_nm_evi = "Ghost Orbs"
@@ -451,7 +454,7 @@ function filter(ignore_link=false){
         if (name != "The Mimic" && speed_has_los != -1 && speed_has_los != has_los){
             loskeep = false
         }
-        
+
         // Check for evidences
         // Standard
         if (["3","3I","3A"].includes(num_evidences)){
@@ -471,11 +474,19 @@ function filter(ignore_link=false){
                     }
                 });
             }
+
+            // Manage evidence classes
+            if(document.getElementById("adaptive_evidence").checked){
+                evidence.forEach(function(item, index){
+                    if(evi_array.includes(item)){
+                        $(evi_objects[index]).addClass("ghost_evidence_found")
+                    }
+                })
+            }
         }
 
         // Nightmare Mode
         else if (num_evidences == "2"){
-
 
             if (evi_array.length == 3 && name != "The Mimic"){
                 keep = false
@@ -500,6 +511,24 @@ function filter(ignore_link=false){
                 if (evidence.filter(x => !not_evi_array.includes(x)).length <= (evidence.length > 3 ? 2 : 1)){
                     keep = false
                 }
+            }
+
+            // Manage evidence classes
+            if(document.getElementById("adaptive_evidence").checked){
+                evidence.forEach(function(item, index){
+                    if(evi_array.includes(item)){
+                        $(evi_objects[index]).addClass("ghost_evidence_found")
+                    }
+                    else if(not_evi_array.includes(item)){
+                        $(evi_objects[index]).addClass("ghost_evidence_not")
+                    }
+                    else if(
+                        (evi_array.length == evidence.length - 1) || 
+                        (evi_array.length == evidence.length - 2 && nm_evidence && item != nm_evidence && !evi_array.includes(nm_evidence))
+                    ){
+                        $(evi_objects[index]).addClass("ghost_evidence_not")
+                    }
+                })
             }
         }
 
@@ -530,6 +559,24 @@ function filter(ignore_link=false){
                     keep = false
                 }
             }
+
+            // Manage evidence classes
+            if(document.getElementById("adaptive_evidence").checked){
+                evidence.forEach(function(item, index){
+                    if(evi_array.includes(item)){
+                        $(evi_objects[index]).addClass("ghost_evidence_found")
+                    }
+                    else if(not_evi_array.includes(item)){
+                        $(evi_objects[index]).addClass("ghost_evidence_not")
+                    }
+                    else if(
+                        (evi_array.length == evidence.length - 2) || 
+                        (evi_array.length == evidence.length - 3 && nm_evidence && item != nm_evidence && !evi_array.includes(nm_evidence))
+                    ){
+                        $(evi_objects[index]).addClass("ghost_evidence_not")
+                    }
+                })
+            }
         }
 
         // Apocalypse
@@ -541,6 +588,14 @@ function filter(ignore_link=false){
 
             if (not_evi_array.length > 0 && name == "The Mimic"){
                 keep = false
+            }
+
+            // Manage evidence classes
+            if(document.getElementById("adaptive_evidence").checked){
+                evidence.forEach(function(item, index){
+                    if(!(evidence.length > 3 && item == nm_evidence))
+                        $(evi_objects[index]).addClass("ghost_evidence_not")
+                })
             }
         }
 
@@ -1292,6 +1347,7 @@ function saveSettings(reset = false){
     user_settings['mute_timer_countdown'] = document.getElementById("mute_timer_countdown").checked ? 1 : 0;
     user_settings['timer_count_up'] = document.getElementById("timer_count_up").checked ? 1 : 0;
     user_settings['timer_split'] = document.getElementById("timer_split").checked ? 1 : 0;
+    user_settings['adaptive_evidence'] = document.getElementById("adaptive_evidence").checked ? 1 : 0;
     user_settings['hide_descriptions'] = document.getElementById("hide_descriptions").checked ? 1 : 0;
     user_settings['compact_cards'] = document.getElementById("compact_cards").checked ? 1 : 0;
     user_settings['offset'] = parseFloat(document.getElementById("offset_value").innerText.replace(/\d+(?:-\d+)+/g,"")).toFixed(1)
@@ -1316,7 +1372,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
     }
 
     user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
@@ -1329,6 +1385,7 @@ function loadSettings(){
     document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] ?? 0 == 1
     document.getElementById("timer_count_up").checked = user_settings['timer_count_up'] ?? 0 == 1
     document.getElementById("timer_split").checked = user_settings['timer_split'] ?? 0 == 1
+    document.getElementById("adaptive_evidence").checked = user_settings['adaptive_evidence'] ?? 0 == 1
     document.getElementById("hide_descriptions").checked = user_settings['hide_descriptions'] ?? 0 == 1
     document.getElementById("compact_cards").checked = user_settings['compact_cards'] ?? 0 == 1
     document.getElementById("offset_value").innerText = ` ${user_settings['offset'] ?? 0.0}% `
@@ -1391,12 +1448,13 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
     document.getElementById("modifier_volume").value = user_settings['volume']
     document.getElementById("mute_timer_toggle").checked = user_settings['mute_timer_toggle'] == 1
     document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] == 1
     document.getElementById("timer_count_up").checked = user_settings['timer_count_up'] == 1
     document.getElementById("timer_split").checked = user_settings['timer_split'] == 1
+    document.getElementById("adaptive_evidence").checked = user_settings['adaptive_evidence'] == 1
     document.getElementById("hide_descriptions").checked = user_settings['hide_descriptions'] == 1
     document.getElementById("compact_cards").checked = user_settings['compact_cards'] == 1
     document.getElementById("offset_value").innerText = ` ${user_settings['offset'].toFixed(1)}% `

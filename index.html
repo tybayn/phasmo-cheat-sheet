@@ -21,12 +21,12 @@
         };
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
-    <script src="scripts-v5/ghost_template-v4.js"></script>
-    <link rel="stylesheet" href="styles-v5/style-v4.css"/>
-    <link rel="stylesheet" href="styles-v5/style-mobile-v4.css"/>
+    <script src="scripts-v5/ghost_template-v5.js"></script>
+    <link rel="stylesheet" href="styles-v5/style-v5.css"/>
+    <link rel="stylesheet" href="styles-v5/style-mobile-v5.css"/>
     <link rel="stylesheet" href="themes-v5/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v5/discord-v1.css" >
-    <link rel="stylesheet" href="wiki-v5/wiki-v1.css" >
+    <link rel="stylesheet" href="wiki-v5/wiki-v2.css" >
     <link rel="stylesheet" href="events-v5/events-v1.css" >
     <link rel="stylesheet" href="feed-v5/feed-v1.css" >
     <link rel="stylesheet" href="styles-v5/sparkles-v1.css" >
@@ -182,6 +182,7 @@
                 <input type="text" placeholder="XXXXXX" id="room_id" class="text" value="Connecting..." disabled style="color:#444;">
                 <div id="room_id_cover" class="copy_cover" style="display:none;">Copied!</div>
                 <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_url_code()">
+                <div id="link_pos" style="display: none;"></div>
                 <div class="journal_link_buttons">
                     <button id="room_id_create" class="journal_link_button" style="display: none;" onclick="create_room()">Create</button>
                     <button id="room_id_link" class="journal_link_button" style="display: none;" onclick="link_room()">Join</button>
@@ -259,7 +260,10 @@
                 <input type="checkbox" id="timer_split" name="timer_split" class="settings_check" onclick="saveSettings();"><label for="timer_split">Split Timer Parts (Desktop Link)</label>
             </div>  
             <hr>
-            <div class="modifier_volume yfont white">Ghost Cards</div>      
+            <div class="modifier_volume yfont white">Ghost Cards</div> 
+            <div class="modifier_option less_pad">
+                <input type="checkbox" id="adaptive_evidence" name="adaptive_evidence" class="settings_check" onclick="filter();saveSettings();"><label for="adaptive_evidence">Adaptive Evidence</label>
+            </div>     
             <div class="modifier_option less_pad">
                 <input type="checkbox" id="hide_descriptions" name="hide_descriptions" class="settings_check" onclick="toggleDescriptions();saveSettings();"><label for="hide_descriptions">Hide Behaviors</label>
             </div>
@@ -371,7 +375,7 @@
         </div>
         <div id="maps_list" class="maps_buttons"></div>
         <div class="flex-holder-right">
-            <a target="_blank" href="https://zero-network.net/phasmo-cheat-sheet/map-explorer/">
+            <a id="map-explorer-link-2" target="_blank" href="https://zero-network.net/phasmo-cheat-sheet/map-explorer/">
                 <div class="button-gray">Map Explorer »</div>
             </a>
         </div>
@@ -666,8 +670,8 @@
     <script src="scripts-v5/timer-v1.js"></script>
     <script src="discord-v5/discord-v1.js"></script>
     <script src="wiki-v5/wiki-v2.js"></script>
-    <script src="scripts-v5/filter-v1.js"></script>
-    <script src="scripts-v5/wslink-v6.js"></script>
+    <script src="scripts-v5/filter-v2.js"></script>
+    <script src="scripts-v5/wslink-v7.js"></script>
     <script src="scripts-v5/zn-v3.js"></script>
     <script src="events-v5/events-v1.js"></script>
     <script src="feed-v5/feed-v1.js"></script>
@@ -680,7 +684,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v5/wiki-v6.html",() => {
+                $("#wiki-body").load("wiki-v5/wiki-v7.html",() => {
                     resolve("Ghost data loaded")
                 })
             })

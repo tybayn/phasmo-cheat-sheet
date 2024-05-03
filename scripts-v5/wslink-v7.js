@@ -8,7 +8,13 @@ var await_dlws_pong = false
 var state_received = false
 const lang = "en"
 
-my_pos = 0
+var my_pos = 0
+var pos_colors = {
+    1:"ff0000",
+    2:"00ff00",
+    3:"0000ff",
+    4:"ca36dd"
+}
 
 function auto_link(){
     var room_id = getCookie("room_id")
@@ -101,6 +107,7 @@ function link_room(){
         $("#room_id_create").hide()
         $("#room_id_link").hide()
         $("#room_id_disconnect").show()
+        $('.card_icon_guess').show()
         document.getElementById("room_id_note").innerText = "STATUS: Connected"
         document.getElementById("settings_status").className = "connected"
         ws_ping = setInterval(function(){
@@ -111,6 +118,7 @@ function link_room(){
         document.getElementById("room_id_note").innerText = "ERROR: Could not connect!"
         document.getElementById("settings_status").className = "error"
         setCookie("room_id","",-1)
+        document.getElementById("map-explorer-link-2").href = `https://zero-network.net/phasmo-cheat-sheet/map-explorer/`
     }
     ws.onmessage = function(event) {
         try {
@@ -121,12 +129,38 @@ function link_room(){
                 return
             }
             var incoming_state = JSON.parse(event.data)
+
             if (incoming_state.hasOwnProperty("setpos")){
                 my_pos = incoming_state["setpos"]
+                pos_elem = document.getElementById("link_pos")
+                pos_elem.innerText = my_pos
+                pos_elem.style.border = `2px solid #${pos_colors[my_pos]}`
+                pos_elem.style.backgroundColor = `#${pos_colors[my_pos]}44`
+                $(pos_elem).show()
+                document.getElementById("map-explorer-link-2").href = `https://zero-network.net/phasmo-cheat-sheet/map-explorer/?jlid=${room_id}&pos=${my_pos}`
+                if($(".guessed").length > 0){
+                    send_guess($(".guessed")[0].id)
+                }
+                request_guess()
             }
             else if (incoming_state.hasOwnProperty("action")){
                 if (incoming_state['action'].toUpperCase() == "RESET"){
                     reset(true)
+                }
+                if (incoming_state['action'].toUpperCase() == "GUESS"){
+                    try { document.getElementById(`guess_pos_${incoming_state['pos']}`).remove()} catch (error) {} 
+                    if(incoming_state['ghost']){
+                        document.getElementById(incoming_state['ghost']).querySelector(".ghost_guesses").innerHTML += `
+                        <div id="guess_pos_${incoming_state['pos']}" class="ghost_guess" title="${incoming_state['ds_image'] ? incoming_state['ds_name'] : ('Player ' + incoming_state['pos'])}" style="${incoming_state['ds_image'] ? 'background-image: url('+incoming_state['ds_image']+');' : 'background-color: #'+pos_colors[incoming_state['pos']]+'44;'} border: 2px solid #${pos_colors[incoming_state['pos']]};">
+                            ${incoming_state['ds_image'] ? "" : incoming_state['pos']}
+                        </div>
+                        `
+                    }
+                }
+                if (incoming_state['action'].toUpperCase() == "GUESSSTATE"){
+                    if($(".guessed").length > 0){
+                        send_guess($(".guessed")[0].id)
+                    }
                 }
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
                     if(incoming_state.hasOwnProperty("force_start") && incoming_state.hasOwnProperty("force_stop")){
@@ -464,6 +498,14 @@ function continue_session(){
 
 function disconnect_room(reset=false,has_status=false){
     ws.close()
+    $(document.getElementById("link_pos")).hide()
+    try { document.getElementById(`guess_pos_1`).remove()} catch (error) {} 
+    try { document.getElementById(`guess_pos_2`).remove()} catch (error) {} 
+    try { document.getElementById(`guess_pos_3`).remove()} catch (error) {} 
+    try { document.getElementById(`guess_pos_4`).remove()} catch (error) {} 
+    document.getElementById("map-explorer-link-2").href = `https://zero-network.net/phasmo-cheat-sheet/map-explorer/`
+    if (Object.keys(discord_user).length == 0)
+        $('.card_icon_guess').hide()
     clearInterval(ws_ping)
     if (!reset){
         $("#room_id_create").show()
@@ -634,6 +676,20 @@ function send_cooldown_timer(force_start = false, force_stop = false){
 function send_hunt_timer(force_start = false, force_stop = false){
     if(hasLink){
         ws.send(`{"action":"HUNTTIMER","force_start":${force_start},"force_stop":${force_stop}}`)
+    }
+}
+
+function send_guess(ghost){
+    if(hasLink){
+        ds_name = Object.keys(discord_user).length > 0 ? discord_user['username'] : ""
+        ds_image = Object.keys(discord_user).length > 0 ? `https://cdn.discordapp.com/avatars/${discord_user['id']}/${discord_user['avatar']}`: ""
+        ws.send(`{"action":"GUESS","pos":${my_pos},"ghost":"${ghost}","ds_name":"${ds_name}","ds_image":"${ds_image}"}`)
+    }
+}
+
+function request_guess(){
+    if(hasLink){
+        ws.send(`{"action":"GUESSSTATE"}`)
     }
 }
 
