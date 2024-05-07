@@ -99,7 +99,8 @@ function create_link(auto_link = false){
 
 function link_room(){
     var room_id = document.getElementById("room_id").value
-    ws = new WebSocket(`wss://zero-network.net/phasmolink/link/${znid}/${room_id}`);
+    var load_pos = getCookie("link-position")
+    ws = new WebSocket(`wss://zero-network.net/phasmolink/link/${znid}/${room_id}${load_pos ? '?pos='+load_pos : ''}`);
     setCookie("room_id",room_id,1)
 
     ws.onopen = function(event){
@@ -132,6 +133,7 @@ function link_room(){
 
             if (incoming_state.hasOwnProperty("setpos")){
                 my_pos = incoming_state["setpos"]
+                setCookie("link-position",my_pos,1)
                 pos_elem = document.getElementById("link_pos")
                 pos_elem.innerText = my_pos
                 pos_elem.style.border = `2px solid #${pos_colors[my_pos]}`
@@ -517,6 +519,7 @@ function disconnect_room(reset=false,has_status=false){
             document.getElementById("room_id").value = ""
         }
         setCookie("room_id","",-1)
+        setCookie("link-position","",1)
         hasLink=false
     }
 }
