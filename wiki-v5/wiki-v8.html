@@ -8,15 +8,380 @@
     <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Obake Fingerprints</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">Obake has a 25% chance to <i>not</i> leave UV evidence and has the ability to make UV evidence disappear faster.</div>
-        <div class="text">This ghost also has a chance to leave behind unique finger/handprints:</div>
-        <h4>6 Fingered Handprint (Doors, Windows, Coolers)</h4>
-        <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/obake_hand.png" style="max-width: 50%; padding: 10px;">
-        <h4>Double Fingerprint (Light Switches)</h4>
-        <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/obake_switch.png" style="max-width: 50%; padding: 10px;">
-        <h4>5 Fingerprint (Keyboards, Cell Doors)</h4>
-        <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/obake_keyboard.png" style="max-width: 50%; padding: 10px;">
+        <div class="text">This ghost also has a chance to leave behind unique finger/handprints:<br><br>
+            <b>6 Fingered Handprint (Doors, Windows, Coolers)</b>
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/obake_hand.png" style="max-width: 50%; padding: 10px;" onclick="zoomImage(this)">
+            </div>
+            <hr>
+            <b>Double Fingerprint (Light Switches)</b>
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/obake_switch.png" style="max-width: 50%; padding: 10px;" onclick="zoomImage(this)">
+            </div>
+            <hr>
+            <b>5 Fingerprint (Keyboards, Cell Doors)</b>
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/obake_keyboard.png" style="max-width: 50%; padding: 10px;" onclick="zoomImage(this)">
+            </div>
+        </div>
     </div>
-</div>    
+</div> 
+
+<div class="wiki_title accordian" onclick="accordian(this)">Cursed Possessions</div>
+<div class="wiki_details" style="height: 0px;">
+    <div class="wiki_title accordian" onclick="accordian(this)">Monkey Paw</div>
+    <div class="wiki_details" style="height: 0px;">
+        <h3>Wishes</h3>
+        <div class="text">
+            <b>"I wish to see the ghost"</b>
+            <ul>
+                <li>Pro: Ghost appears at its current location</li>
+                <li>Con: After the event, a hunt will start and player vision is darkened for the duration of the event and hunt</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"I wish for activity"</b>
+            <ul>
+                <li>Pro: Doubles all ghost activity for 2 min</li>
+                <li>Con: Breaker set to broken and front door locked for 2 min</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"I wish for sanity"</b>
+            <ul>
+                <li>Pro: Averages everyone's sanity to 50%</li>
+                <li>Con: Sets ghost's favorite room to a random room and increases current sanity drain by 50%</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"I wish the ghost was trapped"</b>
+            <ul>
+                <li>Pro: Ghost locked in its room for 1 min where it cannot hunt, roam, or do abilities</li>
+                <li>Con: Locks doors in the players room and hunt starts after the 1 min period (25% doors will unlock after grace period)</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"I wish for life"</b>
+            <ul>
+                <li>Pro: Revive a dead player</li>
+                <li>Con: 50% chance that the wishing player will die</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"I wish to be safe"</b>
+            <ul>
+                <li>Pro: Unblocks the nearest blocked hiding spot</li>
+                <li>Con: Breaks the light in that room and ghost is able to sense or hear the player from any distance</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"I wish to leave"</b>
+            <ul>
+                <li>Pro: Unlocks all exit doors (works during hunts)</li>
+                <li>Con: Player slowness and darkened vision for 5 secs</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"I wish for knowledge"</b>
+            <ul>
+                <li>Pro: Removes 1 incorrect evidence from the journal and crosses out associated ghosts</li>
+                <li>Con: Starts a hunt and player vision and audio is reduced the rest of that round</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"I wish for [weather]"</b>
+            <ul>
+                <li>Pro: Changes the weather to the one specified</li>
+                <li>Con: Drops sanity by 25%</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"I wish for anything"</b>
+            <ul>
+                <li>Randomly chooses one of the above wishes</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="wiki_title accordian" onclick="accordian(this)">Oujia Board</div>
+    <div class="wiki_details" style="height: 0px;">
+        <h3>Questions</h3>
+        <div class="text">
+            <b>"Where are you?"</b>
+            <ul>
+                <li>Sanity Cost: 50%</li>
+                <li>Gives the current room of the ghost (not the favorite room)</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"Are you here? / Are you close?"</b>
+            <ul>
+                <li>Sanity Cost: 20%</li>
+                <li>Tells if the ghost is in the same room as the player</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"Where is the bone?"</b>
+            <ul>
+                <li>Sanity Cost: 50%</li>
+                <li>Gives the room of the bone</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"Hide and seek?"</b>
+            <ul>
+                <li>Sanity Cost: 0% (breaks board)</li>
+                <li>Counts down from 5 and starts a hunt</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"Do you respond to everyone?"</b>
+            <ul>
+                <li>Sanity Cost: 20%</li>
+                <li>Replies with if the ghosts wants to be alone when using the spirit box</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"How old are you?"</b>
+            <ul>
+                <li>Sanity Cost: 5%</li>
+                <li>Returns the current age of the ghost. If the number changes, the ghost is a Thaye</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"When did you die?"</b>
+            <ul>
+                <li>Sanity Cost: 5%</li>
+                <li>Returns a random number</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"What is my sanity?"</b>
+            <ul>
+                <li>Sanity Cost: 5%</li>
+                <li>'Healthy' (Sanity > 80%), 'Good' (60-80%), 'Average' (40-60%), 'Bad' (20-40%), 'Awful' (&lt;20%)</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"How insane am I?"</b>
+            <ul>
+                <li>Sanity Cost: 5%</li>
+                <li>'Not Very' (Sanity > 50%), 'Very' (25-50%), 'Insane' (&lt;25%)</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"Am I insane?"</b>
+            <ul>
+                <li>Sanity Cost: 5%</li>
+                <li>'No' (Sanity > 90%), 'Maybe' (20-90%), 'Yes' (&lt;20%)</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"How did you die?"</b>
+            <ul>
+                <li>Sanity Cost: 5%</li>
+                <li>Returns the ghost's cause of death</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"How do you feel?"</b>
+            <ul>
+                <li>Sanity Cost: 5%</li>
+                <li>Returns a randomly selected emotion</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"Why are you here?"</b>
+            <ul>
+                <li>Sanity Cost: 5%</li>
+                <li>Returns a randomly selected reason</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"Knock Knock"</b>
+            <ul>
+                <li>Sanity Cost: 5%</li>
+                <li>"Whos there"</li>
+            </ul>
+        </div>
+        <div class="text">
+            <b>"Marco"</b>
+            <ul>
+                <li>Sanity Cost: 5%</li>
+                <li>"Polo"</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Tarot Card Wiki Contributed by svenjaun (2023-09-07) -->
+    <div class="wiki_title accordian" onclick="accordian(this)">Tarot Cards</div>
+    <div class="wiki_details" style="height: 0px;">
+        <h3>Tarot Cards</h3>
+        <div class="text">Tarot cards can be picked up, and you can draw one card at a time.</div>
+        <div class="text">Each Tarot card deck contains 10 randomly generated cards.</div>
+        <br />
+        <hr>
+
+        <div class="text">
+            <p><b>The Tower</b></p>
+            <div class="wiki-limg-text">
+                <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/tower.webp" onclick="zoomImage(this)">
+                <div class="pad-left">
+                    <p>Causes an interaction and doubles all ghost activity for 20 seconds.</p>
+                    <ul>
+                        <li>20% Draw Chance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="text">
+            <p><b>The Wheel of Fortune</b></p>
+            <div class="wiki-limg-text">
+                <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/wheeloffortune.webp" onclick="zoomImage(this)">
+                <div class="pad-left">
+                    <p>The player who draws the card will experience either a gain or loss of sanity, depending on the burn color of the card.</p>
+                    <p>
+                        <span class="square green"></span>Green burn: 25% Sanity gain
+                        <br>
+                        <span class="square red"></span>Red burn: 25% Sanity loss
+                    </p>
+                    <ul>
+                        <li>20% Draw Chance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="text">
+            <p><b>The Fool</b></p>
+            <div class="wiki-limg-text">
+                <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/fool.webp" onclick="zoomImage(this)">
+                <div class="pad-left">
+                     <p>No effect is applied when drawing this card.</p>
+                    <p class="smaller-text">Randomly selects another card to appear as, before turning into The Fool as it burns.</p>
+                    <ul>
+                        <li>17% Draw Chance</li>
+                        <li>(100% during hunts)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="text">
+            <p><b>The Devil</b></p>
+            <div class="wiki-limg-text">
+                <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/devil.webp" onclick="zoomImage(this)">
+                <div class="pad-left">
+                     <p>Triggers a Ghost Event towards the nearest player to the ghost.</p>
+                    <ul>
+                        <li>10% Draw Chance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="text">
+            <p><b>Death</b></p>
+            <div class="wiki-limg-text">
+                <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/death.webp" onclick="zoomImage(this)">
+                <div class="pad-left">
+                    <p>Triggers a cursed hunt.</p>
+                    <ul>
+                        <li>10% Draw Chance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="text">
+            <p><b>The Hermit</b></p>
+            <div class="wiki-limg-text">
+                <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/hermit.webp" onclick="zoomImage(this)">
+                <div class="pad-left">
+                     <p>Teleports the ghost back to its ghost room and traps it there for 1 minute. </p>
+                    <p class="smaller-text">This does not affect hunts and ghost events.</p>
+                    <ul>
+                        <li>10% Draw Chance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="text">
+            <p><b>The Sun</b></p>
+            <div class="wiki-limg-text">
+                <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/sun.webp" onclick="zoomImage(this)">
+                <div class="pad-left">
+                    <p>The player who draws the card will have their sanity fully restored to 100%</p>
+                    <ul>
+                        <li>5% Draw Chance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="text">
+            <p><b>The Moon</b></p>
+            <div class="wiki-limg-text">
+                <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/moon.webp" onclick="zoomImage(this)">
+                <div class="pad-left">
+                    <p>The player who draws the card will have their sanity instantly set to 0%.</p>
+                    <ul>
+                        <li>5% Draw Chance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="text">
+            <p><b>The High Priestess</b></p>
+            <div class="wiki-limg-text">
+                <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/highpriestess.webp" onclick="zoomImage(this)">
+                <div class="pad-left">
+                    <p>Revives a randomly chosen dead player at their corpse. </p>
+                    <p class="smaller-text">If no one is currently dead, it will revive the next player who dies. Multiple cards do not stack.<br>(A player cannot die twice in the same hunt)</p>
+                    <ul>
+                        <li>2% Draw Chance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="text">
+            <p><b>The Hanged Man</b></p>
+            <div class="wiki-limg-text">
+                <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/hangedman.webp" onclick="zoomImage(this)">
+                <div class="pad-left">
+                    <p>Instantly kills the player.<br></p>
+                    <p class="smaller-text">If 'Friendly Ghost' custom difficulty option is turned on, this will always turn into "The Fool".</p>
+                    <ul>
+                        <li>1% Draw Chance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> 
 
 <div class="wiki_title accordian" onclick="accordian(this)">Evidence Equipment</div>
 <div class="wiki_details" style="height: 0px;">
@@ -30,16 +395,24 @@
                     The Tier 1 EMF Reader features a needle that will indicate the EMF level by pointing to (or near) the number matching the level. It should be noted that in general, the needle must go past the number for it to be considered that number.<br>
                     <hr>
                     <b>EMF 2:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t1_2.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t1_2.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>EMF 3:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t1_3.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t1_3.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>EMF 4:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t1_4.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t1_4.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>EMF 5:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t1_5.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t1_5.gif" onclick="zoomImage(this)">
+                    </div>
                 </div>
             </div>
             <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tier 2</div></div>
@@ -48,16 +421,24 @@
                     The Tier 2 EMF Reader features 5 LED lights of various colors. The number of illuminated LEDs indicates the level of EMF.<br>
                     <hr>
                     <b>EMF 2:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t2_2.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t2_2.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>EMF 3:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t2_3.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t2_3.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>EMF 4:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t2_4.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t2_4.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>EMF 5:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t2_5.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t2_5.gif" onclick="zoomImage(this)">
+                    </div>
                 </div>
             </div>
             <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Tier 3</div></div>
@@ -66,16 +447,24 @@
                     The Tier 3 EMF Reader features an LCD screen that shows the emf level, the direction, and the distance to the source of the EMF. The level is indicated at the top of each section by little bars. The number of bars shown indicates the level of EMF.<br>
                     <hr>
                     <b>EMF 2:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t3_2.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t3_2.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>EMF 3:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t3_3.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t3_3.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>EMF 4:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t3_4.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t3_4.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>EMF 5:</b><br>
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t3_5.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t3_5.gif" onclick="zoomImage(this)">
+                    </div>
                 </div>
             </div>
         </div>
@@ -89,15 +478,21 @@
                 <div class="text">
                     <b>Mic Indicator:</b><br>
                     A white/blue LED will light up near the microphone icon on the bottom right if the game is able to hear your mic.
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t1_active.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t1_active.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>No Response:</b><br>
                     The LED right of the ghost icon will light up red if the game recognized a valid question, but no response is given.
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t1_no_response.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t1_no_response.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>Response (Evidence):</b><br>
                     The LED right of the ghost icon will light up white if the ghost gave a response to your question.
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t1_response.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t1_response.gif" onclick="zoomImage(this)">
+                    </div>
                 </div>
             </div>
             <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tier 2</div></div>
@@ -105,15 +500,21 @@
                 <div class="text">
                     <b>Mic Indicator:</b><br>
                     A microphone icon at the top left will show if the game is able to hear your mic.
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t2_active.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t2_active.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>No Response:</b><br>
                     The 'X' icon at the bottom right will show if game recognized a valid question, but no response is given.
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t2_no_response.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t2_no_response.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>Response (Evidence):</b><br>
                     The ghost icon at the bottom right will show if the ghost gave a response to your question.
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t2_response.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t2_response.gif" onclick="zoomImage(this)">
+                    </div>
                 </div>
             </div>
             <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Tier 3</div></div>
@@ -121,15 +522,21 @@
                 <div class="text">
                     <b>Mic Indicator:</b><br>
                     The LED below "Mic Input" will light up white if the game is able to hear your mic.
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t3_active.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t3_active.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>No Response:</b><br>
                     The array of LEDs below "Response" will light up red if the game recognized a valid question, but no response is given.
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t3_no_response.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t3_no_response.gif" onclick="zoomImage(this)">
+                    </div>
                     <hr>
                     <b>Response (Evidence):</b><br>
                     The array of LEDs below "Response" will light up white if the ghost gave a response to your question.
-                    <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t3_response.gif">
+                    <div class="img_center">
+                        <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t3_response.gif" onclick="zoomImage(this)">
+                    </div>
                 </div>
             </div>
         </div>
@@ -518,7 +925,9 @@
         <div class="text">
             <b>Standard (with LOS):</b><br>
             A standard speed ghost will hunt at 1.7m/s. Once the ghost has LOS with the player (A), the ghost will increase in speed over 13 seconds of continuous LOS until a maximum speed of 1.65x base speed is reached (B).<br>
-            <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_standard_los.png" style="max-width: 60%; padding: 10px 0px;">
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_standard_los.png" style="max-width: 60%; padding: 10px 0px;">
+            </div>
         </div>
         <hr>
         <div class="text">
@@ -526,7 +935,9 @@
             The Twins move at different speeds when hunting. The main twin is 10% slower than a standard ghost, while the "roaming" twin is 10% faster.<br><br>
             The BPM Plot will keep a history of the previous hunt that was tapped as a dotted red line. Using this line you can see how the previous hunt compares to the current hunt. A different base speed can indicate the Twins.<br><br>
             In the example below, you can see that the previous hunt was at 1.53m/s while the next hunt was at 1.87m/s.<br>
-            <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_twins.png" style="max-width: 60%; padding: 10px 0px;">
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_twins.png" style="max-width: 60%; padding: 10px 0px;">
+            </div>
         </div>
         <hr>
         <div class="text">
@@ -534,26 +945,34 @@
             A Raiju always moves at a fixed speed of 2.5m/s (at 100% ghost speed) while near active electronic player equipment both placed or held. This results in flat spots near 2.5m/s interrupting an otherwise standard hunting pattern.<br><br>
             In the following example, the Raiju came into range of electronics (A) and immediately sped up until it was out of range (B). The Raiju then gained LOS (C) and began the standard increase until it came into electronic range again (D). Once it left the range of electronics, the Raiju's speed returned to that of its LOS increase (E) and continued to increase LOS speed until it reached its max LOS speed (F).<br><br>
             The Raiju's biggest tell is multiple flat spots at 2.5m/s (A-B & D-E).<br>
-            <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_raiju.png" style="max-width: 60%; padding: 10px 0px;">
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_raiju.png" style="max-width: 60%; padding: 10px 0px;">
+            </div>
         </div>
         <hr>
         <div class="text">
             <b>Revenant:</b><br>
             Revenants do not follow a standard LOS increase. Instead, they have a base speed of 1.0m/s until they detect a player (A), whether by sight, sound, or electronic use. They will immediately speed up to 3.0m/s until they can no longer detect the player and have reached the last known location of the player (B). At that point, they will gradually decrease back down to 1.0m/s (C).<br>
-            <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_revenant.png" style="max-width: 60%; padding: 10px 0px;">
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_revenant.png" style="max-width: 60%; padding: 10px 0px;">
+            </div>
         </div>
         <hr>
         <div class="text">
             <b>Hantu:</b><br>
             The Hantu has no LOS increase, but its speed is based on the temperature of the room it is currently in. This leads to very variable speeds while hunting <b><i>IF</i></b> it wanders through multiple different temperature rooms during a hunt. The longer a Hantu is in a room, the colder it will get, and this will affect its speed.<br>
-            <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_hantu.png" style="max-width: 60%; padding: 10px 0px;">
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_hantu.png" style="max-width: 60%; padding: 10px 0px;">
+            </div>
         </div>
         <hr>
         <div class="text">
             <b>Moroi (with LOS + Smudge):</b><br>
             A Moroi's speed is dependent on the team's average sanity. At 0% sanity, a Moroi's base speed starts at 2.25m/s until it has LOS (A). With 13 seconds of continuous LOS, a Moroi can max out at 3.71m/s (D), the fastest of any ghost.<br><br>
             A Moroi also has the longest "blindness" period when smudged of any ghost. If a Moroi has a LOS speed increase when smudged (B), the speed will slowly decrease for 7.5 seconds instead of the standard 5 seconds. After the smudge wears off, if LOS is regained (C), the speed will continue to increase.<br>
-            <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_moroi.png" style="max-width: 60%; padding: 10px 0px;">
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_moroi.png" style="max-width: 60%; padding: 10px 0px;">
+            </div>
         </div>
         <hr>
         <div class="text">
@@ -561,10 +980,14 @@
             The Moroi and Thaye are some of the fastest ghosts in the game and are sometimes hard to distinguish, but there is a key difference: a Thaye will never speed up with LOS.<br><br>
             Thaye:<br>
             Thayes age and grow weaker and slower the longer players are around them. The youngest Thaye will always move at 2.75m/s at 100% speed, even with LOS, and will become slower with each hunt if exposed to players.<br>
-            <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_thaye.png" style="max-width: 60%; padding: 10px 0px;"><br>
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_thaye.png" style="max-width: 60%; padding: 10px 0px;">
+            </div><br>
             Moroi:<br>
             Moroi without LOS will be slower than young Thayes, moving at only 2.25m/s (dotted line), but they are able to reach a speed much faster than Thayes while in continuous LOS (solid line).<br>
-            <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_moroi2.png" style="max-width: 60%; padding: 10px 0px;">
+            <div class="img_center">
+                <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/graph_moroi2.png" style="max-width: 60%; padding: 10px 0px;">
+            </div>
         </div>
         <hr>
         <div class="text">
@@ -572,319 +995,6 @@
             The Mimic is capable of ANY hunt pattern and should be remembered.
         </div>
     </div>
-</div>
-
-<div class="wiki_title accordian" onclick="accordian(this)">Monkey Paw</div>
-<div class="wiki_details" style="height: 0px;">
-    <h3>Wishes</h3>
-    <div class="text">
-        <b>"I wish to see the ghost"</b>
-        <ul>
-            <li>Pro: Ghost appears at its current location</li>
-            <li>Con: After the event, a hunt will start and player vision is darkened for the duration of the event and hunt</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"I wish for activity"</b>
-        <ul>
-            <li>Pro: Doubles all ghost activity for 2 min</li>
-            <li>Con: Breaker set to broken and front door locked for 2 min</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"I wish for sanity"</b>
-        <ul>
-            <li>Pro: Averages everyone's sanity to 50%</li>
-            <li>Con: Sets ghost's favorite room to a random room and increases current sanity drain by 50%</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"I wish the ghost was trapped"</b>
-        <ul>
-            <li>Pro: Ghost locked in its room for 1 min where it cannot hunt, roam, or do abilities</li>
-            <li>Con: Locks doors in the players room and hunt starts after the 1 min period (25% doors will unlock after grace period)</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"I wish for life"</b>
-        <ul>
-            <li>Pro: Revive a dead player</li>
-            <li>Con: 50% chance that the wishing player will die</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"I wish to be safe"</b>
-        <ul>
-            <li>Pro: Unblocks the nearest blocked hiding spot</li>
-            <li>Con: Breaks the light in that room and ghost is able to sense or hear the player from any distance</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"I wish to leave"</b>
-        <ul>
-            <li>Pro: Unlocks all exit doors (works during hunts)</li>
-            <li>Con: Player slowness and darkened vision for 5 secs</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"I wish for knowledge"</b>
-        <ul>
-            <li>Pro: Removes 1 incorrect evidence from the journal and crosses out associated ghosts</li>
-            <li>Con: Starts a hunt and player vision and audio is reduced the rest of that round</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"I wish for [weather]"</b>
-        <ul>
-            <li>Pro: Changes the weather to the one specified</li>
-            <li>Con: Drops sanity by 25%</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"I wish for anything"</b>
-        <ul>
-            <li>Randomly chooses one of the above wishes</li>
-        </ul>
-    </div>
-</div>
-
-<div class="wiki_title accordian" onclick="accordian(this)">Oujia Board</div>
-<div class="wiki_details" style="height: 0px;">
-    <h3>Questions</h3>
-    <div class="text">
-        <b>"Where are you?"</b>
-        <ul>
-            <li>Sanity Cost: 50%</li>
-            <li>Gives the current room of the ghost (not the favorite room)</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"Are you here? / Are you close?"</b>
-        <ul>
-            <li>Sanity Cost: 20%</li>
-            <li>Tells if the ghost is in the same room as the player</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"Where is the bone?"</b>
-        <ul>
-            <li>Sanity Cost: 50%</li>
-            <li>Gives the room of the bone</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"Hide and seek?"</b>
-        <ul>
-            <li>Sanity Cost: 0% (breaks board)</li>
-            <li>Counts down from 5 and starts a hunt</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"Do you respond to everyone?"</b>
-        <ul>
-            <li>Sanity Cost: 20%</li>
-            <li>Replies with if the ghosts wants to be alone when using the spirit box</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"How old are you?"</b>
-        <ul>
-            <li>Sanity Cost: 5%</li>
-            <li>Returns the current age of the ghost. If the number changes, the ghost is a Thaye</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"When did you die?"</b>
-        <ul>
-            <li>Sanity Cost: 5%</li>
-            <li>Returns a random number</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"What is my sanity?"</b>
-        <ul>
-            <li>Sanity Cost: 5%</li>
-            <li>'Healthy' (Sanity > 80%), 'Good' (60-80%), 'Average' (40-60%), 'Bad' (20-40%), 'Awful' (&lt;20%)</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"How insane am I?"</b>
-        <ul>
-            <li>Sanity Cost: 5%</li>
-            <li>'Not Very' (Sanity > 50%), 'Very' (25-50%), 'Insane' (&lt;25%)</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"Am I insane?"</b>
-        <ul>
-            <li>Sanity Cost: 5%</li>
-            <li>'No' (Sanity > 90%), 'Maybe' (20-90%), 'Yes' (&lt;20%)</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"How did you die?"</b>
-        <ul>
-            <li>Sanity Cost: 5%</li>
-            <li>Returns the ghost's cause of death</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"How do you feel?"</b>
-        <ul>
-            <li>Sanity Cost: 5%</li>
-            <li>Returns a randomly selected emotion</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"Why are you here?"</b>
-        <ul>
-            <li>Sanity Cost: 5%</li>
-            <li>Returns a randomly selected reason</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"Knock Knock"</b>
-        <ul>
-            <li>Sanity Cost: 5%</li>
-            <li>"Whos there"</li>
-        </ul>
-    </div>
-    <div class="text">
-        <b>"Marco"</b>
-        <ul>
-            <li>Sanity Cost: 5%</li>
-            <li>"Polo"</li>
-        </ul>
-    </div>
-</div>
-
-<!-- Tarot Card Wiki Contributed by svenjaun (2023-09-07) -->
-<div class="wiki_title accordian" onclick="accordian(this)">Tarot Cards</div>
-<div class="wiki_details" style="height: 0px;">
-    <h3>Tarot Cards</h3>
-    <div class="text">Tarot cards can be picked up, and you can draw one card at a time.</div>
-    <div class="text">Each Tarot card deck contains 10 randomly generated cards.</div>
-    <br />
-    <hr>
-
-    <div class="text">
-        <p><b>The Tower</b></p>
-        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/tower.webp">
-        <p>Causes an interaction and doubles all ghost activity for 20 seconds.</p>
-        <ul class="text">
-            <li>20% Draw Chance</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <div class="text">
-        <p><b>The Wheel of Fortune</b></p>
-        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/wheeloffortune.webp">
-        <p>The player who draws the card will experience either a gain or loss of sanity, depending on the burn color of the card.</p>
-        <p>
-            <span class="square green"></span>Green burn: 25% Sanity gain
-            <br>
-            <span class="square red"></span>Red burn: 25% Sanity loss
-        </p>
-        <ul class="text">
-            <li>20% Draw Chance</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <div class="text">
-        <p><b>The Fool</b></p>
-        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/fool.webp">
-        <p>No effect is applied when drawing this card.</p>
-        <p class="smaller-text">Randomly selects another card to appear as, before turning into The Fool as it burns.</p>
-        <ul class="text">
-            <li>17% Draw Chance</li>
-            <li>(100% during hunts)</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <div class="text">
-        <p><b>The Devil</b></p>
-        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/devil.webp">
-        <p>Triggers a Ghost Event towards the nearest player to the ghost.</p>
-        <ul class="text">
-            <li>10% Draw Chance</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <div class="text">
-        <p><b>Death</b></p>
-        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/death.webp">
-        <p>Triggers a cursed hunt.</p>
-        <ul class="text">
-            <li>10% Draw Chance</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <div class="text">
-        <p><b>The Hermit</b></p>
-        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/hermit.webp">
-        <p>Teleports the ghost back to its ghost room and traps it there for 1 minute. </p>
-        <p class="smaller-text">This does not affect hunts and ghost events.</p>
-        <ul class="text">
-            <li>10% Draw Chance</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <div class="text">
-        <p><b>The Sun</b></p>
-        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/sun.webp">
-        <p>The player who draws the card will have their sanity fully restored to 100%</p>
-        <ul class="text">
-            <li>5% Draw Chance</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <div class="text">
-        <p><b>The Moon</b></p>
-        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/moon.webp">
-        <p>The player who draws the card will have their sanity instantly set to 0%.</p>
-        <ul class="text">
-            <li>5% Draw Chance</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <div class="text">
-        <p><b>The High Priestess</b></p>
-        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/highpriestess.webp">
-        <p>Revives a randomly chosen dead player at their corpse. </p>
-        <p class="smaller-text">If no one is currently dead, it will revive the next player who dies. Multiple cards do not stack.<br>(A player cannot die twice in the same hunt)</p>
-        <ul class="text">
-            <li>2% Draw Chance</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <div class="text">
-        <p><b>The Hanged Man</b></p>
-        <img class="tarot-img" src="https://zero-network.net/phasmophobia/static/imgs/tarot/hangedman.webp">
-        <p>Instantly kills the player.<br></p>
-        <p class="smaller-text">If 'Friendly Ghost' custom difficulty option is turned on, this will always turn into "The Fool".</p>
-        <ul class="text">
-            <li>1% Draw Chance</li>
-        </ul>
-    </div>
-
 </div>
 
 <div class="wiki_title accordian" onclick="accordian(this)">XP Grinding</div>

@@ -80,7 +80,9 @@ function loadAllAndConnect(){
                     $('#room_id_create').show()
                     $('#room_id_link').show()
                     $('#link_id_create').show()
-                    $('#link_id_create_launch').show()
+                    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+                    if(!mquery.matches)
+                        $('#link_id_create_launch').show()
                 }
                 else{
                     $('#room_id').val("Can't Connect!")
@@ -114,7 +116,9 @@ function loadAllAndConnect(){
                 $('#room_id_create').show()
                 $('#room_id_link').show()
                 $('#link_id_create').show()
-                $('#link_id_create_launch').show()
+                mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+                if(!mquery.matches)
+                    $('#link_id_create_launch').show()
             })
             .then(x =>{
                 resolve("New session created")

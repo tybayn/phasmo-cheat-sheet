@@ -121,8 +121,13 @@
 
 @media screen and (pointer: coarse) and (max-device-width: 600px) {
     #discord_avatar{
-        width: 180px;
-        margin: 20px;
+        width: 200px;
+        margin: 40px;
+    }
+
+    #discord_name{
+        width: 100%;
+        text-align: center;
     }
 
     .avatar{
@@ -139,8 +144,8 @@
 
     .discord_note{
         color: #FFF;
-        font-size: 20px;
-        padding-top: 20px;
+        font-size: 16px;
+        padding-top: 30px;
         width: 75%;
     }
 
@@ -157,11 +162,12 @@
         background-color: #5865F2;
         color: white;
         text-decoration: none;
-        padding: 20px;
+        padding: 30px;
         border-radius: 5px;
         margin: 10px 5px 0px 5px;
         display: inline-flex;
         cursor: pointer;
+        font-size: 45px;
     }
 
     #discord_login_button:hover{
@@ -172,11 +178,12 @@
         background-color: #475566;
         color: white;
         text-decoration: none;
-        padding: 20px;
+        padding: 30px;
         border-radius: 5px;
         margin: 10px 5px 0px 5px;
         display: inline-flex;
         cursor: pointer;
+        font-size: 45px;
     }
 
     #discord_unlink_button:hover{
@@ -186,7 +193,7 @@
     #discord_instructions{
         width: 75%;
         padding-top: 30px;
-        font-size: 25px;
+        font-size: 16px;
     }
 
     #discord_instructions ul{
@@ -199,11 +206,11 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        font-size: 20px;
+        font-size: 16px;
     }
 
     #discord_instructions ul li img{
-        width:35px;
+        width: 35px;
         background-image: radial-gradient(#939393, transparent 75%);
         padding: 2px;
         margin-right: 5px;
@@ -214,11 +221,11 @@
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
-        font-size: 20px;
+        font-size: 35px;
     }
 
     .discord_instructions_text{
-        margin-left: 45px;
+        margin-left: 30px;
     }
 
     #phasmo-stats{
@@ -231,7 +238,7 @@
         display: inline-flex;
         cursor: pointer;
         float: right;
-        font-size: 30px;
+        font-size: 16px;
     }
 
     #phasmo-stats:hover{

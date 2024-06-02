@@ -409,7 +409,9 @@ function link_link(){
                             clearInterval(dlws_ping)
                             dlws.send('{"action":"PINGKILL"}')
                             $("#link_id_create").show()
-                            $("#link_id_create_launch").show()
+                            mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+                            if(!mquery.matches)
+                                $("#link_id_create_launch").show()
                             $("#link_id_disconnect").hide()
                             document.getElementById("link_id_note").innerText = "ERROR: Link Lost Connection!"
                             document.getElementById("dllink_status").className = "error"

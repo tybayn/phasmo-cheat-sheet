@@ -4,6 +4,12 @@
         overflow: hidden;
     }
 
+    hr{
+        border: 2px dashed rgba(204, 204, 204, 0.26);
+        margin: 15px;
+        width: 90%;
+    }
+
     #blackout, #blackout_voice, #blackout_image{
         position: fixed;
         background: rgba(0,0,0,0.9);
@@ -40,7 +46,7 @@
     #settings_box{
         position: fixed;
         top: 0;
-        width: 60%;
+        width: calc(100% - 40px);
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -55,14 +61,14 @@
     }
 
     .less_pad{
-        padding-top: 10px !important;
+        padding-top: 20px !important;
     }
 
     .settings_check{
         margin-left: 0 !important;
-        height: 26px;
-        width: 26px;
-        margin-right: 10px;
+        height: 35px;
+        width: 35px;
+        margin-right: 15px;
         cursor: pointer;
     }
 
@@ -170,7 +176,7 @@
     #discord_link_box{
         position: fixed;
         top: 0;
-        width: 60%;
+        width: calc(100% - 40px);
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -208,7 +214,7 @@
     #event_box{
         position: fixed;
         top: 0;
-        width: 60%;
+        width: calc(100% - 40px);
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -249,7 +255,7 @@
     #wiki_box{
         position: fixed;
         top: 0;
-        width: 60%;
+        width: calc(100% - 40px);
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -299,7 +305,7 @@
     #maps_box{
         position: fixed;
         top: 0;
-        width: calc(100% - 100px);
+        width: calc(100% - 40px);
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -334,6 +340,10 @@
         font-size: 30px;
     }
 
+    #map-explorer-link-2{
+        display: none;
+    }
+
     #news_box{
         display: none;
     }
@@ -359,16 +369,16 @@
     }
 
     .settings_title{
-        font-size: 40px;
+        font-size: 70px;
         margin: 10px 0px 10px 0px;
     }
 
     #settings_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon{
         position: absolute;
-        top: 11px;
-        right: 15px;
-        width: 45px;
-        height: 45px;
+        top: 24px;
+        right: 24px;
+        width: 60px;
+        height: 60px;
         -ms-transform: rotate(45deg); /* IE 9 */
         -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
         transform: rotate(45deg);
@@ -379,20 +389,20 @@
         content:"";
         position: absolute;
         width:8px;
-        height:40px;
+        height:50px;
         background-color:#fff;
-        left:15px;
+        left:20px;
         top:0px;
     }
 
     #settings_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #news_box .icon:after{
         content:"";
         position: absolute;
-        width:40px;
+        width:50px;
         height:8px;
         background-color:#fff;
         left:0px;
-        top:15px;
+        top:20px;
     }
 
     #settings_box .info_block, #discord_link_box .info_block, #event_box .info_block, #wiki_box .info_block{
@@ -403,7 +413,7 @@
         background: rgba(0,0,0,0.25);
         align-items: center;
         width: 100%;
-        padding-bottom: 20px;
+        padding: 20px 0px 80px 0px;
         user-select: none;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -421,7 +431,7 @@
     }
 
     #offset_value{
-        font-size: 40px;
+        font-size: 60px;
     }
 
     .speed_icon{
@@ -429,15 +439,15 @@
         align-items: center;
         justify-content: center;
         background: #FFF;
-        border-radius: 25px;
+        border-radius: 50px;
         color: #444;
-        width: 50px;
-        height: 50px;
+        width: 80px;
+        height: 80px;
         text-align: center;
         margin: 0;
         padding: 0;
         cursor: pointer;
-        font-size: 30px;
+        font-size: 42px;
     }
 
     #info_box, #info_box_voice{
@@ -552,7 +562,7 @@
     }
     input[type=range]::-webkit-slider-runnable-track {
         width: 100%;
-        height: 10px;
+        height: 20px;
         cursor: pointer;
         animate: 0.2s;
         box-shadow: 0px 0px 0px #000000;
@@ -563,13 +573,13 @@
     input[type=range]::-webkit-slider-thumb {
         box-shadow: 0px 0px 0px #000000;
         border: 1px solid #ffffff60;
-        height: 24px;
-        width: 24px;
-        border-radius: 12px;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
         background: #ccc;
         cursor: pointer;
         -webkit-appearance: none;
-        margin-top: -7px;
+        margin-top: -10px;
     }
     input[type=range]:focus::-webkit-slider-runnable-track {
         background: #ffffff60;
@@ -929,7 +939,7 @@
     }
 
     .speed_logic_select{
-        font-size: 25px;
+        font-size: 40px;
         display: flex;
         padding: 5px;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -956,17 +966,17 @@
         border: none;
         background: rgba(0,0,0,0.25);
         box-shadow: inset 0 0 10px #161615;
-        padding: 10px;
-        margin: 10px 0px;
+        padding: 20px;
+        margin: 0px 0px 30px 0px;
         width: 100%;
         color: white;
-        font-size: 1em;
+        font-size: 55px;
         outline: none;
         text-align: center;
     }
 
     .clipboard_icon{
-        width: 40px;
+        width: 60px;
         position: absolute;
         right: 5px;
         top: 22px;
@@ -1021,28 +1031,28 @@
         width: 100%;
         cursor: pointer;
         border: none;
-        margin: 0px 2px;
-        padding: 5px;
+        margin: 0px 10px;
+        padding: 15px;
         background: #ccc;
-        font-size: 25px;
+        font-size: 45px;
     }
 
     .desktop_link_button{
         flex-grow:1;
         cursor: pointer;
         border: none;
-        margin: 0px 2px;
-        padding: 5px;
+        margin: 0px 10px;
+        padding: 15px;
         background: #ccc;
-        font-size: 25px;
+        font-size: 45px;
     }
 
     .toggle {
-        height: 30px;
-        width: 70px;
-        border-radius: 15px;
+        height: 40px;
+        width: 100px;
+        border-radius: 25px;
         box-shadow: inset 0 0 10px #161615;
-        background: rgba(0,0,0,0.25);
+        background: rgba(0, 0, 0, 0.25);
         position: relative;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
@@ -1051,8 +1061,8 @@
     
     .toggle::before {
         content: "";
-        height: 30px;
-        width: 30px;
+        height: 40px;
+        width: 40px;
         position: absolute;
         left: 0;
         border-radius: 50%;
@@ -1146,8 +1156,8 @@
 
     .modifier_note{
         color: #ffffffa0;
-        font-size: 21px;
-        padding-top: 15px;
+        font-size: 30px;
+        padding-top: 25px;
         margin: 0px 10px;
         display: flex;
         align-items: center;
@@ -1156,8 +1166,8 @@
 
     .modifier_option{
         color: #ffffffa0;
-        font-size: 21px;
-        padding-top: 15px;
+        font-size: 30px;
+        padding-top: 30px;
         margin: 0px 10px;
         display: flex;
         align-items: center;
@@ -1446,7 +1456,7 @@
     }
 
     .modifier_volume{
-        font-size: 33px;
+        font-size: 60px;
         padding: 15px 10px 10px 10px;
         grid-column: 1;
         grid-row: 5;
@@ -1461,7 +1471,7 @@
 
     .modifier_volume_label{
         color: #fff;
-        font-size: 22px;
+        font-size: 30px;
         rotate: 340deg;
     }
 
@@ -1541,7 +1551,7 @@
     }
 
     .active_title,.info_title,.maps_title{
-        font-size: 50px;
+        font-size: 70px;
         height: 50px;
         padding: 15px;
     }
@@ -1595,13 +1605,14 @@
 
     .maps_buttons{
         display: flex;
-        height: 35%;
+        height: 45%;
         width: calc(100% - 20px);
         margin: 0px 0px 10px 10px;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: wrap;
         justify-content: flex-start;
         align-content: stretch;
+        overflow: auto;
     }
 
     .maps_button{
@@ -1677,11 +1688,12 @@
     }
     
     #session{
-        color: rgb(26, 26, 26);
+        color: rgb(255 255 255 / 50%);
         font-size: 20px;
         text-align: center;
         align-self: center;
         width: 100%;
+        padding-bottom: 20px;
     }
 
     #close-menu-button{

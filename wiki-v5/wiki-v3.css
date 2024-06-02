@@ -9,6 +9,18 @@
     animation-fill-mode: forwards;
 }
 
+.img_center{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.wiki-limg-text{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+}
+
 @keyframes yellow-flash {
     0% {
         box-shadow: inset 0 0 10px #161615;
@@ -163,8 +175,13 @@
     .wiki_details .text{
         padding-top: 10px;
         padding-bottom: 5px;
+        padding-right: 10px;
         font-size: 14px;
         font-weight: 300;
+    }
+
+    .pad-left{
+        padding-left: 10px;
     }
 
     .wiki_details .caption{
@@ -274,8 +291,8 @@
     }
 
     .tarot-img {
-        width: 60px!important;
-        height: 100px;
+        width: 90px !important;
+        cursor: zoom-in;
     }
 
     #map-explorer{
@@ -311,8 +328,8 @@
     }
 
     .wiki_title{
-        padding: 10px;
-        font-size: 35px;
+        padding: 20px 10px;
+        font-size: 45px;
         cursor: pointer;
         border-bottom: 1px dashed rgba(204, 204, 204, 0.26);
         width: calc(100% - 20px);
@@ -330,7 +347,7 @@
 
     .wiki_title:after {
         content: '\02795';
-        font-size: 20px;
+        font-size: 30px;
     }
 
     .wiki_active:after {
@@ -348,7 +365,7 @@
     }
 
     .wiki_details{
-        padding: 0px 5px 5px 5px;
+        padding: 0px 15px 15px 15px;
         width: calc(100% - 10px);
         overflow: hidden;
         display: none;
@@ -357,13 +374,13 @@
     }
 
     .wiki_details ul{
-        margin: 4px 0px;
-        padding: 0px 0px 0px 20px;
+        margin: 4px 0px 40px 0px;
+        padding: 0px 10px 0px 50px;
     }
 
     .wiki_details li{
         margin: 5px 0px;
-        padding: 3px;
+        padding: 10px;
     }
 
     .wiki_details li:not(:first-child){
@@ -407,10 +424,15 @@
     }
 
     .wiki_details .text{
-        padding-top: 10px;
-        padding-bottom: 5px;
-        font-size: 25px;
+        padding: 10px 20px;
+        font-size: 16px;
         font-weight: 300;
+    }
+
+    .pad-left{
+        padding-left: 20px;
+        font-size: 30px;
+        flex: 1;
     }
 
     .wiki_details .caption{
@@ -433,7 +455,7 @@
 
     .wiki_details table tbody td {
         color: #E6E6E6;
-        font-size: 22px;
+        font-size: 30px;
         text-align: center;
     }
 
@@ -452,7 +474,7 @@
     .wiki_details table thead {
         background: rgba(255,255,255,0.2);
         border-bottom: 3px solid rgba(255,255,255,0.2);
-        font-size: 20px;
+        font-size: 30px;
     }
 
     .wiki_details table th:first-child {
@@ -478,7 +500,8 @@
     }
 
     .wiki_details_note i{
-        padding-top: 10px;
+        padding-top: 15px;
+        font-size: 30;
     }
 
     .wiki_details_note a:link{
@@ -540,28 +563,29 @@
         background-image: url(../imgs/footsteps.png);
         filter: invert(1);
         opacity: 0.5;
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         background-size: cover;
         position: absolute;
-        bottom: 10px;
-        left: 110px;
+        bottom: 20px;
+        left: 140px;
     }
 
     #hunts_tab_indent_footstep{
         background-image: url(../imgs/footsteps.png);
         filter: invert(1);
         opacity: 0.5;
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         background-size: cover;
         position: absolute;
-        bottom: 10px;
-        left: 440px;
+        bottom: 20px;
+        left: 565px;
     }
 
     .tarot-img {
-        width: 100px !important;
+        width: 200px !important;
+        cursor: zoom-in;
     }
 
     #map-explorer{

@@ -1141,7 +1141,7 @@ function showVoiceInfo(){
 
 function showSettings(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("settings_box").style.left == (mquery.matches ? "calc(-60% - 40px)" : "-32px")){
+    if (document.getElementById("settings_box").style.left == (mquery.matches ? "-100%" : "-32px")){
         document.getElementById("settings_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("settings_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("discord_link_box").style.zIndex= "1"
@@ -1153,7 +1153,7 @@ function showSettings(){
         $("#settings_box").addClass("tab-open")
     }
     else {
-        document.getElementById("settings_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-32px")
+        document.getElementById("settings_box").style.left = (mquery.matches ? "-100%" : "-32px")
         document.getElementById("settings_box").style.boxShadow = "none"
         document.getElementById("settings_tab").style.boxShadow = "none"
         $("#settings_box").removeClass("tab-open")
@@ -1168,7 +1168,7 @@ function showSettings(){
 
 function showDiscordLink(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("discord_link_box").style.left == (mquery.matches ? "calc(-60% - 40px)" : "-32px")){
+    if (document.getElementById("discord_link_box").style.left == (mquery.matches ? "-100%" : "-32px")){
         document.getElementById("discord_link_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("discord_link_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1180,7 +1180,7 @@ function showDiscordLink(){
         $("#discord_link_box").addClass("tab-open")
     }
     else {
-        document.getElementById("discord_link_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-32px")
+        document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "-32px")
         document.getElementById("discord_link_box").style.boxShadow = "none"
         document.getElementById("discord_link_tab").style.boxShadow = "none"
         $("#discord_link_box").removeClass("tab-open")
@@ -1195,7 +1195,7 @@ function showDiscordLink(){
 
 function showEvent(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("event_box").style.left == (mquery.matches ? "calc(-60% - 40px)" : "-182px")){
+    if (document.getElementById("event_box").style.left == (mquery.matches ? "-100%" : "-182px")){
         document.getElementById("event_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("event_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1207,7 +1207,7 @@ function showEvent(){
         $("#event_box").addClass("tab-open")
     }
     else {
-        document.getElementById("event_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-182px")
+        document.getElementById("event_box").style.left = (mquery.matches ? "-100%" : "-182px")
         document.getElementById("event_box").style.boxShadow = "none"
         document.getElementById("event_tab").style.boxShadow = "none"
         $("#event_box").removeClass("tab-open")
@@ -1222,7 +1222,7 @@ function showEvent(){
 
 function showWiki(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("wiki_box").style.left == (mquery.matches ? "calc(-60% - 40px)" : "-182px")){
+    if (document.getElementById("wiki_box").style.left == (mquery.matches ? "-100%" : "-182px")){
         document.getElementById("wiki_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("wiki_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1234,7 +1234,7 @@ function showWiki(){
         $("#wiki_box").addClass("tab-open")
     }
     else {
-        document.getElementById("wiki_box").style.left = (mquery.matches ? "calc(-60% - 40px)" : "-182px")
+        document.getElementById("wiki_box").style.left = (mquery.matches ? "-100%" : "-182px")
         document.getElementById("wiki_box").style.boxShadow = "none"
         document.getElementById("wiki_tab").style.boxShadow = "none"
         $("#wiki_box").removeClass("tab-open")
@@ -1250,7 +1250,7 @@ function showWiki(){
 
 function showMaps(forceOpen = false, forceClose = false){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("maps_box").style.left == (mquery.matches ? "calc(-100% + 60px)" : "-388px") && !forceClose){
+    if (document.getElementById("maps_box").style.left == (mquery.matches ? "-100%" : "-388px") && !forceClose){
         document.getElementById("maps_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("maps_box").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1259,15 +1259,19 @@ function showMaps(forceOpen = false, forceClose = false){
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= (mquery.matches ? "10" : "2")
         document.getElementById("maps_box").style.left = (mquery.matches ? "0px" : "196px")
-        document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 100px)" : "calc(100% - 265px)")
+        document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 40px)" : "calc(100% - 265px)")
         $("#maps_box").addClass("tab-open")
     }
     else if(!forceOpen) {
-        document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 100px)" : "556px")
-        document.getElementById("maps_box").style.left = (mquery.matches ? "calc(-100% + 60px)" : "-388px")
+        document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 40px)" : "556px")
+        document.getElementById("maps_box").style.left = (mquery.matches ? "-100%" : "-388px")
+        
         document.getElementById("maps_box").style.boxShadow = "none"
         document.getElementById("maps_box").style.boxShadow = "none"
         $("#maps_box").removeClass("tab-open")
+        setTimeout(() => {
+            document.getElementById("maps_box").style.zIndex = "1"
+        },500)
     }
 }
 

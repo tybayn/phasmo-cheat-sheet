@@ -76,7 +76,9 @@
 @media screen and (pointer: coarse) and (max-device-width: 600px) {
     #event_title{
         padding: 10px;
-        font-size: 35px;
+        font-size: 40px;
+        width: 80%;
+        text-align: center;
     }
 
     #event_details{
@@ -85,6 +87,7 @@
         -webkit-transform: translateZ(0);
         will-change: transform;
         font-size: 16px;
+        width: 80%;
     }
 
     #event_details .spoilers{
