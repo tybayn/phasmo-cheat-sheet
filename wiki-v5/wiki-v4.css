@@ -19,7 +19,9 @@
     width: 100%;
     display: flex;
     justify-content: left;
+    padding: 10px 0px;
 }
+
 
 @keyframes yellow-flash {
     0% {
@@ -34,6 +36,34 @@
 }
 
 @media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
+
+
+    .wiki-green{
+        display: table-row;
+    }
+
+    .wiki-green:before{
+        content: "+";
+        color: #00ff00;
+        text-shadow: 0 0 white;
+        display: table-cell;
+        text-align: center;
+        width: 15px;
+    }
+
+    .wiki-red{
+        display: table-row;
+    }
+
+    .wiki-red:before{
+        content: "-";
+        color: #ff0000;
+        text-shadow: 0 0 white;
+        display: table-cell;
+        text-align: center;
+        width: 15px;
+    }
+
     .wiki-flex{
         display: flex;
         justify-content: space-evenly;
@@ -101,10 +131,6 @@
     .wiki_details li{
         margin: 5px 0px;
         padding: 3px;
-    }
-
-    .wiki_details li:not(:first-child){
-        border-top: 0.5px solid rgba(204,204,204,0.2);
     }
 
     .wiki_details_note{
@@ -178,6 +204,16 @@
         padding-right: 10px;
         font-size: 14px;
         font-weight: 300;
+    }
+
+    .wiki_details .text .header{
+        display: block;
+        margin-bottom: 3px;
+    }
+
+    .wiki_details .text .i-header{
+        display: block;
+        margin-top: 10px;
     }
 
     .pad-left{
@@ -313,6 +349,38 @@
 }
 
 @media screen and (pointer: coarse) and (max-device-width: 600px) {
+
+
+    .wiki-green{
+        display: table-row;
+        font-size: 30px;
+    }
+
+    .wiki-green:before{
+        content: "+";
+        color: #00ff00;
+        text-shadow: 0 0 white;
+        display: table-cell;
+        text-align: center;
+        width: 30px;
+        font-size: 30px;
+    }
+
+    .wiki-red{
+        display: table-row;
+        font-size: 30px;
+    }
+
+    .wiki-red:before{
+        content: "-";
+        color: #ff0000;
+        text-shadow: 0 0 white;
+        display: table-cell;
+        text-align: center;
+        width: 30px;
+        font-size: 30px;
+    }
+
     .wiki-flex{
         display: flex;
         justify-content: space-evenly;
@@ -383,10 +451,6 @@
         padding: 10px;
     }
 
-    .wiki_details li:not(:first-child){
-        border-top: 0.5px solid rgba(204,204,204,0.2);
-    }
-
     .flicker-img{
         max-width: 100px;
     }
@@ -427,6 +491,16 @@
         padding: 10px 20px;
         font-size: 16px;
         font-weight: 300;
+    }
+
+    .wiki_details .text .header{
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .wiki_details .text .i-header{
+        display: block;
+        margin-top: 20px;
     }
 
     .pad-left{
