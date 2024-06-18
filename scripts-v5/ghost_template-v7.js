@@ -139,7 +139,7 @@ class Ghost {
             data += `<li${value[i]["definitive"] ? "" : " class=\"non-definitive\""}><b>${value[i]["type"]} (${value[i]["definitive"] ? "Definitive" : "Non-Definitive"})</b>: ${value[i]["data"]}`
 
             if(value[i]["image"] != null)
-                data += `<br><img loading="lazy" class="zoomable" src="${value[i]["image"]}" onclick="zoomImage(this)">`
+                data += `<br><img loading="lazy" class="zoomable" src="${value[i]["image"]}" onclick="zoomImage(this${value[i].hasOwnProperty("subtitle") ? ",'"+value[i]['subtitle']+"'" : ""})">`
 
             if(value[i]["definitive"])
                 data += `<div class="wiki_mark_ghost" onclick='select(document.getElementById("${ghost}"))'>&#x2714; Mark Ghost</div>`

@@ -149,6 +149,9 @@ function link_room(){
                 if (incoming_state['action'].toUpperCase() == "RESET"){
                     reset(true)
                 }
+                if(incoming_state['action'].toUpperCase() == "BROADCAST"){
+                    document.getElementById("room_id_note").innerText = incoming_state['message']
+                }
                 if (incoming_state['action'].toUpperCase() == "GUESS"){
                     try { document.getElementById(`guess_pos_${incoming_state['pos']}`).remove()} catch (error) {} 
                     if(incoming_state['ghost']){

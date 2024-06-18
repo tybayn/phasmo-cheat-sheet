@@ -137,8 +137,15 @@ function openGhostInfo(ghost){
     document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).scrollIntoView({alignToTop:true,behavior:"smooth"})
 }
 
-function zoomImage(elem){
+function zoomImage(elem,subtitle=null){
     $("#zoom_image").attr("src",$(elem).attr("src"))
+    if(subtitle){
+        $("#blackout_image_subtitle").text(subtitle)
+        $("#blackout_image_subtitle").show()
+    }
+    else{
+        $("#blackout_image_subtitle").hide()
+    }
     $("#blackout_image").show()
     document.getElementById("blackout_image").style.opacity = 1
 }
