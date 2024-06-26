@@ -42,7 +42,7 @@ class Ghost {
                 <div class="ghost_speed">
                     <img src="imgs/footsteps.png">
                     <div class="ghost_speed_values">
-                        ${this.toNumStr(data.min_speed)} <span class="ms">m/s</span> <span class="sound" onclick="toggleSound(${data.min_speed},'${data.ghost}0')">&#128266;</span>${data.max_speed == null ? '' : data.speed_is_range?' - ':' | '}${data.max_speed == null ? '' : this.toNumStr(data.max_speed)+' <span class="ms">m/s</span> <span class="sound" onclick="toggleSound('+data.max_speed+',\''+data.ghost+'1\')">&#128266;</span>'}${data.alt_speed == null ? '' : '<br>('+this.toNumStr(data.alt_speed)+' <span class="ms">m/s</span> <span class="sound" onclick="toggleSound('+data.alt_speed+',\''+data.ghost+'2\')">&#128266;</span>)'}
+                        ${this.toNumStr(data.min_speed)} <span class="ms">m/s</span> <span class="sound" onclick="toggleSound(${data.min_speed},'${data.ghost}0')">&#128266;</span>${data.max_speed == null ? '' : (+data.speed_is_range)?' - ':' | '}${data.max_speed == null ? '' : this.toNumStr(data.max_speed)+' <span class="ms">m/s</span> <span class="sound" onclick="toggleSound('+data.max_speed+',\''+data.ghost+'1\')">&#128266;</span>'}${data.alt_speed == null ? '' : '<br>('+this.toNumStr(data.alt_speed)+' <span class="ms">m/s</span> <span class="sound" onclick="toggleSound('+data.alt_speed+',\''+data.ghost+'2\')">&#128266;</span>)'}
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@ class Ghost {
             <div class="ghost_nightmare_evidence">${data.nightmare_evidence?data.nightmare_evidence:''}</div>
             <div class="ghost_hunt_high">${data.hunt_sanity_high}</div>
             <div class="ghost_hunt_low">${data.hunt_sanity_low}</div>
-            <div class="ghost_has_los">${data.has_los}</div>
+            <div class="ghost_has_los">${+data.has_los}</div>
 
             <div class="ghost_behavior">
                 <div class="ghost_tests_button" onClick="openGhostInfo('${data.ghost}')">0 Evidence Tests >></div>
