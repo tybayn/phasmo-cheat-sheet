@@ -41,6 +41,24 @@ document.body.onkeyup = function(e) {
         bpm_clear();
         saveSettings();
     }
+    if(e.key == "m" ||
+        e.code == "keyM" ||
+        e.keyCode == 77
+    ){
+        closeAll(true,false)
+        showMaps();
+    }
+    if(e.key == "g" ||
+        e.code == "keyG" ||
+        e.keyCode == 71
+    ){
+        closeAll(false, true)
+        showWiki();
+    }
+    if(e.keyCode == 37){
+        closeAll();
+    }
+
 }
 
 var timer_snd = [

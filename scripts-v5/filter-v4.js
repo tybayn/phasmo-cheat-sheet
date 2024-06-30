@@ -1139,6 +1139,40 @@ function showVoiceInfo(){
     $("#blackout_voice").fadeToggle(400)
 }
 
+function closeAll(skip_map=false,skip_wiki=false){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+
+    document.getElementById("settings_box").style.left = (mquery.matches ? "-100%" : "-32px")
+    document.getElementById("settings_box").style.boxShadow = "none"
+    document.getElementById("settings_tab").style.boxShadow = "none"
+    $("#settings_box").removeClass("tab-open")
+
+    document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "-32px")
+    document.getElementById("discord_link_box").style.boxShadow = "none"
+    document.getElementById("discord_link_tab").style.boxShadow = "none"
+    $("#discord_link_box").removeClass("tab-open")
+
+    document.getElementById("event_box").style.left = (mquery.matches ? "-100%" : "-182px")
+    document.getElementById("event_box").style.boxShadow = "none"
+    document.getElementById("event_tab").style.boxShadow = "none"
+    $("#event_box").removeClass("tab-open")
+
+    if(!skip_wiki){
+        document.getElementById("wiki_box").style.left = (mquery.matches ? "-100%" : "-182px")
+        document.getElementById("wiki_box").style.boxShadow = "none"
+        document.getElementById("wiki_tab").style.boxShadow = "none"
+        $("#wiki_box").removeClass("tab-open")
+    }
+
+    if(!skip_map){
+        document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 40px)" : "556px")
+        document.getElementById("maps_box").style.left = (mquery.matches ? "-100%" : "-388px")
+        document.getElementById("maps_box").style.boxShadow = "none"
+        document.getElementById("maps_box").style.boxShadow = "none"
+        $("#maps_box").removeClass("tab-open")
+    }
+}
+
 function showSettings(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
     if (document.getElementById("settings_box").style.left == (mquery.matches ? "-100%" : "-32px")){
@@ -1220,9 +1254,9 @@ function showEvent(){
     }
 }
 
-function showWiki(){
+function showWiki(forceOpen = false, forceClose = false){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("wiki_box").style.left == (mquery.matches ? "-100%" : "-182px")){
+    if (document.getElementById("wiki_box").style.left == (mquery.matches ? "-100%" : "-182px") && !forceClose){
         document.getElementById("wiki_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("wiki_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1233,7 +1267,7 @@ function showWiki(){
         document.getElementById("wiki_box").style.left = (mquery.matches ? "0px" : "196px")
         $("#wiki_box").addClass("tab-open")
     }
-    else {
+    else if(!forceOpen) {
         document.getElementById("wiki_box").style.left = (mquery.matches ? "-100%" : "-182px")
         document.getElementById("wiki_box").style.boxShadow = "none"
         document.getElementById("wiki_tab").style.boxShadow = "none"
@@ -1513,8 +1547,10 @@ function showCustom(){
 function changeMap(elem,map,ignore_link=false){
 
     $(".maps_button").removeClass("selected_map")
+    $("#cur_map").html($(elem).html())
     $(elem).addClass("selected_map")
     $(".map_image").css("background-image","url("+map+")")
+    $("#map-explorer-link-2").attr("href",`https://zero-network.net/phasmo-cheat-sheet/map-explorer/?share=${elem.id}`)
     state['map'] = elem.id
     setCookie("state",JSON.stringify(state),1)
     updateMapSize(elem.innerText.split('\n')[0])

@@ -556,7 +556,7 @@ body{
 
     .settings_title{
         font-size: 26px;
-        margin: 2px 0px 10px 0px;
+        margin: 2px 0px 0px 0px;
     }
 
     #settings_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon, #language_box .icon, #theme_box .icon{
@@ -883,7 +883,7 @@ body{
         display: grid;
         width:100%;
         max-height: calc(100vh - 16px);
-        grid-template-rows: 40px auto 55px 20px 20px;
+        grid-template-rows: 40px auto 28px 55px 20px 20px;
         background-color: #313248;
         margin: -8px;
         padding: 8px;
@@ -1061,6 +1061,15 @@ body{
         font-size: 10px;
         padding-top: 5px;
         margin: 0px 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .title_note{
+        color: #ffffffa0;
+        font-size: 11px;
+        margin: 0px;
+        padding-bottom: 5px;
         display: flex;
         align-items: center;
     }
@@ -1761,7 +1770,7 @@ body{
 
     .copyright{
         grid-column: 1;
-        grid-row: 5;
+        grid-row: 6;
         text-align: center;
         z-index: 2;
         color: rgb(173, 173, 173);
@@ -1819,16 +1828,21 @@ body{
         background-color: rgb(128,128,128);
     }
 
-    .active_title,.maps_title,.info_title{
+    .active_title,.info_title{
         font-size: 24px;
-        height:24px;
+        height: 24px;
         padding: 10px;
     }
 
+    .maps_title{
+        font-size: 26px;
+        margin: 2px 0px 0px 0px;
+    }
+
     .maps_image{
-        width: calc(100% - 20px);
+        width: calc(100% - 10px);
         height: calc(100% - 260px);
-        margin: 0px 0px 5px 10px;
+        margin: 0px 0px 5px 0px;
         background-color: #000;
         overflow: hidden;
         position: relative;
@@ -1934,7 +1948,7 @@ body{
 
     #active-users{
         grid-column: 1;
-        grid-row: 4;
+        grid-row: 5;
         text-align: center;
         z-index: 2;
         font-size: 9px;
@@ -1962,9 +1976,17 @@ body{
         display: none;
     }
 
-    #reset{
+    #cur_map{
         grid-column: 1;
         grid-row: 3;
+        width: 100%;   
+        justify-self: center;
+        margin-top: 7px;
+    }
+
+    #reset{
+        grid-column: 1;
+        grid-row: 4;
         width: 100%;
         justify-self: center;
         font-size: 20px;

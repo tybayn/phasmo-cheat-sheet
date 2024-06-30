@@ -1170,6 +1170,10 @@
         justify-content: center;
     }
 
+    .title_note{
+        display: none;
+    }
+
     .modifier_option{
         color: #ffffffa0;
         font-size: 30px;
@@ -1713,6 +1717,10 @@
         border-bottom: solid 5px #CCC;
         transform: rotate(45deg);
         z-index: 110;
+    }
+
+    #cur_map{
+        display: none;
     }
 
     #reset{

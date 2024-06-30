@@ -80,7 +80,7 @@ const ZNLANG = {
         "freezing":[],
         "ghost orbs":["orbs","orb","forbes","ghost forbes","olives","knobs","stops"],
         "writing":['righting',"ryhming"],
-        "spirit box":["spare box","beer box","red box","redbox","strip","strip box","spare parts"]
+        "spirit box":["spare box","beer box","red box","redbox","strip","strip box","spare parts","fairfax","fair fax"]
     },
     "speed":{
         "slow":[],

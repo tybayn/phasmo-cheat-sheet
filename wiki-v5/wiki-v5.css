@@ -78,6 +78,12 @@
         text-align: center;
     }
 
+    .accordian-icon{
+        width: 35px !important;
+        height: 35px;
+        margin: -5px 5px -6px 0px;
+    }
+
     .wiki_title{
         padding: 10px;
         font-size: 18px;
@@ -393,6 +399,12 @@
         width: calc(25% - 20px);
         height: 230px;
         text-align: center;
+    }
+
+    .accordian-icon{
+        width: 75px !important;
+        height: 75px;
+        margin: -8px 10px -7px 0px;
     }
 
     .wiki_title{
