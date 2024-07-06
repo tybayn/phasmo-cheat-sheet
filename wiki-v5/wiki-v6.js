@@ -154,7 +154,7 @@ function openWikiPath(path){
     if(!$("#wiki_box").hasClass("tab-open"))
         showWiki()
     path.split(delim).forEach(id => {
-        if(!$(document.getElementById(`wiki-${id}`)).hasClass("tab-open")){
+        if(!$(document.getElementById(`wiki-${id}`)).hasClass("wiki_active")){
             accordian(document.getElementById(`wiki-${id}`))
         }
     })
