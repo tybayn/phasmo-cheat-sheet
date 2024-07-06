@@ -148,14 +148,17 @@ function openGhostInfo(ghost){
 }
 
 function openWikiPath(path){
+
+    delim = path.includes(">>") ? ">>" : "."
+
     if(!$("#wiki_box").hasClass("tab-open"))
         showWiki()
-    path.split(">>").forEach(id => {
+    path.split(delim).forEach(id => {
         if(!$(document.getElementById(`wiki-${id}`)).hasClass("tab-open")){
             accordian(document.getElementById(`wiki-${id}`))
         }
     })
-    document.getElementById(`wiki-${path.split(">>")[path.split(">>").length - 1]}`).scrollIntoView({alignToTop:true,behavior:"smooth"})
+    document.getElementById(`wiki-${path.split(delim)[path.split(delim).length - 1]}`).scrollIntoView({alignToTop:true,behavior:"smooth"})
 }
 
 function generateWikiShareLink(elem){
