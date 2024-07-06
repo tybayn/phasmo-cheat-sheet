@@ -29,6 +29,16 @@ function accordian(elem){
     setFlicker()
 }
 
+function openWikiFromURL(){
+    params = new URL(window.location.href).searchParams
+    if (params.get("wiki")){
+        openWikiPath(params.get("wiki"))
+        let url = new URL(window.location.href)
+        url.searchParams.delete("wiki")
+        history.replaceState(history.state,"",url.href)
+    }
+}
+
 // -----------------------------------------------
 let ghost_flicker_data = {
     "Normal":{
@@ -135,6 +145,31 @@ function openGhostInfo(ghost){
     if(!$(`#wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).hasClass("wiki_active"))
         accordian(document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`))
     document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).scrollIntoView({alignToTop:true,behavior:"smooth"})
+}
+
+function openWikiPath(path){
+    if(!$("#wiki_box").hasClass("tab-open"))
+        showWiki()
+    path.split(">>").forEach(id => {
+        if(!$(document.getElementById(`wiki-${id}`)).hasClass("tab-open")){
+            accordian(document.getElementById(`wiki-${id}`))
+        }
+    })
+    document.getElementById(`wiki-${path.split(">>")[path.split(">>").length - 1]}`).scrollIntoView({alignToTop:true,behavior:"smooth"})
+}
+
+function generateWikiShareLink(elem){
+    let url = ""
+    let e = elem.parentElement.previousElementSibling
+    do {
+        url = `${e.id.replace("wiki-","")}${url == "" ? "" : ">>"}${url}`
+        e = e.parentElement.previousElementSibling
+    } while (e.id != "wiki-body" && e.id != "");
+
+    navigator.clipboard.writeText(`${window.location.href}?wiki=${url}`)
+
+    $(".wiki-share").html('Copy Share Link <img loading="lazy" src="imgs/share.png">')
+    elem.innerHTML = 'Copied! <img loading="lazy" src="imgs/share.png">'
 }
 
 function zoomImage(elem,subtitle=null){

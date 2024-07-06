@@ -86,6 +86,7 @@ class Ghost {
                     <i>- Use the <a href="https://zero-network.net/phasmo-cheat-sheet/map-explorer/" target="_blank"><b>Map Explorer</b></a> to see ranges/distances -</i>
                 </div>
             </div>
+            <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
         </div>
         `
     }

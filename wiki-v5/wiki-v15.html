@@ -3,9 +3,46 @@
 <div id="wiki-0-evidence-data" class="wiki_details" style="height: 0px;">
 </div>   
 
-<div class="wiki_title accordian" onclick="accordian(this)">Additional Ghost Data</div>
+<div id="wiki-ghost-data" class="wiki_title accordian" onclick="accordian(this)">Additional Ghost Data</div>
 <div class="wiki_details" style="height: 0px;">
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Obake Fingerprints</div></div>
+    <div id="wiki-obake-blinking" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Obake Blinking</div><img class="wiki-warn" src="imgs/warn.png" alt="Section contains unverified information"></div>
+    <div class="wiki_details" style="height: 0px;">
+        <div class="wiki-disclaimer">
+            <img src="imgs/warn.png">
+            <i>This information is not officially verified, but has been researched by many parties</i>
+        </div>
+        <hr>
+        <div class="text">
+            <b class="header">Blinking:</b>
+            During a hunt, the Obake will change models on predetermined blinks: 12, 27, 39, 54, 62, 80, 105, 120, and 132.<br>
+            <br>
+            This is not a 1/15 (6.66%) chance, nor is it random. While the duration and spacing of the blinks remains random, but the actual blink that the model changes on is not. The number of blinks between model changes averages out to roughly 1/15, which is where the number likely came from.<br>
+            <br>
+            This does mean that the Obake is not guaranteed to shapeshift on hunts that are shorter than about 8s, since the hunt would need to be long enough for the ghost to reach 12 blinks.<br>
+            <br>
+            See the below video showing the Obake model changes on specific blinks:
+            <video class="wiki_embed" controls>
+                <source src="https://zero-network.net/phasmophobia/static/videos/wiki/obake-blinking.mp4"></source>
+                Your browser does not support the video tag
+            </video>
+        </div>
+        <hr>
+        <div class="text">
+            <b class="header">Models:</b>
+            The Obake has a pattern that it will follow when changing models. A male model will only shapeshift into other male models, while the female model will only shapeshift into other female models. The pattern for each is the same and the very first model change will always be the same model. The pattern does not reset in between hunts. i.e. if the last model change in a hunt was Grandma, the next model change in the next hunt would be Patient 07.<br>
+            <br>
+            Male Model Pattern:<br>
+            Butcher >> Club / Fisherman >> Greybeard >> Naked >> Nerd >> Skeleton >> Brute >> (Repeat...)<br>
+            <br>
+            Female Model Pattern:<br>
+            Child >> Grandma >> Patient 07 >> Woman >> (Repeat...)<br>
+            <br>
+            The Obake will also shapeshift into itself when its own model is the next model in the pattern, which is generally visualized by a reset in posture.
+        </div>
+        <hr>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
+    </div>
+    <div id="wiki-obake-fingerprints" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Obake Fingerprints</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">Obake has a 25% chance to <i>not</i> leave UV evidence and has the ability to make UV evidence disappear faster.</div>
         <div class="text">This ghost also has a chance to leave behind unique finger/handprints:<br><br>
@@ -24,12 +61,13 @@
                 <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/obake_keyboard.png" style="max-width: 50%; padding: 10px;" onclick="zoomImage(this)">
             </div>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
 </div> 
 
-<div class="wiki_title accordian" onclick="accordian(this)">Cursed Possessions</div>
+<div id="wiki-cursed-possession" class="wiki_title accordian" onclick="accordian(this)">Cursed Possessions</div>
 <div class="wiki_details" style="height: 0px;">
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Haunted Mirror</div></div>
+    <div id="wiki-haunted-mirror" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Haunted Mirror</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">
             <img loading="lazy" class="zoomable" src="https://zero-network.net/phasmophobia/static/imgs/wiki/cursed-mirror-use.gif" onclick="zoomImage(this)">
@@ -58,9 +96,10 @@
                 </li>
             </ul>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
 
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Monkey Paw</div></div>
+    <div id="wiki-monkey-paw" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Monkey Paw</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">
             <img loading="lazy" class="zoomable" src="https://zero-network.net/phasmophobia/static/imgs/wiki/monkey-paw-use.gif" onclick="zoomImage(this)">
@@ -136,9 +175,10 @@
                 <li>Each wish can only be used once per contract. Asking a duplicate question will cause the fingers to wiggle.</li>
             </ul>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
 
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Music Box</div></div>
+    <div id="wiki-music-box" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Music Box</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">
             <img loading="lazy" class="zoomable" src="https://zero-network.net/phasmophobia/static/imgs/wiki/music-box-use.gif" onclick="zoomImage(this)">
@@ -167,9 +207,10 @@
                 <li>It is possible for the music box to close without starting a cursed hunt if either no players are in the investigation area or if the ghost is not close enough to the music box before the music stops playing.</li>
             </ul>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
 
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Oujia Board</div></div>
+    <div id="wiki-ouija-board" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Oujia Board</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">
             <img loading="lazy" class="zoomable" src="https://zero-network.net/phasmophobia/static/imgs/wiki/ouija-board-use.gif" onclick="zoomImage(this)">
@@ -278,9 +319,10 @@
                 </li>
             </ul>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
 
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Summoning Circle</div></div>
+    <div id="wiki-summoning-circle" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Summoning Circle</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">
             <img loading="lazy" class="zoomable" src="https://zero-network.net/phasmophobia/static/imgs/wiki/summoning-circle-use.gif" onclick="zoomImage(this)">
@@ -317,10 +359,11 @@
                 </li>
             </ul>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
 
     <!-- Tarot Card Wiki Contributed by svenjaun (2023-09-07) -->
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tarot Cards</div></div>
+    <div id="wiki-tarot-cards" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tarot Cards</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">
             <img loading="lazy" class="zoomable" src="https://zero-network.net/phasmophobia/static/imgs/wiki/tarot-cards-use.gif" onclick="zoomImage(this)">
@@ -449,10 +492,10 @@
                 </div>
             </div>
         </div>
-
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
 
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Voodoo Doll</div></div>
+    <div id="wiki-voodoo-doll" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Voodoo Doll</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">
             <img loading="lazy" class="zoomable" src="https://zero-network.net/phasmophobia/static/imgs/wiki/voodoo-doll-use.gif" onclick="zoomImage(this)">
@@ -479,17 +522,18 @@
                 </li>
             </ul>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
 
 </div> 
 
-<div class="wiki_title accordian" onclick="accordian(this)">Evidence Equipment</div>
+<div id="wiki-evidence-equipment" class="wiki_title accordian" onclick="accordian(this)">Evidence Equipment</div>
 <div class="wiki_details" style="height: 0px;">
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> EMF Reader</div></div>
+    <div id="wiki-emf-reader" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> EMF Reader</div></div>
     <div class="wiki_details" style="height: 0px;">
-        <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Using the EMF Reader</div></div>
+        <div id="wiki-emf-use" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Using the EMF Reader</div></div>
         <div class="wiki_details" style="height: 0px;">
-            <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tier 1</div></div>
+            <div id="wiki-emf-use-t1" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tier 1</div></div>
             <div class="wiki_details" style="height: 0px;">
                 <div class="text">
                     The Tier 1 EMF Reader features a needle that will indicate the EMF level by pointing to (or near) the number matching the level. It should be noted that in general, the needle must go past the number for it to be considered that number.<br>
@@ -514,8 +558,9 @@
                         <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t1_5.gif" onclick="zoomImage(this)">
                     </div>
                 </div>
+                <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
             </div>
-            <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tier 2</div></div>
+            <div id="wiki-emf-use-t2" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tier 2</div></div>
             <div class="wiki_details" style="height: 0px;">
                 <div class="text">
                     The Tier 2 EMF Reader features 5 LED lights of various colors. The number of illuminated LEDs indicates the level of EMF.<br>
@@ -540,8 +585,9 @@
                         <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t2_5.gif" onclick="zoomImage(this)">
                     </div>
                 </div>
+                <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
             </div>
-            <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Tier 3</div></div>
+            <div id="wiki-emf-use-t3" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Tier 3</div></div>
             <div class="wiki_details" style="height: 0px;">
                 <div class="text">
                     The Tier 3 EMF Reader features an LCD screen that shows the emf level, the direction, and the distance to the source of the EMF. The level is indicated at the top of each section by little bars. The number of bars shown indicates the level of EMF.<br>
@@ -566,14 +612,15 @@
                         <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/emf_t3_5.gif" onclick="zoomImage(this)">
                     </div>
                 </div>
+                <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
             </div>
         </div>
     </div>
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Spirit Box</div></div>
+    <div id="wiki-spirit-box" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Spirit Box</div></div>
     <div class="wiki_details" style="height: 0px;">
-        <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Using the Spirit Box</div></div>
+        <div id="wiki-spirit-box-use" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Using the Spirit Box</div></div>
         <div class="wiki_details" style="height: 0px;">
-            <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tier 1</div></div>
+            <div id="wiki-spirit-box-use-t1" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tier 1</div></div>
             <div class="wiki_details" style="height: 0px;">
                 <div class="text">
                     <b>Mic Indicator:</b>
@@ -594,8 +641,9 @@
                         <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t1_response.gif" onclick="zoomImage(this)">
                     </div>
                 </div>
+                <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
             </div>
-            <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tier 2</div></div>
+            <div id="wiki-spirit-box-use-t2" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Tier 2</div></div>
             <div class="wiki_details" style="height: 0px;">
                 <div class="text">
                     <b>Mic Indicator:</b>
@@ -616,8 +664,9 @@
                         <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t2_response.gif" onclick="zoomImage(this)">
                     </div>
                 </div>
+                <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
             </div>
-            <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Tier 3</div></div>
+            <div id="wiki-spirit-box-use-t3" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Tier 3</div></div>
             <div class="wiki_details" style="height: 0px;">
                 <div class="text">
                     <b>Mic Indicator:</b>
@@ -638,9 +687,10 @@
                         <img loading="lazy" style="padding: 5px;" src="https://zero-network.net/phasmophobia/static/imgs/wiki/spirit_box_t3_response.gif" onclick="zoomImage(this)">
                     </div>
                 </div>
+                <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
             </div>
         </div>
-        <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Aggression Questions</div></div>
+        <div id="wiki-spirit-box-aggression" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Aggression Questions</div></div>
         <div class="wiki_details" style="height: 0px;">
             <div class="text">
                 <p>The following questions can be asked to return a randomly chosen "aggresive" response</p>
@@ -665,8 +715,9 @@
                     <li><i>"...tragic <b>killing</b>,a ..."</i></li>
                 </ul>
             </div>
+            <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
         </div>
-        <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Location Questions</div></div>
+        <div id="wiki-spirit-box-location" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Location Questions</div></div>
         <div class="wiki_details" style="height: 0px;">
             <div class="text">
                 <p>The following questions can be asked to indicate how close you are to ghost and if the ghost is in the same room</p>
@@ -693,8 +744,9 @@
                         - <i>"...<b>far</b> and wide..."</i>
                 </ul>
             </div>
+            <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
         </div>
-        <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Age Questions</div></div>
+        <div id="wiki-spirit-box-age" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Age Questions</div></div>
         <div class="wiki_details" style="height: 0px;">
             <div class="text">
                 <p>The following questions can be asked to return an age (not correlated to ghost model)</p>
@@ -713,14 +765,15 @@
                     <li><i>"...when a <b>young</b> assailant..."</i></li>
                 </ul>
             </div>
+            <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
         </div>
     </div>
 </div>
 
 
-<div class="wiki_title accordian" onclick="accordian(this)">Hunts<div id="hunts_tab_footstep" style="display: none;"></div></div>
+<div id="wiki-hunts" class="wiki_title accordian" onclick="accordian(this)">Hunts<div id="hunts_tab_footstep" style="display: none;"></div></div>
 <div class="wiki_details" style="height: 0px;">
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Flickering</div></div>
+    <div id="wiki-flickering" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Flickering</div></div>
     <div id="wiki_flicker" class="wiki_details" style="height: 0px;">
         <div class="text">During a hunt, ghosts will flicker in and out of existance, alternating between visible and invisible multiple times every few seconds. There are a couple of ghosts that can be identified by their flickering during a hunt: (1) an Oni will be more visible during a hunt, (2) a Deogen will be more visible during a hunt, and (3) the Phantom will be invisible for longer periods of time.</div>
         <div class="text">Below you can see examples of the flicker timing of Phantom, Oni, Deogen, and all other ghosts.</div>
@@ -750,8 +803,9 @@
                 </div>
             </div>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Ghost Speed Breakdowns</div><div id="hunts_tab_indent_footstep" style="display: none;"></div></div>
+    <div id="wiki-ghost-speeds" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Ghost Speed Breakdowns</div><div id="hunts_tab_indent_footstep" style="display: none;"></div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">Many ghosts have a range of speeds that they can be. These are usually dependant on some other factor (such as sanity or temperature) and will cause the speed to be somewhere in-between the speeds listed on the cards</div>
         
@@ -949,8 +1003,9 @@
             </tr>
             
         </table>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Hunt Duration</div></div>
+    <div id="wiki-hunt-duration" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> Hunt Duration</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">The time that a ghost hunts depends on many factors including the Hunt Duration setting and the size of the map. Harder difficulties and larger maps result in longer hunt times.</div>
         
@@ -1017,8 +1072,9 @@
                 <td>+35s</td>
             </tr>
         </table>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Speed & Line-of-sight (LOS)</div></div>
+    <div id="wiki-los" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> Speed & Line-of-sight (LOS)</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">Most ghosts will gradually increase their speed while they have line-of-sight (LOS) on a player up to a maximum of 1.65x their base speed. After breaking LOS, the ghost will maintain the increased speed until it reaches the last known player position. If it does not regain LOS at this point, the ghost will very slowly lose the increased speed.</div>
         <div class="text">While using the BPM Finder, the cheat sheet will generate a plot of the speeds that you tapped over time. Many different hunting behaviors, including LOS, can be observed from this graph, as shown below.</div>
@@ -1094,12 +1150,13 @@
             <b>Mimic</b>
             The Mimic is capable of ANY hunt pattern and should be remembered.
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
 </div>
 
-<div class="wiki_title accordian" onclick="accordian(this)">Puzzles / Unlockables</div>
+<div id="wiki-puzzles" class="wiki_title accordian" onclick="accordian(this)">Puzzles / Unlockables</div>
 <div class="wiki_details" style="height: 0px;">
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div><img class="accordian-icon" loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/apocalypse-adept-badge.png"> Apocalypse Adept</div></div>
+    <div id="wiki-apoc-bronze" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div><img class="accordian-icon" loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/apocalypse-adept-badge.png"> Apocalypse Adept</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="wiki_spoiler_details">
             <h3>Map</h3>
@@ -1129,8 +1186,9 @@
                 <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/apocalypse-adept-trophy.png">
             </div>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div><img class="accordian-icon" loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/apocalypse-master-badge.png"> Apocalypse Master</div></div>
+    <div id="wiki-apoc-silver" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div><img class="accordian-icon" loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/apocalypse-master-badge.png"> Apocalypse Master</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="wiki_spoiler_details">
             <h3>Map</h3>
@@ -1160,8 +1218,9 @@
                 <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/apocalypse-master-trophy.png">
             </div>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div><img class="accordian-icon" loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/apocalypse-legend-badge.png"> Apocalypse Legend</div></div>
+    <div id="wiki-apoc-gold" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div><img class="accordian-icon" loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/apocalypse-legend-badge.png"> Apocalypse Legend</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="wiki_spoiler_details">
             <h3>Map</h3>
@@ -1191,8 +1250,9 @@
                 <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/apocalypse-legend-trophy.png">
             </div>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div><img class="accordian-icon" loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/ferryman-of-the-drowned-badge.png"> Ferryman of the Drowned</div></div>
+    <div id="wiki-ferryman-of-the-drowned" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div><img class="accordian-icon" loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/ferryman-of-the-drowned-badge.png"> Ferryman of the Drowned</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="wiki_spoiler_details">
             <h3>Map</h3>
@@ -1360,8 +1420,9 @@
                 <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/ferryman-of-the-drowned-id-card.jpg">
             </div>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
-    <div class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div><img class="accordian-icon" loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/lighthouse-keeper-badge.png"> Lighthouse Keeper</div></div>
+    <div id="wiki-lighthouse-keeper" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div><img class="accordian-icon" loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/lighthouse-keeper-badge.png"> Lighthouse Keeper</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="wiki_spoiler_details">
             <h3>Map</h3>
@@ -1382,11 +1443,11 @@
                 <img loading="lazy" src="https://zero-network.net/phasmophobia/static/imgs/wiki/lighthouse-keeper-id-card.jpg">
             </div>
         </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
     </div>
-
 </div>
 
-<div class="wiki_title accordian" onclick="accordian(this)">XP Grinding</div>
+<div id="wiki-xp-strats" class="wiki_title accordian" onclick="accordian(this)">XP Grinding</div>
 <div class="wiki_details" style="height: 0px;">
     <div class="text">
         <p><b>Current Strat: x12.97 WoodWind</b></p>
@@ -1456,4 +1517,5 @@
             <li>Fuse box visible on map: Off</li>
         </ul>
     </div>
+    <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
 </div>

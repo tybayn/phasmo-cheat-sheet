@@ -22,6 +22,15 @@
     padding: 10px 0px;
 }
 
+.wiki-link{
+    cursor: pointer;
+    color: #dbd993;
+}
+
+.wiki-link:hover{
+    color: #ffff00;
+}
+
 
 @keyframes yellow-flash {
     0% {
@@ -168,6 +177,55 @@
     
     .wiki_details_note a:active{
         color: #00ff00;
+    }
+
+    .wiki_embed{
+        width: 316px;
+        height: 178px;
+        padding-top: 5px;
+    }
+
+    .wiki-share{
+        cursor: pointer;
+        opacity: 0.5;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 12px;
+        font-size: 12px;
+        font-weight: 100;
+    }
+
+    .wiki-share:hover{
+        opacity: 1.0;
+    }
+
+    .wiki-share img{
+        height: 24px;
+        width: 24px !important;
+        padding-left: 5px;
+    }
+
+    .wiki-warn{
+        width: 24px !important;
+        margin-right: auto;
+        margin-left: 5px;
+    }
+
+    .wiki-disclaimer{
+        padding-top: 10px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        font-size: 14px;
+        font-weight: 300;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .wiki-disclaimer img{
+        width: 24px !important;
+        margin: 0px 5px;
     }
 
     .wiki_mark_ghost{
@@ -604,6 +662,55 @@
     
     .wiki_details_note a:active{
         color: #00ff00;
+    }
+
+    .wiki_embed{
+        width: 820px;
+        height: 461px;
+        padding-top: 20px;
+    }
+
+    .wiki-share{
+        cursor: pointer;
+        opacity: 0.5;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 12px;
+        font-size: 12px;
+        font-weight: 100;
+    }
+
+    .wiki-share:hover{
+        opacity: 1.0;
+    }
+
+    .wiki-share img{
+        height: 32px;
+        width: 32px !important;
+        padding-left: 5px;
+    }
+
+    .wiki-warn{
+        width: 32px !important;
+        margin-right: auto;
+        margin-left: 10px;
+    }
+
+    .wiki-disclaimer{
+        padding-top: 10px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        font-size: 14px;
+        font-weight: 300;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .wiki-disclaimer img{
+        width: 32px !important;
+        margin: 0px 10px;
     }
 
     .wiki_mark_ghost{

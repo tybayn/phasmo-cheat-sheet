@@ -345,6 +345,7 @@ function loadAllAndConnect(){
     .then(x => {
         applyPerms()
         auto_link()
+        openWikiFromURL()
     })
 }
 
