@@ -21,6 +21,9 @@ let markedDead = false;
 let polled = false;
 let filter_locked = false;
 
+let touchStartX = 0;
+let touchStartY = 0;
+
 function waitForElementById(id){
     let wait_for_element = () => {
         const c = document.getElementById(id)
@@ -1137,6 +1140,20 @@ function showInfo(){
 
 function showVoiceInfo(){
     $("#blackout_voice").fadeToggle(400)
+}
+
+function startSwipe(e){
+    touchStartX = e.changedTouches[0].screenX
+    touchStartY = e.changedTouches[0].screenY
+}
+
+function endSwipe(e){
+    touchEndX = e.changedTouches[0].screenX
+    touchEndY = e.changedTouches[0].screenY
+
+    if (touchEndX < touchStartX && Math.abs(touchEndX - touchStartX) > Math.abs(touchEndY - touchStartY)){
+        closeAll()
+    }
 }
 
 function closeAll(skip_map=false,skip_wiki=false){
