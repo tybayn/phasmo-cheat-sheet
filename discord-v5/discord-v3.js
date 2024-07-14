@@ -22,18 +22,18 @@ function getLink(){
             .then(data => {
                 var stats_info = `<strong>Total Games</strong>: ${data.total_games}<hr><div style="display:grid; grid-template-columns: 60%;">`
 
-                stats_info += `<div style="padding:0px 5px;">Amateur: <span style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['3A'] || '0' : '0'}</span></div>`
-                stats_info += `<div style="padding:0px 5px;">Intermediate: <span style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['3I'] || '0' : '0'}</span></div>`
-                stats_info += `<div style="padding:0px 5px;">Professional: <span style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['3'] || '0' : '0'}</span></div>`
-                stats_info += `<div style="padding:0px 5px;">Nightmare: <span style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['2'] || '0' : '0'}</span></div>`
-                stats_info += `<div style="padding:0px 5px;">Insanity: <span style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['1'] || '0' : '0'}</span></div>`
-                stats_info += `<div style="padding:0px 5px;">Apocalypse: <span style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['0'] || '0' : '0'}</span></div>`
-                stats_info += `<div style="padding:0px 5px;">Custom: <span style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['-1'] || '0' : '0'}</span></div>`
+                stats_info += `<div class="discord-entry">Amateur: <span class="discord-num" style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['3A'] || '0' : '0'}</span></div>`
+                stats_info += `<div class="discord-entry">Intermediate: <span class="discord-num" style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['3I'] || '0' : '0'}</span></div>`
+                stats_info += `<div class="discord-entry">Professional: <span class="discord-num" style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['3'] || '0' : '0'}</span></div>`
+                stats_info += `<div class="discord-entry">Nightmare: <span class="discord-num" style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['2'] || '0' : '0'}</span></div>`
+                stats_info += `<div class="discord-entry">Insanity: <span class="discord-num" style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['1'] || '0' : '0'}</span></div>`
+                stats_info += `<div class="discord-entry">Apocalypse: <span class="discord-num" style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['0'] || '0' : '0'}</span></div>`
+                stats_info += `<div class="discord-entry">Custom: <span class="discord-num" style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['-1'] || '0' : '0'}</span></div>`
 
 
                 stats_info += '</div><br><strong>Ghosts</strong><hr><div style="display:grid; grid-template-columns: 50% 50%;">'
                 for (const g in data['ghost_stats']){
-                    stats_info += `<div style="padding:0px 5px;${g == 'Unknown'?'color:#555;':''}">${g}: <span style="float:right;">${data['ghost_stats'][g]}</span></div>`
+                    stats_info += `<div class="discord-entry" style="${g == 'Unknown'?'color:#555;':''}">${g}: <span class="discord-num" style="float:right;">${data['ghost_stats'][g]}</span></div>`
                 }
                 stats_info += '</div>'
 

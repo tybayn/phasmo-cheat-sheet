@@ -24,6 +24,10 @@
         width: calc(100% - 20px);
     }
 
+    .discord-entry{
+        padding: 0px 5px;
+    }
+
     .grey{
         color: #ffffffa0 !important;
     }
@@ -122,7 +126,7 @@
 @media screen and (pointer: coarse) and (max-device-width: 600px) {
     #discord_avatar{
         width: 200px;
-        margin: 40px;
+        margin: 16px;
     }
 
     #discord_name{
@@ -131,8 +135,8 @@
     }
 
     .avatar{
-        height: 180px;
-        border-radius: 90px;
+        height: 200px;
+        border-radius: 100px;
         border: solid white 2px;
     }
 
@@ -147,6 +151,14 @@
         font-size: 16px;
         padding-top: 30px;
         width: 75%;
+    }
+
+    .discord-entry{
+        padding: 0px 15px;
+    }
+
+    .discord-num{
+        font-size: 36px;
     }
 
     .grey{
@@ -206,14 +218,14 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        font-size: 16px;
+        font-size: 24px;
     }
 
     #discord_instructions ul li img{
-        width: 35px;
+        width: 60px;
         background-image: radial-gradient(#939393, transparent 75%);
         padding: 2px;
-        margin-right: 5px;
+        margin-right: 20px;
     }
 
     .discord_instructions_title{
@@ -225,7 +237,7 @@
     }
 
     .discord_instructions_text{
-        margin-left: 30px;
+        margin-left: 100px;
     }
 
     #phasmo-stats{
@@ -234,11 +246,11 @@
         text-decoration: none;
         padding: 20px;
         border-radius: 5px;
-        margin: 0px 5px 10px 5px;
+        margin: 0px 10px 30px 10px;
         display: inline-flex;
         cursor: pointer;
         float: right;
-        font-size: 16px;
+        font-size: 40px;
     }
 
     #phasmo-stats:hover{
