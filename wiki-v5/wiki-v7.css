@@ -677,7 +677,8 @@
         align-items: center;
         justify-content: flex-end;
         margin-top: 12px;
-        font-size: 12px;
+        margin-right: 30px;
+        font-size: 33px;
         font-weight: 100;
     }
 
@@ -686,22 +687,22 @@
     }
 
     .wiki-share img{
-        height: 32px;
-        width: 32px !important;
+        height: 50px;
+        width: 50px !important;
         padding-left: 5px;
     }
 
     .wiki-warn{
-        width: 32px !important;
+        width: 50px !important;
         margin-right: auto;
         margin-left: 10px;
     }
 
     .wiki-disclaimer{
-        padding-top: 10px;
+        padding-top: 25px;
         padding-bottom: 5px;
         padding-right: 10px;
-        font-size: 14px;
+        font-size: 33px;
         font-weight: 300;
         display: flex;
         align-items: center;
@@ -709,8 +710,8 @@
     }
 
     .wiki-disclaimer img{
-        width: 32px !important;
-        margin: 0px 10px;
+        width: 50px !important;
+        margin: 0px 20px;
     }
 
     .wiki_mark_ghost{

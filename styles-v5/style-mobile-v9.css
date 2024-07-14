@@ -7,7 +7,7 @@
     hr{
         border: 2px dashed rgba(204, 204, 204, 0.26);
         margin: 15px;
-        width: 90%;
+        width: 95%;
     }
 
     #blackout, #blackout_voice, #blackout_image{
