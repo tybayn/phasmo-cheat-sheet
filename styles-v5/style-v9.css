@@ -2122,8 +2122,19 @@ body{
     }
 
     .ghost_speed img{
-        height: 20px;
-        filter: invert(1) opacity(0.6);
+        height: 18px;
+        cursor: pointer;
+    }
+
+    .footstep_los{
+        display: flex;
+        flex-direction: column;
+        margin-right: 3px;
+        opacity: 0.6;
+    }
+
+    .footstep_los:hover{
+        opacity: 1.0;
     }
 
     .ghost_speed .ms{

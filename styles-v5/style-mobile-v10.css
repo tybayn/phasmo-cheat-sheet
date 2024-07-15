@@ -1843,8 +1843,14 @@
     }
 
     .ghost_speed img{
-        height: 35px;
-        filter: invert(1);
+        height: 30px;
+        cursor: pointer;
+    }
+
+    .footstep_los{
+        display: flex;
+        flex-direction: column;
+        margin-right: 3px;
     }
 
     .ghost_speed .ms{
