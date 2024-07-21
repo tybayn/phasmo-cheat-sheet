@@ -90,7 +90,7 @@ body{
         background-color: #ffffff60;
     }
 
-    #blackout, #blackout_voice, #blackout_image{
+    #blackout, #blackout_voice, #blackout_zndl, #blackout_image{
         position: fixed;
         background: rgba(0,0,0,0.9);
         left: 0;
@@ -230,6 +230,20 @@ body{
 
     .error{
         background: #db4d48;
+    }
+
+    .zndlinfo{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 20px;
+        cursor: pointer;
+        filter: invert(1);
+        opacity: 0.5;
+    }
+
+    .zndlinfo:hover{
+        opacity: 1.0;
     }
 
     .download{
@@ -665,7 +679,7 @@ body{
         background-color: #747474;
     }
 
-    #info_box, #info_box_voice{
+    #info_box, #info_box_voice, #info_box_zndl{
         z-index: 100;
         width: 600px;
         height: auto;
@@ -684,7 +698,7 @@ body{
         font-size: 12px;
     }
 
-    #info_box .icon, #info_box_voice .icon{
+    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon{
         position: absolute;
         top: 10px;
         right: 10px;
@@ -696,7 +710,7 @@ body{
         cursor: pointer;
     }
 
-    #info_box .icon:before, #info_box_voice .icon:before{
+    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -706,7 +720,7 @@ body{
         top:4px;
     }
 
-    #info_box .icon:after, #info_box_voice .icon:after{
+    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after{
         content:"";
         position: absolute;
         width:15px;
@@ -720,7 +734,7 @@ body{
         margin-bottom: 8px;
     }
 
-    #info_box .info_block, #info_box_voice .info_block{
+    #info_box .info_block, #info_box_voice .info_block, #info_box_zndl .info_block{
         font-family: 'Courier New', Courier, monospace;
         box-shadow: inset 0 0 10px #161615;
         background: rgba(0,0,0,0.25);
@@ -735,13 +749,13 @@ body{
         padding-bottom: 5px !important;
     }
 
-    #info_box .info_block hr, #info_box_voice .info_block hr{
+    #info_box .info_block hr, #info_box_voice .info_block hr, #info_box_zndl .info_block hr{
         width: calc(100% - 10px);
         margin-top: 15px;
         margin-bottom: 15px;
     }
 
-    #info_box .info_text, #info_box_voice .info_text{
+    #info_box .info_text, #info_box_voice .info_text, #info_box_zndl .info_text{
         margin-left: 10px;
         display: flex;
         flex-direction: row;
@@ -766,7 +780,7 @@ body{
         z-index: -1;
     }
 
-    #info_box .copyright_text, #info_box_voice .copyright_text{
+    #info_box .copyright_text, #info_box_voice .copyright_text, #info_box_zndl .copyright_text{
         margin-top: 10px;
         text-align: center;
         align-self: center;
@@ -780,6 +794,13 @@ body{
         align-self: center;
         font-size: 10px;
         line-height: 15px;
+    }
+
+    #info_box_zndl img{
+        align-self: center;
+        margin: 10px;
+        border: 1px solid #FFF;
+        max-height: 225px;
     }
 
     input[type="range"] {

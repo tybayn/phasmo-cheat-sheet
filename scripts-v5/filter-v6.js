@@ -1142,6 +1142,10 @@ function showVoiceInfo(){
     $("#blackout_voice").fadeToggle(400)
 }
 
+function showZNDLInfo(){
+    $("#blackout_zndl").fadeToggle(400)
+}
+
 function startSwipe(e){
     touchStartX = e.changedTouches[0].screenX
     touchStartY = e.changedTouches[0].screenY

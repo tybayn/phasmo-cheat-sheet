@@ -31,7 +31,7 @@ function changeTheme(name = null){
         "#wiki_box","#wiki_tab","#maps_box","#maps_tab",
         "#news_box","#news_tab","#language_box","#language_tab",
         "#theme_box","#theme_tab","#discord_tab","#info_box","#info_box_voice",
-        "#resetMenu"
+        "#info_box_zndl","#resetMenu"
     ]
 
     let theme_name = name != null ? name : $("#theme").val()

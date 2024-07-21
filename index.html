@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v5/ghost_template-v10.js"></script>
-    <link rel="stylesheet" href="styles-v5/style-v9.css"/>
-    <link rel="stylesheet" href="styles-v5/style-mobile-v10.css"/>
+    <link rel="stylesheet" href="styles-v5/style-v10.css"/>
+    <link rel="stylesheet" href="styles-v5/style-mobile-v11.css"/>
     <link rel="stylesheet" href="themes-v5/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v5/discord-v3.css" >
     <link rel="stylesheet" href="wiki-v5/wiki-v7.css" >
@@ -155,6 +155,76 @@
         </div>
     </div>
 
+    <div id="blackout_zndl" style="display: none;">
+        <div id="info_box_zndl">
+            <span class="icon" onclick="showZNDLInfo()"></span>
+            <h2>Thanks for downloading the ZN-Desktop-Link!</h2>
+            <div class="info_text">Please read the following important information about the ZN-Desktop-Link, installation tips, disclaimers, and brief usage instructions.</div>
+            <hr>
+            <h3>Disclaimers</h3>
+            <div class="info_text">
+                The ZN-Desktop-Link does not interact with, read from, write to, or modify any Phasmophobia game files, nor does it interact with the game itself.
+                The software is NOT a mod nor a cheat software, but simply a companion software that displays an overlay on top of the game and provides its own hotkeys for starting timers
+                and utilizing other tools. The use of this software will not result in a ban from the game.
+            </div>
+            <br>
+            <div class="info_text">
+                The software is an extension of the Unofficial Phasmophobia Cheat Sheet. As such, the cheat sheet must remain open for the Desktop Link to work. 
+                Any issues, bugs, or concerns can be taken care of on our Discord.
+            </div>
+            <hr>
+            <h3>Installing</h3>
+            <div class="info_text">Once the .msi file has downloaded, simply run the installer and it will walk you through the installation process.</div>
+            <div class="info_text">During installation, you may see the following popup window:</div>
+            <img loading="lazy" src="imgs/zndl/error.png">
+            <div class="info_text">
+                This popup appears anytime you try to run software that has not been officialy verified by Microsoft 
+                (which costs hundreds of dollars per year). The ZN-Desktop-Link is safe to run and does not contain any malicious code.
+                You can bypass this warning and continue the install by clicking "More info" then "Run Anyway".
+            </div>
+            <hr>
+            <h3>Linking the Desktop Link</h3>
+            <div class="info_text">Once the software is installed, there are 2 ways to link the ZN-Desktop-Link:</div>
+            <h4>Manual Link</h4>
+            <div class="info_text">Navigate to the "Desktop Link" section of the "Settings" tab and click the "Create" button.</div>
+            <img loading="lazy" src="imgs/zndl/settings_desktop_link.png">
+            <div class="info_text">Copy the code it generates (in the format of 'DL-#####') and paste that into the "Link ID" field of the "Connect to Cheat Sheet" page in the ZN-Desktop-Link software. Then hit "Connect".</div>
+            <img loading="lazy" src="imgs/zndl/connect_desktop_link.png">
+            <h4>Auto Link</h4>
+            <div class="info_text">Alternatively, you may navigate to the "Desktop Link" section of the "Settings" tab and click the "Create & Launch" button. This will automatically open the ZN-Desktop-Link and connect it for you.</div>
+            <hr>
+            <h3>Usage</h3>
+            <h4>HotKeys</h4>
+            <div class="info_text">
+                The ZN-Desktop-Link provides a variety of hotkeys to control the cheat sheet while in game, allowing you to start timers, 
+                mark evidence, see ghost data, and tap out footsteps all without having to "tab out" of the game. The provided hotkeys can be seen and 
+                changed on the "Connected!" page in the Desktop Link.
+            </div>
+            <img loading="lazy" src="imgs/zndl/desktop_link.png">
+            <h4>Settings</h4>
+            <div class="info_text">
+                The ZN-Desktop-Link provides many customizable options for you to make the software the perfect companion to your gameplay. 
+                To open the options, click the settings icon on the lower right corner of the "Connected!" page in the Desktop Link. 
+                From here you can show/hide the overlay and ghost overlay, change the location, color, and screen of the overlays, and more. 
+            </div>
+            <img loading="lazy" src="imgs/zndl/desktop_link_options.png">
+            <h4>Overlay</h4>
+            <div class="info_text">
+                Once enabled, the overlay will be displayed on the screen and will be pinned to the front so that it is visible while you are in game.
+                It provides a quick view of the timers, the bpm/speed, the evidences, and the ghost selected/guessed.
+            </div>
+            <img loading="lazy" src="imgs/zndl/overlay.png">
+            <h4>Ghost Overlay</h4>
+            <div class="info_text">
+                In addition to the overlay, there is a second overlay that can be enabled that will show you all the ghosts.
+                From here you can click on a ghost (or cycle through them with hotkeys) to see the behaviors and tells of that ghost.
+            </div>
+            <img loading="lazy" src="imgs/zndl/ghost_overlay.png">
+            <hr>
+            <div class="copyright_text">Copyright © 2023-2024 Ty Bayn (Zero-Network)</div>
+        </div>
+    </div>
+
     <div id="blackout_image" style="display: none;" onclick="zoomOutImage()">
         <img loading="lazy" id="zoom_image" src="" onclick="zoomOutImage()">
         <div id="blackout_image_subtitle" style="display: none;"></div>
@@ -196,8 +266,9 @@
             <div id="room_id_note" class="modifier_note" style="user-select: text;">(STATUS: Not connected)</div>
             <hr>
             <div class="modifier_volume yfont white">
+                <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo()">
                 Desktop Link
-                <a class="download" href="assets/ZN-Desktop-Link-Installer-v2.13.0.msi" download="ZN-Desktop-Link-Installer-v2.13.0.msi"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
+                <a class="download" href="assets/ZN-Desktop-Link-Installer-v2.13.0.msi" download="ZN-Desktop-Link-Installer-v2.13.0.msi" onclick="showZNDLInfo()"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
             </div>
             <div class="journal_link">
                 <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
@@ -678,13 +749,13 @@
             document.getElementById("maps_box").style.left = "-388px";
         }
     </script>
-    <script src="themes-v5/themes-v1.js"></script>
+    <script src="themes-v5/themes-v2.js"></script>
     <script src="scripts-v5/audio_controller-v1.js"></script>
     <script src="scripts-v5/metronome-v1.js"></script>
     <script src="scripts-v5/timer-v2.js"></script>
     <script src="discord-v5/discord-v3.js"></script>
     <script src="wiki-v5/wiki-v6.js"></script>
-    <script src="scripts-v5/filter-v5.js"></script>
+    <script src="scripts-v5/filter-v6.js"></script>
     <script src="scripts-v5/wslink-v10.js"></script>
     <script src="scripts-v5/zn-v5.js"></script>
     <script src="events-v5/events-v1.js"></script>

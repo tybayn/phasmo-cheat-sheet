@@ -10,7 +10,7 @@
         width: 95%;
     }
 
-    #blackout, #blackout_voice, #blackout_image{
+    #blackout, #blackout_voice, #blackout_zndl, #blackout_image{
         position: fixed;
         background: rgba(0,0,0,0.9);
         left: 0;
@@ -162,6 +162,20 @@
 
     .error{
         background: #db4d48;
+    }
+
+    .zndlinfo{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 20px;
+        cursor: pointer;
+        filter: invert(1);
+        opacity: 0.5;
+    }
+
+    .zndlinfo:hover{
+        opacity: 1.0;
     }
 
     .download{
@@ -379,7 +393,7 @@
         margin: 10px 0px 10px 0px;
     }
 
-    #settings_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon{
+    #settings_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon, #info_box_zndl .icon{
         position: absolute;
         top: 24px;
         right: 24px;
@@ -391,7 +405,7 @@
         cursor: pointer;
     }
 
-    #settings_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #news_box .icon:before{
+    #settings_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #news_box .icon:before, #info_box_zndl .icon:before{
         content:"";
         position: absolute;
         width:8px;
@@ -401,7 +415,7 @@
         top:0px;
     }
 
-    #settings_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #news_box .icon:after{
+    #settings_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #news_box .icon:after, #info_box_zndl .icon:after{
         content:"";
         position: absolute;
         width:50px;
@@ -456,7 +470,7 @@
         font-size: 42px;
     }
 
-    #info_box, #info_box_voice{
+    #info_box, #info_box_voice, #info_box_zndl{
         z-index: 100;
         width: calc(100% - 100px);
         height: calc(100% - 100px);
@@ -506,7 +520,7 @@
         top:14px;
     }
 
-    #info_box .info_block, #info_box_voice .info_block{
+    #info_box .info_block, #info_box_voice .info_block, #info_box_zndl .info_block{
         font-family: 'Courier New', Courier, monospace;
         box-shadow: inset 0 0 10px #161615;
         background: rgba(0,0,0,0.25);
@@ -514,13 +528,13 @@
         height: fit-content;
     }
 
-    #info_box .info_block hr, #info_box_voice .info_block hr{
+    #info_box .info_block hr, #info_box_voice .info_block hr, #info_box_zndl .info_block hr{
         width: calc(100% - 10px);
         margin-bottom: 20px;
         margin-top: 20px;
     }
 
-    #info_box .info_text, #info_box_voice .info_text{
+    #info_box .info_text, #info_box_voice .info_text, #info_box_zndl .info_text{
         margin-left: 10px;
     }
 
@@ -541,7 +555,7 @@
         z-index: -1;
     }
 
-    #info_box .copyright_text, #info_box_voice .copyright_text{
+    #info_box .copyright_text, #info_box_voice .copyright_text, #info_box_zndl .copyright_text{
         margin-top: 20px;
         text-align: center;
         align-self: center;
@@ -556,6 +570,13 @@
         align-self: center;
         font-size: 10px;
         width: 100%;
+    }
+
+    #info_box_zndl img{
+        align-self: center;
+        margin: 10px;
+        border: 1px solid #FFF;
+        max-height: 225px;
     }
 
     input[type="range"] {
