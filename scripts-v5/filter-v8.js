@@ -1147,7 +1147,6 @@ function showZNDLInfo(){
 
 function showDebug(){
     $("#blackout_debug").fadeToggle(400)
-    $("#doesnotexists").value = "stuff"
 }
 
 function startSwipe(e){
@@ -1578,7 +1577,7 @@ function changeMap(elem,map,ignore_link=false){
     $("#map-explorer-link-2").attr("href",`https://zero-network.net/phasmo-cheat-sheet/map-explorer/?share=${elem.id}`)
     state['map'] = elem.id
     setCookie("state",JSON.stringify(state),1)
-    updateMapSize(elem.innerText.split('\n')[0])
+    updateMapSize(elem.firstChild.innerText)
     if(!ignore_link){
         send_state()
     }
