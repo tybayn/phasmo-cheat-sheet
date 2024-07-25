@@ -10,7 +10,7 @@
         width: 95%;
     }
 
-    #blackout, #blackout_voice, #blackout_zndl, #blackout_image{
+    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image{
         position: fixed;
         background: rgba(0,0,0,0.9);
         left: 0;
@@ -24,6 +24,18 @@
         align-content: center;
         z-index: 110;
         color: #cccccc44;
+    }
+
+    #debug-console{
+        width: 100%;
+        height: 100%;
+        margin-top: 58px;
+        background-color: #111;
+        border: none;
+        resize: none;
+        overflow: auto;
+        color: #33ff33;
+        font-size: 20px;
     }
 
     #blackout_image{
@@ -388,6 +400,24 @@
         display: none;
     }
 
+    #debug_tab{
+        position: fixed;
+        width: 70px;
+        height: 70px;
+        bottom: 90px;
+        left: 5px;
+        z-index: 1;
+        box-shadow: 5px 5px 10px #000;
+        border: 1px solid #CCC;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #debug_tab img{
+        width: 80% !important;
+    }
+
     .settings_title{
         font-size: 70px;
         margin: 10px 0px 10px 0px;
@@ -470,7 +500,7 @@
         font-size: 42px;
     }
 
-    #info_box, #info_box_voice, #info_box_zndl{
+    #info_box, #info_box_voice, #info_box_zndl, #info_box_debug{
         z-index: 100;
         width: calc(100% - 100px);
         height: calc(100% - 100px);
@@ -488,7 +518,7 @@
         font-size: 12px;
     }
 
-    #info_box .icon, #info_box_voice .icon{
+    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon, #info_box_debug .icon{
         position: absolute;
         top: 24px;
         right: 24px;
@@ -500,7 +530,7 @@
         cursor: pointer;
     }
 
-    #info_box .icon:before, #info_box_voice .icon:before{
+    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before, #info_box_debug .icon:before{
         content:"";
         position: absolute;
         width:7px;
@@ -510,7 +540,7 @@
         top:4px;
     }
 
-    #info_box .icon:after, #info_box_voice .icon:after{
+    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after, #info_box_debug .icon:after{
         content:"";
         position: absolute;
         width:28px;

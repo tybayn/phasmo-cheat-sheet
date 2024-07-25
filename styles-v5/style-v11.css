@@ -90,7 +90,7 @@ body{
         background-color: #ffffff60;
     }
 
-    #blackout, #blackout_voice, #blackout_zndl, #blackout_image{
+    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image{
         position: fixed;
         background: rgba(0,0,0,0.9);
         left: 0;
@@ -104,6 +104,17 @@ body{
         align-content: center;
         z-index: 110;
         color: #cccccc44;
+    }
+
+    #debug-console{
+        width: 100%;
+        height: 85vh;
+        margin-top: 20px;
+        background-color: #111;
+        border: none;
+        resize: none;
+        overflow: auto;
+        color: #33ff33;
     }
 
     #blackout_image{
@@ -564,6 +575,27 @@ body{
         border-radius: 5px 0px 0px 5px;
     }
 
+    #debug_tab{
+        position: fixed;
+        height: 24px;
+        width: 24px;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        top: 169px;
+        right: 0px;
+        background-color: #313248;
+        padding: 5px;
+        cursor: pointer;
+        border-style: solid;
+        border-color: #ccc;
+        border-width: 1px 0px 1px 1px;
+        border-radius: 5px 0px 0px 5px;
+    }
+
     /* #settings_tab:hover, #discord_link_tab:hover, #event_tab:hover, #wiki_tab:hover, #maps_tab:hover{
         background-color: #ffffff60;
     } */
@@ -679,7 +711,7 @@ body{
         background-color: #747474;
     }
 
-    #info_box, #info_box_voice, #info_box_zndl{
+    #info_box, #info_box_voice, #info_box_zndl, #info_box_debug{
         z-index: 100;
         width: 600px;
         height: auto;
@@ -698,7 +730,7 @@ body{
         font-size: 12px;
     }
 
-    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon{
+    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon, #info_box_debug .icon{
         position: absolute;
         top: 10px;
         right: 10px;
@@ -710,7 +742,7 @@ body{
         cursor: pointer;
     }
 
-    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before{
+    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before, #info_box_debug .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -720,7 +752,7 @@ body{
         top:4px;
     }
 
-    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after{
+    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after, #info_box_debug .icon:after{
         content:"";
         position: absolute;
         width:15px;

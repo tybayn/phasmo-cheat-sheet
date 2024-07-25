@@ -59,7 +59,6 @@ function showMenu(){
 }
 
 function toggleFilterTools(){
-
     if($('#tools-content').is(':visible')){
         $('#show_tool_button').attr('onclick',"toggleFilterTools();showMenu();")
         $('#show_tool_button').addClass('filter_tool_button_back')
@@ -1144,6 +1143,11 @@ function showVoiceInfo(){
 
 function showZNDLInfo(){
     $("#blackout_zndl").fadeToggle(400)
+}
+
+function showDebug(){
+    $("#blackout_debug").fadeToggle(400)
+    $("#doesnotexists").value = "stuff"
 }
 
 function startSwipe(e){

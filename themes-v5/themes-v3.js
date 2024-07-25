@@ -29,9 +29,9 @@ function changeTheme(name = null){
         ".ghost_card",".menu","#settings_box","#settings_tab",
         "#discord_link_box","#discord_link_tab","#event_box","#event_tab",
         "#wiki_box","#wiki_tab","#maps_box","#maps_tab",
-        "#news_box","#news_tab","#language_box","#language_tab",
+        "#news_box","#news_tab","#language_box","#language_tab","#debug_tab",
         "#theme_box","#theme_tab","#discord_tab","#info_box","#info_box_voice",
-        "#info_box_zndl","#resetMenu"
+        "#info_box_debug","#info_box_zndl","#resetMenu"
     ]
 
     let theme_name = name != null ? name : $("#theme").val()

@@ -1,6 +1,26 @@
 function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";");for(let n=0;n<i.length;n++){let o=i[n];for(;" "==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(t))return o.substring(t.length,o.length)}return""}
 function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
 
+function startDebugMode(){
+
+    if(typeof console != 'undefined')
+        if(typeof console.log != 'undefined')
+            console.olog = console.log
+        else
+            console.olog = function() {}
+
+    console.log = function(message){
+        console.olog(message)
+        document.getElementById("debug-console").value += `${message}\n`
+    }
+    console.error = console.debug = console.info = console.log
+
+    window.onerror = function(event){
+        console.log(event)
+        return false
+    }
+}
+
 function checkLink(){
     return new Promise((resolve, reject) => {
         params = new URL(window.location.href).searchParams
@@ -33,6 +53,11 @@ function checkLink(){
             else{
                 console.log("Hey! That language is not yet officially supported by the Zero-Network. If you would like to help translate the website, find me (SeverelyZero) on the Zero-Network Discord: https://discord.gg/afpvC7Bf7Y")
             }
+        }
+
+        if (params.get("debug") == "true"){
+            startDebugMode()
+            $("#debug_tab").show()
         }
 
         resolve("URL parsed")
