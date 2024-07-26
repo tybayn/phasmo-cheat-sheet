@@ -91,13 +91,14 @@ class Ghost {
             <div class="text">
                 <p><b>Abilities, Behaviors, & Tells</b></p>
                 ${this.build_tells(data.wiki["tells"],data.wiki["behaviors"],data.wiki["abilities"])}
-                <p><b>Confirmation Test(s)</b></p>
+                <p><b>Confirmation Test(s)</b> †</p>
                 ${this.build_confirmation_tests(data.ghost,data.wiki["confirmation_tests"])}
                 <p><b>Elimination Test(s)</b></p>
                 ${this.build_elimination_tests(data.ghost,data.wiki["elimination_tests"])}
                 <div class="wiki_details_note">
                     <i>- Use the <a href="javascript:void(0);" onclick="highLightBPMFinder()"><b>BPM Finder</b></a> to track ghost speeds -</i>
                     <i>- Use the <a href="https://zero-network.net/phasmo-cheat-sheet/map-explorer/" target="_blank"><b>Map Explorer</b></a> to see ranges/distances -</i>
+                    <i style="opacity: 0.4; margin-top: 3px;">† The Mimic can copy abilities and behaviors of other ghosts, meaning that any confirmation test could also be a Mimic</i>
                 </div>
             </div>
             <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
