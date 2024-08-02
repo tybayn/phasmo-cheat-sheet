@@ -99,6 +99,7 @@ function create_link(auto_link = false){
 
 function link_room(){
     var room_id = document.getElementById("room_id").value
+    console.log(room_id)
     var load_pos = getCookie("link-position")
     ws = new WebSocket(`wss://zero-network.net/phasmolink/link/${znid}/${room_id}${load_pos ? '?pos='+load_pos : ''}`);
     setCookie("room_id",room_id,1)
@@ -139,7 +140,8 @@ function link_room(){
                 pos_elem.style.border = `2px solid #${pos_colors[my_pos]}`
                 pos_elem.style.backgroundColor = `#${pos_colors[my_pos]}44`
                 $(pos_elem).show()
-                document.getElementById("map-explorer-link-2").href = `https://zero-network.net/phasmo-cheat-sheet/map-explorer/?jlid=${room_id}&pos=${my_pos}`
+                var lmap = document.getElementsByClassName("selected_map")[0].id
+                document.getElementById("map-explorer-link-2").href = `https://zero-network.net/phasmo-cheat-sheet/map-explorer/?jlid=${room_id}&pos=${my_pos}&share=${lmap}`
                 if($(".guessed").length > 0){
                     send_guess($(".guessed")[0].id)
                 }
@@ -231,16 +233,33 @@ function link_room(){
                 if (
                     document.getElementById("num_evidence").value != incoming_state['settings']['num_evidences'] ||
                     document.getElementById("cust_num_evidence").value != incoming_state['settings']['cust_num_evidences'] ||
-                    document.getElementById("cust_hunt_length").value != incoming_state['settings']['cust_hunt_length']
+                    document.getElementById("cust_hunt_length").value != incoming_state['settings']['cust_hunt_length'] ||
+                    document.getElementById("cust_starting_sanity").value != incoming_state['settings']['cust_starting_sanity'] ||
+                    document.getElementById("cust_sanity_pill_rest").value != incoming_state['settings']['cust_sanity_pill_rest'] ||
+                    document.getElementById("cust_sanity_drain").value != incoming_state['settings']['cust_sanity_drain'] ||
+                    document.getElementById("cust_lobby_type").value != incoming_state['settings']['cust_lobby_type']
                 ){
                     if(incoming_state['settings']['num_evidences'] != "")
                         document.getElementById("num_evidence").value = incoming_state['settings']['num_evidences']
-                    if(incoming_state['settings']['cust_num_evidences'] != "")
-                        document.getElementById("cust_num_evidence").value = incoming_state['settings']['cust_num_evidences']
-                    if(incoming_state['settings']['cust_hunt_length'] != "")
-                        document.getElementById("cust_hunt_length").value = incoming_state['settings']['cust_hunt_length']
+                    if(incoming_state['settings']['cust_lobby_type'] != "")
+                        document.getElementById("cust_lobby_type").value = incoming_state['settings']['cust_lobby_type']
+                    if (incoming_state['settings']['num_evidences'] == "-1"){
+                        if(incoming_state['settings']['cust_num_evidences'] != "")
+                            document.getElementById("cust_num_evidence").value = incoming_state['settings']['cust_num_evidences']
+                        if(incoming_state['settings']['cust_hunt_length'] != "")
+                            document.getElementById("cust_hunt_length").value = incoming_state['settings']['cust_hunt_length']
+                        if(incoming_state['settings']['cust_starting_sanity'] != "")
+                            document.getElementById("cust_starting_sanity").value = incoming_state['settings']['cust_starting_sanity']
+                        if(incoming_state['settings']['cust_sanity_pill_rest'] != "")
+                            document.getElementById("cust_sanity_pill_rest").value = incoming_state['settings']['cust_sanity_pill_rest']
+                        if(incoming_state['settings']['cust_sanity_drain'] != "")
+                            document.getElementById("cust_sanity_drain").value = incoming_state['settings']['cust_sanity_drain']
+                    }
+                    else{
+                        set_sanity_settings()
+                    }
                     updateMapDifficulty(incoming_state['settings']['num_evidences'])
-                    showCustom()
+                    showCustom(true)
                     flashMode()
                 }
                 if(document.getElementById("ghost_modifier_speed").value != incoming_state['settings']['ghost_modifier']){
@@ -288,9 +307,9 @@ function link_room(){
                 }
 
                 if(incoming_state.hasOwnProperty("map")){
-                    state['map'] = incoming_state['map'];
                     var map_exists = setInterval(function(){
                         if(document.getElementById(incoming_state['map']) != null){
+                            state['map'] = incoming_state['map'];
                             var map_elem = document.getElementById(incoming_state["map"])
                             changeMap(map_elem,map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
                             saveSettings()
@@ -401,6 +420,7 @@ function link_link(){
                     document.getElementById("link_id_note").innerText = `STATUS: Linked`
                     document.getElementById("dllink_status").className = "connected"
                     dlws.send('{"action":"LINK"}')
+                    send_sanity_link(Math.round(sanity),sanity_color())
                     send_timer_link("TIMER_VAL","0:00")
                     send_timer_link("COOLDOWN_VAL","0:00")
                     send_timer_link("HUNT_VAL","0:00")
@@ -438,6 +458,20 @@ function link_link(){
                     }
                     else{
                         bpm_tap()
+                    }
+                }
+                if (incoming_state['action'].toUpperCase() == "SANITY"){
+                    if(incoming_state['value'].toUpperCase() == "TOGGLE"){
+                        toggle_sanity_drain()
+                    }
+                    else if(incoming_state['value'].toUpperCase() == "RESTORE"){
+                        restore_sanity()
+                    }
+                    else if(incoming_state['value'].toUpperCase() == "RESET"){
+                        reset_sanity()
+                    }
+                    else{
+                        adjust_sanity(parseInt(incoming_state['value']))
                     }
                 }
                 if (incoming_state['action'].toUpperCase() == "DL_RESET"){
@@ -510,7 +544,8 @@ function disconnect_room(reset=false,has_status=false){
     try { document.getElementById(`guess_pos_2`).remove()} catch (error) {} 
     try { document.getElementById(`guess_pos_3`).remove()} catch (error) {} 
     try { document.getElementById(`guess_pos_4`).remove()} catch (error) {} 
-    document.getElementById("map-explorer-link-2").href = `https://zero-network.net/phasmo-cheat-sheet/map-explorer/`
+    var lmap = document.getElementsByClassName("selected_map")[0].id
+    document.getElementById("map-explorer-link-2").href = `https://zero-network.net/phasmo-cheat-sheet/map-explorer/?share=${lmap}`
     if (Object.keys(discord_user).length == 0)
         $('.card_icon_guess').hide()
     clearInterval(ws_ping)
@@ -558,7 +593,7 @@ function send_ghost_data_link(ghost){
         $(document.getElementById(ghost)).removeClass(readd_classes)
         data = `<b>${ghost}:<b>\n`
         data += document.getElementById(ghost).querySelector(".ghost_evidence").innerText.trim().replaceAll("\n",", ") + (ghost == "The Mimic" ? ", *Ghost Orbs" : "") + "\n"
-        data += document.getElementById(ghost).querySelector(".ghost_behavior").innerText
+        data += document.getElementById(ghost).querySelector(".ghost_behavior").innerText.replace("0 Evidence Tests >>","").trim()
         data = data.replace("Tells","\n<b>Tells:<b>\n")
         data = data.replace("Behaviors","\n<b>Behaviors:<b>\n")
         data = data.replace("Hunt Sanity","\n<b>Hunt Sanity:<b>\n")
@@ -577,7 +612,7 @@ function send_ghost_data_link(ghost){
 function send_ghost_tests_link(ghost){
     if(hasDLLink){
         data = `<b>${ghost} Tests:<b>\n`
-        data += document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).nextElementSibling.innerText
+        data += document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).nextElementSibling.innerText.replace("† The Mimic can copy abilities and behaviors of other ghosts, meaning that any confirmation test could also be a Mimic","").replace("Copy Share Link","").replace("†","").trim()
         data = data.replace("Abilities, Behaviors, & Tells","<b>Abilities, Behaviors, & Tells:<b>")
         data = data.replace("Confirmation Test(s)","\n<b>Confirmation Test(s):<b>")
         data = data.replace("Elimination Test(s)","\n<b>Elimination Test(s):<b>")
@@ -626,6 +661,13 @@ function send_ghosts_link(reset = false){
             }
         }
         dlws.send(`{"action":"GHOSTS","ghost":"${ghost_list}"}`)
+    }
+}
+
+
+function send_sanity_link(value, color){
+    if(hasDLLink){
+        dlws.send(`{"action":"SANITY","value":${value},"color":"${color}"}`)
     }
 }
 
@@ -720,10 +762,13 @@ function send_state() {
                 "num_evidences":document.getElementById("num_evidence").value,
                 "cust_num_evidences":document.getElementById("cust_num_evidence").value,
                 "cust_hunt_length":document.getElementById("cust_hunt_length").value,
+                "cust_starting_sanity": document.getElementById("cust_starting_sanity").value,
+                "cust_sanity_pill_rest": document.getElementById("cust_sanity_pill_rest").value,
+                "cust_sanity_drain": document.getElementById("cust_sanity_drain").value,
+                "cust_lobby_type": document.getElementById("cust_lobby_type").value,
                 "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
             }
         })
         ws.send(outgoing_state)
-
     }
 }

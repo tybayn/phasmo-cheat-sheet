@@ -26,7 +26,7 @@ function loadThemes(){
 function changeTheme(name = null){
 
     let changeObjects = [
-        ".ghost_card",".menu","#settings_box","#settings_tab",
+        ".ghost_card",".menu","#settings_box","#settings_tab","#customs_box",
         "#discord_link_box","#discord_link_tab","#event_box","#event_tab",
         "#wiki_box","#wiki_tab","#maps_box","#maps_tab",
         "#news_box","#news_tab","#language_box","#language_tab","#debug_tab",

@@ -11,7 +11,7 @@ let bpm_list = []
 let bpm_los_list = []
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood"}
-var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
 
 let znid = getCookie("znid")
 
@@ -39,20 +39,15 @@ function waitForElementById(id){
 
 function closeMenu(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    var is_c = document.getElementById("num_evidence").value == "-1"
     if(mquery.matches){
-        document.getElementById("menu").style.marginBottom = is_c ? "-640px" : "-585px";
-        $("#domovoi").removeClass("domovoi-custom")
+        document.getElementById("menu").style.marginBottom = "-585px";
         $("#domovoi").addClass("domovoi-menu-hidden")
     }
 }
 
 function showMenu(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    var is_c = document.getElementById("num_evidence").value == "-1"
     if(mquery.matches){
-        if(is_c)
-            $("#domovoi").addClass("domovoi-custom")
         $("#domovoi").removeClass("domovoi-menu-hidden")
         document.getElementById("menu").style.marginBottom = "-8px";
     }
@@ -1158,7 +1153,9 @@ function endSwipe(e){
     touchEndX = e.changedTouches[0].screenX
     touchEndY = e.changedTouches[0].screenY
 
-    if (touchEndX < touchStartX && Math.abs(touchEndX - touchStartX) > Math.abs(touchEndY - touchStartY)){
+    let cust_open = document.getElementById("customs_box").style.left == "0px"
+
+    if (!cust_open && touchEndX < touchStartX && Math.abs(touchEndX - touchStartX) > Math.abs(touchEndY - touchStartY)){
         closeAll()
     }
 }
@@ -1170,6 +1167,9 @@ function closeAll(skip_map=false,skip_wiki=false){
     document.getElementById("settings_box").style.boxShadow = "none"
     document.getElementById("settings_tab").style.boxShadow = "none"
     $("#settings_box").removeClass("tab-open")
+
+    document.getElementById("customs_box").style.left = (mquery.matches ? "100%" : "-32px")
+    document.getElementById("customs_box").style.boxShadow = "none"
 
     document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "-32px")
     document.getElementById("discord_link_box").style.boxShadow = "none"
@@ -1195,6 +1195,13 @@ function closeAll(skip_map=false,skip_wiki=false){
         document.getElementById("maps_box").style.boxShadow = "none"
         $("#maps_box").removeClass("tab-open")
     }
+
+    document.getElementById("settings_box").style.zIndex = "1"
+    document.getElementById("customs_box").style.zIndex = "1"
+    document.getElementById("discord_link_box").style.zIndex= "1"
+    document.getElementById("event_box").style.zIndex= "1"
+    if (!skip_wiki) document.getElementById("wiki_box").style.zIndex= "1"
+    if (!skip_map) document.getElementById("maps_box").style.zIndex= "1"
 }
 
 function showSettings(){
@@ -1202,6 +1209,7 @@ function showSettings(){
     if (document.getElementById("settings_box").style.left == (mquery.matches ? "-100%" : "-32px")){
         document.getElementById("settings_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("settings_tab").style.boxShadow = "5px 6px 5px -2px #000"
+        document.getElementById("customs_box").style.zIndex = "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
@@ -1224,12 +1232,38 @@ function showSettings(){
     }
 }
 
+function showCustoms(){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    if (document.getElementById("customs_box").style.left == (mquery.matches ? "100%" : "-32px")){
+        closeAll()
+        document.getElementById("customs_box").style.boxShadow = "5px 0px 10px 0px #000"
+        document.getElementById("settings_box").style.zIndex = "1"
+        document.getElementById("customs_box").style.zIndex = "1"
+        document.getElementById("event_box").style.zIndex= "1"
+        document.getElementById("wiki_box").style.zIndex= "1"
+        document.getElementById("maps_box").style.zIndex= "1"
+        document.getElementById("customs_box").style.zIndex = (mquery.matches ? "10" : "2")
+        document.getElementById("customs_box").style.left = (mquery.matches ? "0px" : "196px")
+    }
+    else {
+        document.getElementById("customs_box").style.left = (mquery.matches ? "100%" : "-32px")
+        document.getElementById("customs_box").style.boxShadow = "none"
+        if(mquery.matches){
+            $("#cards").scrollTop($("#cards").scrollTop() - 1);
+            setTimeout(function(){
+                $("#cards").scrollTop($("#cards").scrollTop() + 1);
+            },500);
+        }
+    }
+}
+
 function showDiscordLink(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
     if (document.getElementById("discord_link_box").style.left == (mquery.matches ? "-100%" : "-32px")){
         document.getElementById("discord_link_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("discord_link_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
+        document.getElementById("customs_box").style.zIndex = "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
@@ -1257,6 +1291,7 @@ function showEvent(){
         document.getElementById("event_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("event_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
+        document.getElementById("customs_box").style.zIndex = "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
@@ -1284,6 +1319,7 @@ function showWiki(forceOpen = false, forceClose = false){
         document.getElementById("wiki_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("wiki_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
+        document.getElementById("customs_box").style.zIndex = "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
@@ -1312,6 +1348,7 @@ function showMaps(forceOpen = false, forceClose = false){
         document.getElementById("maps_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("maps_box").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
+        document.getElementById("customs_box").style.zIndex = "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
@@ -1417,6 +1454,10 @@ function saveSettings(reset = false){
     user_settings['num_evidences'] = document.getElementById("num_evidence").value
     user_settings['cust_num_evidences'] = document.getElementById("cust_num_evidence").value
     user_settings['cust_hunt_length'] = document.getElementById("cust_hunt_length").value
+    user_settings['cust_starting_sanity'] = document.getElementById("cust_starting_sanity").value
+    user_settings['cust_sanity_pill_rest'] = document.getElementById("cust_sanity_pill_rest").value
+    user_settings['cust_sanity_drain'] = document.getElementById("cust_sanity_drain").value
+    user_settings['cust_lobby_type'] = document.getElementById("cust_lobby_type").value
     user_settings['sound_type'] = document.getElementById("modifier_sound_type").value;
     user_settings['speed_logic_type'] = document.getElementById("speed_logic_type").checked ? 1 : 0;
     user_settings['bpm_type'] = document.getElementById("bpm_type").checked ? 1 : 0;
@@ -1455,6 +1496,10 @@ function loadSettings(){
     document.getElementById("num_evidence").value = user_settings['num_evidences'] ?? "3"
     document.getElementById("cust_num_evidence").value = user_settings['cust_num_evidences'] ?? "3"
     document.getElementById("cust_hunt_length").value = user_settings['cust_hunt_length'] ?? "3"
+    document.getElementById("cust_starting_sanity").value = user_settings['cust_starting_sanity'] ?? "100"
+    document.getElementById("cust_sanity_pill_rest").value = user_settings['cust_sanity_pill_rest'] ?? "7"
+    document.getElementById("cust_sanity_drain").value = user_settings['cust_sanity_drain'] ?? "100"
+    document.getElementById("cust_lobby_type").value = user_settings['cust_lobby_type'] ?? "solo"
     document.getElementById("modifier_sound_type").value = user_settings['sound_type'] ?? 0
     document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] ?? 0 == 1
     document.getElementById("bpm_type").checked = user_settings['bpm_type'] ?? 0 == 1
@@ -1464,15 +1509,16 @@ function loadSettings(){
     }
     document.getElementById("priority_sort").checked = user_settings['priority_sort'] ?? 0 == 1;
     
-    
-    var map_exists = setInterval(function(){
-        if(document.getElementById(user_settings['map']) != null){
-            var map_elem = document.getElementById(user_settings['map'])
-            changeMap(map_elem,map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
-            clearInterval(map_exists)
-        }
-    },500)
-    
+    var room_id = getCookie("room_id")
+    if (room_id == ''){
+        var map_exists = setInterval(function(){
+            if(document.getElementById(user_settings['map']) != null){
+                var map_elem = document.getElementById(user_settings['map'])
+                changeMap(map_elem,map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
+                clearInterval(map_exists)
+            }
+        },500)
+    }
 
     document.getElementById("theme").value = user_settings['theme']
 
@@ -1524,6 +1570,10 @@ function resetSettings(){
     document.getElementById("num_evidence").value = user_settings['num_evidences']
     document.getElementById("cust_num_evidence").value = user_settings['cust_num_evidences']
     document.getElementById("cust_hunt_length").value = user_settings['cust_hunt_length']
+    document.getElementById("cust_starting_sanity").value = user_settings['cust_starting_sanity']
+    document.getElementById("cust_sanity_pill_rest").value = user_settings['cust_sanity_pill_rest']
+    document.getElementById("cust_sanity_drain").value = user_settings['cust_sanity_drain']
+    document.getElementById("cust_lobby_type").value = user_settings['cust_lobby_type']
     document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] == 1
     document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] == 1
     document.getElementById("bpm_type").checked = user_settings['bpm_type'] == 1
@@ -1532,28 +1582,50 @@ function resetSettings(){
     setCookie("settings",JSON.stringify(user_settings),30)
 }
 
-function showCustom(){
+function highLightCustomsIcon(){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    if ((mquery.matches && document.getElementById("customs_box").style.left == "100%") || (!mquery.matches && document.getElementById("customs_box").style.left == "-32px")){
+        closeAll()
+        setTimeout(() => {
+            $("#customs_settings_icon").addClass("focus-shift")
+            $("#customs_box").addClass("box-shift")
+            setTimeout(() =>{
+                $("#customs_settings_icon").removeClass("focus-shift")
+                $("#customs_box").removeClass("box-shift")
+            },2100)
+        },10)
+    }
+}
+
+function showCustom(skip_hightlight=false){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
     var is_h = ![null,"","-8px"].includes(document.getElementById("menu").style.marginBottom)
     if(document.getElementById("num_evidence").value == "-1"){
         if(mquery.matches){
-            document.getElementById("menu").style.height="675px";
             if(is_h){
                 document.getElementById("menu").style.marginBottom = "-640px";
-                $("#domovoi").removeClass("domovoi-custom")
                 $("#domovoi").addClass("domovoi-menu-hidden")
             }
             else{
-                $("#domovoi").addClass("domovoi-custom")
                 $("#domovoi").removeClass("domovoi-menu-hidden")
             }
         }
-        document.getElementById("evidence").style.marginTop = "56px";
-        $("#custom_options").show()
+        $("#cust_num_evidence").removeAttr("disabled")
+        $("#cust_hunt_length").removeAttr("disabled")
+        $("#cust_starting_sanity").removeAttr("disabled")
+        $("#cust_sanity_pill_rest").removeAttr("disabled")
+        $("#cust_sanity_drain").removeAttr("disabled")
+        $("#cust_num_evidence").removeClass("option-disabled")
+        $("#cust_hunt_length").removeClass("option-disabled")
+        $("#cust_starting_sanity").removeClass("option-disabled")
+        $("#cust_sanity_pill_rest").removeClass("option-disabled")
+        $("#cust_sanity_drain").removeClass("option-disabled")
+
+        if(!skip_hightlight)
+            highLightCustomsIcon()
     }
     else{
         $("#custom_options").hide()
-        document.getElementById("evidence").style.marginTop = mquery.matches ? "0px" : "28px";
         if(mquery.matches){
             if(is_h){
                 document.getElementById("menu").style.marginBottom = "-585px";
@@ -1563,8 +1635,17 @@ function showCustom(){
             else{
                 $("#domovoi").removeClass(["domovoi-custom","domovoi-menu-hidden"])
             }
-            document.getElementById("menu").style.height="620px";
         }
+        $("#cust_num_evidence").attr("disabled","disabled")
+        $("#cust_hunt_length").attr("disabled","disabled")
+        $("#cust_starting_sanity").attr("disabled","disabled")
+        $("#cust_sanity_pill_rest").attr("disabled","disabled")
+        $("#cust_sanity_drain").attr("disabled","disabled")
+        $("#cust_num_evidence").addClass("option-disabled")
+        $("#cust_hunt_length").addClass("option-disabled")
+        $("#cust_starting_sanity").addClass("option-disabled")
+        $("#cust_sanity_pill_rest").addClass("option-disabled")
+        $("#cust_sanity_drain").addClass("option-disabled")
     }
 }
 
@@ -1574,7 +1655,12 @@ function changeMap(elem,map,ignore_link=false){
     $("#cur_map").html($(elem).html())
     $(elem).addClass("selected_map")
     $(".map_image").css("background-image","url("+map+")")
-    $("#map-explorer-link-2").attr("href",`https://zero-network.net/phasmo-cheat-sheet/map-explorer/?share=${elem.id}`)
+    var room_id = document.getElementById("room_id").value
+    if(room_id != '')
+        document.getElementById("map-explorer-link-2").href = `https://zero-network.net/phasmo-cheat-sheet/map-explorer/?jlid=${room_id}&pos=${my_pos}&share=${elem.id}`
+    else
+        $("#map-explorer-link-2").attr("href",`https://zero-network.net/phasmo-cheat-sheet/map-explorer/?share=${elem.id}`)
+
     state['map'] = elem.id
     setCookie("state",JSON.stringify(state),1)
     updateMapSize(elem.firstChild.innerText)
