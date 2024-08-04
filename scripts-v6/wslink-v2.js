@@ -6,6 +6,7 @@ var dlws_ping;
 var await_dlws_pong = false
 
 var state_received = false
+var map_loaded = false
 const lang = "en"
 
 var my_pos = 0
@@ -314,6 +315,7 @@ function link_room(){
                             changeMap(map_elem,map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
                             saveSettings()
                             clearInterval(map_exists)
+                            map_loaded = true
                         }
                     },500)
                 }
@@ -750,7 +752,7 @@ function send_ping(){
 }
 
 function send_state() {
-    if (hasLink && state_received){
+    if (hasLink && state_received && map_loaded){
         var outgoing_state = JSON.stringify({
             'evidence': state['evidence'],
             'speed': state['speed'],
