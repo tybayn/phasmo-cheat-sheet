@@ -141,7 +141,10 @@ function start_drain(){
         let map_size = document.getElementById("cur_map").querySelector(".map_size").innerText
         let dif = document.getElementById("num_evidence").value
         let sds = parseFloat(document.getElementById("cust_sanity_drain").value) / 100.0
-        let mp = document.getElementById("cust_lobby_type").value
+        let mp = ['solo','multiplayer'].includes(document.getElementById("cust_lobby_type").value) ? document.getElementById("cust_lobby_type").value : 'solo'
+
+        console.log("Drain v3:",map_size, dif, sds, mp)
+
         let mult = (
             sanity_maps[map_size] *
             (sanity_difficulty[dif] || sds) *
@@ -163,14 +166,13 @@ function start_drain(){
 
     sanity_stopped = false
     send_sanity_link(Math.round(sanity),sanity_color())
+    console.log("Starting sanity timer")
     const blob = new Blob([`(function(e){setInterval(function(){this.postMessage(null)},1000)})()`])
     const url = window.URL.createObjectURL(blob)
-    setTimeout(() => {
-        sanity_worker = new Worker(url)
-        sanity_worker.onmessage = () => {
-            drain()
-        }
-    },1000)
+    sanity_worker = new Worker(url)
+    sanity_worker.onmessage = () => {
+        drain()
+    }
     
 }
 

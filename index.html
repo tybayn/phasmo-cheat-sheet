@@ -244,7 +244,7 @@
         <div class="info_block">
             <div class="modifier_volume yfont white">Number of Evidence</div>
             <select name="cust_num_evidence" id="cust_num_evidence" class="cust_num_evidence option-disabled" onchange="filter();flashMode();saveSettings();" disabled>
-                <option value="3">3 Evidence</option>
+                <option value="3" selected>3 Evidence</option>
                 <option value="2">2 Evidence</option>
                 <option value="1">1 Evidence</option>
                 <option value="0">0 Evidence</option>
@@ -254,7 +254,7 @@
             <select name="cust_hunt_length" id="cust_hunt_length" class="cust_num_evidence option-disabled" onchange="filter();updateMapDifficulty(this.value);saveSettings();" disabled>
                 <option value="3A">Low</option>
                 <option value="3I">Medium</option>
-                <option value="3">High</option>
+                <option value="3" selected>High</option>
             </select>
             <hr>
             <div class="modifier_volume yfont white">Starting Sanity</div>
@@ -265,7 +265,7 @@
                 <div class="modifier_volume_label">25%</div>
                 <div class="modifier_volume_label">50%</div>
                 <div class="modifier_volume_label">75%</div>
-                <div class="modifier_volume_label">100%</div>
+                <div class="modifier_volume_label" selected>100%</div>
             </div>
             <hr>
             <div class="modifier_volume yfont white">Sanity Pill Rest.</div>
@@ -277,7 +277,7 @@
                 <div class="modifier_volume_label cust_label">10%</div>
                 <div class="modifier_volume_label cust_label">20%</div>
                 <div class="modifier_volume_label cust_label">25%</div>
-                <div class="modifier_volume_label cust_label">30%</div>
+                <div class="modifier_volume_label cust_label" selected>30%</div>
                 <div class="modifier_volume_label cust_label">35%</div>
                 <div class="modifier_volume_label cust_label">40%</div>
                 <div class="modifier_volume_label cust_label">45%</div>
@@ -292,14 +292,14 @@
             <div class="modifier_volume_labels">
                 <div class="modifier_volume_label">0%</div>
                 <div class="modifier_volume_label">50%</div>
-                <div class="modifier_volume_label">100%</div>
+                <div class="modifier_volume_label" selected>100%</div>
                 <div class="modifier_volume_label">150%</div>
                 <div class="modifier_volume_label">200%</div>
             </div>
             <hr>
             <div class="modifier_volume yfont white">Lobby Type</div>
             <select name="cust_lobby_type" id="cust_lobby_type" class="cust_num_evidence" onchange="filter();set_sanity_settings();saveSettings();">
-                <option value="solo">Singleplayer</option>
+                <option value="solo" selected>Singleplayer</option>
                 <option value="multiplayer">Multiplayer</option>
             </select>
         </div>
@@ -824,8 +824,8 @@
     <script src="scripts-v6/timer-v1.js"></script>
     <script src="discord-v6/discord-v1.js"></script>
     <script src="wiki-v6/wiki-v1.js"></script>
-    <script src="scripts-v6/filter-v2.js"></script>
-    <script src="scripts-v6/sanity-v2.js"></script>
+    <script src="scripts-v6/filter-v3.js"></script>
+    <script src="scripts-v6/sanity-v3.js"></script>
     <script src="scripts-v6/wslink-v1.js"></script>
     <script src="scripts-v6/zn-v2.js"></script>
     <script src="events-v6/events-v1.js"></script>

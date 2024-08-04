@@ -1437,7 +1437,11 @@ function flashMode(){
     document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} evidence)</span>`.replace("-1",document.getElementById("cust_num_evidence").value)
     $("#game_mode").fadeIn(500,function () {
         $("#game_mode").delay(500).fadeOut(500);
-      });
+    });
+}
+
+function load_default(key, def){
+    return user_settings.hasOwnProperty(key) ? ((user_settings[key] == '' || user_settings[key] == null) ? def : user_settings[key]) : def
 }
 
 function saveSettings(reset = false){
@@ -1466,6 +1470,7 @@ function saveSettings(reset = false){
     user_settings['priority_sort'] = document.getElementById("priority_sort").checked ? 1 : 0;
     user_settings['map'] = $(".selected_map")[0].id
     user_settings['theme'] = $("#theme").val();
+
     setCookie("settings",JSON.stringify(user_settings),30)
 }
 
@@ -1475,39 +1480,40 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
     }
 
     user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
     user_settings['cust_num_evidences'] = user_settings['cust_num_evidences'] == "" ? "3" : user_settings['cust_num_evidences']
     user_settings['cust_hunt_length'] = user_settings['cust_hunt_length'] == "" ? "3" : user_settings['cust_hunt_length']
+    user_settings['cust_lobby_type'] = ['solo','multiplayer'].includes(user_settings['cust_lobby_type']) ? user_settings['cust_lobby_type'] : 'solo'
 
 
-    document.getElementById("modifier_volume").value = user_settings['volume'] ?? 50
-    document.getElementById("mute_timer_toggle").checked = user_settings['mute_timer_toggle'] ?? 0 == 1
-    document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] ?? 0 == 1
-    document.getElementById("timer_count_up").checked = user_settings['timer_count_up'] ?? 0 == 1
-    document.getElementById("timer_split").checked = user_settings['timer_split'] ?? 0 == 1
-    document.getElementById("adaptive_evidence").checked = user_settings['adaptive_evidence'] ?? 0 == 1
-    document.getElementById("hide_descriptions").checked = user_settings['hide_descriptions'] ?? 0 == 1
-    document.getElementById("compact_cards").checked = user_settings['compact_cards'] ?? 0 == 1
-    document.getElementById("offset_value").innerText = ` ${user_settings['offset'] ?? 0.0}% `
-    document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier'] ?? 2
-    document.getElementById("num_evidence").value = user_settings['num_evidences'] ?? "3"
-    document.getElementById("cust_num_evidence").value = user_settings['cust_num_evidences'] ?? "3"
-    document.getElementById("cust_hunt_length").value = user_settings['cust_hunt_length'] ?? "3"
-    document.getElementById("cust_starting_sanity").value = user_settings['cust_starting_sanity'] ?? "100"
-    document.getElementById("cust_sanity_pill_rest").value = user_settings['cust_sanity_pill_rest'] ?? "7"
-    document.getElementById("cust_sanity_drain").value = user_settings['cust_sanity_drain'] ?? "100"
-    document.getElementById("cust_lobby_type").value = user_settings['cust_lobby_type'] ?? "solo"
-    document.getElementById("modifier_sound_type").value = user_settings['sound_type'] ?? 0
-    document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] ?? 0 == 1
-    document.getElementById("bpm_type").checked = user_settings['bpm_type'] ?? 0 == 1
-    if (user_settings['domo_side'] == 1){
+    document.getElementById("modifier_volume").value = load_default('volume',50)
+    document.getElementById("mute_timer_toggle").checked = load_default('mute_timer_toggle',0) == 1 
+    document.getElementById("mute_timer_countdown").checked = load_default('mute_timer_countdown',0) == 1
+    document.getElementById("timer_count_up").checked = load_default('timer_count_up',0) == 1
+    document.getElementById("timer_split").checked = load_default('timer_split',0) == 1
+    document.getElementById("adaptive_evidence").checked = load_default('adaptive_evidence',0) == 1
+    document.getElementById("hide_descriptions").checked = load_default('hide_descriptions',0) == 1
+    document.getElementById("compact_cards").checked = load_default('compact_cards',0) == 1
+    document.getElementById("offset_value").innerText = ` ${load_default('offset',0.0)}% `
+    document.getElementById("ghost_modifier_speed").value = load_default('ghost_modifier',2)
+    document.getElementById("num_evidence").value = load_default('num_evidences','3')
+    document.getElementById("cust_num_evidence").value = load_default('cust_num_evidences','3')
+    document.getElementById("cust_hunt_length").value = load_default('cust_hunt_length','3')
+    document.getElementById("cust_starting_sanity").value = load_default('cust_starting_sanity','100')
+    document.getElementById("cust_sanity_pill_rest").value = load_default('cust_sanity_pill_rest','7')
+    document.getElementById("cust_sanity_drain").value = load_default('cust_sanity_drain','100')
+    document.getElementById("cust_lobby_type").value = load_default('cust_lobby_type','solo')
+    document.getElementById("modifier_sound_type").value = load_default('sound_type',0)
+    document.getElementById("speed_logic_type").checked = load_default('speed_logic_type',0) == 1
+    document.getElementById("bpm_type").checked = load_default('bpm_type',0) == 1
+    if (load_default('domo_side',0) == 1){
         $("#domovoi").addClass("domovoi-flip")
         $("#domovoi-img").addClass("domovoi-img-flip")
     }
-    document.getElementById("priority_sort").checked = user_settings['priority_sort'] ?? 0 == 1;
+    document.getElementById("priority_sort").checked = load_default('priority_sort',0) == 1;
     
     var room_id = getCookie("room_id")
     if (room_id == ''){
@@ -1556,27 +1562,27 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
-    document.getElementById("modifier_volume").value = user_settings['volume']
-    document.getElementById("mute_timer_toggle").checked = user_settings['mute_timer_toggle'] == 1
-    document.getElementById("mute_timer_countdown").checked = user_settings['mute_timer_countdown'] == 1
-    document.getElementById("timer_count_up").checked = user_settings['timer_count_up'] == 1
-    document.getElementById("timer_split").checked = user_settings['timer_split'] == 1
-    document.getElementById("adaptive_evidence").checked = user_settings['adaptive_evidence'] == 1
-    document.getElementById("hide_descriptions").checked = user_settings['hide_descriptions'] == 1
-    document.getElementById("compact_cards").checked = user_settings['compact_cards'] == 1
-    document.getElementById("offset_value").innerText = ` ${user_settings['offset'].toFixed(1)}% `
-    document.getElementById("ghost_modifier_speed").value = user_settings['ghost_modifier']
-    document.getElementById("num_evidence").value = user_settings['num_evidences']
-    document.getElementById("cust_num_evidence").value = user_settings['cust_num_evidences']
-    document.getElementById("cust_hunt_length").value = user_settings['cust_hunt_length']
-    document.getElementById("cust_starting_sanity").value = user_settings['cust_starting_sanity']
-    document.getElementById("cust_sanity_pill_rest").value = user_settings['cust_sanity_pill_rest']
-    document.getElementById("cust_sanity_drain").value = user_settings['cust_sanity_drain']
-    document.getElementById("cust_lobby_type").value = user_settings['cust_lobby_type']
-    document.getElementById("modifier_sound_type").checked = user_settings['sound_type'] == 1
-    document.getElementById("speed_logic_type").checked = user_settings['speed_logic_type'] == 1
-    document.getElementById("bpm_type").checked = user_settings['bpm_type'] == 1
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+    document.getElementById("modifier_volume").value = load_default('volume',50)
+    document.getElementById("mute_timer_toggle").checked = load_default('mute_timer_toggle',0) == 1 
+    document.getElementById("mute_timer_countdown").checked = load_default('mute_timer_countdown',0) == 1
+    document.getElementById("timer_count_up").checked = load_default('timer_count_up',0) == 1
+    document.getElementById("timer_split").checked = load_default('timer_split',0) == 1
+    document.getElementById("adaptive_evidence").checked = load_default('adaptive_evidence',0) == 1
+    document.getElementById("hide_descriptions").checked = load_default('hide_descriptions',0) == 1
+    document.getElementById("compact_cards").checked = load_default('compact_cards',0) == 1
+    document.getElementById("offset_value").innerText = ` ${load_default('offset',0.0)}% `
+    document.getElementById("ghost_modifier_speed").value = load_default('ghost_modifier',2)
+    document.getElementById("num_evidence").value = load_default('num_evidences','3')
+    document.getElementById("cust_num_evidence").value = load_default('cust_num_evidences','3')
+    document.getElementById("cust_hunt_length").value = load_default('cust_hunt_length','3')
+    document.getElementById("cust_starting_sanity").value = load_default('cust_starting_sanity','100')
+    document.getElementById("cust_sanity_pill_rest").value = load_default('cust_sanity_pill_rest','7')
+    document.getElementById("cust_sanity_drain").value = load_default('cust_sanity_drain','100')
+    document.getElementById("cust_lobby_type").value = load_default('cust_lobby_type','solo')
+    document.getElementById("modifier_sound_type").value = load_default('sound_type',0)
+    document.getElementById("speed_logic_type").checked = load_default('speed_logic_type',0) == 1
+    document.getElementById("bpm_type").checked = load_default('bpm_type',0) == 1
     document.getElementById("tanglewood").click()
     document.getElementById("theme").value = user_settings['theme']
     setCookie("settings",JSON.stringify(user_settings),30)
