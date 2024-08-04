@@ -1663,7 +1663,7 @@ function changeMap(elem,map,ignore_link=false){
 
     state['map'] = elem.id
     setCookie("state",JSON.stringify(state),1)
-    updateMapSize(elem.firstChild.innerText)
+    updateMapSize(elem.querySelector(".map_size").innerText)
     if(!ignore_link){
         send_state()
     }

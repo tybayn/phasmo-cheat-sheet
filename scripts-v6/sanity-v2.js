@@ -1,14 +1,14 @@
-let sanity = 100.00
-let sanity_stopped = true
-let last_sanity = 100.00
+var sanity = 100.00
+var sanity_stopped = true
+var last_sanity = 100.00
 
-let sanity_maps = {
+const sanity_maps = {
     "S": 0.12,
     "M": 0.08,
     "L": 0.05
 }
 
-let sanity_difficulty = {
+const sanity_difficulty = {
     "3A": 1,
     "3I": 1.5,
     "3": 2,
@@ -17,12 +17,12 @@ let sanity_difficulty = {
     "0": 2
 }
 
-let sanity_players = {
+const sanity_players = {
     "solo": 0.5,
     "multiplayer": 1
 }
 
-let sanity_rest = {
+const sanity_rest = {
     "0": 0,
     "1": 5,
     "2": 10,
@@ -37,7 +37,7 @@ let sanity_rest = {
     "11": 100
 }
 
-let built_in_diff = {
+const built_in_diff = {
     "3A": {
         "num_evi": 3,
         "hd": "3A",
@@ -138,7 +138,7 @@ function start_drain(){
 
     function drain(){
 
-        let map_size = document.getElementById("cur_map").firstChild.innerText
+        let map_size = document.getElementById("cur_map").querySelector(".map_size").innerText
         let dif = document.getElementById("num_evidence").value
         let sds = parseFloat(document.getElementById("cust_sanity_drain").value) / 100.0
         let mp = document.getElementById("cust_lobby_type").value
@@ -156,7 +156,6 @@ function start_drain(){
         let cursanity = Math.round(sanity)
 
         if (last_sanity != cursanity){
-            
             send_sanity_link(cursanity,sanity_color())
             last_sanity = cursanity
         }
@@ -166,10 +165,13 @@ function start_drain(){
     send_sanity_link(Math.round(sanity),sanity_color())
     const blob = new Blob([`(function(e){setInterval(function(){this.postMessage(null)},1000)})()`])
     const url = window.URL.createObjectURL(blob)
-    sanity_worker = new Worker(url)
-    sanity_worker.onmessage = () => {
-        drain()
-    }
+    setTimeout(() => {
+        sanity_worker = new Worker(url)
+        sanity_worker.onmessage = () => {
+            drain()
+        }
+    },1000)
+    
 }
 
 function restore_sanity(){
