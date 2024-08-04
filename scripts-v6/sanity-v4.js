@@ -143,8 +143,6 @@ function start_drain(){
         let sds = parseFloat(document.getElementById("cust_sanity_drain").value) / 100.0
         let mp = ['solo','multiplayer'].includes(document.getElementById("cust_lobby_type").value) ? document.getElementById("cust_lobby_type").value : 'solo'
 
-        console.log("Drain v3:",map_size, dif, sds, mp)
-
         let mult = (
             sanity_maps[map_size] *
             (sanity_difficulty[dif] || sds) *
