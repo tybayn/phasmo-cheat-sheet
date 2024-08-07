@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v6/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v6/style-v1.css"/>
-    <link rel="stylesheet" href="styles-v6/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="styles-v6/style-v2.css"/>
+    <link rel="stylesheet" href="styles-v6/style-mobile-v2.css"/>
     <link rel="stylesheet" href="themes-v6/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v6/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v6/wiki-v1.css" >
@@ -186,12 +186,12 @@
             <h3>Linking the Desktop Link</h3>
             <div class="info_text">Once the software is installed, there are 2 ways to link the ZN-Desktop-Link:</div>
             <h4>Manual Link</h4>
-            <div class="info_text">Navigate to the "Desktop Link" section of the "Settings" tab and click the "Create" button.</div>
+            <div class="info_text">Navigate to the "Desktop Link" section of the "Links" tab and click the "Create" button.</div>
             <img loading="lazy" src="imgs/zndl/settings_desktop_link.png">
             <div class="info_text">Copy the code it generates (in the format of 'DL-#####') and paste that into the "Link ID" field of the "Connect to Cheat Sheet" page in the ZN-Desktop-Link software. Then hit "Connect".</div>
             <img loading="lazy" src="imgs/zndl/connect_desktop_link.png">
             <h4>Auto Link</h4>
-            <div class="info_text">Alternatively, you may navigate to the "Desktop Link" section of the "Settings" tab and click the "Create & Launch" button. This will automatically open the ZN-Desktop-Link and connect it for you.</div>
+            <div class="info_text">Alternatively, you may navigate to the "Desktop Link" section of the "Links" tab and click the "Create & Launch" button. This will automatically open the ZN-Desktop-Link and connect it for you.</div>
             <hr>
             <h3>Usage</h3>
             <h4>HotKeys</h4>
@@ -220,6 +220,19 @@
                 From here you can click on a ghost (or cycle through them with hotkeys) to see the behaviors and tells of that ghost.
             </div>
             <img loading="lazy" src="imgs/zndl/ghost_overlay.png">
+            <h4>Sanity Overlay</h4>
+            <div class="info_text">
+                There is a third overlay that can be enabled that will help track your in-game sanity. When activated, it will start a timer that will 
+                simulate passive sanity drain (based on the "Sanity Settings" in the bottom of the "Links" tab). It will also allow you to add and subtract
+                various values of sanity based on ghost events, cursed possessions, and more.
+            </div>
+            <img loading="lazy" src="imgs/zndl/sanity_overlay.png">
+            <div class="info_text">
+                In order for the sanity drain to be accurate, it is important that the "Sanity Settings" are set correctly (all "Sanity Settings",
+                except Lobby Type, will be set automatically based on the difficulty chosen. If you have custom selected, you will need to 
+                set the values to match your in-game settings).
+            </div>
+            <img loading="lazy" src="imgs/zndl/sanity_overlay_options.png">
             <hr>
             <div class="copyright_text">Copyright © 2023-2024 Ty Bayn (Zero-Network)</div>
         </div>
@@ -237,126 +250,16 @@
         <div id="blackout_image_subtitle" style="display: none;"></div>
     </div>
 
-    <div id="customs_box" style="left: -1000px; display: none;">
-        <span class="icon" onclick="showCustoms()"></span>
-        <div class="settings_title yfont white">Custom Settings</div>
-        <div class="title_note">( '◄' to close )</div>
-        <div class="info_block">
-            <div class="modifier_volume yfont white">Number of Evidence</div>
-            <select name="cust_num_evidence" id="cust_num_evidence" class="cust_num_evidence option-disabled" onchange="filter();flashMode();saveSettings();" disabled>
-                <option value="3" selected>3 Evidence</option>
-                <option value="2">2 Evidence</option>
-                <option value="1">1 Evidence</option>
-                <option value="0">0 Evidence</option>
-            </select>
-            <hr>
-            <div class="modifier_volume yfont white">Hunt Duration</div>
-            <select name="cust_hunt_length" id="cust_hunt_length" class="cust_num_evidence option-disabled" onchange="filter();updateMapDifficulty(this.value);saveSettings();" disabled>
-                <option value="3A">Low</option>
-                <option value="3I">Medium</option>
-                <option value="3" selected>High</option>
-            </select>
-            <hr>
-            <div class="modifier_volume yfont white">Starting Sanity</div>
-            <input type="range" id="cust_starting_sanity" name="cust_starting_sanity" class="option-disabled"
-                min="0" max="100" step="25" default="50" onchange="filter();set_sanity_settings();saveSettings();" disabled>
-            <div class="modifier_volume_labels">
-                <div class="modifier_volume_label">0%</div>
-                <div class="modifier_volume_label">25%</div>
-                <div class="modifier_volume_label">50%</div>
-                <div class="modifier_volume_label">75%</div>
-                <div class="modifier_volume_label" selected>100%</div>
-            </div>
-            <hr>
-            <div class="modifier_volume yfont white">Sanity Pill Rest.</div>
-            <input type="range" id="cust_sanity_pill_rest" name="cust_sanity_pill_rest" class="option-disabled"
-                min="0" max="11" step="1" default="7" onchange="filter();set_sanity_settings();saveSettings();" disabled>
-            <div class="modifier_volume_labels">
-                <div class="modifier_volume_label cust_label">0%</div>
-                <div class="modifier_volume_label cust_label">5%</div>
-                <div class="modifier_volume_label cust_label">10%</div>
-                <div class="modifier_volume_label cust_label">20%</div>
-                <div class="modifier_volume_label cust_label">25%</div>
-                <div class="modifier_volume_label cust_label" selected>30%</div>
-                <div class="modifier_volume_label cust_label">35%</div>
-                <div class="modifier_volume_label cust_label">40%</div>
-                <div class="modifier_volume_label cust_label">45%</div>
-                <div class="modifier_volume_label cust_label">50%</div>
-                <div class="modifier_volume_label cust_label">75%</div>
-                <div class="modifier_volume_label cust_label">100%</div>
-            </div>
-            <hr>
-            <div class="modifier_volume yfont white">Sanity Drain Speed</div>
-            <input type="range" id="cust_sanity_drain" name="cust_sanity_drain" class="option-disabled"
-                min="0" max="200" step="50" default="100" onchange="filter();set_sanity_settings();saveSettings();" disabled>
-            <div class="modifier_volume_labels">
-                <div class="modifier_volume_label">0%</div>
-                <div class="modifier_volume_label">50%</div>
-                <div class="modifier_volume_label" selected>100%</div>
-                <div class="modifier_volume_label">150%</div>
-                <div class="modifier_volume_label">200%</div>
-            </div>
-            <hr>
-            <div class="modifier_volume yfont white">Lobby Type</div>
-            <select name="cust_lobby_type" id="cust_lobby_type" class="cust_num_evidence" onchange="filter();set_sanity_settings();saveSettings();">
-                <option value="solo" selected>Singleplayer</option>
-                <option value="multiplayer">Multiplayer</option>
-            </select>
-        </div>
-    </div>
-
     <div id="settings_box" style="left: -1000px;">
         <div id="settings_tab" onclick="showSettings()">
-            <div class="tab_rotate">Settings</div>
-            <div id="settings_status"></div>
-            <div id="dllink_status"></div>
-            <div id="voice_recognition_status" class="pulse_animation" style="display:none; background-image: url(imgs/mic.png);"></div>
+            <img class="settings_icon" src="imgs/settings.png">
         </div>
         <span class="icon" onclick="showSettings()"></span>
 
         <div class="settings_title yfont white">Settings</div>
         <div class="title_note">( '◄' to close )</div>
+
         <div class="info_block">
-            <div class="modifier_volume yfont white">Voice Commands</div>
-            <div class="journal_link vc_link">
-                <div class="journal_link_buttons">
-                    <button id="start_voice" class="journal_link_button" onclick="start_voice()">Enable</button>
-                    <button id="stop_voice" class="journal_link_button" onclick="stop_voice()" disabled>Disable</button>
-                </div>
-            </div>
-            <div id="voice_recognition_note" class="modifier_note"><div onclick="showVoiceInfo()" class="link_hover">Commands and Info &#187;</div></div>
-            <hr>
-            <div class="modifier_volume yfont white">Shared Journal Link</div>
-            <div class="journal_link">
-                <input type="text" placeholder="XXXXXX" id="room_id" class="text" value="Connecting..." disabled style="color:#444;">
-                <div id="room_id_cover" class="copy_cover" style="display:none;">Copied!</div>
-                <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_url_code()">
-                <div id="link_pos" style="display: none;"></div>
-                <div class="journal_link_buttons">
-                    <button id="room_id_create" class="journal_link_button" style="display: none;" onclick="create_room()">Create</button>
-                    <button id="room_id_link" class="journal_link_button" style="display: none;" onclick="link_room()">Join</button>
-                    <button id="room_id_disconnect" class="journal_link_button" style="display: none;" onclick="disconnect_room()">Disconnect</button>
-                </div>
-            </div>
-            <div id="room_id_note" class="modifier_note" style="user-select: text;">(STATUS: Not connected)</div>
-            <hr>
-            <div class="modifier_volume yfont white">
-                <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo()">
-                Desktop Link
-                <a class="download" href="assets/ZN-Desktop-Link-Installer-v3.0.1.msi" download="ZN-Desktop-Link-Installer-v3.0.1.msi" onclick="showZNDLInfo()"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
-            </div>
-            <div class="journal_link">
-                <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
-                <div id="link_id_cover" class="copy_cover" style="display:none;">Copied!</div>
-                <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_code()">
-                <div class="journal_link_buttons">
-                    <button id="link_id_create" class="desktop_link_button" style="display: none;" onclick="create_link(false)">Create</button>
-                    <button id="link_id_create_launch" class="desktop_link_button" style="display: none;" onclick="create_link(true)">Create & Launch</button>
-                    <button id="link_id_disconnect" class="desktop_link_button" style="display: none;" onclick="disconnect_link()">Disconnect</button>
-                </div>
-            </div>
-            <div id="link_id_note" class="modifier_note">(STATUS: Not linked)</div>
-            <hr>
             <div class="modifier_volume yfont white">Speed Offset</div>
             <div id="speed_offset">
                 <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-1);setTempo();saveSettings();">-1</span>
@@ -423,6 +326,111 @@
             <div class="modifier_note">(Compact View has no effect on mobile)</div>
         </div>
         <div id="session">-</div>
+    </div>
+
+    <div id="links_box" style="left: -1000px;">
+        <div id="links_tab" onclick="showLinks()">
+            <div class="tab_rotate">Links</div>
+            <div id="settings_status"></div>
+            <div id="dllink_status"></div>
+            <div id="voice_recognition_status" class="pulse_animation" style="display:none; background-image: url(imgs/mic.png);"></div>
+        </div>
+        <span class="icon" onclick="showLinks()"></span>
+
+        <div class="settings_title yfont white">Links</div>
+        <div class="title_note">( '◄' to close )</div>
+        <div class="info_block">
+            <div class="modifier_volume yfont white">Voice Commands</div>
+            <div class="journal_link vc_link">
+                <div class="journal_link_buttons">
+                    <button id="start_voice" class="journal_link_button" onclick="start_voice()">Enable</button>
+                    <button id="stop_voice" class="journal_link_button" onclick="stop_voice()" disabled>Disable</button>
+                </div>
+            </div>
+            <div id="voice_recognition_note" class="modifier_note"><div onclick="showVoiceInfo()" class="link_hover">Commands and Info &#187;</div></div>
+            <hr>
+            <div class="modifier_volume yfont white">Shared Journal Link</div>
+            <div class="journal_link">
+                <input type="text" placeholder="XXXXXX" id="room_id" class="text" value="Connecting..." disabled style="color:#444;">
+                <div id="room_id_cover" class="copy_cover" style="display:none;">Copied!</div>
+                <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_url_code()">
+                <div id="link_pos" style="display: none;"></div>
+                <div class="journal_link_buttons">
+                    <button id="room_id_create" class="journal_link_button" style="display: none;" onclick="create_room()">Create</button>
+                    <button id="room_id_link" class="journal_link_button" style="display: none;" onclick="link_room()">Join</button>
+                    <button id="room_id_disconnect" class="journal_link_button" style="display: none;" onclick="disconnect_room()">Disconnect</button>
+                </div>
+            </div>
+            <div id="room_id_note" class="modifier_note" style="user-select: text;">(STATUS: Not connected)</div>
+            <hr>
+            <div class="modifier_volume yfont white">
+                <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo()">
+                Desktop Link
+                <a class="download" href="assets/ZN-Desktop-Link-Installer-v3.0.1.msi" download="ZN-Desktop-Link-Installer-v3.0.1.msi" onclick="showZNDLInfo()"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
+            </div>
+            <div class="journal_link">
+                <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
+                <div id="link_id_cover" class="copy_cover" style="display:none;">Copied!</div>
+                <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_code()">
+                <div class="journal_link_buttons">
+                    <button id="link_id_create" class="desktop_link_button" style="display: none;" onclick="create_link(false)">Create</button>
+                    <button id="link_id_create_launch" class="desktop_link_button" style="display: none;" onclick="create_link(true)">Create & Launch</button>
+                    <button id="link_id_disconnect" class="desktop_link_button" style="display: none;" onclick="disconnect_link()">Disconnect</button>
+                </div>
+            </div>
+            <div id="link_id_note" class="modifier_note">(STATUS: Not linked)</div>
+            <hr>
+            <div class="modifier_volume yfont white">Sanity Settings</div>
+            <div class="modifier_note">For Sanity Overlay on Desktop Link</div>
+            <div class="sanity_labels yfont white">Starting Sanity</div>
+            <input type="range" id="cust_starting_sanity" name="cust_starting_sanity" class="option-disabled"
+                min="0" max="100" step="25" default="50" onchange="filter();set_sanity_settings();saveSettings();" disabled>
+            <div class="modifier_volume_labels">
+                <div class="modifier_volume_label">0%</div>
+                <div class="modifier_volume_label">25%</div>
+                <div class="modifier_volume_label">50%</div>
+                <div class="modifier_volume_label">75%</div>
+                <div class="modifier_volume_label" selected>100%</div>
+            </div>
+            <div class="sanity_labels yfont white">Sanity Pill Rest.</div>
+            <input type="range" id="cust_sanity_pill_rest" name="cust_sanity_pill_rest" class="option-disabled"
+                min="0" max="11" step="1" default="7" onchange="filter();set_sanity_settings();saveSettings();" disabled>
+            <div class="modifier_volume_labels">
+                <div class="modifier_volume_label cust_label">0%</div>
+                <div class="modifier_volume_label cust_label">5%</div>
+                <div class="modifier_volume_label cust_label">10%</div>
+                <div class="modifier_volume_label cust_label">20%</div>
+                <div class="modifier_volume_label cust_label">25%</div>
+                <div class="modifier_volume_label cust_label" selected>30%</div>
+                <div class="modifier_volume_label cust_label">35%</div>
+                <div class="modifier_volume_label cust_label">40%</div>
+                <div class="modifier_volume_label cust_label">45%</div>
+                <div class="modifier_volume_label cust_label">50%</div>
+                <div class="modifier_volume_label cust_label">75%</div>
+                <div class="modifier_volume_label cust_label">100%</div>
+            </div>
+            <div class="sanity_labels yfont white">Sanity Drain Speed</div>
+            <input type="range" id="cust_sanity_drain" name="cust_sanity_drain" class="option-disabled"
+                min="0" max="200" step="50" default="100" onchange="filter();set_sanity_settings();saveSettings();" disabled>
+            <div class="modifier_volume_labels">
+                <div class="modifier_volume_label">0%</div>
+                <div class="modifier_volume_label">50%</div>
+                <div class="modifier_volume_label" selected>100%</div>
+                <div class="modifier_volume_label">150%</div>
+                <div class="modifier_volume_label">200%</div>
+            </div>
+            <div class="sanity_labels yfont white">Lobby Type</div>
+            <select name="cust_lobby_type" id="cust_lobby_type" class="cust_lobby_type" onchange="filter();set_sanity_settings();saveSettings();">
+                <option value="solo" selected>Singleplayer</option>
+                <option value="multiplayer">Multiplayer</option>
+            </select>
+        </div>
+        <div class="find-overlay">
+            Looking for the overlay?<br>
+            <a href="assets/ZN-Desktop-Link-Installer-v3.0.1.msi" download="ZN-Desktop-Link-Installer-v3.0.1.msi" onclick="showZNDLInfo()" style="text-decoration: none;">
+                <div class="button-zn"><img class="download_icon" src="imgs/download.png" style="filter: invert(1); padding-right: 5px;">ZN-Desktop-Link</div>
+            </a>
+        </div>
     </div>
 
     <div id="discord_link_box" style="left: -1000px;">
@@ -710,7 +718,7 @@
             </div>
             <div id="filter-content" class="filter-content">
                 <div class="evidence_title yfont white">
-                    Evidence <div id ="customs_settings_icon" class="customs_settings_icon" onclick="showCustoms()">>></div>
+                    Evidence
                 </div>
 
                 <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="showCustom();filter();flashMode();set_sanity_settings();setGhostSpeedFromDifficulty(this.value);updateMapDifficulty(this.value);bpm_calc(true);saveSettings();">
@@ -722,6 +730,20 @@
                     <option value="0">Apocalypse III (0)</option>
                     <option value="-1">Custom (?)</option>
                 </select>
+
+                <div id="custom_options" style="display: none;">
+                    <select name="cust_num_evidence" id="cust_num_evidence" class="cust_num_evidence" style="width: calc(50% - 2px); margin-right: 2px;" onchange="filter();flashMode();saveSettings();">
+                        <option value="3">Evi: 3</option>
+                        <option value="2">Evi: 2</option>
+                        <option value="1">Evi: 1</option>
+                        <option value="0">Evi: 0</option>
+                    </select>
+                    <select name="cust_hunt_length" id="cust_hunt_length" class="cust_num_evidence"  style="width: calc(50% - 2px); margin-left: 2px;" onchange="filter();updateMapDifficulty(this.value);saveSettings();">
+                        <option value="3A">Hunt: Low</option>
+                        <option value="3I">Hunt: Med</option>
+                        <option value="3">Hunt: High</option>
+                    </select>
+                </div>
 
                 <div id="game_mode" class="yfont white" style="display:none;">Insanity</div>
                 <div id="evidence" class="evidence">
@@ -800,33 +822,31 @@
         mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
         if(mquery.matches){
             document.getElementById("settings_box").style.left = "-100%";
-            document.getElementById("customs_box").style.left = "100%";
+            document.getElementById("links_box").style.left = "-100%";
             document.getElementById("discord_link_box").style.left = "-100%";
             document.getElementById("event_box").style.left = "-100%";
             document.getElementById("wiki_box").style.left = "-100%";
             document.getElementById("maps_box").style.left = "-100%";
             document.getElementById("link_id_create_launch").style.display = "none";
-            document.getElementById("customs_settings_icon").innerText = "<<"
         }
         else{
             document.getElementById("settings_box").style.left = "-32px";
-            document.getElementById("customs_box").style.left = "-32px";
+            document.getElementById("links_box").style.left = "-32px";
             document.getElementById("discord_link_box").style.left = "-32px";
             document.getElementById("event_box").style.left = "-182px";
             document.getElementById("wiki_box").style.left = "-182px";
             document.getElementById("maps_box").style.left = "-388px";
         }
-        document.getElementById("customs_box").style.display = "flex"
     </script>
-    <script src="themes-v6/themes-v1.js"></script>
+    <script src="themes-v6/themes-v2.js"></script>
     <script src="scripts-v6/audio_controller-v1.js"></script>
     <script src="scripts-v6/metronome-v1.js"></script>
     <script src="scripts-v6/timer-v1.js"></script>
     <script src="discord-v6/discord-v1.js"></script>
     <script src="wiki-v6/wiki-v1.js"></script>
-    <script src="scripts-v6/filter-v3.js"></script>
+    <script src="scripts-v6/filter-v4.js"></script>
     <script src="scripts-v6/sanity-v4.js"></script>
-    <script src="scripts-v6/wslink-v2.js"></script>
+    <script src="scripts-v6/wslink-v3.js"></script>
     <script src="scripts-v6/zn-v2.js"></script>
     <script src="events-v6/events-v1.js"></script>
     <script src="feed-v6/feed-v1.js"></script>

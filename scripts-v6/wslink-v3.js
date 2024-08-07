@@ -260,7 +260,7 @@ function link_room(){
                         set_sanity_settings()
                     }
                     updateMapDifficulty(incoming_state['settings']['num_evidences'])
-                    showCustom(true)
+                    showCustom()
                     flashMode()
                 }
                 if(document.getElementById("ghost_modifier_speed").value != incoming_state['settings']['ghost_modifier']){
@@ -428,6 +428,7 @@ function link_link(){
                     send_timer_link("HUNT_VAL","0:00")
                     send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
                     filter()
+                    toggleSanitySettings()
                     await_dlws_pong = false
                     dlws_ping = setInterval(function(){
                         if (await_dlws_pong){
@@ -702,6 +703,7 @@ function disconnect_link(reset=false,has_status=false){
         $("#link_id_create").show()
         $("#link_id_create_launch").show()
         $("#link_id_disconnect").hide()
+        toggleSanitySettings()
         if(!has_status){
             document.getElementById("link_id_note").innerText = "STATUS: Not linked"
             document.getElementById("dllink_status").className = null

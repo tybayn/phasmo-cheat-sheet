@@ -39,15 +39,20 @@ function waitForElementById(id){
 
 function closeMenu(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    var is_c = document.getElementById("num_evidence").value == "-1"
     if(mquery.matches){
-        document.getElementById("menu").style.marginBottom = "-585px";
+        document.getElementById("menu").style.marginBottom = is_c ? "-640px" : "-585px";
+        $("#domovoi").removeClass("domovoi-custom")
         $("#domovoi").addClass("domovoi-menu-hidden")
     }
 }
 
 function showMenu(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    var is_c = document.getElementById("num_evidence").value == "-1"
     if(mquery.matches){
+        if(is_c)
+            $("#domovoi").addClass("domovoi-custom")
         $("#domovoi").removeClass("domovoi-menu-hidden")
         document.getElementById("menu").style.marginBottom = "-8px";
     }
@@ -1153,9 +1158,7 @@ function endSwipe(e){
     touchEndX = e.changedTouches[0].screenX
     touchEndY = e.changedTouches[0].screenY
 
-    let cust_open = document.getElementById("customs_box").style.left == "0px"
-
-    if (!cust_open && touchEndX < touchStartX && Math.abs(touchEndX - touchStartX) > Math.abs(touchEndY - touchStartY)){
+    if (touchEndX < touchStartX && Math.abs(touchEndX - touchStartX) > Math.abs(touchEndY - touchStartY)){
         closeAll()
     }
 }
@@ -1168,8 +1171,10 @@ function closeAll(skip_map=false,skip_wiki=false){
     document.getElementById("settings_tab").style.boxShadow = "none"
     $("#settings_box").removeClass("tab-open")
 
-    document.getElementById("customs_box").style.left = (mquery.matches ? "100%" : "-32px")
-    document.getElementById("customs_box").style.boxShadow = "none"
+    document.getElementById("links_box").style.left = (mquery.matches ? "-100%" : "-32px")
+    document.getElementById("links_box").style.boxShadow = "none"
+    document.getElementById("links_box").style.boxShadow = "none"
+    $("#links_box").removeClass("tab-open")
 
     document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "-32px")
     document.getElementById("discord_link_box").style.boxShadow = "none"
@@ -1197,7 +1202,7 @@ function closeAll(skip_map=false,skip_wiki=false){
     }
 
     document.getElementById("settings_box").style.zIndex = "1"
-    document.getElementById("customs_box").style.zIndex = "1"
+    document.getElementById("links_box").style.zIndex = "1"
     document.getElementById("discord_link_box").style.zIndex= "1"
     document.getElementById("event_box").style.zIndex= "1"
     if (!skip_wiki) document.getElementById("wiki_box").style.zIndex= "1"
@@ -1209,7 +1214,7 @@ function showSettings(){
     if (document.getElementById("settings_box").style.left == (mquery.matches ? "-100%" : "-32px")){
         document.getElementById("settings_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("settings_tab").style.boxShadow = "5px 6px 5px -2px #000"
-        document.getElementById("customs_box").style.zIndex = "1"
+        document.getElementById("links_box").style.zIndex = "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
@@ -1232,22 +1237,25 @@ function showSettings(){
     }
 }
 
-function showCustoms(){
+function showLinks(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("customs_box").style.left == (mquery.matches ? "100%" : "-32px")){
-        closeAll()
-        document.getElementById("customs_box").style.boxShadow = "5px 0px 10px 0px #000"
+    if (document.getElementById("links_box").style.left == (mquery.matches ? "-100%" : "-32px")){
+        document.getElementById("links_box").style.boxShadow = "5px 0px 10px 0px #000"
+        document.getElementById("links_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
-        document.getElementById("customs_box").style.zIndex = "1"
+        document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
-        document.getElementById("customs_box").style.zIndex = (mquery.matches ? "10" : "2")
-        document.getElementById("customs_box").style.left = (mquery.matches ? "0px" : "196px")
+        document.getElementById("links_box").style.zIndex = (mquery.matches ? "10" : "2")
+        document.getElementById("links_box").style.left = (mquery.matches ? "0px" : "196px")
+        $("#links_box").addClass("tab-open")
     }
     else {
-        document.getElementById("customs_box").style.left = (mquery.matches ? "100%" : "-32px")
-        document.getElementById("customs_box").style.boxShadow = "none"
+        document.getElementById("links_box").style.left = (mquery.matches ? "-100%" : "-32px")
+        document.getElementById("links_box").style.boxShadow = "none"
+        document.getElementById("links_tab").style.boxShadow = "none"
+        $("#links_box").removeClass("tab-open")
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
             setTimeout(function(){
@@ -1263,7 +1271,7 @@ function showDiscordLink(){
         document.getElementById("discord_link_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("discord_link_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
-        document.getElementById("customs_box").style.zIndex = "1"
+        document.getElementById("links_box").style.zIndex = "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
@@ -1291,7 +1299,7 @@ function showEvent(){
         document.getElementById("event_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("event_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
-        document.getElementById("customs_box").style.zIndex = "1"
+        document.getElementById("links_box").style.zIndex = "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
@@ -1319,7 +1327,7 @@ function showWiki(forceOpen = false, forceClose = false){
         document.getElementById("wiki_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("wiki_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
-        document.getElementById("customs_box").style.zIndex = "1"
+        document.getElementById("links_box").style.zIndex = "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
@@ -1348,7 +1356,7 @@ function showMaps(forceOpen = false, forceClose = false){
         document.getElementById("maps_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("maps_box").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
-        document.getElementById("customs_box").style.zIndex = "1"
+        document.getElementById("links_box").style.zIndex = "1"
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
@@ -1588,50 +1596,63 @@ function resetSettings(){
     setCookie("settings",JSON.stringify(user_settings),30)
 }
 
-function highLightCustomsIcon(){
-    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if ((mquery.matches && document.getElementById("customs_box").style.left == "100%") || (!mquery.matches && document.getElementById("customs_box").style.left == "-32px")){
-        closeAll()
-        setTimeout(() => {
-            $("#customs_settings_icon").addClass("focus-shift")
-            $("#customs_box").addClass("box-shift")
-            setTimeout(() =>{
-                $("#customs_settings_icon").removeClass("focus-shift")
-                $("#customs_box").removeClass("box-shift")
-            },2100)
-        },10)
+function toggleSanitySettings(){
+
+    if (hasDLLink && document.getElementById("num_evidence").value == "-1"){
+        $("#cust_starting_sanity").removeAttr("disabled")
+        $("#cust_sanity_pill_rest").removeAttr("disabled")
+        $("#cust_sanity_drain").removeAttr("disabled")
+        $("#cust_lobby_type").removeAttr("disabled")
+        $("#cust_starting_sanity").removeClass("option-disabled")
+        $("#cust_sanity_pill_rest").removeClass("option-disabled")
+        $("#cust_sanity_drain").removeClass("option-disabled")
+        $("#cust_lobby_type").removeClass("option-disabled")
+
+    }
+    else if(hasDLLink && document.getElementById("num_evidence").value != "-1"){
+        $("#cust_starting_sanity").attr("disabled","disabled")
+        $("#cust_sanity_pill_rest").attr("disabled","disabled")
+        $("#cust_sanity_drain").attr("disabled","disabled")
+        $("#cust_lobby_type").removeAttr("disabled")
+        $("#cust_starting_sanity").addClass("option-disabled")
+        $("#cust_sanity_pill_rest").addClass("option-disabled")
+        $("#cust_sanity_drain").addClass("option-disabled")
+        $("#cust_lobby_type").removeClass("option-disabled")
+    }
+    else{
+        $("#cust_starting_sanity").attr("disabled","disabled")
+        $("#cust_sanity_pill_rest").attr("disabled","disabled")
+        $("#cust_sanity_drain").attr("disabled","disabled")
+        $("#cust_lobby_type").attr("disabled","disabled")
+        $("#cust_starting_sanity").addClass("option-disabled")
+        $("#cust_sanity_pill_rest").addClass("option-disabled")
+        $("#cust_sanity_drain").addClass("option-disabled")
+        $("#cust_lobby_type").addClass("option-disabled")
     }
 }
 
-function showCustom(skip_hightlight=false){
+function showCustom(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
     var is_h = ![null,"","-8px"].includes(document.getElementById("menu").style.marginBottom)
     if(document.getElementById("num_evidence").value == "-1"){
         if(mquery.matches){
+            document.getElementById("menu").style.height="675px";
             if(is_h){
                 document.getElementById("menu").style.marginBottom = "-640px";
+                $("#domovoi").removeClass("domovoi-custom")
                 $("#domovoi").addClass("domovoi-menu-hidden")
             }
             else{
+                $("#domovoi").addClass("domovoi-custom")
                 $("#domovoi").removeClass("domovoi-menu-hidden")
             }
         }
-        $("#cust_num_evidence").removeAttr("disabled")
-        $("#cust_hunt_length").removeAttr("disabled")
-        $("#cust_starting_sanity").removeAttr("disabled")
-        $("#cust_sanity_pill_rest").removeAttr("disabled")
-        $("#cust_sanity_drain").removeAttr("disabled")
-        $("#cust_num_evidence").removeClass("option-disabled")
-        $("#cust_hunt_length").removeClass("option-disabled")
-        $("#cust_starting_sanity").removeClass("option-disabled")
-        $("#cust_sanity_pill_rest").removeClass("option-disabled")
-        $("#cust_sanity_drain").removeClass("option-disabled")
-
-        if(!skip_hightlight)
-            highLightCustomsIcon()
+        document.getElementById("evidence").style.marginTop = "56px";
+        $("#custom_options").show()
     }
     else{
         $("#custom_options").hide()
+        document.getElementById("evidence").style.marginTop = mquery.matches ? "0px" : "28px";
         if(mquery.matches){
             if(is_h){
                 document.getElementById("menu").style.marginBottom = "-585px";
@@ -1642,17 +1663,8 @@ function showCustom(skip_hightlight=false){
                 $("#domovoi").removeClass(["domovoi-custom","domovoi-menu-hidden"])
             }
         }
-        $("#cust_num_evidence").attr("disabled","disabled")
-        $("#cust_hunt_length").attr("disabled","disabled")
-        $("#cust_starting_sanity").attr("disabled","disabled")
-        $("#cust_sanity_pill_rest").attr("disabled","disabled")
-        $("#cust_sanity_drain").attr("disabled","disabled")
-        $("#cust_num_evidence").addClass("option-disabled")
-        $("#cust_hunt_length").addClass("option-disabled")
-        $("#cust_starting_sanity").addClass("option-disabled")
-        $("#cust_sanity_pill_rest").addClass("option-disabled")
-        $("#cust_sanity_drain").addClass("option-disabled")
     }
+    toggleSanitySettings()
 }
 
 function changeMap(elem,map,ignore_link=false){
