@@ -8,7 +8,13 @@ loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_gravel.m
 loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_gravel_2.mp3',3)
 loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_wood_2.mp3',4)
 loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_wood_3.mp3',4)
-loadSound('assets/click.mp3',5)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_metal_stairs.mp3',5)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_metal_stairs_2.mp3',5)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_metal_stairs_3.mp3',5)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_squishy.mp3',6)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_squishy_2.mp3',6)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_squishy_3.mp3',6)
+loadSound('assets/click.mp3',7)
 
 var speed = 1.7
 var muteTimerToggle = false
