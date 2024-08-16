@@ -33,8 +33,11 @@ function loadSound(url,idx=0) {
 
 function playStep(time) {
     gainNode.gain.value = volume
-    
-    if(step_cnt == 2){
+
+    if(stepBuffer[snd_choice].length == 1){
+        step_cnt += 1
+    }
+    else if(step_cnt == 2){
         var r = Math.round(Math.random() * (stepBuffer[snd_choice].length-1))
         if(prev_r != r){
             prev_r = r
