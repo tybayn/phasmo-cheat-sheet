@@ -454,7 +454,7 @@ function filter(ignore_link=false){
         ]
 
         //Check for monkey paw filter
-        if(monkey_evi == "Ghost Orbs" && name != "The Mimic" && prev_monkey_state == 1){
+        if(monkey_evi == "Ghost Orbs" && name != "The Mimic" && prev_monkey_state == 1 && evi_array.every(value => ["Ultraviolet","Spirit Box","Freezing"].includes(value))){
             keep = false
         }
 

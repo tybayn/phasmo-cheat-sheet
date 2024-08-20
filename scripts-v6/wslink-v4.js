@@ -320,6 +320,8 @@ function link_room(){
                     },500)
                 }
 
+                prev_monkey_state = incoming_state["prev_monkey_state"] ?? 0
+
                 var prev_evidence = state['evidence']
                 var new_mp = false
                 for (const [key, value] of Object.entries(incoming_state["evidence"])){ 
@@ -762,6 +764,7 @@ function send_state() {
             'sanity': state['sanity'],
             'ghosts': state['ghosts'],
             "map": state['map'],
+            "prev_monkey_state": state['prev_monkey_state'],
             'settings': {
                 "num_evidences":document.getElementById("num_evidence").value,
                 "cust_num_evidences":document.getElementById("cust_num_evidence").value,
