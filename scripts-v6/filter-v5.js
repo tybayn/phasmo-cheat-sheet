@@ -9,8 +9,9 @@ let all_ghosts = []
 let all_maps = {}
 let bpm_list = []
 let bpm_los_list = []
+let prev_monkey_state = 0
 
-var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood"}
+var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood","prev_monkey_state":0}
 var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
 
 let znid = getCookie("znid")
@@ -103,6 +104,15 @@ function monkeyPawFilter(elem,ignore_link=false){
     if($(elem).hasClass("monkey-paw-selected")){
         $(checkbox).removeClass("monkey-disabled")
         $(elem).removeClass("monkey-paw-selected")
+        if (prev_monkey_state == 1){
+            $(checkbox).removeClass("neutral")
+            $(checkbox).addClass("good")
+        }
+        if (prev_monkey_state == -1){
+            $(checkbox).removeClass("neutral")
+            $(checkbox).addClass("bad")
+            label.addClass("strike")
+        }
         $(smudge).hide()
     }
     else{
@@ -112,6 +122,7 @@ function monkeyPawFilter(elem,ignore_link=false){
             $(siblings[i]).find("#checkbox").removeClass("monkey-disabled")
             $(siblings[i]).find(".monkey-smudge").hide()
         }
+        prev_monkey_state = $(checkbox).hasClass("good") ? 1 : $(checkbox).hasClass("bad") ? -1 : 0
         $(checkbox).removeClass(["good","bad"])
         $(checkbox).addClass(["neutral","block","disabled","monkey-disabled"])
         $(label).addClass("disabled-text")
@@ -119,7 +130,9 @@ function monkeyPawFilter(elem,ignore_link=false){
         $(elem).addClass("monkey-paw-selected")
         $(smudge).show()
     }
+    state['prev_monkey_state'] = prev_monkey_state
 
+    setCookie("state",JSON.stringify(state),1)
     if(!ignore_link){filter(ignore_link)}
 }
 
@@ -441,8 +454,14 @@ function filter(ignore_link=false){
         ]
 
         //Check for monkey paw filter
-        if (evidence.includes(monkey_evi)){
+        if(monkey_evi == "Ghost Orbs" && name != "The Mimic" && prev_monkey_state == 1){
             keep = false
+        }
+
+        if (evidence.includes(monkey_evi)){
+            if (monkey_evi != "Ghost Orbs" || name != "The Mimic" || ![0,1].includes(prev_monkey_state)){
+                keep = false
+            }
         }
 
         //Logic for mimic
@@ -1808,8 +1827,10 @@ function resetFilters(skip_filter=false){
         $(e.querySelector(".label")).removeClass(["strike","disabled-text"]);
         $(e).siblings(".monkey-paw-select").removeClass(["monkey-paw-selected"]);
         $(e).siblings(".monkey-smudge").hide()
+        prev_monkey_state = 0
 
         state['evidence'][all_evidence[i]] = 0
+        state['prev_monkey_state'] = 0
     }
 
     for(var i = 0; i < all_speed.length; i++){

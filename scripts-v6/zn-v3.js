@@ -213,6 +213,7 @@ function loadAllAndConnect(){
                 for (var i = 0; i < all_ghosts.length; i++){
                     state["ghosts"][all_ghosts[i]] = 1
                 }
+                state["prev_monkey_state"] = 0
 
                 var read_state = JSON.parse(JSON.stringify(state))
             }
@@ -245,6 +246,7 @@ function loadAllAndConnect(){
                     $("#"+key)[0].click();
                 }
             }
+            prev_monkey_state = read_state["prev_monkey_state"] ?? 0
 
             if (state['los'] == 1){
                 tristate(document.getElementById("LOS"));
