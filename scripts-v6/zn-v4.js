@@ -89,10 +89,12 @@ function heartbeat(){
 function loadAllAndConnect(){
     let loadZN = new Promise((resolve, reject) => {
         znid = getCookie("znid")
+        pznid = getCookie("prev-znid")
         if(znid && znid!="no-connection-to-server"){
             getLink()
             .then(x => {
-                $("#session").text(znid)
+                $("#session").text(`C: ${znid}`)
+                $("#prev-session").text(`P: ${pznid == '' ? '-' : pznid}`)
                 try {
                     heartbeat()
                 } catch (error){
@@ -128,8 +130,10 @@ function loadAllAndConnect(){
             .then(e => {
                 znid = e.znid
                 setCookie("znid",e.znid,1)
+
                 getLink()
-                $("#session").text(e.znid)
+                $("#session").text(`C: ${e.znid}`)
+                $("#prev-session").text(`P: ${pznid == '' ? '-' : pznid}`)
                 try {
                     heartbeat()
                 } catch (error){
@@ -156,6 +160,7 @@ function loadAllAndConnect(){
                 $('#room_id').val("Can't Connect!")
                 $('#link_id').val("Can't Connect!")
                 $("#session").text("no-connection-to-server")
+                $("#prev-session").text(`P: ${pznid == '' ? '-' : pznid}`)
                 reject("Unable to connect")
             })
         }

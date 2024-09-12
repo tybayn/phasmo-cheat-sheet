@@ -1886,11 +1886,13 @@ function reset(skip_continue_session=false){
         fetch("https://zero-network.net/zn/"+znid+"/end",{method:"POST",body:JSON.stringify(state),signal: AbortSignal.timeout(2000)})
         .then((response) => {
             setCookie("znid",znid,-1)
+            setCookie("prev-znid",znid,30)
             setCookie("state",JSON.stringify(state),-1)
             location.reload()
         })
         .catch((response) => {
             setCookie("znid",znid,-1)
+            setCookie("prev-znid",znid,30)
             setCookie("state",JSON.stringify(state),-1)
             location.reload()
         });
