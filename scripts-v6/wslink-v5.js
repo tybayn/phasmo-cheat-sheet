@@ -66,6 +66,10 @@ function create_room(){
             "num_evidences":document.getElementById("num_evidence").value,
             "cust_num_evidences":document.getElementById("cust_num_evidence").value,
             "cust_hunt_length":document.getElementById("cust_hunt_length").value,
+            "cust_starting_sanity": document.getElementById("cust_starting_sanity").value,
+            "cust_sanity_pill_rest": document.getElementById("cust_sanity_pill_rest").value,
+            "cust_sanity_drain": document.getElementById("cust_sanity_drain").value,
+            "cust_lobby_type": document.getElementById("cust_lobby_type").value,
             "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
         }
     }
