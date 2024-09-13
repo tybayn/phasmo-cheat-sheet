@@ -165,7 +165,7 @@ function parse_speech(vtext){
             domovoi_msg = "cleared "
         }
         else if(vtext.startsWith("guess ") || vtext.startsWith("might be ")){
-            vtext = vtext.replace('guess ', "").trim()
+            vtext = vtext.replace('guess ', "").replace('might be ', "").trim()
             vvalue = 3
             domovoi_msg = "guessed "
         }
