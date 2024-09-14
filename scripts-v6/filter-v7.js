@@ -1401,6 +1401,7 @@ function showNews(){
     if (document.getElementById("news_box").style.right == "-366px"){
         document.getElementById("language_box").style.zIndex = "9"
         document.getElementById("theme_box").style.zIndex = "9"
+        document.getElementById("z3d-box").style.zIndex = "9"
         document.getElementById("news_box").style.zIndex = "11"
         document.getElementById("news_box").style.boxShadow = "-5px 0px 10px 0px #000"
         document.getElementById("news_tab").style.boxShadow = "-5px 6px 5px -2px #000"
@@ -1418,6 +1419,7 @@ function showLanguage(){
     if (document.getElementById("language_box").style.right == "-176px"){
         document.getElementById("news_box").style.zIndex = "9"
         document.getElementById("theme_box").style.zIndex = "9"
+        document.getElementById("z3d-box").style.zIndex = "9"
         document.getElementById("language_box").style.zIndex = "11"
         document.getElementById("language_box").style.boxShadow = "-5px 0px 10px 0px #000"
         document.getElementById("language_tab").style.boxShadow = "-5px 6px 5px -2px #000"
@@ -1440,6 +1442,7 @@ function showTheme(){
     if (document.getElementById("theme_box").style.right == "-176px"){
         document.getElementById("news_box").style.zIndex = "9"
         document.getElementById("language_box").style.zIndex = "9"
+        document.getElementById("z3d-box").style.zIndex = "9"
         document.getElementById("theme_box").style.zIndex = "11"
         document.getElementById("theme_box").style.boxShadow = "-5px 0px 10px 0px #000"
         document.getElementById("theme_tab").style.boxShadow = "-5px 6px 5px -2px #000"
@@ -1455,6 +1458,24 @@ function showTheme(){
         setTimeout(()=>{
             document.getElementById("theme_blockout").style.zIndex = "-999"
         },500)
+    }
+}
+
+function show3D(){
+    if (document.getElementById("z3d-box").style.right == "-366px"){
+        document.getElementById("language_box").style.zIndex = "9"
+        document.getElementById("theme_box").style.zIndex = "9"
+        document.getElementById("news_box").style.zIndex = "9"
+        document.getElementById("z3d-box").style.zIndex = "11"
+        document.getElementById("z3d-box").style.boxShadow = "-5px 0px 10px 0px #000"
+        document.getElementById("z3d-tab").style.boxShadow = "-5px 6px 5px -2px #000"
+        document.getElementById("z3d-box").style.right = "0px"
+        mark_feed_read()
+    }
+    else {
+        document.getElementById("z3d-box").style.right = "-366px"
+        document.getElementById("z3d-box").style.boxShadow = "none"
+        document.getElementById("z3d-box").style.boxShadow = "none"
     }
 }
 

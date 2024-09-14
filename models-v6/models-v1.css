@@ -1,0 +1,50 @@
+#model_name{
+    padding: 10px 10px 0px 10px;
+    font-size: 18px;
+}
+
+#model_date{
+    padding-left: 20px;
+    font-size: 10px;
+    color: #7d7d7d;
+}
+
+#model_image{
+    width: calc(100% - 40px);
+    margin: 10px 0px 0px 20px;
+}
+
+#model_description{
+    padding: 10px 10px 10px 20px;
+    align-self: end;
+}
+
+#model_description a:link{
+    color: #ffff00;
+    text-decoration: none;
+}
+
+#model_description a:visited{
+    color: #ffff00;
+    text-decoration: none;
+}
+
+#model_description a:hover{
+    color: #ff9100;
+    text-decoration: none;
+}
+
+#model_description a:active{
+    color: #00ff00;
+    text-decoration: none;
+}
+
+.feed_icon{
+    width: 18px;
+    opacity: 25%;
+    cursor: pointer;
+}
+
+.feed_icon:hover{
+    opacity: 70%;
+}

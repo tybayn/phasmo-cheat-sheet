@@ -30,7 +30,7 @@ function changeTheme(name = null){
         "#discord_link_box","#discord_link_tab","#event_box","#event_tab",
         "#wiki_box","#wiki_tab","#maps_box","#maps_tab",
         "#news_box","#news_tab","#language_box","#language_tab","#debug_tab",
-        "#theme_box","#theme_tab","#discord_tab","#info_box","#info_box_voice",
+        "#z3d-tab","#z3d-box","#theme_box","#theme_tab","#discord_tab","#info_box","#info_box_voice",
         "#info_box_debug","#info_box_zndl","#resetMenu"
     ]
 
