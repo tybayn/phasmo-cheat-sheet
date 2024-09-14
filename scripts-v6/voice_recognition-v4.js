@@ -154,8 +154,9 @@ function parse_speech(vtext){
         var smallest_ghost = "Spirit"
         var smallest_val = 100
         var vvalue = 0
-        if(vtext.startsWith("not ") || vtext.startsWith("knot ") || vtext.startsWith("knight ")|| vtext.startsWith("night ")){
-            vtext = vtext.replace('knot ', "").replace('not ', "").replace('knight ', "").replace('night ', "").trim()
+        if(vtext.startsWith("not ") || vtext.startsWith("knot ") || vtext.startsWith("knight ") || 
+            vtext.startsWith("night ") || vtext.startsWith("is not ") || vtext.startsWith("is knot ")){
+            vtext = vtext.replace('is not ', "").replace('is knot ', "").replace('knot ', "").replace('not ', "").replace('knight ', "").replace('night ', "").trim()
             vvalue = 0
             domovoi_msg += "not "
         }
@@ -169,8 +170,8 @@ function parse_speech(vtext){
             vvalue = 3
             domovoi_msg = "guessed "
         }
-        else if(vtext.startsWith("select ") || vtext.startsWith("deselect ")){
-            vtext = vtext.replace('deselect ', "").replace('select ', "").trim()
+        else if(vtext.startsWith("select ") || vtext.startsWith("deselect ") || vtext.startsWith("is ")){
+            vtext = vtext.replace('deselect ', "").replace('select ', "").replace("is ", "").trim()
             vvalue = 2
             domovoi_msg = "selected "
         }
