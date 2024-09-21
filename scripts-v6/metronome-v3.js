@@ -149,6 +149,7 @@ function bpm_tap(ts=-1){
 function draw_graph(clear = true){
     var graph = $('#bpm_hist')
     var c = graph[0].getContext('2d');
+    var hlen = map_hunt_lengths[map_difficulty][map_size]
 
     try{
         c.reset()
@@ -169,12 +170,12 @@ function draw_graph(clear = true){
     c.font = "6pt Calibri"
     c.fillStyle = "#999"
     c.strokeStyle = '#666'
-    for (var i = 0; i <= 45; i+=10){
-        c.fillText(i, (graph.width()-15) / 45 * i + 15, graph.height() - 5)
+    for (var i = 0; i <= hlen-1; i+=10){
+        c.fillText(i, (graph.width()-15) / hlen * i + 15, graph.height() - 5)
         c.beginPath();
         c.setLineDash([2,1])
-        c.moveTo((graph.width()-15) / 45 * i + 15,graph.height() - 5)
-        c.lineTo((graph.width()-15) / 45 * i + 15,5)
+        c.moveTo((graph.width()-15) / hlen * i + 15,graph.height() - 5)
+        c.lineTo((graph.width()-15) / hlen * i + 15,5)
         c.stroke();
     }
 
@@ -205,7 +206,7 @@ function draw_graph(clear = true){
             c.setLineDash([1,0])
         c.moveTo(15,(graph.height()-20) - ((graph.height()-20) / 4 * bpm_hist[0]) + 5)
         for(var i = 1; i < bpm_hist.length; i++){
-            var cur_x = (graph.width()-15) / 45 * bpm_hist[i]['seconds'] + 15
+            var cur_x = (graph.width()-15) / hlen * bpm_hist[i]['seconds'] + 15
             var cur_y = (graph.height()-20) - ((graph.height()-20) / 4 * bpm_hist[i]['speed']) + 5
             c.lineTo(cur_x,cur_y)
         }
@@ -216,16 +217,17 @@ function draw_graph(clear = true){
 function graph_bpm(){
     var graph = $('#bpm_hist')
     var c = graph[0].getContext('2d');
+    var hlen = map_hunt_lengths[map_difficulty][map_size]
 
     c.lineWidth = 1;
     c.strokeStyle = "#f00"
     c.beginPath();
     c.setLineDash([1,0])
     
-    var cur_x = (graph.width()-15) / 45 * (bpm_hist[bpm_hist.length - 1]['seconds']) + 15
+    var cur_x = (graph.width()-15) / hlen * (bpm_hist[bpm_hist.length - 1]['seconds']) + 15
     var cur_y = (graph.height()-20) - ((graph.height()-20) / 4 * bpm_hist[bpm_hist.length - 1]['speed']) + 5
     if(bpm_hist.length > 1){
-        var prev_x = (graph.width()-15) / 45 * (bpm_hist[bpm_hist.length - 2]['seconds']) + 15
+        var prev_x = (graph.width()-15) / hlen * (bpm_hist[bpm_hist.length - 2]['seconds']) + 15
         var prev_y = (graph.height()-20) - ((graph.height()-20) / 4 * bpm_hist[bpm_hist.length - 2]['speed']) + 5
     }
     else{

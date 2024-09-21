@@ -129,6 +129,7 @@ function updateMapSize(size){
     document.getElementById("second_hunt").innerHTML = zeroPad(map_hunt_lengths[map_difficulty][map_size] % 60,2)
     document.getElementsByClassName('normal_line')[0].style.left = `${(20/map_hunt_lengths[map_difficulty][map_size])*100}%`
     document.getElementsByClassName('hunt_size_label')[0].innerText = `Map: ${["S","M","L"][map_size]}, Hunt: ${["L","M","H"][map_difficulty]}`
+    draw_graph()
 }
 
 function updateMapDifficulty(difficulty){
