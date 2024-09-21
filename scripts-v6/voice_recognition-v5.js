@@ -867,6 +867,29 @@ function parse_speech(vtext){
         console.log(`Heard '${vtext}'`)
         stop_voice()
     }
+    else if(vtext.startsWith('disconnect all') || vtext.startsWith('unlink all')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized disconnect command")
+        if(hasLink)
+            disconnect_room()
+        if(hasDLLink)
+            disconnect_link()
+        stop_voice()
+    }
+    else if(vtext.startsWith('launch desktop link')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized launch command")
+        if (hasDLLink){
+            domovoi_heard("ZN-Desktop-Link already connected!")
+        }
+        else {
+            domovoi_heard("Launching ZN-Desktop-Link")
+            create_link(true)
+        }
+        
+    }
     else if(
         vtext.startsWith("hello domo") || vtext.startsWith("hello domovoi")|| vtext.startsWith("hello zero") ||
         vtext.startsWith("hi domo") || vtext.startsWith("hi domovoi")|| vtext.startsWith("hi zero")
