@@ -300,7 +300,7 @@ function parse_speech(vtext){
         domovoi_msg += smallest_evidence
 
         if(!$(document.getElementById(smallest_evidence).querySelector("#checkbox")).hasClass("block")){
-            while (vvalue != {"good":1,"bad":-1,"neutral":0}[document.getElementById(smallest_evidence).querySelector("#checkbox").classList[0]]){
+            while (!document.getElementById(smallest_evidence).querySelector("#checkbox").classList.contains({"1":"good","-1":"bad","0":"neutral"}[vvalue.toString()])){
                 tristate(document.getElementById(smallest_evidence),true);
             }
             filter();
@@ -422,7 +422,7 @@ function parse_speech(vtext){
             domovoi_msg += smallest_speed
 
             if(!$(document.getElementById(smallest_speed).querySelector("#checkbox")).hasClass("block")){
-                while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_speed).querySelector("#checkbox").classList[0]]){
+                while (!document.getElementById(smallest_speed).querySelector("#checkbox").classList.contains({"1":"good","0":"neutral"}[vvalue.toString()])){
                     dualstate(document.getElementById(smallest_speed));
                 }
             }
@@ -480,7 +480,7 @@ function parse_speech(vtext){
         domovoi_msg += smallest_sanity.replace("Average","Normal")
 
         if(!$(document.getElementById(smallest_sanity).querySelector("#checkbox")).hasClass("block")){
-            while (vvalue != {"good":1,"neutral":0}[document.getElementById(smallest_sanity).querySelector("#checkbox").classList[0]]){
+            while (!document.getElementById(smallest_sanity).querySelector("#checkbox").classList.contains({"1":"good","0":"neutral"}[vvalue.toString()])){
                 dualstate(document.getElementById(smallest_sanity),false,true);
             }
         }
