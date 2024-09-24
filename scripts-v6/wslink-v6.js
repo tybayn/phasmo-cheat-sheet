@@ -409,6 +409,9 @@ function link_link(){
                 if (incoming_state['action'].toUpperCase() == "GHOSTSELECT"){
                     select(document.getElementById(incoming_state['ghost']))
                 }
+                if (incoming_state['action'].toUpperCase() == "GHOSTNOT"){
+                    fade(document.getElementById(incoming_state['ghost']))
+                }
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
                     let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
                     toggle_timer(force_start)
