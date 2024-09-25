@@ -9,12 +9,55 @@ var state_received = false
 var map_loaded = false
 const lang = "en"
 
+let broadcast_interval = null
+let broadcast_closing = false
+
 var my_pos = 0
 var pos_colors = {
     1:"ff0000",
     2:"00ff00",
     3:"0000ff",
     4:"ca36dd"
+}
+
+function close_broadcast(){
+    broadcast_closing = true
+    clearInterval(broadcast_interval);
+    $("#broadcast").fadeOut(500)
+    document.getElementById("broadcast-timer-bar").style.width = "100%";
+}
+
+function broadcast(message, remain=10000){
+    broadcast_closing = false
+    clearInterval(broadcast_interval);
+    document.getElementById("broadcast-message").innerText = message;
+    $("#broadcast").fadeIn(500)
+    let timerBar = document.getElementById("broadcast-timer-bar");
+    let duration = 10000
+    let timeLeft = remain
+    
+    broadcast_interval = setInterval(() => {
+        timeLeft -= 100;
+        const widthPercent = (timeLeft / duration) * 100;
+        timerBar.style.width = `${widthPercent}%`;
+        if (timeLeft <= 0) {
+            clearInterval(broadcast_interval);
+            $("#broadcast").fadeOut(500)
+        }
+    }, 100);
+}
+
+function pause_broadcast(){
+    clearInterval(broadcast_interval);
+}
+
+function resume_broadcast(){
+    if (!broadcast_closing){
+        broadcast(
+            document.getElementById("broadcast-message").innerText,
+            parseFloat(document.getElementById("broadcast-timer-bar").style.width)/100 * 10000
+        )
+    }
 }
 
 function auto_link(){
@@ -158,6 +201,7 @@ function link_room(){
                 }
                 if(incoming_state['action'].toUpperCase() == "BROADCAST"){
                     document.getElementById("room_id_note").innerText = incoming_state['message']
+                    broadcast(incoming_state['message'])
                 }
                 if (incoming_state['action'].toUpperCase() == "GUESS"){
                     try { document.getElementById(`guess_pos_${incoming_state['pos']}`).remove()} catch (error) {} 
@@ -399,6 +443,9 @@ function link_link(){
             if (incoming_state.hasOwnProperty("action")){
                 if (incoming_state['action'].toUpperCase() == "PONG"){
                     await_dlws_pong = false
+                }
+                if (incoming_state['action'].toUpperCase() == "BROADCAST"){
+                    broadcast(incoming_state['message'])
                 }
                 if (incoming_state['action'].toUpperCase() == "GHOSTDATA"){
                     send_ghost_data_link(incoming_state['ghost'])
