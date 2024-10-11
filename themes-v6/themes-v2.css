@@ -33,6 +33,11 @@
     background-attachment: inherit;
 }
 
+.theme-holiday-animated{
+    background: linear-gradient(45deg, rgb(57, 89, 104) 0%, rgb(99, 99, 99) 50%, rgb(57, 89, 104) 100%);
+    background-attachment: inherit;
+}
+
 .theme-northern-lights{
     background: linear-gradient(45deg, rgba(45,47,75,1) 0%, rgba(44,73,72,1) 33%, rgba(56,39,69,1) 66%, rgba(45,47,75,1) 100%);
     background-attachment: inherit;
@@ -40,6 +45,11 @@
 
 .theme-pride{
     background: linear-gradient(45deg, rgba(65,39,39,1) 0%, rgba(74,58,40,1) 20%, rgba(92,92,50,1) 40%, rgba(46,74,46,1) 60%, rgba(44,48,77,1) 80%, rgba(71,44,88,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-spooky-animated{
+    background: linear-gradient(46deg, rgb(41, 41, 41) 0%, rgb(39, 0, 90) 50%, rgba(41,41,41,1) 100%);
     background-attachment: inherit;
 }
 
@@ -66,4 +76,83 @@
 .theme-zn{
     background: linear-gradient(45deg, rgba(66,49,72,1) 0%, rgba(55,89,99,1) 100%);
     background-attachment: inherit;
+}
+
+
+
+
+.c-light-div{
+    margin-top: 50px !important;
+}
+
+.c-light-t{
+    position: absolute;
+    width: 7px;
+    height: 10px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.8;
+}
+
+.c-light-b-t{
+    background-color: rgb(160, 160, 160);
+    width: 5px;
+    height: 4px;
+    border-radius: 0% 0% 25% 25%;
+    position: absolute;
+    bottom: -3px;
+    left: 1px;
+}
+
+.c-light-r{
+    position: absolute;
+    width: 10px;
+    height: 7px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.8;
+}
+
+.c-light-b-r{
+    background-color: rgb(160, 160, 160);
+    width: 5px;
+    height: 4px;
+    border-radius: 25% 0% 0% 25%;
+    position: absolute;
+    left: -3px;
+    top: 1px;
+}
+
+.c-light-b{
+    position: absolute;
+    width: 7px;
+    height: 10px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    opacity: 0.8;
+}
+
+.c-light-b-b{
+    background-color: rgb(160, 160, 160);
+    width: 5px;
+    height: 4px;
+    border-radius: 25% 25% 0% 0%;
+    position: absolute;
+    top: -3px;
+    left: 1px;
+}
+
+.c-light-l{
+    position: absolute;
+    width: 10px;
+    height: 7px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.8;
+}
+
+.c-light-b-l{
+    background-color: rgb(160, 160, 160);
+    width: 4px;
+    height: 5px;
+    border-radius: 0% 25% 25% 0%;
+    position: absolute;
+    right: -3px;
+    top: 1px;
 }
