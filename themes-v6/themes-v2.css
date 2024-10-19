@@ -18,6 +18,11 @@
     background-attachment: inherit;
 }
 
+.theme-blood-moon-particle{
+    background: linear-gradient(180deg, rgba(60,32,32,1) 0%, rgba(44,0,0,1) 51%, rgba(8,0,0,1) 100%);
+    background-attachment: fixed;
+}
+
 .theme-dusk{
     background: linear-gradient(45deg, rgba(75,98,102,1) 0%, rgba(68,55,83,1) 100%);
     background-attachment: inherit;
@@ -34,7 +39,7 @@
 }
 
 .theme-holiday-animated{
-    background: linear-gradient(45deg, rgb(57, 89, 104) 0%, rgb(99, 99, 99) 50%, rgb(57, 89, 104) 100%);
+    background: linear-gradient(45deg, rgb(44,85,39) 0%, rgb(53,14,14) 50%, rgb(61,61,61) 100%);
     background-attachment: inherit;
 }
 
@@ -48,8 +53,8 @@
     background-attachment: inherit;
 }
 
-.theme-spooky-animated{
-    background: linear-gradient(46deg, rgb(41, 41, 41) 0%, rgb(39, 0, 90) 50%, rgba(41,41,41,1) 100%);
+.theme-snow-particle{
+    background: linear-gradient(45deg, rgba(26,44,57,1) 0%, rgba(83,83,83,1) 100%);
     background-attachment: inherit;
 }
 
@@ -82,7 +87,7 @@
 
 
 .c-light-div{
-    margin-top: 50px !important;
+    margin: 25px !important;
 }
 
 .c-light-t{
@@ -155,4 +160,64 @@
     position: absolute;
     right: -3px;
     top: 1px;
+}
+
+#particle-container {
+    position: absolute;
+    width: calc(100% - 8px);
+    height: calc(100vh - 8px);
+    overflow: hidden;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.bm-particle {
+    position: absolute;
+    bottom: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-up 5s linear infinite, fade-out 5s ease-in infinite;
+}
+
+.snow-particle{
+    position: absolute;
+    top: -5px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-down 20s linear infinite, fade-out 5s ease-in infinite;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20vh);
+        opacity: 0;
+    }
+}
+
+@keyframes float-down {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(50vh);
+        opacity: 0;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }

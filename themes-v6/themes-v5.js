@@ -2,6 +2,7 @@ const themes = {
     "Default": "theme-default",
     "Berry": "theme-berry",
     "Black & White": "theme-black-white",
+    "Blood Moon": "theme-blood-moon-particle",
     "Coral": "theme-coral",
     "Dusk": "theme-dusk",
     "Frost": "theme-frost",
@@ -9,7 +10,7 @@ const themes = {
     "Holiday": "theme-holiday-animated",
     "Northern Lights": "theme-northern-lights",
     "Pride": "theme-pride",
-    "Spooky": "theme-spooky-animated",
+    "Snow": "theme-snow-particle",
     "Spruce": "theme-spruce",
     "Steel": "theme-steel",
     "Sunset": "theme-sunset",
@@ -31,6 +32,8 @@ function loadThemes(){
 }
 
 let light_interval = null
+let bloodMoonInterval = null
+let snowInterval = null
 
 function changeTheme(name = null){
 
@@ -52,6 +55,8 @@ function changeTheme(name = null){
         light.remove()
     })
 
+    clearInterval(bloodMoonInterval)
+    clearInterval(snowInterval)
 
     if(themes[theme_name].endsWith("-animated")){
 
@@ -69,6 +74,18 @@ function changeTheme(name = null){
                 light.style.boxShadow = `0px 0px 20px 5px ${theme_lights[theme_name][i]}`
             });
         }, 2000);
+    }
+
+    if(themes[theme_name] == "theme-blood-moon-particle"){
+        bloodMoonInterval = setInterval(createBMParticle, 80);
+        document.body.style.backgroundImage = "radial-gradient(circle, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://zero-network.net/phasmophobia/static/imgs/bm-background.jpg')"
+    }
+    else if(themes[theme_name] == "theme-snow-particle"){
+        snowInterval = setInterval(createSnowParticle, 200);
+        document.body.style.backgroundImage = "radial-gradient(circle, rgba(0,0,0,0.75), rgba(0,0,0,1)), url('https://zero-network.net/phasmophobia/static/imgs/background.jpg')"
+    }
+    else{
+        document.body.style.backgroundImage = "radial-gradient(circle, rgba(0,0,0,0.75), rgba(0,0,0,1)), url('https://zero-network.net/phasmophobia/static/imgs/background.jpg')"
     }
 
     changeObjects.forEach((item) => {
@@ -151,4 +168,40 @@ function wrap(div, light_colors, top=true, right=true, bottom=true, left=true, s
             div.appendChild(light);
             light_color = (light_color + 1) % light_colors.length
         }
+}
+
+function createBMParticle() {
+    particleContainer = document.getElementById('particle-container');
+    const particle = document.createElement('div');
+    particle.classList.add('bm-particle');
+    particle.style.backgroundColor = Math.floor(Math.random() * 3) == 0 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)';
+    const randomX = Math.random() * window.innerWidth;
+    particle.style.left = `${randomX}px`;
+    const size = Math.random() * 3 + 2;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    const duration = Math.random() * 3 + 2;
+    particle.style.animationDuration = `${duration}s`;
+    particleContainer.appendChild(particle);
+    setTimeout(() => {
+        particle.remove();
+    }, duration * 1000);
+}
+
+function createSnowParticle() {
+    particleContainer = document.getElementById('particle-container');
+    const particle = document.createElement('div');
+    particle.classList.add('snow-particle');
+    particle.style.backgroundColor = Math.floor(Math.random() * 3) == 0 ? 'rgb(200, 200, 200)' : 'rgb(200, 200, 220)';
+    const randomX = Math.random() * window.innerWidth;
+    particle.style.left = `${randomX}px`;
+    const size = Math.random() * 3 + 2;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    const duration = Math.random() * 10 + 10;
+    particle.style.animationDuration = `${duration}s`;
+    particleContainer.appendChild(particle);
+    setTimeout(() => {
+        particle.remove();
+    }, duration * 1000);
 }
