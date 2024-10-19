@@ -1083,6 +1083,7 @@ body{
         padding: 8px;
         box-shadow: 5px 0px 10px 0px #000;
         z-index: 2;
+        position: relative;
     }
 
     .tools-filter-buttons{

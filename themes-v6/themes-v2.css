@@ -1,0 +1,223 @@
+.theme-default{
+    background: #313248;
+    background-attachment: inherit;
+}
+
+.theme-berry{
+    background: linear-gradient(45deg, rgba(79,21,74,1) 0%, rgba(71,94,102,1) 33%, rgba(73,32,32,1) 66%, rgba(88,40,73,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-black-white{
+    background: linear-gradient(45deg, rgba(33,33,33,1) 0%, rgba(111,111,111,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-coral{
+    background: linear-gradient(45deg, rgba(106,23,32,1) 0%, rgba(6,102,100,1) 51%, rgba(106,23,32,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-blood-moon-particle{
+    background: linear-gradient(180deg, rgba(60,32,32,1) 0%, rgba(44,0,0,1) 51%, rgba(8,0,0,1) 100%);
+    background-attachment: fixed;
+}
+
+.theme-dusk{
+    background: linear-gradient(45deg, rgba(75,98,102,1) 0%, rgba(68,55,83,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-frost{
+    background: linear-gradient(45deg, rgba(44,68,88,1) 0%, rgba(92,89,89,1) 50%, rgba(44,68,88,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-halloween{
+    background: linear-gradient(45deg, rgba(62,85,63,1) 0%, rgba(82,68,50,1) 50%, rgba(68,55,83,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-holiday-animated{
+    background: linear-gradient(45deg, rgb(44,85,39) 0%, rgb(53,14,14) 50%, rgb(61,61,61) 100%);
+    background-attachment: inherit;
+}
+
+.theme-northern-lights{
+    background: linear-gradient(45deg, rgba(45,47,75,1) 0%, rgba(44,73,72,1) 33%, rgba(56,39,69,1) 66%, rgba(45,47,75,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-pride{
+    background: linear-gradient(45deg, rgba(65,39,39,1) 0%, rgba(74,58,40,1) 20%, rgba(92,92,50,1) 40%, rgba(46,74,46,1) 60%, rgba(44,48,77,1) 80%, rgba(71,44,88,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-snow-particle{
+    background: linear-gradient(45deg, rgba(26,44,57,1) 0%, rgba(83,83,83,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-spruce{
+    background: linear-gradient(45deg, rgba(26,57,57,1) 0%, rgba(64,53,30,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-steel{
+    background: linear-gradient(46deg, rgba(55,80,99,1) 0%, rgba(49,50,72,1) 50%, rgba(55,80,99,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-sunset{
+    background: linear-gradient(45deg, rgba(71,49,0,1) 0%, rgba(65,45,88,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-twilight{
+    background: linear-gradient(45deg, rgba(4,32,51,1) 0%, rgba(103,94,117,1) 100%);
+    background-attachment: inherit;
+}
+
+.theme-zn{
+    background: linear-gradient(45deg, rgba(66,49,72,1) 0%, rgba(55,89,99,1) 100%);
+    background-attachment: inherit;
+}
+
+
+
+
+.c-light-div{
+    margin: 25px !important;
+}
+
+.c-light-t{
+    position: absolute;
+    width: 7px;
+    height: 10px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.8;
+}
+
+.c-light-b-t{
+    background-color: rgb(160, 160, 160);
+    width: 5px;
+    height: 4px;
+    border-radius: 0% 0% 25% 25%;
+    position: absolute;
+    bottom: -3px;
+    left: 1px;
+}
+
+.c-light-r{
+    position: absolute;
+    width: 10px;
+    height: 7px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.8;
+}
+
+.c-light-b-r{
+    background-color: rgb(160, 160, 160);
+    width: 5px;
+    height: 4px;
+    border-radius: 25% 0% 0% 25%;
+    position: absolute;
+    left: -3px;
+    top: 1px;
+}
+
+.c-light-b{
+    position: absolute;
+    width: 7px;
+    height: 10px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    opacity: 0.8;
+}
+
+.c-light-b-b{
+    background-color: rgb(160, 160, 160);
+    width: 5px;
+    height: 4px;
+    border-radius: 25% 25% 0% 0%;
+    position: absolute;
+    top: -3px;
+    left: 1px;
+}
+
+.c-light-l{
+    position: absolute;
+    width: 10px;
+    height: 7px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.8;
+}
+
+.c-light-b-l{
+    background-color: rgb(160, 160, 160);
+    width: 4px;
+    height: 5px;
+    border-radius: 0% 25% 25% 0%;
+    position: absolute;
+    right: -3px;
+    top: 1px;
+}
+
+#particle-container {
+    position: absolute;
+    width: calc(100% - 8px);
+    height: calc(100vh - 8px);
+    overflow: hidden;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.bm-particle {
+    position: absolute;
+    bottom: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-up 5s linear infinite, fade-out 5s ease-in infinite;
+}
+
+.snow-particle{
+    position: absolute;
+    top: -5px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-down 20s linear infinite, fade-out 5s ease-in infinite;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20vh);
+        opacity: 0;
+    }
+}
+
+@keyframes float-down {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(50vh);
+        opacity: 0;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
