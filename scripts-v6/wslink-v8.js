@@ -77,6 +77,14 @@ function auto_link(){
             link_link()
         },1)
     }
+    else{
+        params = new URL(window.location.href).searchParams
+        if(params.get("autolink") == 'true'){
+            setTimeout(function(){
+                create_link(true)
+            },1)
+        }
+    }
 }
 
 function copy_code(){
@@ -458,6 +466,9 @@ function link_link(){
                 }
                 if (incoming_state['action'].toUpperCase() == "GHOSTNOT"){
                     fade(document.getElementById(incoming_state['ghost']))
+                }
+                if (incoming_state['action'].toUpperCase() == "GHOSTDIED"){
+                    died(document.getElementById(incoming_state['ghost']))
                 }
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
                     let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
