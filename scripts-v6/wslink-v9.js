@@ -413,6 +413,15 @@ function link_room(){
                         tristate(document.getElementById("LOS"),true,true);
                     }
                 }
+
+                if(incoming_state.hasOwnProperty("blood_moon")){
+                    if(incoming_state["blood_moon"]){
+                        toggleBloodMoon(true,false,true)
+                    }
+                    else{
+                        toggleBloodMoon(false,true,true)
+                    }
+                }
                 
                 filter(true)
                 state_received = true
@@ -838,7 +847,8 @@ function send_state() {
                 "cust_sanity_pill_rest": document.getElementById("cust_sanity_pill_rest").value,
                 "cust_sanity_drain": document.getElementById("cust_sanity_drain").value,
                 "cust_lobby_type": document.getElementById("cust_lobby_type").value,
-                "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
+                "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value),
+                "blood_moon": document.getElementById("blood_moon_icon").classList.contains("blood-moon-active") ? 1 : 0
             }
         })
         ws.send(outgoing_state)

@@ -10,9 +10,10 @@ let all_maps = {}
 let bpm_list = []
 let bpm_los_list = []
 let prev_monkey_state = 0
+let blood_moon = 0
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood","prev_monkey_state":0}
-var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default","blood_moon":0}
 
 let znid = getCookie("znid")
 
@@ -196,6 +197,39 @@ function tristate(elem,ignore_link=false){
         checkbox.removeClass("bad")
         label.removeClass("strike")
         checkbox.addClass("neutral")
+    }
+
+    if(!ignore_link){filter(ignore_link)}
+}
+
+let bloodMoonEffectInterval = null
+function toggleBloodMoon(force_on = false, force_off = false, ignore_link=false){
+
+    if(force_off){
+        $('#blood-moon-icon').removeClass('blood-moon-active')
+        $('#blood-moon-icon').attr("src","imgs/moon-w.png")
+        $("#blood-moon-effect-top").removeClass("blood-moon-effect-top")
+        $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom")
+        clearInterval(bloodMoonEffectInterval)
+        blood_moon = 0
+        return
+    }
+
+    if(!$("#blood-moon-icon").hasClass("blood-moon-active") || force_on){
+        $('#blood-moon-icon').addClass('blood-moon-active')
+        $('#blood-moon-icon').attr("src","imgs/moon-r.png")
+        $("#blood-moon-effect-top").addClass("blood-moon-effect-top")
+        $("#blood-moon-effect-bottom").addClass("blood-moon-effect-bottom")
+        bloodMoonEffectInterval = setInterval(createBMEffectParticle, 250);
+        blood_moon = 1
+    }
+    else{
+        $('#blood-moon-icon').removeClass('blood-moon-active')
+        $('#blood-moon-icon').attr("src","imgs/moon-w.png")
+        $("#blood-moon-effect-top").removeClass("blood-moon-effect-top")
+        $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom")
+        clearInterval(bloodMoonEffectInterval)
+        blood_moon = 0
     }
 
     if(!ignore_link){filter(ignore_link)}
@@ -1518,6 +1552,7 @@ function saveSettings(reset = false){
     user_settings['priority_sort'] = document.getElementById("priority_sort").checked ? 1 : 0;
     user_settings['map'] = $(".selected_map")[0].id
     user_settings['theme'] = $("#theme").val();
+    user_settings['blood_moon'] = $("#blood-moon-icon").hasClass("blood-moon-active") ? 1 : 0
 
     setCookie("settings",JSON.stringify(user_settings),30)
 }
@@ -1528,7 +1563,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default","blood_moon":0}
     }
 
     user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
@@ -1575,6 +1610,9 @@ function loadSettings(){
     }
 
     document.getElementById("theme").value = user_settings['theme']
+    if (user_settings['blood_moon']){
+        toggleBloodMoon(true)
+    }
 
     if ((user_settings['bpm'] ?? 0) > 0){
         document.getElementById('input_bpm').innerHTML = `${user_settings['bpm']}<br>bpm`
@@ -1610,7 +1648,7 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default"}
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default","blood_moon":0}
     document.getElementById("modifier_volume").value = load_default('volume',50)
     document.getElementById("mute_timer_toggle").checked = load_default('mute_timer_toggle',0) == 1 
     document.getElementById("mute_timer_countdown").checked = load_default('mute_timer_countdown',0) == 1
@@ -1633,6 +1671,10 @@ function resetSettings(){
     document.getElementById("bpm_type").checked = load_default('bpm_type',0) == 1
     document.getElementById("tanglewood").click()
     document.getElementById("theme").value = user_settings['theme']
+    if (user_settings['blood_moon']){
+        $('#blood-moon-icon').removeClass('blood-moon-active')
+        blood_moon = 0
+    }
     setCookie("settings",JSON.stringify(user_settings),30)
 }
 

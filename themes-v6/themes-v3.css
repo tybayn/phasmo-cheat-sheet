@@ -178,7 +178,17 @@
     height: 5px;
     border-radius: 50%;
     opacity: 0;
-    animation: float-up 5s linear infinite, fade-out 5s ease-in infinite;
+    animation: bm-float-up 5s linear infinite, fade-out 5s ease-in infinite;
+}
+
+.bm-particle-top {
+    position: absolute;
+    top: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: bm-float-down 5s linear infinite, fade-out 5s ease-in infinite;
 }
 
 .snow-particle{
@@ -191,13 +201,24 @@
     animation: float-down 20s linear infinite, fade-out 5s ease-in infinite;
 }
 
-@keyframes float-up {
+@keyframes bm-float-up {
     0% {
         transform: translateY(0);
         opacity: 1;
     }
     100% {
         transform: translateY(-20vh);
+        opacity: 0;
+    }
+}
+
+@keyframes bm-float-down {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(20vh);
         opacity: 0;
     }
 }
