@@ -942,6 +942,77 @@
         grid-row: 1;
         font-size: 40px;
         z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    #blood-moon-icon{
+        float: right;
+        height: 44px;
+        opacity: 0.5;
+        cursor: pointer;
+        padding-left: 20px;
+    }
+
+    #blood-moon-icon:hover{
+        opacity: 1.0;
+    }
+
+    .blood-moon-active{
+        opacity: 1.0 !important;
+        filter: drop-shadow(0px 0px 15px #a00);
+    }
+
+    #blood-moon-effect-top, #blood-moon-effect-bottom{
+        z-index: 0;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        pointer-events: none;
+    }
+
+    .blood-moon-effect-top {
+        top: 0;
+        background: linear-gradient(180deg, rgba(255, 74, 74, 0.5) 0%, rgba(255, 74, 74,0) 80%);
+        animation: blood-moon-pulse-top 10s infinite;
+    }
+    
+    .blood-moon-effect-bottom {
+        bottom: 0;
+        background: linear-gradient(0deg, rgba(255, 74, 74, 0.5) 0%, rgba(255, 74, 74,0) 80%);
+        animation: blood-moon-pulse-bot 10s infinite;
+    }
+    
+    @keyframes blood-moon-pulse-top {
+        0% {
+            opacity: 0.3;
+            transform: translateY(-50px);
+        }
+        50% {
+            opacity: 0.7;
+            transform: translateY(0);
+        }
+        100% {
+            opacity: 0.3;
+            transform: translateY(-50px);
+        }
+    }
+
+    @keyframes blood-moon-pulse-bot {
+        0% {
+            opacity: 0.3;
+            transform: translateY(50px);
+        }
+        50% {
+            opacity: 0.7;
+            transform: translateY(0);
+        }
+        100% {
+            opacity: 0.3;
+            transform: translateY(50px);
+        }
     }
 
     .num_evidence{

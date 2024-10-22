@@ -1736,6 +1736,7 @@ function showCustom(){
         $("#custom_options").hide()
         document.getElementById("evidence").style.marginTop = mquery.matches ? "0px" : "28px";
         if(mquery.matches){
+            document.getElementById("menu").style.height="620px";
             if(is_h){
                 document.getElementById("menu").style.marginBottom = "-585px";
                 $("#domovoi").removeClass("domovoi-custom")

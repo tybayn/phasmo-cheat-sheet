@@ -47,6 +47,10 @@ function changeTheme(name = null){
     ]
 
     let theme_name = name != null ? name : $("#theme").val()
+    if(themes[theme_name] == undefined){
+        theme_name = "Default"
+        document.getElementById("theme").value = "Default"
+    }
 
     clearInterval(light_interval)
     $(".ghost_card").removeClass("c-light-div")
