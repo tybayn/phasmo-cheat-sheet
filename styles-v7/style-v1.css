@@ -1078,7 +1078,7 @@ body{
         display: grid;
         width:100%;
         max-height: calc(100vh - 16px);
-        grid-template-rows: 40px auto 28px 55px 20px 20px;
+        grid-template-rows: 30px auto 28px 55px 20px 20px;
         background-color: #313248;
         margin: -8px;
         padding: 8px;
@@ -1098,7 +1098,6 @@ body{
     .filter_tool_button{
         cursor: pointer;
         width: 50%;
-        margin-bottom: 10px;
         font-family: 'Yahfie';
         font-size: 21px;
     }
@@ -1132,7 +1131,7 @@ body{
         grid-row: 2;
         display: grid;
         width:100%;
-        grid-template-rows: 32px min-content 40px auto;
+        grid-template-rows: 35px min-content 35px auto;
         overflow-y: auto;
     }
 
@@ -1173,6 +1172,7 @@ body{
         grid-row: 1;
         font-size: 26px;
         z-index: 2;
+        padding-top: 10px;
     }
 
     .modifier_title{
@@ -1310,7 +1310,7 @@ body{
         grid-row: 2;
         display: grid;
         width:100%;
-        grid-template-rows: 25px min-content 37px min-content 37px auto;
+        grid-template-rows: 35px min-content 37px min-content 37px auto;
         overflow-x: hidden;
     }
 
@@ -1319,6 +1319,7 @@ body{
         grid-row: 1;
         font-size: 26px;
         z-index: 2;
+        padding-top: 10px;
     }
 
     #blood-moon-icon{
@@ -1339,38 +1340,53 @@ body{
     }
 
     #blood-moon-effect-top, #blood-moon-effect-bottom{
-        z-index: 5;
+        z-index: 0;
         position: absolute;
-        left: calc(50% + 98px);
-        width: calc(100% - 196px);
-        height: 100vh;
+        left: 0;
+        width: 100%;
+        height: 200px;
         pointer-events: none;
     }
 
     .blood-moon-effect-top {
-        top: -50vh;
-        background: radial-gradient(ellipse at center, rgba(255, 74, 74, 0.5) 0%, rgba(255, 74, 74,0) 80%);
-        animation: blood-moon-pulse 10s infinite;
+        top: 0;
+        background: linear-gradient(180deg, rgba(255, 74, 74, 0.5) 0%, rgba(255, 74, 74,0) 80%);
+        animation: blood-moon-pulse-top 10s infinite;
     }
     
     .blood-moon-effect-bottom {
-        bottom: -50vh;
-        background: radial-gradient(ellipse at center, rgba(255, 74, 74, 0.5) 0%, rgba(255, 74, 74,0) 80%);
-        animation: blood-moon-pulse 10s infinite;
+        bottom: 0;
+        background: linear-gradient(0deg, rgba(255, 74, 74, 0.5) 0%, rgba(255, 74, 74,0) 80%);
+        animation: blood-moon-pulse-bot 10s infinite;
     }
     
-    @keyframes blood-moon-pulse {
+    @keyframes blood-moon-pulse-top {
         0% {
             opacity: 0.3;
-            transform: translateX(-50%) translateY(-20px);
+            transform: translateY(-50px);
         }
         50% {
             opacity: 0.7;
-            transform: translateX(-50%) translateY(0);
+            transform: translateY(0);
         }
         100% {
             opacity: 0.3;
-            transform: translateX(-50%) translateY(-20px);
+            transform: translateY(-50px);
+        }
+    }
+
+    @keyframes blood-moon-pulse-bot {
+        0% {
+            opacity: 0.3;
+            transform: translateY(50px);
+        }
+        50% {
+            opacity: 0.7;
+            transform: translateY(0);
+        }
+        100% {
+            opacity: 0.3;
+            transform: translateY(50px);
         }
     }
 

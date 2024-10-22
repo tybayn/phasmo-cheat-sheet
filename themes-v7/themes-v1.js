@@ -210,7 +210,7 @@ function createBMEffectParticle() {
     particleContainer = document.getElementById('particle-container');
     const top_particle = document.createElement('div');
     top_particle.classList.add('bm-particle');
-    top_particle.style.backgroundColor = 'rgb(40, 40, 40)';
+    top_particle.style.backgroundColor = Math.floor(Math.random() * 4) == 0 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)';
     const top_randomX = Math.random() * window.innerWidth;
     top_particle.style.left = `${top_randomX}px`;
     const top_size = Math.random() * 3 + 2;
@@ -224,7 +224,7 @@ function createBMEffectParticle() {
     }, top_duration * 1000);
     const bot_particle = document.createElement('div');
     bot_particle.classList.add('bm-particle-top');
-    bot_particle.style.backgroundColor = 'rgb(40, 40, 40)';
+    bot_particle.style.backgroundColor = Math.floor(Math.random() * 4) == 0 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)';
     const bot_randomX = Math.random() * window.innerWidth;
     bot_particle.style.left = `${bot_randomX}px`;
     const bot_size = Math.random() * 3 + 2;

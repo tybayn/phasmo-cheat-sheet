@@ -155,7 +155,6 @@ function create_link(auto_link = false){
 
 function link_room(){
     var room_id = document.getElementById("room_id").value
-    console.log(room_id)
     var load_pos = getCookie("link-position")
     ws = new WebSocket(`wss://zero-network.net/phasmolink/link/${znid}/${room_id}${load_pos ? '?pos='+load_pos : ''}`);
     setCookie("room_id",room_id,1)
@@ -839,6 +838,7 @@ function send_state() {
             'ghosts': state['ghosts'],
             "map": state['map'],
             "prev_monkey_state": state['prev_monkey_state'],
+            "blood_moon": document.getElementById("blood-moon-icon").classList.contains("blood-moon-active") ? 1 : 0,
             'settings': {
                 "num_evidences":document.getElementById("num_evidence").value,
                 "cust_num_evidences":document.getElementById("cust_num_evidence").value,
@@ -847,8 +847,7 @@ function send_state() {
                 "cust_sanity_pill_rest": document.getElementById("cust_sanity_pill_rest").value,
                 "cust_sanity_drain": document.getElementById("cust_sanity_drain").value,
                 "cust_lobby_type": document.getElementById("cust_lobby_type").value,
-                "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value),
-                "blood_moon": document.getElementById("blood_moon_icon").classList.contains("blood-moon-active") ? 1 : 0
+                "ghost_modifier":parseInt(document.getElementById("ghost_modifier_speed").value)
             }
         })
         ws.send(outgoing_state)

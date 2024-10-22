@@ -167,7 +167,7 @@
     width: calc(100% - 8px);
     height: calc(100vh - 8px);
     overflow: hidden;
-    z-index: 100;
+    z-index: 2;
     pointer-events: none;
 }
 
@@ -198,7 +198,7 @@
     height: 5px;
     border-radius: 50%;
     opacity: 0;
-    animation: float-down 20s linear infinite, fade-out 5s ease-in infinite;
+    animation: float-down 40s linear infinite, fade-out 5s ease-in infinite;
 }
 
 @keyframes bm-float-up {
@@ -229,7 +229,7 @@
         opacity: 1;
     }
     100% {
-        transform: translateY(50vh);
+        transform: translateY(100vh);
         opacity: 0;
     }
 }
