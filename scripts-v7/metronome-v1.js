@@ -21,6 +21,7 @@ var muteTimerToggle = false
 var muteTimerCountdown = false
 
 var offset = 0
+let blood_moon = 0
 var step_duration = 5 * 1000
 
 var additional_ghost_data = ["hantu","moroi","thaye"]
@@ -40,6 +41,14 @@ let bpmToSpeed = {
     2:(x) => x < 64 ? (x-32.3)/31.7 : -0.32 + 0.0259 * (x * (1+(offset/100))) - 9.73e-05 * Math.pow((x * (1+(offset/100))), 2) + 2.23e-07 * Math.pow((x * (1+(offset/100))), 3),
     3:(x) => x < 81 ? (x-37.0)/45.0 : -0.215 + 0.0179 * (x * (1+(offset/100))) - 4.3e-05 * Math.pow((x * (1+(offset/100))), 2) + 6.34e-08 * Math.pow((x * (1+(offset/100))), 3),
     4:(x) => x < 98 ? (x-40.7)/58.3 : 0.291 + 6.24e-03 * (x * (1+(offset/100))) + 1.19e-05 * Math.pow((x * (1+(offset/100))), 2) - 2.57e-08 * Math.pow((x * (1+(offset/100))), 3)
+}
+
+let bloodmoon_mult = {
+    0: 0.175,
+    1: 0.1625,
+    2: 0.15,
+    3: 0.1375,
+    4: 0.125
 }
 
 var last_id = "";
@@ -79,7 +88,7 @@ function toggleSound(set_tempo,id){
     adjustOffset(0)
     speed = set_tempo
     var speed_idx = parseInt($("#ghost_modifier_speed").val())
-    tempo = speedToBpm[speed_idx](speed) * (1+(offset/100))
+    tempo = speedToBpm[speed_idx](speed * (blood_moon ? (1 + bloodmoon_mult[speed_idx]) : 1.0)) * (1+(offset/100))
     if(!isPlaying){
         step()
         timerStop = setTimeout(function(){
@@ -326,7 +335,7 @@ function get_ms(bpm){
     var cur_ms = 0
     var cur_offset = 1000
     bpm_speeds.forEach(function(m){
-        var t = speedToBpm[speed_idx](m) * (1+((offset)/100))
+        var t = speedToBpm[speed_idx](m) * (1+((offset)/100)) * (blood_moon ? (1 - bloodmoon_mult[speed_idx]) : 1.0)
         if (Math.abs(bpm-t) < cur_offset){
             cur_offset = Math.abs(bpm-t)
             cur_ms = m
@@ -338,7 +347,7 @@ function get_ms(bpm){
 
 function get_ms_exact(bpm){
     var speed_idx = parseInt($("#ghost_modifier_speed").val())
-    var cur_ms = bpmToSpeed[speed_idx](bpm) *(1+((offset)/100))
+    var cur_ms = bpmToSpeed[speed_idx](bpm) *(1+((offset)/100)) * (blood_moon ? (1 - bloodmoon_mult[speed_idx]) : 1.0)
     return bpm == 0 ? 0.00 : cur_ms.toFixed(2)
 }
 

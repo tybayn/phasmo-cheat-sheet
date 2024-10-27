@@ -703,6 +703,34 @@ function parse_speech(vtext){
         running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
+    else if(vtext.startsWith('set blood moon')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized blood moon command")
+        running_log[cur_idx]["Type"] = "set blood moon"
+        console.log(`Heard '${vtext}'`)
+        domovoi_msg += "setting blood moon..."
+
+        toggleBloodMoon(true, false)
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('set not blood moon') || vtext.startsWith('remove blood moon')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized blood moon command")
+        running_log[cur_idx]["Type"] = "remove blood moon"
+        console.log(`Heard '${vtext}'`)
+        domovoi_msg += "removing blood moon..."
+
+        toggleBloodMoon(false, true)
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
     else if(vtext.startsWith('show maps') || vtext.startsWith('show map')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"

@@ -93,6 +93,13 @@
         margin: -5px 5px -6px 0px;
     }
 
+    .accordian-icon-s{
+        width: 30px !important;
+        height: 30px;
+        margin: -3px 6px -6px 0px;
+        opacity: 0.5;
+    }
+
     .wiki_title{
         padding: 10px;
         font-size: 18px;
@@ -463,6 +470,13 @@
         width: 75px !important;
         height: 75px;
         margin: -8px 10px -7px 0px;
+    }
+
+    .accordian-icon-s{
+        width: 60px !important;
+        height: 60px;
+        margin: 0px 10px -7px 0px;
+        opacity: 0.5;
     }
 
     .wiki_title{

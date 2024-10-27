@@ -10,7 +10,6 @@ let all_maps = {}
 let bpm_list = []
 let bpm_los_list = []
 let prev_monkey_state = 0
-let blood_moon = 0
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood","prev_monkey_state":0}
 var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"6 Tanglewood Drive","theme":"Default","blood_moon":0}
@@ -208,6 +207,8 @@ function toggleBloodMoon(force_on = false, force_off = false, ignore_link=false)
     if(force_off){
         $('#blood-moon-icon').removeClass('blood-moon-active')
         $('#blood-moon-icon').attr("src","imgs/moon-w.png")
+        $('#blood-moon-icon-2').removeClass('blood-moon-active')
+        $('#blood-moon-icon-2').attr("src","imgs/moon-w.png")
         $("#blood-moon-effect-top").removeClass("blood-moon-effect-top")
         $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom")
         clearInterval(bloodMoonEffectInterval)
@@ -218,6 +219,8 @@ function toggleBloodMoon(force_on = false, force_off = false, ignore_link=false)
     if(!$("#blood-moon-icon").hasClass("blood-moon-active") || force_on){
         $('#blood-moon-icon').addClass('blood-moon-active')
         $('#blood-moon-icon').attr("src","imgs/moon-r.png")
+        $('#blood-moon-icon-2').addClass('blood-moon-active')
+        $('#blood-moon-icon-2').attr("src","imgs/moon-r.png")
         $("#blood-moon-effect-top").addClass("blood-moon-effect-top")
         $("#blood-moon-effect-bottom").addClass("blood-moon-effect-bottom")
         bloodMoonEffectInterval = setInterval(createBMEffectParticle, 250);
@@ -226,6 +229,8 @@ function toggleBloodMoon(force_on = false, force_off = false, ignore_link=false)
     else{
         $('#blood-moon-icon').removeClass('blood-moon-active')
         $('#blood-moon-icon').attr("src","imgs/moon-w.png")
+        $('#blood-moon-icon-2').removeClass('blood-moon-active')
+        $('#blood-moon-icon-2').attr("src","imgs/moon-w.png")
         $("#blood-moon-effect-top").removeClass("blood-moon-effect-top")
         $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom")
         clearInterval(bloodMoonEffectInterval)
@@ -1219,28 +1224,38 @@ function endSwipe(e){
 function closeAll(skip_map=false,skip_wiki=false){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
 
-    document.getElementById("settings_box").style.left = (mquery.matches ? "-100%" : "-32px")
+    document.getElementById("settings_box").style.left = (mquery.matches ? "-100%" : "0px")
+    if (!mquery.matches)
+        document.getElementById("settings_box").style.width = "168px"
     document.getElementById("settings_box").style.boxShadow = "none"
     document.getElementById("settings_tab").style.boxShadow = "none"
     $("#settings_box").removeClass("tab-open")
 
-    document.getElementById("links_box").style.left = (mquery.matches ? "-100%" : "-32px")
+    document.getElementById("links_box").style.left = (mquery.matches ? "-100%" : "0px")
+    if (!mquery.matches)
+        document.getElementById("links_box").style.width = "168px"
     document.getElementById("links_box").style.boxShadow = "none"
     document.getElementById("links_box").style.boxShadow = "none"
     $("#links_box").removeClass("tab-open")
 
-    document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "-32px")
+    document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "0px")
+    if (!mquery.matches)
+        document.getElementById("discord_link_box").style.width = "168px"
     document.getElementById("discord_link_box").style.boxShadow = "none"
     document.getElementById("discord_link_tab").style.boxShadow = "none"
     $("#discord_link_box").removeClass("tab-open")
 
-    document.getElementById("event_box").style.left = (mquery.matches ? "-100%" : "-182px")
+    document.getElementById("event_box").style.left = (mquery.matches ? "-100%" : "0px")
+    if (!mquery.matches)
+        document.getElementById("event_box").style.width = "168px"
     document.getElementById("event_box").style.boxShadow = "none"
     document.getElementById("event_tab").style.boxShadow = "none"
     $("#event_box").removeClass("tab-open")
 
     if(!skip_wiki){
-        document.getElementById("wiki_box").style.left = (mquery.matches ? "-100%" : "-182px")
+        document.getElementById("wiki_box").style.left = (mquery.matches ? "-100%" : "0px")
+        if (!mquery.matches)
+            document.getElementById("wiki_box").style.width = "168px"
         document.getElementById("wiki_box").style.boxShadow = "none"
         document.getElementById("wiki_tab").style.boxShadow = "none"
         $("#wiki_box").removeClass("tab-open")
@@ -1264,7 +1279,7 @@ function closeAll(skip_map=false,skip_wiki=false){
 
 function showSettings(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("settings_box").style.left == (mquery.matches ? "-100%" : "-32px")){
+    if (document.getElementById("settings_box").style.left == (mquery.matches ? "-100%" : "0px")){
         document.getElementById("settings_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("settings_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("links_box").style.zIndex = "1"
@@ -1274,10 +1289,14 @@ function showSettings(){
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("settings_box").style.zIndex = (mquery.matches ? "10" : "2")
         document.getElementById("settings_box").style.left = (mquery.matches ? "0px" : "196px")
+        if (!mquery.matches)
+            document.getElementById("settings_box").style.width = "200px"
         $("#settings_box").addClass("tab-open")
     }
     else {
-        document.getElementById("settings_box").style.left = (mquery.matches ? "-100%" : "-32px")
+        if (!mquery.matches)
+            document.getElementById("settings_box").style.width = "168px"
+        document.getElementById("settings_box").style.left = (mquery.matches ? "-100%" : "0px")
         document.getElementById("settings_box").style.boxShadow = "none"
         document.getElementById("settings_tab").style.boxShadow = "none"
         $("#settings_box").removeClass("tab-open")
@@ -1292,7 +1311,7 @@ function showSettings(){
 
 function showLinks(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("links_box").style.left == (mquery.matches ? "-100%" : "-32px")){
+    if (document.getElementById("links_box").style.left == (mquery.matches ? "-100%" : "0px")){
         document.getElementById("links_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("links_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1302,10 +1321,14 @@ function showLinks(){
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("links_box").style.zIndex = (mquery.matches ? "10" : "2")
         document.getElementById("links_box").style.left = (mquery.matches ? "0px" : "196px")
+        if (!mquery.matches)
+            document.getElementById("links_box").style.width = "200px"
         $("#links_box").addClass("tab-open")
     }
     else {
-        document.getElementById("links_box").style.left = (mquery.matches ? "-100%" : "-32px")
+        if (!mquery.matches)
+            document.getElementById("links_box").style.width = "168px"
+        document.getElementById("links_box").style.left = (mquery.matches ? "-100%" : "0px")
         document.getElementById("links_box").style.boxShadow = "none"
         document.getElementById("links_tab").style.boxShadow = "none"
         $("#links_box").removeClass("tab-open")
@@ -1320,7 +1343,7 @@ function showLinks(){
 
 function showDiscordLink(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("discord_link_box").style.left == (mquery.matches ? "-100%" : "-32px")){
+    if (document.getElementById("discord_link_box").style.left == (mquery.matches ? "-100%" : "0px")){
         document.getElementById("discord_link_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("discord_link_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1330,10 +1353,14 @@ function showDiscordLink(){
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("discord_link_box").style.zIndex= (mquery.matches ? "10" : "2")
         document.getElementById("discord_link_box").style.left = (mquery.matches ? "0px" : "196px")
+        if (!mquery.matches)
+            document.getElementById("discord_link_box").style.width = "200px"
         $("#discord_link_box").addClass("tab-open")
     }
     else {
-        document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "-32px")
+        if (!mquery.matches)
+            document.getElementById("discord_link_box").style.width = "168px"
+        document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "0px")
         document.getElementById("discord_link_box").style.boxShadow = "none"
         document.getElementById("discord_link_tab").style.boxShadow = "none"
         $("#discord_link_box").removeClass("tab-open")
@@ -1348,7 +1375,7 @@ function showDiscordLink(){
 
 function showEvent(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("event_box").style.left == (mquery.matches ? "-100%" : "-182px")){
+    if (document.getElementById("event_box").style.left == (mquery.matches ? "-100%" : "0px")){
         document.getElementById("event_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("event_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1358,10 +1385,14 @@ function showEvent(){
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= (mquery.matches ? "10" : "2")
         document.getElementById("event_box").style.left = (mquery.matches ? "0px" : "196px")
+        if (!mquery.matches)
+            document.getElementById("event_box").style.width = "350px"
         $("#event_box").addClass("tab-open")
     }
     else {
-        document.getElementById("event_box").style.left = (mquery.matches ? "-100%" : "-182px")
+        if (!mquery.matches)
+            document.getElementById("event_box").style.width = "168px"
+        document.getElementById("event_box").style.left = (mquery.matches ? "-100%" : "0px")
         document.getElementById("event_box").style.boxShadow = "none"
         document.getElementById("event_tab").style.boxShadow = "none"
         $("#event_box").removeClass("tab-open")
@@ -1376,7 +1407,7 @@ function showEvent(){
 
 function showWiki(forceOpen = false, forceClose = false){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("wiki_box").style.left == (mquery.matches ? "-100%" : "-182px") && !forceClose){
+    if (document.getElementById("wiki_box").style.left == (mquery.matches ? "-100%" : "0px") && !forceClose){
         document.getElementById("wiki_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("wiki_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1386,10 +1417,14 @@ function showWiki(forceOpen = false, forceClose = false){
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= (mquery.matches ? "10" : "2")
         document.getElementById("wiki_box").style.left = (mquery.matches ? "0px" : "196px")
+        if (!mquery.matches)
+            document.getElementById("wiki_box").style.width = "350px"
         $("#wiki_box").addClass("tab-open")
     }
     else if(!forceOpen) {
-        document.getElementById("wiki_box").style.left = (mquery.matches ? "-100%" : "-182px")
+        if (!mquery.matches)
+            document.getElementById("wiki_box").style.width = "168px"
+        document.getElementById("wiki_box").style.left = (mquery.matches ? "-100%" : "0px")
         document.getElementById("wiki_box").style.boxShadow = "none"
         document.getElementById("wiki_tab").style.boxShadow = "none"
         $("#wiki_box").removeClass("tab-open")
@@ -1432,7 +1467,7 @@ function showMaps(forceOpen = false, forceClose = false){
 }
 
 function showNews(){
-    if (document.getElementById("news_box").style.right == "-366px"){
+    if (document.getElementById("news_box").style.right == "-36px"){
         document.getElementById("language_box").style.zIndex = "9"
         document.getElementById("theme_box").style.zIndex = "9"
         document.getElementById("z3d-box").style.zIndex = "9"
@@ -1440,17 +1475,19 @@ function showNews(){
         document.getElementById("news_box").style.boxShadow = "-5px 0px 10px 0px #000"
         document.getElementById("news_tab").style.boxShadow = "-5px 6px 5px -2px #000"
         document.getElementById("news_box").style.right = "0px"
+        document.getElementById("news_box").style.width = "350px"
         mark_feed_read()
     }
     else {
-        document.getElementById("news_box").style.right = "-366px"
+        document.getElementById("news_box").style.width = "20px"
+        document.getElementById("news_box").style.right = "-36px"
         document.getElementById("news_box").style.boxShadow = "none"
         document.getElementById("news_box").style.boxShadow = "none"
     }
 }
 
 function showLanguage(){
-    if (document.getElementById("language_box").style.right == "-176px"){
+    if (document.getElementById("language_box").style.right == "-36px"){
         document.getElementById("news_box").style.zIndex = "9"
         document.getElementById("theme_box").style.zIndex = "9"
         document.getElementById("z3d-box").style.zIndex = "9"
@@ -1458,11 +1495,13 @@ function showLanguage(){
         document.getElementById("language_box").style.boxShadow = "-5px 0px 10px 0px #000"
         document.getElementById("language_tab").style.boxShadow = "-5px 6px 5px -2px #000"
         document.getElementById("language_box").style.right = "0px"
+        document.getElementById("language_box").style.width = "160px"
         document.getElementById("lang_blockout").style.zIndex = "10"
         $("#lang_blockout").fadeIn(500)
     }
     else {
-        document.getElementById("language_box").style.right = "-176px"
+        document.getElementById("language_box").style.width = "20px"
+        document.getElementById("language_box").style.right = "-36px"
         document.getElementById("language_box").style.boxShadow = "none"
         document.getElementById("language_box").style.boxShadow = "none"
         $("#lang_blockout").fadeOut(500)
@@ -1473,7 +1512,7 @@ function showLanguage(){
 }
 
 function showTheme(){
-    if (document.getElementById("theme_box").style.right == "-176px"){
+    if (document.getElementById("theme_box").style.right == "-36px"){
         document.getElementById("news_box").style.zIndex = "9"
         document.getElementById("language_box").style.zIndex = "9"
         document.getElementById("z3d-box").style.zIndex = "9"
@@ -1481,11 +1520,13 @@ function showTheme(){
         document.getElementById("theme_box").style.boxShadow = "-5px 0px 10px 0px #000"
         document.getElementById("theme_tab").style.boxShadow = "-5px 6px 5px -2px #000"
         document.getElementById("theme_box").style.right = "0px"
+        document.getElementById("theme_box").style.width = "160px"
         document.getElementById("theme_blockout").style.zIndex = "10"
         $("#theme_blockout").fadeIn(500)
     }
     else {
-        document.getElementById("theme_box").style.right = "-176px"
+        document.getElementById("theme_box").style.width = "20px"
+        document.getElementById("theme_box").style.right = "-36px"
         document.getElementById("theme_box").style.boxShadow = "none"
         document.getElementById("theme_box").style.boxShadow = "none"
         $("#theme_blockout").fadeOut(500)
@@ -1496,7 +1537,7 @@ function showTheme(){
 }
 
 function show3D(){
-    if (document.getElementById("z3d-box").style.right == "-366px"){
+    if (document.getElementById("z3d-box").style.right == "-36px"){
         document.getElementById("language_box").style.zIndex = "9"
         document.getElementById("theme_box").style.zIndex = "9"
         document.getElementById("news_box").style.zIndex = "9"
@@ -1504,10 +1545,12 @@ function show3D(){
         document.getElementById("z3d-box").style.boxShadow = "-5px 0px 10px 0px #000"
         document.getElementById("z3d-tab").style.boxShadow = "-5px 6px 5px -2px #000"
         document.getElementById("z3d-box").style.right = "0px"
+        document.getElementById("z3d-box").style.width = "350px"
         mark_feed_read()
     }
     else {
-        document.getElementById("z3d-box").style.right = "-366px"
+        document.getElementById("z3d-box").style.width = "20px"
+        document.getElementById("z3d-box").style.right = "-36px"
         document.getElementById("z3d-box").style.boxShadow = "none"
         document.getElementById("z3d-box").style.boxShadow = "none"
     }

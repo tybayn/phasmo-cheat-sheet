@@ -513,6 +513,13 @@
         margin: 10px 0px 10px 0px;
     }
 
+    .moving_content{
+        width: 100%;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
     #settings_box .icon, #links_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon, #info_box_zndl .icon, .broadcast-content .icon{
         position: absolute;
         top: 24px;
@@ -690,6 +697,22 @@
         align-self: center;
         font-size: 10px;
         width: 100%;
+    }
+
+    .thankyou_text_img{
+        display: flex;
+        align-items: center;
+        color: #ffffffa0;
+        margin-top: 40px;
+        margin: 15px 10px 0px 10px;
+        align-self: center;
+        font-size: 10px;
+    }
+
+    .thankyou_text_img img{
+        border-radius: 50%;
+        height: 45px;
+        margin-right: 10px;
     }
 
     #info_box_zndl img{
@@ -947,7 +970,7 @@
         justify-content: flex-start;
     }
 
-    #blood-moon-icon{
+    .blood-moon-icon{
         float: right;
         height: 44px;
         opacity: 0.5;
@@ -955,7 +978,7 @@
         padding-left: 20px;
     }
 
-    #blood-moon-icon:hover{
+    .blood-moon-icon:hover{
         opacity: 1.0;
     }
 
@@ -1968,7 +1991,7 @@
         z-index: 110;
     }
 
-    #cur_map{
+    #cur_map_label, #cur_map{
         display: none;
     }
 

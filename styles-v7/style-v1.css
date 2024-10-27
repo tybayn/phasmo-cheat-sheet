@@ -212,7 +212,7 @@ body{
         position: fixed;
         top: 0;
         z-index: 2;
-        width: 200px;
+        width: 168px;
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -223,7 +223,7 @@ body{
         color: #fff;
         padding: 5px 8px 5px 20px;
         font-size: 14px;
-        transition: left 0.5s ease;
+        transition: left 0.5s ease, width 0.5s ease;
     }
 
     #settings_tab{
@@ -362,7 +362,7 @@ body{
         position: fixed;
         top: 0;
         z-index: 1;
-        width: 200px;
+        width: 168px;
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -373,7 +373,7 @@ body{
         color: #fff;
         padding: 5px 8px 5px 20px;
         font-size: 14px;
-        transition: left 0.5s ease;
+        transition: left 0.5s ease, width 0.5s ease;
     }
 
     #discord_link_tab{
@@ -400,7 +400,7 @@ body{
         position: fixed;
         top: 0;
         z-index: 1;
-        width: 350px;
+        width: 168px;
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -411,7 +411,7 @@ body{
         color: #fff;
         padding: 5px 8px 5px 20px;
         font-size: 14px;
-        transition: left 0.5s ease;
+        transition: left 0.5s ease, width 0.5s ease;
     }
 
     #event_tab{
@@ -438,7 +438,7 @@ body{
         position: fixed;
         top: 0;
         z-index: 1;
-        width: 350px;
+        width: 168px;
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -449,7 +449,7 @@ body{
         color: #fff;
         padding: 5px 8px 5px 20px;
         font-size: 14px;
-        transition: left 0.5s ease;
+        transition: left 0.5s ease, width 0.5s ease;
     }
 
     #wiki_tab{
@@ -527,7 +527,7 @@ body{
         position: fixed;
         top: 0;
         z-index: 1;
-        width: 350px;
+        width: 20px;
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -538,7 +538,7 @@ body{
         color: #fff;
         padding: 5px 8px 5px 8px;
         font-size: 14px;
-        transition: right 0.5s ease;
+        transition: right 0.5s ease, width 0.5s ease;
     }
 
     #news_tab{
@@ -571,7 +571,7 @@ body{
         position: fixed;
         top: 46px;
         z-index: 1;
-        width: 160px;
+        width: 20px;
         height: 24px;
         background-color: #313248;
         display: flex;
@@ -582,7 +582,7 @@ body{
         color: #fff;
         padding: 5px 8px 5px 8px;
         font-size: 14px;
-        transition: right 0.5s ease;
+        transition: right 0.5s ease, width 0.5s ease;
     }
 
     #language_tab{
@@ -605,7 +605,7 @@ body{
         position: fixed;
         top: 87px;
         z-index: 1;
-        width: 160px;
+        width: 20px;
         height: 24px;
         background-color: #313248;
         display: flex;
@@ -616,7 +616,7 @@ body{
         color: #fff;
         padding: 5px 8px 5px 8px;
         font-size: 14px;
-        transition: right 0.5s ease;
+        transition: right 0.5s ease, width 0.5s ease;
     }
 
     #theme_tab{
@@ -644,7 +644,7 @@ body{
         position: fixed;
         top: 0;
         z-index: 1;
-        width: 350px;
+        width: 20px;
         height: 100%;
         background-color: #313248;
         display: flex;
@@ -655,7 +655,7 @@ body{
         color: #fff;
         padding: 5px 8px 5px 8px;
         font-size: 14px;
-        transition: right 0.5s ease;
+        transition: right 0.5s ease, width 0.5s ease;
     }
 
     #z3d-tab{
@@ -723,6 +723,7 @@ body{
     .settings_title{
         font-size: 26px;
         margin: 2px 0px 0px 0px;
+        text-wrap: nowrap;
     }
 
     #settings_box .icon, #links_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon, #language_box .icon, #theme_box .icon, #z3d-box .icon, .broadcast-content .icon{
@@ -757,6 +758,13 @@ body{
         top:10px;
     }
 
+    .moving_content{
+        width: 100%;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
     #settings_box .info_block, #links_box .info_block, #discord_link_box .info_block, #event_box .info_block, #wiki_box .info_block{
         display: flex;
         flex-direction: column;
@@ -771,6 +779,15 @@ body{
         overflow-x: hidden;
         margin-bottom: 13px;
         border-radius: 5px;
+        float: right;
+    }
+
+    #settings_box .info_block, #links_box .info_block, #discord_link_box .info_block {
+        min-width: 200px;
+    }
+    
+    #event_box .info_block > div , #wiki_box .info_block > div{
+        min-width: 330px;
     }
 
     .less_pad{
@@ -797,6 +814,7 @@ body{
         overflow-x: hidden;
         margin-bottom: 13px;
         border-radius: 5px;
+        min-width: 350px;
     }
 
     #z3d-box .info_block {
@@ -813,12 +831,14 @@ body{
         overflow-x: hidden;
         margin-bottom: 13px;
         border-radius: 5px;
+        min-width: 350px;
     }
 
     #z3d-footer{
         font-size: 11px;
         padding: 0px 10px 20px 10px;
         color: rgb(173,173,173);
+        min-width: 350px;
     }
 
     #speed_offset{
@@ -970,6 +990,22 @@ body{
         line-height: 15px;
     }
 
+    .thankyou_text_img{
+        display: flex;
+        align-items: center;
+        color: #ffffffa0;
+        margin: 15px 10px 0px 10px;
+        align-self: center;
+        font-size: 10px;
+        line-height: 15px;
+    }
+
+    .thankyou_text_img img{
+        border-radius: 50%;
+        height: 35px;
+        margin-right: 5px;
+    }
+
     #info_box_zndl img{
         align-self: center;
         margin: 10px;
@@ -1078,7 +1114,7 @@ body{
         display: grid;
         width:100%;
         max-height: calc(100vh - 16px);
-        grid-template-rows: 30px auto 28px 55px 20px 20px;
+        grid-template-rows: 30px auto 25px 33px 55px 20px 20px;
         background-color: #313248;
         margin: -8px;
         padding: 8px;
@@ -1322,7 +1358,7 @@ body{
         padding-top: 10px;
     }
 
-    #blood-moon-icon{
+    .blood-moon-icon{
         float: right;
         height: 22px;
         opacity: 0.5;
@@ -1330,7 +1366,7 @@ body{
         padding-right: 5px;
     }
 
-    #blood-moon-icon:hover{
+    .blood-moon-icon:hover{
         opacity: 1.0;
     }
 
@@ -2066,7 +2102,7 @@ body{
 
     .copyright{
         grid-column: 1;
-        grid-row: 6;
+        grid-row: 7;
         text-align: center;
         z-index: 2;
         color: rgb(173, 173, 173);
@@ -2272,7 +2308,7 @@ body{
 
     #active-users{
         grid-column: 1;
-        grid-row: 5;
+        grid-row: 6;
         text-align: center;
         z-index: 2;
         font-size: 9px;
@@ -2303,17 +2339,32 @@ body{
         display: none;
     }
 
-    #cur_map{
+    #cur_map_label{
         grid-column: 1;
         grid-row: 3;
+        width: 100%; 
+        margin-top: 10px;
+        letter-spacing: 1px;
+        font-size: 16px;
+        text-align: left;
+        color: #ffffff99;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    #cur_map{
+        grid-column: 1;
+        grid-row: 4;
         width: 100%;   
         justify-self: center;
-        margin-top: 7px;
+        margin-bottom: 10px;
     }
 
     #reset{
         grid-column: 1;
-        grid-row: 4;
+        grid-row: 5;
         width: 100%;
         justify-self: center;
         font-size: 20px;
