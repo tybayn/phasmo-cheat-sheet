@@ -81,11 +81,15 @@ function changeTheme(name = null){
     }
 
     if(themes[theme_name] == "theme-blood-moon-particle"){
-        bloodMoonInterval = setInterval(createBMParticle, 80);
+        if(!document.getElementById("disable_particles").checked){
+            bloodMoonInterval = setInterval(createBMParticle, 80);
+        }
         document.body.style.backgroundImage = "radial-gradient(circle, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://zero-network.net/phasmophobia/static/imgs/bm-background.jpg')"
     }
     else if(themes[theme_name] == "theme-snow-particle"){
-        snowInterval = setInterval(createSnowParticle, 200);
+        if(!document.getElementById("disable_particles").checked){
+            snowInterval = setInterval(createSnowParticle, 200);
+        }
         document.body.style.backgroundImage = "radial-gradient(circle, rgba(0,0,0,0.75), rgba(0,0,0,1)), url('https://zero-network.net/phasmophobia/static/imgs/background.jpg')"
     }
     else{

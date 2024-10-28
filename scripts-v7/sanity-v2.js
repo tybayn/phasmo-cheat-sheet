@@ -142,13 +142,24 @@ function start_drain(){
         let dif = document.getElementById("num_evidence").value
         let sds = parseFloat(document.getElementById("cust_sanity_drain").value) / 100.0
         let mp = ['solo','multiplayer'].includes(document.getElementById("cust_lobby_type").value) ? document.getElementById("cust_lobby_type").value : 'solo'
-
-        let mult = (
-            sanity_maps[map_size] *
-            (sanity_difficulty[dif] || sds) *
-            sanity_players[mp] *
-            (blood_moon ? 1.5 : 1.0)
-        )
+        let mult = null
+        if(blood_moon){
+            mult = (
+            ((
+                sanity_maps[map_size] *
+                (sanity_difficulty[dif] || sds)
+            ) + sanity_maps[map_size]) *
+            sanity_players[mp]
+            )
+            
+        }
+        else{
+            mult = (
+                sanity_maps[map_size] *
+                (sanity_difficulty[dif] || sds) *
+                sanity_players[mp]
+            )
+        }
         sanity -= mult
         if (sanity <= 0)
             sanity = 0

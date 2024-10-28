@@ -354,6 +354,11 @@
                     <input type="checkbox" id="compact_cards" name="compact_cards" class="settings_check" onclick="toggleCompact();saveSettings();"><label for="compact_cards">Compact View</label>
                 </div>
                 <div class="modifier_note">(Compact View has no effect on mobile)</div>
+                <hr>
+                <div class="modifier_volume yfont white">Graphics</div> 
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="disable_particles" name="disable_particles" class="settings_check" onclick="setBloodMoonParticles();changeTheme();saveSettings();"><label for="disable_particles">Disable Particle Effects</label>
+                </div>  
             </div>
             <div id="session">C: -</div>
             <div id="prev-session">P: -</div>
@@ -908,14 +913,14 @@
             document.getElementById("maps_box").style.left = "-388px";
         }
     </script>
-    <script src="themes-v7/themes-v1.js"></script>
+    <script src="themes-v7/themes-v2.js"></script>
     <script src="scripts-v7/audio_controller-v1.js"></script>
     <script src="scripts-v7/metronome-v1.js"></script>
     <script src="scripts-v7/timer-v1.js"></script>
     <script src="discord-v7/discord-v1.js"></script>
     <script src="wiki-v7/wiki-v1.js"></script>
-    <script src="scripts-v7/filter-v1.js"></script>
-    <script src="scripts-v7/sanity-v1.js"></script>
+    <script src="scripts-v7/filter-v2.js"></script>
+    <script src="scripts-v7/sanity-v2.js"></script>
     <script src="scripts-v7/wslink-v1.js"></script>
     <script src="scripts-v7/zn-v2.js"></script>
     <script src="events-v7/events-v1.js"></script>
@@ -932,7 +937,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v7/wiki-v1.html",() => {
+                $("#wiki-body").load("wiki-v7/wiki-v2.html",() => {
                     resolve("Ghost data loaded")
                 })
             })
