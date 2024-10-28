@@ -21,18 +21,18 @@
         };
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
-    <script src="scripts-v6/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v6/style-v7.css"/>
-    <link rel="stylesheet" href="styles-v6/style-mobile-v5.css"/>
-    <link rel="stylesheet" href="themes-v6/themes-v2.css"/>
-    <link rel="stylesheet" href="discord-v6/discord-v1.css" >
-    <link rel="stylesheet" href="wiki-v6/wiki-v1.css" >
-    <link rel="stylesheet" href="wiki-v6/wiki-spoiler-v1.css" >
-    <link rel="stylesheet" href="events-v6/events-v1.css" >
-    <link rel="stylesheet" href="models-v6/models-v1.css" >
-    <link rel="stylesheet" href="feed-v6/feed-v1.css" >
-    <link rel="stylesheet" href="styles-v6/plugins-v1/makeship-v1.css" >
-    <link rel="stylesheet" href="styles-v6/sparkles-v1.css" >
+    <script src="scripts-v7/ghost_template-v1.js"></script>
+    <link rel="stylesheet" href="styles-v7/style-v1.css"/>
+    <link rel="stylesheet" href="styles-v7/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="themes-v7/themes-v1.css"/>
+    <link rel="stylesheet" href="discord-v7/discord-v1.css" >
+    <link rel="stylesheet" href="wiki-v7/wiki-v1.css" >
+    <link rel="stylesheet" href="wiki-v7/wiki-spoiler-v1.css" >
+    <link rel="stylesheet" href="events-v7/events-v1.css" >
+    <link rel="stylesheet" href="models-v7/models-v1.css" >
+    <link rel="stylesheet" href="feed-v7/feed-v1.css" >
+    <link rel="stylesheet" href="styles-v7/plugins-v1/makeship-v1.css" >
+    <link rel="stylesheet" href="styles-v7/sparkles-v1.css" >
 </head>
 
 <body>
@@ -53,6 +53,8 @@
         </div>
     </div>
 
+    <div id="blood-moon-effect-top"></div>
+    <div id="blood-moon-effect-bottom"></div>
     <div id="particle-container"></div>
 
     <div id="blackout" style="display: none;">
@@ -75,10 +77,19 @@
             <h3>Recognition</h3>
             <div class="info_image_text">
                 <span class="sparkling"><img src="https://zero-network.net/phasmophobia/static/imgs/vip.png"></span>
-                <div>The developer of this guide (SeverelyZero) received an in-game VIP badge from Official Content Creator "JOJOsaysbreee" for the creation of this guide as a community resource (2022-12-29)</div>
+                <div>The developer of this guide (SeverelyZero) received an in-game VIP badge from Kinetic Games Partner "JOJOsaysbreee" for the creation of this guide as a community resource (2022-12-29)</div>
             </div>
             <div class="thankyou_text">
-                A special thank you to @fantismalspider, @darkhooper, @.wavebuster, @sassysalamence, @alunny, @skreekaw, @idshay16, and @vandelayind for their continued support in QA, testing, ideas, data validation, and the creation of fantastic community resources<br><br>
+                A special thank you to @fantismalspider, @darkhooper, @.wavebuster, @sassysalamence, @alunny,<br>
+                @skreekaw, @idshay16, @vandelayind, and @werdna64 for their continued support in QA, testing,<br>
+                ideas, data validation, and the creation of fantastic community resources
+            </div>
+            <div class="thankyou_text_img">
+                <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/161cdac5-6a34-4089-97cc-834aaa28058a-profile_image-70x70.png">
+                And a huge thank you to Kinetic Games Partner @bepisttv for<br>
+                helping us gather, document, and verify game mechanics
+            </div>
+            <div class="thankyou_text">
                 <strong>Found a bug? Have ideas? Want to play a few rounds?</strong><br>
                 <p class="footer_link">
                     <a class="inline_image_text" style="color: #5865F2;" href="https://discord.gg/afpvC7Bf7Y" target="_blank">
@@ -86,7 +97,6 @@
                         <strong style="padding-left: 6px;">Join the 'Zero-Network: Ghost Hunters' server</strong>
                     </a>
                 </p>
-                or find me on Discord! @severelyzero
             </div>
             <div class="copyright_text">Copyright © 2023-2024 Ty Bayn (Zero-Network)</div>
         </div>
@@ -154,6 +164,8 @@
                     <li>"show descriptions" or "show behaviors" -> Shows ghost behavior on the ghost cards</li>
                     <li>"hide descriptions" or "hide behaviors" -> Hides ghost behavior on the ghost cards</li>
                     <li>"ghost speed &lt;percent&gt;" -> Set ghost speed modifier to 50%, 75%, 100%, 125%, or 150%</li>
+                    <li>"set blood moon" -> Set Blood Moon modifier</li>
+                    <li>"remove blood moon" -> SRemove Blood Moon modifier</li>
                     <li>"select map &lt;map name&gt;" -> Selects the specified map</li>
                     <li>"show map [&lt;map name&gt;]" -> Opens the map tab and displays map</li>
                     <li>"close map" or "hide map" -> Closes the map tab</li>
@@ -273,77 +285,79 @@
         </div>
         <span class="icon" onclick="showSettings()"></span>
 
-        <div class="settings_title yfont white">Settings</div>
-        <div class="title_note">( '◄' to close )</div>
+        <div class="moving_content">
+            <div class="settings_title yfont white">Settings</div>
+            <div class="title_note">( '◄' to close )</div>
 
-        <div class="info_block">
-            <div class="modifier_volume yfont white">Speed Offset</div>
-            <div id="speed_offset">
-                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-1);setTempo();saveSettings();">-1</span>
-                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-0.1);setTempo();saveSettings();">-.1</span>
-                <span id="offset_value"> 0.0% </span>
-                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(0.1);setTempo();saveSettings();">+.1</span>
-                <span id="minus_speed" class="speed_icon" onclick="adjustOffset(1);setTempo();saveSettings();">+1</span>
+            <div class="info_block">
+                <div class="modifier_volume yfont white">Speed Offset</div>
+                <div id="speed_offset">
+                    <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-1);setTempo();saveSettings();">-1</span>
+                    <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-0.1);setTempo();saveSettings();">-.1</span>
+                    <span id="offset_value"> 0.0% </span>
+                    <span id="minus_speed" class="speed_icon" onclick="adjustOffset(0.1);setTempo();saveSettings();">+.1</span>
+                    <span id="minus_speed" class="speed_icon" onclick="adjustOffset(1);setTempo();saveSettings();">+1</span>
+                </div>
+                <div class="modifier_note">(Adjust speed of footsteps)</div>
+                <hr>
+                <div class="modifier_volume yfont white">Speed Filter Logic</div>
+                <div class="speed_logic_select">
+                    <span>OR</span>
+                    <label for="speed_logic_type" onchange="filter();saveSettings();">
+                        <input type="checkbox" name="" id="speed_logic_type">
+                        <div class="toggle"></div>
+                    </label>
+                    <span>AND</span>
+                </div>
+                <hr>
+                <div class="modifier_volume yfont white">BPM to m/s</div>
+                <div class="speed_logic_select">
+                    <span>Exact</span>
+                    <label for="bpm_type" onchange="bpm_calc(true);saveSettings();">
+                        <input type="checkbox" name="" id="bpm_type">
+                        <div class="toggle"></div>
+                    </label>
+                    <span>Rounded</span>
+                </div>    
+                <hr>
+                <div class="modifier_volume yfont white">Volume & Timers</div>
+                <input type="range" id="modifier_volume" name="volume" 
+                    min="0" max="100" step="2" default="50" onchange="setVolume();saveSettings();">
+                <div class="modifier_volume_labels">
+                    <div class="modifier_volume_label">0%</div>
+                    <div class="modifier_volume_label">25%</div>
+                    <div class="modifier_volume_label">50%</div>
+                    <div class="modifier_volume_label">75%</div>
+                    <div class="modifier_volume_label">100%</div>
+                </div>
+                <div class="modifier_option">
+                    <input type="checkbox" id="mute_timer_countdown" name="mute_timer_countdown" class="settings_check" onclick="mute('countdown');saveSettings();"><label for="mute_timer_countdown">Mute Timer Countdown</label>
+                </div>
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="mute_timer_toggle" name="mute_timer_toggle" class="settings_check" onclick="mute('toggle');saveSettings();"><label for="mute_timer_toggle">Mute Timer Toggle</label>
+                </div>
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="timer_count_up" name="timer_count_up" class="settings_check" onclick="toggleCountup();saveSettings();"><label for="timer_count_up">Timer Count Up</label>
+                </div>
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="timer_split" name="timer_split" class="settings_check" onclick="saveSettings();"><label for="timer_split">Split Timer Parts (Desktop Link)</label>
+                </div>  
+                <hr>
+                <div class="modifier_volume yfont white">Ghost Cards</div> 
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="adaptive_evidence" name="adaptive_evidence" class="settings_check" onclick="filter();saveSettings();"><label for="adaptive_evidence">Adaptive Evidence</label>
+                </div>     
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="hide_descriptions" name="hide_descriptions" class="settings_check" onclick="toggleDescriptions();saveSettings();"><label for="hide_descriptions">Hide Behaviors</label>
+                </div>
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="compact_cards" name="compact_cards" class="settings_check" onclick="toggleCompact();saveSettings();"><label for="compact_cards">Compact View</label>
+                </div>
+                <div class="modifier_note">(Compact View has no effect on mobile)</div>
             </div>
-            <div class="modifier_note">(Adjust speed of footsteps)</div>
-            <hr>
-            <div class="modifier_volume yfont white">Speed Filter Logic</div>
-            <div class="speed_logic_select">
-                <span>OR</span>
-                <label for="speed_logic_type" onchange="filter();saveSettings();">
-                    <input type="checkbox" name="" id="speed_logic_type">
-                    <div class="toggle"></div>
-                </label>
-                <span>AND</span>
-            </div>
-            <hr>
-            <div class="modifier_volume yfont white">BPM to m/s</div>
-            <div class="speed_logic_select">
-                <span>Exact</span>
-                <label for="bpm_type" onchange="bpm_calc(true);saveSettings();">
-                    <input type="checkbox" name="" id="bpm_type">
-                    <div class="toggle"></div>
-                </label>
-                <span>Rounded</span>
-            </div>    
-            <hr>
-            <div class="modifier_volume yfont white">Volume & Timers</div>
-            <input type="range" id="modifier_volume" name="volume" 
-                min="0" max="100" step="2" default="50" onchange="setVolume();saveSettings();">
-            <div class="modifier_volume_labels">
-                <div class="modifier_volume_label">0%</div>
-                <div class="modifier_volume_label">25%</div>
-                <div class="modifier_volume_label">50%</div>
-                <div class="modifier_volume_label">75%</div>
-                <div class="modifier_volume_label">100%</div>
-            </div>
-            <div class="modifier_option">
-                <input type="checkbox" id="mute_timer_countdown" name="mute_timer_countdown" class="settings_check" onclick="mute('countdown');saveSettings();"><label for="mute_timer_countdown">Mute Timer Countdown</label>
-            </div>
-            <div class="modifier_option less_pad">
-                <input type="checkbox" id="mute_timer_toggle" name="mute_timer_toggle" class="settings_check" onclick="mute('toggle');saveSettings();"><label for="mute_timer_toggle">Mute Timer Toggle</label>
-            </div>
-            <div class="modifier_option less_pad">
-                <input type="checkbox" id="timer_count_up" name="timer_count_up" class="settings_check" onclick="toggleCountup();saveSettings();"><label for="timer_count_up">Timer Count Up</label>
-            </div>
-            <div class="modifier_option less_pad">
-                <input type="checkbox" id="timer_split" name="timer_split" class="settings_check" onclick="saveSettings();"><label for="timer_split">Split Timer Parts (Desktop Link)</label>
-            </div>  
-            <hr>
-            <div class="modifier_volume yfont white">Ghost Cards</div> 
-            <div class="modifier_option less_pad">
-                <input type="checkbox" id="adaptive_evidence" name="adaptive_evidence" class="settings_check" onclick="filter();saveSettings();"><label for="adaptive_evidence">Adaptive Evidence</label>
-            </div>     
-            <div class="modifier_option less_pad">
-                <input type="checkbox" id="hide_descriptions" name="hide_descriptions" class="settings_check" onclick="toggleDescriptions();saveSettings();"><label for="hide_descriptions">Hide Behaviors</label>
-            </div>
-            <div class="modifier_option less_pad">
-                <input type="checkbox" id="compact_cards" name="compact_cards" class="settings_check" onclick="toggleCompact();saveSettings();"><label for="compact_cards">Compact View</label>
-            </div>
-            <div class="modifier_note">(Compact View has no effect on mobile)</div>
+            <div id="session">C: -</div>
+            <div id="prev-session">P: -</div>
         </div>
-        <div id="session">C: -</div>
-        <div id="prev-session">P: -</div>
     </div>
 
     <div id="links_box" style="left: -1000px;">
@@ -355,99 +369,101 @@
         </div>
         <span class="icon" onclick="showLinks()"></span>
 
-        <div class="settings_title yfont white">Links</div>
-        <div class="title_note">( '◄' to close )</div>
-        <div class="info_block">
-            <div class="modifier_volume yfont white">Voice Commands</div>
-            <div class="journal_link vc_link">
-                <div class="journal_link_buttons">
-                    <button id="start_voice" class="journal_link_button" onclick="start_voice()">Enable</button>
-                    <button id="stop_voice" class="journal_link_button" onclick="stop_voice()" disabled>Disable</button>
+        <div class="moving_content">
+            <div class="settings_title yfont white">Links</div>
+            <div class="title_note">( '◄' to close )</div>
+            <div class="info_block">
+                <div class="modifier_volume yfont white">Voice Commands</div>
+                <div class="journal_link vc_link">
+                    <div class="journal_link_buttons">
+                        <button id="start_voice" class="journal_link_button" onclick="start_voice()">Enable</button>
+                        <button id="stop_voice" class="journal_link_button" onclick="stop_voice()" disabled>Disable</button>
+                    </div>
                 </div>
-            </div>
-            <div id="voice_recognition_note" class="modifier_note"><div onclick="showVoiceInfo()" class="link_hover">Commands and Info &#187;</div></div>
-            <hr>
-            <div class="modifier_volume yfont white">Shared Journal Link</div>
-            <div class="journal_link">
-                <input type="text" placeholder="XXXXXX" id="room_id" class="text" value="Connecting..." disabled style="color:#444;">
-                <div id="room_id_cover" class="copy_cover" style="display:none;">Copied!</div>
-                <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_url_code()">
-                <div id="link_pos" style="display: none;"></div>
-                <div class="journal_link_buttons">
-                    <button id="room_id_create" class="journal_link_button" style="display: none;" onclick="create_room()">Create</button>
-                    <button id="room_id_link" class="journal_link_button" style="display: none;" onclick="link_room()">Join</button>
-                    <button id="room_id_disconnect" class="journal_link_button" style="display: none;" onclick="disconnect_room()">Disconnect</button>
+                <div id="voice_recognition_note" class="modifier_note"><div onclick="showVoiceInfo()" class="link_hover">Commands and Info &#187;</div></div>
+                <hr>
+                <div class="modifier_volume yfont white">Shared Journal Link</div>
+                <div class="journal_link">
+                    <input type="text" placeholder="XXXXXX" id="room_id" class="text" value="Connecting..." disabled style="color:#444;">
+                    <div id="room_id_cover" class="copy_cover" style="display:none;">Copied!</div>
+                    <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_url_code()">
+                    <div id="link_pos" style="display: none;"></div>
+                    <div class="journal_link_buttons">
+                        <button id="room_id_create" class="journal_link_button" style="display: none;" onclick="create_room()">Create</button>
+                        <button id="room_id_link" class="journal_link_button" style="display: none;" onclick="link_room()">Join</button>
+                        <button id="room_id_disconnect" class="journal_link_button" style="display: none;" onclick="disconnect_room()">Disconnect</button>
+                    </div>
                 </div>
-            </div>
-            <div id="room_id_note" class="modifier_note" style="user-select: text;">(STATUS: Not connected)</div>
-            <hr>
-            <div class="modifier_volume yfont white">
-                <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo()">
-                Desktop Link
-                <a class="download" href="assets/ZN-Desktop-Link-Installer-v3.1.1.msi" download="ZN-Desktop-Link-Installer-v3.1.1.msi" onclick="showZNDLInfo()"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
-            </div>
-            <div class="journal_link">
-                <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
-                <div id="link_id_cover" class="copy_cover" style="display:none;">Copied!</div>
-                <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_code()">
-                <div class="journal_link_buttons">
-                    <button id="link_id_create" class="desktop_link_button" style="display: none;" onclick="create_link(false)">Create</button>
-                    <button id="link_id_create_launch" class="desktop_link_button" style="display: none;" onclick="create_link(true)">Create & Launch</button>
-                    <button id="link_id_disconnect" class="desktop_link_button" style="display: none;" onclick="disconnect_link()">Disconnect</button>
+                <div id="room_id_note" class="modifier_note" style="user-select: text;">(STATUS: Not connected)</div>
+                <hr>
+                <div class="modifier_volume yfont white">
+                    <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo()">
+                    Desktop Link
+                    <a class="download" href="assets/ZN-Desktop-Link-Installer-v1.1.1.msi" download="ZN-Desktop-Link-Installer-v1.1.1.msi" onclick="showZNDLInfo()"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
                 </div>
+                <div class="journal_link">
+                    <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
+                    <div id="link_id_cover" class="copy_cover" style="display:none;">Copied!</div>
+                    <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_code()">
+                    <div class="journal_link_buttons">
+                        <button id="link_id_create" class="desktop_link_button" style="display: none;" onclick="create_link(false)">Create</button>
+                        <button id="link_id_create_launch" class="desktop_link_button" style="display: none;" onclick="create_link(true)">Create & Launch</button>
+                        <button id="link_id_disconnect" class="desktop_link_button" style="display: none;" onclick="disconnect_link()">Disconnect</button>
+                    </div>
+                </div>
+                <div id="link_id_note" class="modifier_note">(STATUS: Not linked)</div>
+                <hr>
+                <div class="modifier_volume yfont white">Sanity Settings</div>
+                <div class="modifier_note">For Sanity Overlay on Desktop Link</div>
+                <div class="sanity_labels yfont white">Starting Sanity</div>
+                <input type="range" id="cust_starting_sanity" name="cust_starting_sanity" class="option-disabled"
+                    min="0" max="100" step="25" default="50" onchange="filter();set_sanity_settings();saveSettings();" disabled>
+                <div class="modifier_volume_labels">
+                    <div class="modifier_volume_label">0%</div>
+                    <div class="modifier_volume_label">25%</div>
+                    <div class="modifier_volume_label">50%</div>
+                    <div class="modifier_volume_label">75%</div>
+                    <div class="modifier_volume_label" selected>100%</div>
+                </div>
+                <div class="sanity_labels yfont white">Sanity Pill Rest.</div>
+                <input type="range" id="cust_sanity_pill_rest" name="cust_sanity_pill_rest" class="option-disabled"
+                    min="0" max="11" step="1" default="7" onchange="filter();set_sanity_settings();saveSettings();" disabled>
+                <div class="modifier_volume_labels">
+                    <div class="modifier_volume_label cust_label">0%</div>
+                    <div class="modifier_volume_label cust_label">5%</div>
+                    <div class="modifier_volume_label cust_label">10%</div>
+                    <div class="modifier_volume_label cust_label">20%</div>
+                    <div class="modifier_volume_label cust_label">25%</div>
+                    <div class="modifier_volume_label cust_label" selected>30%</div>
+                    <div class="modifier_volume_label cust_label">35%</div>
+                    <div class="modifier_volume_label cust_label">40%</div>
+                    <div class="modifier_volume_label cust_label">45%</div>
+                    <div class="modifier_volume_label cust_label">50%</div>
+                    <div class="modifier_volume_label cust_label">75%</div>
+                    <div class="modifier_volume_label cust_label">100%</div>
+                </div>
+                <div class="sanity_labels yfont white">Sanity Drain Speed</div>
+                <input type="range" id="cust_sanity_drain" name="cust_sanity_drain" class="option-disabled"
+                    min="0" max="200" step="50" default="100" onchange="filter();set_sanity_settings();saveSettings();" disabled>
+                <div class="modifier_volume_labels">
+                    <div class="modifier_volume_label">0%</div>
+                    <div class="modifier_volume_label">50%</div>
+                    <div class="modifier_volume_label" selected>100%</div>
+                    <div class="modifier_volume_label">150%</div>
+                    <div class="modifier_volume_label">200%</div>
+                </div>
+                <div class="sanity_labels yfont white">Lobby Type</div>
+                <select name="cust_lobby_type" id="cust_lobby_type" class="cust_lobby_type" onchange="filter();set_sanity_settings();saveSettings();">
+                    <option value="solo" selected>Singleplayer</option>
+                    <option value="multiplayer">Multiplayer</option>
+                </select>
             </div>
-            <div id="link_id_note" class="modifier_note">(STATUS: Not linked)</div>
-            <hr>
-            <div class="modifier_volume yfont white">Sanity Settings</div>
-            <div class="modifier_note">For Sanity Overlay on Desktop Link</div>
-            <div class="sanity_labels yfont white">Starting Sanity</div>
-            <input type="range" id="cust_starting_sanity" name="cust_starting_sanity" class="option-disabled"
-                min="0" max="100" step="25" default="50" onchange="filter();set_sanity_settings();saveSettings();" disabled>
-            <div class="modifier_volume_labels">
-                <div class="modifier_volume_label">0%</div>
-                <div class="modifier_volume_label">25%</div>
-                <div class="modifier_volume_label">50%</div>
-                <div class="modifier_volume_label">75%</div>
-                <div class="modifier_volume_label" selected>100%</div>
+            <div class="find-overlay">
+                Looking for the overlay?<br>
+                <a href="assets/ZN-Desktop-Link-Installer-v1.1.1.msi" download="ZN-Desktop-Link-Installer-v1.1.1.msi" onclick="showZNDLInfo()" style="text-decoration: none;">
+                    <div class="button-zn"><img class="download_icon" src="imgs/download.png" style="filter: invert(1); padding-right: 5px;">ZN-Desktop-Link</div>
+                </a>
             </div>
-            <div class="sanity_labels yfont white">Sanity Pill Rest.</div>
-            <input type="range" id="cust_sanity_pill_rest" name="cust_sanity_pill_rest" class="option-disabled"
-                min="0" max="11" step="1" default="7" onchange="filter();set_sanity_settings();saveSettings();" disabled>
-            <div class="modifier_volume_labels">
-                <div class="modifier_volume_label cust_label">0%</div>
-                <div class="modifier_volume_label cust_label">5%</div>
-                <div class="modifier_volume_label cust_label">10%</div>
-                <div class="modifier_volume_label cust_label">20%</div>
-                <div class="modifier_volume_label cust_label">25%</div>
-                <div class="modifier_volume_label cust_label" selected>30%</div>
-                <div class="modifier_volume_label cust_label">35%</div>
-                <div class="modifier_volume_label cust_label">40%</div>
-                <div class="modifier_volume_label cust_label">45%</div>
-                <div class="modifier_volume_label cust_label">50%</div>
-                <div class="modifier_volume_label cust_label">75%</div>
-                <div class="modifier_volume_label cust_label">100%</div>
-            </div>
-            <div class="sanity_labels yfont white">Sanity Drain Speed</div>
-            <input type="range" id="cust_sanity_drain" name="cust_sanity_drain" class="option-disabled"
-                min="0" max="200" step="50" default="100" onchange="filter();set_sanity_settings();saveSettings();" disabled>
-            <div class="modifier_volume_labels">
-                <div class="modifier_volume_label">0%</div>
-                <div class="modifier_volume_label">50%</div>
-                <div class="modifier_volume_label" selected>100%</div>
-                <div class="modifier_volume_label">150%</div>
-                <div class="modifier_volume_label">200%</div>
-            </div>
-            <div class="sanity_labels yfont white">Lobby Type</div>
-            <select name="cust_lobby_type" id="cust_lobby_type" class="cust_lobby_type" onchange="filter();set_sanity_settings();saveSettings();">
-                <option value="solo" selected>Singleplayer</option>
-                <option value="multiplayer">Multiplayer</option>
-            </select>
-        </div>
-        <div class="find-overlay">
-            Looking for the overlay?<br>
-            <a href="assets/ZN-Desktop-Link-Installer-v3.1.1.msi" download="ZN-Desktop-Link-Installer-v3.1.1.msi" onclick="showZNDLInfo()" style="text-decoration: none;">
-                <div class="button-zn"><img class="download_icon" src="imgs/download.png" style="filter: invert(1); padding-right: 5px;">ZN-Desktop-Link</div>
-            </a>
         </div>
     </div>
 
@@ -457,56 +473,59 @@
             <div id="discord_link_status"></div>
         </div>
         <span class="icon" onclick="showDiscordLink()"></span>
-        <div class="settings_title yfont white">Discord Link</div>
-        <div class="title_note">( '◄' to close )</div>
-        <div class="info_block">
-            <img id="discord_avatar" src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png">
-            <div id="discord_name">Link your Discord</div>
-            <div id="discord_link_date" class="hidden"></div>
-            <div id="discord_stats" class="discord_note">Linking your Discord account will allow you to record what is input into this Cheat Sheet, allowing you to view statistics about ghosts, evidences, and play style!</div>
-            <div id="discord_instructions" class="hidden">
-                <strong>Collecting Additional Stats</strong>
-                <hr>
-                <ul>
-                    <li>
-                        <div class="discord_instructions_title">
-                            <img src="imgs/select.png"><strong>Select the ghost</strong>
-                        </div>
-                        <div class="discord_instructions_text">
-                            Select the actual ghost (shown on the summary board after leaving).
-                            <i>If you died, mark that the ghost "killed" you instead.</i>
-                        </div>
-                    </li>
 
-                    <li>
-                        <div class="discord_instructions_title">
-                            <img src="imgs/guess.png"><strong>Guess the ghost</strong>
-                        </div>
-                        <div class="discord_instructions_text">
-                            Select what you think the ghost is (not the actual ghost). 
-                            If correct, "select" the ghost. 
-                            If incorrect, keep your guess and "select" the correct ghost.
-                        </div>
-                    </li>
+        <div class="moving_content">
+            <div class="settings_title yfont white">Discord Link</div>
+            <div class="title_note">( '◄' to close )</div>
+            <div class="info_block">
+                <img id="discord_avatar" src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png">
+                <div id="discord_name">Link your Discord</div>
+                <div id="discord_link_date" class="hidden"></div>
+                <div id="discord_stats" class="discord_note">Linking your Discord account will allow you to record what is input into this Cheat Sheet, allowing you to view statistics about ghosts, evidences, and play style!</div>
+                <div id="discord_instructions" class="hidden">
+                    <strong>Collecting Additional Stats</strong>
+                    <hr>
+                    <ul>
+                        <li>
+                            <div class="discord_instructions_title">
+                                <img src="imgs/select.png"><strong>Select the ghost</strong>
+                            </div>
+                            <div class="discord_instructions_text">
+                                Select the actual ghost (shown on the summary board after leaving).
+                                <i>If you died, mark that the ghost "killed" you instead.</i>
+                            </div>
+                        </li>
 
-                    <li>
-                        <div class="discord_instructions_title">
-                            <img src="imgs/died.png"><strong>Killed by the ghost</strong>
-                        </div>
-                        <div class="discord_instructions_text">
-                            Select the actual ghost <i>AND</i> indicate that the ghost killed you. 
-                        </div>
-                    </li>
-                </ul>
-                <a id="discord-stats-link" target="_blank"><div id="phasmo-stats">My Stats Explorer &#187;</div></a>
-                <hr>
-            </div>
-            <div id="discord_note" class="discord_note grey">(1) Linking does not maintain an active connection to Discord, you will need to relink every 30 days or if you update your Discord profile. (2) Stats provided are purely from the use of this Cheat Sheet. We do not connect to the Phasmophobia game or Steam in any way.</div>
-            <div>
-                <a id="discord_link" href="https://discord.com/api/oauth2/authorize?client_id=1077230568422510602&redirect_uri=https%3A%2F%2Fzero-network.net%2Fanalytics%2Fdiscord-connect&response_type=code&scope=identify">
-                    <div id="discord_login_button">Link</div>
-                </a>
-                <div id="discord_unlink_button" class="hidden" onclick="discord_unlink()">Unlink</div>
+                        <li>
+                            <div class="discord_instructions_title">
+                                <img src="imgs/guess.png"><strong>Guess the ghost</strong>
+                            </div>
+                            <div class="discord_instructions_text">
+                                Select what you think the ghost is (not the actual ghost). 
+                                If correct, "select" the ghost. 
+                                If incorrect, keep your guess and "select" the correct ghost.
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="discord_instructions_title">
+                                <img src="imgs/died.png"><strong>Killed by the ghost</strong>
+                            </div>
+                            <div class="discord_instructions_text">
+                                Select the actual ghost <i>AND</i> indicate that the ghost killed you. 
+                            </div>
+                        </li>
+                    </ul>
+                    <a id="discord-stats-link" target="_blank"><div id="phasmo-stats">My Stats Explorer &#187;</div></a>
+                    <hr>
+                </div>
+                <div id="discord_note" class="discord_note grey">(1) Linking does not maintain an active connection to Discord, you will need to relink every 30 days or if you update your Discord profile. (2) Stats provided are purely from the use of this Cheat Sheet. We do not connect to the Phasmophobia game or Steam in any way.</div>
+                <div>
+                    <a id="discord_link" href="https://discord.com/api/oauth2/authorize?client_id=1077230568422510602&redirect_uri=https%3A%2F%2Fzero-network.net%2Fanalytics%2Fdiscord-connect&response_type=code&scope=identify">
+                        <div id="discord_login_button">Link</div>
+                    </a>
+                    <div id="discord_unlink_button" class="hidden" onclick="discord_unlink()">Unlink</div>
+                </div>
             </div>
         </div>
     </div>
@@ -516,26 +535,31 @@
             <div class="tab_rotate">Current Event</div>
         </div>
         <span class="icon" onclick="showEvent()"></span>
-        <div class="settings_title yfont white">Current Event</div>
-        <div class="title_note">( '◄' to close )</div>
-        <div class="info_block">
-            <div id="event_title">No current events!</div>
-            <hr>
-            <div id="event_details">
-                Check back on the next update!
+        <div class="moving_content">
+            <div class="settings_title yfont white">Current Event</div>
+            <div class="title_note">( '◄' to close )</div>
+            <div class="info_block">
+                <div id="event_title">No current events!</div>
+                <hr>
+                <div id="event_details">
+                    Check back on the next update!
+                </div>
             </div>
         </div>
     </div>
 
     <div id="wiki_box" style="left: -1000px;">
-        <div id="wiki_tab" onclick="showWiki();">
+        <div id="wiki_tab" onclick="showWiki()">
             <div class="tab_rotate">Guides</div>
             <div id="guide_tab_footstep" style="display: none;"></div>
         </div>
         <span class="icon" onclick="showWiki();"></span>
-        <div class="settings_title yfont white">Guides</div>
-        <div class="title_note">( '◄' to close, 'G' to toggle)</div>
-        <div id="wiki-body" class="info_block"></div>
+
+        <div class="moving_content">
+            <div class="settings_title yfont white">Guides</div>
+            <div class="title_note">( '◄' to close, 'G' to toggle)</div>
+            <div id="wiki-body" class="info_block"></div>
+        </div>
     </div>
 
     <div id="maps_box" style="left: -1000px;">
@@ -561,52 +585,64 @@
         </div>
     </div>
 
-    <div id="news_box" style="right:-366px;">
+    <div id="news_box" style="right:-36px;">
         <div id="news_tab" onclick="showNews();">
             <img src="imgs/news-icon.png" width="24px" id="feed_icon_img"/>
         </div>
         <span class="icon" onclick="showNews()"></span>
-        <div class="settings_title yfont white">News Feed</div>
-        <div class="info_block" id="feed_info_block">
+
+        <div class="moving_content">
+            <div class="settings_title yfont white">News Feed</div>
+            <div class="info_block" id="feed_info_block">
+            </div>
+            <a href='https://ko-fi.com/H2H7OPG9V' target='_blank' style="margin-left: calc(50% - 70px);">
+                <img height='36' style='border:0px;height:36px;margin-bottom: 20px; background-color: #ccc; border-radius: 10px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+            </a>
         </div>
-        <a href='https://ko-fi.com/H2H7OPG9V' target='_blank' style="margin-left: calc(50% - 70px);">
-            <img height='36' style='border:0px;height:36px;margin-bottom: 20px; background-color: #ccc; border-radius: 10px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' />
-        </a>
     </div>
 
     <div id="lang_blockout" class="blockout" style="display: none;" onclick="showLanguage()"></div>
-    <div id="language_box" style="right:-176px;">
+    <div id="language_box" style="right:-36px;">
         <div id="language_tab" onclick="showLanguage();">
             <img src="imgs/langauge.png" width="24px" id="feed_icon_img"/>
         </div>
         <span class="icon" onclick="showLanguage()"></span>
-        <div class="settings_title yfont white">
-            <select name="language" id="language" class="language" onchange="loadLanguage();">
-            </select>
+
+        <div class="moving_content">
+            <div class="settings_title yfont white">
+                <select name="language" id="language" class="language" onchange="loadLanguage();">
+                </select>
+            </div>
         </div>
     </div>
 
     <div id="theme_blockout" class="blockout" style="display: none;" onclick="showTheme()"></div>
-    <div id="theme_box" style="right:-176px;">
+    <div id="theme_box" style="right:-36px;">
         <div id="theme_tab" onclick="showTheme();">
             <img src="imgs/theme.png" width="24px" id="feed_icon_img"/>
         </div>
         <span class="icon" onclick="showTheme()"></span>
-        <div class="settings_title yfont white">
-            <select name="theme" id="theme" class="theme" onchange="changeTheme();saveSettings();">
-            </select>
+
+        <div class="moving_content">
+            <div class="settings_title yfont white">
+                <select name="theme" id="theme" class="theme" onchange="changeTheme();saveSettings();">
+                </select>
+            </div>
         </div>
     </div>
 
-    <div id="z3d-box" style="right:-366px;">
+    <div id="z3d-box" style="right:-36px;">
         <div id="z3d-tab" onclick="show3D();">
             <img src="imgs/3d.png" width="24px" id="3d_icon_img"/>
         </div>
         <span class="icon" onclick="show3D()"></span>
-        <div class="settings_title yfont white">3D Printable Models</div>
-        <div class="info_block" id="3d_info_block">
+
+        <div class="moving_content"></div>
+            <div class="settings_title yfont white">3D Printable Models</div>
+            <div class="info_block" id="3d_info_block">
+            </div>
+            <div id="z3d-footer">All models are provided for free under either a CC BY-NC-ND or a CC BY-SA license and are modeled from the ground up only using the game as a visual reference.</div>
         </div>
-        <div id="z3d-footer">All models are provided for free under either a CC BY-NC-ND or a CC BY-SA license and are modeled from the ground up only using the game as a visual reference.</div>
     </div>
 
     <a href="https://discord.gg/afpvC7Bf7Y" target="_blank" >
@@ -628,6 +664,7 @@
             <div id="tools-content" class="tools-content" style="display: none;">
                 <div class="timer_title yfont white">
                     Timers
+                    <img id="blood-moon-icon-2" class="blood-moon-icon" src="imgs/moon-w.png" title="Blood Moon Weather" onclick="toggleBloodMoon();bpm_calc(true);saveSettings();">
                 </div>
                 <div class="timers">
                     <div class="timer_block">
@@ -750,8 +787,9 @@
             <div id="filter-content" class="filter-content">
                 <div class="evidence_title yfont white">
                     Evidence
+                    <img id="blood-moon-icon" class="blood-moon-icon" src="imgs/moon-w.png" title="Blood Moon Weather" onclick="toggleBloodMoon();bpm_calc(true);saveSettings();">
                 </div>
-
+                
                 <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="showCustom();filter();flashMode();set_sanity_settings();setGhostSpeedFromDifficulty(this.value);updateMapDifficulty(this.value);bpm_calc(true);saveSettings();">
                     <option value="3A">Amateur (3)</option>
                     <option value="3I">Intermediate (3)</option>
@@ -826,6 +864,7 @@
                 </div>
 
             </div>
+            <div id="cur_map_label" class="yfont">Current Map<div class="modifier_note_2">(Click to change)</div></div>
             <button id="cur_map" class="maps_button" onclick="closeAll(true);showMaps();">
                 <div class="map_size s">S</div>
                 6 Tanglewood Drive
@@ -861,30 +900,30 @@
             document.getElementById("link_id_create_launch").style.display = "none";
         }
         else{
-            document.getElementById("settings_box").style.left = "-32px";
-            document.getElementById("links_box").style.left = "-32px";
-            document.getElementById("discord_link_box").style.left = "-32px";
-            document.getElementById("event_box").style.left = "-182px";
-            document.getElementById("wiki_box").style.left = "-182px";
+            document.getElementById("settings_box").style.left = "0px";
+            document.getElementById("links_box").style.left = "0px";
+            document.getElementById("discord_link_box").style.left = "0px";
+            document.getElementById("event_box").style.left = "0px";
+            document.getElementById("wiki_box").style.left = "0px";
             document.getElementById("maps_box").style.left = "-388px";
         }
     </script>
-    <script src="themes-v6/themes-v6.js"></script>
-    <script src="scripts-v6/audio_controller-v3.js"></script>
-    <script src="scripts-v6/metronome-v3.js"></script>
-    <script src="scripts-v6/timer-v2.js"></script>
-    <script src="discord-v6/discord-v1.js"></script>
-    <script src="wiki-v6/wiki-v1.js"></script>
-    <script src="scripts-v6/filter-v7.js"></script>
-    <script src="scripts-v6/sanity-v4.js"></script>
-    <script src="scripts-v6/wslink-v8.js"></script>
-    <script src="scripts-v6/zn-v4.js"></script>
-    <script src="events-v6/events-v1.js"></script>
-    <script src="models-v6/models-v1.js"></script>
-    <script src="feed-v6/feed-v1.js"></script>
-    <script src="scripts-v6/voice_en-v1.js"></script>
-    <script src="scripts-v6/voice_recognition-v6.js"></script>
-    <script src="scripts-v6/sparkles-v1.js"></script>
+    <script src="themes-v7/themes-v1.js"></script>
+    <script src="scripts-v7/audio_controller-v1.js"></script>
+    <script src="scripts-v7/metronome-v1.js"></script>
+    <script src="scripts-v7/timer-v1.js"></script>
+    <script src="discord-v7/discord-v1.js"></script>
+    <script src="wiki-v7/wiki-v1.js"></script>
+    <script src="scripts-v7/filter-v1.js"></script>
+    <script src="scripts-v7/sanity-v1.js"></script>
+    <script src="scripts-v7/wslink-v1.js"></script>
+    <script src="scripts-v7/zn-v1.js"></script>
+    <script src="events-v7/events-v1.js"></script>
+    <script src="models-v7/models-v1.js"></script>
+    <script src="feed-v7/feed-v1.js"></script>
+    <script src="scripts-v7/voice_en-v1.js"></script>
+    <script src="scripts-v7/voice_recognition-v1.js"></script>
+    <script src="scripts-v7/sparkles-v1.js"></script>
     <script>
         document.getElementById('reset').oncontextmenu = showResetMenu;
         document.onclick = hideResetMenu;
@@ -893,7 +932,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v6/wiki-v3.html",() => {
+                $("#wiki-body").load("wiki-v7/wiki-v1.html",() => {
                     resolve("Ghost data loaded")
                 })
             })
