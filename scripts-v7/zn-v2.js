@@ -37,7 +37,10 @@ function checkLink(){
 
             setCookie("discord_link",JSON.stringify(discord_link),30)
             fetch(`https://zero-network.net/zn/${znid}/attach/${discord_link['id']}`, {method:"POST",signal: AbortSignal.timeout(6000)})
-            window.location.href = window.location.href.split("?")[0]
+            .then(data => {
+                window.location.href = window.location.href.split("?")[0]
+            })
+            
         }
 
         if (params.get('journal')){
