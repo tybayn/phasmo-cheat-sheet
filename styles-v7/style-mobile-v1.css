@@ -919,6 +919,9 @@
         grid-row: 1;
         font-size: 40px;
         z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
     }
 
     .timers{

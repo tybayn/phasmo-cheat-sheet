@@ -147,7 +147,7 @@ function start_drain(){
             sanity_maps[map_size] *
             (sanity_difficulty[dif] || sds) *
             sanity_players[mp] *
-            (blood_moon ? 1.125 : 1.0)
+            (blood_moon ? 1.5 : 1.0)
         )
         sanity -= mult
         if (sanity <= 0)
