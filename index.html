@@ -404,7 +404,7 @@
                 <div class="modifier_volume yfont white">
                     <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo()">
                     Desktop Link
-                    <a class="download" href="assets/ZN-Desktop-Link-Installer-v3.1.1.msi" download="ZN-Desktop-Link-Installer-v3.1.1.msi" onclick="showZNDLInfo()"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
+                    <a class="download" href="assets/ZN-Desktop-Link-Installer-v3.1.2.msi" download="ZN-Desktop-Link-Installer-v3.1.2.msi" onclick="showZNDLInfo()"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
                 </div>
                 <div class="journal_link">
                     <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
@@ -465,7 +465,7 @@
             </div>
             <div class="find-overlay">
                 Looking for the overlay?<br>
-                <a href="assets/ZN-Desktop-Link-Installer-v3.1.1.msi" download="ZN-Desktop-Link-Installer-v3.1.1.msi" onclick="showZNDLInfo()" style="text-decoration: none;">
+                <a href="assets/ZN-Desktop-Link-Installer-v3.1.2.msi" download="ZN-Desktop-Link-Installer-v3.1.2.msi" onclick="showZNDLInfo()" style="text-decoration: none;">
                     <div class="button-zn"><img class="download_icon" src="imgs/download.png" style="filter: invert(1); padding-right: 5px;">ZN-Desktop-Link</div>
                 </a>
             </div>
@@ -915,13 +915,13 @@
     </script>
     <script src="themes-v7/themes-v2.js"></script>
     <script src="scripts-v7/audio_controller-v1.js"></script>
-    <script src="scripts-v7/metronome-v1.js"></script>
+    <script src="scripts-v7/metronome-v2.js"></script>
     <script src="scripts-v7/timer-v1.js"></script>
     <script src="discord-v7/discord-v1.js"></script>
     <script src="wiki-v7/wiki-v1.js"></script>
-    <script src="scripts-v7/filter-v2.js"></script>
+    <script src="scripts-v7/filter-v3.js"></script>
     <script src="scripts-v7/sanity-v2.js"></script>
-    <script src="scripts-v7/wslink-v1.js"></script>
+    <script src="scripts-v7/wslink-v2.js"></script>
     <script src="scripts-v7/zn-v2.js"></script>
     <script src="events-v7/events-v1.js"></script>
     <script src="models-v7/models-v1.js"></script>
@@ -937,7 +937,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v7/wiki-v3.html",() => {
+                $("#wiki-body").load("wiki-v7/wiki-v4.html",() => {
                     resolve("Ghost data loaded")
                 })
             })

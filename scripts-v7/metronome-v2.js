@@ -342,13 +342,13 @@ function get_ms(bpm){
         }
     })
 
-    return bpm == 0 ? 0.00 : cur_ms.toFixed(2)
+    return cur_ms < 0 ? 0.40 : cur_ms.toFixed(2)
 }
 
 function get_ms_exact(bpm){
     var speed_idx = parseInt($("#ghost_modifier_speed").val())
     var cur_ms = bpmToSpeed[speed_idx](bpm) *(1+((offset)/100)) * (blood_moon ? (1 - bloodmoon_mult[speed_idx]) : 1.0)
-    return bpm == 0 ? 0.00 : cur_ms.toFixed(2)
+    return cur_ms < 0 ? 0.01 : cur_ms.toFixed(2)
 }
 
 function mark_ghost_details(ms)

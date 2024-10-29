@@ -502,6 +502,7 @@ function link_link(){
                     send_timer_link("COOLDOWN_VAL","0:00")
                     send_timer_link("HUNT_VAL","0:00")
                     send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
+                    send_blood_moon_link($("#blood-moon-icon").hasClass("blood-moon-active"))
                     filter()
                     toggleSanitySettings()
                     await_dlws_pong = false
@@ -742,6 +743,11 @@ function send_ghosts_link(reset = false){
     }
 }
 
+function send_blood_moon_link(value){
+    if(hasDLLink){
+        dlws.send(`{"action":"BLOODMOON","value":${value ? 1 : 0}}`)
+    }
+}
 
 function send_sanity_link(value, color){
     if(hasDLLink){

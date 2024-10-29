@@ -212,6 +212,7 @@ function toggleBloodMoon(force_on = false, force_off = false, ignore_link=false)
         $("#blood-moon-effect-top").removeClass("blood-moon-effect-top")
         $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom")
         clearInterval(bloodMoonEffectInterval)
+        send_blood_moon_link(false)
         blood_moon = 0
         return
     }
@@ -226,7 +227,7 @@ function toggleBloodMoon(force_on = false, force_off = false, ignore_link=false)
         if(!document.getElementById("disable_particles").checked){
             bloodMoonEffectInterval = setInterval(createBMEffectParticle, 250);
         }
-        
+        send_blood_moon_link(true)
         blood_moon = 1
     }
     else{
@@ -237,6 +238,7 @@ function toggleBloodMoon(force_on = false, force_off = false, ignore_link=false)
         $("#blood-moon-effect-top").removeClass("blood-moon-effect-top")
         $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom")
         clearInterval(bloodMoonEffectInterval)
+        send_blood_moon_link(false)
         blood_moon = 0
     }
 
