@@ -32,10 +32,18 @@ function accordian(elem){
 function openWikiFromURL(){
     params = new URL(window.location.href).searchParams
     if (params.get("wiki")){
-        openWikiPath(params.get("wiki"))
-        let url = new URL(window.location.href)
-        url.searchParams.delete("wiki")
-        history.replaceState(history.state,"",url.href)
+        if(params.get("wiki") == "current-event"){
+            showEvent()
+            let url = new URL(window.location.href)
+            url.searchParams.delete("wiki")
+            history.replaceState(history.state,"",url.href)
+        }
+        else{
+            openWikiPath(params.get("wiki"))
+            let url = new URL(window.location.href)
+            url.searchParams.delete("wiki")
+            history.replaceState(history.state,"",url.href)
+        }
     }
 }
 
@@ -171,6 +179,12 @@ function generateWikiShareLink(elem){
 
     navigator.clipboard.writeText(`${window.location.href}?wiki=${url}`)
 
+    $(".wiki-share").html('Copy Share Link <img loading="lazy" src="imgs/share.png">')
+    elem.innerHTML = 'Copied! <img loading="lazy" src="imgs/share.png">'
+}
+
+function generateEventShareLink(elem){
+    navigator.clipboard.writeText(`${window.location.href}?wiki=current-event`)
     $(".wiki-share").html('Copy Share Link <img loading="lazy" src="imgs/share.png">')
     elem.innerHTML = 'Copied! <img loading="lazy" src="imgs/share.png">'
 }
