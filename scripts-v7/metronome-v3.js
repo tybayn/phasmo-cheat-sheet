@@ -116,6 +116,7 @@ function toggleSound(set_tempo,id){
 // ------------------------------------------------------------------------------
 
 const bpm_precision = 5;
+let calibrating = false
 let input_bpm = 0;
 let taps = [];
 let bpm_hist = [];
@@ -309,6 +310,8 @@ function bpm_calc(forced=false) {
         document.getElementById('input_bpm').innerHTML = `${Math.round(input_bpm)}<br>bpm`;
         document.getElementById('input_speed').innerHTML = `${input_ms}<br>m/s`;
 
+        calibrateOffset(ex_ms)
+
         bpm_hist.push({"speed":input_ms,"seconds":(taps[taps.length - 1] - start_ts)/1000});
         
         try{
@@ -346,8 +349,8 @@ function get_ms(bpm){
 }
 
 function get_ms_exact(bpm){
-    var speed_idx = parseInt($("#ghost_modifier_speed").val())
-    var cur_ms = bpmToSpeed[speed_idx](bpm) *(1+((offset)/100)) * (blood_moon ? (1 - bloodmoon_mult[speed_idx]) : 1.0)
+    var speed_idx = calibrating ? 2 : parseInt($("#ghost_modifier_speed").val())
+    var cur_ms = bpmToSpeed[speed_idx](bpm) *(1+((offset)/100)) * (blood_moon && !calibrating ? (1 - bloodmoon_mult[speed_idx]) : 1.0)
     return cur_ms < 0 ? 0.01 : cur_ms.toFixed(2)
 }
 
@@ -458,4 +461,106 @@ function get_bpm_average(values, precision) {
     }
 
     return n / bpm_precision;
+}
+
+// ------------------------------------------------------------------------------
+
+let max_cal = 0
+let tap_attempts = 0
+let prev_offset = 0
+function toggle_calibration(skip_message = false, force_off = false){
+    if(calibrating || force_off){
+        document.getElementById("calibration").innerText = "Start"
+        if(!skip_message)
+            document.getElementById("cal_complete").innerText = ""
+        offset = prev_offset
+    }
+    else{
+        document.getElementById("calibration").innerText = "Stop"
+        calibration_progress(0)
+        max_cal = 0
+        tap_attempts = 0
+        prev_offset = offset
+        if(!skip_message)
+            document.getElementById("cal_complete").innerText = `Status: Waiting for first tap`
+
+        $("#cal_intro").hide()
+        $("#cal_instructions").hide()
+        $("#cal_tap_intro").show()
+        $("#calibration-tap").show()
+        $("#calibration-bar").show()
+        $("#cal_complete").show()
+        $("#new_offset").show()
+    }
+    calibrating = !calibrating
+}
+
+
+function calibration_progress(val){
+    if (val >= max_cal){
+        max_cal = val
+        console.log(val)
+        document.getElementById("calibration-progress").style.width = `${Math.round(val*100)}%`
+    }
+}
+
+let num_correct = 0
+function calibrateOffset(speed){
+    if (calibrating){
+        if (speed > 1.8){
+            offset -= 1.0
+            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            num_correct = 0
+        }
+        else if (speed <= 1.8 && speed > 1.75){
+            offset -= 0.5
+            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            num_correct = 0
+        }
+        else if (speed <= 1.75 && speed > 1.71){
+            offset -= 0.1
+            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            num_correct = 0
+        }
+        else if(speed <= 1.71 && speed >= 1.69){
+            num_correct += 1
+            if (num_correct == 5){
+                offset = parseFloat(offset.toFixed(1))
+                prev_offset = offset
+                document.getElementById("offset_value").innerText = ` ${offset.toFixed(1)}% `
+                document.getElementById("cal_complete").innerHTML = `Calibration complete! Offset is:`
+                document.getElementById("new_offset").innerHTML = `${offset}%`
+                toggle_calibration(true)
+                calibration_progress(1)
+                return
+            }
+        }
+        else if (speed < 1.69 && speed >= 1.65){
+            offset += 0.1
+            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            num_correct = 0
+        }
+        else if (speed < 1.65 && speed >= 1.60){
+            offset += 0.5
+            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            num_correct = 0
+        }
+        else{
+            offset += 1.0
+            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            num_correct = 0
+        }
+
+        tap_attempts += 1
+        if(tap_attempts == 60){
+            document.getElementById("cal_complete").innerHTML = `Status: Calibration failed!`
+            toggle_calibration(true)
+            max_cal = 0
+            calibration_progress(0)
+            offset = prev_offset
+            return
+        }
+
+        calibration_progress(1-(Math.abs(Math.min(0.099,1.7-speed)/0.1))-0.02)
+    }
 }

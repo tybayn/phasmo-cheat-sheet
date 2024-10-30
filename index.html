@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v7/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v7/style-v1.css"/>
-    <link rel="stylesheet" href="styles-v7/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="styles-v7/style-v2.css"/>
+    <link rel="stylesheet" href="styles-v7/style-mobile-v2.css"/>
     <link rel="stylesheet" href="themes-v7/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v7/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v7/wiki-v1.css" >
@@ -274,6 +274,51 @@
         </div>
     </div>
 
+    <div id="blackout_calibrate" style="display: none;">
+        <div id="info_box_calibrate">
+            <span class="icon" onclick="showCalibrate();toggle_calibration(false,true);"></span>
+            <h3>Calibrate</h3>
+            <div id="cal_tap_intro" class="info_text" style="display:none;">
+                While calibration is running, tap along with the ghost footsteps to begin<br>
+                (You can tap the "Tap" button directly, tap 'f' on your keyboard, or use the desktop link)
+            </div>
+            <button id="calibration-tap" class="yfont" onclick="bpm_tap()" style="display:none;">
+                <div>Tap</div>
+            </button>
+            <div id="calibration-bar" class="calibration-bar" style="display:none;">
+                <div id="calibration-progress" class="calibration-progress"></div>
+            </div>
+            <h4 id="cal_complete" style="display:none;"></h4>
+            <h1 id="new_offset" style="display:none;"></h1>
+            <div id="cal_intro" class="info_text">
+                If you find that the BPM Finder or Footsteps seem to be a little bit off, 
+                you can use this tool to calibrate an offset so that they match what you hear in game!
+            </div>
+            <div id="cal_instructions" class="info_text">
+                <ol style="margin:10px 0px 0px 0px; padding:5px; font-size: 10px;">
+                    <li>
+                        <b>Prepare the Cheat Sheet:</b><br>
+                        Link the ZN-Desktop-Link if prefered for tapping. Ghost speed will automatically be set
+                        to 100% and Blood Moon modifiers will be ignored during calibration.
+                    </li>
+                    <li>
+                        <b>Prepare in-game:</b><br>
+                        Enter a game that has 100% Ghost Speed, hiding spots, and the Weather is not Blood Moon. 
+                        Find a ghost that has normal speed ghost (1.7m/s). Then hide in a hiding spot where you
+                        can hear the ghost footsteps while it is hunting.
+                    </li>
+                    <li>
+                        <b>Calibrating:</b><br>
+                        While the ghost is hunting, tap along with the footsteps, attempting to remain as consistant as possible.
+                        Continue tapping until the progress bar below is full and says that the calibration was successful or
+                        not. If successful, it will automatically change the offset value in the settings.
+                    </li>
+                </ol>
+            </div>
+            <button id="calibration" class="yfont" onclick="toggle_calibration()">Start</button>
+        </div>
+    </div>
+
     <div id="blackout_image" style="display: none;" onclick="zoomOutImage()">
         <img loading="lazy" id="zoom_image" src="" onclick="zoomOutImage()">
         <div id="blackout_image_subtitle" style="display: none;"></div>
@@ -298,6 +343,7 @@
                     <span id="minus_speed" class="speed_icon" onclick="adjustOffset(0.1);setTempo();saveSettings();">+.1</span>
                     <span id="minus_speed" class="speed_icon" onclick="adjustOffset(1);setTempo();saveSettings();">+1</span>
                 </div>
+                <button id="calibrate-button" class="yfont" onclick="showCalibrate();">Calibrate</button>
                 <div class="modifier_note">(Adjust speed of footsteps)</div>
                 <hr>
                 <div class="modifier_volume yfont white">Speed Filter Logic</div>
@@ -903,6 +949,7 @@
             document.getElementById("wiki_box").style.left = "-100%";
             document.getElementById("maps_box").style.left = "-100%";
             document.getElementById("link_id_create_launch").style.display = "none";
+            document.getElementById("calibrate-button").style.display = "none";
         }
         else{
             document.getElementById("settings_box").style.left = "0px";
@@ -913,13 +960,13 @@
             document.getElementById("maps_box").style.left = "-388px";
         }
     </script>
-    <script src="themes-v7/themes-v2.js"></script>
+    <script src="themes-v7/themes-v3.js"></script>
     <script src="scripts-v7/audio_controller-v1.js"></script>
-    <script src="scripts-v7/metronome-v2.js"></script>
+    <script src="scripts-v7/metronome-v3.js"></script>
     <script src="scripts-v7/timer-v1.js"></script>
     <script src="discord-v7/discord-v1.js"></script>
     <script src="wiki-v7/wiki-v2.js"></script>
-    <script src="scripts-v7/filter-v3.js"></script>
+    <script src="scripts-v7/filter-v4.js"></script>
     <script src="scripts-v7/sanity-v2.js"></script>
     <script src="scripts-v7/wslink-v2.js"></script>
     <script src="scripts-v7/zn-v2.js"></script>

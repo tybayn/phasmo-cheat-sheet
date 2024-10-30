@@ -1219,6 +1219,10 @@ function showDebug(){
     $("#blackout_debug").fadeToggle(400)
 }
 
+function showCalibrate(){
+    $("#blackout_calibrate").fadeToggle(400)
+}
+
 function startSwipe(e){
     touchStartX = e.changedTouches[0].screenX
     touchStartY = e.changedTouches[0].screenY

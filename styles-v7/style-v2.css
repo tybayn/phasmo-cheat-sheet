@@ -152,7 +152,7 @@ body{
     }
     
 
-    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image{
+    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image, #blackout_calibrate{
         position: fixed;
         background: rgba(0,0,0,0.9);
         left: 0;
@@ -854,6 +854,20 @@ body{
         font-size: 20px;
     }
 
+    #calibrate-button{
+        width: 50%;
+        height: 30px;
+        margin-top: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+
+    #calibrate-button:hover{
+        background-color: #ffffff60;
+    }
+
     .speed_icon{
         display: flex;
         align-items: center;
@@ -892,7 +906,25 @@ body{
         font-size: 12px;
     }
 
-    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon, #info_box_debug .icon{
+    #info_box_calibrate {
+        z-index: 100;
+        width: 400px;
+        height: 400px;
+        background-color: #313248;
+        border-radius: 5px;  
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        flex-wrap: nowrap;
+        align-content: stretch;
+        align-items: flex-start;
+        color: #fff;
+        padding: 20px;
+        overflow-y: scroll;
+        font-size: 12px;
+    }
+
+    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon, #info_box_debug .icon, #info_box_calibrate .icon{
         position: absolute;
         top: 10px;
         right: 10px;
@@ -904,7 +936,7 @@ body{
         cursor: pointer;
     }
 
-    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before, #info_box_debug .icon:before{
+    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before, #info_box_debug .icon:before, #info_box_calibrate .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -914,7 +946,7 @@ body{
         top:4px;
     }
 
-    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after, #info_box_debug .icon:after{
+    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after, #info_box_debug .icon:after, #info_box_calibrate .icon:after{
         content:"";
         position: absolute;
         width:15px;
@@ -928,7 +960,7 @@ body{
         margin-bottom: 8px;
     }
 
-    #info_box .info_block, #info_box_voice .info_block, #info_box_zndl .info_block{
+    #info_box .info_block, #info_box_voice .info_block, #info_box_zndl .info_block, #info_box_calibrate .info_block{
         font-family: 'Courier New', Courier, monospace;
         box-shadow: inset 0 0 10px #161615;
         background: rgba(0,0,0,0.25);
@@ -943,13 +975,13 @@ body{
         padding-bottom: 5px !important;
     }
 
-    #info_box .info_block hr, #info_box_voice .info_block hr, #info_box_zndl .info_block hr{
+    #info_box .info_block hr, #info_box_voice .info_block hr, #info_box_zndl .info_block hr, #info_box_calibrate .info_block hr{
         width: calc(100% - 10px);
         margin-top: 15px;
         margin-bottom: 15px;
     }
 
-    #info_box .info_text, #info_box_voice .info_text, #info_box_zndl .info_text{
+    #info_box .info_text, #info_box_voice .info_text, #info_box_zndl .info_text, #info_box_calibrate .info_text{
         margin-left: 10px;
         display: flex;
         flex-direction: row;
@@ -2002,7 +2034,41 @@ body{
         justify-content: space-between;
     }
 
-    #tap:hover{
+    #calibration-tap{
+        font-size: 30px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        color: #ccc;
+        border: 2px solid #ccc;
+        background: none;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 25px 5px 5px 5px;
+        cursor: pointer;
+        z-index: 100;
+        width: 250px;
+        height: 45px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+    }
+
+    #calibration{
+        cursor: pointer;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px 5px 5px 5px;
+        width: 150px;
+        height: 40px;
+        align-self: center;
+        position: absolute;
+        bottom: 20px;
+    }
+
+    #tap:hover, #calibration-tap:hover, #calibration:hover{
         background-color: #ffffff60;
     }
 
@@ -2036,6 +2102,27 @@ body{
         font-size: 12px;
         text-align: center;
         width: 30px;
+    }
+
+    .calibration-bar{
+        height: 8px;
+        width: 250px;
+        border-radius: 4px;
+        background-color: #a3a3a3;
+        margin: 5px;
+        align-self: center;
+    }
+    
+    .calibration-progress{
+        height: 100%;
+        width: 0%;
+        border-radius: 4px;
+        background-color: #00bbff;
+        transition: width 1s ease;
+    }
+    
+    #cal_complete, #new_offset{
+        align-self: center;
     }
 
     .legend{

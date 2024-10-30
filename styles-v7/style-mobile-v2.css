@@ -67,7 +67,7 @@
     }
     
 
-    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image{
+    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image, #blackout_calibrate{
         position: fixed;
         background: rgba(0,0,0,0.9);
         left: 0;
