@@ -26,7 +26,8 @@ function accordian(elem){
         panel.style.height = "auto"
     }
 
-    setFlicker()
+    if(elem.id == "wiki-flickering")
+        setFlicker()
 }
 
 function openWikiFromURL(){
@@ -48,36 +49,59 @@ function openWikiFromURL(){
 }
 
 // -----------------------------------------------
+
+function rand_normal(mean = 0.5, stddev = 0.25) {
+    let u = Math.random();
+    let v = Math.random();
+    let num = Math.sqrt(-2.0 * Math.log(u == 0 ? 0.001 : u)) * Math.cos(2.0 * Math.PI * v);
+    num = num * stddev + mean;
+    return Math.min(Math.max(num, 0), 1);
+}
+
 let ghost_flicker_data = {
     "Normal":{
         "vis_max":0.30,
         "vis_min":0.08,
+        "vis_rand":Math.random,
         "invis_max":0.92,
         "invis_min":0.10,
+        "invis_rand":Math.random,
         "flicker_max":1.00,
         "flicker_min":0.30
     },
     "Phantom":{
         "vis_max":0.30,
         "vis_min":0.08,
+        "vis_rand":Math.random,
         "invis_max":1.92,
         "invis_min":0.70,
+        "invis_rand":rand_normal,
+        "invis_mean":0.80,
+        "invis_stddev":0.15,
         "flicker_max":2.00,
         "flicker_min":1.00
     },
     "Oni":{
         "vis_max":0.50,
         "vis_min":0.02,
+        "vis_rand":rand_normal,
+        "vis_mean":0.74,
+        "vis_stddev":0.22,
         "invis_max":0.50,
         "invis_min":0.01,
+        "invis_rand":rand_normal,
+        "invis_mean":0.15,
+        "invis_stddev":0.15,
         "flicker_max":1.00,
         "flicker_min":0.30
     },
     "Deogen":{
         "vis_max":0.30,
         "vis_min":0.20,
+        "vis_rand":Math.random,
         "invis_max":0.40,
         "invis_min":0.01,
+        "invis_rand":Math.random,
         "flicker_max":0.60,
         "flicker_min":0.30
     }
@@ -94,29 +118,31 @@ function startFlicker(elem){
     let invis_max = ghost_flicker_data[ghost].invis_max
     let flicker_min = ghost_flicker_data[ghost].flicker_min
     let flicker_max = ghost_flicker_data[ghost].flicker_max
+    let flicker_ghost = ghost_flicker_data[ghost]
 
     function flickerOn(){
         if (flickering){
             $(obj).show()
-            r = Math.round((Math.random() * (vis_max - vis_min) + vis_min) * 1000)
-            setTimeout(flickerOff,r,r/1000)
+            let r = flicker_ghost.vis_rand == Math.random ? flicker_ghost.vis_rand(flicker_ghost.vis_mean,flicker_ghost.vis_stddev) : flicker_ghost.vis_rand()
+            let flicker_on_time = (r * (vis_max - vis_min) + vis_min)
+            setTimeout(flickerOff,Math.round(flicker_on_time*1000),flicker_on_time)
         }
     }
 
     function flickerOff(on){
         if (flickering){
             $(obj).hide()
-            t_max = Math.min(flicker_max - on, invis_max)
-            t_min = Math.max(flicker_min - on, invis_min)
-            r = Math.round((Math.random() * (t_max - t_min) + t_min) * 1000)
-            setTimeout(flickerOn,r)
+            let r = flicker_ghost.invis_rand == Math.random ? flicker_ghost.invis_rand(flicker_ghost.invis_mean,flicker_ghost.invis_stddev) : flicker_ghost.invis_rand()
+            let flicker_off_time = (r * (invis_max - invis_min) + invis_min)
+            flicker_off_time = (on + flicker_off_time) > flicker_max ? (flicker_max - on) : (on + flicker_off_time) < flicker_min ? (flicker_min - on) : flicker_off_time
+            setTimeout(flickerOn,Math.round(flicker_off_time*1000))
         }
     }
 
-    r = Math.floor((Math.random() * (vis_max - vis_min) + vis_min) * 1000)
+    let start_filcker_time = (Math.random() * (vis_max - vis_min) + vis_min)
     $(obj).show()
     flickering = true
-    setTimeout(flickerOff,r,r)
+    setTimeout(flickerOff,Math.round(start_filcker_time*1000),start_filcker_time)
 }
 
 function setFlicker(){
