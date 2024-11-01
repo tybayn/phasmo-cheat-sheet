@@ -338,7 +338,7 @@ function get_ms(bpm){
     var cur_ms = 0
     var cur_offset = 1000
     bpm_speeds.forEach(function(m){
-        var t = speedToBpm[speed_idx](m) * (1+((offset)/100)) * (blood_moon ? (1 - bloodmoon_mult[speed_idx]) : 1.0)
+        var t = speedToBpm[speed_idx](m) * (1+((offset)/100)) * (blood_moon ? (1 + bloodmoon_mult[speed_idx]) : 1.0)
         if (Math.abs(bpm-t) < cur_offset){
             cur_offset = Math.abs(bpm-t)
             cur_ms = m
