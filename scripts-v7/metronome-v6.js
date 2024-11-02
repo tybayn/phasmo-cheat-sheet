@@ -298,7 +298,8 @@ function bpm_calc(forced=false) {
     if (avg_taps.length >= 2 || forced) {
         
         if(forced){
-            current_bpm = parseInt(document.getElementById('input_bpm').innerHTML.split("<br>")[0])
+            let current_bpm_value = document.getElementById('input_bpm').innerHTML.split("<br>")[0]
+            current_bpm = parseInt(current_bpm_value == '-' ? 0 : current_bpm_value)
         }
         else{
             current_bpm = get_bpm_average(avg_taps, bpm_precision)
@@ -307,8 +308,9 @@ function bpm_calc(forced=false) {
         var ex_ms = get_ms_exact(input_bpm)
         var av_ms = get_ms(input_bpm)
         input_ms = document.getElementById("bpm_type").checked ? av_ms : ex_ms
-        document.getElementById('input_bpm').innerHTML = `${Math.round(input_bpm)}<br>bpm`;
-        document.getElementById('input_speed').innerHTML = `${input_ms}<br>m/s`;
+        console.log(input_ms)
+        document.getElementById('input_bpm').innerHTML = input_bpm == 0 ? '-' : `${Math.round(input_bpm)}<br>bpm`;
+        document.getElementById('input_speed').innerHTML = input_bpm == 0 ? '-' : `${input_ms}<br>m/s`;
 
         calibrateOffset(ex_ms)
 
@@ -325,8 +327,8 @@ function bpm_calc(forced=false) {
             // Om nom nom
         }
         send_bpm_link(
-            (input_ms == 0 ? "-" : Math.round(input_bpm)).toString(),
-            (input_ms == 0 ? "-" : input_ms).toString(),
+            (input_bpm == 0 ? "-" : Math.round(input_bpm)).toString(),
+            (input_bpm == 0 ? "-" : input_ms).toString(),
             ["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())]
         )
         saveSettings()
