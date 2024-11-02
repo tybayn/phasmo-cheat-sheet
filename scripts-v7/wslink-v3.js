@@ -11,6 +11,10 @@ const lang = "en"
 
 let broadcast_interval = null
 let broadcast_closing = false
+var muteBroadcast = false
+let broadcast_audio = new Audio("assets/broadcast-alert.mp3")
+broadcast_audio.preload = 'auto';
+broadcast_audio.load();
 
 var my_pos = 0
 var pos_colors = {
@@ -20,6 +24,10 @@ var pos_colors = {
     4:"ca36dd"
 }
 
+function mute_broadcast(){
+    muteBroadcast = document.getElementById("mute_broadcast").checked
+}
+
 function close_broadcast(){
     broadcast_closing = true
     clearInterval(broadcast_interval);
@@ -27,10 +35,16 @@ function close_broadcast(){
     document.getElementById("broadcast-timer-bar").style.width = "100%";
 }
 
-function broadcast(message, remain=10000){
+function broadcast(message, remain=10000, play_sound = true){
     broadcast_closing = false
     clearInterval(broadcast_interval);
     document.getElementById("broadcast-message").innerText = message;
+
+    if(play_sound && !muteBroadcast){
+        broadcast_audio.volume = volume
+        broadcast_audio.play()
+    }
+
     $("#broadcast").fadeIn(500)
     let timerBar = document.getElementById("broadcast-timer-bar");
     let duration = 10000
@@ -55,7 +69,8 @@ function resume_broadcast(){
     if (!broadcast_closing){
         broadcast(
             document.getElementById("broadcast-message").innerText,
-            parseFloat(document.getElementById("broadcast-timer-bar").style.width)/100 * 10000
+            parseFloat(document.getElementById("broadcast-timer-bar").style.width)/100 * 10000,
+            false
         )
     }
 }
