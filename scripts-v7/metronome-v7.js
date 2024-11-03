@@ -309,8 +309,8 @@ function bpm_calc(forced=false) {
         var av_ms = get_ms(input_bpm)
         input_ms = document.getElementById("bpm_type").checked ? av_ms : ex_ms
         console.log(input_ms)
-        document.getElementById('input_bpm').innerHTML = input_bpm == 0 ? '-' : `${Math.round(input_bpm)}<br>bpm`;
-        document.getElementById('input_speed').innerHTML = input_bpm == 0 ? '-' : `${input_ms}<br>m/s`;
+        document.getElementById('input_bpm').innerHTML = input_bpm == 0 ? '0<br>bpm' : `${Math.round(input_bpm)}<br>bpm`;
+        document.getElementById('input_speed').innerHTML = input_bpm == 0 ? '0<br>m/s' : `${input_ms}<br>m/s`;
 
         calibrateOffset(ex_ms)
 
