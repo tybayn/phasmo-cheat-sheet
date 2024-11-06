@@ -554,6 +554,9 @@ function link_link(){
                         bpm_tap()
                     }
                 }
+                if (incoming_state['action'].toUpperCase() == "BLOODMOON"){
+                    toggleBloodMoon()
+                }
                 if (incoming_state['action'].toUpperCase() == "SANITY"){
                     if(incoming_state['value'].toUpperCase() == "TOGGLE"){
                         toggle_sanity_drain()
