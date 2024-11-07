@@ -707,15 +707,14 @@
         display: flex;
         align-items: center;
         color: #ffffffa0;
-        margin-top: 40px;
-        margin: 15px 10px 0px 10px;
+        margin: 30px 10px 0px 10px;
         align-self: center;
-        font-size: 10px;
+        font-size: 20px;
     }
 
     .thankyou_text_img img{
         border-radius: 50%;
-        height: 45px;
+        height: 80px;
         margin-right: 10px;
     }
 

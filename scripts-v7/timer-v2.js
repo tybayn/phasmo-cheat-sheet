@@ -200,6 +200,7 @@ function start_timer(){
     }
 
     var time = 180 +1
+    var prev_t = ""
     var snds_played = [0,0,0,0,0,0,0]
 
     var deadline = new Date(Date.now() + time *1000);
@@ -317,14 +318,18 @@ function start_timer(){
         sec_val = t<0 ? "00" : zeroPad(seconds,2);
         d_min_val = t<0 ? "00" : zeroPad(d_minutes,2);
         d_sec_val = t<0 ? "00" : zeroPad(d_seconds,2);
+        d_val = `${d_min_val[1]}:${d_sec_val}`
+        if(prev_t != d_val){
+            send_timer_link("TIMER_VAL",`${d_val}`,is_split && is_spirit ? 2 : is_split && is_demon ? 1 : 0)
 
-        send_timer_link("TIMER_VAL",`${d_min_val[1]}:${d_sec_val}`,is_split && is_spirit ? 2 : is_split && is_demon ? 1 : 0)
+            min_obj.innerHTML = min_val
+            sec_obj.innerHTML = sec_val
 
-        min_obj.innerHTML = min_val
-        sec_obj.innerHTML = sec_val
+            var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / (time-1) : (180 - timeleft) * progress_bar.width() / (time-1);
+            progress_bar_inner.style.width = progressBarWidth;
 
-        var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / (time-1) : (180 - timeleft) * progress_bar.width() / (time-1);
-        progress_bar_inner.style.width = progressBarWidth;
+            prev_t = d_val
+        }
 
         if(timeleft <= 0){
             smudge_worker.terminate();
@@ -392,6 +397,7 @@ function start_cooldown_timer(){
     }
 
     var time = 25 +1
+    var prev_t = ""
     var snds_played = [0,0,0,0,0]
 
     var deadline = new Date(Date.now() + time *1000);
@@ -474,14 +480,19 @@ function start_cooldown_timer(){
 
         min_val = t<0 ? "00" : zeroPad(minutes,2);
         sec_val = t<0 ? "00" : zeroPad(seconds,2);
+        d_val = `${min_val[1]}:${sec_val}`
+        if(prev_t != d_val){
 
-        send_timer_link("COOLDOWN_VAL",`${min_val[1]}:${sec_val}`,is_split && is_demon ? 1 : 0)
+            send_timer_link("COOLDOWN_VAL",`${d_val}`,is_split && is_demon ? 1 : 0)
 
-        min_obj.innerHTML = min_val
-        sec_obj.innerHTML = sec_val
+            min_obj.innerHTML = min_val
+            sec_obj.innerHTML = sec_val
 
-        var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / (time-1) : (25 - timeleft) * progress_bar.width() / (time-1);
-        progress_bar_inner.style.width = progressBarWidth;
+            var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / (time-1) : (25 - timeleft) * progress_bar.width() / (time-1);
+            progress_bar_inner.style.width = progressBarWidth;
+
+            prev_t = d_val
+        }
 
         if(timeleft <= 0){
             cooldown_worker.terminate();
@@ -549,6 +560,7 @@ function start_hunt_timer(){
     }
 
     var time = map_hunt_lengths[map_difficulty][map_size] +1;
+    var prev_t = ""
     var snds_played = [0,0,0,0,0,0,0]
 
     var deadline = new Date(Date.now() + time *1000);
@@ -658,14 +670,19 @@ function start_hunt_timer(){
         sec_val = t<0 ? "00" : zeroPad(seconds,2);
         d_min_val = t<0 ? "00" : zeroPad(d_minutes,2);
         d_sec_val = t<0 ? "00" : zeroPad(d_seconds,2);
+        d_val = `${d_min_val[1]}:${d_sec_val}`
+        if(prev_t != d_val){
 
-        send_timer_link("HUNT_VAL",`${d_min_val[1]}:${d_sec_val}`,is_split && is_cursed ? 1 : 0)
+            send_timer_link("HUNT_VAL",`${d_val}`,is_split && is_cursed ? 1 : 0)
 
-        min_obj.innerHTML = min_val
-        sec_obj.innerHTML = sec_val
+            min_obj.innerHTML = min_val
+            sec_obj.innerHTML = sec_val
 
-        var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / (time-1) : (map_hunt_lengths[map_difficulty][map_size] - timeleft) * progress_bar.width() / (time-1);
-        progress_bar_inner.style.width = progressBarWidth;
+            var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / (time-1) : (map_hunt_lengths[map_difficulty][map_size] - timeleft) * progress_bar.width() / (time-1);
+            progress_bar_inner.style.width = progressBarWidth;
+
+            prev_t = d_val
+        }
 
         if(timeleft <= 0){
             hunt_worker.terminate();

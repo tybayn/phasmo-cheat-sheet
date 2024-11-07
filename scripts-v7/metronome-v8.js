@@ -308,7 +308,6 @@ function bpm_calc(forced=false) {
         var ex_ms = get_ms_exact(input_bpm)
         var av_ms = get_ms(input_bpm)
         input_ms = document.getElementById("bpm_type").checked ? av_ms : ex_ms
-        console.log(input_ms)
         document.getElementById('input_bpm').innerHTML = input_bpm == 0 ? '0<br>bpm' : `${Math.round(input_bpm)}<br>bpm`;
         document.getElementById('input_speed').innerHTML = input_bpm == 0 ? '0<br>m/s' : `${input_ms}<br>m/s`;
 
@@ -501,7 +500,6 @@ function toggle_calibration(skip_message = false, force_off = false){
 function calibration_progress(val){
     if (val >= max_cal){
         max_cal = val
-        console.log(val)
         document.getElementById("calibration-progress").style.width = `${Math.round(val*100)}%`
     }
 }

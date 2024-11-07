@@ -1145,7 +1145,7 @@ body{
         grid-column: 1;
         display: grid;
         width:100%;
-        max-height: calc(100vh - 16px);
+        max-height: calc(100dvh - 16px);
         grid-template-rows: 30px auto 25px 33px 55px 20px 20px;
         background-color: #313248;
         margin: -8px;
@@ -2173,7 +2173,7 @@ body{
     .cards{
         grid-column: 2;
         height: 0;
-        min-height: calc(100% - 14px);
+        min-height: calc(100dvh - 14px);
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
