@@ -111,7 +111,7 @@ function loadAllAndConnect(){
                     $('#room_id_link').show()
                     $('#link_id_create').show()
                     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-                    if(!mquery.matches)
+                    if(!mquery.matches && navigator.platform.toLowerCase().includes('win'))
                         $('#link_id_create_launch').show()
                 }
                 else{
@@ -149,7 +149,7 @@ function loadAllAndConnect(){
                 $('#room_id_link').show()
                 $('#link_id_create').show()
                 mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-                if(!mquery.matches)
+                if(!mquery.matches && navigator.platform.toLowerCase().includes('win'))
                     $('#link_id_create_launch').show()
             })
             .then(x =>{

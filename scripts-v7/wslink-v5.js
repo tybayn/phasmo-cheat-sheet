@@ -527,7 +527,7 @@ function link_link(){
                             dlws.send('{"action":"PINGKILL"}')
                             $("#link_id_create").show()
                             mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-                            if(!mquery.matches)
+                            if (!mquery.matches && navigator.platform.toLowerCase().includes('win'))
                                 $("#link_id_create_launch").show()
                             $("#link_id_disconnect").hide()
                             document.getElementById("link_id_note").innerText = "ERROR: Link Lost Connection!"
@@ -800,7 +800,9 @@ function disconnect_link(reset=false,has_status=false){
             dlws.send('{"action":"KILL"}')
         }
         $("#link_id_create").show()
-        $("#link_id_create_launch").show()
+        mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+        if (!mquery.matches && navigator.platform.toLowerCase().includes('win'))
+            $("#link_id_create_launch").show()
         $("#link_id_disconnect").hide()
         toggleSanitySettings()
         if(!has_status){
