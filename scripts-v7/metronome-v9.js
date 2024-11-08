@@ -164,6 +164,7 @@ function draw_graph(clear = true){
     try{
         c.reset()
     } catch(e){
+        c.clearRect(0, 0, c.canvas.width, c.canvas.height)
         c.width = c.width + 0
     }
 

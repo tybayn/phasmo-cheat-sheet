@@ -957,7 +957,7 @@ function parse_speech(vtext){
 
 }
 
-if (("webkitSpeechRecognition" in window || "speechRecognition" in window) && navigator.userAgent.toLowerCase().match(/chrome|edge/) && !('brave' in navigator)) {
+if (("webkitSpeechRecognition" in window || "speechRecognition" in window) && navigator.userAgent.toLowerCase().match(/chrome|edge|crios/) && !('brave' in navigator)) {
     let speechRecognition = new webkitSpeechRecognition() || new SpeechRecognition();
     let speechRecognitionList = new webkitSpeechGrammarList() || new SpeechGrammarList();
     let stop_listen = true

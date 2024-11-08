@@ -1,9 +1,5 @@
 @media screen and (pointer: coarse) and (max-device-width: 600px) {
 
-    * {
-        touch-action: manipulation;
-    }
-
     body{
         overflow: hidden;
     }

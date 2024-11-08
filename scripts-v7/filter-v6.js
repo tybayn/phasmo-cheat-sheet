@@ -1611,7 +1611,7 @@ function saveSettings(reset = false){
     user_settings['domo_side'] = $("#domovoi").hasClass("domovoi-flip") ? 1 : 0;
     user_settings['priority_sort'] = document.getElementById("priority_sort").checked ? 1 : 0;
     user_settings['disable_particles'] = document.getElementById("disable_particles").checked ? 1 : 0;
-    user_settings['map'] = $(".selected_map")[0].id
+    user_settings['map'] = $(".selected_map")[0] ? $(".selected_map")[0].id : 'tanglewood'
     user_settings['theme'] = $("#theme").val();
     user_settings['blood_moon'] = $("#blood-moon-icon").hasClass("blood-moon-active") ? 1 : 0
 
