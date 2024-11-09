@@ -132,7 +132,7 @@ function startFlicker(elem, is_obake = false){
     let flicker_min = ghost_flicker_data[ghost].flicker_min
     let flicker_max = ghost_flicker_data[ghost].flicker_max
     let flicker_ghost = ghost_flicker_data[ghost]
-    let num_blink = 0
+    let num_blink = 1
 
     function flickerOn(){
         if (flickering){
