@@ -59,14 +59,14 @@ function rand_normal(mean = 0.5, stddev = 0.25) {
 }
 
 blinks = {
-    "11": "https://i.imgur.com/j0JhpT4.png",
-    "28": "https://i.imgur.com/UsN4kIZ.png",
-    "38": "https://i.imgur.com/U2cHXrN.png",
-    "53": "https://i.imgur.com/Ek0n29p.png",
-    "61": "https://i.imgur.com/j0JhpT4.png",
-    "79": "https://i.imgur.com/UsN4kIZ.png",
-    "104": "https://i.imgur.com/U2cHXrN.png",
-    "119": "https://i.imgur.com/Ek0n29p.png",
+    "12": "https://i.imgur.com/j0JhpT4.png",
+    "27": "https://i.imgur.com/UsN4kIZ.png",
+    "39": "https://i.imgur.com/U2cHXrN.png",
+    "54": "https://i.imgur.com/Ek0n29p.png",
+    "62": "https://i.imgur.com/j0JhpT4.png",
+    "80": "https://i.imgur.com/UsN4kIZ.png",
+    "105": "https://i.imgur.com/U2cHXrN.png",
+    "120": "https://i.imgur.com/Ek0n29p.png",
 }
 
 let ghost_flicker_data = {
