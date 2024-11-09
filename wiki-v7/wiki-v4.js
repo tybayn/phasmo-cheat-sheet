@@ -58,6 +58,17 @@ function rand_normal(mean = 0.5, stddev = 0.25) {
     return Math.min(Math.max(num, 0), 1);
 }
 
+blinks = {
+    "11": "https://i.imgur.com/j0JhpT4.png",
+    "28": "https://i.imgur.com/UsN4kIZ.png",
+    "38": "https://i.imgur.com/U2cHXrN.png",
+    "53": "https://i.imgur.com/Ek0n29p.png",
+    "61": "https://i.imgur.com/j0JhpT4.png",
+    "79": "https://i.imgur.com/UsN4kIZ.png",
+    "104": "https://i.imgur.com/U2cHXrN.png",
+    "119": "https://i.imgur.com/Ek0n29p.png",
+}
+
 let ghost_flicker_data = {
     "Normal":{
         "vis_max":0.30,
@@ -109,9 +120,11 @@ let ghost_flicker_data = {
 
 let flickering = false
 
-function startFlicker(elem){
+function startFlicker(elem, is_obake = false){
     let obj = $(elem).find("#ghost-flicker")
+    let obj_img = $(obj).find("img")
     let ghost = $(elem).find("#flicker-ghost-name")[0].innerText
+    ghost = ghost == "Obake" ? "Normal" : ghost
     let vis_min = ghost_flicker_data[ghost].vis_min
     let vis_max = ghost_flicker_data[ghost].vis_max
     let invis_min = ghost_flicker_data[ghost].invis_min
@@ -119,6 +132,7 @@ function startFlicker(elem){
     let flicker_min = ghost_flicker_data[ghost].flicker_min
     let flicker_max = ghost_flicker_data[ghost].flicker_max
     let flicker_ghost = ghost_flicker_data[ghost]
+    let num_blink = 0
 
     function flickerOn(){
         if (flickering){
@@ -132,6 +146,13 @@ function startFlicker(elem){
     function flickerOff(on){
         if (flickering){
             $(obj).hide()
+            num_blink = (num_blink + 1) % 132
+            if (is_obake && blinks.hasOwnProperty(num_blink.toString())){
+                $(obj_img).attr('src',blinks[num_blink.toString()])
+            }
+            if (is_obake && blinks.hasOwnProperty((num_blink - 1).toString())){
+                $(obj_img).attr('src','https://i.imgur.com/U2cHXrN.png')
+            }
             let r = flicker_ghost.invis_rand == Math.random ? flicker_ghost.invis_rand(flicker_ghost.invis_mean,flicker_ghost.invis_stddev) : flicker_ghost.invis_rand()
             let flicker_off_time = (r * (invis_max - invis_min) + invis_min)
             flicker_off_time = (on + flicker_off_time) > flicker_max ? (flicker_max - on) : (on + flicker_off_time) < flicker_min ? (flicker_min - on) : flicker_off_time
@@ -154,6 +175,8 @@ function setFlicker(){
         startFlicker(document.getElementById("normal-flicker"))
         startFlicker(document.getElementById("oni-flicker"))
         startFlicker(document.getElementById("deogen-flicker"))
+        startFlicker(document.getElementById("normal-flicker-shift"))
+        startFlicker(document.getElementById("obake-flicker-shift"),true)
     }
 }
 

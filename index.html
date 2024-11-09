@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="styles-v7/style-mobile-v6.css"/>
     <link rel="stylesheet" href="themes-v7/themes-v2.css"/>
     <link rel="stylesheet" href="discord-v7/discord-v1.css" >
-    <link rel="stylesheet" href="wiki-v7/wiki-v1.css" >
+    <link rel="stylesheet" href="wiki-v7/wiki-v2.css" >
     <link rel="stylesheet" href="wiki-v7/wiki-spoiler-v1.css" >
     <link rel="stylesheet" href="events-v7/events-v1.css" >
     <link rel="stylesheet" href="models-v7/models-v1.css" >
@@ -975,7 +975,7 @@
     <script src="scripts-v7/metronome-v9.js"></script>
     <script src="scripts-v7/timer-v2.js"></script>
     <script src="discord-v7/discord-v1.js"></script>
-    <script src="wiki-v7/wiki-v3.js"></script>
+    <script src="wiki-v7/wiki-v4.js"></script>
     <script src="scripts-v7/filter-v6.js"></script>
     <script src="scripts-v7/sanity-v2.js"></script>
     <script src="scripts-v7/wslink-v5.js"></script>
@@ -994,7 +994,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v7/wiki-v9.html",() => {
+                $("#wiki-body").load("wiki-v7/wiki-v10.html",() => {
                     resolve("Ghost data loaded")
                 })
             })
