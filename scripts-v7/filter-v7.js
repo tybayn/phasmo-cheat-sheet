@@ -1582,7 +1582,7 @@ function flashMode(){
 }
 
 function load_default(key, def){
-    return user_settings.hasOwnProperty(key) ? ((user_settings[key] == '' || user_settings[key] == null) ? def : user_settings[key]) : def
+    return user_settings.hasOwnProperty(key) ? ((user_settings[key] === '' || user_settings[key] === null) ? def : user_settings[key]) : def
 }
 
 function saveSettings(reset = false){

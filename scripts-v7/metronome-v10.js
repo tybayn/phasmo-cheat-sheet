@@ -44,8 +44,8 @@ let bpmToSpeed = {
 }
 
 let bloodmoon_mult = {
-    0: 0.175,
-    1: 0.1625,
+    0: 0.15,
+    1: 0.15,
     2: 0.15,
     3: 0.1375,
     4: 0.125
@@ -337,12 +337,12 @@ function bpm_calc(forced=false) {
 
 function get_ms(bpm){
     var speed_idx = parseInt($("#ghost_modifier_speed").val())
+    var t_ms= bpmToSpeed[speed_idx](bpm) *(1+((offset)/100)) * (blood_moon ? (1 - bloodmoon_mult[speed_idx]) : 1.0)
     var cur_ms = 0
     var cur_offset = 1000
     bpm_speeds.forEach(function(m){
-        var t = speedToBpm[speed_idx](m) * (1+((offset)/100)) * (blood_moon ? (1 + bloodmoon_mult[speed_idx]) : 1.0)
-        if (Math.abs(bpm-t) < cur_offset){
-            cur_offset = Math.abs(bpm-t)
+        if (Math.abs(t_ms-m) < cur_offset){
+            cur_offset = Math.abs(t_ms-m)
             cur_ms = m
         }
     })
