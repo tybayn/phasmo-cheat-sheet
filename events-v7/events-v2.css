@@ -6,6 +6,7 @@
 
     #event_details{
         padding: 0px 3px 5px 5px;
+        font-weight: 100;
     }
 
     #event_details .spoilers{
