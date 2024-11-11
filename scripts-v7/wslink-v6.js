@@ -738,7 +738,7 @@ function send_evidence_link(reset = false){
     if(hasDLLink){
         var evi_list = [];
         for (const [key, value] of Object.entries(state['evidence'])){ 
-            evi_list.push(`${key}:${reset ? 0 : $(document.getElementById(key)).hasClass("block")? -2 : value}`)
+            evi_list.push(`${key}:${reset ? 0 : $(document.getElementById(key)).hasClass("block") ? -2 : $(document.getElementById(key).querySelector("#checkbox")).hasClass("faded") ? -1 : value}`)
         }
         var cur_num_evi = document.getElementById("num_evidence").value
         cur_num_evi = cur_num_evi == "-1" ? document.getElementById("cust_num_evidence").value : cur_num_evi
