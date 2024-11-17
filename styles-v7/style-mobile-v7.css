@@ -416,6 +416,19 @@
         left: 7px;
     }
 
+    .data-warning {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        color: #fbfe9f;
+        margin-bottom: 15px;
+    }
+
+    .data-warning img{
+        height: 50px;
+        padding-right:20px
+    }
+
     #maps_box{
         position: fixed;
         top: 0;

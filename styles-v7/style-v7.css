@@ -493,6 +493,19 @@ body{
         left: 3px;
     }
 
+    .data-warning {
+        display: flex;
+        align-items: center;
+        font-size: 10px;
+        color: #fbfe9f;
+        margin-bottom: 15px;
+    }
+
+    .data-warning img{
+        height: 20px;
+        padding-right:10px
+    }
+
     #maps_box{
         position: fixed;
         top: 0;
