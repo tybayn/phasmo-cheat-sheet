@@ -478,6 +478,21 @@ function link_link(){
                 if (incoming_state['action'].toUpperCase() == "BROADCAST"){
                     broadcast(incoming_state['message'])
                 }
+                if (incoming_state['action'].toUpperCase() == "NEXTMAP"){
+
+                    let cur_map_elem = document.getElementById("maps_list").querySelector(".selected_map").nextSibling
+                    if (cur_map_elem === undefined || cur_map_elem === null)
+                        cur_map_elem = document.getElementById("maps_list").children[0]
+                    changeMap(cur_map_elem,cur_map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
+                    send_cur_map_link()
+                }
+                if (incoming_state['action'].toUpperCase() == "PREVMAP"){
+                    let cur_map_elem = document.getElementById("maps_list").querySelector(".selected_map").previousSibling
+                    if (cur_map_elem === undefined || cur_map_elem === null)
+                        cur_map_elem = document.getElementById("maps_list").children[document.getElementById("maps_list").children.length-1]
+                    changeMap(cur_map_elem,cur_map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
+                    send_cur_map_link()
+                }
                 if (incoming_state['action'].toUpperCase() == "GHOSTDATA"){
                     send_ghost_data_link(incoming_state['ghost'])
                 }
@@ -517,6 +532,7 @@ function link_link(){
                     send_timer_link("COOLDOWN_VAL","0:00")
                     send_timer_link("HUNT_VAL","0:00")
                     send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
+                    send_cur_map_link()
                     send_blood_moon_link($("#blood-moon-icon").hasClass("blood-moon-active"))
                     filter()
                     toggleSanitySettings()
@@ -770,6 +786,13 @@ function send_blood_moon_link(value){
 function send_sanity_link(value, color){
     if(hasDLLink){
         dlws.send(`{"action":"SANITY","value":${value},"color":"${color}"}`)
+    }
+}
+
+function send_cur_map_link(){
+    if(hasDLLink){
+        cur_map_link = document.getElementById("map_image").style.backgroundImage.slice(4,-1).replace(/"/g,"")
+        dlws.send(`{"action":"MAP","message":"${cur_map_link}"}`)
     }
 }
 
