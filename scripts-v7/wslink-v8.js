@@ -459,6 +459,7 @@ function link_link(){
         $("#link_id_create").hide()
         $("#link_id_create_launch").hide()
         $("#link_id_disconnect").show()
+        toggleSanitySettings()
         document.getElementById("link_id_note").innerText = "STATUS: Awaiting Desktop Link"
         document.getElementById("dllink_status").className = "pending"
     }
@@ -535,7 +536,6 @@ function link_link(){
                     send_cur_map_link()
                     send_blood_moon_link($("#blood-moon-icon").hasClass("blood-moon-active"))
                     filter()
-                    toggleSanitySettings()
                     await_dlws_pong = false
                     dlws_ping = setInterval(function(){
                         if (await_dlws_pong){
@@ -827,7 +827,6 @@ function disconnect_link(reset=false,has_status=false){
         if (!mquery.matches && navigator.platform.toLowerCase().includes('win'))
             $("#link_id_create_launch").show()
         $("#link_id_disconnect").hide()
-        toggleSanitySettings()
         if(!has_status){
             document.getElementById("link_id_note").innerText = "STATUS: Not linked"
             document.getElementById("dllink_status").className = null
@@ -835,6 +834,7 @@ function disconnect_link(reset=false,has_status=false){
         }
         setCookie("link_id","",-1)
         hasDLLink=false
+        toggleSanitySettings()
     }
     dlws.close()
 }
