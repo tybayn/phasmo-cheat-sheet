@@ -96,6 +96,6 @@ const ZNLANG = {
     "maps":{
         "sunnymeadows":["sm"],
         "brownstone":["high school"],
-        "":["restricted ","street","drive","road","farmhouse"," high school","campsite","camp","wing"]
+        "":["restricted ","street","drive","road","farmhouse"," high school","campsite","camp","wing","chapel"]
     }
 }
