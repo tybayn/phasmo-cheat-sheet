@@ -767,6 +767,7 @@ function parse_speech(vtext){
             domovoi_msg += `: ${smallest_map}`
 
             changeMap(document.getElementById(smallest_map),all_maps[smallest_map])
+            send_cur_map_link()
         }
 
         showMaps(true,false)
