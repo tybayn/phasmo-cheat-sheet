@@ -480,7 +480,6 @@ function link_link(){
                     broadcast(incoming_state['message'])
                 }
                 if (incoming_state['action'].toUpperCase() == "NEXTMAP"){
-
                     let cur_map_elem = document.getElementById("maps_list").querySelector(".selected_map").nextSibling
                     if (cur_map_elem === undefined || cur_map_elem === null)
                         cur_map_elem = document.getElementById("maps_list").children[0]
@@ -528,6 +527,7 @@ function link_link(){
                     document.getElementById("link_id_note").innerText = `STATUS: Linked`
                     document.getElementById("dllink_status").className = "connected"
                     dlws.send('{"action":"LINK"}')
+                    send_map_preload_link()
                     send_sanity_link(Math.round(sanity),sanity_color())
                     send_timer_link("TIMER_VAL","0:00")
                     send_timer_link("COOLDOWN_VAL","0:00")
@@ -786,6 +786,12 @@ function send_blood_moon_link(value){
 function send_sanity_link(value, color){
     if(hasDLLink){
         dlws.send(`{"action":"SANITY","value":${value},"color":"${color}"}`)
+    }
+}
+
+function send_map_preload_link(){
+    if(hasDLLink){
+        dlws.send(`{"action":"MAPPRELOAD","list":["${Object.values(all_maps).join('","')}"]}`)
     }
 }
 
