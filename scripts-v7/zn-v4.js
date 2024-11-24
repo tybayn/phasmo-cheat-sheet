@@ -345,7 +345,7 @@ function loadAllAndConnect(){
             var first = true
             for(var i = 0; i < data.length; i++) {
                 all_maps[data[i]['div_id']] = data[i]['file_url']
-                map_html += `<button class="maps_button${first ? " selected_map" : ""}" id="${data[i]['div_id']}" onclick="changeMap(this,'${data[i]['file_url']}');saveSettings();"><div class="map_size ${data[i]['size'].toLowerCase()}">${data[i]['size']}</div>${data[i]['name']}</button>`
+                map_html += `<button class="maps_button${first ? " selected_map" : ""}" id="${data[i]['div_id']}" onclick="changeMap(this,'${data[i]['file_url']}');send_cur_map_link();saveSettings();"><div class="map_size ${data[i]['size'].toLowerCase()}">${data[i]['size']}</div>${data[i]['name']}</button>`
                 first = false
             }
             $("#maps_list").html(map_html)
