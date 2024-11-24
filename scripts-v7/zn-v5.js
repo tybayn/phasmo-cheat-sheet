@@ -342,11 +342,13 @@ function loadAllAndConnect(){
         .then(data => data.json())
         .then(data => {
             var map_html = ""
-            var first = true
+            var usr_set = JSON.parse(getCookie("settings"))
+            var usr_map = usr_set.hasOwnProperty('map') ? usr_set['map'] == "6 Tanglewood Drive" ? "tanglewood" : usr_set['map']: "tanglewood"
+
+            console.log(usr_map)
             for(var i = 0; i < data.length; i++) {
                 all_maps[data[i]['div_id']] = data[i]['file_url']
-                map_html += `<button class="maps_button${first ? " selected_map" : ""}" id="${data[i]['div_id']}" onclick="changeMap(this,'${data[i]['file_url']}');send_cur_map_link();saveSettings();"><div class="map_size ${data[i]['size'].toLowerCase()}">${data[i]['size']}</div>${data[i]['name']}</button>`
-                first = false
+                map_html += `<button class="maps_button${data[i]['div_id'] == usr_map ? " selected_map" : ""}" id="${data[i]['div_id']}" onclick="changeMap(this,'${data[i]['file_url']}');send_cur_map_link();saveSettings();"><div class="map_size ${data[i]['size'].toLowerCase()}">${data[i]['size']}</div>${data[i]['name']}</button>`
             }
             $("#maps_list").html(map_html)
 

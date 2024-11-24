@@ -535,7 +535,6 @@ function link_link(){
                     send_timer_link("COOLDOWN_VAL","0:00")
                     send_timer_link("HUNT_VAL","0:00")
                     send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
-                    send_cur_map_link()
                     send_blood_moon_link($("#blood-moon-icon").hasClass("blood-moon-active"))
                     filter()
                     await_dlws_pong = false
@@ -638,6 +637,7 @@ function link_link(){
 
         } catch (error){
             console.log(event.data)
+            console.error(error)
         }
     }
 }
@@ -793,7 +793,8 @@ function send_sanity_link(value, color){
 
 function send_map_preload_link(){
     if(hasDLLink){
-        dlws.send(`{"action":"MAPPRELOAD","list":["${Object.values(all_maps).join('","')}"]}`)
+        cur_map_link = document.getElementById("map_image").style.backgroundImage.slice(4,-1).replace(/"/g,"")
+        dlws.send(`{"action":"MAPPRELOAD","message":"${cur_map_link}","list":["${Object.values(all_maps).join('","')}"]}`)
     }
 }
 
