@@ -484,6 +484,7 @@ function link_link(){
                     if (cur_map_elem === undefined || cur_map_elem === null)
                         cur_map_elem = document.getElementById("maps_list").children[0]
                     changeMap(cur_map_elem,cur_map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
+                    saveSettings()
                     send_cur_map_link()
                 }
                 if (incoming_state['action'].toUpperCase() == "PREVMAP"){
@@ -491,6 +492,7 @@ function link_link(){
                     if (cur_map_elem === undefined || cur_map_elem === null)
                         cur_map_elem = document.getElementById("maps_list").children[document.getElementById("maps_list").children.length-1]
                     changeMap(cur_map_elem,cur_map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
+                    saveSettings()
                     send_cur_map_link()
                 }
                 if (incoming_state['action'].toUpperCase() == "GHOSTDATA"){

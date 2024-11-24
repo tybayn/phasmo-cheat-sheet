@@ -1709,6 +1709,7 @@ function loadSettings(){
     updateMapDifficulty(user_settings['num_evidences'])
     showCustom()
     flashMode()
+    send_cur_map_link()
 }
 
 function resetSettings(){
