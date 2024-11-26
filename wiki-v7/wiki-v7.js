@@ -222,7 +222,7 @@ function generateWikiShareLink(elem){
     let url = ""
     let e = elem.parentElement.previousElementSibling
     do {
-        url = `${e.id.replace("wiki-","")}${url == "" ? "" : ">>"}${url}`
+        url = `${e.id.replace("wiki-","")}${url == "" ? "" : "."}${url}`
         e = e.parentElement.previousElementSibling
     } while (e.id != "wiki-body" && e.id != "");
 
