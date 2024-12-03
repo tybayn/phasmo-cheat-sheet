@@ -345,7 +345,6 @@ function loadAllAndConnect(){
             var usr_set = JSON.parse(getCookie("settings"))
             var usr_map = usr_set.hasOwnProperty('map') ? usr_set['map'] == "6 Tanglewood Drive" ? "tanglewood" : usr_set['map']: "tanglewood"
 
-            console.log(usr_map)
             for(var i = 0; i < data.length; i++) {
                 all_maps[data[i]['div_id']] = data[i]['file_url']
                 map_html += `<button class="maps_button${data[i]['div_id'] == usr_map ? " selected_map" : ""}" id="${data[i]['div_id']}" onclick="changeMap(this,'${data[i]['file_url']}');send_cur_map_link();saveSettings();"><div class="map_size ${data[i]['size'].toLowerCase()}">${data[i]['size']}</div>${data[i]['name']}</button>`
@@ -355,6 +354,7 @@ function loadAllAndConnect(){
             resolve("Map data loaded")
         })
         .catch(error => {
+            console.error(error)
             reject("Failed to load map data")
         })
 
@@ -373,6 +373,7 @@ function loadAllAndConnect(){
             resolve("Language data loaded")
         })
         .catch(error => {
+            console.error(error)
             reject("Failed to load language data")
         })
 
