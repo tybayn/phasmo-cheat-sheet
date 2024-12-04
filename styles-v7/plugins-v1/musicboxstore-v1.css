@@ -1,0 +1,26 @@
+.musicboxstore_logo{
+    grid-row: 1;
+    grid-column: 2;
+    max-width: 100%;
+}
+
+.musicboxstore_link{
+    grid-column: 1 / 4;
+    grid-row: 5;
+    text-decoration: none;
+}
+
+.musicboxstore_buy{
+    background: linear-gradient(90deg, rgb(158, 85, 89) 9.35%, rgb(151,90,94) 95.28%);
+    color: rgb(255, 255, 255);
+    border-radius: 45px;
+    padding: 10px 15px;
+    line-height: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 60px;
+}
+
+.musicboxstore_buy:hover{
+    background: linear-gradient(90deg, rgb(117, 63, 66) 9.35%, rgb(109, 65, 68) 95.28%);
+}
