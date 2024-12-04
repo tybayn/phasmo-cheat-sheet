@@ -342,7 +342,17 @@ function loadAllAndConnect(){
         .then(data => data.json())
         .then(data => {
             var map_html = ""
-            var usr_set = JSON.parse(getCookie("settings"))
+            attempts = 0
+            var usr_set = {}
+            try{
+                let cur_settings = getCookie("settings")
+                usr_set = JSON.parse(cur_settings)
+            }
+            catch(e){
+                console.warn(`Error loading settings! Loading defaults...`)
+                usr_set = user_settings
+            }
+            
             var usr_map = usr_set.hasOwnProperty('map') ? usr_set['map'] == "6 Tanglewood Drive" ? "tanglewood" : usr_set['map']: "tanglewood"
 
             for(var i = 0; i < data.length; i++) {
