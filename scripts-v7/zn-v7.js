@@ -342,7 +342,6 @@ function loadAllAndConnect(){
         .then(data => data.json())
         .then(data => {
             var map_html = ""
-            attempts = 0
             var usr_set = {}
             try{
                 let cur_settings = getCookie("settings")
