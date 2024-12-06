@@ -1,6 +1,12 @@
 const zeroPad = (num, places) => String(num).padStart(places, '0')
-
+var bpm_down = false
 document.body.onkeyup = function(e) {
+    if (e.key == "f" ||
+        e.code == "KeyF" ||      
+        e.keyCode == 70      
+    ) {
+        bpm_down = false
+    }
     if (e.key == "t" ||
         e.code == "KeyT" ||      
         e.keyCode == 84      
@@ -21,12 +27,6 @@ document.body.onkeyup = function(e) {
     ) {
         toggle_hunt_timer();
         send_hunt_timer();
-    }
-    if (e.key == "f" ||
-        e.code == "KeyF" ||      
-        e.keyCode == 70      
-    ) {
-        bpm_tap();
     }
     if (e.key == "q" ||
         e.code == "KeyQ" ||      
@@ -58,7 +58,16 @@ document.body.onkeyup = function(e) {
     if(e.keyCode == 37){
         closeAll();
     }
+}
 
+document.body.onkeydown = function(e){
+    if (!bpm_down && (e.key == "f" ||
+        e.code == "KeyF" ||      
+        e.keyCode == 70)      
+    ) {
+        bpm_down = true
+        bpm_tap();
+    }
 }
 
 var timer_snd = [

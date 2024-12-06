@@ -284,7 +284,7 @@
                 While calibration is running, tap along with the ghost footsteps to begin<br>
                 (You can tap the "Tap" button directly, tap 'f' on your keyboard, or use the desktop link)
             </div>
-            <button id="calibration-tap" class="yfont" onclick="bpm_tap()" style="display:none;">
+            <button id="calibration-tap" class="yfont" onmousedown="bpm_tap()" style="display:none;">
                 <div>Tap</div>
             </button>
             <div id="calibration-bar" class="calibration-bar" style="display:none;">
@@ -825,7 +825,7 @@
                     <div class="modifier_note">(Click <span class="sound" onclick="toggleSound(1.7,'spirit0')">&#128266;</span> on cards to hear speed)</div>
                     <hr>
                     <div class="modifier_bpm_finder yfont white">BPM Finder</div>
-                    <button id="tap" class="yfont" onclick="bpm_tap()">
+                    <button id="tap" class="yfont" onmousedown="bpm_tap()">
                         <div id="input_bpm">0<br>bpm</div>
                         <div>Tap<div class="tap_note">(or press 'F')</div></div>
                         <div id="input_speed">0<br>m/s</div>
@@ -979,7 +979,7 @@
     <script src="themes-v7/themes-v3.js"></script>
     <script src="scripts-v7/audio_controller-v1.js"></script>
     <script src="scripts-v7/metronome-v10.js"></script>
-    <script src="scripts-v7/timer-v2.js"></script>
+    <script src="scripts-v7/timer-v3.js"></script>
     <script src="discord-v7/discord-v1.js"></script>
     <script src="wiki-v7/wiki-v7.js"></script>
     <script src="scripts-v7/filter-v9.js"></script>
