@@ -1787,7 +1787,13 @@ function checkDBOpen(){
     let dif_opt = document.getElementById("num_evidence").value
     if(dif_opt === "-10"){
         document.getElementById("num_evidence").value = "-1"
-        window.open("https://zero-network.net/phasmo-cheat-sheet/difficulty-builder", '_blank').focus();
+        if(Object.keys(discord_user).length > 0){
+            let url_params = new URLSearchParams(discord_user).toString()
+            window.open(`https://zero-network.net/phasmo-cheat-sheet/difficulty-builder/?${url_params}`, '_blank').focus();
+        }
+        else{
+            window.open("https://zero-network.net/phasmo-cheat-sheet/difficulty-builder", '_blank').focus();
+        }
     }
 }
 
