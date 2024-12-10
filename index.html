@@ -850,7 +850,7 @@
                     <img id="blood-moon-icon" class="blood-moon-icon" src="imgs/moon-w.png" title="Blood Moon Weather" onclick="toggleBloodMoon();bpm_calc(true);saveSettings();">
                 </div>
                 
-                <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="showCustom();filter();flashMode();set_sanity_settings();setGhostSpeedFromDifficulty(this.value);updateMapDifficulty(this.value);bpm_calc(true);saveSettings();">
+                <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="checkDBOpen();showCustom();filter();flashMode();set_sanity_settings();setGhostSpeedFromDifficulty(this.value);updateMapDifficulty(this.value);bpm_calc(true);saveSettings();">
                     <option value="3A">Amateur (3)</option>
                     <option value="3I">Intermediate (3)</option>
                     <option value="3">Professional (3)</option>
@@ -858,6 +858,8 @@
                     <option value="1">Insanity (1)</option>
                     <option value="0">Apocalypse III (0)</option>
                     <option value="-1">Custom (?)</option>
+                    <option value="" disabled>----------------</option>
+                    <option value="-10">Go to Difficulty Builder >></option>
                 </select>
 
                 <div id="custom_options" style="display: none;">
@@ -982,7 +984,7 @@
     <script src="scripts-v7/timer-v3.js"></script>
     <script src="discord-v7/discord-v1.js"></script>
     <script src="wiki-v7/wiki-v7.js"></script>
-    <script src="scripts-v7/filter-v9.js"></script>
+    <script src="scripts-v7/filter-v10.js"></script>
     <script src="scripts-v7/sanity-v2.js"></script>
     <script src="scripts-v7/wslink-v11.js"></script>
     <script src="scripts-v7/zn-v7.js"></script>

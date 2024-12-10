@@ -1783,6 +1783,14 @@ function toggleSanitySettings(){
     }
 }
 
+function checkDBOpen(){
+    let dif_opt = document.getElementById("num_evidence").value
+    if(dif_opt === "-10"){
+        document.getElementById("num_evidence").value = "-1"
+        window.open("https://zero-network.net/phasmo-cheat-sheet/difficulty-builder", '_blank').focus();
+    }
+}
+
 function showCustom(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
     var is_h = ![null,"","-8px"].includes(document.getElementById("menu").style.marginBottom)
