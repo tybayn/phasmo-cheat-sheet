@@ -187,6 +187,12 @@
         color: #00ff00;
     }
 
+    .wiki_quote{
+        margin: 10px 20px 0px 20px;
+        text-align: justify;
+        color: #b5b5b5;
+    }
+
     .wiki_embed{
         width: 316px;
         height: 178px;
@@ -678,6 +684,12 @@
     
     .wiki_details_note a:active{
         color: #00ff00;
+    }
+
+    .wiki_quote{
+        margin: 10px 20px 0px 20px;
+        text-align: justify;
+        color: #b5b5b5;
     }
 
     .wiki_embed{
