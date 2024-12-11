@@ -1402,7 +1402,7 @@ body{
         width:100%;
         grid-template-rows: 35px min-content 37px min-content 37px auto;
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 
     .evidence_title{
