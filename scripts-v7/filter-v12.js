@@ -22,8 +22,10 @@ let markedDead = false;
 let polled = false;
 let filter_locked = false;
 
-let touchStartX = 0;
-let touchStartY = 0;
+let touchStartX = 0
+let touchStartY = 0
+let touchMap = false
+let tabOpen = false
 
 function waitForElementById(id){
     let wait_for_element = () => {
@@ -1224,17 +1226,36 @@ function showCalibrate(){
 }
 
 function startSwipe(e){
-    touchStartX = e.changedTouches[0].screenX
-    touchStartY = e.changedTouches[0].screenY
+    touchStartX = e.changedTouches[0].pageX
+    touchStartY = e.changedTouches[0].pageY
 }
 
 function endSwipe(e){
-    touchEndX = e.changedTouches[0].screenX
-    touchEndY = e.changedTouches[0].screenY
+    touchEndX = e.changedTouches[0].pageX
+    touchEndY = e.changedTouches[0].pageY
 
-    if (touchEndX < touchStartX && Math.abs(touchEndX - touchStartX) > Math.abs(touchEndY - touchStartY)){
-        closeAll()
+    if(
+        !touchMap && 
+        (Math.abs(touchEndX - touchStartX) / screen.width > 0.20 ||
+        Math.abs(touchEndY - touchStartY) / screen.height > 0.15 )
+    ){
+        // Closing tabs
+        if (touchEndX < touchStartX && Math.abs(touchEndX - touchStartX) > Math.abs(touchEndY - touchStartY)){
+            closeAll()
+        }
+
+        // Close filters
+        if (!tabOpen && touchStartY >= $("#menu").offset().top && touchEndY > touchStartY && Math.abs(touchEndX - touchStartX) < Math.abs(touchEndY - touchStartY)){
+            closeMenu()
+        }
+
+        // Open filters
+        if (!tabOpen && touchStartY >= $("#menu").offset().top - 100 && touchEndY < touchStartY && Math.abs(touchEndX - touchStartX) < Math.abs(touchEndY - touchStartY)){
+            showMenu()
+        }
     }
+
+    touchMap = false
 }
 
 function closeAll(skip_map=false,skip_wiki=false){
@@ -1291,6 +1312,7 @@ function closeAll(skip_map=false,skip_wiki=false){
     document.getElementById("event_box").style.zIndex= "1"
     if (!skip_wiki) document.getElementById("wiki_box").style.zIndex= "1"
     if (!skip_map) document.getElementById("maps_box").style.zIndex= "1"
+    tabOpen = false
 }
 
 function showSettings(){
@@ -1308,6 +1330,7 @@ function showSettings(){
         if (!mquery.matches)
             document.getElementById("settings_box").style.width = "200px"
         $("#settings_box").addClass("tab-open")
+        tabOpen = true
     }
     else {
         if (!mquery.matches)
@@ -1316,6 +1339,7 @@ function showSettings(){
         document.getElementById("settings_box").style.boxShadow = "none"
         document.getElementById("settings_tab").style.boxShadow = "none"
         $("#settings_box").removeClass("tab-open")
+        tabOpen = false
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
             setTimeout(function(){
@@ -1340,6 +1364,7 @@ function showLinks(){
         if (!mquery.matches)
             document.getElementById("links_box").style.width = "200px"
         $("#links_box").addClass("tab-open")
+        tabOpen = true
     }
     else {
         if (!mquery.matches)
@@ -1348,6 +1373,7 @@ function showLinks(){
         document.getElementById("links_box").style.boxShadow = "none"
         document.getElementById("links_tab").style.boxShadow = "none"
         $("#links_box").removeClass("tab-open")
+        tabOpen = false
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
             setTimeout(function(){
@@ -1372,6 +1398,7 @@ function showDiscordLink(){
         if (!mquery.matches)
             document.getElementById("discord_link_box").style.width = "200px"
         $("#discord_link_box").addClass("tab-open")
+        tabOpen = true
     }
     else {
         if (!mquery.matches)
@@ -1380,6 +1407,7 @@ function showDiscordLink(){
         document.getElementById("discord_link_box").style.boxShadow = "none"
         document.getElementById("discord_link_tab").style.boxShadow = "none"
         $("#discord_link_box").removeClass("tab-open")
+        tabOpen = false
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
             setTimeout(function(){
@@ -1404,6 +1432,7 @@ function showEvent(){
         if (!mquery.matches)
             document.getElementById("event_box").style.width = "350px"
         $("#event_box").addClass("tab-open")
+        tabOpen = true
     }
     else {
         if (!mquery.matches)
@@ -1412,6 +1441,7 @@ function showEvent(){
         document.getElementById("event_box").style.boxShadow = "none"
         document.getElementById("event_tab").style.boxShadow = "none"
         $("#event_box").removeClass("tab-open")
+        tabOpen = false
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
             setTimeout(function(){
@@ -1436,6 +1466,7 @@ function showWiki(forceOpen = false, forceClose = false){
         if (!mquery.matches)
             document.getElementById("wiki_box").style.width = "350px"
         $("#wiki_box").addClass("tab-open")
+        tabOpen = true
     }
     else if(!forceOpen) {
         if (!mquery.matches)
@@ -1444,6 +1475,7 @@ function showWiki(forceOpen = false, forceClose = false){
         document.getElementById("wiki_box").style.boxShadow = "none"
         document.getElementById("wiki_tab").style.boxShadow = "none"
         $("#wiki_box").removeClass("tab-open")
+        tabOpen = false
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
             setTimeout(function(){
@@ -1468,6 +1500,7 @@ function showMaps(forceOpen = false, forceClose = false){
         document.getElementById("maps_box").style.left = (mquery.matches ? "0px" : "196px")
         document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 40px)" : "calc(100% - 265px)")
         $("#maps_box").addClass("tab-open")
+        tabOpen = true
     }
     else if(!forceOpen) {
         document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 40px)" : "556px")
@@ -1476,6 +1509,7 @@ function showMaps(forceOpen = false, forceClose = false){
         document.getElementById("maps_box").style.boxShadow = "none"
         document.getElementById("maps_box").style.boxShadow = "none"
         $("#maps_box").removeClass("tab-open")
+        tabOpen = false
         setTimeout(() => {
             document.getElementById("maps_box").style.zIndex = "1"
         },500)
@@ -1855,6 +1889,7 @@ function changeMap(elem,map,ignore_link=false){
 }
 
 function zoomMap(elem){
+    touchMap = true
     $(".map_image").css("width",`200%`)
     $(".map_image").css("height",`200%`)
 }
