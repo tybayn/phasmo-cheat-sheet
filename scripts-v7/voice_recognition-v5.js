@@ -813,6 +813,7 @@ function parse_speech(vtext){
         }
 
         changeMap(document.getElementById(smallest_map),all_maps[smallest_map])
+        send_cur_map_link()
 
         domovoi_heard(domovoi_msg)
         running_log[cur_idx]["Domo"] = domovoi_msg
