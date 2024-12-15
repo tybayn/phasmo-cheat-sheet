@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v7/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v7/style-v9.css"/>
-    <link rel="stylesheet" href="styles-v7/style-mobile-v8.css"/>
+    <link rel="stylesheet" href="styles-v7/style-v10.css"/>
+    <link rel="stylesheet" href="styles-v7/style-mobile-v9.css"/>
     <link rel="stylesheet" href="themes-v7/themes-v2.css"/>
     <link rel="stylesheet" href="discord-v7/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v7/wiki-v5.css" >
@@ -171,6 +171,8 @@
                     <li>"select map &lt;map name&gt;" -> Selects the specified map</li>
                     <li>"show map [&lt;map name&gt;]" -> Opens the map tab and displays map</li>
                     <li>"close map" or "hide map" -> Closes the map tab</li>
+                    <li>"event maps" -> Will show event maps if available</li>
+                    <li>"standard maps" or "regular map" -> Will show standard maps</li>
                     <li>"reset journal" or "reset cheat sheet" -> Reset the cheat sheet (will save if linked with Discord)</li>
                     <li>"domo move" -> Toggles the side of the screen that Domo is on</li>
                     <li>"launch desktop link" -> Launch and Connect Desktop Link</li>
@@ -634,7 +636,8 @@
             <div id="map_image" class="map_image"></div>
             <div class="hover_zoom">+ Hover/Touch to zoom</div>
         </div>
-        <div class="flex-holder-right">
+        <div class="flex-holder-split">
+            <div class="map_event_check"><input type="checkbox" class="settings_check" id="map_event_check_box" name="map_event_check_box" onchange="changeMap(document.getElementById('maps_list').querySelector('.selected_map'),all_maps[document.getElementById('maps_list').querySelector('.selected_map').id]);send_cur_map_link();saveSettings();"><label for="map_event_check_box">Show event maps ★</label></div>
             <div class="maps_credit">Map images belong to <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">Images</a>)</div>
         </div>
         <div id="maps_list" class="maps_buttons"></div>
@@ -985,15 +988,15 @@
     <script src="scripts-v7/timer-v3.js"></script>
     <script src="discord-v7/discord-v1.js"></script>
     <script src="wiki-v7/wiki-v7.js"></script>
-    <script src="scripts-v7/filter-v12.js"></script>
+    <script src="scripts-v7/filter-v13.js"></script>
     <script src="scripts-v7/sanity-v2.js"></script>
-    <script src="scripts-v7/wslink-v11.js"></script>
-    <script src="scripts-v7/zn-v7.js"></script>
+    <script src="scripts-v7/wslink-v12.js"></script>
+    <script src="scripts-v7/zn-v8.js"></script>
     <script src="events-v7/events-v1.js"></script>
     <script src="models-v7/models-v1.js"></script>
     <script src="feed-v7/feed-v1.js"></script>
     <script src="scripts-v7/voice_en-v2.js"></script>
-    <script src="scripts-v7/voice_recognition-v5.js"></script>
+    <script src="scripts-v7/voice_recognition-v6.js"></script>
     <script src="scripts-v7/sparkles-v1.js"></script>
     <script>
         document.getElementById('reset').oncontextmenu = showResetMenu;

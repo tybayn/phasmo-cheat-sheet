@@ -356,7 +356,9 @@ function loadAllAndConnect(){
 
             for(var i = 0; i < data.length; i++) {
                 all_maps[data[i]['div_id']] = data[i]['file_url']
-                map_html += `<button class="maps_button${data[i]['div_id'] == usr_map ? " selected_map" : ""}" id="${data[i]['div_id']}" onclick="changeMap(this,'${data[i]['file_url']}');send_cur_map_link();saveSettings();"><div class="map_size ${data[i]['size'].toLowerCase()}">${data[i]['size']}</div>${data[i]['name']}</button>`
+                if(data[i]['extra'] !== '')
+                    all_maps[`${data[i]['div_id']}-e`] = data[i]['extra']
+                map_html += `<button class="maps_button${data[i]['div_id'] == usr_map ? " selected_map" : ""}" id="${data[i]['div_id']}" onclick="changeMap(this,'${data[i]['file_url']}');send_cur_map_link();saveSettings();"><div class="map_size ${data[i]['size'].toLowerCase()}">${data[i]['size']}</div>${data[i]['name']}${data[i]['extra'] !== '' ? '<div class="event_map">★</div>' : ''}</button>`
             }
             $("#maps_list").html(map_html)
 

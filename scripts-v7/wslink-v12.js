@@ -495,6 +495,12 @@ function link_link(){
                     saveSettings()
                     send_cur_map_link()
                 }
+                if (incoming_state['action'].toUpperCase() == "EVENTMAP"){
+                    document.getElementById("map_event_check_box").checked = !document.getElementById("map_event_check_box").checked
+                    changeMap(document.getElementById('maps_list').querySelector('.selected_map'),all_maps[document.getElementById('maps_list').querySelector('.selected_map').id])
+                    saveSettings()
+                    send_cur_map_link()
+                }
                 if (incoming_state['action'].toUpperCase() == "GHOSTDATA"){
                     send_ghost_data_link(incoming_state['ghost'])
                 }
