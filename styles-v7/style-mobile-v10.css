@@ -1973,6 +1973,7 @@
         border-radius: 0px 4px 4px 0px;
         justify-content: center;
         font-size: 25px;
+        position: absolute;
     }
 
     .maps_button .s{
