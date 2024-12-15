@@ -141,8 +141,8 @@
 
     .settings_check{
         margin-left: 0 !important;
-        height: 35px;
-        width: 35px;
+        height: 30px;
+        width: 30px;
         margin-right: 15px;
         cursor: pointer;
     }
@@ -1904,13 +1904,14 @@
         color:#00aa2b;
     }
 
-    .maps_event_check{
+    .map_event_check{
         color: #FFF;
         text-align: left;
         right: 35px;
         font-size: 20px;
         margin-bottom: 15px;
         display: flex;
+        align-items: center;
     }
 
     .maps_buttons{

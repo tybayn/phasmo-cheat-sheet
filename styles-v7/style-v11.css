@@ -2368,6 +2368,7 @@ body{
         font-size: 10px;
         margin-bottom: 10px;
         display: flex;
+        align-items: center;
         cursor: pointer;
     }
     .map_event_check label{
