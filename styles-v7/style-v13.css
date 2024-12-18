@@ -73,6 +73,25 @@ body{
     cursor: not-allowed !important;
 }
 
+.icon-flash{
+    animation-name: opacity-pulse;
+    animation-duration: 0.5s;
+    animation-iteration-count: 3;
+    animation-fill-mode: forwards;
+}
+
+@keyframes opacity-pulse {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
 
 @media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
 
@@ -168,7 +187,7 @@ body{
     }
     
 
-    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image, #blackout_calibrate{
+    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image, #blackout_calibrate, #blackout_weekly{
         position: fixed;
         background: rgba(0,0,0,0.9);
         left: 0;
@@ -222,6 +241,46 @@ body{
     .tab_rotate{
         transform: rotate(-90deg);
         width: max-content;
+    }
+
+    .weekly-modifiers{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .weekly-mod{
+        flex:1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 5px;
+        font-size: 16px;
+        line-height: 25px;
+        min-width: 30%;
+    }
+
+    .weekly-image{
+        width:80%;
+    }
+
+    .weekly-mod a:link{
+        color: #ffff00;
+    }
+    
+    .weekly-mod a:visited{
+        color: #ffff00;
+    }
+    
+    .weekly-mod a:hover{
+        color: #ff9100;
+    }
+    
+    .weekly-mod a:active{
+        color: #00ff00;
     }
 
     #settings_box, #links_box{
@@ -596,6 +655,15 @@ body{
         z-index: -999;
     }
 
+    .blockout-invis{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 10;
+    }
+
     #language_box{
         position: fixed;
         top: 46px;
@@ -794,7 +862,7 @@ body{
         flex-direction: column;
     }
 
-    #settings_box .info_block, #links_box .info_block, #discord_link_box .info_block, #event_box .info_block, #wiki_box .info_block{
+    #settings_box .info_block, #links_box .info_block, #discord_link_box .info_block, #event_box .info_block, #wiki_box .info_block, #info_box_weekly .info_block{
         display: flex;
         flex-direction: column;
         z-index: 2;
@@ -916,7 +984,7 @@ body{
         background-color: #747474;
     }
 
-    #info_box, #info_box_voice, #info_box_zndl, #info_box_debug{
+    #info_box, #info_box_voice, #info_box_zndl, #info_box_debug, #info_box_weekly{
         z-index: 100;
         width: 600px;
         height: auto;
@@ -953,7 +1021,7 @@ body{
         font-size: 12px;
     }
 
-    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon, #info_box_debug .icon, #info_box_calibrate .icon{
+    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon, #info_box_debug .icon, #info_box_calibrate .icon, #info_box_weekly .icon{
         position: absolute;
         top: 10px;
         right: 10px;
@@ -965,7 +1033,7 @@ body{
         cursor: pointer;
     }
 
-    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before, #info_box_debug .icon:before, #info_box_calibrate .icon:before{
+    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before, #info_box_debug .icon:before, #info_box_calibrate .icon:before, #info_box_weekly .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -975,7 +1043,7 @@ body{
         top:4px;
     }
 
-    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after, #info_box_debug .icon:after, #info_box_calibrate .icon:after{
+    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after, #info_box_debug .icon:after, #info_box_calibrate .icon:after, #info_box_weekly .icon:after{
         content:"";
         position: absolute;
         width:15px;
@@ -1488,9 +1556,16 @@ body{
         }
     }
 
-    .num_evidence{
+    .difficulty_holder{
         grid-column: 1;
         grid-row: 2;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .num_evidence{
+        flex:1;
+        width: 100%;
         border-radius: 5px;
         border: none;
         color: #FFF;
@@ -1503,6 +1578,18 @@ body{
         font-family: 'Yahfie';
         float: right;
         cursor: pointer;
+    }
+
+    #weekly_icon{
+        width: 25px;
+        height: 25px;
+        margin-right: 3px;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    #weekly_icon:hover{
+        opacity: 1.0;
     }
 
     .cust_num_evidence, .cust_lobby_type{

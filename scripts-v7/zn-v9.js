@@ -371,6 +371,53 @@ function loadAllAndConnect(){
 
     })
 
+    let loadWeekly = new Promise((resolve, reject) => {
+        fetch("https://zero-network.net/phasmophobia/data/weekly.json?skip_cache=true", {signal: AbortSignal.timeout(6000)})
+        .then(data => data.json())
+        .then(data => {
+            weekly_data = {
+                "title": data.challenge,
+                "description": data.description,
+                "map": data.map,
+                "map_id": data.map_id,
+                "player_speed": data.details.player_speed,
+                "ghost_speed": data.details.ghost_speed,
+                "num_evidence": data.details.num_evidence,
+                "hunt_duration": data.details.cssettings.hunt_duration,
+                "sanity_drain_speed": data.details.cssettings.sanity_drain_speed,
+                "sanity_pill_restoration": data.details.cssettings.sanity_pill_restoration,
+                "starting_sanity": data.details.cssettings.starting_sanity,
+                "equipment_url": data.equipment_url,
+                "cursed_objects": data.details.cursed_objects,
+                "difficulty_id": data.difficulty_id
+            }
+
+            let weekly_html = `
+                <h1>${weekly_data.title}</h1>
+                <h4 style="margin-top:0px;"><i>${weekly_data.description}</i></h4>
+                <hr>
+                <div class="weekly-modifiers">
+                    <div class="weekly-mod"><b>Map</b>${weekly_data.map}</div>
+                    <div class="weekly-mod"><b>Player Speed</b>${weekly_data.player_speed}%</div>
+                    <div class="weekly-mod"><b>Ghost Speed</b>${weekly_data.ghost_speed}%</div>   
+                    <div class="weekly-mod"><b>Number of Evidence</b>${weekly_data.num_evidence}</div>
+                    <div class="weekly-mod"><b>Cursed Possessions</b>${weekly_data.cursed_objects.join(', ')}</div>
+                    <div class="weekly-mod"><b>Difficulty Settings</b><a href="https://zero-network.net/phasmo-cheat-sheet/difficulty-builder/?share=${weekly_data.difficulty_id}" target="_blank">${weekly_data.difficulty_id}</a></div>
+                </div>
+                <img class="weekly-image" loading="lazy" src="${weekly_data.equipment_url}">
+            `
+
+            document.getElementById("weekly_title").innerText += ` (${getCurrentWeekUTC()})`
+            document.getElementById("weekly_info_box").innerHTML = weekly_html
+
+            resolve("Weekly data loaded")
+        })
+        .catch(error => {
+            console.error(error)
+            reject("Failed to load weekly data")
+        })
+    })
+
     let loadLanguages = new Promise((resolve, reject) => {
         fetch("https://zero-network.net/phasmophobia/languages", {signal: AbortSignal.timeout(6000)})
         .then(data => data.json())
@@ -390,7 +437,7 @@ function loadAllAndConnect(){
 
     })
     
-    Promise.all([loadZN,loadData,loadMaps,loadLanguages])
+    Promise.all([loadZN,loadData,loadMaps,loadWeekly,loadLanguages])
     .then(x => {
         applyPerms()
         auto_link()

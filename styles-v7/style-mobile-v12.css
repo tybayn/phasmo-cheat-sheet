@@ -67,7 +67,7 @@
     }
     
 
-    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image, #blackout_calibrate{
+    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image, #blackout_calibrate, #blackout_weekly{
         position: fixed;
         background: rgba(0,0,0,0.9);
         left: 0;
@@ -116,6 +116,60 @@
     .zoomable{
         cursor: zoom-in;
         margin: 10px 0px;
+    }
+
+    #info_box_weekly h3{
+        font-size: 40px;
+    }
+
+    #weekly_info_box h1{
+        font-size: 60px;
+    }
+
+    #weekly_info_box h4{
+        font-size: 30px;
+        margin: 0px 50px 30px 50px;
+    }
+
+    .weekly-modifiers{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .weekly-mod{
+        flex:1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 10px;
+        font-size: 35px;
+        line-height: 65px;
+        min-width: 40%;
+    }
+
+    .weekly-image{
+        width: calc(100% - 10px);
+        margin-top: 40px;
+    }
+
+    .weekly-mod a:link{
+        color: #ffff00;
+    }
+    
+    .weekly-mod a:visited{
+        color: #ffff00;
+    }
+    
+    .weekly-mod a:hover{
+        color: #ff9100;
+    }
+    
+    .weekly-mod a:active{
+        color: #00ff00;
     }
 
     #settings_box, #links_box{
@@ -479,6 +533,15 @@
         display: none;
     }
 
+    .blockout-invis{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 10;
+    }
+
     #blockout{
         display: none;
     }
@@ -565,7 +628,7 @@
         top:20px;
     }
 
-    #settings_box .info_block, #links_box .info_block, #discord_link_box .info_block, #event_box .info_block, #wiki_box .info_block{
+    #settings_box .info_block, #links_box .info_block, #discord_link_box .info_block, #event_box .info_block, #wiki_box .info_block, #info_box_weekly .info_block{
         display: flex;
         flex-direction: column;
         z-index: 2;
@@ -610,7 +673,7 @@
         font-size: 42px;
     }
 
-    #info_box, #info_box_voice, #info_box_zndl, #info_box_debug{
+    #info_box, #info_box_voice, #info_box_zndl, #info_box_debug, #info_box_weekly{
         z-index: 100;
         width: calc(100% - 100px);
         height: calc(100% - 100px);
@@ -628,7 +691,7 @@
         font-size: 12px;
     }
 
-    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon, #info_box_debug .icon{
+    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon, #info_box_debug .icon, #info_box_weekly .icon{
         position: absolute;
         top: 24px;
         right: 24px;
@@ -640,7 +703,7 @@
         cursor: pointer;
     }
 
-    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before, #info_box_debug .icon:before{
+    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before, #info_box_debug .icon:before, #info_box_weekly .icon:before{
         content:"";
         position: absolute;
         width:7px;
@@ -650,7 +713,7 @@
         top:4px;
     }
 
-    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after, #info_box_debug .icon:after{
+    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after, #info_box_debug .icon:after, #info_box_weekly .icon:after{
         content:"";
         position: absolute;
         width:28px;
@@ -1053,9 +1116,20 @@
         }
     }
 
-    .num_evidence{
+    .difficulty_holder{
         grid-column: 1;
         grid-row: 1;
+        width: calc(33% + 75px);
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        position: absolute;
+        right: 0;
+        z-index: 2;
+    }
+
+    .num_evidence{
+        flex: 1;
         border: none;
         color: #FFF;
         background: rgba(0,0,0,0.25);
@@ -1065,10 +1139,14 @@
         padding: 2px 10px;
         margin: 2px 10px;
         font-family: 'Yahfie';
-        width: 33%;
-        position: absolute;
-        right: 0;
-        z-index: 2;
+    }
+
+    #weekly_icon{
+        width: 45px;
+        height: 45px;
+        margin-right: 6px;
+        opacity: 0.5;
+        cursor: pointer;
     }
 
     #custom_options{

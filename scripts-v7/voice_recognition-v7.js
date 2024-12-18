@@ -662,7 +662,7 @@ function parse_speech(vtext){
         var smallest_num = "3"
         var smallest_val = 100
         var prev_value = document.getElementById("num_evidence").value
-        var all_difficulty = ["custom","apocolypse","insanity","nightmare","professional","intermediate","amateur"]
+        var all_difficulty = ["weekly","custom","apocolypse","insanity","nightmare","professional","intermediate","amateur"]
 
         for(var i = 0; i < all_difficulty.length; i++){
             var leven_val = levenshtein_distance(all_difficulty[i],vtext)
@@ -673,9 +673,10 @@ function parse_speech(vtext){
         }
         domovoi_msg += smallest_num
 
-        smallest_num = {"custom":"-1","apocolypse":"0","insanity":"1","nightmare":"2","professional":"3","intermediate":"3I","amateur":"3A"}[smallest_num]
+        smallest_num = {"weekly":"-5","custom":"-1","apocolypse":"0","insanity":"1","nightmare":"2","professional":"3","intermediate":"3I","amateur":"3A"}[smallest_num]
         document.getElementById("num_evidence").value =  smallest_num
         if(prev_value != smallest_num){
+            checkDifficulty()
             filter()
             updateMapDifficulty(smallest_num)
             showCustom()

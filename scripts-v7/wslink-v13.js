@@ -310,11 +310,17 @@ function link_room(){
                     document.getElementById("cust_sanity_drain").value != incoming_state['settings']['cust_sanity_drain'] ||
                     document.getElementById("cust_lobby_type").value != incoming_state['settings']['cust_lobby_type']
                 ){
+                    if(incoming_state['settings']['num_evidences'] != document.getElementById("num_evidence").value){
+                        $("#cust_num_evidence").removeAttr("disabled")
+                        $("#cust_hunt_length").removeAttr("disabled")
+                        document.getElementById("num_evidence").style.width = "100%"
+                        $("#weekly_icon").hide()
+                    }
                     if(incoming_state['settings']['num_evidences'] != "")
                         document.getElementById("num_evidence").value = incoming_state['settings']['num_evidences']
                     if(incoming_state['settings']['cust_lobby_type'] != "")
                         document.getElementById("cust_lobby_type").value = incoming_state['settings']['cust_lobby_type']
-                    if (incoming_state['settings']['num_evidences'] == "-1"){
+                    if (["-5","-1"].includes(incoming_state['settings']['num_evidences'])){
                         if(incoming_state['settings']['cust_num_evidences'] != "")
                             document.getElementById("cust_num_evidence").value = incoming_state['settings']['cust_num_evidences']
                         if(incoming_state['settings']['cust_hunt_length'] != "")
@@ -325,6 +331,13 @@ function link_room(){
                             document.getElementById("cust_sanity_pill_rest").value = incoming_state['settings']['cust_sanity_pill_rest']
                         if(incoming_state['settings']['cust_sanity_drain'] != "")
                             document.getElementById("cust_sanity_drain").value = incoming_state['settings']['cust_sanity_drain']
+
+                        if(incoming_state['settings']['num_evidences'] === "-5"){
+                            $("#cust_num_evidence").attr("disabled","disabled")
+                            $("#cust_hunt_length").attr("disabled","disabled")
+                            document.getElementById("num_evidence").style.width = "calc(100% - 28px)"
+                            $("#weekly_icon").show()
+                        }
                     }
                     else{
                         set_sanity_settings()
@@ -765,7 +778,7 @@ function send_evidence_link(reset = false){
             evi_list.push(`${key}:${reset ? 0 : $(document.getElementById(key)).hasClass("block") ? -2 : $(document.getElementById(key).querySelector("#checkbox")).hasClass("faded") ? -1 : value}`)
         }
         var cur_num_evi = document.getElementById("num_evidence").value
-        cur_num_evi = cur_num_evi == "-1" ? document.getElementById("cust_num_evidence").value : cur_num_evi
+        cur_num_evi = ["-5","-1"].includes(cur_num_evi) ? document.getElementById("cust_num_evidence").value : cur_num_evi
         dlws.send(`{"action":"EVIDENCE","evidences":"${evi_list}","num_evidence":"${cur_num_evi}"}`)
     }
 }

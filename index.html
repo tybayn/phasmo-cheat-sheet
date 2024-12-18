@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v7/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v7/style-v12.css"/>
-    <link rel="stylesheet" href="styles-v7/style-mobile-v11.css"/>
+    <link rel="stylesheet" href="styles-v7/style-v13.css"/>
+    <link rel="stylesheet" href="styles-v7/style-mobile-v12.css"/>
     <link rel="stylesheet" href="themes-v7/themes-v2.css"/>
     <link rel="stylesheet" href="discord-v7/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v7/wiki-v5.css" >
@@ -60,8 +60,9 @@
     <div id="particle-container"></div>
 
     <div id="blackout" style="display: none;">
+        <div id="info_blockout" class="blockout-invis" style="display: none;" onclick="showInfo(event)"></div>
         <div id="info_box">
-            <span class="icon" onclick="showInfo()"></span>
+            <span class="icon" onclick="showInfo(event)"></span>
 
             <h3>Data Accuracy</h3>
             <div class="info_text">The data was last corrected and verified by Phasmophobia Discord Moderator "Shuee01" on 2023-01-04 (v0.8.0.5). Data is kept up to date with the verified information in the official Phasmophobia Discord #ghost-huntin-resources channel, which is maintained and kept accurate by "Shuee01".</div>
@@ -105,8 +106,9 @@
     </div>
 
     <div id="blackout_voice" style="display: none;">
+        <div id="voice_blockout" class="blockout-invis" style="display: none;" onclick="showVoiceInfo(event)"></div>
         <div id="info_box_voice">
-            <span class="icon" onclick="showVoiceInfo()"></span>
+            <span class="icon" onclick="showVoiceInfo(event)"></span>
 
             <h3>Voice Commands</h3>
             <div class="info_text">Voice commands allow you to control the cheat sheet via your voice. Once you hit enable, the cheat sheet will begin listening to your voice commands and will persist between resets until you disable it. It will by default read from your default microphone, so ensure that it is set correctly. The voice recognition will continue to work even if the page is not in focus and you are using the same microphone in-game.</div>
@@ -189,8 +191,9 @@
     </div>
 
     <div id="blackout_zndl" style="display: none;">
+        <div id="zndl_blockout" class="blockout-invis" style="display: none;" onclick="showZNDLInfo(event)"></div>
         <div id="info_box_zndl">
-            <span class="icon" onclick="showZNDLInfo()"></span>
+            <span class="icon" onclick="showZNDLInfo(event)"></span>
             <h2>Thanks for downloading the ZN-Desktop-Link!</h2>
             <div class="info_text">Please read the following important information about the ZN-Desktop-Link, installation tips, disclaimers, and brief usage instructions.</div>
             <hr>
@@ -271,9 +274,19 @@
         </div>
     </div>
 
+    <div id="blackout_weekly" style="display: none;">
+        <div id="weekly_blockout" class="blockout-invis" style="display: none;" onclick="showWeekly(event)"></div>
+        <div id="info_box_weekly" style="text-align: center;">
+            <span class="icon" onclick="showWeekly(event)"></span>
+            <h3 id="weekly_title">Weekly Challenge</h3>
+            <div id="weekly_info_box" class="info_block"></div>
+        </div>
+    </div>
+
     <div id="blackout_debug" style="display: none;">
+        <div id="debug_blockout" class="blockout-invis" style="display: none;" onclick="showDebug(event)"></div>
         <div id="info_box_debug">
-            <span class="icon" onclick="showDebug()"></span>
+            <span class="icon" onclick="showDebug(event)"></span>
             <textarea id="debug-console" readonly></textarea>
         </div>
     </div>
@@ -438,7 +451,7 @@
                         <button id="stop_voice" class="journal_link_button" onclick="stop_voice()" disabled>Disable</button>
                     </div>
                 </div>
-                <div id="voice_recognition_note" class="modifier_note"><div onclick="showVoiceInfo()" class="link_hover">Commands and Info &#187;</div></div>
+                <div id="voice_recognition_note" class="modifier_note"><div onclick="showVoiceInfo(event)" class="link_hover">Commands and Info &#187;</div></div>
                 <hr>
                 <div class="modifier_volume yfont white">Shared Journal Link</div>
                 <div class="journal_link">
@@ -455,9 +468,9 @@
                 <div id="room_id_note" class="modifier_note" style="user-select: text;">(STATUS: Not connected)</div>
                 <hr>
                 <div class="modifier_volume yfont white">
-                    <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo()">
+                    <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo(event)">
                     Desktop Link
-                    <a id="zndl-download-icon" class="download" href="assets/ZN-Desktop-Link-Installer-v3.3.8.msi" download="ZN-Desktop-Link-Installer-v3.3.8.msi" onclick="showZNDLInfo()"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
+                    <a id="zndl-download-icon" class="download" href="assets/ZN-Desktop-Link-Installer-v3.3.8.msi" download="ZN-Desktop-Link-Installer-v3.3.8.msi" onclick="showZNDLInfo(event)"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
                 </div>
                 <div class="journal_link">
                     <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
@@ -518,7 +531,7 @@
             </div>
             <div id="zndl-download-button" class="find-overlay">
                 Looking for the overlay?<br>
-                <a href="assets/ZN-Desktop-Link-Installer-v3.3.8.msi" download="ZN-Desktop-Link-Installer-v3.3.8.msi" onclick="showZNDLInfo()" style="text-decoration: none;">
+                <a href="assets/ZN-Desktop-Link-Installer-v3.3.8.msi" download="ZN-Desktop-Link-Installer-v3.3.8.msi" onclick="showZNDLInfo(event)" style="text-decoration: none;">
                     <div class="button-zn"><img class="download_icon" src="imgs/download.png" style="filter: invert(1); padding-right: 5px;">ZN-Desktop-Link</div>
                 </a>
             </div>
@@ -714,7 +727,7 @@
         </div>
     </a>
 
-    <div id="debug_tab" style="display: none;" onclick="showDebug()">
+    <div id="debug_tab" style="display: none;" onclick="showDebug(event)">
         <img src="imgs/terminal.png" width="21">
     </div>
     
@@ -854,17 +867,22 @@
                     <img id="blood-moon-icon" class="blood-moon-icon" src="imgs/moon-w.png" title="Blood Moon Weather" onclick="toggleBloodMoon();bpm_calc(true);saveSettings();">
                 </div>
                 
-                <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="checkDBOpen();showCustom();filter();flashMode();set_sanity_settings();setGhostSpeedFromDifficulty(this.value);updateMapDifficulty(this.value);bpm_calc(true);saveSettings();">
-                    <option value="3A">Amateur (3)</option>
-                    <option value="3I">Intermediate (3)</option>
-                    <option value="3">Professional (3)</option>
-                    <option value="2">Nightmare (2)</option>
-                    <option value="1">Insanity (1)</option>
-                    <option value="0">Apocalypse III (0)</option>
-                    <option value="-1">Custom (?)</option>
-                    <option value="" disabled>----------------</option>
-                    <option value="-10">Go to Difficulty Builder >></option>
-                </select>
+                <div class="difficulty_holder">
+                    <img id="weekly_icon" src="imgs/weekly.png" onclick="showWeekly(event)" style="display: none;">
+                    <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="checkDifficulty();showCustom();filter();flashMode();set_sanity_settings();setGhostSpeedFromDifficulty(this.value);updateMapDifficulty(this.value);bpm_calc(true);saveSettings();">
+                        <option value="3A">Amateur (3)</option>
+                        <option value="3I">Intermediate (3)</option>
+                        <option value="3">Professional (3)</option>
+                        <option value="2">Nightmare (2)</option>
+                        <option value="1">Insanity (1)</option>
+                        <option value="0">Apocalypse III (0)</option>
+                        <option value="-1">Custom (?)</option>
+                        <option value="sep1" disabled>----------------</option>
+                        <option value="-5">Weekly Challenge</option>
+                        <option value="sep2" disabled>----------------</option>
+                        <option value="-10">Go to Difficulty Builder >></option>
+                    </select>
+                </div>
 
                 <div id="custom_options" style="display: none;">
                     <select name="cust_num_evidence" id="cust_num_evidence" class="cust_num_evidence" style="width: calc(50% - 2px); margin-right: 2px;" onchange="filter();flashMode();saveSettings();">
@@ -937,7 +955,7 @@
             </button>
             <button id="reset" class="yfont standard_reset" onclick="reset()" onmouseenter="checkResetButton()" onmouseleave="resetResetButton()">Reset</button>
             <div id="active-users"><span id="current-version-label"></span> | <span id="active-users-label">Active Users: -</span></div>
-            <div class="copyright" onclick="showInfo()"><img class="question" src="imgs/question.png"> Info / Copyright</div>
+            <div class="copyright" onclick="showInfo(event)"><img class="question" src="imgs/question.png"> Info / Copyright</div>
             <div id="close-menu-button" onclick="closeMenu()"></div>
             
 
@@ -982,21 +1000,22 @@
         if(navigator.userAgent.includes("CriOS") && (/iPad/.test(navigator.userAgent) || (navigator.platform.toLowerCase().includes('mac') && 'ontouchend' in document)))
             document.body.style.position = 'fixed';
     </script>
+    <script src="scripts-v7/utils-v1.js"></script>
     <script src="themes-v7/themes-v3.js"></script>
     <script src="scripts-v7/audio_controller-v1.js"></script>
     <script src="scripts-v7/metronome-v11.js"></script>
-    <script src="scripts-v7/timer-v3.js"></script>
+    <script src="scripts-v7/timer-v4.js"></script>
     <script src="discord-v7/discord-v1.js"></script>
     <script src="wiki-v7/wiki-v7.js"></script>
-    <script src="scripts-v7/filter-v13.js"></script>
+    <script src="scripts-v7/filter-v14.js"></script>
     <script src="scripts-v7/sanity-v2.js"></script>
-    <script src="scripts-v7/wslink-v12.js"></script>
-    <script src="scripts-v7/zn-v8.js"></script>
+    <script src="scripts-v7/wslink-v13.js"></script>
+    <script src="scripts-v7/zn-v9.js"></script>
     <script src="events-v7/events-v1.js"></script>
     <script src="models-v7/models-v1.js"></script>
     <script src="feed-v7/feed-v1.js"></script>
     <script src="scripts-v7/voice_en-v2.js"></script>
-    <script src="scripts-v7/voice_recognition-v6.js"></script>
+    <script src="scripts-v7/voice_recognition-v7.js"></script>
     <script src="scripts-v7/sparkles-v1.js"></script>
     <script>
         document.getElementById('reset').oncontextmenu = showResetMenu;

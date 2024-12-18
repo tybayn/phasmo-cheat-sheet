@@ -142,7 +142,7 @@ function updateMapSize(size){
 }
 
 function updateMapDifficulty(difficulty){
-    map_difficulty = {"0":2,"1":2,"2":2,"3":2,"3I":1,"3A":0}[difficulty == "-1" ? document.getElementById("cust_hunt_length").value : difficulty]
+    map_difficulty = {"0":2,"1":2,"2":2,"3":2,"3I":1,"3A":0}[["-5","-1"].includes(difficulty) ? document.getElementById("cust_hunt_length").value : difficulty]
     document.getElementById("minute_hunt").innerHTML = zeroPad(Math.floor(map_hunt_lengths[map_difficulty][map_size]/60),2)
     document.getElementById("second_hunt").innerHTML = zeroPad(map_hunt_lengths[map_difficulty][map_size] % 60,2)
     document.getElementsByClassName('normal_line')[0].style.left = `${(20/map_hunt_lengths[map_difficulty][map_size])*100}%`

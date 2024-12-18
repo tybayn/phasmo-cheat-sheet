@@ -10,6 +10,7 @@ let all_maps = {}
 let bpm_list = []
 let bpm_los_list = []
 let prev_monkey_state = 0
+let weekly_data = {}
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood","prev_monkey_state":0}
 var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"disable_particles":0,"show_event_maps":0}
@@ -1196,7 +1197,9 @@ function resetResetButton(){
     $("#reset").attr("onclick","reset()")
 }
 
-function showInfo(){
+function showInfo(event){
+
+    event.stopPropagation()
 
     if (!$("#blackout").is(":visible")){
         set_sparkle(false)
@@ -1206,19 +1209,32 @@ function showInfo(){
         set_sparkle(true)
     }
 
+    $("#info_blockout").toggle()
     $("#blackout").fadeToggle(400)
 }
 
-function showVoiceInfo(){
+function showVoiceInfo(event){
+    event.stopPropagation()
+    $("#voice_blockout").toggle()
     $("#blackout_voice").fadeToggle(400)
 }
 
-function showZNDLInfo(){
+function showZNDLInfo(event){
+    event.stopPropagation()
+    $("#zndl_blockout").toggle()
     $("#blackout_zndl").fadeToggle(400)
 }
 
-function showDebug(){
+function showDebug(event){
+    event.stopPropagation()
+    $("#debug_blockout").toggle()
     $("#blackout_debug").fadeToggle(400)
+}
+
+function showWeekly(event){
+    event.stopPropagation()
+    $("#weekly_blockout").toggle()
+    $("#blackout_weekly").fadeToggle(400)
 }
 
 function showCalibrate(){
@@ -1608,8 +1624,8 @@ function show3D(){
 
 function flashMode(){
     var cur_evidence = document.getElementById("num_evidence").value
-    var mode_text = {"-1":"Custom","0":"Apocalypse III","1":"Insanity","2":"Nightmare","3":"Professional","3I":"Intermediate","3A":"Amateur"}[cur_evidence]
-    document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} evidence)</span>`.replace("-1",document.getElementById("cust_num_evidence").value)
+    var mode_text = {"-5":"Weekly Challenge Mode","-1":"Custom","0":"Apocalypse III","1":"Insanity","2":"Nightmare","3":"Professional","3I":"Intermediate","3A":"Amateur"}[cur_evidence]
+    document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} evidence)</span>`.replace("-1",document.getElementById("cust_num_evidence").value).replace("-5",document.getElementById("cust_num_evidence").value)
     $("#game_mode").fadeIn(500,function () {
         $("#game_mode").delay(500).fadeOut(500);
     });
@@ -1680,6 +1696,12 @@ function loadSettings(){
     document.getElementById("offset_value").innerText = ` ${load_default('offset',0.0)}% `
     document.getElementById("ghost_modifier_speed").value = load_default('ghost_modifier',2)
     document.getElementById("num_evidence").value = load_default('num_evidences','3')
+    if(load_default('num_evidences','3') === "-5"){
+        $("#cust_num_evidence").attr("disabled","disabled")
+        $("#cust_hunt_length").attr("disabled","disabled")
+        document.getElementById("num_evidence").style.width = "calc(100% - 28px)"
+        $("#weekly_icon").show()
+    }
     document.getElementById("cust_num_evidence").value = load_default('cust_num_evidences','3')
     document.getElementById("cust_hunt_length").value = load_default('cust_hunt_length','3')
     document.getElementById("cust_starting_sanity").value = load_default('cust_starting_sanity','100')
@@ -1820,7 +1842,18 @@ function toggleSanitySettings(){
     }
 }
 
-function checkDBOpen(){
+function highlightWeekly(){
+
+    setTimeout(() => {
+        $("#weekly_icon").addClass("icon-flash")
+        setTimeout(() =>{
+            $("#weekly_icon").removeClass("icon-flash")
+        },2000)
+    },1500)
+}
+
+function checkDifficulty(){
+
     let dif_opt = document.getElementById("num_evidence").value
     if(dif_opt === "-10"){
         document.getElementById("num_evidence").value = "-1"
@@ -1832,12 +1865,35 @@ function checkDBOpen(){
             window.open("https://zero-network.net/phasmo-cheat-sheet/difficulty-builder", '_blank').focus();
         }
     }
+
+    if(dif_opt === "-5"){
+        document.getElementById("cust_num_evidence").value = weekly_data.num_evidence
+        document.getElementById("cust_hunt_length").value = {"Low":"3A","Medium":"3I","High":"3"}[weekly_data.hunt_length]
+
+        document.getElementById("cust_starting_sanity").value = weekly_data.starting_sanity
+        document.getElementById("cust_sanity_pill_rest").value = weekly_data.sanity_pill_restoration
+        document.getElementById("cust_sanity_drain").value = weekly_data.sanity_drain_speed
+
+        changeMap(document.getElementById(weekly_data.map_id),all_maps[weekly_data.map_id])
+
+        $("#cust_num_evidence").attr("disabled","disabled")
+        $("#cust_hunt_length").attr("disabled","disabled")
+        document.getElementById("num_evidence").style.width = "calc(100% - 28px)"
+        $("#weekly_icon").show()
+        highlightWeekly()
+    }
+    else{
+        $("#cust_num_evidence").removeAttr("disabled")
+        $("#cust_hunt_length").removeAttr("disabled")
+        document.getElementById("num_evidence").style.width = "100%"
+        $("#weekly_icon").hide()
+    }
 }
 
 function showCustom(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
     var is_h = ![null,"","-8px"].includes(document.getElementById("menu").style.marginBottom)
-    if(document.getElementById("num_evidence").value == "-1"){
+    if(["-1","-5"].includes(document.getElementById("num_evidence").value)){
         if(mquery.matches){
             document.getElementById("menu").style.height="675px";
             if(is_h){
@@ -2085,3 +2141,4 @@ function reset(skip_continue_session=false){
         });
     }
 }
+
