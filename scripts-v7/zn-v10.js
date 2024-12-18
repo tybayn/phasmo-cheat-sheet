@@ -372,7 +372,7 @@ function loadAllAndConnect(){
     })
 
     let loadWeekly = new Promise((resolve, reject) => {
-        fetch("https://zero-network.net/phasmophobia/data/weekly.json?skip_cache=true", {signal: AbortSignal.timeout(6000)})
+        fetch("https://zero-network.net/phasmophobia/data/weekly.json", {signal: AbortSignal.timeout(6000)})
         .then(data => data.json())
         .then(data => {
             weekly_data = {
