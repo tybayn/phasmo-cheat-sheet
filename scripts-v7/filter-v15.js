@@ -416,13 +416,13 @@ function filter(ignore_link=false){
     var good_checkboxes = document.querySelectorAll('[name="evidence"] .good');
     var bad_checkboxes = document.querySelectorAll('[name="evidence"] .bad');
     var speed_checkboxes = document.querySelectorAll('[name="speed"] .good');
-    var sanity_checkboxes = document.querySelectorAll('[name="hunt-sanity"] .good');
+    var sanity_checkboxes = document.querySelectorfunction filter(All('[name="hunt-sanity"] .good');
     if(document.getElementById("cust_num_evidence").value == "")
         document.getElementById("cust_num_evidence").value = "3"
     if(document.getElementById("cust_hunt_length").value == "")
         document.getElementById("cust_hunt_length").value = "3"
     var num_evidences = document.getElementById("num_evidence").value
-    num_evidences = num_evidences == "-1" ? document.getElementById("cust_num_evidence").value : num_evidences;
+    num_evidences = ["-5","-1"].includes(num_evidences) ? document.getElementById("cust_num_evidence").value : num_evidences;
     var speed_logic_type = document.getElementById("speed_logic_type").checked ? 1 : 0;
     var speed_has_los = $("#LOS").find("#checkbox").hasClass("good") ? 1 : $("#LOS").find("#checkbox").hasClass("bad") ? 0 : -1;
     state['los'] = speed_has_los
