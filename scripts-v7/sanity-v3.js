@@ -82,6 +82,12 @@ const built_in_diff = {
     }
 }
 
+const hunt_length = {
+    "Low":"3A",
+    "Medium":"3I",
+    "High":"3"
+}
+
 var sanity_worker;
 
 function set_sanity_settings(){

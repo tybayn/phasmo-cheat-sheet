@@ -264,8 +264,6 @@ function loadAllAndConnect(){
                 tristate(document.getElementById("LOS"));
             }
 
-            filter(true)
-
             for (const [key, value] of Object.entries(read_state['ghosts'])){ 
                 if (value == 0){
                     fade(document.getElementById(key), true);
@@ -286,8 +284,6 @@ function loadAllAndConnect(){
                     state['ghosts'][key] = value
                 }
             }
-            loadSettings()
-            filter(true)
         })
         .then(data => {
             resolve("Ghost data loaded")
@@ -328,8 +324,6 @@ function loadAllAndConnect(){
                     wiki.innerHTML += (i == data.ghosts.length-1 ? `${ghost.wikiTemplate.replace("&#9500;","&#9492;")}` : `${ghost.wikiTemplate}`)
                 }
                 cur_version.innerHTML = `${data.version}`
-                loadSettings()
-                filter()
             })
             .then(data => {
                 resolve("Backup ghost data loaded")
@@ -441,6 +435,8 @@ function loadAllAndConnect(){
     
     Promise.all([loadZN,loadData,loadMaps,loadWeekly,loadLanguages])
     .then(x => {
+        loadSettings()
+        filter(true)
         applyPerms()
         auto_link()
         openWikiFromURL()

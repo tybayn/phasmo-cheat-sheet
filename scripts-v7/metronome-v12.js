@@ -334,7 +334,6 @@ function bpm_calc(forced=false) {
             (input_bpm == 0 ? "-" : input_ms).toString(),
             ["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())]
         )
-        saveSettings()
     }
 }
 

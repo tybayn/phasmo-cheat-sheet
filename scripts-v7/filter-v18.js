@@ -1697,11 +1697,21 @@ function loadSettings(){
     document.getElementById("ghost_modifier_speed").value = load_default('ghost_modifier',2)
     document.getElementById("num_evidence").value = load_default('num_evidences','3')
     if(load_default('num_evidences','3') === "-5"){
+
+        if (weekly_data){
+            user_settings['cust_num_evidences'] = weekly_data.num_evidence
+            user_settings['cust_hunt_length'] = hunt_length[weekly_data.hunt_duration]
+            user_settings['cust_starting_sanity'] = weekly_data.starting_sanity
+            user_settings['cust_sanity_pill_rest'] = Object.keys(sanity_rest).find(e => sanity_rest[e] == weekly_data.sanity_pill_restoration)
+            user_settings['cust_sanity_drain'] = weekly_data.sanity_drain
+            user_settings['map'] = weekly_data.map_id
+        }
         $("#cust_num_evidence").attr("disabled","disabled")
         $("#cust_hunt_length").attr("disabled","disabled")
         document.getElementById("num_evidence").style.width = "calc(100% - 28px)"
         $("#weekly_icon").show()
     }
+
     document.getElementById("cust_num_evidence").value = load_default('cust_num_evidences','3')
     document.getElementById("cust_hunt_length").value = load_default('cust_hunt_length','3')
     document.getElementById("cust_starting_sanity").value = load_default('cust_starting_sanity','100')
@@ -1726,11 +1736,6 @@ function loadSettings(){
     if (room_id == ''){
         var map_exists = setInterval(function(){
             if(document.getElementById(user_settings['map']) != null){
-
-                if(user_settings['num_evidences'] == "-5" && weekly_data.map_id != null && weekly_data.map_id != user_settings['map']){
-                    user_settings['map'] = weekly_data.map_id;
-                }
-
                 var map_elem = document.getElementById(user_settings['map'])
                 changeMap(map_elem,map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
                 clearInterval(map_exists)
@@ -1873,10 +1878,10 @@ function checkDifficulty(){
 
     if(dif_opt === "-5"){
         document.getElementById("cust_num_evidence").value = weekly_data.num_evidence
-        document.getElementById("cust_hunt_length").value = {"Low":"3A","Medium":"3I","High":"3"}[weekly_data.hunt_length]
+        document.getElementById("cust_hunt_length").value = hunt_length[weekly_data.hunt_duration]
 
         document.getElementById("cust_starting_sanity").value = weekly_data.starting_sanity
-        document.getElementById("cust_sanity_pill_rest").value = weekly_data.sanity_pill_restoration
+        document.getElementById("cust_sanity_pill_rest").value = Object.keys(sanity_rest).find(e => sanity_rest[e] == weekly_data.sanity_pill_restoration)
         document.getElementById("cust_sanity_drain").value = weekly_data.sanity_drain_speed
 
         changeMap(document.getElementById(weekly_data.map_id),all_maps[weekly_data.map_id])
