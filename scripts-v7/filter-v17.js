@@ -1726,6 +1726,11 @@ function loadSettings(){
     if (room_id == ''){
         var map_exists = setInterval(function(){
             if(document.getElementById(user_settings['map']) != null){
+
+                if(user_settings['num_evidences'] == "-5" && weekly_data.map_id != null && weekly_data.map_id != user_settings['map']){
+                    user_settings['map'] = weekly_data.map_id;
+                }
+
                 var map_elem = document.getElementById(user_settings['map'])
                 changeMap(map_elem,map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
                 clearInterval(map_exists)
