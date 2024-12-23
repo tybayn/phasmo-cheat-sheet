@@ -392,6 +392,8 @@ function loadAllAndConnect(){
                 "difficulty_id": data.difficulty_id
             }
 
+            let image_str = weekly_data.equipment_url !== null ?  `<img class="weekly-image" loading="lazy" src="${weekly_data.equipment_url}">` : "<h4>Hold tight! We will have an image soon!</h4>"
+
             let weekly_html = `
                 <h1>${weekly_data.title}</h1>
                 <h4 style="margin-top:0px;"><i>${weekly_data.description}</i></h4>
@@ -404,7 +406,7 @@ function loadAllAndConnect(){
                     <div class="weekly-mod"><b>Cursed Possessions</b>${weekly_data.cursed_objects.join(', ')}</div>
                     <div class="weekly-mod"><b>Difficulty Settings</b><a href="https://zero-network.net/phasmo-cheat-sheet/difficulty-builder/?share=${weekly_data.difficulty_id}" target="_blank">${weekly_data.difficulty_id}</a></div>
                 </div>
-                <img class="weekly-image" loading="lazy" src="${weekly_data.equipment_url}">
+                ${image_str}
             `
 
             document.getElementById("weekly_title").innerText += ` (${getCurrentWeekUTC()})`
