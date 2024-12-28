@@ -36,11 +36,11 @@ has_los_guide = [
 ]
 
 class Ghost {
-    constructor(data){
+    constructor(data,evidence){
 
         this.ghostTemplate = `
         <div class="ghost_card" id="${data.ghost}">
-            <div class="ghost_name">${data.ghost}</div>
+            <div class="ghost_name">${data.name}</div>
             <div class="ghost_hunt_info">
                 <div class="ghost_hunt ${parseInt(data.hunt_sanity_high) > 50 ?'high':parseInt(data.hunt_sanity_high) < 50 ? 'low':'average'}">
                     <img src="imgs/sanity.png">
@@ -61,10 +61,10 @@ class Ghost {
                 </div>
             </div>
             <div class="ghost_evidence">
-                ${this.build_evidence_item(data.evidence[0])}
-                ${this.build_evidence_item(data.evidence[1])}
-                ${this.build_evidence_item(data.evidence[2])}
-                ${data.ghost == "The Mimic" ? this.build_evidence_item('Ghost Orbs') : ''}
+                ${this.build_evidence_item(data.evidence[0],evidence[data.evidence[0]])}
+                ${this.build_evidence_item(data.evidence[1],evidence[data.evidence[1]])}
+                ${this.build_evidence_item(data.evidence[2],evidence[data.evidence[2]])}
+                ${data.ghost == "The Mimic" ? this.build_evidence_item(evidence['Ghost Orbs']) : ''}
             </div>
             <div class="ghost_nightmare_evidence">${data.nightmare_evidence?data.nightmare_evidence:''}</div>
             <div class="ghost_hunt_high">${data.hunt_sanity_high}</div>
@@ -106,8 +106,8 @@ class Ghost {
         `
     }
 
-    build_evidence_item(evidence){
-        return `<div class="ghost_evidence_item" ${evidence in evi_color ? 'style=\"color:' + evi_color[evidence] + ' !important;\"' : ''}><img src="${evi_icons[evidence]}">${evidence}</div>`
+    build_evidence_item(evidence,evidence_name){
+        return `<div class="ghost_evidence_item" ${evidence in evi_color ? 'style=\"color:' + evi_color[evidence] + ' !important;\"' : ''}><img src="${evi_icons[evidence]}">${evidence_name}</div>`
     }
 
     build_tells(tells,behavior,abilities){
