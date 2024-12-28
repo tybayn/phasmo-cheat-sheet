@@ -4,7 +4,7 @@ function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="e
 const all_speed = ["Slow","Normal","Fast"]
 const all_sanity = ["Late","Average","Early","VeryEarly"]
 
-let all_evidence = []
+let all_evidence = {}
 let all_ghosts = []
 let all_maps = {}
 let bpm_list = []
@@ -396,8 +396,8 @@ function revive(){
 function filter(ignore_link=false){
     state["evidence"] = {}
     state["speed"] = {"Slow":0,"Normal":0,"Fast":0}
-    for (var i = 0; i < all_evidence.length; i++){
-        state["evidence"][all_evidence[i]] = 0
+    for (var i = 0; i < Object.keys(all_evidence).length; i++){
+        state["evidence"][Object.keys(all_evidence)[i]] = 0
     }
     state["sanity"] = {"Late":0,"Average":0,"Early":0,"VeryEarly":0}
     state["los"] = -1
@@ -454,7 +454,7 @@ function filter(ignore_link=false){
 
     // Filter other evidences
     for (var i = 0; i < all_evidence.length; i++){
-        var checkbox = document.getElementById(all_evidence[i]);
+        var checkbox = document.getElementById(Object.keys(all_evidence)[i]);
         $(checkbox).removeClass("block")
         $(checkbox).find("#checkbox").removeClass(["block","disabled","faded"])
         $(checkbox).find(".label").removeClass("disabled-text")
@@ -827,7 +827,7 @@ function filter(ignore_link=false){
 
     if (["3","3I","3A"].includes(num_evidences)){
         if (evi_array.length >= 0){
-            all_evidence.filter(evi => !keep_evidence.has(evi)).forEach(function(item){
+            Object.keys(all_evidence).filter(evi => !keep_evidence.has(evi)).forEach(function(item){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
@@ -843,7 +843,7 @@ function filter(ignore_link=false){
     else if (num_evidences == "2"){
         var keep_evi = evi_array
         if (keep_evi.length == 3){
-            all_evidence.filter(evi => !keep_evi.includes(evi)).forEach(function(item){
+            Object.keys(all_evidence).filter(evi => !keep_evi.includes(evi)).forEach(function(item){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
@@ -866,7 +866,7 @@ function filter(ignore_link=false){
                 } 
             }
 
-            all_evidence.filter(evi => !keep_evi.includes(evi)).forEach(function(item){
+            Object.keys(all_evidence).filter(evi => !keep_evi.includes(evi)).forEach(function(item){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
@@ -878,7 +878,7 @@ function filter(ignore_link=false){
             })
         }
         else if (keep_evi.length > 0){
-            all_evidence.filter(evi => !keep_evidence.has(evi)).forEach(function(item){
+            Object.keys(all_evidence).filter(evi => !keep_evidence.has(evi)).forEach(function(item){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
@@ -894,7 +894,7 @@ function filter(ignore_link=false){
     else if (num_evidences == "1"){
         var keep_evi = evi_array
         if (keep_evi.length == 2){
-            all_evidence.filter(evi => !keep_evi.includes(evi)).forEach(function(item){
+            Object.keys(all_evidence).filter(evi => !keep_evi.includes(evi)).forEach(function(item){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
@@ -917,7 +917,7 @@ function filter(ignore_link=false){
                 } 
             }
 
-            all_evidence.filter(evi => !keep_evi.includes(evi)).forEach(function(item){
+            Object.keys(all_evidence).filter(evi => !keep_evi.includes(evi)).forEach(function(item){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
@@ -929,7 +929,7 @@ function filter(ignore_link=false){
             })
         }
         else if (keep_evi.length > 0){
-            all_evidence.filter(evi => !keep_evidence.has(evi)).forEach(function(item){
+            Object.keys(all_evidence).filter(evi => !keep_evidence.has(evi)).forEach(function(item){
                 if (!not_evi_array.includes(item)){
                     var checkbox = document.getElementById(item);
                     $(checkbox).addClass("block")
@@ -943,7 +943,7 @@ function filter(ignore_link=false){
     }
 
     else if (num_evidences == "0"){
-        all_evidence.filter(evi => evi != 'Ghost Orbs').forEach(function(item){
+        Object.keys(all_evidence).filter(evi => evi != 'Ghost Orbs').forEach(function(item){
             var checkbox = document.getElementById(item);
             $(checkbox).addClass("block")
             $(checkbox).find("#checkbox").removeClass(["good","bad","faded"])
@@ -2073,8 +2073,8 @@ function resetGhosts(skip_filter=false){
 }
 
 function resetFilters(skip_filter=false){
-    for(var i = 0; i < all_evidence.length; i++){
-        let e = document.getElementById(all_evidence[i])
+    for(var i = 0; i < Object.keys(all_evidence).length; i++){
+        let e = document.getElementById(Object.keys(all_evidence)[i])
         $(e).removeClass(["block"])
         e.querySelector("#checkbox").className = "neutral"
         $(e.querySelector(".label")).removeClass(["strike","disabled-text"]);
@@ -2082,7 +2082,7 @@ function resetFilters(skip_filter=false){
         $(e).siblings(".monkey-smudge").hide()
         prev_monkey_state = 0
 
-        state['evidence'][all_evidence[i]] = 0
+        state['evidence'][Object.keys(all_evidence)[i]] = 0
         state['prev_monkey_state'] = 0
     }
 
@@ -2092,7 +2092,7 @@ function resetFilters(skip_filter=false){
         e.querySelector("#checkbox").className = "neutral"
         $(e.querySelector(".label")).removeClass(["strike","disabled-text"]);
 
-        state['speed'][all_evidence[i]] = 0
+        state['speed'][all_speed[i]] = 0
     }
 
     for(var i = 0; i < all_sanity.length; i++){
@@ -2101,7 +2101,7 @@ function resetFilters(skip_filter=false){
         e.querySelector("#checkbox").className = "neutral"
         $(e.querySelector(".label")).removeClass(["strike","disabled-text"]);
 
-        state['sanity'][all_evidence[i]] = 0
+        state['sanity'][all_sanity[i]] = 0
     }
 
     let e = document.getElementById("LOS")
