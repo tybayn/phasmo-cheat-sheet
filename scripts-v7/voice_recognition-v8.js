@@ -288,11 +288,11 @@ function parse_speech(vtext){
         }
 
 
-        for(var i = 0; i < all_evidence.length; i++){
-            var leven_val = levenshtein_distance(all_evidence[i].toLowerCase(),vtext)
+        for(var i = 0; i < Object.keys(all_evidence).length; i++){
+            var leven_val = levenshtein_distance(Object.keys(all_evidence)[i].toLowerCase(),vtext)
             if(leven_val < smallest_val){
                 smallest_val = leven_val 
-                smallest_evidence = all_evidence[i]
+                smallest_evidence = Object.keys(all_evidence)[i]
             }
         }
         console.log(`${prevtext} >> ${vtext} >> ${smallest_evidence}`)
@@ -339,11 +339,11 @@ function parse_speech(vtext){
         }
 
 
-        for(var i = 0; i < all_evidence.length; i++){
-            var leven_val = levenshtein_distance(all_evidence[i].toLowerCase(),vtext)
+        for(var i = 0; i < Object.keys(all_evidence).length; i++){
+            var leven_val = levenshtein_distance(Object.keys(all_evidence)[i].toLowerCase(),vtext)
             if(leven_val < smallest_val){
                 smallest_val = leven_val 
-                smallest_evidence = all_evidence[i]
+                smallest_evidence = Object.keys(all_evidence)[i]
             }
         }
         console.log(`${prevtext} >> ${vtext} >> ${smallest_evidence}`)
@@ -1000,7 +1000,7 @@ if (("webkitSpeechRecognition" in window || "speechRecognition" in window) && na
     let stop_listen = true
 
     let ghost_grammar = `#JSGF V1.0; grammar ghosts; public <ghost> = ${all_ghosts.join(" | ")}`
-    let evidence_grammar = `#JSGF V1.0; grammar evidence; public <evidence> = ${all_evidence.join(" | ")}`
+    let evidence_grammar = `#JSGF V1.0; grammar evidence; public <evidence> = ${Object.keys(all_evidence).join(" | ")}`
     let speed_grammar = `#JSGF V1.0; grammar speed; pubilc <speed> = ${all_speed.join(" | ")}`
     let sanity_grammar = `#JSGF V1.0; grammar sanity; public <sanity> = ${all_sanity.join(" | ")}`
     let maps_grammar = `#JSGF V1.0; grammar maps; public <map> = tanglewood | edgefield | ridgeview | grafton | willow | brownstone | bleasdale | sunny meadows | sm | restricted | courtyard | male | female | wing | hospital | prison | maple lodge | woodwind | drive | road | court | farmhouse | high school | campsite | camp`
