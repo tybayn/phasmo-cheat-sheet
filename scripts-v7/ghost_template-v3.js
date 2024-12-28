@@ -64,7 +64,7 @@ class Ghost {
                 ${this.build_evidence_item(data.evidence[0],evidence[data.evidence[0]])}
                 ${this.build_evidence_item(data.evidence[1],evidence[data.evidence[1]])}
                 ${this.build_evidence_item(data.evidence[2],evidence[data.evidence[2]])}
-                ${data.ghost == "The Mimic" ? this.build_evidence_item(evidence['Ghost Orbs']) : ''}
+                ${data.ghost == "The Mimic" ? this.build_evidence_item('Ghost Orbs',evidence['Ghost Orbs']) : ''}
             </div>
             <div class="ghost_nightmare_evidence">${data.nightmare_evidence?data.nightmare_evidence:''}</div>
             <div class="ghost_hunt_high">${data.hunt_sanity_high}</div>
