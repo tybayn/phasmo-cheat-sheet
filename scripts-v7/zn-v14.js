@@ -214,8 +214,8 @@ function loadAllAndConnect(){
 
             if (!raw_state || raw_state == '' || raw_state == null){
                 console.log("No State found")
-                for (var i = 0; i < all_evidence.length; i++){
-                    state["evidence"][all_evidence[i]] = 0
+                for (var i = 0; i < Object.keys(all_evidence).length; i++){
+                    state["evidence"][Object.keys(all_evidence)[i]] = 0
                 }
                 for (var i = 0; i < all_ghosts.length; i++){
                     state["ghosts"][all_ghosts[i]] = 1
