@@ -453,7 +453,7 @@ function filter(ignore_link=false){
 
 
     // Filter other evidences
-    for (var i = 0; i < all_evidence.length; i++){
+    for (var i = 0; i < Object.keys(all_evidence).length; i++){
         var checkbox = document.getElementById(Object.keys(all_evidence)[i]);
         $(checkbox).removeClass("block")
         $(checkbox).find("#checkbox").removeClass(["block","disabled","faded"])
