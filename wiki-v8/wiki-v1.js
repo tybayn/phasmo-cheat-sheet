@@ -26,8 +26,7 @@ function accordian(elem){
         panel.style.height = "auto"
     }
 
-    if(elem.id == "wiki-flickering")
-        setFlicker()
+    setFlicker()
 }
 
 function openWikiFromURL(){
@@ -167,10 +166,10 @@ function startFlicker(elem, is_obake = false){
 }
 
 function setFlicker(){
-    if (document.getElementById("wiki_flicker").style.height == "0px" && flickering){
+    if (document.getElementById("wiki_flicker").style.height == "0px"){
         flickering=false
     }
-    else{
+    else if (document.getElementById("wiki_flicker").style.height != "0px" && !flickering){
         startFlicker(document.getElementById("phantom-flicker"))
         startFlicker(document.getElementById("normal-flicker"))
         startFlicker(document.getElementById("oni-flicker"))
