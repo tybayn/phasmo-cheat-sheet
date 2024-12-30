@@ -50,12 +50,7 @@ function checkLink(){
 
         if (params.get('lang')){
             lang = params.get('lang').toLowerCase()
-            if (["tr","fr","ru","de","pl"].includes(lang)){
-                window.location.href = `https://tybayn.github.io/phasmo-cheat-sheet-${lang}/`
-            }
-            else{
-                console.log("Hey! That language is not yet officially supported by the Zero-Network. If you would like to help translate the website, find me (SeverelyZero) on the Zero-Network Discord: https://discord.gg/afpvC7Bf7Y")
-            }
+            setCookie("lang",lang,90)
         }
 
         if (params.get("debug") == "true"){
@@ -67,25 +62,21 @@ function checkLink(){
     })
 }
 
-function loadLanguage(){
-    var lang_url = document.getElementById("language").value
-    window.location.href = lang_url
-}
-
 function heartbeat(){
     if(znid != "no-connection-to-server"){
         state['settings'] = JSON.stringify(user_settings)
         fetch("https://zero-network.net/zn/"+znid,{method:"POST",Accept:"application/json",body:JSON.stringify(state),signal: AbortSignal.timeout(10000)})
         .then(response => response.json())
         .then(data => {
-            $("#active-users-label").text("Active Users: " + data['active_num_users'])
+            $("#active-users-label").text(lang_data['{{active_users}}']+ ": " + data['active_num_users'])
         })
         .catch(response => {
-            $("#active-users-label").text("Active Users: -")
+            console.error(response)
+            $("#active-users-label").text(lang_data['{{active_users}}']+ ": -")
         });
     }
     else {
-        $("#active-users-label").text("Active Users: -")
+        $("#active-users-label").text(lang_data['{{active_users}}']+ ": -")
     }
 }
 
@@ -94,32 +85,25 @@ function loadAllAndConnect(){
         znid = getCookie("znid")
         pznid = getCookie("prev-znid")
         if(znid && znid!="no-connection-to-server"){
-            getLink()
-            .then(x => {
-                $("#session").text(`C: ${znid}`)
-                $("#prev-session").text(`P: ${pznid == '' ? '-' : pznid}`)
-                try {
-                    heartbeat()
-                } catch (error){
-                    console.warn("Possible latency issues!")
-                }
-                if(znid!="no-connection-to-server"){
-                    $('#room_id').val("")
-                    $('#room_id').css('color',"#CCC")
-                    $('#room_id').prop('disabled',false)
-                    $('#room_id_create').show()
-                    $('#room_id_link').show()
-                    $('#link_id_create').show()
-                    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-                    if(!mquery.matches && navigator.platform.toLowerCase().includes('win'))
-                        $('#link_id_create_launch').show()
-                }
-                else{
-                    $('#room_id').val("Can't Connect!")
-                    $('#link_id').val("Can't Connect!")
-                }
-                resolve("Loaded existing session")
-            })
+            $("#session").text(`C: ${znid}`)
+            $("#prev-session").text(`P: ${pznid == '' ? '-' : pznid}`)
+
+            if(znid!="no-connection-to-server"){
+                $('#room_id').val("")
+                $('#room_id').css('color',"#CCC")
+                $('#room_id').prop('disabled',false)
+                $('#room_id_create').show()
+                $('#room_id_link').show()
+                $('#link_id_create').show()
+                mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+                if(!mquery.matches && navigator.platform.toLowerCase().includes('win'))
+                    $('#link_id_create_launch').show()
+            }
+            else{
+                $('#room_id').val("Can't Connect!")
+                $('#link_id').val("Can't Connect!")
+            }
+            resolve("Loaded existing session")
         }
         else{
             var id;
@@ -128,20 +112,15 @@ function loadAllAndConnect(){
             } catch(Error) {
                 id = false;
             }
-            fetch(`https://zero-network.net/zn/${id ? '?discord_id='+id : ''}`,{headers:{Accept:"application/json"},signal: AbortSignal.timeout(10000)})
+            fetch(`https://zero-network.net/zn/${id ? '?discord_id='+id : ''}?lang=${lang}`,{headers:{Accept:"application/json"},signal: AbortSignal.timeout(10000)})
             .then(e=>e.json())
             .then(e => {
                 znid = e.znid
                 setCookie("znid",e.znid,1)
 
-                getLink()
                 $("#session").text(`C: ${e.znid}`)
                 $("#prev-session").text(`P: ${pznid == '' ? '-' : pznid}`)
-                try {
-                    heartbeat()
-                } catch (error){
-                    console.warn("Possible latency issues!")
-                }
+
                 $('#room_id').val("")
                 $('#room_id').css('color',"#CCC")
                 $('#room_id').prop('disabled',false)
@@ -170,11 +149,16 @@ function loadAllAndConnect(){
     })
 
     let loadData = new Promise((resolve, reject) => {
-        fetch("https://zero-network.net/phasmophobia/data/ghosts.json", {signal: AbortSignal.timeout(6000)})
+
+        lang = getCookie("lang")
+        if(!lang){
+            lang = 'en'
+        }
+        fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=${lang}`, {signal: AbortSignal.timeout(6000)})
         .then(data => data.json())
         .then(data => {
 
-            all_ghosts = data.ghosts.map(a => a.ghost)
+            all_ghosts = Object.fromEntries(data.ghosts.map(a => [a.ghost,a.name]))
             all_evidence = data.evidence
 
             var cards = document.getElementById('cards')
@@ -217,8 +201,8 @@ function loadAllAndConnect(){
                 for (var i = 0; i < Object.keys(all_evidence).length; i++){
                     state["evidence"][Object.keys(all_evidence)[i]] = 0
                 }
-                for (var i = 0; i < all_ghosts.length; i++){
-                    state["ghosts"][all_ghosts[i]] = 1
+                for (var i = 0; i < Object.keys(all_ghosts).length; i++){
+                    state["ghosts"][Object.keys(all_ghosts)[i]] = 1
                 }
                 state["prev_monkey_state"] = 0
 
@@ -284,7 +268,7 @@ function loadAllAndConnect(){
                 }
             }
         })
-        .then(data => {
+        .then(() => {
             resolve("Ghost data loaded")
         })
         .catch(error => {
@@ -294,7 +278,7 @@ function loadAllAndConnect(){
             .then(data => data.json())
             .then(data => {
 
-                all_ghosts = data.ghosts.map(a => a.ghost)
+                all_ghosts = Object.fromEntries(data.ghosts.map(a => [a.ghost,a.name]))
                 all_evidence = data.evidence
             
                 var cards = document.getElementById('cards')
@@ -385,19 +369,19 @@ function loadAllAndConnect(){
                 "difficulty_id": data.difficulty_id
             }
 
-            let image_str = weekly_data.equipment_url !== null ?  `<img class="weekly-image" loading="lazy" src="${weekly_data.equipment_url}">` : "<h4>Hold tight! We will have an image soon!</h4>"
+            let image_str = weekly_data.equipment_url !== null ?  `<img class="weekly-image" loading="lazy" src="${weekly_data.equipment_url}">` : "<h4>{{weekly_missing_image}}</h4>"
 
             let weekly_html = `
                 <h1>${weekly_data.title}</h1>
                 <h4 style="margin-top:0px;"><i>${weekly_data.description}</i></h4>
                 <hr>
                 <div class="weekly-modifiers">
-                    <div class="weekly-mod"><b>Map</b>${weekly_data.map}</div>
-                    <div class="weekly-mod"><b>Player Speed</b>${weekly_data.player_speed}%</div>
-                    <div class="weekly-mod"><b>Ghost Speed</b>${weekly_data.ghost_speed}%</div>   
-                    <div class="weekly-mod"><b>Number of Evidence</b>${weekly_data.num_evidence}</div>
-                    <div class="weekly-mod"><b>Cursed Possessions</b>${weekly_data.cursed_objects.join(', ')}</div>
-                    <div class="weekly-mod"><b>Difficulty Settings</b><a href="https://zero-network.net/phasmo-cheat-sheet/difficulty-builder/?share=${weekly_data.difficulty_id}" target="_blank">${weekly_data.difficulty_id}</a></div>
+                    <div class="weekly-mod"><b>{{weekly_map}}</b>${weekly_data.map}</div>
+                    <div class="weekly-mod"><b>{{weekly_player_speed}}</b>${weekly_data.player_speed}%</div>
+                    <div class="weekly-mod"><b>{{weekly_ghost_speed}}</b>${weekly_data.ghost_speed}%</div>   
+                    <div class="weekly-mod"><b>{{weekly_num_evidence}}</b>${weekly_data.num_evidence}</div>
+                    <div class="weekly-mod"><b>{{weekly_cursed_possessions}}</b>${weekly_data.cursed_objects.join(', ')}</div>
+                    <div class="weekly-mod"><b>{{weekly_difficulty_settings}}</b><a href="https://zero-network.net/phasmo-cheat-sheet/difficulty-builder/?share=${weekly_data.difficulty_id}" target="_blank">${weekly_data.difficulty_id}</a></div>
                 </div>
                 ${image_str}
             `
@@ -429,16 +413,37 @@ function loadAllAndConnect(){
             console.error(error)
             reject("Failed to load language data")
         })
-
     })
     
-    Promise.all([loadZN,loadData,loadMaps,loadWeekly,loadLanguages])
-    .then(x => {
-        loadSettings()
-        filter(true)
-        applyPerms()
-        auto_link()
-        openWikiFromURL()
+    document.getElementById("page-loading-status").innerText = "loading language data..."
+    Promise.all([load_translation()])
+    .then(() => {
+        document.getElementById("page-loading-status").innerText = "loading ghost data..."
+        Promise.all([loadZN,loadData,loadMaps,loadWeekly,loadLanguages])
+        .then(() => {
+            document.getElementById("page-loading-status").innerText = "translating page..."
+            Promise.all([translate(lang)])
+            .then(() => {
+                document.getElementById("page-loading-status").innerText = "translating wiki..."
+                Promise.all([translate_wiki(lang)])
+                .then(() => {
+                    document.getElementById("page-loading-status").innerText = "loading user settings..."
+                    getLink()
+                    loadSettings()
+                    filter(true)
+                    applyPerms()
+                    auto_link()
+                    openWikiFromURL()
+
+                    try{heartbeat()} catch(Error){console.warn("Possible latency issues!")}
+                    setInterval(function(){
+                        if(!document.hidden){
+                            try{heartbeat()} catch(Error){console.error("Heartbeat failed!")}
+                        }
+                    }, 300000)
+                })
+            })
+        })
     })
 }
 

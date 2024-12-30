@@ -21,27 +21,32 @@
         };
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
-    <script src="scripts-v7/ghost_template-v3.js"></script>
-    <link rel="stylesheet" href="styles-v7/style-v13.css"/>
-    <link rel="stylesheet" href="styles-v7/style-mobile-v12.css"/>
-    <link rel="stylesheet" href="themes-v7/themes-v2.css"/>
-    <link rel="stylesheet" href="discord-v7/discord-v1.css" >
-    <link rel="stylesheet" href="wiki-v7/wiki-v5.css" >
-    <link rel="stylesheet" href="wiki-v7/wiki-spoiler-v2.css" >
-    <link rel="stylesheet" href="events-v7/events-v2.css" >
-    <link rel="stylesheet" href="models-v7/models-v1.css" >
-    <link rel="stylesheet" href="feed-v7/feed-v1.css" >
-    <link rel="stylesheet" href="styles-v7/plugins-v2/plugins-v1.css" >
-    <link rel="stylesheet" href="styles-v7/plugins-v2/makeship-v1.css" >
-    <link rel="stylesheet" href="styles-v7/plugins-v2/musicboxstore-v1.css" >
-    <link rel="stylesheet" href="styles-v7/sparkles-v1.css" >
+    <script src="scripts-v8/ghost_template-v1.js"></script>
+    <link rel="stylesheet" href="styles-v8/style-v1.css"/>
+    <link rel="stylesheet" href="styles-v8/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="themes-v8/themes-v1.css"/>
+    <link rel="stylesheet" href="discord-v8/discord-v1.css" >
+    <link rel="stylesheet" href="wiki-v8/wiki-v1.css" >
+    <link rel="stylesheet" href="wiki-v8/wiki-spoiler-v1.css" >
+    <link rel="stylesheet" href="events-v8/events-v1.css" >
+    <link rel="stylesheet" href="models-v8/models-v1.css" >
+    <link rel="stylesheet" href="feed-v8/feed-v1.css" >
+    <link rel="stylesheet" href="styles-v8/plugins-v1/plugins-v1.css" >
+    <link rel="stylesheet" href="styles-v8/plugins-v1/makeship-v1.css" >
+    <link rel="stylesheet" href="styles-v8/plugins-v1/musicboxstore-v1.css" >
+    <link rel="stylesheet" href="styles-v8/sparkles-v1.css" >
 </head>
 
 <body>
+    <div id="page-loading">
+        <div id="page-loading-status"></div>
+        <div class="dot-loading"></div>
+        <div class="not-loading">Page not loading? Check our <a href="https://zero-network.net/status" target="_blank">status</a> or join our <a href="https://discord.gg/afpvC7Bf7Y" target="_blank">Discord</a></div>
+    </div>
     <div id="resetMenu" style="display: none;">
-        <button onclick="resetGhosts()">Reset Ghosts</button>
-        <button onclick="resetFilters()">Reset Filters</button>
-        <button onclick="resetNoSave()">Reset All without saving</button>
+        <button onclick="resetGhosts()">{{reset_ghosts}}</button>
+        <button onclick="resetFilters()">{{reset_filters}}</button>
+        <button onclick="resetNoSave()">{{reset_all}}</button>
     </div>
 
     <div id="broadcast" class="broadcast" style="display:none;">
@@ -64,40 +69,37 @@
         <div id="info_box">
             <span class="icon" onclick="showInfo(event)"></span>
 
-            <h3>Data Accuracy</h3>
-            <div class="info_text">The data was last corrected and verified by Phasmophobia Discord Moderator "Shuee01" on 2023-01-04 (v0.8.0.5). Data is kept up to date with the verified information in the official Phasmophobia Discord #ghost-huntin-resources channel, which is maintained and kept accurate by "Shuee01".</div>
-            <div class="info_text" style="padding-top: 15px;">Graphics settings and GPU/CPU load will impact the speed of footstep sounds in game. What you hear in game may differ and not match exactly with what is heard on this guide. You can adjust the "Speed Offset" in settings to more accurately align the footstep sounds to what you hear in game. When comparing footsteps via sound examples: double footsteps, stairs, and turning around can cause the audio to appear slightly offset.</div>
-            <h3>Copyright and Disclaimers</h3>
-            <div class="info_block">Phasmophobia, the Phasmophobia logo, and any game related info, images, or sounds (specifically footstep sounds, banshee scream, and deogen breathing) are either ® or TM, Kinetic Games Limited. Any assets used within this site are used with direct permission from Kinetic Games.<br><br>
-                The Zero-Network "Unofficial Phasmophobia Cheat Sheet" is not created by nor affiliated with Kinetic Games, its developers, or partners. This service is created by an independent third party.<br><br>
-                This service is created as an educational tool for the Phasmophobia community, no copyright infringement intended.<br>
+            <h3>{{infocopy_h1}}</h3>
+            <div class="info_text">{{infocopy_p1}}</div>
+            <div class="info_text" style="padding-top: 15px;">{{infocopy_p2}}</div>
+            <h3>{{infocopy_h2}}</h3>
+            <div class="info_block">{{infocopy_p3}}<br><br>
+                {{infocopy_p4}}<br><br>
+                {{infocopy_p5}}<br>
                 <hr>
-                Fair Use Disclaimer:<br><br>
-                Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for "fair use" for purposes such as criticism, comment, news reporting, teaching, scholarship and research. Fair use is a use permitted by copyright statute that might otherwise be infringing.<br>
+                {{infocopy_h3}}<br><br>
+                {{infocopy_p6}}<br>
                 <hr>
-                The website itself, its design, layout, functionality, and additional softwares are copyrighted by Ty Bayn (Zero-Network).<br><br>
+                {{infocopy_p7}}<br><br>
             </div>
-            <h3>Recognition</h3>
+            <h3>{{infocopy_h4}}</h3>
             <div class="info_image_text">
                 <span class="sparkling"><img src="https://zero-network.net/phasmophobia/static/imgs/vip.png"></span>
-                <div>The developer of this guide (SeverelyZero) received an in-game VIP badge from Kinetic Games Partner "JOJOsaysbreee" for the creation of this guide as a community resource (2022-12-29)</div>
+                <div>{{infocopy_p8}}</div>
             </div>
             <div class="thankyou_text">
-                A special thank you to @fantismalspider, @darkhooper, @.wavebuster, @sassysalamence, @alunny,<br>
-                @skreekaw, @idshay16, @vandelayind, and @werdna64 for their continued support in QA, testing,<br>
-                ideas, data validation, and the creation of fantastic community resources
+                {{infocopy_p9}}
             </div>
             <div class="thankyou_text_img">
                 <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/161cdac5-6a34-4089-97cc-834aaa28058a-profile_image-70x70.png">
-                And a huge thank you to Kinetic Games Partner @bepisttv for<br>
-                helping us gather, document, and verify game mechanics
+                {{infocopy_p10}}
             </div>
             <div class="thankyou_text">
-                <strong>Found a bug? Have ideas? Want to play a few rounds?</strong><br>
+                <strong>{{infocopy_p11}}</strong><br>
                 <p class="footer_link">
                     <a class="inline_image_text" style="color: #5865F2;" href="https://discord.gg/afpvC7Bf7Y" target="_blank">
                         <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" width="25">
-                        <strong style="padding-left: 6px;">Join the 'Zero-Network: Ghost Hunters' server</strong>
+                        <strong style="padding-left: 6px;">{{infocopy_p12}}</strong>
                     </a>
                 </p>
             </div>
@@ -194,79 +196,64 @@
         <div id="zndl_blockout" class="blockout-invis" style="display: none;" onclick="showZNDLInfo(event)"></div>
         <div id="info_box_zndl">
             <span class="icon" onclick="showZNDLInfo(event)"></span>
-            <h2>Thanks for downloading the ZN-Desktop-Link!</h2>
-            <div class="info_text">Please read the following important information about the ZN-Desktop-Link, installation tips, disclaimers, and brief usage instructions.</div>
+            <h2>{{zndl_title}}</h2>
+            <div class="info_text">{{zndl_p1}}</div>
             <hr>
-            <h3>Disclaimers</h3>
+            <h3>{{zndl_h1}}</h3>
             <div class="info_text">
-                The ZN-Desktop-Link does not interact with, read from, write to, or modify any Phasmophobia game files, nor does it interact with the game itself.
-                The software is NOT a mod nor a cheat software, but simply a companion software that displays an overlay on top of the game and provides its own hotkeys for starting timers
-                and utilizing other tools. The use of this software will not result in a ban from the game.
+                {{zndl_p2}}
             </div>
             <br>
             <div class="info_text">
-                The software is an extension of the Unofficial Phasmophobia Cheat Sheet. As such, the cheat sheet must remain open for the Desktop Link to work. 
-                Any issues, bugs, or concerns can be taken care of on our Discord.
+                {{zndl_p3}}
             </div>
             <hr>
-            <h3>Installing</h3>
-            <div class="info_text">Once the .msi file has downloaded, simply run the installer and it will walk you through the installation process.</div>
-            <div class="info_text">During installation, you may see the following popup window:</div>
+            <h3>{{zndl_h2}}</h3>
+            <div class="info_text">{{zndl_p4}}</div>
+            <div class="info_text">{{zndl_p5}}</div>
             <img loading="lazy" src="imgs/zndl/error.png">
             <div class="info_text">
-                This popup appears anytime you try to run software that has not been officialy verified by Microsoft 
-                (which costs hundreds of dollars per year). The ZN-Desktop-Link is safe to run and does not contain any malicious code.
-                You can bypass this warning and continue the install by clicking "More info" then "Run Anyway".
+                {{zndl_p6}}
             </div>
             <hr>
-            <h3>Linking the Desktop Link</h3>
-            <div class="info_text">Once the software is installed, there are 2 ways to link the ZN-Desktop-Link:</div>
-            <h4>Manual Link</h4>
-            <div class="info_text">Navigate to the "Desktop Link" section of the "Links" tab and click the "Create" button.</div>
+            <h3>{{zndl_h3}}</h3>
+            <div class="info_text">{{zndl_p7}}</div>
+            <h4>{{zndl_h4}}</h4>
+            <div class="info_text">{{zndl_p8}}</div>
             <img loading="lazy" src="imgs/zndl/settings_desktop_link.png">
-            <div class="info_text">Copy the code it generates (in the format of 'DL-#####') and paste that into the "Link ID" field of the "Connect to Cheat Sheet" page in the ZN-Desktop-Link software. Then hit "Connect".</div>
+            <div class="info_text">{{zndl_p9}}</div>
             <img loading="lazy" src="imgs/zndl/connect_desktop_link.png">
-            <h4>Auto Link</h4>
-            <div class="info_text">Alternatively, you may navigate to the "Desktop Link" section of the "Links" tab and click the "Create & Launch" button. This will automatically open the ZN-Desktop-Link and connect it for you.</div>
+            <h4>{{zndl_h5}}</h4>
+            <div class="info_text">{{zndl_p10}}</div>
             <hr>
-            <h3>Usage</h3>
-            <h4>HotKeys</h4>
+            <h3>{{zndl_h6}}</h3>
+            <h4>{{zndl_h7}}</h4>
             <div class="info_text">
-                The ZN-Desktop-Link provides a variety of hotkeys to control the cheat sheet while in game, allowing you to start timers, 
-                mark evidence, see ghost data, and tap out footsteps all without having to "tab out" of the game. The provided hotkeys can be seen and 
-                changed on the "Connected!" page in the Desktop Link.
+                {{zndl_p11}}
             </div>
             <img loading="lazy" src="imgs/zndl/desktop_link.png">
-            <h4>Settings</h4>
+            <h4>{{zndl_h8}}</h4>
             <div class="info_text">
-                The ZN-Desktop-Link provides many customizable options for you to make the software the perfect companion to your gameplay. 
-                To open the options, click the settings icon on the lower right corner of the "Connected!" page in the Desktop Link. 
-                From here you can show/hide the overlay and ghost overlay, change the location, color, and screen of the overlays, and more. 
+                {{zndl_p12}} 
             </div>
             <img loading="lazy" src="imgs/zndl/desktop_link_options.png">
-            <h4>Overlay</h4>
+            <h4>{{zndl_h9}}</h4>
             <div class="info_text">
-                Once enabled, the overlay will be displayed on the screen and will be pinned to the front so that it is visible while you are in game.
-                It provides a quick view of the timers, the bpm/speed, the evidences, and the ghost selected/guessed.
+                {{zndl_p13}}
             </div>
             <img loading="lazy" src="imgs/zndl/overlay.png">
-            <h4>Ghost Overlay</h4>
+            <h4>{{zndl_h10}}</h4>
             <div class="info_text">
-                In addition to the overlay, there is a second overlay that can be enabled that will show you all the ghosts.
-                From here you can click on a ghost (or cycle through them with hotkeys) to see the behaviors and tells of that ghost.
+                {{zndl_p14}}
             </div>
             <img loading="lazy" src="imgs/zndl/ghost_overlay.png">
-            <h4>Sanity Overlay</h4>
+            <h4>{{zndl_h11}}</h4>
             <div class="info_text">
-                There is a third overlay that can be enabled that will help track your in-game sanity. When activated, it will start a timer that will 
-                simulate passive sanity drain (based on the "Sanity Settings" in the bottom of the "Links" tab). It will also allow you to add and subtract
-                various values of sanity based on ghost events, cursed possessions, and more.
+                {{zndl_p15}}
             </div>
             <img loading="lazy" src="imgs/zndl/sanity_overlay.png">
             <div class="info_text">
-                In order for the sanity drain to be accurate, it is important that the "Sanity Settings" are set correctly (all "Sanity Settings",
-                except Lobby Type, will be set automatically based on the difficulty chosen. If you have custom selected, you will need to 
-                set the values to match your in-game settings).
+                {{zndl_p16}}
             </div>
             <img loading="lazy" src="imgs/zndl/sanity_overlay_options.png">
             <hr>
@@ -278,7 +265,7 @@
         <div id="weekly_blockout" class="blockout-invis" style="display: none;" onclick="showWeekly(event)"></div>
         <div id="info_box_weekly" style="text-align: center;">
             <span class="icon" onclick="showWeekly(event)"></span>
-            <h3 id="weekly_title">Weekly Challenge</h3>
+            <h3 id="weekly_title">{{weekly_challenge}}</h3>
             <div id="weekly_info_box" class="info_block"></div>
         </div>
     </div>
@@ -294,45 +281,31 @@
     <div id="blackout_calibrate" style="display: none;">
         <div id="info_box_calibrate">
             <span class="icon" onclick="showCalibrate();toggle_calibration(false,true);"></span>
-            <h3>Calibrate</h3>
-            <div id="cal_tap_intro" class="info_text" style="display:none;">
-                While calibration is running, tap along with the ghost footsteps to begin<br>
-                (You can tap the "Tap" button directly, tap 'f' on your keyboard, or use the desktop link)
-            </div>
+            <h3>{{calibrate}}</h3>
+            <div id="cal_tap_intro" class="info_text" style="display:none;">{{calibrate_running}}</div>
             <button id="calibration-tap" class="yfont" onmousedown="bpm_tap()" style="display:none;">
-                <div>Tap</div>
+                <div>{{tap}}</div>
             </button>
             <div id="calibration-bar" class="calibration-bar" style="display:none;">
                 <div id="calibration-progress" class="calibration-progress"></div>
             </div>
             <h4 id="cal_complete" style="display:none;"></h4>
             <h1 id="new_offset" style="display:none;"></h1>
-            <div id="cal_intro" class="info_text">
-                If you find that the BPM Finder or Footsteps seem to be a little bit off, 
-                you can use this tool to calibrate an offset so that they match what you hear in game!
-            </div>
+            <div id="cal_intro" class="info_text">{{calibrate_intro}}</div>
             <div id="cal_instructions" class="info_text">
                 <ol style="margin:10px 0px 0px 0px; padding:5px; font-size: 10px;">
                     <li>
-                        <b>Prepare the Cheat Sheet:</b><br>
-                        Link the ZN-Desktop-Link if prefered for tapping. Ghost speed will automatically be set
-                        to 100% and Blood Moon modifiers will be ignored during calibration.
+                        <b>{{calibrate_1_header}}:</b><br>{{calibrate_1}}
                     </li>
                     <li>
-                        <b>Prepare in-game:</b><br>
-                        Enter a game that has 100% Ghost Speed, hiding spots, and the Weather is not Blood Moon. 
-                        Find a ghost that has normal speed ghost (1.7m/s). Then hide in a hiding spot where you
-                        can hear the ghost footsteps while it is hunting.
+                        <b>{{calibrate_2_header}}:</b><br>{{calibrate_2}}
                     </li>
                     <li>
-                        <b>Calibrating:</b><br>
-                        While the ghost is hunting, tap along with the footsteps, attempting to remain as consistant as possible.
-                        Continue tapping until the progress bar below is full and says that the calibration was successful or
-                        not. If successful, it will automatically change the offset value in the settings.
+                        <b>{{calibrate_3_header}}:</b><br>{{calibrate_3}}
                     </li>
                 </ol>
             </div>
-            <button id="calibration" class="yfont" onclick="toggle_calibration()">Start</button>
+            <button id="calibration" class="yfont" onclick="toggle_calibration()">{{start}}</button>
         </div>
     </div>
 
@@ -348,11 +321,11 @@
         <span class="icon" onclick="showSettings()"></span>
 
         <div class="moving_content">
-            <div class="settings_title yfont white">Settings</div>
-            <div class="title_note">( '◄' to close )</div>
+            <div class="settings_title yfont white">{{settings}}</div>
+            <div class="title_note">( '◄' {{to_close}} )</div>
 
             <div class="info_block">
-                <div class="modifier_volume yfont white">Speed Offset</div>
+                <div class="modifier_volume yfont white">{{speed_offset}}</div>
                 <div id="speed_offset">
                     <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-1);setTempo();saveSettings();">-1</span>
                     <span id="minus_speed" class="speed_icon" onclick="adjustOffset(-0.1);setTempo();saveSettings();">-.1</span>
@@ -361,29 +334,29 @@
                     <span id="minus_speed" class="speed_icon" onclick="adjustOffset(1);setTempo();saveSettings();">+1</span>
                 </div>
                 <button id="calibrate-button" class="yfont" onclick="showCalibrate();">Calibrate</button>
-                <div class="modifier_note">(Adjust speed of footsteps)</div>
+                <div class="modifier_note">({{adjust_speed}})</div>
                 <hr>
-                <div class="modifier_volume yfont white">Speed Filter Logic</div>
+                <div class="modifier_volume yfont white">{{speed_filter_logic}}</div>
                 <div class="speed_logic_select">
-                    <span>OR</span>
+                    <span>{{or}}</span>
                     <label for="speed_logic_type" onchange="filter();saveSettings();">
                         <input type="checkbox" name="" id="speed_logic_type">
                         <div class="toggle"></div>
                     </label>
-                    <span>AND</span>
+                    <span>{{and}}</span>
                 </div>
                 <hr>
-                <div class="modifier_volume yfont white">BPM to m/s</div>
+                <div class="modifier_volume yfont white">{{bpm_to_ms}}</div>
                 <div class="speed_logic_select">
-                    <span>Exact</span>
+                    <span>{{exact}}</span>
                     <label for="bpm_type" onchange="bpm_calc(true);saveSettings();">
                         <input type="checkbox" name="" id="bpm_type">
                         <div class="toggle"></div>
                     </label>
-                    <span>Rounded</span>
+                    <span>{{rounded}}</span>
                 </div>    
                 <hr>
-                <div class="modifier_volume yfont white">Volume & Timers</div>
+                <div class="modifier_volume yfont white">{{volume_and_timers}}</div>
                 <input type="range" id="modifier_volume" name="volume" 
                     min="0" max="100" step="2" default="50" onchange="setVolume();saveSettings();">
                 <div class="modifier_volume_labels">
@@ -394,36 +367,36 @@
                     <div class="modifier_volume_label">100%</div>
                 </div>
                 <div class="modifier_option">
-                    <input type="checkbox" id="mute_broadcast" name="mute_broadcast" class="settings_check" onclick="mute_broadcast();saveSettings();"><label for="mute_broadcast">Mute Broadcast Alert</label>
+                    <input type="checkbox" id="mute_broadcast" name="mute_broadcast" class="settings_check" onclick="mute_broadcast();saveSettings();"><label for="mute_broadcast">{{mute_broadcast}}</label>
                 </div>
                 <div class="modifier_option less_pad">
-                    <input type="checkbox" id="mute_timer_countdown" name="mute_timer_countdown" class="settings_check" onclick="mute('countdown');saveSettings();"><label for="mute_timer_countdown">Mute Timer Countdown</label>
+                    <input type="checkbox" id="mute_timer_countdown" name="mute_timer_countdown" class="settings_check" onclick="mute('countdown');saveSettings();"><label for="mute_timer_countdown">{{mute_countdown}}</label>
                 </div>
                 <div class="modifier_option less_pad">
-                    <input type="checkbox" id="mute_timer_toggle" name="mute_timer_toggle" class="settings_check" onclick="mute('toggle');saveSettings();"><label for="mute_timer_toggle">Mute Timer Toggle</label>
+                    <input type="checkbox" id="mute_timer_toggle" name="mute_timer_toggle" class="settings_check" onclick="mute('toggle');saveSettings();"><label for="mute_timer_toggle">{{mute_toggle}}</label>
                 </div>
                 <div class="modifier_option less_pad">
-                    <input type="checkbox" id="timer_count_up" name="timer_count_up" class="settings_check" onclick="toggleCountup();saveSettings();"><label for="timer_count_up">Timer Count Up</label>
+                    <input type="checkbox" id="timer_count_up" name="timer_count_up" class="settings_check" onclick="toggleCountup();saveSettings();"><label for="timer_count_up">{{timer_count_up}}</label>
                 </div>
                 <div class="modifier_option less_pad">
-                    <input type="checkbox" id="timer_split" name="timer_split" class="settings_check" onclick="saveSettings();"><label for="timer_split">Split Timer Parts (Desktop Link)</label>
+                    <input type="checkbox" id="timer_split" name="timer_split" class="settings_check" onclick="saveSettings();"><label for="timer_split">{{split_timer}}</label>
                 </div>  
                 <hr>
-                <div class="modifier_volume yfont white">Ghost Cards</div> 
+                <div class="modifier_volume yfont white">{{ghost_cards}}</div> 
                 <div class="modifier_option less_pad">
-                    <input type="checkbox" id="adaptive_evidence" name="adaptive_evidence" class="settings_check" onclick="filter();saveSettings();"><label for="adaptive_evidence">Adaptive Evidence</label>
+                    <input type="checkbox" id="adaptive_evidence" name="adaptive_evidence" class="settings_check" onclick="filter();saveSettings();"><label for="adaptive_evidence">{{adaptive_evidence}}</label>
                 </div>     
                 <div class="modifier_option less_pad">
-                    <input type="checkbox" id="hide_descriptions" name="hide_descriptions" class="settings_check" onclick="toggleDescriptions();saveSettings();"><label for="hide_descriptions">Hide Behaviors</label>
+                    <input type="checkbox" id="hide_descriptions" name="hide_descriptions" class="settings_check" onclick="toggleDescriptions();saveSettings();"><label for="hide_descriptions">{{hide_behaviors}}</label>
                 </div>
                 <div class="modifier_option less_pad">
-                    <input type="checkbox" id="compact_cards" name="compact_cards" class="settings_check" onclick="toggleCompact();saveSettings();"><label for="compact_cards">Compact View</label>
+                    <input type="checkbox" id="compact_cards" name="compact_cards" class="settings_check" onclick="toggleCompact();saveSettings();"><label for="compact_cards">{{compact_view}}</label>
                 </div>
-                <div class="modifier_note">(Compact View has no effect on mobile)</div>
+                <div class="modifier_note">{{compact_disclaimer}}</div>
                 <hr>
-                <div class="modifier_volume yfont white">Graphics</div> 
+                <div class="modifier_volume yfont white">{{graphics}}</div> 
                 <div class="modifier_option less_pad">
-                    <input type="checkbox" id="disable_particles" name="disable_particles" class="settings_check" onclick="setBloodMoonParticles();changeTheme();saveSettings();"><label for="disable_particles">Disable Particle Effects</label>
+                    <input type="checkbox" id="disable_particles" name="disable_particles" class="settings_check" onclick="setBloodMoonParticles();changeTheme();saveSettings();"><label for="disable_particles">{{disable_particles}}</label>
                 </div>  
             </div>
             <div id="session">C: -</div>
@@ -433,7 +406,7 @@
 
     <div id="links_box" style="left: -1000px;">
         <div id="links_tab" onclick="showLinks()">
-            <div class="tab_rotate">Links</div>
+            <div class="tab_rotate">{{links}}</div>
             <div id="settings_status"></div>
             <div id="dllink_status"></div>
             <div id="voice_recognition_status" class="pulse_animation" style="display:none; background-image: url(imgs/mic.png);"></div>
@@ -441,52 +414,52 @@
         <span class="icon" onclick="showLinks()"></span>
 
         <div class="moving_content">
-            <div class="settings_title yfont white">Links</div>
-            <div class="title_note">( '◄' to close )</div>
+            <div class="settings_title yfont white">{{links}}</div>
+            <div class="title_note">( '◄' {{to_close}} )</div>
             <div class="info_block">
-                <div class="modifier_volume yfont white">Voice Commands</div>
-                <div class="journal_link vc_link">
+                <div class="vcs modifier_volume yfont white">Voice Commands</div>
+                <div class="vcs journal_link vc_link">
                     <div class="journal_link_buttons">
                         <button id="start_voice" class="journal_link_button" onclick="start_voice()">Enable</button>
                         <button id="stop_voice" class="journal_link_button" onclick="stop_voice()" disabled>Disable</button>
                     </div>
                 </div>
-                <div id="voice_recognition_note" class="modifier_note"><div onclick="showVoiceInfo(event)" class="link_hover">Commands and Info &#187;</div></div>
-                <hr>
-                <div class="modifier_volume yfont white">Shared Journal Link</div>
+                <div id="voice_recognition_note" class="vcs modifier_note"><div onclick="showVoiceInfo(event)" class="link_hover">Commands and Info &#187;</div></div>
+                <hr class="vcs">
+                <div class="modifier_volume yfont white">{{shared_journal_link}}</div>
                 <div class="journal_link">
-                    <input type="text" placeholder="XXXXXX" id="room_id" class="text" value="Connecting..." disabled style="color:#444;">
-                    <div id="room_id_cover" class="copy_cover" style="display:none;">Copied!</div>
+                    <input type="text" placeholder="XXXXXX" id="room_id" class="text" value="" disabled style="color:#444;">
+                    <div id="room_id_cover" class="copy_cover" style="display:none;">{{copied}}</div>
                     <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_url_code()">
                     <div id="link_pos" style="display: none;"></div>
                     <div class="journal_link_buttons">
-                        <button id="room_id_create" class="journal_link_button" style="display: none;" onclick="create_room()">Create</button>
-                        <button id="room_id_link" class="journal_link_button" style="display: none;" onclick="link_room()">Join</button>
-                        <button id="room_id_disconnect" class="journal_link_button" style="display: none;" onclick="disconnect_room()">Disconnect</button>
+                        <button id="room_id_create" class="journal_link_button" style="display: none;" onclick="create_room()">{{create}}</button>
+                        <button id="room_id_link" class="journal_link_button" style="display: none;" onclick="link_room()">{{join}}</button>
+                        <button id="room_id_disconnect" class="journal_link_button" style="display: none;" onclick="disconnect_room()">{{disconnect}}</button>
                     </div>
                 </div>
-                <div id="room_id_note" class="modifier_note" style="user-select: text;">(STATUS: Not connected)</div>
+                <div id="room_id_note" class="modifier_note" style="user-select: text;">({{status}}: {{not_connected}})</div>
                 <hr>
                 <div class="modifier_volume yfont white">
                     <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo(event)">
-                    Desktop Link
+                    {{desktop_link}}
                     <a id="zndl-download-icon" class="download" href="assets/ZN-Desktop-Link-Installer-v3.3.8.msi" download="ZN-Desktop-Link-Installer-v3.3.8.msi" onclick="showZNDLInfo(event)"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
                 </div>
                 <div class="journal_link">
-                    <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="DL-XXXXX" disabled style="color:#444;">
-                    <div id="link_id_cover" class="copy_cover" style="display:none;">Copied!</div>
+                    <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="" disabled style="color:#444;">
+                    <div id="link_id_cover" class="copy_cover" style="display:none;">{{copied}}</div>
                     <img class="clipboard_icon" src="imgs/copy.png" onclick="copy_code()">
                     <div class="journal_link_buttons">
-                        <button id="link_id_create" class="desktop_link_button" style="display: none;" onclick="create_link(false)">Create</button>
-                        <button id="link_id_create_launch" class="desktop_link_button" style="display: none;" onclick="create_link(true)">Create & Launch</button>
-                        <button id="link_id_disconnect" class="desktop_link_button" style="display: none;" onclick="disconnect_link()">Disconnect</button>
+                        <button id="link_id_create" class="desktop_link_button" style="display: none;" onclick="create_link(false)">{{create}}</button>
+                        <button id="link_id_create_launch" class="desktop_link_button" style="display: none;" onclick="create_link(true)">{{create_and_launch}}</button>
+                        <button id="link_id_disconnect" class="desktop_link_button" style="display: none;" onclick="disconnect_link()">{{disconnect}}</button>
                     </div>
                 </div>
-                <div id="link_id_note" class="modifier_note">(STATUS: Not linked)</div>
+                <div id="link_id_note" class="modifier_note">({{status}}: {{not_linked}})</div>
                 <hr>
-                <div class="modifier_volume yfont white">Sanity Settings</div>
-                <div class="modifier_note">For Sanity Overlay on Desktop Link</div>
-                <div class="sanity_labels yfont white">Starting Sanity</div>
+                <div class="modifier_volume yfont white">{{sanity_settings}}</div>
+                <div class="modifier_note">{{for_sanity}}</div>
+                <div class="sanity_labels yfont white">{{starting_sanity}}</div>
                 <input type="range" id="cust_starting_sanity" name="cust_starting_sanity" class="option-disabled"
                     min="0" max="100" step="25" default="50" onchange="filter();set_sanity_settings();saveSettings();" disabled>
                 <div class="modifier_volume_labels">
@@ -496,7 +469,7 @@
                     <div class="modifier_volume_label">75%</div>
                     <div class="modifier_volume_label" selected>100%</div>
                 </div>
-                <div class="sanity_labels yfont white">Sanity Pill Rest.</div>
+                <div class="sanity_labels yfont white">{{sanity_pill_rest}}</div>
                 <input type="range" id="cust_sanity_pill_rest" name="cust_sanity_pill_rest" class="option-disabled"
                     min="0" max="11" step="1" default="7" onchange="filter();set_sanity_settings();saveSettings();" disabled>
                 <div class="modifier_volume_labels">
@@ -513,7 +486,7 @@
                     <div class="modifier_volume_label cust_label">75%</div>
                     <div class="modifier_volume_label cust_label">100%</div>
                 </div>
-                <div class="sanity_labels yfont white">Sanity Drain Speed</div>
+                <div class="sanity_labels yfont white">{{sanity_drain_speed}}</div>
                 <input type="range" id="cust_sanity_drain" name="cust_sanity_drain" class="option-disabled"
                     min="0" max="200" step="50" default="100" onchange="filter();set_sanity_settings();saveSettings();" disabled>
                 <div class="modifier_volume_labels">
@@ -523,14 +496,14 @@
                     <div class="modifier_volume_label">150%</div>
                     <div class="modifier_volume_label">200%</div>
                 </div>
-                <div class="sanity_labels yfont white">Lobby Type</div>
+                <div class="sanity_labels yfont white">{{lobby_type}}</div>
                 <select name="cust_lobby_type" id="cust_lobby_type" class="cust_lobby_type" onchange="filter();set_sanity_settings();saveSettings();">
-                    <option value="solo" selected>Singleplayer</option>
-                    <option value="multiplayer">Multiplayer</option>
+                    <option value="solo" selected>{{singleplayer}}</option>
+                    <option value="multiplayer">{{multiplayer}}</option>
                 </select>
             </div>
             <div id="zndl-download-button" class="find-overlay">
-                Looking for the overlay?<br>
+                {{looking_for_overlay}}<br>
                 <a href="assets/ZN-Desktop-Link-Installer-v3.3.8.msi" download="ZN-Desktop-Link-Installer-v3.3.8.msi" onclick="showZNDLInfo(event)" style="text-decoration: none;">
                     <div class="button-zn"><img class="download_icon" src="imgs/download.png" style="filter: invert(1); padding-right: 5px;">ZN-Desktop-Link</div>
                 </a>
@@ -540,62 +513,59 @@
 
     <div id="discord_link_box" style="left: -1000px;">
         <div id="discord_link_tab" onclick="showDiscordLink();getLink();">
-            <div class="tab_rotate">Discord Link</div>
+            <div class="tab_rotate">{{discord_link}}</div>
             <div id="discord_link_status"></div>
         </div>
         <span class="icon" onclick="showDiscordLink()"></span>
 
         <div class="moving_content">
-            <div class="settings_title yfont white">Discord Link</div>
-            <div class="title_note">( '◄' to close )</div>
+            <div class="settings_title yfont white">{{discord_link}}</div>
+            <div class="title_note">( '◄' {{to_close}} )</div>
             <div class="info_block">
                 <img id="discord_avatar" src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png">
-                <div id="discord_name">Link your Discord</div>
+                <div id="discord_name">{{discord_link_h1}}</div>
                 <div id="discord_link_date" class="hidden"></div>
-                <div id="discord_stats" class="discord_note">Linking your Discord account will allow you to record what is input into this Cheat Sheet, allowing you to view statistics about ghosts, evidences, and play style!</div>
+                <div id="discord_stats" class="discord_note">{{discord_link_p1}}</div>
                 <div id="discord_instructions" class="hidden">
-                    <strong>Collecting Additional Stats</strong>
+                    <strong>{{discord_link_h5}}</strong>
                     <hr>
                     <ul>
                         <li>
                             <div class="discord_instructions_title">
-                                <img src="imgs/select.png"><strong>Select the ghost</strong>
+                                <img src="imgs/select.png"><strong>{{discord_link_h6}}</strong>
                             </div>
                             <div class="discord_instructions_text">
-                                Select the actual ghost (shown on the summary board after leaving).
-                                <i>If you died, mark that the ghost "killed" you instead.</i>
+                                {{discord_link_p4}}
                             </div>
                         </li>
 
                         <li>
                             <div class="discord_instructions_title">
-                                <img src="imgs/guess.png"><strong>Guess the ghost</strong>
+                                <img src="imgs/guess.png"><strong>{{discord_link_h7}}</strong>
                             </div>
                             <div class="discord_instructions_text">
-                                Select what you think the ghost is (not the actual ghost). 
-                                If correct, "select" the ghost. 
-                                If incorrect, keep your guess and "select" the correct ghost.
+                                {{discord_link_p5}}
                             </div>
                         </li>
 
                         <li>
                             <div class="discord_instructions_title">
-                                <img src="imgs/died.png"><strong>Killed by the ghost</strong>
+                                <img src="imgs/died.png"><strong>{{discord_link_h8}}</strong>
                             </div>
                             <div class="discord_instructions_text">
-                                Select the actual ghost <i>AND</i> indicate that the ghost killed you. 
+                                {{discord_link_p6}}
                             </div>
                         </li>
                     </ul>
-                    <a id="discord-stats-link" target="_blank"><div id="phasmo-stats">My Stats Explorer &#187;</div></a>
+                    <a id="discord-stats-link" target="_blank"><div id="phasmo-stats">{{discord_link_b1}}&#187;</div></a>
                     <hr>
                 </div>
-                <div id="discord_note" class="discord_note grey">(1) Linking does not maintain an active connection to Discord, you will need to relink every 30 days or if you update your Discord profile. (2) Stats provided are purely from the use of this Cheat Sheet. We do not connect to the Phasmophobia game or Steam in any way.</div>
+                <div id="discord_note" class="discord_note grey">{{discord_link_p2}}</div>
                 <div>
                     <a id="discord_link" href="https://discord.com/api/oauth2/authorize?client_id=1077230568422510602&redirect_uri=https%3A%2F%2Fzero-network.net%2Fanalytics%2Fdiscord-connect&response_type=code&scope=identify">
-                        <div id="discord_login_button">Link</div>
+                        <div id="discord_login_button">{{discord_link_b2}}</div>
                     </a>
-                    <div id="discord_unlink_button" class="hidden" onclick="discord_unlink()">Unlink</div>
+                    <div id="discord_unlink_button" class="hidden" onclick="discord_unlink()">{{discord_link_b4}}</div>
                 </div>
             </div>
         </div>
@@ -603,12 +573,12 @@
 
     <div id="event_box" style="left: -1000px;">
         <div id="event_tab" onclick="showEvent()">
-            <div class="tab_rotate">Current Event</div>
+            <div class="tab_rotate">{{current_event}}</div>
         </div>
         <span class="icon" onclick="showEvent()"></span>
         <div class="moving_content">
-            <div class="settings_title yfont white">Current Event</div>
-            <div class="title_note">( '◄' to close )</div>
+            <div class="settings_title yfont white">{{current_event}}</div>
+            <div class="title_note">( '◄' {{to_close}} )</div>
             <div class="info_block">
                 <div id="event_title">No current events!</div>
                 <hr>
@@ -621,42 +591,42 @@
 
     <div id="wiki_box" style="left: -1000px;">
         <div id="wiki_tab" onclick="showWiki()">
-            <div class="tab_rotate">Guides</div>
+            <div class="tab_rotate">{{guides}}</div>
             <div id="guide_tab_footstep" style="display: none;"></div>
         </div>
         <span class="icon" onclick="showWiki();"></span>
 
         <div class="moving_content">
-            <div class="settings_title yfont white">Guides</div>
-            <div class="title_note">( '◄' to close, 'G' to toggle)</div>
+            <div class="settings_title yfont white">{{guides}}</div>
+            <div class="title_note">( '◄' {{to_close}}, 'G' {{to_toggle}})</div>
             <div id="wiki-body" class="info_block"></div>
             <div class="data-warning">
                 <img src="https://zero-network.net/phasmophobia/static/imgs/warn.png">
-                Data with this symbol may not be fully verified or only partially verified, but extended testing shows the data to be correct.
+                {{verification_warning}}
             </div>
         </div>
     </div>
 
     <div id="maps_box" style="left: -1000px;">
         <div id="maps_tab" onclick="showMaps()">
-            <div class="tab_rotate">Maps</div>
+            <div class="tab_rotate">{{maps}}</div>
         </div>
         <span class="icon" onclick="showMaps()"></span>
 
-        <div class="maps_title yfont white">Maps</div>
-        <div class="title_note">( '◄' to close, 'M' to toggle)</div>
+        <div class="maps_title yfont white">{{maps}}</div>
+        <div class="title_note">( '◄' {{to_close}}, 'M' {{to_toggle}})</div>
         <div class="maps_image" onpointerenter="zoomMap(this)" onpointerleave="unZoomMap(this)" onpointermove="moveZoom(this,event)">
             <div id="map_image" class="map_image"></div>
-            <div class="hover_zoom">+ Hover/Touch to zoom</div>
+            <div class="hover_zoom">+ {{hover_touch}}</div>
         </div>
         <div class="flex-holder-split">
-            <div class="map_event_check"><input type="checkbox" class="settings_check" id="map_event_check_box" name="map_event_check_box" onchange="changeMap(document.getElementById('maps_list').querySelector('.selected_map'),all_maps[document.getElementById('maps_list').querySelector('.selected_map').id]);send_cur_map_link();saveSettings();"><label for="map_event_check_box">Show event maps ★</label></div>
-            <div class="maps_credit">Map images belong to <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">Images</a>)</div>
+            <div class="map_event_check"><input type="checkbox" class="settings_check" id="map_event_check_box" name="map_event_check_box" onchange="changeMap(document.getElementById('maps_list').querySelector('.selected_map'),all_maps[document.getElementById('maps_list').querySelector('.selected_map').id]);send_cur_map_link();saveSettings();"><label for="map_event_check_box">{{show_event_maps}} ★</label></div>
+            <div class="maps_credit">{{map_images_belong_to}} <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">{{images}}</a>)</div>
         </div>
         <div id="maps_list" class="maps_buttons"></div>
         <div class="flex-holder-right">
             <a id="map-explorer-link-2" target="_blank" href="https://zero-network.net/phasmo-cheat-sheet/map-explorer/">
-                <div class="button-gray">Map Explorer »</div>
+                <div class="button-gray">{{map_explorer}} »</div>
             </a>
         </div>
     </div>
@@ -668,7 +638,7 @@
         <span class="icon" onclick="showNews()"></span>
 
         <div class="moving_content">
-            <div class="settings_title yfont white">News Feed</div>
+            <div class="settings_title yfont white">{{news_feed}}</div>
             <div class="info_block" id="feed_info_block">
             </div>
             <a href='https://ko-fi.com/H2H7OPG9V' target='_blank' style="margin-left: calc(50% - 70px);">
@@ -714,10 +684,10 @@
         <span class="icon" onclick="show3D()"></span>
 
         <div class="moving_content"></div>
-            <div class="settings_title yfont white">3D Printable Models</div>
+            <div class="settings_title yfont white">{{3d_print_models}}</div>
             <div class="info_block" id="3d_info_block">
             </div>
-            <div id="z3d-footer">All models are provided for free under either a CC BY-NC-ND or a CC BY-SA license and are modeled from the ground up only using the game as a visual reference.</div>
+            <div id="z3d-footer">{{3d_models_disclaimer}}</div>
         </div>
     </div>
 
@@ -734,23 +704,23 @@
     <div class="data">
         <div id="menu" class="menu">
             <div class="tools-filter-buttons">
-                <button id="show_filter_button" class="filter_tool_button filter_tool_button_live" onclick="showMenu()">Filters</button>
-                <button id="show_tool_button" class="filter_tool_button filter_tool_button_back" onclick="toggleFilterTools();showMenu();">Tools</button>
+                <button id="show_filter_button" class="filter_tool_button filter_tool_button_live" onclick="showMenu()">{{filters}}</button>
+                <button id="show_tool_button" class="filter_tool_button filter_tool_button_back" onclick="toggleFilterTools();showMenu();">{{tools}}</button>
             </div>
             <div id="tools-content" class="tools-content" style="display: none;">
                 <div class="timer_title yfont white">
-                    Timers
+                    {{timers}}
                     <img id="blood-moon-icon-2" class="blood-moon-icon" src="imgs/moon-w.png" title="Blood Moon Weather" onclick="toggleBloodMoon();bpm_calc(true);saveSettings();">
                 </div>
                 <div class="timers">
                     <div class="timer_block">
                         <div class="modifier_smudge_timer yfont white" onclick="toggle_timer();send_timer();">
-                            Smudge
-                            <div class="modifier_note_2">('T' to start/stop)</div>
+                            {{smudge}}
+                            <div class="modifier_note_2">('T' {{to_start_stop}})</div>
                         </div>
                         <div class="line_labels" onclick="toggle_timer();send_timer();">
-                            <div class="spirit_line_label">Spirit</div>
-                            <div class="demon_line_label">Demon</div>
+                            <div class="spirit_line_label">{{Spirit}}</div>
+                            <div class="demon_line_label">{{Demon}}</div>
                         </div>
                         <div id="progress" onclick="toggle_timer();send_timer();">
                             <img src="imgs/play.png" id="play_button" class="play_button">
@@ -768,11 +738,11 @@
                     <hr>
                     <div class="timer_block">
                         <div class="modifier_smudge_timer yfont white" onclick="toggle_cooldown_timer();send_cooldown_timer();">
-                            Cooldown
-                            <div class="modifier_note_2">('C' to start/stop)</div>
+                            {{cooldown}}
+                            <div class="modifier_note_2">('C' {{to_start_stop}})</div>
                         </div>
                         <div class="line_labels" onclick="toggle_cooldown_timer();send_cooldown_timer();">
-                            <div class="cooldown_demon_line_label">Demon</div>
+                            <div class="cooldown_demon_line_label">{{Demon}}</div>
                         </div>
                         <div id="cooldownProgress" onclick="toggle_cooldown_timer();send_cooldown_timer();">
                             <img src="imgs/play.png" id="play_cooldown_button" class="play_button">
@@ -790,12 +760,12 @@
                     <hr>
                     <div class="timer_block">
                         <div class="modifier_smudge_timer yfont white" onclick="toggle_hunt_timer();send_hunt_timer();">
-                            Hunt
-                            <div class="modifier_note_2">('H' to start/stop)</div>
+                            {{hunt}}
+                            <div class="modifier_note_2">('H' {{to_start_stop}})</div>
                         </div>
                         <div class="line_labels" onclick="toggle_hunt_timer();send_hunt_timer();">
-                            <div class="hunt_cursed_line_label">Cursed</div>
-                            <div class="hunt_size_label">Map: S, Hunt: L</div>
+                            <div class="hunt_cursed_line_label">{{cursed}}</div>
+                            <div class="hunt_size_label">{{map}}: S, {{hunt}}: L</div>
                         </div>
                         <div id="huntProgress" onclick="toggle_hunt_timer();send_hunt_timer();">
                             <img src="imgs/play.png" id="play_hunt_button" class="play_button">
@@ -812,10 +782,10 @@
                     </div>
                 </div>
                 <div class="modifier_title yfont white">
-                    Tools
+                    {{tools}}
                 </div>
                 <div class="modifier">
-                    <div class="modifier_ghost_speed yfont white">Ghost Speed</div>
+                    <div class="modifier_ghost_speed yfont white">{{ghost_speed}}</div>
                     <input type="range" id="ghost_modifier_speed" name="volume" 
                         min="0" max="4" step="1" default="2" onchange="setTempo();bpm_calc(true);saveSettings();send_state();">
                     <div class="modifier_ghost_speed_labels">
@@ -828,134 +798,134 @@
                     <div class="modifier_sound_select">
                         <img src="imgs/footsteps.png">
                         <select id="modifier_sound_type" onchange="setSoundType();saveSettings();">
-                            <option value=0 selected>Default</option>
-                            <option value=1>Asphalt / Concrete</option>
-                            <option value=2>Carpet</option>
-                            <option value=3>Gravel / Grass</option>
-                            <option value=4>Wood</option>
-                            <option value=5>Metal Stairs</option>
-                            <option value=6>Flesh</option>
-                            <option value=7>Krampus</option>
-                            <option value=8>Metronome</option>
+                            <option value=0 selected>{{default}}</option>
+                            <option value=1>{{asphalt}}</option>
+                            <option value=2>{{carpet}}</option>
+                            <option value=3>{{gravel}}</option>
+                            <option value=4>{{wood}}</option>
+                            <option value=5>{{metal_stairs}}</option>
+                            <option value=6>{{flesh}}</option>
+                            <option value=7>{{krampus}}</option>
+                            <option value=8>{{metronome}}</option>
                         </select>
                     </div>
-                    <div class="modifier_note">(Click <span class="sound" onclick="toggleSound(1.7,'spirit0')">&#128266;</span> on cards to hear speed)</div>
+                    <div class="modifier_note">({{click_to_hear_speed}})</div>
                     <hr>
-                    <div class="modifier_bpm_finder yfont white">BPM Finder</div>
+                    <div class="modifier_bpm_finder yfont white">{{bpm_finder}}</div>
                     <button id="tap" class="yfont" onmousedown="bpm_tap()">
                         <div id="input_bpm">0<br>bpm</div>
-                        <div>Tap<div class="tap_note">(or press 'F')</div></div>
+                        <div>{{tap}}<div class="tap_note">({{press_f}})</div></div>
                         <div id="input_speed">0<br>m/s</div>
                     </button>
                     <canvas id="bpm_hist" height="85" width="150"></canvas>
                     <div id="tap_viz"></div>
                     <div class="legend">
                         <div class="legend_box" style="box-shadow: 0px 0px 4px 1px #dbd994"></div>
-                        <div class="modifier_note_2">Matches Base Speed</div>
+                        <div class="modifier_note_2">{{match_base}}</div>
                     </div>
                     <div class="legend">
                         <div class="legend_box" style="box-shadow: -3px 0px 2px -1px #dbd994;"></div>
-                        <div class="modifier_note_2">Possible LOS Speed</div>
+                        <div class="modifier_note_2">{{possible_los}}</div>
                     </div>
-                    <div class="modifier_note_2">(Press 'R' to reset)</div>
-                    <div class="modifier_note_3">See "Guides >> Hunts >> Speed & Line-of-sight (LOS)" for info on how to read the graph</div>
+                    <div class="modifier_note_2">({{press_r}})</div>
+                    <div class="modifier_note_3">{{see_los_guide}}</div>
                 </div>
             </div>
             <div id="filter-content" class="filter-content">
                 <div class="evidence_title yfont white">
-                    Evidence
+                    {{evidence}}
                     <img id="blood-moon-icon" class="blood-moon-icon" src="imgs/moon-w.png" title="Blood Moon Weather" onclick="toggleBloodMoon();bpm_calc(true);saveSettings();">
                 </div>
                 
                 <div class="difficulty_holder">
                     <img id="weekly_icon" src="imgs/weekly.png" onclick="showWeekly(event)" style="display: none;">
                     <select name="num_evidence" id="num_evidence" class="num_evidence" onchange="checkDifficulty();showCustom();filter();flashMode();set_sanity_settings();setGhostSpeedFromDifficulty(this.value);updateMapDifficulty(this.value);bpm_calc(true);saveSettings();">
-                        <option value="3A">Amateur (3)</option>
-                        <option value="3I">Intermediate (3)</option>
-                        <option value="3">Professional (3)</option>
-                        <option value="2">Nightmare (2)</option>
-                        <option value="1">Insanity (1)</option>
-                        <option value="0">Apocalypse III (0)</option>
-                        <option value="-1">Custom (?)</option>
+                        <option value="3A">{{amateur}} (3)</option>
+                        <option value="3I">{{intermediate}} (3)</option>
+                        <option value="3">{{professional}} (3)</option>
+                        <option value="2">{{nightmare}} (2)</option>
+                        <option value="1">{{insanity}} (1)</option>
+                        <option value="0">{{apocalypse_iii}} (0)</option>
+                        <option value="-1">{{custom}} (?)</option>
                         <option value="sep1" disabled>----------------</option>
-                        <option value="-5">Weekly Challenge</option>
+                        <option value="-5">{{weekly_challenge}}</option>
                         <option value="sep2" disabled>----------------</option>
-                        <option value="-10">Go to Difficulty Builder >></option>
+                        <option value="-10">{{difficulty_builder}} >></option>
                     </select>
                 </div>
 
                 <div id="custom_options" style="display: none;">
                     <select name="cust_num_evidence" id="cust_num_evidence" class="cust_num_evidence" style="width: calc(50% - 2px); margin-right: 2px;" onchange="filter();flashMode();saveSettings();">
-                        <option value="3">Evi: 3</option>
-                        <option value="2">Evi: 2</option>
-                        <option value="1">Evi: 1</option>
-                        <option value="0">Evi: 0</option>
+                        <option value="3">{{evi}}: 3</option>
+                        <option value="2">{{evi}}: 2</option>
+                        <option value="1">{{evi}}: 1</option>
+                        <option value="0">{{evi}}: 0</option>
                     </select>
                     <select name="cust_hunt_length" id="cust_hunt_length" class="cust_num_evidence"  style="width: calc(50% - 2px); margin-left: 2px;" onchange="filter();updateMapDifficulty(this.value);saveSettings();">
-                        <option value="3A">Hunt: Low</option>
-                        <option value="3I">Hunt: Med</option>
-                        <option value="3">Hunt: High</option>
+                        <option value="3A">{{hunt}}: {{low}}</option>
+                        <option value="3I">{{hunt}}: {{med}}</option>
+                        <option value="3">{{hunt}}: {{high}}</option>
                     </select>
                 </div>
 
-                <div id="game_mode" class="yfont white" style="display:none;">Insanity</div>
+                <div id="game_mode" class="yfont white" style="display:none;">{{insanity}}</div>
                 <div id="evidence" class="evidence">
                     <div class="dot-flashing"></div>
                 </div>
 
                 <div class="speed_title yfont white">
-                    Speed
+                    {{speed}}
                 </div>
                 <div class="speed">
                     <button id="Slow" class="tricheck white" name="speed" onclick="dualstate(this)" value="Slow">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label">Slow</div>
+                        <div class="label">{{slow}}</div>
                     </button>
                     <button id="Normal" class="tricheck white" name="speed" onclick="dualstate(this)" value="Normal">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label">Normal</div>
+                        <div class="label">{{normal}}</div>
                     </button>
                     <button id="Fast" class="tricheck white" name="speed" onclick="dualstate(this)" value="Fast">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label">Fast</div>
+                        <div class="label">{{fast}}</div>
                     </button>
                     <hr>
                     <button id="LOS" class="tricheck white" name="los" onclick="tristate(this)" value="LOS">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label label-font-s">Std. LOS Speed Up</div>
+                        <div class="label label-font-s">{{los_speed_up}}</div>
                     </button>
                 </div>
                 <div class="hunt_sanity_title yfont white">
-                    Hunt Sanity
+                    {{hunt_sanity}}
                 </div>
                 <div class="hunt_sanity">
                     <button id="Late" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Late">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label">Late <span class="hunt_sanity_num">(&lt;40%)</span></div>
+                        <div class="label">{{late}} <span class="hunt_sanity_num">(&lt;40%)</span></div>
                     </button>
                     <button id="Average" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Average">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label">Normal <span class="hunt_sanity_num">(>40%)</span></div>
+                        <div class="label">{{normal}} <span class="hunt_sanity_num">(>40%)</span></div>
                     </button>
                     <button id="Early" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Early">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label">Early <span class="hunt_sanity_num">(>50%)</span></div>
+                        <div class="label">{{early}} <span class="hunt_sanity_num">(>50%)</span></div>
                     </button>
                     <button id="VeryEarly" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="VeryEarly">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label">Very Early <span class="hunt_sanity_num">(>75%)</span></div>
+                        <div class="label">{{very_early}} <span class="hunt_sanity_num">(>75%)</span></div>
                     </button>
                 </div>
 
             </div>
-            <div id="cur_map_label" class="yfont">Current Map<div class="modifier_note_2">(Click to change)</div></div>
+            <div id="cur_map_label" class="yfont">{{current_map}}<div class="modifier_note_2">({{click_to_change}})</div></div>
             <button id="cur_map" class="maps_button" onclick="closeAll(true);showMaps();">
                 <div class="map_size s">S</div>
                 6 Tanglewood Drive
             </button>
-            <button id="reset" class="yfont standard_reset" onclick="reset()" onmouseenter="checkResetButton()" onmouseleave="resetResetButton()">Reset</button>
-            <div id="active-users"><span id="current-version-label"></span> | <span id="active-users-label">Active Users: -</span></div>
-            <div class="copyright" onclick="showInfo(event)"><img class="question" src="imgs/question.png"> Info / Copyright</div>
+            <button id="reset" class="yfont standard_reset" onclick="reset()" onmouseenter="checkResetButton()" onmouseleave="resetResetButton()" oncontextmenu="showResetMenu(event)">{{reset}}</button>
+            <div id="active-users"><span id="current-version-label"></span> | <span id="active-users-label">{{active_users}}: -</span></div>
+            <div class="copyright" onclick="showInfo(event)"><img class="question" src="imgs/question.png"> {{info_copyright}}</div>
             <div id="close-menu-button" onclick="closeMenu()"></div>
             
 
@@ -968,8 +938,8 @@
         <div id="domovoi-text" style="display: none;">Hello! I am Domo!</div>
         <img id="domovoi-img" src="imgs/domovoi.png" onmouseenter="domovoi_show_last()" onmouseleave="domovoi_hide_last()" ondblclick="domovoi_print_logs()">
     </div>
-    <input type="checkbox" id="priority_sort" onchange="prioritySort();saveSettings();"><label for="priority_sort" title="Sort faded ghosts to the bottom"><img id="sort_img" src="imgs/not-sort-icon.png"></label>
-    <div id="eye" onclick="revive()" title="Show manually hidden ghosts"><img src="imgs/eye.png"></div>
+    <input type="checkbox" id="priority_sort" onchange="prioritySort();saveSettings();"><label for="priority_sort" title="{{sort_ghosts}}"><img id="sort_img" src="imgs/not-sort-icon.png"></label>
+    <div id="eye" onclick="revive()" title="{{show_manually_hidden_ghosts}}"><img src="imgs/eye.png"></div>
 
 
     <script>
@@ -1000,32 +970,32 @@
         if(navigator.userAgent.includes("CriOS") && (/iPad/.test(navigator.userAgent) || (navigator.platform.toLowerCase().includes('mac') && 'ontouchend' in document)))
             document.body.style.position = 'fixed';
     </script>
-    <script src="scripts-v7/utils-v1.js"></script>
-    <script src="themes-v7/themes-v4.js"></script>
-    <script src="scripts-v7/audio_controller-v1.js"></script>
-    <script src="scripts-v7/metronome-v12.js"></script>
-    <script src="scripts-v7/timer-v4.js"></script>
-    <script src="discord-v7/discord-v1.js"></script>
-    <script src="wiki-v7/wiki-v7.js"></script>
-    <script src="scripts-v7/filter-v20.js"></script>
-    <script src="scripts-v7/sanity-v3.js"></script>
-    <script src="scripts-v7/wslink-v14.js"></script>
-    <script src="scripts-v7/zn-v14.js"></script>
-    <script src="events-v7/events-v1.js"></script>
-    <script src="models-v7/models-v1.js"></script>
-    <script src="feed-v7/feed-v1.js"></script>
-    <script src="scripts-v7/voice_en-v2.js"></script>
-    <script src="scripts-v7/voice_recognition-v8.js"></script>
-    <script src="scripts-v7/sparkles-v1.js"></script>
+    <script src="scripts-v8/utils-v1.js"></script>
+    <script src="lang-v8/lang-v1.js"></script>
+    <script src="themes-v8/themes-v1.js"></script>
+    <script src="scripts-v8/audio_controller-v1.js"></script>
+    <script src="scripts-v8/metronome-v1.js"></script>
+    <script src="scripts-v8/timer-v1.js"></script>
+    <script src="discord-v8/discord-v1.js"></script>
+    <script src="wiki-v8/wiki-v1.js"></script>
+    <script src="scripts-v8/filter-v1.js"></script>
+    <script src="scripts-v8/sanity-v1.js"></script>
+    <script src="scripts-v8/wslink-v1.js"></script>
+    <script src="scripts-v8/zn-v1.js"></script>
+    <script src="events-v8/events-v1.js"></script>
+    <script src="models-v8/models-v1.js"></script>
+    <script src="feed-v8/feed-v1.js"></script>
+    <script src="scripts-v8/voice_en-v1.js"></script>
+    <script src="scripts-v8/voice_recognition-v1.js"></script>
+    <script src="scripts-v8/sparkles-v1.js"></script>
     <script>
-        document.getElementById('reset').oncontextmenu = showResetMenu;
         document.onclick = hideResetMenu;
         document.addEventListener('touchstart', startSwipe, false);
         document.addEventListener('touchend', endSwipe, false); 
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v7/wiki-v19.html",() => {
+                $("#wiki-body").load("wiki-v8/wiki-v1.html",() => {
                     resolve("Ghost data loaded")
                 })
             })
@@ -1035,11 +1005,6 @@
                 if(getCookie("voice_recognition_on")){
                     start_voice()
                 }
-                setInterval(function(){
-                    if(!document.hidden){
-                        try{heartbeat()} catch(Error){console.error("Heartbeat failed!")}
-                    }
-                }, 300000)
             })
         });
     </script>

@@ -7,7 +7,6 @@ var await_dlws_pong = false
 
 var state_received = false
 var map_loaded = false
-const lang = "en"
 
 let broadcast_interval = null
 let broadcast_closing = false
@@ -113,7 +112,7 @@ function copy_code(){
 
 function copy_url_code(){
     var copyText = document.getElementById("room_id").value
-    navigator.clipboard.writeText(`${window.location.href}?journal=${copyText}`)
+    navigator.clipboard.writeText(`${window.location.href.split("?")[0]}?journal=${copyText}`)
     $("#room_id_cover").fadeIn(150)
     setTimeout(function(){
         $("#room_id_cover").fadeOut(150)
@@ -180,14 +179,14 @@ function link_room(){
         $("#room_id_link").hide()
         $("#room_id_disconnect").show()
         $('.card_icon_guess').show()
-        document.getElementById("room_id_note").innerText = "STATUS: Connected"
+        document.getElementById("room_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{connected}}']}`
         document.getElementById("settings_status").className = "connected"
         ws_ping = setInterval(function(){
             send_ping()
         }, 30000)
     }
     ws.onerror = function(event){
-        document.getElementById("room_id_note").innerText = "ERROR: Could not connect!"
+        document.getElementById("room_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`
         document.getElementById("settings_status").className = "error"
         setCookie("room_id","",-1)
         document.getElementById("map-explorer-link-2").href = `https://zero-network.net/phasmo-cheat-sheet/map-explorer/`
@@ -272,19 +271,19 @@ function link_room(){
                     if(Object.keys(discord_user).length > 0){
                         if (hasSelected()){
                             ws.send('{"action":"READY"}')
-                            $("#reset").html("Waiting for others...")
+                            $("#reset").html(lang_data['{{waiting_for_others}}'])
                         }
                         else{
                             $("#reset").removeClass("standard_reset")
                             $("#reset").addClass("reset_pulse")
-                            $("#reset").html("No ghost selected!<div class='reset_note'>(double click to save & reset)</div>")
+                            $("#reset").html(`${lang_data['{{no_ghost_selected}}']}<div class='reset_note'>(${lang_data['{{double_click_to_reset']})</div>`)
                             $("#reset").attr("onclick",null)
                             $("#reset").attr("ondblclick","reset()")
                         }
                     }
                     else{
                         ws.send('{"action":"READY"}')
-                        $("#reset").html("Waiting for others...")
+                        $("#reset").html(lang_data['{{waiting_for_others}}'])
                     }
                 }
                 return
@@ -292,7 +291,7 @@ function link_room(){
 
             else if (incoming_state.hasOwnProperty("error")){
                 console.log(incoming_state)
-                document.getElementById("room_id_note").innerText = `ERROR: ${incoming_state['error']}!`
+                document.getElementById("room_id_note").innerText = `${lang_data['{{error}}']}: ${incoming_state['error']}!`
                 document.getElementById("settings_status").className = "error"
                 if (incoming_state.hasOwnProperty("disconnect") && incoming_state['disconnect']){
                     disconnect_room(false,true)
@@ -353,6 +352,7 @@ function link_room(){
                 saveSettings()
 
                 for (const [key, value] of Object.entries(incoming_state["ghosts"])){ 
+                    console.log(key,value)
                     if (value == 0 || value == 1){
                         if(state['ghosts'][key] == 2){
                             select(document.getElementById(key),true);
@@ -473,11 +473,11 @@ function link_link(){
         $("#link_id_create_launch").hide()
         $("#link_id_disconnect").show()
         toggleSanitySettings()
-        document.getElementById("link_id_note").innerText = "STATUS: Awaiting Desktop Link"
+        document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{awaiting_link}}']}`
         document.getElementById("dllink_status").className = "pending"
     }
     dlws.onerror = function(event){
-        document.getElementById("link_id_note").innerText = "ERROR: Could not connect!"
+        document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`
         document.getElementById("dllink_status").className = "error"
         setCookie("link_id","",-1)
     }
@@ -545,7 +545,7 @@ function link_link(){
                     send_hunt_timer(force_start)
                 }
                 if (incoming_state['action'].toUpperCase() == "LINKED"){
-                    document.getElementById("link_id_note").innerText = `STATUS: Linked`
+                    document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{linked}}']}`
                     document.getElementById("dllink_status").className = "connected"
                     dlws.send('{"action":"LINK"}')
                     send_map_preload_link()
@@ -566,7 +566,7 @@ function link_link(){
                             if (!mquery.matches && navigator.platform.toLowerCase().includes('win'))
                                 $("#link_id_create_launch").show()
                             $("#link_id_disconnect").hide()
-                            document.getElementById("link_id_note").innerText = "ERROR: Link Lost Connection!"
+                            document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{link_lost}}']}`
                             document.getElementById("dllink_status").className = "error"
                             document.getElementById("link_id").value = ""
                             setCookie("link_id","",-1)
@@ -620,7 +620,7 @@ function link_link(){
                             send_ghost_link("None Selected!",-1)
                             $("#reset").removeClass("standard_reset")
                             $("#reset").addClass("reset_pulse")
-                            $("#reset").html("No ghost selected!<div class='reset_note'>(say 'force reset' to save & reset)</div>")
+                            $("#reset").html(`${lang_data['{{no_ghost_selected}}']}<div class='reset_note'>${lang_data['{{say_force_reset}}']}</div>`)
                             $("#reset").prop("onclick",null)
                             $("#reset").prop("ondblclick","reset()")
                             reset_voice_status()
@@ -646,7 +646,7 @@ function link_link(){
             }
 
             if (incoming_state.hasOwnProperty("error")){
-                document.getElementById("link_id_note").innerText = `ERROR: ${incoming_state['error']}!`
+                document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${incoming_state['error']}!`
                 document.getElementById("dllink_status").className = "error"
             }
 
@@ -665,7 +665,7 @@ function continue_session(){
     if(hasLink){
         ws.send('{"action":"REQUEST_RESET"}')
         polled = true
-        $("#reset").html("Waiting for others...")
+        $("#reset").html(lang_data['{{waiting_for_others}}'])
         return false
     }
     return true
@@ -688,7 +688,7 @@ function disconnect_room(reset=false,has_status=false){
         $("#room_id_link").show()
         $("#room_id_disconnect").hide()
         if(!has_status){
-            document.getElementById("room_id_note").innerText = "STATUS: Not connected"
+            document.getElementById("room_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{not_connected}}']}`
             document.getElementById("settings_status").className = null
             document.getElementById("room_id").value = ""
         }
@@ -726,14 +726,14 @@ function send_ghost_data_link(ghost){
 
         $(document.getElementById(ghost)).removeClass(readd_classes)
         data = `<b>${ghost}:<b>\n`
-        data += document.getElementById(ghost).querySelector(".ghost_evidence").innerText.trim().replaceAll("\n",", ") + (ghost == "The Mimic" ? ", *Ghost Orbs" : "") + "\n"
-        data += document.getElementById(ghost).querySelector(".ghost_behavior").innerText.replace("0 Evidence Tests >>","").trim()
-        data = data.replace("Tells","\n<b>Tells:<b>\n")
-        data = data.replace("Behaviors","\n<b>Behaviors:<b>\n")
-        data = data.replace("Hunt Sanity","\n<b>Hunt Sanity:<b>\n")
-        data = data.replace("Hunt Speed","\n<b>Hunt Speed:<b>\n")
-        data = data.replace("Evidence","\n<b>Evidence:<b>\n")
-        data = data.replace("Tests >>\n","")
+        data += document.getElementById(ghost).querySelector(".ghost_evidence").innerText.trim().replaceAll("\n",", ") + (ghost == "The Mimic" ? (", *" + all_evidence["Ghost Orbs"]) : "") + "\n"
+        data += document.getElementById(ghost).querySelector(".ghost_behavior").innerText.replace(`${lang_data['{{0_evidence_tests}}']} >>`,"").trim()
+        data = data.replace(`${lang_data['{{tells}}']}`,`\n<b>${lang_data['{{tells}}']}:<b>\n`)
+        data = data.replace(`${lang_data['{{behaviors}}']}`,`\n<b>${lang_data['{{behaviors}}']}:<b>\n`)
+        data = data.replace(`${lang_data['{{hunt_sanity}}']}`,`\n<b>${lang_data['{{hunt_sanity}}']}:<b>\n`)
+        data = data.replace(`${lang_data['{{hunt_speed}}']}`,`\n<b>${lang_data['{{hunt_speed}}']}:<b>\n`)
+        data = data.replace(`${lang_data['{{evidence}}']}`,`\n<b>${lang_data['{{evidence}}']}:<b>\n`)
+        data = data.replace(`Tests >>\n`,"")
         data = data.replace("🔊","")
         data = data.replaceAll("<b>\n\n","<b>\n")
         data = data.replace(/[ ]+/g,' ').trim()
@@ -747,17 +747,17 @@ function send_ghost_tests_link(ghost){
     if(hasDLLink){
         data = `<b>${ghost} Tests:<b>\n`
         data += document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).nextElementSibling.innerText.replace("† The Mimic can copy abilities and behaviors of other ghosts, meaning that any confirmation test could also be a Mimic","").replace("Copy Share Link","").replace("†","").trim()
-        data = data.replace("Abilities, Behaviors, & Tells","<b>Abilities, Behaviors, & Tells:<b>")
-        data = data.replace("Confirmation Test(s)","\n<b>Confirmation Test(s):<b>")
-        data = data.replace("Elimination Test(s)","\n<b>Elimination Test(s):<b>")
+        data = data.replace(`${lang_data['{{abilities_behaviors_tells}}']}`,`<b>${lang_data['{{abilities_behaviors_tells}}']}:<b>`)
+        data = data.replace(`${lang_data['{{confirmation_tests}}']}`,`\n<b>${lang_data['{{confirmation_tests}}']}:<b>`)
+        data = data.replace(`${lang_data['{{elimination_tests}}']}`,`\n<b>${lang_data['{{elimination_tests}}']}:<b>`)
         data = data.replaceAll(/-.+?-/g,"")
         data = data.replace(/[ ]+/g,' ')
         data = data.replaceAll("\n ","\n")
-        data = data.replaceAll("✔ Mark Ghost","")
-        data = data.replaceAll("✗ Mark Ghost","")
-        data = data.replaceAll("\n\nT","\nT")
-        data = data.replaceAll("\n\nB","\nB")
-        data = data.replaceAll("\n\nA","\nA")
+        data = data.replaceAll(`✔ ${lang_data['{{mark_ghost}}']}`,"")
+        data = data.replaceAll(`✗ ${lang_data['{{mark_ghost}}']}`,"")
+        data = data.replaceAll(`\n\n${lang_data['{{tells}}'][0]}`,`\n${lang_data['{{tells}}'][0]}`)
+        data = data.replaceAll(`\n\n${lang_data['{{behaviors}}'][0]}`,`\n${lang_data['{{behaviors}}'][0]}`)
+        data = data.replaceAll(`\n\n${lang_data['{{abilities}}'][0]}`,`\n${lang_data['{{abilities}}'][0]}`)
         data = data.replaceAll("<b>\n\n","<b>\n").trim()
         
 
@@ -767,7 +767,7 @@ function send_ghost_tests_link(ghost){
 
 function send_empty_data_link(){
     if(hasDLLink){
-        dlws.send(JSON.stringify({"action":"GHOSTDATA","ghost":`None|<i>Click a ghost to see its tells and behaviors\n(Use ' [ ' and ' ] ' to cycle through ghosts)<i>`}))
+        dlws.send(JSON.stringify({"action":"GHOSTDATA","ghost":`None|<i>${lang_data['{{empty_data_link}}']}<i>`}))
     }
 }
 
@@ -856,7 +856,7 @@ function disconnect_link(reset=false,has_status=false){
             $("#link_id_create_launch").show()
         $("#link_id_disconnect").hide()
         if(!has_status){
-            document.getElementById("link_id_note").innerText = "STATUS: Not linked"
+            document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{not_linked}}']}`
             document.getElementById("dllink_status").className = null
             document.getElementById("link_id").value = ""
         }
