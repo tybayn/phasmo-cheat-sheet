@@ -313,7 +313,7 @@ function bpm_calc(forced=false) {
         var av_ms = get_ms(input_bpm)
         input_ms = document.getElementById("bpm_type").checked ? av_ms : ex_ms
         document.getElementById('input_bpm').innerHTML = input_bpm == 0 ? '0<br>bpm' : `${Math.round(input_bpm)}<br>bpm`;
-        document.getElementById('input_speed').innerHTML = input_bpm == 0 ? '0<br>m/s' : `${input_ms}<br>m/s`;
+        document.getElementById('input_speed').innerHTML = input_bpm == 0 ? '0<br>m/s' : `${lang_currency.includes(lang) ? input_ms.replace(".",",") : input_ms}<br>m/s`;
 
         calibrateOffset(ex_ms)
 
@@ -331,7 +331,7 @@ function bpm_calc(forced=false) {
         }
         send_bpm_link(
             (input_bpm == 0 ? "-" : Math.round(input_bpm)).toString(),
-            (input_bpm == 0 ? "-" : input_ms).toString(),
+            (input_bpm == 0 ? "-" : lang_currency.includes(lang) ? input_ms.replace(".",",") : input_ms).toString(),
             ["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())]
         )
     }
@@ -368,7 +368,7 @@ function mark_ghost_details(ms)
         var speed_tab = document.getElementById(`${additional_ghost_data[g]}_speed_breakdown`)
         for (var i = 1, row; row = speed_tab.rows[i]; i++){
             $(row).removeClass("row_select")
-            var speed = parseFloat(row.getElementsByClassName(`${additional_ghost_data[g]}_speed_item`)[0].textContent.replace(" m/s",""))
+            var speed = parseFloat(row.getElementsByClassName(`${additional_ghost_data[g]}_speed_item`)[0].textContent.replace(" m/s","").replace(",","."))
             if(((speed - additional_ghost_var[g]) <= ms && ms <= (speed + additional_ghost_var[g]))){
                 $(row).addClass("row_select")
                 $("#guide_tab_footstep").show()
@@ -391,6 +391,10 @@ function mark_ghosts(ms){
             var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
             var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
             var has_los = ghosts[i].getElementsByClassName("ghost_has_los")[0].textContent == '1';
+
+            if(lang_currency.includes(lang)){
+                speed = speed.replace(",",".")
+            }
 
             //Parse Ghost speeds
             if (speed.includes('|')){
@@ -474,19 +478,19 @@ let tap_attempts = 0
 let prev_offset = 0
 function toggle_calibration(skip_message = false, force_off = false){
     if(calibrating || force_off){
-        document.getElementById("calibration").innerText = "Start"
+        document.getElementById("calibration").innerText = lang_data['{{start}}']
         if(!skip_message)
             document.getElementById("cal_complete").innerText = ""
         offset = prev_offset
     }
     else{
-        document.getElementById("calibration").innerText = "Stop"
+        document.getElementById("calibration").innerText = lang_data['{{stop}}']
         calibration_progress(0)
         max_cal = 0
         tap_attempts = 0
         prev_offset = offset
         if(!skip_message)
-            document.getElementById("cal_complete").innerText = `Status: Waiting for first tap`
+            document.getElementById("cal_complete").innerText = lang_data['{{waiting_for_tap}}']
 
         $("#cal_intro").hide()
         $("#cal_instructions").hide()
@@ -512,17 +516,17 @@ function calibrateOffset(speed){
     if (calibrating){
         if (speed > 1.8){
             offset -= 1.0
-            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            document.getElementById("cal_complete").innerText = lang_data['{{calibrating}}']
             num_correct = 0
         }
         else if (speed <= 1.8 && speed > 1.75){
             offset -= 0.5
-            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            document.getElementById("cal_complete").innerText = lang_data['{{calibrating}}']
             num_correct = 0
         }
         else if (speed <= 1.75 && speed > 1.71){
             offset -= 0.1
-            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            document.getElementById("cal_complete").innerText = lang_data['{{calibrating}}']
             num_correct = 0
         }
         else if(speed <= 1.71 && speed >= 1.69){
@@ -530,33 +534,34 @@ function calibrateOffset(speed){
             if (num_correct == 5){
                 offset = parseFloat(offset.toFixed(1))
                 prev_offset = offset
-                document.getElementById("offset_value").innerText = ` ${offset.toFixed(1)}% `
-                document.getElementById("cal_complete").innerHTML = `Calibration complete! Offset is:`
+                document.getElementById("offset_value").innerText = ` ${lang_currency.includes(lang) ? offset.toFixed(1).replace(".",",") : offset.toFixed(1)}% `
+                document.getElementById("cal_complete").innerHTML = lang_data['{{calibration_complete}}']
                 document.getElementById("new_offset").innerHTML = `${offset}%`
                 toggle_calibration(true)
                 calibration_progress(1)
+                saveSettings()
                 return
             }
         }
         else if (speed < 1.69 && speed >= 1.65){
             offset += 0.1
-            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            document.getElementById("cal_complete").innerText = lang_data['{{calibrating}}']
             num_correct = 0
         }
         else if (speed < 1.65 && speed >= 1.60){
             offset += 0.5
-            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            document.getElementById("cal_complete").innerText = lang_data['{{calibrating}}']
             num_correct = 0
         }
         else{
             offset += 1.0
-            document.getElementById("cal_complete").innerText = `Status: Calibrating...`
+            document.getElementById("cal_complete").innerText = lang_data['{{calibrating}}']
             num_correct = 0
         }
 
         tap_attempts += 1
         if(tap_attempts == 60){
-            document.getElementById("cal_complete").innerHTML = `Status: Calibration failed!`
+            document.getElementById("cal_complete").innerHTML = lang_data['{{calibration_failed}}']
             toggle_calibration(true)
             max_cal = 0
             calibration_progress(0)

@@ -31,6 +31,22 @@
     color: #ffff00;
 }
 
+.wiki_details a:link{
+    color: #ffff00;
+}
+
+.wiki_details a:visited{
+    color: #ffff00;
+}
+
+.wiki_details a:hover{
+    color: #ff9100;
+}
+
+.wiki_details a:active{
+    color: #00ff00;
+}
+
 
 @keyframes yellow-flash {
     0% {

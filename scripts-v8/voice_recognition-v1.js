@@ -204,11 +204,11 @@ function parse_speech(vtext){
             }
         }
 
-        for(var i = 0; i < all_ghosts.length; i++){
-            var leven_val = levenshtein_distance(all_ghosts[i].toLowerCase(),vtext)
+        for(var i = 0; i < Object.keys(all_ghosts).length; i++){
+            var leven_val = levenshtein_distance(Object.keys(all_ghosts)[i].toLowerCase(),vtext)
             if(leven_val < smallest_val){
                 smallest_val = leven_val 
-                smallest_ghost = all_ghosts[i]
+                smallest_ghost = Object.keys(all_ghosts)[i]
             }
         }
         console.log(`${prevtext} >> ${vtext} >> ${smallest_ghost}`)
@@ -999,7 +999,7 @@ if (("webkitSpeechRecognition" in window || "speechRecognition" in window) && na
     let speechRecognitionList = new webkitSpeechGrammarList() || new SpeechGrammarList();
     let stop_listen = true
 
-    let ghost_grammar = `#JSGF V1.0; grammar ghosts; public <ghost> = ${all_ghosts.join(" | ")}`
+    let ghost_grammar = `#JSGF V1.0; grammar ghosts; public <ghost> = ${Object.keys(all_ghosts).join(" | ")}`
     let evidence_grammar = `#JSGF V1.0; grammar evidence; public <evidence> = ${Object.keys(all_evidence).join(" | ")}`
     let speed_grammar = `#JSGF V1.0; grammar speed; pubilc <speed> = ${all_speed.join(" | ")}`
     let sanity_grammar = `#JSGF V1.0; grammar sanity; public <sanity> = ${all_sanity.join(" | ")}`

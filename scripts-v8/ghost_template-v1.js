@@ -52,7 +52,7 @@ class Ghost {
                 </div>
                 <div class="ghost_speed">
                     <div class="footstep_los" onclick="openWikiPath('hunts.los.los-${has_los_guide.includes(data.ghost) ? data.ghost.toLowerCase().replace(' ','-') : 'std' }')">
-                        <img src="imgs/${(+data.has_los) || data.ghost == 'The Mimic' ? 'los' : 'nlos'}.png" title="${(+data.has_los) || data.ghost == 'The Mimic' ? 'Has LOS' : 'Does not have LOS'}">
+                        <img src="imgs/${(+data.has_los) || data.ghost == 'The Mimic' ? 'los' : 'nlos'}.png" title="${(+data.has_los) || data.ghost == 'The Mimic' ? '{{has_los}}' : '{{not_los}}'}">
                         <img src="imgs/footsteps.png" style="filter: invert(1);">
                     </div>
                     <div class="ghost_speed_values">
@@ -72,42 +72,42 @@ class Ghost {
             <div class="ghost_has_los">${+data.has_los}</div>
 
             <div class="ghost_behavior">
-                <div class="ghost_tests_button" onClick="openGhostInfo('${data.ghost}')">0 Evidence Tests >></div>
+                <div class="ghost_tests_button" onClick="openGhostInfo('${data.ghost}')">{{0_evidence_tests}} >></div>
                 ${this.behavior(data.wiki)}
             </div>
             <div class="ghost_clear">
-                <img class="card_icon card_icon_select" title="Select Ghost" src="imgs/select.png" onclick="select(this.parentElement.parentElement)">
-                <img class="card_icon card_icon_guess" title="Guess Ghost" style="display:none;" src="imgs/guess.png" onclick="guess(this.parentElement.parentElement)">
-                <img class="card_icon card_icon_not" title="Not Ghost" src="imgs/not.png" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)">
-                <img class="card_icon card_icon_died" title="Died to Ghost" style="display:none;" src="imgs/died.png" onclick="died(this.parentElement.parentElement)">
+                <img class="card_icon card_icon_select" title="{{select_ghost}}" src="imgs/select.png" onclick="select(this.parentElement.parentElement)">
+                <img class="card_icon card_icon_guess" title="{{guess_ghost}}" style="display:none;" src="imgs/guess.png" onclick="guess(this.parentElement.parentElement)">
+                <img class="card_icon card_icon_not" title="{{not_ghost}}" src="imgs/not.png" onclick="fade(this.parentElement.parentElement)" ondblclick="remove(this.parentElement.parentElement)">
+                <img class="card_icon card_icon_died" title="{{died_to_ghost}}" style="display:none;" src="imgs/died.png" onclick="died(this.parentElement.parentElement)">
             </div>
             <div class="ghost_guesses"></div>
         </div>
         `
 
         this.wikiTemplate = `
-        <div id="wiki-0-evidence-${data.ghost.replace(" ","-").toLowerCase()}" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> ${data.ghost}</div></div>
+        <div id="wiki-0-evidence-${data.ghost.replace(" ","-").toLowerCase()}" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> ${data.name}</div></div>
         <div class="wiki_details" style="height: 0px;">
             <div class="text">
-                <p><b>Abilities, Behaviors, & Tells</b></p>
-                ${this.build_tells(data.wiki["tells"],data.wiki["behaviors"],data.wiki["abilities"])}
-                <p><b>Confirmation Test(s)</b> †</p>
-                ${this.build_confirmation_tests(data.ghost,data.wiki["confirmation_tests"])}
-                <p><b>Elimination Test(s)</b></p>
-                ${this.build_elimination_tests(data.ghost,data.wiki["elimination_tests"])}
+                <p><b>{{abilities_behaviors_tells}}</b></p>
+                ${Object.keys(data.wiki).length > 0 ? this.build_tells(data.wiki["tells"],data.wiki["behaviors"],data.wiki["abilities"]) : ""}
+                <p><b>{{confirmation_tests}}</b> †</p>
+                ${Object.keys(data.wiki).length > 0 ? this.build_confirmation_tests(data.ghost,data.name,data.wiki["confirmation_tests"]) : ""}
+                <p><b>{{elimination_tests}}</b></p>
+                ${Object.keys(data.wiki).length > 0 ? this.build_elimination_tests(data.ghost,data.name,data.wiki["elimination_tests"]) : ""}
                 <div class="wiki_details_note">
-                    <i>- Use the <a href="javascript:void(0);" onclick="highLightBPMFinder()"><b>BPM Finder</b></a> to track ghost speeds -</i>
-                    <i>- Use the <a href="https://zero-network.net/phasmo-cheat-sheet/map-explorer/" target="_blank"><b>Map Explorer</b></a> to see ranges/distances -</i>
-                    <i style="opacity: 0.4; margin-top: 3px;">† The Mimic can copy abilities and behaviors of other ghosts, meaning that any confirmation test could also be a Mimic</i>
+                    <i>{{use_bpm_finder}}</i>
+                    <i>{{use_map_explorer}}</i>
+                    <i style="opacity: 0.4; margin-top: 3px;">† {{mimic_disclaimer}}</i>
                 </div>
             </div>
-            <div onclick="generateWikiShareLink(this);" class="wiki-share">Copy Share Link <img loading="lazy" src="imgs/share.png"></div>
+            <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
         </div>
         `
     }
 
     build_evidence_item(evidence,evidence_name){
-        return `<div class="ghost_evidence_item" ${evidence in evi_color ? 'style=\"color:' + evi_color[evidence] + ' !important;\"' : ''}><img src="${evi_icons[evidence]}">${evidence_name}</div>`
+        return `<div class="ghost_evidence_item" ${evidence in evi_color ? 'style=\"color:' + evi_color[evidence] + ' !important;\"' : ''} name="${evidence}"><img src="${evi_icons[evidence]}">${evidence_name}</div>`
     }
 
     build_tells(tells,behavior,abilities){
@@ -115,27 +115,27 @@ class Ghost {
 
         for(var i in tells){
             if(tells[i]["is_0_evi"]){
-                data += `<li><b>Tell</b>: ${tells[i]["data"]}`
+                data += `<li><b>{{tell}}</b>: ${tells[i]["data"]}`
                 if(tells[i].hasOwnProperty("note"))
-                    data += `<br><i>Note: ${tells[i]["note"]}</i>`
+                    data += `<br><i>{{note}}: ${tells[i]["note"]}</i>`
                 data += "</li>"
             }
         }
 
         for(var i in behavior){
             if(behavior[i]["is_0_evi"]){
-                data += `<li><b>Behavior</b>: ${behavior[i]["data"]}</li>`
+                data += `<li><b>{{behavior}}</b>: ${behavior[i]["data"]}</li>`
                 if(behavior[i].hasOwnProperty("note"))
-                    data += `<br><i>Note: ${behavior[i]["note"]}</i>`
+                    data += `<br><i>{{note}}: ${behavior[i]["note"]}</i>`
                 data += "</li>"
             }
         }
 
         for(var i in abilities){
             if(abilities[i]["is_0_evi"]){
-                data += `<li><b>Ability</b>: ${abilities[i]["data"]}</li>`
+                data += `<li><b>{{ability}}</b>: ${abilities[i]["data"]}</li>`
                 if(abilities[i].hasOwnProperty("note"))
-                    data += `<br><i>Note: ${abilities[i]["note"]}</i>`
+                    data += `<br><i>{{note}}: ${abilities[i]["note"]}</i>`
                 data += "</li>"
             }
         }
@@ -144,21 +144,21 @@ class Ghost {
         return data
     }
 
-    build_confirmation_tests(ghost,value){
+    build_confirmation_tests(ghost,ghost_name,value){
         var data = "<ul>"
 
         if(value.length == 0){
-            data += `<li class="non-definitive"><i>(There are no confirmation tests for ${ghost})</i></li>`
+            data += `<li class="non-definitive"><i>({{no_confirmation_tests}} ${ghost_name})</i></li>`
         }
 
         for(var i in value){
-            data += `<li${value[i]["definitive"] ? "" : " class=\"non-definitive\""}><b>${value[i]["type"]} (${value[i]["definitive"] ? "Definitive" : "Non-Definitive"})</b>: ${value[i]["data"]}`
+            data += `<li${value[i]["definitive"] ? "" : " class=\"non-definitive\""}><b>{{${value[i]["type"].toLowerCase().replace(' ','_')}}} (${value[i]["definitive"] ? "{{definitive}}" : "{{non_definitive}}"})</b>: ${value[i]["data"]}`
 
             if(value[i]["image"] != null)
                 data += `<br><img loading="lazy" class="zoomable" src="${value[i]["image"]}" onclick="zoomImage(this${value[i].hasOwnProperty("subtitle") ? ",'"+value[i]['subtitle']+"'" : ""})">`
 
             if(value[i]["definitive"])
-                data += `<div class="wiki_mark_ghost" onclick='select(document.getElementById("${ghost}"))'>&#x2714; Mark Ghost</div>`
+                data += `<div class="wiki_mark_ghost" onclick='select(document.getElementById("${ghost}"))'>&#x2714; {{mark_ghost}}</div>`
             
             data += `</li>`
         }
@@ -167,20 +167,20 @@ class Ghost {
         return data
     }
 
-    build_elimination_tests(ghost,value){
+    build_elimination_tests(ghost,ghost_name,value){
         var data = "<ul>"
 
         if(value.length == 0){
-            data += `<li class="non-definitive"><i>(There are no elimination tests for ${ghost})</i></li>`
+            data += `<li class="non-definitive"><i>({{no_elimination_tests}} ${ghost_name})</i></li>`
         }
 
         for(var i in value){
-            data += `<li><b>${value[i]["type"]}</b>: ${value[i]["data"]}`
+            data += `<li><b>{{${value[i]["type"].toLowerCase().replace(' ','_')}}}</b>: ${value[i]["data"]}`
 
             if(value[i]["image"] != null)
                 data += `<br><img loading="lazy" class="zoomable" src="${value[i]["image"]}" onclick="zoomImage(this)">`
 
-            data += `<div class="wiki_mark_ghost" onclick='fade(document.getElementById("${ghost}"))'>&#x2717; Mark Ghost</div></li>`
+            data += `<div class="wiki_mark_ghost" onclick='fade(document.getElementById("${ghost}"))'>&#x2717; {{mark_ghost}}</div></li>`
         }
 
         data += "</ul>"
@@ -199,7 +199,7 @@ class Ghost {
                     if(value[s][i]["include_on_card"]){
                         if(i == 0){
                             opened = true
-                            msg += `<div class='dtitle'><i>${titleCase(s.replace("_"," "))}</i><div class='ddash'></div></div><ul>`
+                            msg += `<div class='dtitle'><i>{{${(s)}}}</i><div class='ddash'></div></div><ul>`
                         }
                         msg += `<li>${value[s][i]["data"]}</li>`
                     }
@@ -214,10 +214,13 @@ class Ghost {
     }
 
     toNumStr(num) { 
-        if (Number.isInteger(num)) { 
-          return num + ".0"
+        let new_num = num
+        if (Number.isInteger(new_num)) { 
+          new_num += ".0"
         } else {
-          return num.toString(); 
+          new_num = new_num.toString(); 
         }
+
+        return lang_currency.includes(lang) ? new_num.replace(".",",") : new_num
       }
 }

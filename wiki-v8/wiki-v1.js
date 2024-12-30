@@ -26,8 +26,7 @@ function accordian(elem){
         panel.style.height = "auto"
     }
 
-    if(elem.id == "wiki-flickering")
-        setFlicker()
+    setFlicker()
 }
 
 function openWikiFromURL(){
@@ -123,7 +122,7 @@ let flickering = false
 function startFlicker(elem, is_obake = false){
     let obj = $(elem).find("#ghost-flicker")
     let obj_img = $(obj).find("img")
-    let ghost = $(elem).find("#flicker-ghost-name")[0].innerText
+    let ghost = $(elem).find("#flicker-ghost-name")[0].getAttribute("name")
     ghost = ghost == "Obake" ? "Normal" : ghost
     let vis_min = ghost_flicker_data[ghost].vis_min
     let vis_max = ghost_flicker_data[ghost].vis_max
@@ -167,10 +166,10 @@ function startFlicker(elem, is_obake = false){
 }
 
 function setFlicker(){
-    if (document.getElementById("wiki_flicker").style.height == "0px" && flickering){
+    if (document.getElementById("wiki_flicker").style.height == "0px"){
         flickering=false
     }
-    else{
+    else if (document.getElementById("wiki_flicker").style.height != "0px" && !flickering){
         startFlicker(document.getElementById("phantom-flicker"))
         startFlicker(document.getElementById("normal-flicker"))
         startFlicker(document.getElementById("oni-flicker"))
@@ -226,14 +225,14 @@ function generateWikiShareLink(elem){
         e = e.parentElement.previousElementSibling
     } while (e.id != "wiki-body" && e.id != "");
 
-    navigator.clipboard.writeText(`${window.location.href}?wiki=${url}`)
+    navigator.clipboard.writeText(`${window.location.href}${window.location.href.includes("?") ? "&" : "?"}wiki=${url}`)
 
     $(".wiki-share").html('Copy Share Link <img loading="lazy" src="imgs/share.png">')
     elem.innerHTML = 'Copied! <img loading="lazy" src="imgs/share.png">'
 }
 
 function generateEventShareLink(elem){
-    navigator.clipboard.writeText(`${window.location.href}?wiki=current-event`)
+    navigator.clipboard.writeText(`${window.location.href}${window.location.href.includes("?") ? "&" : "?"}wiki=current-event`)
     $(".wiki-share").html('Copy Share Link <img loading="lazy" src="imgs/share.png">')
     elem.innerHTML = 'Copied! <img loading="lazy" src="imgs/share.png">'
 }

@@ -5,7 +5,7 @@ const all_speed = ["Slow","Normal","Fast"]
 const all_sanity = ["Late","Average","Early","VeryEarly"]
 
 let all_evidence = {}
-let all_ghosts = []
+let all_ghosts = {}
 let all_maps = {}
 let bpm_list = []
 let bpm_los_list = []
@@ -45,7 +45,7 @@ function closeMenu(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
     var is_c = document.getElementById("num_evidence").value == "-1"
     if(mquery.matches){
-        document.getElementById("menu").style.marginBottom = is_c ? "-640px" : "-585px";
+        document.getElementById("menu").style.marginBottom = is_c ? lang_menu_widths[lang].menu_bottom_custom : lang_menu_widths[lang].menu_bottom;
         $("#domovoi").removeClass("domovoi-custom")
         $("#domovoi").addClass("domovoi-menu-hidden")
     }
@@ -273,13 +273,13 @@ function select(elem,ignore_link=false,internal=false){
     if (on){
         $(elem).removeClass(["selected"]);
         if (!ignore_link || internal) markedDead = false
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+        state["ghosts"][elem.id] = 1;
     }
     else{
         $(elem).removeClass(["died","guessed","permhidden"])
         $(elem).addClass("selected");
         if (!ignore_link || internal) markedDead = false
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 2;
+        state["ghosts"][elem.id] = 2;
     }
     setCookie("state",JSON.stringify(state),1)
     if(!ignore_link){filter(ignore_link)}
@@ -307,13 +307,13 @@ function guess(elem,ignore_link=false,internal=false){
 
     if (on){
         $(elem).removeClass("guessed");
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+        state["ghosts"][elem.id] = 1;
         send_guess("")
     }
     else{
         $(elem).removeClass(["selected","died","permhidden"])
         $(elem).addClass("guessed");
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 3;
+        state["ghosts"][elem.id] = 3;
         send_guess(elem.id)
     }
     setCookie("state",JSON.stringify(state),1)
@@ -338,13 +338,13 @@ function died(elem,ignore_link=false,internal=false){
     if (on){
         $(elem).removeClass(["selected","died"]);
         if (!ignore_link || internal) markedDead = false
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+        state["ghosts"][elem.id] = 1;
     }
     else{
         $(elem).removeClass(["selected","guessed","permhidden"])
         $(elem).addClass("died");
         if (!ignore_link || internal) markedDead = true
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -2;
+        state["ghosts"][elem.id] = -2;
     }
     setCookie("state",JSON.stringify(state),1)
     if(!ignore_link){filter(ignore_link)}
@@ -356,13 +356,13 @@ function fade(elem,ignore_link=false){
 
     $(elem).removeClass(["selected","guessed","died"])
 
-    if (state["ghosts"][$(elem).find(".ghost_name")[0].innerText] != 0){
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 0;
+    if (state["ghosts"][elem.id] != 0){
+        state["ghosts"][elem.id] = 0;
         $(elem).addClass("faded");
         $(elem).find(".ghost_name").addClass("strike");
     }
     else{
-        state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = 1;
+        state["ghosts"][elem.id] = 1;
         $(elem).removeClass("faded");
         $(elem).find(".ghost_name").removeClass("strike");
     }
@@ -372,7 +372,7 @@ function fade(elem,ignore_link=false){
 }
 
 function remove(elem,ignore_link=false){
-    state["ghosts"][$(elem).find(".ghost_name")[0].innerText] = -1;
+    state["ghosts"][elem.id] = -1;
     $(elem).find(".ghost_name").removeClass("strike");
     $(elem).removeClass(["selected","guessed","died","faded"]);
     $(elem).addClass("permhidden");
@@ -492,12 +492,12 @@ function filter(ignore_link=false){
         var keep = true;
         var loskeep = true;
         var marked_not = $(ghosts[i]).hasClass("faded") || $(ghosts[i]).hasClass("permhidden")
-        var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
+        var name = ghosts[i].id;
         var evi_objects = ghosts[i].getElementsByClassName("ghost_evidence_item")
         var evidence = []
         for (var j = 0; j < evi_objects.length; j++){
             $(evi_objects[j]).removeClass(["ghost_evidence_found","ghost_evidence_not"])
-            evidence.push(evi_objects[j].textContent)
+            evidence.push(evi_objects[j].getAttribute("name"))
         }
         var nm_evidence = ghosts[i].getElementsByClassName("ghost_nightmare_evidence")[0].textContent;
         var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
@@ -690,9 +690,9 @@ function filter(ignore_link=false){
         }
 
         // Get min and max
-        var min_speed = parseFloat(speeds[0].replaceAll(" m/s",""))
+        var min_speed = parseFloat(speeds[0].replaceAll(" m/s","").replace(",","."))
         if (speeds.length > 1){
-            var max_speed = parseFloat(speeds[1].replaceAll(" m/s",""))
+            var max_speed = parseFloat(speeds[1].replaceAll(" m/s","").replace(",","."))
         }
         else{
             var max_speed = min_speed
@@ -1055,7 +1055,7 @@ function prioritySort(){
     if(document.getElementById("priority_sort").checked){
         $("#sort_img").attr("src","imgs/sort-icon.png")
         sortElements.sort((a,b) => {
-            return all_ghosts.indexOf(a.id) - all_ghosts.indexOf(b.id)
+            return Object.keys(all_ghosts).indexOf(a.id) - Object.keys(all_ghosts).indexOf(b.id)
         }).sort((a,b) => {
             if ($(a).hasClass("faded") && !$(b).hasClass("faded"))
                 return 1
@@ -1067,7 +1067,7 @@ function prioritySort(){
     else{
         $("#sort_img").attr("src","imgs/not-sort-icon.png")
         sortElements.sort((a,b) => {
-            return all_ghosts.indexOf(a.id) - all_ghosts.indexOf(b.id)
+            return Object.keys(all_ghosts).indexOf(a.id) - Object.keys(all_ghosts).indexOf(b.id)
         }).forEach(gcard => sortParentElement.appendChild(gcard))
     }
 }
@@ -1177,7 +1177,7 @@ function checkResetButton(){
         if(!hasSelected()){
             $("#reset").removeClass("standard_reset")
             $("#reset").addClass("reset_pulse")
-            $("#reset").html("No ghost selected!<div class='reset_note'>(double click to save & reset)</div>")
+            $("#reset").html(`${lang_data['{{no_ghost_selected}}']}<div class='reset_note'>(${lang_data['{{double_click_to_reset}}']})</div>`)
             $("#reset").attr("onclick",null)
             $("#reset").attr("ondblclick","reset()")
         }
@@ -1188,10 +1188,11 @@ function resetResetButton(){
     $("#reset").removeClass("reset_pulse")
     $("#reset").addClass("standard_reset")
     if(Object.keys(discord_user).length > 0){
-        $("#reset").html("Save & Reset<div class='reset_note'>(right click for more options)</div>")
+        $("#reset").html(`${lang_data['{{save_and_reset}}']}<div class='reset_note'>(${lang_data['{{right_click_for_more}}']})</div>`)
     }
     else{
-        $("#reset").html(polled ? "Waiting for others..." : "Reset")
+        if(lang_data)
+            $("#reset").html(polled ? lang_data['{{waiting_for_others}}'] : lang_data['{{reset}}'])
     }
     $("#reset").attr("ondblclick",null)
     $("#reset").attr("onclick","reset()")
@@ -1279,28 +1280,28 @@ function closeAll(skip_map=false,skip_wiki=false){
 
     document.getElementById("settings_box").style.left = (mquery.matches ? "-100%" : "0px")
     if (!mquery.matches)
-        document.getElementById("settings_box").style.width = "168px"
+        document.getElementById("settings_box").style.width = lang_menu_widths[lang].width
     document.getElementById("settings_box").style.boxShadow = "none"
     document.getElementById("settings_tab").style.boxShadow = "none"
     $("#settings_box").removeClass("tab-open")
 
     document.getElementById("links_box").style.left = (mquery.matches ? "-100%" : "0px")
     if (!mquery.matches)
-        document.getElementById("links_box").style.width = "168px"
+        document.getElementById("links_box").style.width = lang_menu_widths[lang].width
     document.getElementById("links_box").style.boxShadow = "none"
     document.getElementById("links_box").style.boxShadow = "none"
     $("#links_box").removeClass("tab-open")
 
     document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "0px")
     if (!mquery.matches)
-        document.getElementById("discord_link_box").style.width = "168px"
+        document.getElementById("discord_link_box").style.width = lang_menu_widths[lang].width
     document.getElementById("discord_link_box").style.boxShadow = "none"
     document.getElementById("discord_link_tab").style.boxShadow = "none"
     $("#discord_link_box").removeClass("tab-open")
 
     document.getElementById("event_box").style.left = (mquery.matches ? "-100%" : "0px")
     if (!mquery.matches)
-        document.getElementById("event_box").style.width = "168px"
+        document.getElementById("event_box").style.width = lang_menu_widths[lang].width
     document.getElementById("event_box").style.boxShadow = "none"
     document.getElementById("event_tab").style.boxShadow = "none"
     $("#event_box").removeClass("tab-open")
@@ -1308,7 +1309,7 @@ function closeAll(skip_map=false,skip_wiki=false){
     if(!skip_wiki){
         document.getElementById("wiki_box").style.left = (mquery.matches ? "-100%" : "0px")
         if (!mquery.matches)
-            document.getElementById("wiki_box").style.width = "168px"
+            document.getElementById("wiki_box").style.width = lang_menu_widths[lang].width
         document.getElementById("wiki_box").style.boxShadow = "none"
         document.getElementById("wiki_tab").style.boxShadow = "none"
         $("#wiki_box").removeClass("tab-open")
@@ -1342,7 +1343,7 @@ function showSettings(){
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("settings_box").style.zIndex = (mquery.matches ? "10" : "2")
-        document.getElementById("settings_box").style.left = (mquery.matches ? "0px" : "196px")
+        document.getElementById("settings_box").style.left = (mquery.matches ? "0px" : lang_menu_widths[lang].left)
         if (!mquery.matches)
             document.getElementById("settings_box").style.width = "200px"
         $("#settings_box").addClass("tab-open")
@@ -1350,7 +1351,7 @@ function showSettings(){
     }
     else {
         if (!mquery.matches)
-            document.getElementById("settings_box").style.width = "168px"
+            document.getElementById("settings_box").style.width = lang_menu_widths[lang].width
         document.getElementById("settings_box").style.left = (mquery.matches ? "-100%" : "0px")
         document.getElementById("settings_box").style.boxShadow = "none"
         document.getElementById("settings_tab").style.boxShadow = "none"
@@ -1376,7 +1377,7 @@ function showLinks(){
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("links_box").style.zIndex = (mquery.matches ? "10" : "2")
-        document.getElementById("links_box").style.left = (mquery.matches ? "0px" : "196px")
+        document.getElementById("links_box").style.left = (mquery.matches ? "0px" : lang_menu_widths[lang].left)
         if (!mquery.matches)
             document.getElementById("links_box").style.width = "200px"
         $("#links_box").addClass("tab-open")
@@ -1384,7 +1385,7 @@ function showLinks(){
     }
     else {
         if (!mquery.matches)
-            document.getElementById("links_box").style.width = "168px"
+            document.getElementById("links_box").style.width = lang_menu_widths[lang].width
         document.getElementById("links_box").style.left = (mquery.matches ? "-100%" : "0px")
         document.getElementById("links_box").style.boxShadow = "none"
         document.getElementById("links_tab").style.boxShadow = "none"
@@ -1410,7 +1411,7 @@ function showDiscordLink(){
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("discord_link_box").style.zIndex= (mquery.matches ? "10" : "2")
-        document.getElementById("discord_link_box").style.left = (mquery.matches ? "0px" : "196px")
+        document.getElementById("discord_link_box").style.left = (mquery.matches ? "0px" : lang_menu_widths[lang].left)
         if (!mquery.matches)
             document.getElementById("discord_link_box").style.width = "200px"
         $("#discord_link_box").addClass("tab-open")
@@ -1418,7 +1419,7 @@ function showDiscordLink(){
     }
     else {
         if (!mquery.matches)
-            document.getElementById("discord_link_box").style.width = "168px"
+            document.getElementById("discord_link_box").style.width = lang_menu_widths[lang].width
         document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "0px")
         document.getElementById("discord_link_box").style.boxShadow = "none"
         document.getElementById("discord_link_tab").style.boxShadow = "none"
@@ -1444,7 +1445,7 @@ function showEvent(){
         document.getElementById("discord_link_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= (mquery.matches ? "10" : "2")
-        document.getElementById("event_box").style.left = (mquery.matches ? "0px" : "196px")
+        document.getElementById("event_box").style.left = (mquery.matches ? "0px" : lang_menu_widths[lang].left)
         if (!mquery.matches)
             document.getElementById("event_box").style.width = "350px"
         $("#event_box").addClass("tab-open")
@@ -1452,7 +1453,7 @@ function showEvent(){
     }
     else {
         if (!mquery.matches)
-            document.getElementById("event_box").style.width = "168px"
+            document.getElementById("event_box").style.width = lang_menu_widths[lang].width
         document.getElementById("event_box").style.left = (mquery.matches ? "-100%" : "0px")
         document.getElementById("event_box").style.boxShadow = "none"
         document.getElementById("event_tab").style.boxShadow = "none"
@@ -1478,7 +1479,7 @@ function showWiki(forceOpen = false, forceClose = false){
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= (mquery.matches ? "10" : "2")
-        document.getElementById("wiki_box").style.left = (mquery.matches ? "0px" : "196px")
+        document.getElementById("wiki_box").style.left = (mquery.matches ? "0px" : lang_menu_widths[lang].left)
         if (!mquery.matches)
             document.getElementById("wiki_box").style.width = "350px"
         $("#wiki_box").addClass("tab-open")
@@ -1486,7 +1487,7 @@ function showWiki(forceOpen = false, forceClose = false){
     }
     else if(!forceOpen) {
         if (!mquery.matches)
-            document.getElementById("wiki_box").style.width = "168px"
+            document.getElementById("wiki_box").style.width = lang_menu_widths[lang].width
         document.getElementById("wiki_box").style.left = (mquery.matches ? "-100%" : "0px")
         document.getElementById("wiki_box").style.boxShadow = "none"
         document.getElementById("wiki_tab").style.boxShadow = "none"
@@ -1513,8 +1514,8 @@ function showMaps(forceOpen = false, forceClose = false){
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= (mquery.matches ? "10" : "2")
-        document.getElementById("maps_box").style.left = (mquery.matches ? "0px" : "196px")
-        document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 40px)" : "calc(100% - 265px)")
+        document.getElementById("maps_box").style.left = (mquery.matches ? "0px" : lang_menu_widths[lang].left)
+        document.getElementById("maps_box").style.width = (mquery.matches ? "calc(100% - 40px)" : lang_menu_widths[lang].maps)
         $("#maps_box").addClass("tab-open")
         tabOpen = true
     }
@@ -1624,8 +1625,8 @@ function show3D(){
 
 function flashMode(){
     var cur_evidence = document.getElementById("num_evidence").value
-    var mode_text = {"-5":"Weekly Challenge Mode","-1":"Custom","0":"Apocalypse III","1":"Insanity","2":"Nightmare","3":"Professional","3I":"Intermediate","3A":"Amateur"}[cur_evidence]
-    document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} evidence)</span>`.replace("-1",document.getElementById("cust_num_evidence").value).replace("-5",document.getElementById("cust_num_evidence").value)
+    var mode_text = {"-5":lang_data['{{weekly_challenge_mode}}'],"-1":lang_data['{{custom}}'],"0":lang_data['{{apocalypse_iii}}'],"1":lang_data['{{insanity}}'],"2":lang_data['{{nightmare}}'],"3":lang_data['{{professional}}'],"3I":lang_data['{{intermediate}}'],"3A":lang_data['{{amateur}}']}[cur_evidence]
+    document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} ${lang_data['{{evidence}}']})</span>`.replace("-1",document.getElementById("cust_num_evidence").value).replace("-5",document.getElementById("cust_num_evidence").value)
     $("#game_mode").fadeIn(500,function () {
         $("#game_mode").delay(500).fadeOut(500);
     });
@@ -1779,11 +1780,14 @@ function loadSettings(){
     setSoundType()
     updateMapDifficulty(user_settings['num_evidences'])
     showCustom()
-    flashMode()
+    setTimeout(() => {
+        flashMode()
+    },300)
     send_cur_map_link()
 }
 
 function resetSettings(){
+    console.log("Resetting")
     user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"disable_particles":0,"show_event_maps":0}
     document.getElementById("modifier_volume").value = load_default('volume',50)
     document.getElementById("mute_broadcast").checked = load_default('mute_broadcast',0) == 1 
@@ -1905,9 +1909,9 @@ function showCustom(){
     var is_h = ![null,"","-8px"].includes(document.getElementById("menu").style.marginBottom)
     if(["-1","-5"].includes(document.getElementById("num_evidence").value)){
         if(mquery.matches){
-            document.getElementById("menu").style.height="675px";
+            document.getElementById("menu").style.height=lang_menu_widths[lang].menu_height_custom;
             if(is_h){
-                document.getElementById("menu").style.marginBottom = "-640px";
+                document.getElementById("menu").style.marginBottom = lang_menu_widths[lang].menu_bottom_custom;
                 $("#domovoi").removeClass("domovoi-custom")
                 $("#domovoi").addClass("domovoi-menu-hidden")
             }
@@ -1923,9 +1927,9 @@ function showCustom(){
         $("#custom_options").hide()
         document.getElementById("evidence").style.marginTop = mquery.matches ? "0px" : "28px";
         if(mquery.matches){
-            document.getElementById("menu").style.height="620px";
+            document.getElementById("menu").style.height=lang_menu_widths[lang].menu_height;
             if(is_h){
-                document.getElementById("menu").style.marginBottom = "-585px";
+                document.getElementById("menu").style.marginBottom = lang_menu_widths[lang].menu_bottom;
                 $("#domovoi").removeClass("domovoi-custom")
                 $("#domovoi").addClass("domovoi-menu-hidden")
             }
@@ -1996,8 +2000,13 @@ function setSpeedLogicType(){
 }
 
 function setGhostSpeedFromDifficulty(dif){
-    speed = {"-1":2,"0":4,"1":2,"2":2,"3":2,"3I":2,"3A":2}[dif]
-    document.getElementById("ghost_modifier_speed").value = speed;
+    if(dif == '-5'){
+        document.getElementById("ghost_modifier_speed").value = Object.keys(ghost_speed_modifier).find(e => ghost_speed_modifier[e] == weekly_data.ghost_speed)
+    }
+    else{
+        speed = {"-1":2,"0":4,"1":2,"2":2,"3":2,"3I":2,"3A":2}[dif]
+        document.getElementById("ghost_modifier_speed").value = speed
+    }
 }
 
 function toggleDescriptions(forced = null){

@@ -8,6 +8,14 @@ const sanity_maps = {
     "L": 0.05
 }
 
+const ghost_speed_modifier = {
+    "0": 50,
+    "1": 75,
+    "2": 100,
+    "3": 125,
+    "4": 150
+}
+
 const sanity_difficulty = {
     "3A": 1,
     "3I": 1.5,
