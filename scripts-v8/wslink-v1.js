@@ -341,11 +341,11 @@ function link_room(){
                     else{
                         set_sanity_settings()
                     }
-                    setGhostSpeedFromDifficulty(incoming_state['settings']['num_evidences'])
                     updateMapDifficulty(incoming_state['settings']['num_evidences'])
                     showCustom()
                     flashMode()
                 }
+                
                 if(document.getElementById("ghost_modifier_speed").value != incoming_state['settings']['ghost_modifier']){
                     document.getElementById("ghost_modifier_speed").value = incoming_state['settings']['ghost_modifier']
                 }
@@ -353,7 +353,6 @@ function link_room(){
                 saveSettings()
 
                 for (const [key, value] of Object.entries(incoming_state["ghosts"])){ 
-                    console.log(key,value)
                     if (value == 0 || value == 1){
                         if(state['ghosts'][key] == 2){
                             select(document.getElementById(key),true);
