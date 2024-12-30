@@ -48,6 +48,10 @@
     #maps_tab {
         top: 530px !important;
     }
+
+    #game_mode {
+        font-size: 24px !important;
+    }
 }
 
 /* Mobile Adjustments */

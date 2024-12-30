@@ -136,7 +136,7 @@ function translate_wiki(to_lang){
             Object.entries(data).forEach(([key,value]) => {
                 body = body.replaceAll(key,value)
             })
-            document.body.innerHTML = lang_currency.includes(to_lang) ? body.replace(/(\d+)\.(\d+)/g, '$1,$2') : body
+            document.body.innerHTML = lang_currency.includes(to_lang) ? body.replace(/(?<!\d\.\d*)\b(\d+)\.(\d+)\b(?!\.\d)/g, '$1,$2') : body
             resolve("Translation complete")
         })
         .catch(err => {

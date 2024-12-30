@@ -368,7 +368,7 @@ function mark_ghost_details(ms)
         var speed_tab = document.getElementById(`${additional_ghost_data[g]}_speed_breakdown`)
         for (var i = 1, row; row = speed_tab.rows[i]; i++){
             $(row).removeClass("row_select")
-            var speed = parseFloat(row.getElementsByClassName(`${additional_ghost_data[g]}_speed_item`)[0].textContent.replace(" m/s",""))
+            var speed = parseFloat(row.getElementsByClassName(`${additional_ghost_data[g]}_speed_item`)[0].textContent.replace(" m/s","").replace(",","."))
             if(((speed - additional_ghost_var[g]) <= ms && ms <= (speed + additional_ghost_var[g]))){
                 $(row).addClass("row_select")
                 $("#guide_tab_footstep").show()
