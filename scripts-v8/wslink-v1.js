@@ -341,6 +341,7 @@ function link_room(){
                     else{
                         set_sanity_settings()
                     }
+                    setGhostSpeedFromDifficulty(incoming_state['settings']['num_evidences'])
                     updateMapDifficulty(incoming_state['settings']['num_evidences'])
                     showCustom()
                     flashMode()
