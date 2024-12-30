@@ -31,4 +31,4 @@ NOTE: By using this code, you agree to not use any included, external URLs prese
 
 With the exception of:  
 JQuery - MIT License  
-ZNPrimary Font - Custom License
+October Crow Font - Custom License
