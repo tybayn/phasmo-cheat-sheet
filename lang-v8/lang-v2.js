@@ -4,7 +4,7 @@ var lang_data = null
 // ----------------------------------
 
 const lang_currency = [
-    "de"
+    "de", "fr"
 ]
 
 const lang_menu_widths = {
@@ -25,6 +25,15 @@ const lang_menu_widths = {
         "menu_bottom_custom":"-665px",
         "menu_height":"645px",
         "menu_height_custom":"700px"
+    },
+    "fr":{
+        "left":"230px",
+        "width":"209px",
+        "maps":"calc(100% - 299px)",
+        "menu_bottom":"-585px",
+        "menu_bottom_custom":"-640px",
+        "menu_height":"620px",
+        "menu_height_custom":"675px"
     },
 }
 
@@ -66,7 +75,7 @@ function load_translation(){
         })
         .catch(err => {
             console.log(`${lang} is not yet supported!`)
-            fetch(`lang-v8/en.json`)
+            fetch(`lang-v8/en/data.json`)
             .then(data => data.json())
             .then(data => {
                 lang_data = data
@@ -103,7 +112,7 @@ function translate(to_lang){
         })
         .catch(err => {
             console.log(`${to_lang} is not yet supported!`)
-            fetch(`lang-v8/en.json`)
+            fetch(`lang-v8/en/data.json`)
             .then(data => data.json())
             .then(data => {
                 Object.entries(data).forEach(([key,value]) => {

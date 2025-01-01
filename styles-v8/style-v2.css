@@ -3071,6 +3071,7 @@ input{
         letter-spacing: 1.5;
         display: grid;
         justify-content: start;
+        align-items: center;
     }
 
     #checkbox{
