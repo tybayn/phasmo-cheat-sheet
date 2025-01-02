@@ -112,7 +112,7 @@ function loadAllAndConnect(){
             } catch(Error) {
                 id = false;
             }
-            fetch(`https://zero-network.net/zn/?lang=${lang}${id ? '&discord_id='+id : ''}`,{headers:{Accept:"application/json"},signal: AbortSignal.timeout(10000)})
+            fetch(`https://zero-network.net/zn/?lang=${lang}${id ? '&discord_id='+id : ''}`,{headers:{Accept:"application/json"}, signal: AbortSignal.timeout(10000)})
             .then(e=>e.json())
             .then(e => {
                 znid = e.znid
@@ -154,7 +154,7 @@ function loadAllAndConnect(){
         if(!lang){
             lang = 'en'
         }
-        fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=${lang}`, {signal: AbortSignal.timeout(6000)})
+        fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=${lang}`, {cache: 'default', signal: AbortSignal.timeout(10000)})
         .then(data => data.json())
         .then(data => {
 
@@ -315,7 +315,7 @@ function loadAllAndConnect(){
     })
 
     let loadMaps = new Promise((resolve, reject) => {
-        fetch("https://zero-network.net/phasmophobia/data/maps", {signal: AbortSignal.timeout(6000)})
+        fetch("https://zero-network.net/phasmophobia/data/maps", {cache: 'default', signal: AbortSignal.timeout(12000)})
         .then(data => data.json())
         .then(data => {
             var map_html = ""
@@ -349,7 +349,7 @@ function loadAllAndConnect(){
     })
 
     let loadWeekly = new Promise((resolve, reject) => {
-        fetch("https://zero-network.net/phasmophobia/data/weekly.json", {signal: AbortSignal.timeout(6000)})
+        fetch("https://zero-network.net/phasmophobia/data/weekly.json", {cache: 'default', signal: AbortSignal.timeout(10000)})
         .then(data => data.json())
         .then(data => {
             weekly_data = {
@@ -398,7 +398,7 @@ function loadAllAndConnect(){
     })
 
     let loadLanguages = new Promise((resolve, reject) => {
-        fetch("https://zero-network.net/phasmophobia/languages", {signal: AbortSignal.timeout(6000)})
+        fetch("https://zero-network.net/phasmophobia/languages", {cache: 'default', signal: AbortSignal.timeout(10000)})
         .then(data => data.json())
         .then(data => {
             var lang_html = ""
@@ -418,7 +418,7 @@ function loadAllAndConnect(){
     document.getElementById("page-loading-status").innerText = "loading language data..."
     Promise.all([load_translation()])
     .then(() => {
-        document.getElementById("page-loading-status").innerText = "loading ghost data..."
+        document.getElementById("page-loading-status").innerText = "loading ghost & map data..."
         Promise.all([loadZN,loadData,loadMaps,loadWeekly,loadLanguages])
         .then(() => {
             document.getElementById("page-loading-status").innerText = "translating page..."
