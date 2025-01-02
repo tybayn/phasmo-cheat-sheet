@@ -253,6 +253,7 @@
     "{{discord_link_h8}}": "Killed by the ghost",
     "{{discord_link_p6}}": "Select the actual ghost <i>AND</i> indicate that the ghost killed you.",
     "{{discord_link_b1}}": "My Stats Explorer",
+    "{{discord_link_h9}}": "You have successfully linked your Discord account! In order for your stats to be most accurate, be sure to select the correct number of evidences and mark the correct ghost before hitting 'Save & Reset'",
     "{{discord_link_b2}}": "Link",
     "{{discord_link_b3}}": "Relink",
     "{{discord_link_b4}}": "Unlink"

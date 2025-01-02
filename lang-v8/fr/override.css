@@ -54,6 +54,14 @@
     #game_mode {
         font-size: 24px !important;
     }
+
+    .discord-entry{
+        font-size: 9px !important;
+    }
+
+    .modifier .modifier_note{
+        display: block !important;
+    }
 }
 
 /* Mobile Adjustments */

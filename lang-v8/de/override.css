@@ -52,6 +52,18 @@
     #game_mode {
         font-size: 24px !important;
     }
+
+    .discord-entry{
+        font-size: 9px !important;
+    }
+
+    #discord_login_button, #discord_unlink_button{
+        padding: 6px !important;
+    }
+
+    .modifier .modifier_note{
+        display: block !important;
+    }
 }
 
 /* Mobile Adjustments */
@@ -109,5 +121,10 @@
     #event_tab{
         height: 280px !important;
         top: 1075px !important;
+    }
+
+    .modifier .modifier_note{
+        font-size: 23px !important;
+        padding-top: 0 !important;
     }
 }

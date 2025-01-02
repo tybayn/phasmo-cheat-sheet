@@ -24,6 +24,14 @@
         width: calc(100% - 20px);
     }
 
+    .discord-breakdown .discord-entry:nth-child(even){
+        background-color: #ffffff12;
+    }
+
+    .discord-ghost-breakdown .discord-entry:nth-child(4n+1), .discord-ghost-breakdown .discord-entry:nth-child(4n+2){
+        background-color: #ffffff12;
+    }
+
     .discord-entry{
         padding: 0px 5px;
     }

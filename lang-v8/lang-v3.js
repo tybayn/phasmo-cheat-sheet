@@ -61,6 +61,55 @@ function loadLanguage(){
     }
 }
 
+function load_voice(){
+    timer_snd = [
+        new Audio(`assets/finish.mp3`),
+        new Audio(`lang-v8/${lang}/assets/1.mp3`),
+        new Audio(`lang-v8/${lang}/assets/2.mp3`),
+        new Audio(`lang-v8/${lang}/assets/3.mp3`),
+        new Audio(`lang-v8/${lang}/assets/4.mp3`),
+        new Audio(`lang-v8/${lang}/assets/5.mp3`),
+        new Audio(`lang-v8/${lang}/assets/spirit_smudge.mp3`),
+        new Audio(`lang-v8/${lang}/assets/standard_smudge.mp3`),
+        new Audio(`lang-v8/${lang}/assets/demon_smudge.mp3`),
+        new Audio(`lang-v8/${lang}/assets/demon_cooldown.mp3`),
+        new Audio(`lang-v8/${lang}/assets/standard_cooldown.mp3`),
+        new Audio(`lang-v8/${lang}/assets/standard_hunt.mp3`),
+        new Audio(`lang-v8/${lang}/assets/cursed_hunt.mp3`),
+        new Audio('assets/start.mp3'),
+        new Audio('assets/stop.mp3')];
+    timer_snd[0].preload = 'auto';
+    timer_snd[1].preload = 'auto';
+    timer_snd[2].preload = 'auto';
+    timer_snd[3].preload = 'auto';
+    timer_snd[4].preload = 'auto';
+    timer_snd[5].preload = 'auto';
+    timer_snd[6].preload = 'auto';
+    timer_snd[7].preload = 'auto';
+    timer_snd[8].preload = 'auto';
+    timer_snd[9].preload = 'auto';
+    timer_snd[10].preload = 'auto';
+    timer_snd[11].preload = 'auto';
+    timer_snd[12].preload = 'auto';
+    timer_snd[13].preload = 'auto';
+    timer_snd[14].preload = 'auto';
+    timer_snd[0].load();
+    timer_snd[1].load();
+    timer_snd[2].load();
+    timer_snd[3].load();
+    timer_snd[4].load();
+    timer_snd[5].load();
+    timer_snd[6].load();
+    timer_snd[7].load();
+    timer_snd[8].load();
+    timer_snd[9].load();
+    timer_snd[10].load();
+    timer_snd[11].load();
+    timer_snd[12].load();
+    timer_snd[13].load();
+    timer_snd[14].load();
+}
+
 function load_translation(){
     return new Promise((resolve, reject) => {
         lang = getCookie("lang")
@@ -71,6 +120,7 @@ function load_translation(){
         .then(data => data.json())
         .then(data => {
             lang_data = data
+            load_voice()
             resolve("Translation loaded")
         })
         .catch(err => {
@@ -79,6 +129,7 @@ function load_translation(){
             .then(data => data.json())
             .then(data => {
                 lang_data = data
+                load_voice()
                 resolve("Translation loaded")
             })
             .catch(err => {
@@ -145,7 +196,7 @@ function translate_wiki(to_lang){
             Object.entries(data).forEach(([key,value]) => {
                 body = body.replaceAll(key,value)
             })
-            document.body.innerHTML = lang_currency.includes(to_lang) ? body.replace(/(?<!\d\.\d*)\b(\d+)\.(\d+)\b(?!\.\d)/g, '$1,$2') : body
+            document.body.innerHTML = lang_currency.includes(to_lang) ? body.replace(/(?<!\b\w+\()\b(?<!\d\.\d*)\b(\d+)\.(\d+)\b(?!\.\d)/g, '$1,$2') : body
             resolve("Translation complete")
         })
         .catch(err => {

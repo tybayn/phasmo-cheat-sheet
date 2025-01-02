@@ -12,14 +12,14 @@ function getLink(){
         document.getElementById("discord_link_date").innerText = `${lang_data['{{discord_link_h2}}']} ${discord_user['last_linked']}`
         $("#discord_link_date").removeClass("hidden")
         $("#discord_instructions").removeClass("hidden")
-        document.getElementById("discord_note").innerText = "You have successfully linked your Discord account! In order for your stats to be most accurate, be sure to select the correct number of evidences and mark the correct ghost before hitting 'Save & Reset'"
+        document.getElementById("discord_note").innerText = lang_data['{{discord_link_h9}}']
         document.getElementById("discord_login_button").innerText = lang_data['{{discord_link_b3}}']
         $("#discord_unlink_button").removeClass("hidden")
         document.getElementById("reset").innerHTML = `${lang_data['{{save_and_reset}}']}<div class='reset_note'>(${lang_data['{{right_click_for_more}}']})</div>`
         fetch(`https://zero-network.net/zn/${znid}/${discord_user['id']}`, {signal: AbortSignal.timeout(6000)})
         .then(data => data.json())
         .then(data => {
-            var stats_info = `<strong>${lang_data['{{discord_link_h3}}']}</strong>: ${data.total_games}<hr><div style="display:grid; grid-template-columns: 60%;">`
+            var stats_info = `<strong>${lang_data['{{discord_link_h3}}']}</strong> ${data.total_games}<hr><div class="discord-breakdown" style="display:grid; grid-template-columns: auto;">`
 
             stats_info += `<div class="discord-entry">${lang_data['{{amateur}}']}: <span class="discord-num" style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['3A'] || '0' : '0'}</span></div>`
             stats_info += `<div class="discord-entry">${lang_data['{{intermediate}}']}: <span class="discord-num" style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['3I'] || '0' : '0'}</span></div>`
@@ -31,7 +31,7 @@ function getLink(){
             stats_info += `<div class="discord-entry">${lang_data['{{weekly_challenge}}']}: <span class="discord-num" style="float:right;">${data.hasOwnProperty('game_evidence') ? data['game_evidence']['-5'] || '0' : '0'}</span></div>`
 
 
-            stats_info += `</div><br><strong>${lang_data['{{discord_link_h4}}']}</strong><hr><div style="display:grid; grid-template-columns: 50% 50%;">`
+            stats_info += `</div><br><strong>${lang_data['{{discord_link_h4}}']}</strong><hr><div class="discord-ghost-breakdown" style="display:grid; grid-template-columns: 50% 50%;">`
             for (const g in data['ghost_stats']){
                 stats_info += `<div class="discord-entry" style="${g == 'Unknown'?'color:#555;':''}">${all_ghosts[g]}: <span class="discord-num" style="float:right;">${data['ghost_stats'][g]}</span></div>`
             }

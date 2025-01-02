@@ -70,52 +70,7 @@ document.body.onkeydown = function(e){
     }
 }
 
-var timer_snd = [
-    new Audio('assets/finish.mp3'),
-    new Audio('assets/1.mp3'),
-    new Audio('assets/2.mp3'),
-    new Audio('assets/3.mp3'),
-    new Audio('assets/4.mp3'),
-    new Audio('assets/5.mp3'),
-    new Audio('assets/spirit_smudge.mp3'),
-    new Audio('assets/standard_smudge.mp3'),
-    new Audio('assets/demon_smudge.mp3'),
-    new Audio('assets/demon_cooldown.mp3'),
-    new Audio('assets/standard_cooldown.mp3'),
-    new Audio('assets/standard_hunt.mp3'),
-    new Audio('assets/cursed_hunt.mp3'),
-    new Audio('assets/start.mp3'),
-    new Audio('assets/stop.mp3')];
-timer_snd[0].preload = 'auto';
-timer_snd[1].preload = 'auto';
-timer_snd[2].preload = 'auto';
-timer_snd[3].preload = 'auto';
-timer_snd[4].preload = 'auto';
-timer_snd[5].preload = 'auto';
-timer_snd[6].preload = 'auto';
-timer_snd[7].preload = 'auto';
-timer_snd[8].preload = 'auto';
-timer_snd[9].preload = 'auto';
-timer_snd[10].preload = 'auto';
-timer_snd[11].preload = 'auto';
-timer_snd[12].preload = 'auto';
-timer_snd[13].preload = 'auto';
-timer_snd[14].preload = 'auto';
-timer_snd[0].load();
-timer_snd[1].load();
-timer_snd[2].load();
-timer_snd[3].load();
-timer_snd[4].load();
-timer_snd[5].load();
-timer_snd[6].load();
-timer_snd[7].load();
-timer_snd[8].load();
-timer_snd[9].load();
-timer_snd[10].load();
-timer_snd[11].load();
-timer_snd[12].load();
-timer_snd[13].load();
-timer_snd[14].load();
+var timer_snd = []
 
 var smudge_worker;
 var cooldown_worker;
