@@ -112,7 +112,7 @@ function loadAllAndConnect(){
             } catch(Error) {
                 id = false;
             }
-            fetch(`https://zero-network.net/zn/${id ? '?discord_id='+id : ''}?lang=${lang}`,{headers:{Accept:"application/json"},signal: AbortSignal.timeout(10000)})
+            fetch(`https://zero-network.net/zn/?lang=${lang}${id ? '&discord_id='+id : ''}`,{headers:{Accept:"application/json"},signal: AbortSignal.timeout(10000)})
             .then(e=>e.json())
             .then(e => {
                 znid = e.znid
