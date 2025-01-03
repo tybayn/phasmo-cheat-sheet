@@ -600,7 +600,7 @@
     "{{wiki_heavy_rain_p6}}": "Heavy rain brings very loud environmental noise which can make it difficult to hear many interactions.",
     "{{wiki_heavy_rain_p7}}": "The sound carries inside of many areas of various maps as the rain hitting the roof produces its own sound as well.",
     "{{wiki_heavy_rain_p8}}": "Heavy rain also prevents Tier 1 / 2 firelights and igniters from being lit in the rain and will extinguish them immediately if brought in the rain.",
-    "{{wiki_heavy_rain_p9}}": "In addition to the heavy rain, this map also provides occasional flashes of lighting with accompanying thunder.",
+    "{{wiki_heavy_rain_p9}}": "In addition to the heavy rain, this weather also produces occasional flashes of lighting with accompanying thunder.",
     "{{wiki_heavy_rain_p10}}": "The thunder last for a couple of seconds and is loud enough that it can drown out all other sound, making it hard to track ghost footsteps or hear equipment.",
     "{{wiki_heavy_rain_p11}}": "However, the lightning does produce a few seconds of very bright light that can illuminate the map and allow the player to see.",
 
@@ -639,7 +639,7 @@
     "{{wiki_windy_p6}}": "Windy weather has the same visibility and lighting as clear weather, but provides the additional environmental sound of wind blowing through trees and the rustling of leaves. It is generally not loud enough to drown out the sound of equipment and most interactions.",
 
     "{{wiki_xp_grinding}}": "XP Grinding",
-    "{{wiki_xp_grinding_p1}}": "Current Strat: x12.97 WoodWind",
+    "{{wiki_xp_grinding_p1}}": "Current Strat: x12.97 Woodwind",
     "{{wiki_xp_grinding_p2}}": "Strategy:",
     "{{wiki_xp_grinding_p3}}": "The goal of this strategy is to go in long enough to survive a single hunt (2 if you value correctness over number of attempts) and leave. It requires a decent understanding of ghost behaviour during hunts and the ability to loop a ghost. This strat is done ideally with 2+ players, but it is possible to do in single player.",
     "{{wiki_xp_grinding_p4}}": "You will want to equip a loadout that at a minimum has incense (I prefer Tier 1 so the ghost will run away and not hang around), ignitors, salt (preferably tier 2 or 3), and a device that can be left on to test for raiju (I usually go with an EMF reader or another device that will help complete an objective, such as a paramic).",
