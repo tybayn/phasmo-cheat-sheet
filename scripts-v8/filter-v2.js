@@ -43,7 +43,7 @@ function waitForElementById(id){
 
 function closeMenu(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    var is_c = document.getElementById("num_evidence").value == "-1"
+    var is_c = ["-5","-1"].includes(document.getElementById("num_evidence").value)
     if(mquery.matches){
         document.getElementById("menu").style.marginBottom = is_c ? lang_menu_widths[lang].menu_bottom_custom : lang_menu_widths[lang].menu_bottom;
         $("#domovoi").removeClass("domovoi-custom")
@@ -53,7 +53,7 @@ function closeMenu(){
 
 function showMenu(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    var is_c = document.getElementById("num_evidence").value == "-1"
+    var is_c = ["-5","-1"].includes(document.getElementById("num_evidence").value)
     if(mquery.matches){
         if(is_c)
             $("#domovoi").addClass("domovoi-custom")
