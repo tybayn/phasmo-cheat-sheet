@@ -376,7 +376,7 @@
     "{{wiki_los_thaye_p1}}": "The Moroi and Thaye are some of the fastest ghosts in the game and are sometimes hard to distinguish, but there is a key difference: a Thaye will never speed up with LOS.",
     "{{wiki_los_thaye_p2}}": "Thayes age and grow weaker and slower the longer players are around them. The youngest Thaye will always move at 2.75m/s at 100% speed, even with LOS, and will become slower with each hunt if exposed to players.",
     "{{wiki_los_thaye_p3}}": "Moroi without LOS will be slower than young Thayes, moving at only 2.25m/s (dotted line), but they are able to reach a speed much faster than Thayes while in continuous LOS (solid line).",
-    "{{wiki_los_deogen_p1}}": "Deogens do not have a LOS speed up. Instead, they are always able to sense their target and will move at 3.0m/s until they are close to the targetted player and will slow down to 0.4m/s.",
+    "{{wiki_los_deogen_p1}}": "Deogens do not have a LOS speed up. Instead, they are always able to sense their target and will move at 3.0m/s until they are close to the targeted player and will slow down to 0.4m/s.",
     "{{wiki_los_mimic_p1}}": "The Mimic is capable of ANY hunt pattern and should be remembered.",
 
     "{{wiki_puzzles}}": "Puzzles / Unlockables",
