@@ -174,7 +174,7 @@
     "{{elimination_tests}}": "Ausschluss Test",
     "{{definitive}}": "Garantiert",
     "{{non_definitive}}": "Nicht-Garantiert",
-    "{{mark_ghost}}": "Beim Geist wählen",
+    "{{mark_ghost}}": "beim Geist wählen",
     "{{use_bpm_finder}}": "Nutze den <a href=\"javascript:void(0);\" onclick=\"highLightBPMFinder()\">Schritt Zähler</a> um Geister Geschwindigkeit zu messen",
     "{{use_map_explorer}}": "Nutze den <a href=\"https://zero-network.net/phasmo-cheat-sheet/map-explorer/\" target=\"_blank\">Karten Erkunder</a> um Reichweiten und Entfernungen zu überprüfen",
     "{{mimic_disclaimer}}": "Der Mimik kann Fähigkeiten und Verhalten anderer Geister übernehmen, das bedeutet fast jeder Bestätigungstest kann auch ein Mimik sein",
