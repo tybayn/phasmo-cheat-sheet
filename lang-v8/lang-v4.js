@@ -120,6 +120,7 @@ function load_translation(){
         .then(data => data.json())
         .then(data => {
             lang_data = data
+            loadCSS(`lang-v8/${lang}/override.css`)
             load_voice()
             resolve("Translation loaded")
         })
@@ -128,7 +129,9 @@ function load_translation(){
             fetch(`lang-v8/en/data.json`)
             .then(data => data.json())
             .then(data => {
+                lang = 'en'
                 lang_data = data
+                loadCSS(`lang-v8/en/override.css`)
                 load_voice()
                 resolve("Translation loaded")
             })
@@ -152,7 +155,6 @@ function translate(to_lang){
                 body = body.replaceAll(`{{${key}}}`,value)
             })
             document.body.innerHTML = body
-            loadCSS(`lang-v8/${to_lang}/override.css`)
             if(to_lang != "en")
                 $(".vcs").hide()
             $("#page-loading").hide()
@@ -160,29 +162,6 @@ function translate(to_lang){
             setCookie("lang",lang,90)
             lang_data = data
             resolve("Translation complete")
-        })
-        .catch(err => {
-            console.log(`${to_lang} is not yet supported!`)
-            fetch(`lang-v8/en/data.json`)
-            .then(data => data.json())
-            .then(data => {
-                Object.entries(data).forEach(([key,value]) => {
-                    body = body.replaceAll(key,value)
-                })
-                Object.entries(all_ghosts).forEach(([key,value]) => {
-                    body = body.replaceAll(`{{${key}}}`,value)
-                })
-                document.body.innerHTML = body
-                loadCSS(`lang-v8/en/override.css`)
-                $("#page-loading").hide()
-                lang = 'en'
-                setCookie("lang",'en',90)
-                lang_data = data
-                resolve("Translation complete")
-            })
-            .catch(err => {
-                reject("Could not translate")
-            })
         })
     })
 }
