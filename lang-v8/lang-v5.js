@@ -142,6 +142,23 @@ function load_translation(){
     })
 }
 
+function convert_currency(content){
+    return content.replace(/\b(\d+)\.(\d+)\b/g, (match, p1, p2, offset, string) => {
+        const before = string.slice(0, offset);
+        if (/\b\w+\($/.test(before) || /\d\.\d*$/.test(before)) {
+            return match;
+        }
+
+        const after = string.slice(offset + match.length);
+        if (/^\.\d/.test(after)) {
+            return match;
+        }
+
+        return `${p1},${p2}`;
+    });
+    
+}
+
 function translate(to_lang){
     return new Promise((resolve, reject) => {
         let body = document.body.innerHTML
@@ -175,7 +192,7 @@ function translate_wiki(to_lang){
             Object.entries(data).forEach(([key,value]) => {
                 body = body.replaceAll(key,value)
             })
-            document.body.innerHTML = lang_currency.includes(to_lang) ? body.replace(/(?<!\b\w+\()\b(?<!\d\.\d*)\b(\d+)\.(\d+)\b(?!\.\d)/g, '$1,$2') : body
+            document.body.innerHTML = lang_currency.includes(to_lang) ? convert_currency(body) : body
             resolve("Translation complete")
         })
         .catch(err => {

@@ -64,6 +64,10 @@
     .modifier .modifier_note{
         display: block !important;
     }
+
+    #wiki-ghost-speeds .wiki_subtitle{
+        width: 60%;
+    }
 }
 
 /* Mobile Adjustments */

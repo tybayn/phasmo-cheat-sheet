@@ -125,7 +125,7 @@
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         position: relative;
     }
@@ -137,6 +137,8 @@
     .wiki_title:after {
         content: '\02795';
         font-size: 10px;
+        position: absolute;
+        right: 10px;
     }
 
     .wiki_active:after {
@@ -145,6 +147,7 @@
 
     .wiki_subtitle{
         display: flex;
+        align-items: center;
     }
 
     .wiki_crumb{
@@ -403,9 +406,7 @@
         width: 20px;
         height: 20px;
         background-size: cover;
-        position: absolute;
-        bottom: 10px;
-        left: 60px;
+        margin-left: 5px;
     }
 
     #hunts_tab_indent_footstep{
@@ -415,9 +416,7 @@
         width: 20px;
         height: 20px;
         background-size: cover;
-        position: absolute;
-        bottom: 10px;
-        left: 230px;
+        margin-left: 5px;
     }
 
     .tarot-img {
@@ -511,7 +510,7 @@
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         position: relative;
     }
@@ -523,6 +522,8 @@
     .wiki_title:after {
         content: '\02795';
         font-size: 30px;
+        position: absolute;
+        right: 10px;
     }
 
     .wiki_active:after {
@@ -531,6 +532,7 @@
 
     .wiki_subtitle{
         display: flex;
+        align-items: center;
     }
 
     .wiki_crumb{
@@ -804,9 +806,7 @@
         width: 50px;
         height: 50px;
         background-size: cover;
-        position: absolute;
-        bottom: 20px;
-        left: 140px;
+        margin-left: 10px;
     }
 
     #hunts_tab_indent_footstep{
@@ -816,9 +816,7 @@
         width: 50px;
         height: 50px;
         background-size: cover;
-        position: absolute;
-        bottom: 20px;
-        left: 565px;
+        margin-left: 10px;
     }
 
     .tarot-img {
