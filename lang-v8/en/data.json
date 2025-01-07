@@ -75,7 +75,7 @@
     "{{calibrate_1_header}}": "Prepare the Cheat Sheet",
     "{{calibrate_1}}": "Link the ZN-Desktop-Link if preferred for tapping. Ghost speed will automatically be set to 100% and Blood Moon modifiers will be ignored during calibration.",
     "{{calibrate_2_header}}": "Prepare in-game",
-    "{{calibrate_2}}": "Enter a game that has 100% Ghost Speed, hiding spots, and the Weather is not Blood Moon. Find a ghost that has normal speed ghost (1.7m/s). Then hide in a hiding spot where you can hear the ghost footsteps while it is hunting.",
+    "{{calibrate_2}}": "Enter a game that has 100% Ghost Speed, hiding spots, and the Weather is not Blood Moon. Find a ghost that is normal speed (1.7m/s). Then hide in a hiding spot where you can hear the ghost footsteps while it is hunting.",
     "{{calibrate_3_header}}": "Calibrating",
     "{{calibrate_3}}": "While the ghost is hunting, tap along with the footsteps, attempting to remain as consistant as possible. Continue tapping until the progress bar below is full and says that the calibration was successful or not. If successful, it will automatically change the offset value in the settings.",
     "{{start}}": "Start",
