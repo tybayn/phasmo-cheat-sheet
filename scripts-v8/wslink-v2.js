@@ -1,6 +1,12 @@
 let ws = null
 let dlws = null
 
+let reconn_id = null
+let kill_gracefully = false
+let reconnecting = false
+let relink_interval = null
+let relink_timeout = null
+
 var ws_ping;
 var dlws_ping;
 var await_dlws_pong = false
@@ -22,6 +28,39 @@ var pos_colors = {
     3:"0000ff",
     4:"ca36dd"
 }
+
+// --------------- Override WS send
+
+const wssend = WebSocket.prototype.send
+
+WebSocket.prototype.send = function(message){
+    if(this.readyState == WebSocket.OPEN){
+        wssend.call(this, message)
+    }
+
+    else if(this.readyState == WebSocket.CONNECTING){
+        const timeout = setTimeout(() => {
+            if(this.readyState != WebSocket.OPEN){
+                console.error("Socket did not open in time, message not sent")
+            }
+        },5000)
+
+        const interval = setInterval(() => {
+            if(this.readyState === WebSocket.OPEN){
+                clearTimeout(timeout)
+                clearInterval(interval)
+                wssend.call(this,message)
+            }
+        },250)
+    }
+
+    else{
+        console.warn("Socket not open or connecting. Failed to send message")
+    }
+
+}
+
+// --------------------------------
 
 function mute_broadcast(){
     muteBroadcast = document.getElementById("mute_broadcast").checked
@@ -461,10 +500,30 @@ function link_room(){
     }
 }
 
-function link_link(){
-    var link_id = document.getElementById("link_id").value
+function reconnect_link(){
+    relink_interval = setInterval(() =>{
+        console.log("Attempting to reconnect")
+        try{
+            link_link(true)
+        }catch(e){
+            console.error(e)
+            //Om nom nom
+        }
+    },5000)
 
-    dlws = new WebSocket(`wss://zero-network.net/phasmolink/link/${link_id}`);
+    relink_timeout = setTimeout(() => {
+        clearInterval(relink_interval)
+        disconnect_link(false)
+        document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`
+        document.getElementById("dllink_status").className = "error"
+        setCookie("link_id","",-1)
+    },30000)
+}
+
+function link_link(reconnect = false){
+    var link_id = reconnect ? reconn_id : document.getElementById("link_id").value 
+
+    dlws = new WebSocket(`wss://zero-network.net/phasmolink/link/${link_id}${reconnect ? '?reconnect=true' : ''}`);
     setCookie("link_id",link_id,1)
 
     dlws.onopen = function(event){
@@ -477,9 +536,26 @@ function link_link(){
         document.getElementById("dllink_status").className = "pending"
     }
     dlws.onerror = function(event){
-        document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`
-        document.getElementById("dllink_status").className = "error"
-        setCookie("link_id","",-1)
+        if(!reconnecting){
+            kill_gracefully = true
+            document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`
+            document.getElementById("dllink_status").className = "error"
+            setCookie("link_id","",-1)
+        }
+    }
+    dlws.onclose = function(event){
+        hasDLLink = false
+        setTimeout(() => {
+            if(!kill_gracefully){
+                if(!reconnecting){
+                    reconnecting = true
+                    document.getElementById("dllink_status").className = "pending"
+                    document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{awaiting_link}}']}`
+                    reconnect_link()
+                }
+            }
+        },500)
+        
     }
     dlws.onmessage = function(event) {
         try {
@@ -544,9 +620,21 @@ function link_link(){
                     toggle_hunt_timer(force_start)
                     send_hunt_timer(force_start)
                 }
+                if(incoming_state['action'].toUpperCase() == "RECONN"){
+                    reconn_id = incoming_state.message
+                }
                 if (incoming_state['action'].toUpperCase() == "LINKED"){
+                    clearInterval(relink_interval)
+                    clearTimeout(relink_timeout)
+                    reconnecting = false
+                    kill_gracefully = false
+
                     document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{linked}}']}`
                     document.getElementById("dllink_status").className = "connected"
+                    if(incoming_state.hasOwnProperty("message")){
+                        document.getElementById("link_id").value = incoming_state.message
+                        setCookie("link_id",incoming_state.message,1)
+                    }
                     dlws.send('{"action":"LINK"}')
                     send_map_preload_link()
                     send_sanity_link(Math.round(sanity),sanity_color())
@@ -846,6 +934,7 @@ function send_reset_link(){
 
 function disconnect_link(reset=false,has_status=false){
     clearInterval(dlws_ping)
+    clearInterval(relink_interval)
     if(!reset){
         if(hasDLLink){
             dlws.send('{"action":"KILL"}')
@@ -864,6 +953,7 @@ function disconnect_link(reset=false,has_status=false){
         hasDLLink=false
         toggleSanitySettings()
     }
+    kill_gracefully = true
     dlws.close()
 }
 
