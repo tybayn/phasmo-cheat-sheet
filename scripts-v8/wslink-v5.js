@@ -696,6 +696,7 @@ function link_link(reconnect = false){
                     }, 30000)
                 }
                 if (incoming_state['action'].toUpperCase() == "UNLINK"){
+                    kill_gracefully = true
                     disconnect_link()
                 }
                 if (incoming_state['action'].toUpperCase() == "DL_STEP"){
@@ -767,6 +768,7 @@ function link_link(reconnect = false){
             }
 
             if (incoming_state.hasOwnProperty("disconnect") && incoming_state['disconnect']){
+                kill_gracefully = true
                 disconnect_link(false,true)
             }
 
@@ -961,8 +963,13 @@ function send_reset_link(){
 }
 
 function disconnect_link(reset=false,has_status=false){
-    clearInterval(dlws_ping)
     clearInterval(relink_interval)
+    clearTimeout(relink_timeout)
+    reconnecting = false
+    kill_gracefully = false
+    relink_live = false
+    relink_interval = null
+    relink_timeout = null
     if(!reset){
         if(hasDLLink){
             dlws.send('{"action":"KILL"}')
