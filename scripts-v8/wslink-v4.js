@@ -586,6 +586,9 @@ function link_link(reconnect = false){
             clearTimeout(relink_timeout)
             reconnecting = false
             kill_gracefully = false
+            relink_live = false
+            relink_interval = null
+            relink_timeout = null
 
             var incoming_state = JSON.parse(event.data)
 
