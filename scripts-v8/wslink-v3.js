@@ -6,6 +6,7 @@ let kill_gracefully = false
 let reconnecting = false
 let relink_interval = null
 let relink_timeout = null
+let relink_live = false
 
 var ws_ping;
 var dlws_ping;
@@ -113,6 +114,11 @@ function resume_broadcast(){
     }
 }
 
+function isUUIDv4(str) {
+    const uuidv4Regex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    return uuidv4Regex.test(str);
+}
+
 function auto_link(){
     var room_id = getCookie("room_id")
     var link_id = getCookie("link_id")
@@ -124,11 +130,22 @@ function auto_link(){
         },1)
     }
     if(link_id){
-        var l = document.getElementById("link_id")
-        setTimeout(function(){
-            l.value = link_id
-            link_link()
-        },1)
+        console.log(`Found previous link_id: ${link_id}`)
+        if(isUUIDv4(link_id)){
+            console.log("Detected reconnect link, attempting reconnect")
+            reconn_id = link_id
+            reconnecting = true
+            document.getElementById("dllink_status").className = "pending"
+            document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{awaiting_link}}']}`
+            reconnect_link()
+        }
+        else{
+            var l = document.getElementById("link_id")
+            setTimeout(function(){
+                l.value = link_id
+                link_link()
+            },1)
+        }
     }
     else{
         params = new URL(window.location.href).searchParams
@@ -502,9 +519,12 @@ function link_room(){
 
 function reconnect_link(){
     relink_interval = setInterval(() =>{
-        console.log("Attempting to reconnect")
+        console.log(`Attempting to reconnect. Already attempting: ${relink_live}`)
         try{
-            link_link(true)
+            if(!relink_live){
+                relink_live = true
+                link_link(true)
+            }
         }catch(e){
             console.error(e)
             //Om nom nom
@@ -512,12 +532,13 @@ function reconnect_link(){
     },5000)
 
     relink_timeout = setTimeout(() => {
+        console.warn("Unable to reconnect to server!")
         clearInterval(relink_interval)
         disconnect_link(false)
         document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`
         document.getElementById("dllink_status").className = "error"
         setCookie("link_id","",-1)
-    },30000)
+    },5 * 60 * 1000)
 }
 
 function link_link(reconnect = false){
@@ -540,17 +561,19 @@ function link_link(reconnect = false){
             kill_gracefully = true
             document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`
             document.getElementById("dllink_status").className = "error"
-            setCookie("link_id","",-1)
+            setCookie("link_id",reconn_id,1)
         }
     }
     dlws.onclose = function(event){
         hasDLLink = false
+        relink_live = false
         setTimeout(() => {
             if(!kill_gracefully){
                 if(!reconnecting){
                     reconnecting = true
                     document.getElementById("dllink_status").className = "pending"
                     document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{awaiting_link}}']}`
+                    setCookie("link_id","",-1)
                     reconnect_link()
                 }
             }
@@ -559,6 +582,11 @@ function link_link(reconnect = false){
     }
     dlws.onmessage = function(event) {
         try {
+            clearInterval(relink_interval)
+            clearTimeout(relink_timeout)
+            reconnecting = false
+            kill_gracefully = false
+
             var incoming_state = JSON.parse(event.data)
 
             if (incoming_state.hasOwnProperty("action")){
@@ -624,14 +652,11 @@ function link_link(reconnect = false){
                     reconn_id = incoming_state.message
                 }
                 if (incoming_state['action'].toUpperCase() == "LINKED"){
-                    clearInterval(relink_interval)
-                    clearTimeout(relink_timeout)
-                    reconnecting = false
-                    kill_gracefully = false
 
                     document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{linked}}']}`
                     document.getElementById("dllink_status").className = "connected"
                     if(incoming_state.hasOwnProperty("message")){
+                        console.log(`Relinked with new link_id: ${incoming_state.message}`)
                         document.getElementById("link_id").value = incoming_state.message
                         setCookie("link_id",incoming_state.message,1)
                     }
