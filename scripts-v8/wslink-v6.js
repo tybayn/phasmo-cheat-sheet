@@ -207,6 +207,13 @@ function create_room(){
 }
 
 function create_link(auto_link = false){
+    clearInterval(relink_interval)
+    clearTimeout(relink_timeout)
+    reconnecting = false
+    kill_gracefully = false
+    relink_live = false
+    relink_interval = null
+    relink_timeout = null
     fetch(`https://zero-network.net/znlink/create-link/${znid}`,{method:"POST",Accept:"application/json",signal: AbortSignal.timeout(6000)})
     .then(response => response.json())
     .then(data => {
@@ -519,9 +526,9 @@ function link_room(){
 
 function reconnect_link(){
     relink_interval = setInterval(() =>{
-        console.log(`Attempting to reconnect. Already attempting: ${relink_live}`)
         try{
             if(!relink_live){
+            console.log(`Attempting to reconnect...`)
                 relink_live = true
                 link_link(true)
             }
@@ -544,7 +551,14 @@ function reconnect_link(){
 function link_link(reconnect = false){
     var link_id = reconnect ? reconn_id : document.getElementById("link_id").value 
 
-    dlws = new WebSocket(`wss://zero-network.net/phasmolink/link/${link_id}${reconnect ? '?reconnect=true' : ''}`);
+    try{
+        dlws = new WebSocket(`wss://zero-network.net/phasmolink/link/${link_id}${reconnect ? '?reconnect=true' : ''}`);
+    }
+    catch(e){
+        relink_live = false
+        return
+    }
+    
     setCookie("link_id",link_id,1)
 
     dlws.onopen = function(event){
@@ -558,7 +572,6 @@ function link_link(reconnect = false){
     }
     dlws.onerror = function(event){
         if(!reconnecting){
-            kill_gracefully = true
             document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`
             document.getElementById("dllink_status").className = "error"
             setCookie("link_id",reconn_id,1)
