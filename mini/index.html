@@ -5,7 +5,7 @@
     <link rel="icon" type="image/x-icon" href="https://zero-network.net/phasmophobia/static/imgs/favicon.ico">
     <meta name="Description" content="The Unofficial Phasmo Cheat Sheet (Printable!) is a compressed version of the Unofficial Phasmo Cheat Sheet that simply has the ghost data and none of the fluff." />
     <meta name="keywords" content="phasmphobia, phasmo, phasmophobia cheat sheet, phasmo cheat sheet, phasmophobia info, phasmo info, phasmophobia guide, phasmo guide, phasmophobia help, phasmo help, phasmophobia tool, phasmo tools, phasmophobia tools, phasmo tools, phasmophobia github, phasmo github, phasmo ghosts, phasmophobia ghosts, phasmophobia 0 evidence, phasmo 0 evidence, phasmo ghost tests, phasmophobia ghost tests, phasmo tests, phasmophobia tests, phasmo maps, phasmophobia maps, phasmo github, phasmophobia github, zero network" />
-    <meta name="viewport" content="user-scalable=0">
+    <meta name="viewport" content="user-scalable=0,initial-scale=1.0">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tybayn.github.io/phasmo-cheat-sheet/">
@@ -41,71 +41,135 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
-        #ghost_table_1,#ghost_table_2{
-            background-color: #ddd;
-            width: 8.3in;
-            height: 10.8in;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-content: space-between;
-            padding: 0.1in;
-            position: relative;
+        @media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
+            #ghost_table_1,#ghost_table_2{
+                background-color: #fff;
+                width: 8.3in;
+                height: 10.8in;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-content: space-between;
+                padding: 0.1in;
+                position: relative;
+            }
+
+            .print{
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+            }
+            .print:hover{
+                background-color: #8b8b8b;
+            }
+
+            #page_title{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                min-width: 540px;
+                line-height: 1;
+            }
+
+            #title_zn{
+                position: absolute;
+                top: 0px;
+                left: 70px;
+                font-size: 12px;
+            }
+
+            #title_title{
+                font-size: 30px;
+            }
+
+            #title_version{
+                position: absolute;
+                bottom: 0px;
+                right: 70px;
+                font-size: 12px;
+            }
+
+            .ghost_card_1,.ghost_card_2{
+                max-width: calc(50% - 24px);
+                display: grid;
+                grid-template-columns: 50px 80px calc(100% - 130px);
+                grid-template-rows: 20px 40px 40px auto; 
+                margin: 0px 5px 5px 5px;
+                padding: 10px 5px 10px 5px;
+                min-width: 40%;
+                flex:1;
+            }
+
+            .ghost_card_1:nth-child(n+5),.ghost_card_2:nth-child(n+3){
+                border-top: dashed 1px #8b8b8b;
+            }
         }
 
-        .print{
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-        }
-        .print:hover{
-            background-color: #8b8b8b;
-        }
+        @media screen and (pointer: coarse) and (max-device-width: 600px) {
+            #ghost_table_1,#ghost_table_2{
+                background-color: #fff;
+                width: 95%;
+                height: auto;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                flex-direction: column;
+                align-content: space-between;
+                padding: 0.1in;
+                position: relative;
+                margin: 0 !important;
+            }
 
-        #page_title{
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            min-width: 540px;
-            line-height: 1;
-        }
+            .print{
+                display: none;
+            }
 
-        #title_zn{
-            position: absolute;
-            top: 0px;
-            left: 70px;
-            font-size: 12px;
-        }
+            #page_title{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                line-height: 1;
+                width: calc(100% - 20px);
+            }
 
-        #title_title{
-            font-size: 30px;
-        }
+            #title_zn{
+                position: absolute;
+                top: 0px;
+                left: 10px;
+                font-size: 12px;
+            }
 
-        #title_version{
-            position: absolute;
-            bottom: 0px;
-            right: 70px;
-            font-size: 12px;
-        }
+            #title_title{
+                font-size: 24px;
+            }
 
-        .ghost_card_1,.ghost_card_2{
-            max-width: calc(50% - 24px);
-            display: grid;
-            grid-template-columns: 50px 80px calc(100% - 130px);
-            grid-template-rows: 20px 40px 40px auto; 
-            margin: 0px 5px 5px 5px;
-            padding: 10px 5px 10px 5px;
-            min-width: 40%;
-            flex:1;
-        }
+            #title_version{
+                position: absolute;
+                bottom: 0px;
+                right: 10px;
+                font-size: 12px;
+            }
 
-        .ghost_card_1:nth-child(n+5),.ghost_card_2:nth-child(n+3){
-            border-top: dashed 1px #8b8b8b;
+            .ghost_card_1,.ghost_card_2{
+                width: calc(100% - 10px);
+                display: grid;
+                grid-template-columns: 50px 80px calc(100% - 130px);
+                grid-template-rows: 20px 40px 40px auto; 
+                margin: 0px 5px 5px 5px;
+                padding: 10px 5px 10px 5px;
+                flex:1;
+            }
+
+            .ghost_card_1:nth-child(n+4),.ghost_card_2{
+                border-top: dashed 1px #8b8b8b;
+            }
         }
 
         .ghost_name{
@@ -182,10 +246,20 @@
             margin-top: 10px;
             line-height: 0.9;
         }
-        .ghost_behavior{
-            grid-row: 2 / 5;
-            grid-column: 2 / 4;
-            font-size: 9px;
+
+        @media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
+            .ghost_behavior{
+                grid-row: 2 / 5;
+                grid-column: 2 / 4;
+                font-size: 9px;
+            }
+        }
+        @media screen and (pointer: coarse) and (max-device-width: 600px) {
+            .ghost_behavior{
+                grid-row: 2 / 5;
+                grid-column: 2 / 4;
+                font-size: 12px;
+            }
         }
         .ghost_behavior .ghost_behavior_item{
             margin-bottom: -20px;
