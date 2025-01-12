@@ -1,0 +1,333 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Unofficial Phasmophobia Cheat Sheet (Printable!)</title>
+    
+    <link rel="icon" type="image/x-icon" href="https://zero-network.net/phasmophobia/static/imgs/favicon.ico">
+    <meta name="Description" content="The Unofficial Phasmo Cheat Sheet (Printable!) is a compressed version of the Unofficial Phasmo Cheat Sheet that simply has the ghost data and none of the fluff." />
+    <meta name="keywords" content="phasmphobia, phasmo, phasmophobia cheat sheet, phasmo cheat sheet, phasmophobia info, phasmo info, phasmophobia guide, phasmo guide, phasmophobia help, phasmo help, phasmophobia tool, phasmo tools, phasmophobia tools, phasmo tools, phasmophobia github, phasmo github, phasmo ghosts, phasmophobia ghosts, phasmophobia 0 evidence, phasmo 0 evidence, phasmo ghost tests, phasmophobia ghost tests, phasmo tests, phasmophobia tests, phasmo maps, phasmophobia maps, phasmo github, phasmophobia github, zero network" />
+    <meta name="viewport" content="user-scalable=0">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tybayn.github.io/phasmo-cheat-sheet/">
+    <meta property="og:title" content="Zero-Network | Unofficial Phasmo Cheat Sheet (Printable!)">
+    <meta property="og:description" content="The Unofficial Phasmo Cheat Sheet (Printable!) is a compressed version of the Unofficial Phasmo Cheat Sheet that simply has the ghost data and none of the fluff.">
+    <meta property="og:image" content="https://i.imgur.com/8PJDBnm.png">
+
+    <script>
+        AbortSignal.timeout = ms => {
+            const controller = new AbortController();
+            setTimeout(() => controller.abort(), ms);
+            return controller.signal;
+        };
+    </script>
+    <script src="../jquery/jquery-3.6.2.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'ZNDefault';
+            src: url('../styles-v8/fonts/yahfie.ttf');
+        }
+
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.75), rgba(0,0,0,1)), url('https://zero-network.net/phasmophobia/static/imgs/background.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        #ghost_table_1,#ghost_table_2{
+            background-color: #ddd;
+            width: 8.3in;
+            height: 10.8in;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: space-between;
+            padding: 0.1in;
+            position: relative;
+        }
+
+        .print{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .print:hover{
+            background-color: #8b8b8b;
+        }
+
+        #page_title{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            min-width: 540px;
+            line-height: 1;
+        }
+
+        #title_zn{
+            position: absolute;
+            top: 0px;
+            left: 70px;
+            font-size: 12px;
+        }
+
+        #title_title{
+            font-size: 30px;
+        }
+
+        #title_version{
+            position: absolute;
+            bottom: 0px;
+            right: 70px;
+            font-size: 12px;
+        }
+
+        .ghost_card_1,.ghost_card_2{
+            max-width: calc(50% - 24px);
+            display: grid;
+            grid-template-columns: 50px 80px calc(100% - 130px);
+            grid-template-rows: 20px 40px 40px auto; 
+            margin: 0px 5px 5px 5px;
+            padding: 10px 5px 10px 5px;
+            min-width: 40%;
+            flex:1;
+        }
+
+        .ghost_card_1:nth-child(n+5),.ghost_card_2:nth-child(n+3){
+            border-top: dashed 1px #8b8b8b;
+        }
+
+        .ghost_name{
+            grid-row: 1;
+            grid-column: 1 / 3;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            font-family: "ZNDefault";
+        }
+        .ghost_evidence_list{
+            grid-row: 1;
+            grid-column: 3;
+            display: flex;
+            flex-direction: row;
+        }
+        .ghost_evidence{
+            flex:1;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-position: left;
+            background-size: contain;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 22px;
+        }
+        .ghost_sanity{
+            background-image: url(../imgs/sanity.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            background-color: rgba(255,255,255,0.3);
+            background-blend-mode: difference;
+            grid-row: 2;
+            grid-column: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-weight: bold;
+            margin-top: 10px;
+            line-height: 0.9;
+        }
+        .ghost_sanity_min{
+            font-size: 11px;
+            opacity: 0.6;
+        }
+        .ghost_sanity_main{
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .ghost_sanity_max{
+            font-size: 11px;
+            opacity: 0.6;
+        }
+        .ghost_speed{
+            background-image: url(../imgs/footsteps.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            background-color: rgba(255,255,255,0.7);
+            background-blend-mode: lighten;
+            grid-row: 3;
+            grid-column: 1;
+            text-align: center;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-weight: bold;
+            margin-top: 10px;
+            line-height: 0.9;
+        }
+        .ghost_behavior{
+            grid-row: 2 / 5;
+            grid-column: 2 / 4;
+            font-size: 9px;
+        }
+        .ghost_behavior .ghost_behavior_item{
+            margin-bottom: -20px;
+        }
+        .ghost_behavior ul{
+            margin-left: -20px;
+        }
+
+        @media print{
+            @page{
+                size: letter portrait;
+                margin: 0 !important;
+            }
+            body{
+                visibility: hidden;
+                background-image: none;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            #ghost_table_1,#ghost_table_2{
+                visibility: visible;
+                margin: 0px !important;
+            }
+            .print{
+                display: none;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="ghost_table_1">
+        <button class="print" onclick="window.print()">Print</button> 
+        <div id="page_title">
+            <div id="title_zn">Zero-Network's</div>
+            <div id="title_title">Unofficial Phasmo Cheat Sheet</div>
+            <div id="title_version">Game Version: vx.x.x.x</div>
+        </div>
+    </div>
+
+    <div id="ghost_table_2" style="margin-top: 2px;">
+
+    </div>
+
+    <script>
+        $(window).on('load', function() {
+
+            function toNumStr(num) { 
+                let new_num = num
+                if (Number.isInteger(new_num)) { 
+                    new_num += ".0"
+                } else {
+                    new_num = new_num.toString(); 
+                }
+                return new_num;
+            }
+
+            function behavior(value){
+                var msg = "<div class='ghost_behavior_item'><ul>"
+                var opened = false
+
+                // Load Tells
+                for(var s of ["tells","behaviors","abilities","hunt_sanity","hunt_speed","evidence"]){
+                    if(value[s] != null){
+                        for(var i = 0; i < value[s].length;i++){
+                            if(value[s][i]["include_on_card"]){
+                                msg += `<li>${value[s][i]["data"]}</li>`
+                            }
+                        }
+                    }
+                }
+
+                msg += "</ul></div>"
+                return msg
+            }
+
+            let short_evidence = {
+                "EMF 5":"EMF 5",
+                "Ultraviolet":"UV",
+                "Writing":"Writing",
+                "Freezing":"Freezing",
+                "DOTs":"DOTs",
+                "Ghost Orbs":"Orbs",
+                "Spirit Box":"Box"
+            }
+
+            let evidence_img = {
+                "EMF 5":"../imgs/emf5-icon.png",
+                "Ultraviolet":"../imgs/fingerprints-icon.png",
+                "Writing":"../imgs/writing-icon.png",
+                "Freezing":"../imgs/freezing-icon.png",
+                "DOTs":"../imgs/dots-icon.png",
+                "Ghost Orbs":"../imgs/orbs-icon.png",
+                "Spirit Box":"../imgs/spirit-box-icon.png"
+            }
+
+            fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=en`, {cache: 'default', signal: AbortSignal.timeout(10000)})
+            .then(data => data.json())
+            .then(data => {
+
+                let ghost_cards_html_1 = "" 
+                let ghost_cards_html_2 = ""
+
+                data.ghosts = data.ghosts.sort((a,b) => (a.name > b.name) ? 1 : (a.name < b.name) ? -1 : 0)
+
+                for(var i = 0; i < data.ghosts.length; i++){
+
+                    let ghost_card = `
+                        <div class="ghost_card_${(i < data.ghosts.length / 2) ? '1' : '2'}">
+                            <div class="ghost_name">${data.ghosts[i].name}</div>
+                            <div class="ghost_evidence_list">
+                                <div class="ghost_evidence" style="background-image: url(${evidence_img[data.ghosts[i].evidence[0]]});">${short_evidence[data.ghosts[i].evidence[0]]}</div>
+                                <div class="ghost_evidence" style="background-image: url(${evidence_img[data.ghosts[i].evidence[1]]});">${short_evidence[data.ghosts[i].evidence[1]]}</div>
+                                <div class="ghost_evidence" style="background-image: url(${evidence_img[data.ghosts[i].evidence[2]]});">${short_evidence[data.ghosts[i].evidence[2]]}</div>
+                                ${data.ghosts[i].ghost === "The Mimic" ? '<div class="ghost_evidence" style="background-image: url(../imgs/orbs-icon.png);">Orbs</div>' : ''}
+                            </div>
+                            <div class="ghost_sanity">
+                                ${data.ghosts[i].hunt_sanity_low != data.ghosts[i].hunt_sanity ? '<div class="ghost_sanity_min">'+data.ghosts[i].hunt_sanity_low+'</div>' : ''}
+                                <div class="ghost_sanity_main">${data.ghosts[i].hunt_sanity}</div>
+                                ${data.ghosts[i].hunt_sanity_high != data.ghosts[i].hunt_sanity ? '<div class="ghost_sanity_max">'+data.ghosts[i].hunt_sanity_high+'</div>' : ''}
+                            </div>
+                            <div class="ghost_speed">
+                                ${toNumStr(data.ghosts[i].min_speed)} m/s ${data.ghosts[i].max_speed == null ? '' : (+data.ghosts[i].speed_is_range)?'<br>-<br>':'<br>or<br>'}${data.ghosts[i].max_speed == null ? '' : toNumStr(data.ghosts[i].max_speed)+' m/s'}
+                            </div>
+                            <div class="ghost_behavior">
+                                ${behavior(data.ghosts[i].wiki)}
+                            </div>
+                        </div>
+                    `
+
+                    if (i < data.ghosts.length / 2)
+                        ghost_cards_html_1 += ghost_card
+                    else
+                        ghost_cards_html_2 += ghost_card
+                }
+
+                document.getElementById('ghost_table_1').innerHTML += ghost_cards_html_1
+                document.getElementById('ghost_table_2').innerHTML += ghost_cards_html_2 + '<div style="font-size:10px; padding:10px;">Copyright © 2023-2025 Ty Bayn (Zero-Network)</div>'
+                document.getElementById('title_version').innerText = `Game Version: ${data.version}`
+            })
+        })
+
+    </script>
+</body>
