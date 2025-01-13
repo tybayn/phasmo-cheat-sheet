@@ -353,25 +353,26 @@ body{
         font-size: 16px;
         line-height: 25px;
         min-width: 30%;
+        font-weight: lighter;
     }
 
     .weekly-image{
         width:80%;
     }
 
-    .weekly-mod a:link{
+    .weekly-mod a:link, #weekly_footer a:link{
         color: #ffff00;
     }
     
-    .weekly-mod a:visited{
+    .weekly-mod a:visited, #weekly_footer a:visited{
         color: #ffff00;
     }
     
-    .weekly-mod a:hover{
+    .weekly-mod a:hover, #weekly_footer a:hover{
         color: #ff9100;
     }
     
-    .weekly-mod a:active{
+    .weekly-mod a:active, #weekly_footer a:active{
         color: #00ff00;
     }
 
@@ -1095,6 +1096,10 @@ body{
         padding: 20px;
         overflow-y: scroll;
         font-size: 12px;
+    }
+
+    #info_box_weekly{
+        padding-bottom: 10px;
     }
 
     #info_box_calibrate {

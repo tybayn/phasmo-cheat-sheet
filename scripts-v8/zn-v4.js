@@ -366,6 +366,7 @@ function loadAllAndConnect(){
                 "starting_sanity": data.details.cssettings.starting_sanity,
                 "equipment_url": data.equipment_url,
                 "cursed_objects": data.details.cursed_objects,
+                "friendly_ghost": data.details.friendly_ghost,
                 "difficulty_id": data.difficulty_id
             }
 
@@ -381,13 +382,14 @@ function loadAllAndConnect(){
                     <div class="weekly-mod"><b>{{weekly_ghost_speed}}</b>${weekly_data.ghost_speed}%</div>   
                     <div class="weekly-mod"><b>{{weekly_num_evidence}}</b>${weekly_data.num_evidence}</div>
                     <div class="weekly-mod"><b>{{weekly_cursed_possessions}}</b>${weekly_data.cursed_objects.join(', ')}</div>
-                    <div class="weekly-mod"><b>{{weekly_difficulty_settings}}</b><a href="https://zero-network.net/phasmo-cheat-sheet/difficulty-builder/?share=${weekly_data.difficulty_id}" target="_blank">${weekly_data.difficulty_id}</a></div>
+                    <div class="weekly-mod"><b>{{weekly_friendly_ghost}}</b>${weekly_data.friendly_ghost}</div>
                 </div>
                 ${image_str}
             `
 
             document.getElementById("weekly_title").innerText += ` (${getCurrentWeekUTC()})`
             document.getElementById("weekly_info_box").innerHTML = weekly_html
+            document.getElementById("weekly_footer").innerHTML = `<b>{{weekly_difficulty_settings}}</b>: <a href="https://zero-network.net/phasmo-cheat-sheet/difficulty-builder/?share=${weekly_data.difficulty_id}" target="_blank">${weekly_data.difficulty_id}</a>`
 
             resolve("Weekly data loaded")
         })
