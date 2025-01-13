@@ -978,6 +978,7 @@ function send_reset_link(){
 function disconnect_link(reset=false,has_status=false){
     clearInterval(relink_interval)
     clearTimeout(relink_timeout)
+    clearInterval(dlws_ping)
     reconnecting = false
     kill_gracefully = false
     relink_live = false
