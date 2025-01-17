@@ -1397,7 +1397,8 @@
     }
 
     #modifier_sound_type {
-        display: none;
+        font-size: 30px;
+        width: calc(100% - 45px);
     }
 
     .speed_logic_select{
@@ -1613,6 +1614,12 @@
     }
 
     .modifier_sound_select{
+        grid-row: 4;
+        grid-column: 2;
+        padding-top: 50px;
+    }
+
+    .modifier_sound_select img{
         display: none;
     }
 
