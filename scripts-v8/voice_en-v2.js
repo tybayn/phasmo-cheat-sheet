@@ -4,6 +4,7 @@ const ZNLANG = {
         "evidence emf5":["evan ncma 5"],
         "journal":["channel"],
         "sanity":["saturday","insanity","unsanity","sandy"],
+        "hantu":["haunt to","haunt too"],
         "hunt":["hunts","aunt"],
         "ghost ":["go ","goes ","just ","gross "],
         "remove":["removes","removed","or move"],
