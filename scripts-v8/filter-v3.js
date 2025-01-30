@@ -551,13 +551,14 @@ function filter(ignore_link=false){
             }
 
             // Manage evidence classes
-            if(document.getElementById("adaptive_evidence").checked){
-                evidence.forEach(function(item, index){
+            evidence.forEach(function(item, index){
+                if(document.getElementById("adaptive_evidence").checked){
                     if(evi_array.includes(item)){
                         $(evi_objects[index]).addClass("ghost_evidence_found")
                     }
-                })
-            }
+                }
+                $(evi_objects[index]).removeClass("nightmare_highlight")
+            })
         }
 
         // Nightmare Mode
@@ -589,8 +590,8 @@ function filter(ignore_link=false){
             }
 
             // Manage evidence classes
-            if(document.getElementById("adaptive_evidence").checked){
-                evidence.forEach(function(item, index){
+            evidence.forEach(function(item, index){
+                if(document.getElementById("adaptive_evidence").checked){
                     if(evi_array.includes(item)){
                         $(evi_objects[index]).addClass("ghost_evidence_found")
                     }
@@ -603,8 +604,12 @@ function filter(ignore_link=false){
                     ){
                         $(evi_objects[index]).addClass("ghost_evidence_not")
                     }
-                })
-            }
+                }
+
+                if(nm_evidence && item == nm_evidence){
+                    $(evi_objects[index]).addClass("nightmare_highlight")
+                }
+            })
         }
 
         // Insanity
@@ -636,8 +641,9 @@ function filter(ignore_link=false){
             }
 
             // Manage evidence classes
-            if(document.getElementById("adaptive_evidence").checked){
-                evidence.forEach(function(item, index){
+            
+            evidence.forEach(function(item, index){
+                if(document.getElementById("adaptive_evidence").checked){
                     if(evi_array.includes(item)){
                         $(evi_objects[index]).addClass("ghost_evidence_found")
                     }
@@ -650,8 +656,12 @@ function filter(ignore_link=false){
                     ){
                         $(evi_objects[index]).addClass("ghost_evidence_not")
                     }
-                })
-            }
+                }
+
+                if(nm_evidence && item == nm_evidence){
+                    $(evi_objects[index]).addClass("nightmare_highlight")
+                }
+            })
         }
 
         // Apocalypse

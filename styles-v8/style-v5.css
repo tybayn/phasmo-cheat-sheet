@@ -87,6 +87,9 @@ body{
     }
 }
 
+.nightmare_highlight {
+    text-decoration: underline;
+}
 
 @media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
 
