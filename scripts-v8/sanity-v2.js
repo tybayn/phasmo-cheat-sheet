@@ -99,12 +99,15 @@ const hunt_length = {
 var sanity_worker;
 
 function set_sanity_settings(){
+
     toggle_sanity_drain(false, true)
     let dif = document.getElementById("num_evidence").value
     sanity = parseFloat(document.getElementById("cust_starting_sanity").value)
 
-    if (!built_in_diff.hasOwnProperty(dif))
+    if (!built_in_diff.hasOwnProperty(dif)){
+        send_sanity_link(Math.round(sanity),sanity_color())
         return
+    }
 
     let setup = built_in_diff[dif]
 

@@ -1789,6 +1789,7 @@ function loadSettings(){
     setTempo()
     setSoundType()
     updateMapDifficulty(user_settings['num_evidences'])
+    set_sanity_settings()
     showCustom()
     setTimeout(() => {
         flashMode()
@@ -1967,6 +1968,7 @@ function changeMap(elem,map,ignore_link=false){
     state['map'] = elem.id
     setCookie("state",JSON.stringify(state),1)
     updateMapSize(elem.querySelector(".map_size").innerText)
+    send_cur_map_link()
     if(!ignore_link){
         send_state()
     }
