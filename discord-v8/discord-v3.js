@@ -12,7 +12,7 @@ function getLink(){
         document.getElementById("discord_link_date").innerText = `${lang_data['{{discord_link_h2}}']} ${discord_user['last_linked']}`
         $("#discord_link_date").removeClass("hidden")
         $("#discord_instructions").removeClass("hidden")
-        document.getElementById("discord_note").innerText = lang_data['{{discord_link_h9}}']
+        document.getElementById("discord_note").innerHTML = `${lang_data['{{discord_link_h9}}']}<br><br>${lang_data['{{discord_link_p7}}']}`
         document.getElementById("discord_login_button").innerText = lang_data['{{discord_link_b3}}']
         $("#discord_unlink_button").removeClass("hidden")
         document.getElementById("reset").innerHTML = `${lang_data['{{save_and_reset}}']}<div class='reset_note'>(${lang_data['{{right_click_for_more}}']})</div>`
