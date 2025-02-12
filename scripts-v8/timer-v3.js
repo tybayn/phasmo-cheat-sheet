@@ -93,6 +93,8 @@ function updateMapSize(size){
     document.getElementById("second_hunt").innerHTML = zeroPad(map_hunt_lengths[map_difficulty][map_size] % 60,2)
     document.getElementsByClassName('normal_line')[0].style.left = `${(20/map_hunt_lengths[map_difficulty][map_size])*100}%`
     document.getElementsByClassName('hunt_size_label')[0].innerText = `${lang_data['{{map}}']}: ${["S","M","L"][map_size]}, ${lang_data['{{hunt}}']}: ${["L","M","H"][map_difficulty]}`
+    document.getElementById("map_size_info").innerText = `${lang_data['{{map_size}}']}: ${lang_data[["{{small}}","{{medium}}","{{large}}"][map_size]]}`
+    document.getElementById("max_num_lights").innerText = `${lang_data['{{max_lights}}']}: ${["9","8","7"][map_size]}`
     draw_graph()
 }
 

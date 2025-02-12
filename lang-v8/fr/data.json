@@ -25,6 +25,9 @@
     "{{late}}": "Tard",
     "{{early}}": "Tôt",
     "{{very_early}}": "Très tôt",
+    "{{small}}": "Petite",
+    "{{medium}}": "Moyenne",
+    "{{large}}": "Grande",
 
     "{{blood_moon_weather}}": "Météo Lune de sang",
     "{{tools}}": "Outils",
@@ -135,11 +138,15 @@
 
     "{{discord_link}}": "Associer Discord",
     "{{current_event}}": "Événement en cours",
+    "{{current_event_title}}": "Pas d'événement en cours !",
+    "{{current_event_text}}": "Revenez voir à la prochaine mise à jour !",
     "{{guides}}": "Guides",
     "{{verification_warning}}": "Les données portant ce symbole peuvent ne pas être entièrement vérifiées ou n'être que partiellement vérifiées, mais des tests approfondis montrent que ces données sont correctes.",
     "{{map}}": "Carte",
     "{{maps}}": "Cartes",
     "{{to_toggle}}": "pour afficher",
+    "{{map_size}}": "Taille de la carte",
+    "{{max_lights}}": "Lumières allumées max",
     "{{hover_touch}}": "Survoler/toucher pour zoomer",
     "{{show_event_maps}}": "Afficher les événements sur la carte",
     "{{map_images_belong_to}}": "Les images de la carte appartiennent à",
@@ -255,6 +262,7 @@
     "{{discord_link_p6}}": "Sélectionnez l'entité <i>ET</i> indiquez que vous êtes mort par l'entité.",
     "{{discord_link_b1}}": "My Stats Explorer",
     "{{discord_link_h9}}": "Vous avez réussi à associer votre compte Discord ! Pour que vos statistiques soient les plus précises possibles, assurez-vous de sélectionner le bon nombre de preuves et de sélectionner la bonne entité avant de cliquer sur \"Sauvegarder & réinitialiser\".",
+    "{{discord_link_p7}}": "Pour réinitialiser ou ajuster vos stats, veuillez faire une demande sur notre Discord.",
     "{{discord_link_b2}}": "Associer",
     "{{discord_link_b3}}": "Rassocier",
     "{{discord_link_b4}}": "Dissocier"

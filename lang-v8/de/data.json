@@ -25,6 +25,9 @@
     "{{late}}": "Spät",
     "{{early}}": "Früh",
     "{{very_early}}": "Sehr Früh",
+    "{{small}}": "Klein",
+    "{{medium}}": "Mittel",
+    "{{large}}": "Groß",
 
     "{{blood_moon_weather}}": "Blutmond Wetter",
     "{{tools}}": "Werkzeuge",
@@ -135,11 +138,15 @@
 
     "{{discord_link}}": "Discord Link",
     "{{current_event}}": "Aktuelles Ereignis",
+    "{{current_event_title}}": "Momentan kein Event!",
+    "{{current_event_text}}": "Schaut beim nächsten Update nochmal!",
     "{{guides}}": "Handbuch",
     "{{verification_warning}}": "Daten mit diesem Symbol sind möglicherweise nicht vollständig oder nur teilweise verifiziert, aber erweiterte Tests zeigen, dass die Daten korrekt sind.",
     "{{map}}": "Karte",
     "{{maps}}": "Karten",
     "{{to_toggle}}": "zum Umschalten",
+    "{{map_size}}": "Karten Größe",
+    "{{max_lights}}": "Maximale Anzahl Lichte an",
     "{{hover_touch}}": "Bewegen/Berühren zum Zoomen",
     "{{show_event_maps}}": "Karten von Events anzeigen",
     "{{map_images_belong_to}}": "Die Kartenbilder gehören zu:",
@@ -255,6 +262,7 @@
     "{{discord_link_p6}}": "Wähle den wirklichen Geist <i>UND</i> gib an das er dich getötet hat.",
     "{{discord_link_b1}}": "Meine Statistiken",
     "{{discord_link_h9}}": "Du hast dein Discord-Konto erfolgreich verknüpft! Damit deine Statistiken so genau wie möglich sind, stelle sicher, dass du die richtige Anzahl von Beweisen auswählst und den richtigen Geist markierst, bevor du auf „Speichern & Zurücksetzen“ klickst.",
+    "{{discord_link_p7}}": "Um die Statistiken anzupassen oder zurückzusetzen, fragt auf unserem Discord nach.",
     "{{discord_link_b2}}": "Verbinden",
     "{{discord_link_b3}}": "Entfernen",
     "{{discord_link_b4}}": "Aktualisieren"

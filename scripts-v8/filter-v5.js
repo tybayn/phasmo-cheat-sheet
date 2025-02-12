@@ -23,6 +23,8 @@ let markedDead = false;
 let polled = false;
 let filter_locked = false;
 
+let auto_select_timeout = null
+
 let touchStartX = 0
 let touchStartY = 0
 let touchMap = false
@@ -300,7 +302,7 @@ function guess(elem,ignore_link=false,internal=false){
         for (const [key, value] of Object.entries(state["ghosts"])){ 
             if(value == 3){
                 state['ghosts'][key] = 1
-                $(document.getElementById(key)).removeClass(["guessed"])
+                $(document.getElementById(key)).removeClass(["guessed","preguessed"])
             }
         }
     }
@@ -311,7 +313,7 @@ function guess(elem,ignore_link=false,internal=false){
         send_guess("")
     }
     else{
-        $(elem).removeClass(["selected","died","permhidden"])
+        $(elem).removeClass(["selected","died","permhidden","preguessed"])
         $(elem).addClass("guessed");
         state["ghosts"][elem.id] = 3;
         send_guess(elem.id)
@@ -489,6 +491,7 @@ function filter(ignore_link=false){
     var mimic_nm_evi = ""
 
     for (var i = 0; i < ghosts.length; i++){
+        $(ghosts[i]).removeClass("preguessed")
         var keep = true;
         var loskeep = true;
         var marked_not = $(ghosts[i]).hasClass("faded") || $(ghosts[i]).hasClass("permhidden")
@@ -1052,7 +1055,11 @@ function filter(ignore_link=false){
     }
 
     prioritySort()
-    autoSelect()
+    clearTimeout(auto_select_timeout)
+    autoPreSelect()
+    auto_select_timeout = setTimeout(() => {
+        autoSelect()
+    }, 1005)
     setCookie("state",JSON.stringify(state),1)
     if (hasLink && !ignore_link){send_state()}
     if (hasDLLink){send_evidence_link(); send_ghosts_link();}
@@ -1108,6 +1115,46 @@ function all_not_los(){
     }
     
     return true
+}
+
+function autoPreSelect(){
+
+    if(Object.keys(discord_user).length > 0 || hasDLLink){
+        var cur_selected = []
+        var has_selected = false
+        var selected = "";
+        var died = "";
+        var guessed = "";
+        var ghosts = document.getElementsByClassName("ghost_card")
+        for (var i = 0; i < ghosts.length; i++){
+            if($(ghosts[i]).hasClass("selected")){
+                has_selected = true
+                selected = ghosts[i].id;
+            }
+            else if($(ghosts[i]).hasClass("died")){
+                has_selected = true
+                died = ghosts[i].id;
+            }
+            else if($(ghosts[i]).hasClass("guessed")){
+                has_selected = true
+                guessed = ghosts[i].id;
+            }
+            else if(
+                !$(ghosts[i]).hasClass("faded") && 
+                !$(ghosts[i]).hasClass("hidden") && 
+                !$(ghosts[i]).hasClass("permhidden")
+            ){
+                cur_selected.push(i)
+            }
+        }
+
+        if (!has_selected && cur_selected.length == 1){
+            if(Object.keys(discord_user).length > 0){
+                $(ghosts[cur_selected[0]]).addClass("preguessed")
+            }
+        }
+    }
+    resetResetButton()
 }
 
 function autoSelect(){

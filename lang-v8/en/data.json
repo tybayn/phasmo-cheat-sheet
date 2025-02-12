@@ -25,6 +25,9 @@
     "{{late}}": "Late",
     "{{early}}": "Early",
     "{{very_early}}": "Very Early",
+    "{{small}}": "Small",
+    "{{medium}}": "Medium",
+    "{{large}}": "Large",
 
     "{{blood_moon_weather}}": "Blood Moon Weather",
     "{{tools}}": "Tools",
@@ -135,11 +138,15 @@
 
     "{{discord_link}}": "Discord Link",
     "{{current_event}}": "Current Event",
+    "{{current_event_title}}": "No current events!",
+    "{{current_event_text}}": "Check back on the next update!",
     "{{guides}}": "Guides",
     "{{verification_warning}}": "Data with this symbol may not be fully verified or only partially verified, but extended testing shows the data to be correct.",
     "{{map}}": "Map",
     "{{maps}}": "Maps",
     "{{to_toggle}}": "to toggle",
+    "{{map_size}}": "Map Size",
+    "{{max_lights}}": "Max Lights On",
     "{{hover_touch}}": "Hover/Touch to zoom",
     "{{show_event_maps}}": "Show event maps",
     "{{map_images_belong_to}}": "Map images belong to",
@@ -255,6 +262,7 @@
     "{{discord_link_p6}}": "Select the actual ghost <i>AND</i> indicate that the ghost killed you.",
     "{{discord_link_b1}}": "My Stats Explorer",
     "{{discord_link_h9}}": "You have successfully linked your Discord account! In order for your stats to be most accurate, be sure to select the correct number of evidences and mark the correct ghost before hitting 'Save & Reset'",
+    "{{discord_link_p7}}": "To reset or adjust your stats, please make a request on our Discord.",
     "{{discord_link_b2}}": "Link",
     "{{discord_link_b3}}": "Relink",
     "{{discord_link_b4}}": "Unlink"
