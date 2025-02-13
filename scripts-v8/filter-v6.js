@@ -24,6 +24,7 @@ let polled = false;
 let filter_locked = false;
 
 let auto_select_timeout = null
+let last_guessed = null
 
 let touchStartX = 0
 let touchStartY = 0
@@ -313,6 +314,8 @@ function guess(elem,ignore_link=false,internal=false){
         send_guess("")
     }
     else{
+        clearTimeout(auto_select_timeout)
+        last_guessed = null
         $(elem).removeClass(["selected","died","permhidden","preguessed"])
         $(elem).addClass("guessed");
         state["ghosts"][elem.id] = 3;
@@ -403,6 +406,10 @@ function filter(ignore_link=false){
     }
     state["sanity"] = {"Late":0,"Average":0,"Early":0,"VeryEarly":0}
     state["los"] = -1
+
+    if (document.getElementsByClassName("guessed").length > 0 && last_guessed == null){
+        last_guessed = document.getElementsByClassName("guessed")[0].id
+    }
 
     // Get values of checkboxes
     var base_speed = 1.7;
@@ -1122,9 +1129,6 @@ function autoPreSelect(){
     if(Object.keys(discord_user).length > 0 || hasDLLink){
         var cur_selected = []
         var has_selected = false
-        var selected = "";
-        var died = "";
-        var guessed = "";
         var ghosts = document.getElementsByClassName("ghost_card")
         for (var i = 0; i < ghosts.length; i++){
             if($(ghosts[i]).hasClass("selected")){
@@ -1148,9 +1152,12 @@ function autoPreSelect(){
             }
         }
 
-        if (!has_selected && cur_selected.length == 1){
+        if (!has_selected && (cur_selected.length == 1 || last_guessed != null)){
             if(Object.keys(discord_user).length > 0){
-                $(ghosts[cur_selected[0]]).addClass("preguessed")
+                if (last_guessed != null)
+                    $(ghosts[last_guessed]).addClass("preguessed")
+                else
+                    $(ghosts[cur_selected[0]]).addClass("preguessed")
             }
         }
     }
@@ -1158,7 +1165,6 @@ function autoPreSelect(){
 }
 
 function autoSelect(){
-
     if(Object.keys(discord_user).length > 0 || hasDLLink){
         var cur_selected = []
         var has_selected = false
@@ -1198,7 +1204,11 @@ function autoSelect(){
             }
         }
         else{
-            if (selected != ""){
+            if (last_guessed != null && !$(ghosts[last_guessed]).hasClass("hidden")){
+                send_ghost_link(last_guessed,1)
+                guess(ghosts[last_guessed],internal=true)
+            }
+            else if (selected != ""){
                 send_ghost_link(selected,2)
             }
             else if(died != ""){
@@ -1211,6 +1221,8 @@ function autoSelect(){
                 send_ghost_link("",0)
             }
         }
+
+        last_guessed = null
 
         setCookie("state",JSON.stringify(state),1)
     }
