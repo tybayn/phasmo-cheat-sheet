@@ -971,6 +971,7 @@ function send_reset_link(){
         send_timer_link("COOLDOWN_VAL","0:00")
         send_timer_link("HUNT_VAL","0:00")
         send_empty_data_link()
+        dlws.send('{"action":"REQUESTRESET"}')
         dlws.send('{"action":"UNLINK"}')
     }
 }
