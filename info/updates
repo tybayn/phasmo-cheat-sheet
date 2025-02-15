@@ -1,4 +1,6 @@
 {
-    "version":"4.0.0",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.0.0.msi"
+    "version":"4.0.1",
+    "date":"2025-02-15",
+    "details": "- Added new customizable checklist overlay\n- New fixed hotkeys for selecting ('+') / fading ('-') the currently selected ghost in the ghost overlay\n- Support for up ti 3 modifier keys in hotkeys (Example: 'ctrl+shift+alt+t')\n- Added this change log\n\nBug Fixes:\n- Fixed issue with software crashing upon first install",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.0.1.msi"
 }
