@@ -1129,6 +1129,8 @@ function autoPreSelect(){
     if(Object.keys(discord_user).length > 0 || hasDLLink){
         var cur_selected = []
         var has_selected = false
+        var selected = "";
+        var died = "";
         var ghosts = document.getElementsByClassName("ghost_card")
         for (var i = 0; i < ghosts.length; i++){
             if($(ghosts[i]).hasClass("selected")){
@@ -1152,13 +1154,22 @@ function autoPreSelect(){
             }
         }
 
-        if (!has_selected && (cur_selected.length == 1 || last_guessed != null)){
+        if (cur_selected.length == 1 || last_guessed != null){
             if(Object.keys(discord_user).length > 0){
                 if (last_guessed != null)
                     $(ghosts[last_guessed]).addClass("preguessed")
                 else
                     $(ghosts[cur_selected[0]]).addClass("preguessed")
             }
+        }
+        if (selected != ""){
+            send_ghost_link(selected,2)
+        }
+        else if(died != ""){
+            send_ghost_link(died,-1)
+        }
+        else if(last_guessed == null){
+            send_ghost_link("",0)
         }
     }
     resetResetButton()

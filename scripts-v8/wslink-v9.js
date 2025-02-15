@@ -649,6 +649,14 @@ function link_link(reconnect = false){
                 if (incoming_state['action'].toUpperCase() == "GHOSTDIED"){
                     died(document.getElementById(incoming_state['ghost']))
                 }
+                if (incoming_state['action'].toUpperCase() == "GHOSTCYCLE"){
+                    if($(document.getElementById(incoming_state['ghost'])).hasClass(["selected","died"])){
+                        died(document.getElementById(incoming_state['ghost']))
+                    }
+                    else{
+                        select(document.getElementById(incoming_state['ghost']))
+                    }
+                }
                 if (incoming_state['action'].toUpperCase() == "TIMER"){
                     let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
                     toggle_timer(force_start)
