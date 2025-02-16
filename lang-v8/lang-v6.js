@@ -4,7 +4,7 @@ var lang_data = null
 // ----------------------------------
 
 const lang_currency = [
-    "de", "fr"
+    "de", "fr", "pt-br"
 ]
 
 const lang_menu_widths = {
@@ -35,6 +35,15 @@ const lang_menu_widths = {
         "menu_height":"620px",
         "menu_height_custom":"675px"
     },
+    "pt-br":{
+        "left":"230px",
+        "width":"209px",
+        "maps":"calc(100% - 299px)",
+        "menu_bottom":"-585px",
+        "menu_bottom_custom":"-640px",
+        "menu_height":"620px",
+        "menu_height_custom":"675px"
+    }
 }
 
 // ----------------------------------
@@ -116,7 +125,7 @@ function load_translation(){
         if(!lang){
             lang = 'en'
         }
-        fetch(`lang-v8/${lang.split('-')[0]}/data.json`)
+        fetch(`lang-v8/${lang}/data.json`)
         .then(data => data.json())
         .then(data => {
             lang_data = data
@@ -162,7 +171,7 @@ function convert_currency(content){
 function translate(to_lang){
     return new Promise((resolve, reject) => {
         let body = document.body.innerHTML
-        fetch(`lang-v8/${to_lang.split('-')[0]}/data.json`)
+        fetch(`lang-v8/${to_lang}/data.json`)
         .then(data => data.json())
         .then(data => {
             Object.entries(data).forEach(([key,value]) => {
@@ -186,7 +195,7 @@ function translate(to_lang){
 function translate_wiki(to_lang){
     return new Promise((resolve, reject) => {
         let body = document.body.innerHTML
-        fetch(`lang-v8/${to_lang.split('-')[0]}/wiki.json`)
+        fetch(`lang-v8/${to_lang}/wiki.json`)
         .then(data => data.json())
         .then(data => {
             Object.entries(data).forEach(([key,value]) => {
