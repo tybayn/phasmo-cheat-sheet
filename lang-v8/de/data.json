@@ -119,6 +119,7 @@
     "{{could_not_connect}}": "Konnte keine Verbindung herstellen!",
     "{{not_connected}}": "Nicht verbunden",
     "{{connected}}": "Verbunden",
+    "{{timeout}}": "Zeitüberschreitung (1 Benutzer im Raum)",
     "{{not_linked}}": "Nicht verknüpft",
     "{{awaiting_link}}": "Warten auf Desktop-Link",
     "{{linked}}": "Verknüpft",

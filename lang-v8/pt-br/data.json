@@ -119,6 +119,7 @@
     "{{could_not_connect}}": "Não foi possível conectar!",
     "{{not_connected}}": "Não conectado",
     "{{connected}}": "Conectado",
+    "{{timeout}}": "Tempo esgotado (1 usuário na sala)",
     "{{not_linked}}": "Não linkado",
     "{{awaiting_link}}": "Aguardando Desktop Link",
     "{{linked}}": "Linkado",

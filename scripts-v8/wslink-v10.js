@@ -287,6 +287,13 @@ function link_room(){
                     document.getElementById("room_id_note").innerText = incoming_state['message']
                     broadcast(incoming_state['message'])
                 }
+                if (incoming_state['action'].toUpperCase() == "UNLINK"){
+                    document.getElementById("room_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{timeout}}']}`
+                    document.getElementById("settings_status").className = "pending"
+                    document.getElementById("room_id").value = ""
+                    disconnect_room(false, true)
+                    return
+                }
                 if (incoming_state['action'].toUpperCase() == "GUESS"){
                     try { document.getElementById(`guess_pos_${incoming_state['pos']}`).remove()} catch (error) {} 
                     if(incoming_state['ghost']){

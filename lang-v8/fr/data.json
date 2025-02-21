@@ -119,6 +119,7 @@
     "{{could_not_connect}}": "Impossible de se connecter !",
     "{{not_connected}}": "Déconnecté",
     "{{connected}}": "Connecté",
+    "{{timeout}}": "Délai expiré (1 utilisateur dans la pièce)",
     "{{not_linked}}": "Non lié",
     "{{awaiting_link}}": "Attente de liaison avec l'application de bureau",
     "{{linked}}": "Lié",
