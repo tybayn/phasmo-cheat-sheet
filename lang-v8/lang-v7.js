@@ -36,13 +36,13 @@ const lang_menu_widths = {
         "menu_height_custom":"675px"
     },
     "pt-br":{
-        "left":"230px",
-        "width":"209px",
-        "maps":"calc(100% - 299px)",
-        "menu_bottom":"-585px",
-        "menu_bottom_custom":"-640px",
-        "menu_height":"620px",
-        "menu_height_custom":"675px"
+        "left":"196px",
+        "width":"168px",
+        "maps":"calc(100% - 265px)",
+        "menu_bottom":"-625px",
+        "menu_bottom_custom":"-680px",
+        "menu_height":"660px",
+        "menu_height_custom":"715px"
     }
 }
 
