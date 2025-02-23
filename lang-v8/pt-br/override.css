@@ -17,6 +17,10 @@
         font-size: 17px !important;
     }
 
+    .menu{
+        grid-template-rows: 30px calc(100dvh - 215px) 25px 33px 70px 20px 20px !important;
+    }
+
     .tricheck{
         font-size: 16px !important;
     }
