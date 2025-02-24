@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'ZNPrimary';
+    src: url('../../styles-v8/fonts/chosungs.ttf');
+}
+
+@font-face {
+    font-family: 'ZNSecondary';
+    src: url('../../styles-v8/fonts/icehimchan.ttf');
+}
+
+/* Desktop Adjustments */
+@media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
+
+    .data{
+        grid-template-columns: 205px auto !important;
+    }
+
+    .evidence_title, .speed_title, .hunt_sanity_title, .timer_title, .modifier_title{
+        font-size: 22px !important;
+    }
+
+    .modifier_smudge_title{
+        font-size: 14px !important;
+    }
+
+    .ghost_name{
+        font-size: 28px !important;
+        font-weight: lighter !important;
+    }
+
+    #settings_box, #links_box, #discord_link_box, #event_box, #wiki_box {
+        width: 193px;
+    }
+
+    #maps_box{
+        min-width: 581px !important;
+    }
+}
+
+/* Mobile Adjustments */
+@media screen and (pointer: coarse) and (max-device-width: 600px) {
+
+    .evidence-row{
+        width: 33% !important;
+    }
+
+    .speed .tricheck {
+        width: 20% !important;
+    }
+    .speed .tricheck:last-child {
+        width: 40% !important;
+    }
+
+    .menu{
+        height: 670px;
+    }
+
+    .evidence_title, .speed_title, .hunt_sanity_title, .timer_title, .modifier_title{
+        font-size: 36px !important;
+    }
+
+    #reset {
+        font-size: 38px !important;
+    }
+}
