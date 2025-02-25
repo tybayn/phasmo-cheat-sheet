@@ -1,6 +1,6 @@
 {
-    "version":"4.0.2",
-    "date":"2025-02-20",
-    "details": "- Made overlays not appear in alt-tab when in non-stream friendly mode. Turning on stream friendly mode will show these in alt-tab.\n\nBug Fixes:\n- Exiting stream safe mode will now correctly handle transparency",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.0.2.msi"
+    "version":"4.0.3",
+    "date":"2025-02-25",
+    "details": "\n\nBug Fixes:\n- Transparent overlays can now be moved.",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.0.3.msi"
 }
