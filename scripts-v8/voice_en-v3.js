@@ -59,7 +59,7 @@ const ZNLANG = {
         "revenant":[],
         "shade":[],
         "demon":[],
-        "yurei":["your a","your ray","your way","you're a","erie","array","urie","trey","ouray","theory"],
+        "yurei":["your a","your ray","your way","you're a","erie","array","urie","trey","ouray","theory","urine"],
         "oni":["only"],
         "yokai":[],
         "hantu":["on to","onto","on 2","haunt 2","haunt to","haunt two","honda"],
