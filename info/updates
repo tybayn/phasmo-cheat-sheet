@@ -1,6 +1,6 @@
 {
-    "version":"4.0.3",
-    "date":"2025-02-25",
-    "details": "\n\nBug Fixes:\n- Transparent overlays can now be moved.",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.0.3.msi"
+    "version":"4.0.4",
+    "date":"2025-02-27",
+    "details": "- Reverted change that removed overlays from alt-tab. This will be added again after more testing. \n\nBug Fixes:\n- Overlays will no longer disappear on minimize.",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.0.4.msi"
 }
