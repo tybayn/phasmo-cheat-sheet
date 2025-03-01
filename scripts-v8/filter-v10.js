@@ -1215,7 +1215,7 @@ function autoSelect(){
             }
         }
         else{
-            if (last_guessed != null && !$(ghosts[last_guessed]).hasClass("hidden")){
+            if (last_guessed != null && !$(ghosts[last_guessed]).hasClass("hidden") && selected == ""){
                 send_ghost_link(last_guessed,1)
                 guess(ghosts[last_guessed],internal=true)
             }
