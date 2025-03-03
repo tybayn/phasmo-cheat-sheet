@@ -5,6 +5,46 @@
 
 <div id="wiki-ghost-data" class="wiki_title accordian" onclick="accordian(this)">{{wiki_additional_ghost_data}}</div>
 <div class="wiki_details" style="height: 0px;">
+    <div id="wiki-interaction-range" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> {{wiki_interaction_range_title}}</div><img class="wiki-warn" src="imgs/warn.png" alt="{{wiki_interaction_alt}}"></div>
+    <div class="wiki_details" style="height: 0px;">
+        <div class="wiki-disclaimer">
+            <img src="imgs/warn.png">
+            <i>{{wiki_interaction_warning}}</i>
+        </div>
+        <hr>
+        <div class="text">
+            {{wiki_interaction_p1}}<br>
+            <br>
+            {{wiki_interaction_p2}}
+        </div>
+        <hr>
+        <div class="text">
+            <b class="header">{{wiki_interaction_h1}}</b>
+            <b>{{wiki_interaction_h2}}:</b><br>
+            {{wiki_interaction_p3}}<br>
+            <br>
+            <b>{{wiki_interaction_h3}}:</b><br>
+            {{wiki_interaction_p4}}
+        </div>
+        <img loading="lazy" class="zoomable" src="https://i.imgur.com/bPdfLJf.png" onclick="zoomImage(this)">
+        <hr>
+        <div class="text">
+            <b class="header">{{wiki_interaction_h4}}</b>
+            <b>{{wiki_interaction_h5}}:</b><br>
+            {{wiki_interaction_p5}}<br>
+            <br>
+            <b>{{wiki_interaction_h6}}:</b><br>
+            {{wiki_interaction_p6}}
+        </div>
+        <img loading="lazy" class="zoomable" src="https://i.imgur.com/YuANIjB.png" onclick="zoomImage(this)">
+        <hr>
+        <div class="text">
+            <i>{{wiki_interaction_disclaimer}}</i><br>
+            <br>
+            <i>{{wiki_interaction_research}}</i> 
+        </div>
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
+    </div>
     <div id="wiki-obake-blinking" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> {{wiki_obake_blinking_title}}</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">
