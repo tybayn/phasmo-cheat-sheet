@@ -991,7 +991,7 @@
     <script src="scripts-v8/zn-v4.js"></script>
     <script src="events-v8/events-v1.js"></script>
     <script src="models-v8/models-v1.js"></script>
-    <script src="feed-v8/feed-v1.js"></script>
+    <script src="feed-v8/feed-v2.js"></script>
     <script src="scripts-v8/voice_en-v3.js"></script>
     <script src="scripts-v8/voice_recognition-v1.js"></script>
     <script src="scripts-v8/sparkles-v1.js"></script>
@@ -1002,11 +1002,11 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v8/wiki-v3.html",() => {
+                $("#wiki-body").load("wiki-v8/wiki-v4.html",() => {
                     resolve("Ghost data loaded")
                 })
             })
-            Promise.all([load_wiki,checkLink()])
+            Promise.all([load_wiki,load_feed,checkLink()])
             .then(x => {
                 loadAllAndConnect()
                 if(getCookie("voice_recognition_on")){

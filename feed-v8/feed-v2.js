@@ -1,7 +1,7 @@
 let feed_recent_date = null
 let feed_interactions = {}
 
-$(window).on('load', function() {
+let load_feed = new Promise((resolve, reject) => {
     fetch("https://zero-network.net/phasmophobia/data/feed.json", {signal: AbortSignal.timeout(6000)})
     .then(data => data.json())
     .then(data => {
@@ -48,9 +48,11 @@ $(window).on('load', function() {
             `
             document.getElementById('feed_info_block').innerHTML += feed_html
         }
+
+        resolve("Feed loaded")
     })
     .catch(error => {
-        // Om nom nom
+        reject("Feed failed to load")
     })
 })
 
