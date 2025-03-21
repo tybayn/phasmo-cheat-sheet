@@ -21,6 +21,7 @@ const levenshtein_distance = (str1 = '', str2 = '') => {
  };
 
  let running_log = []
+ let listen_next = false
 
  $.fn.isInViewport = function () {
     let elementTop = $(this).offset().top;
@@ -99,6 +100,21 @@ function parse_speech(vtext){
     }
 
     running_log[cur_idx]["Cleaned"] = vtext
+
+    if(voice_prefix && (vtext.startsWith("domo") || vtext.startsWith("hey domo") || vtext.startsWith("okay domo"))){
+        vtext = vtext.replace("okay domo","").replace("hey domo","").replace("domo").trim()
+        if (vtext == ""){
+            console.log("Domo awaiting command!")
+            $("#domovoi-img").attr("src",user_settings['domo_side'] == 1 ? "imgs/domovoi-attention-flip.png" : "imgs/domovoi-attention.png")
+            listen_next = true
+            return
+        }
+    }
+    else if(voice_prefix && !listen_next){
+        return
+    }
+
+    listen_next = false
 
     if(vtext.startsWith('ghost speed')){
         document.getElementById("voice_recognition_status").className = null

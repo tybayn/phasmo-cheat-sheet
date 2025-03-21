@@ -393,7 +393,7 @@
                 <div class="modifier_option less_pad">
                     <input type="checkbox" id="compact_cards" name="compact_cards" class="settings_check" onclick="toggleCompact();saveSettings();"><label for="compact_cards">{{compact_view}}</label>
                 </div>
-                <div class="modifier_note">{{compact_disclaimer}}</div>
+                <div class="modifier_note">{{compact_disclaimer}}</div>                
                 <hr>
                 <div class="modifier_volume yfont white">{{graphics}}</div> 
                 <div class="modifier_option less_pad">
@@ -425,6 +425,9 @@
                         <button id="stop_voice" class="journal_link_button" onclick="stop_voice()" disabled>Disable</button>
                     </div>
                 </div>
+                <div class="modifier_option vcs">
+                    <input type="checkbox" id="voice_prefix" name="voice_prefix" class="settings_check" onclick="toggleVoicePrefix();saveSettings();"><label for="disable_particles">Require "Hey Domo"</label>
+                </div> 
                 <div id="voice_recognition_note" class="vcs modifier_note"><div onclick="showVoiceInfo(event)" class="link_hover">Commands and Info &#187;</div></div>
                 <hr class="vcs">
                 <div class="modifier_volume yfont white">{{shared_journal_link}}</div>
@@ -985,7 +988,7 @@
     <script src="scripts-v8/timer-v3.js"></script>
     <script src="discord-v8/discord-v3.js"></script>
     <script src="wiki-v8/wiki-v1.js"></script>
-    <script src="scripts-v8/filter-v10.js"></script>
+    <script src="scripts-v8/filter-v11.js"></script>
     <script src="scripts-v8/sanity-v2.js"></script>
     <script src="scripts-v8/wslink-v10.js"></script>
     <script src="scripts-v8/zn-v4.js"></script>
@@ -993,7 +996,7 @@
     <script src="models-v8/models-v1.js"></script>
     <script src="feed-v8/feed-v2.js"></script>
     <script src="scripts-v8/voice_en-v3.js"></script>
-    <script src="scripts-v8/voice_recognition-v1.js"></script>
+    <script src="scripts-v8/voice_recognition-v2.js"></script>
     <script src="scripts-v8/sparkles-v1.js"></script>
     <script>
         document.onclick = hideResetMenu;

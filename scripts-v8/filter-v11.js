@@ -13,7 +13,7 @@ let prev_monkey_state = 0
 let weekly_data = {}
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood","prev_monkey_state":0}
-var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"disable_particles":0,"show_event_maps":0}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"disable_particles":0,"show_event_maps":0,"voice_prefix":0}
 
 let znid = getCookie("znid")
 
@@ -22,6 +22,7 @@ let hasDLLink = false;
 let markedDead = false;
 let polled = false;
 let filter_locked = false;
+let voice_prefix = false;
 
 let auto_select_timeout = null
 let last_guessed = null
@@ -1746,6 +1747,7 @@ function saveSettings(reset = false){
     user_settings['map'] = $(".selected_map")[0] ? $(".selected_map")[0].id : 'tanglewood'
     user_settings['theme'] = $("#theme").val();
     user_settings['blood_moon'] = $("#blood-moon-icon").hasClass("blood-moon-active") ? 1 : 0
+    user_settings['voice_prefix'] = document.getElementById("voice_prefix").checked ? 1 : 0
 
     setCookie("settings",JSON.stringify(user_settings),30)
 }
@@ -1756,7 +1758,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"disable_particles":0,"show_event_maps":0}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"disable_particles":0,"show_event_maps":0,"voice_prefix":0}
     }
 
     user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
@@ -1809,6 +1811,7 @@ function loadSettings(){
     document.getElementById("priority_sort").checked = load_default('priority_sort',0) == 1;
     document.getElementById("disable_particles").checked = load_default('disable_particles',0) == 1;
     document.getElementById("map_event_check_box").checked = load_default('show_event_maps',0) == 1;
+    document.getElementById("voice_prefix").checked = load_default('voice_prefix',0) == 1;
 
     // Fix for depricated
     user_settings['map'] = user_settings['map'] == "6 Tanglewood Drive" ? "tanglewood" : user_settings['map']
@@ -1855,6 +1858,7 @@ function loadSettings(){
     mute("countdown")
     mute_broadcast()
     toggleCountup()
+    toggleVoicePrefix()
     adjustOffset(0)
     setTempo()
     setSoundType()
@@ -1869,7 +1873,7 @@ function loadSettings(){
 
 function resetSettings(){
     console.log("Resetting")
-    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"disable_particles":0,"show_event_maps":0}
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"disable_particles":0,"show_event_maps":0,"voice_prefix":0}
     document.getElementById("modifier_volume").value = load_default('volume',50)
     document.getElementById("mute_broadcast").checked = load_default('mute_broadcast',0) == 1 
     document.getElementById("mute_timer_toggle").checked = load_default('mute_timer_toggle',0) == 1 
@@ -1893,6 +1897,7 @@ function resetSettings(){
     document.getElementById("bpm_type").checked = load_default('bpm_type',0) == 1
     document.getElementById("disable_particles").checked = load_default('disable_particles',0) == 1
     document.getElementById("map_event_check_box").checked = load_default('show_event_maps',0) == 1;
+    document.getElementById("voice_prefix").checked = load_default('voice_prefix',0) == 1;
     document.getElementById("tanglewood").click()
     document.getElementById("theme").value = user_settings['theme']
     if (user_settings['blood_moon']){
@@ -2128,6 +2133,10 @@ function toggleCompact(){
             $(".ghost_clear").removeClass(["ghost_clear_compact"])
         }
     }
+}
+
+function toggleVoicePrefix(){
+    voice_prefix = document.getElementById("voice_prefix").checked
 }
 
 function showResetMenu(event){
