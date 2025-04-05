@@ -1037,7 +1037,8 @@ if (("webkitSpeechRecognition" in window || "speechRecognition" in window) && na
   
     speechRecognition.onend = () => {
         if(!stop_listen){
-            speechRecognition.start(auto=true);
+            let auto = true
+            speechRecognition.start();
         }
     }
 
