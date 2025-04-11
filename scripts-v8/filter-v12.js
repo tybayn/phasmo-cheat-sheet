@@ -1095,6 +1095,10 @@ function prioritySort(){
             return Object.keys(all_ghosts).indexOf(a.id) - Object.keys(all_ghosts).indexOf(b.id)
         }).forEach(gcard => sortParentElement.appendChild(gcard))
     }
+
+    let spacer = document.getElementById("body-spacer")
+    if (spacer)
+        sortParentElement.appendChild(spacer)
 }
 
 function all_los(){

@@ -4,6 +4,7 @@ const themes = {
     "Black & White": "theme-black-white",
     "Blood Moon": "theme-blood-moon-particle",
     "Coral": "theme-coral",
+    "Cozy": "theme-cozy",
     "Dusk": "theme-dusk",
     "Frost": "theme-frost",
     "Halloween": "theme-halloween",
@@ -61,6 +62,12 @@ function changeTheme(name = null){
 
     clearInterval(bloodMoonInterval)
     clearInterval(snowInterval)
+    cg = document.getElementById("candle-group")
+    if(cg) cg.remove()
+    sl = document.getElementById("string-lights")
+    if(sl) sl.remove()
+    sd = document.getElementById("body-spacer")
+    if(sd) sd.remove()
 
     if(themes[theme_name].endsWith("-animated")){
 
@@ -91,6 +98,14 @@ function changeTheme(name = null){
             snowInterval = setInterval(createSnowParticle, 200);
         }
         document.body.style.backgroundImage = "radial-gradient(circle, rgba(0,0,0,0.75), rgba(0,0,0,1)), url('https://zero-network.net/phasmophobia/static/imgs/background.jpg')"
+    }
+    else if(themes[theme_name] == "theme-cozy"){
+        if(!document.getElementById("disable_particles").checked){
+            createCozyLights()
+            createCandles()
+            createGhostSpacer()
+        }
+        document.body.style.backgroundImage = "radial-gradient(circle, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://zero-network.net/phasmophobia/static/imgs/background-cozy.png')"
     }
     else{
         document.body.style.backgroundImage = "radial-gradient(circle, rgba(0,0,0,0.75), rgba(0,0,0,1)), url('https://zero-network.net/phasmophobia/static/imgs/background.jpg')"
@@ -176,6 +191,66 @@ function wrap(div, light_colors, top=true, right=true, bottom=true, left=true, s
             div.appendChild(light);
             light_color = (light_color + 1) % light_colors.length
         }
+}
+
+function createGhostSpacer(height=125){
+    ghost_container = document.getElementById('cards')
+    const spacerdiv = document.createElement('div')  
+    spacerdiv.id = "body-spacer"
+    spacerdiv.style.height = `${height}px`
+    ghost_container.appendChild(spacerdiv);
+}
+
+function createCandles(){
+    particleContainer = document.getElementById('particle-container')
+    menu_width = parseInt(lang_menu_widths[lang].width)
+    const candlediv = document.createElement('div')   
+    candlediv.innerHTML = `
+        <div class="holder" style="bottom: 0px; left: 20px;">
+            <div class="candle">
+                <div class="blinking-glow"></div>
+                <div class="thread"></div>
+                <div class="glow"></div>
+                <div class="flame"></div>
+            </div>
+        </div>
+        <div class="holder" style="bottom: -10px; left: 80px;">
+            <div class="candle">
+                <div class="blinking-glow"></div>
+                <div class="thread"></div>
+                <div class="glow"></div>
+                <div class="flame"></div>
+            </div>
+        </div>
+        <div class="holder" style="bottom: -30px; left: 50px;">
+            <div class="candle">
+                <div class="blinking-glow"></div>
+                <div class="thread"></div>
+                <div class="glow"></div>
+                <div class="flame"></div>
+            </div>
+        </div>
+    `
+    candlediv.id = "candle-group"
+    candlediv.style.left = `${menu_width}px`
+    particleContainer.appendChild(candlediv);
+}
+
+function createCozyLights(){
+    particleContainer = document.getElementById('particle-container')
+    menu_width = parseInt(lang_menu_widths[lang].width)
+    const lightdiv = document.createElement('div')   
+    lightdiv.innerHTML = `
+        <div class="light" style="--i:0;"></div>
+        <div class="light" style="--i:1;"></div>
+        <div class="light" style="--i:2;"></div>
+        <div class="light" style="--i:3;"></div>
+        <div class="light" style="--i:4;"></div>
+        <div class="light" style="--i:5;"></div>
+    `
+    lightdiv.id = "string-lights"
+    lightdiv.classList.add("string-lights")
+    particleContainer.appendChild(lightdiv);
 }
 
 function createBMParticle() {
