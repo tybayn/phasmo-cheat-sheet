@@ -1,6 +1,6 @@
 {
-    "version":"4.1.1",
-    "date":"2025-03-16",
-    "details": "- Completely rewrote hotkey handler. \n\nBug Fixes:\n- Using the Desktop Link will no longer cause lag while playing the game (hopefully)\n- Corrected issue with map overlay removing the cursor from the screen\n- Fixed some of the states when setting hotkeys\n- Fixed issue with software blocking alt commands when in focus",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.1.1.msi"
+    "version":"4.1.2",
+    "date":"2025-04-10",
+    "details": "- BPM Label will now turn red when blood moon mode is on as an indicator when evidence is hidden. \n\nBug Fixes:\n- None",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.1.2.msi"
 }
