@@ -748,6 +748,34 @@ function parse_speech(vtext){
         running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
+    else if(vtext.startsWith('set forest minion')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized forest minion command")
+        running_log[cur_idx]["Type"] = "set forest minion"
+        console.log(`Heard '${vtext}'`)
+        domovoi_msg += "setting forest minion..."
+
+        toggleForestMinion(true, false)
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('set not forest minion') || vtext.startsWith('remove forest minion')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized forest minioncommand")
+        running_log[cur_idx]["Type"] = "remove forest minion"
+        console.log(`Heard '${vtext}'`)
+        domovoi_msg += "removing forest minion..."
+
+        toggleForestMinion(false, true)
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
     else if(vtext.startsWith('show maps') || vtext.startsWith('show map')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"

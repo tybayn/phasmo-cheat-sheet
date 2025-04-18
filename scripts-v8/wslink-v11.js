@@ -511,6 +511,15 @@ function link_room(){
                     }
                 }
 
+                if(incoming_state.hasOwnProperty("forest_minion")){
+                    if(incoming_state["forest_minion"]){
+                        toggleForestMinion(true,false,true)
+                    }
+                    else{
+                        toggleForestMinion(false,true,true)
+                    }
+                }
+
                 if(incoming_state.hasOwnProperty("blood_moon")){
                     if(incoming_state["blood_moon"]){
                         toggleBloodMoon(true,false,true)
@@ -699,6 +708,7 @@ function link_link(reconnect = false){
                     send_timer_link("HUNT_VAL","0:00")
                     send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
                     send_blood_moon_link($("#blood-moon-icon").hasClass("blood-moon-active"))
+                    send_forest_minion_link($("#forest-minion-icon").hasClass("forest-minion-active"))
                     filter()
                     await_dlws_pong = false
                     dlws_ping = setInterval(function(){
@@ -736,7 +746,20 @@ function link_link(reconnect = false){
                     }
                 }
                 if (incoming_state['action'].toUpperCase() == "BLOODMOON"){
-                    toggleBloodMoon()
+                    toggleBloodMoon(true,false)
+                    toggleForestMinion(false,true)
+                }
+                if (incoming_state['action'].toUpperCase() == "FORESTMINION"){
+                    toggleBloodMoon(false,true)
+                    toggleForestMinion(true,false)
+                }
+                if (incoming_state['action'].toUpperCase() == "BLOODMINION"){
+                    toggleBloodMoon(true,false)
+                    toggleForestMinion(true,false)
+                }
+                if (incoming_state['action'].toUpperCase() == "NOMODIFER"){
+                    toggleBloodMoon(false,true)
+                    toggleForestMinion(false,true)
                 }
                 if (incoming_state['action'].toUpperCase() == "SANITY"){
                     if(incoming_state['value'].toUpperCase() == "TOGGLE"){
@@ -946,9 +969,30 @@ function send_ghosts_link(reset = false){
 
 function send_blood_moon_link(value){
     if(hasDLLink){
-        dlws.send(`{"action":"BLOODMOON","value":${value ? 1 : 0}}`)
+        if ($("#forest-minion-icon").hasClass("forest-minion-active")){
+            if(value)
+                dlws.send(`{"action":"BLOODMINION","value":1}`)
+            else
+                dlws.send(`{"action":"FORESTMINION","value":1}`)
+        }
+        else
+            dlws.send(`{"action":"BLOODMOON","value":${value ? 1 : 0}}`)
     }
 }
+
+function send_forest_minion_link(value){
+    if(hasDLLink){
+        if($("#blood-moon-icon").hasClass("blood-moon-active")){
+            if(value)
+                dlws.send(`{"action":"BLOODMINION","value":1}`)
+            else
+                dlws.send(`{"action":"BLOODMOON","value":1}`)
+        }
+        else
+            dlws.send(`{"action":"FORESTMINION","value":${value ? 1 : 0}}`)
+    }
+}
+
 
 function send_sanity_link(value, color){
     if(hasDLLink){
@@ -1070,6 +1114,7 @@ function send_state() {
             'ghosts': state['ghosts'],
             "map": state['map'],
             "prev_monkey_state": state['prev_monkey_state'],
+            "forest_minion": document.getElementById("forest-minion-icon").classList.contains("forest-minion-active") ? 1 : 0,
             "blood_moon": document.getElementById("blood-moon-icon").classList.contains("blood-moon-active") ? 1 : 0,
             'settings': {
                 "num_evidences":document.getElementById("num_evidence").value,

@@ -24,6 +24,7 @@ var muteTimerToggle = false
 var muteTimerCountdown = false
 
 var offset = 0
+let forest_minion = 0
 let blood_moon = 0
 var step_duration = 5 * 1000
 
@@ -31,19 +32,27 @@ var additional_ghost_data = ["hantu","moroi","thaye"]
 var additional_ghost_var = [0.18,0.085,0.175]
 
 let speedToBpm = {
-    0:(x) => x < 0.9 ? (16.7*x)+14.3 : (-2.55*Math.pow(x,3))+(15.4*Math.pow(x, 2))+(4.95*x)+13.1,
-    1:(x) => x < 0.9 ? (23.3*x)+23.7 : (-1.54*Math.pow(x,3))+(10.4*Math.pow(x,2))+(33.3*x)+4.81,
-    2:(x) => x < 0.9 ? (31.7*x)+32.3 : (-7.82*Math.pow(x,3))+(48.4*Math.pow(x,2))-(15.4*x)+39,
-    3:(x) => x < 0.9 ? (45.0*x)+37.0 : (-8.32*Math.pow(x,3))+(58.7*Math.pow(x,2))-(17.8*x)+49.4,
-    4:(x) => x < 0.9 ? (58.3*x)+40.7 : (15.7*Math.pow(x,3))-(75.1*Math.pow(x,2))+(240*x)-81.7
+    0:(x) => x < 0.9 ? (16.7*x)+14.3 : x > 3.0 ? (38.0*x)-13.0 : (-2.55*Math.pow(x,3))+(15.4*Math.pow(x, 2))+(4.95*x)+13.1,
+    1:(x) => x < 0.9 ? (23.3*x)+23.7 : x > 3.0 ? (69.0*x)-40.0 : (-1.54*Math.pow(x,3))+(10.4*Math.pow(x,2))+(33.3*x)+4.81,
+    2:(x) => x < 0.9 ? (31.7*x)+32.3 : x > 3.0 ? (100.0*x)-67.0 : (-7.82*Math.pow(x,3))+(48.4*Math.pow(x,2))-(15.4*x)+39,
+    3:(x) => x < 0.9 ? (45.0*x)+37.0 : x > 3.0 ? (132.0*x)-88.5 : (-8.32*Math.pow(x,3))+(58.7*Math.pow(x,2))-(17.8*x)+49.4,
+    4:(x) => x < 0.9 ? (58.3*x)+40.7 : x > 3.0 ? (164.0*x)-110.0 : (15.7*Math.pow(x,3))-(75.1*Math.pow(x,2))+(240*x)-81.7
 }
 
 let bpmToSpeed = {
-    0:(x) => x < 30 ? (x-14.3)/16.7 : -0.318 + 0.0527 * (x * (1+(offset/100))) - 3.86e-04 * Math.pow((x * (1+(offset/100))), 2) + 1.98e-06 * Math.pow((x * (1+(offset/100))), 3),
-    1:(x) => x < 46 ? (x-23.7)/23.3 : -0.0355 + 0.0245 * (x * (1+(offset/100))) - 5.95e-05 * Math.pow((x * (1+(offset/100))), 2) + 1.72e-07 * Math.pow((x * (1+(offset/100))), 3),
-    2:(x) => x < 64 ? (x-32.3)/31.7 : -0.32 + 0.0259 * (x * (1+(offset/100))) - 9.73e-05 * Math.pow((x * (1+(offset/100))), 2) + 2.23e-07 * Math.pow((x * (1+(offset/100))), 3),
-    3:(x) => x < 81 ? (x-37.0)/45.0 : -0.215 + 0.0179 * (x * (1+(offset/100))) - 4.3e-05 * Math.pow((x * (1+(offset/100))), 2) + 6.34e-08 * Math.pow((x * (1+(offset/100))), 3),
-    4:(x) => x < 98 ? (x-40.7)/58.3 : 0.291 + 6.24e-03 * (x * (1+(offset/100))) + 1.19e-05 * Math.pow((x * (1+(offset/100))), 2) - 2.57e-08 * Math.pow((x * (1+(offset/100))), 3)
+    0:(x) => x < 30 ? (x-14.3)/16.7 : x > 98 ? (x+13.0)/38.0 : -0.318 + 0.0527 * (x * (1+(offset/100))) - 3.86e-04 * Math.pow((x * (1+(offset/100))), 2) + 1.98e-06 * Math.pow((x * (1+(offset/100))), 3),
+    1:(x) => x < 46 ? (x-23.7)/23.3 : x > 157 ? (x+40.0)/69.0 : -0.0355 + 0.0245 * (x * (1+(offset/100))) - 5.95e-05 * Math.pow((x * (1+(offset/100))), 2) + 1.72e-07 * Math.pow((x * (1+(offset/100))), 3),
+    2:(x) => x < 64 ? (x-32.3)/31.7 : x > 218 ? (x+67.0)/100.0 : -0.32 + 0.0259 * (x * (1+(offset/100))) - 9.73e-05 * Math.pow((x * (1+(offset/100))), 2) + 2.23e-07 * Math.pow((x * (1+(offset/100))), 3),
+    3:(x) => x < 81 ? (x-37.0)/45.0 : x > 300 ? (x+88.5)/132.0 : -0.215 + 0.0179 * (x * (1+(offset/100))) - 4.3e-05 * Math.pow((x * (1+(offset/100))), 2) + 6.34e-08 * Math.pow((x * (1+(offset/100))), 3),
+    4:(x) => x < 98 ? (x-40.7)/58.3 : x > 387 ? (x+110.0)/164.0 : 0.291 + 6.24e-03 * (x * (1+(offset/100))) + 1.19e-05 * Math.pow((x * (1+(offset/100))), 2) - 2.57e-08 * Math.pow((x * (1+(offset/100))), 3)
+}
+
+let forestminion_mult = {
+    0: 0.03,
+    1: 0.04,
+    2: 0.05,
+    3: 0.05,
+    4: 0.05
 }
 
 let bloodmoon_mult = {
@@ -91,7 +100,7 @@ function toggleSound(set_tempo,id){
     adjustOffset(0)
     speed = set_tempo
     var speed_idx = parseInt($("#ghost_modifier_speed").val())
-    tempo = speedToBpm[speed_idx](speed * (blood_moon ? (1 + bloodmoon_mult[speed_idx]) : 1.0)) * (1+(offset/100))
+    tempo = speedToBpm[speed_idx](speed * (blood_moon ? (1 + bloodmoon_mult[speed_idx]) : 1.0) * (forest_minion ? (1 - forestminion_mult[speed_idx]) : 1.0)) * (1+(offset/100))
     if(!isPlaying){
         step()
         timerStop = setTimeout(function(){
@@ -281,6 +290,7 @@ function bpm_clear() {
 function bpm_calc(forced=false) {
     let current_bpm = 0;
     let avg_taps = [];
+    let hit_max = false
 
     if (taps.length == 5) {
         start_ts = taps[taps.length - 1]
@@ -309,15 +319,36 @@ function bpm_calc(forced=false) {
             current_bpm = get_bpm_average(avg_taps, bpm_precision)
         }
         input_bpm = current_bpm;
+
+        if (input_bpm > 600){
+            hit_max = true
+            input_bpm = 600
+        }
+
         var ex_ms = get_ms_exact(input_bpm)
         var av_ms = get_ms(input_bpm)
         input_ms = document.getElementById("bpm_type").checked ? av_ms : ex_ms
+
+        if (input_ms > 5.0){
+            hit_max = true
+            input_ms = 5.0
+        }
+
         document.getElementById('input_bpm').innerHTML = input_bpm == 0 ? '0<br>bpm' : `${Math.round(input_bpm)}<br>bpm`;
         document.getElementById('input_speed').innerHTML = input_bpm == 0 ? '0<br>m/s' : `${lang_currency.includes(lang) ? input_ms.replace(".",",") : input_ms}<br>m/s`;
 
         calibrateOffset(ex_ms)
 
         bpm_hist.push({"speed":input_ms,"seconds":(taps[taps.length - 1] - start_ts)/1000});
+
+        if(hit_max){
+            $("#input_speed").addClass('max-value')
+            $("#input_bpm").addClass('max-value')
+        }
+        else{
+            $("#input_speed").removeClass('max-value')
+            $("#input_bpm").removeClass('max-value')
+        }
         
         try{
             mark_ghosts(input_ms)
@@ -339,7 +370,7 @@ function bpm_calc(forced=false) {
 
 function get_ms(bpm){
     var speed_idx = parseInt($("#ghost_modifier_speed").val())
-    var t_ms= bpmToSpeed[speed_idx](bpm) *(1+((offset)/100)) * (blood_moon ? (1 - bloodmoon_mult[speed_idx]) : 1.0)
+    var t_ms= bpmToSpeed[speed_idx](bpm) *(1+((offset)/100)) * (blood_moon ? (1 - bloodmoon_mult[speed_idx]) : 1.0) * (forest_minion ? (1 + forestminion_mult[speed_idx]) : 1.0)
     var cur_ms = 0
     var cur_offset = 1000
     bpm_speeds.forEach(function(m){
@@ -354,7 +385,7 @@ function get_ms(bpm){
 
 function get_ms_exact(bpm){
     var speed_idx = calibrating ? 2 : parseInt($("#ghost_modifier_speed").val())
-    var cur_ms = bpmToSpeed[speed_idx](bpm) *(1+((offset)/100)) * (blood_moon && !calibrating ? (1 - bloodmoon_mult[speed_idx]) : 1.0)
+    var cur_ms = bpmToSpeed[speed_idx](bpm) *(1+((offset)/100)) * (blood_moon && !calibrating ? (1 - bloodmoon_mult[speed_idx]) : 1.0) * (forest_minion ? (1 + forestminion_mult[speed_idx]) : 1.0)
     return cur_ms < 0 ? 0.01 : cur_ms.toFixed(2)
 }
 
