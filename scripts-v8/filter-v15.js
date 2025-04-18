@@ -1252,7 +1252,7 @@ function autoSelect(){
             }
         }
         else{
-            if (last_guessed != null && !$(ghosts[last_guessed]).hasClass("hidden") && selected == ""){
+            if (last_guessed != null && !$(ghosts[last_guessed]).hasClass("hidden") && selected == "" && died == ""){
                 send_ghost_link(last_guessed,1)
                 guess(ghosts[last_guessed],internal=true)
             }
