@@ -1191,7 +1191,7 @@ function autoPreSelect(){
             }
         }
 
-        if ((cur_selected.length == 1 || last_guessed != null) && selected == ""){
+        if ((cur_selected.length == 1 || last_guessed != null) && selected == "" && died == ""){
             if(Object.keys(discord_user).length > 0){
                 if (last_guessed != null)
                     $(ghosts[last_guessed]).addClass("preguessed")
