@@ -1,6 +1,6 @@
 {
-    "version":"4.1.3",
-    "date":"2025-04-17",
-    "details": "- Added Forest Minion Run Away speed support. \n\nBug Fixes:\n- None",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.1.3.msi"
+    "version":"4.1.4",
+    "date":"2025-04-21",
+    "details": "- None \n\nBug Fixes:\n- Fixed issue with Checklist overlay not staying on screen when game is focused",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.1.4.msi"
 }
