@@ -1,6 +1,6 @@
 {
-    "version":"4.1.4",
+    "version":"4.1.5",
     "date":"2025-04-21",
-    "details": "- None \n\nBug Fixes:\n- Fixed issue with Checklist overlay not staying on screen when game is focused",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.1.4.msi"
+    "details": "- Changed 'Blood Moon' Hotkey to 'Modifier Mode' Hotkey, which will rotate through available speed modifiers (blood moon & forest minion) \n\nBug Fixes:\n- Fixed issue with Checklist overlay not staying on screen when game is focused",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.1.5.msi"
 }
