@@ -464,7 +464,7 @@ function filter(ignore_link=false){
     if(document.getElementById("cust_hunt_length").value == "")
         document.getElementById("cust_hunt_length").value = "3"
     var num_evidences = document.getElementById("num_evidence").value
-    num_evidences = ["-5","-1"].includes(num_evidences) ? document.getElementById("cust_num_evidence").value : num_evidences;
+    num_evidences = ["-5","-1"].includes(num_evidences) || num_evidences.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g) ? document.getElementById("cust_num_evidence").value : num_evidences;
     var speed_logic_type = document.getElementById("speed_logic_type").checked ? 1 : 0;
     var speed_has_los = $("#LOS").find("#checkbox").hasClass("good") ? 1 : $("#LOS").find("#checkbox").hasClass("bad") ? 0 : -1;
     state['los'] = speed_has_los
@@ -1742,8 +1742,14 @@ function show3D(){
 
 function flashMode(){
     var cur_evidence = document.getElementById("num_evidence").value
-    var mode_text = {"-5":lang_data['{{weekly_challenge_mode}}'],"-1":lang_data['{{custom}}'],"0":lang_data['{{apocalypse_iii}}'],"1":lang_data['{{insanity}}'],"2":lang_data['{{nightmare}}'],"3":lang_data['{{professional}}'],"3I":lang_data['{{intermediate}}'],"3A":lang_data['{{amateur}}']}[cur_evidence]
-    document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} ${lang_data['{{evidence}}']})</span>`.replace("-1",document.getElementById("cust_num_evidence").value).replace("-5",document.getElementById("cust_num_evidence").value)
+    if(document.getElementById("num_evidence").value.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)){
+        var mode_text = lang_data['{{custom}}']
+        document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${document.getElementById("cust_num_evidence").value} ${lang_data['{{evidence}}']})</span>`
+    }
+    else{
+        var mode_text = {"-5":lang_data['{{weekly_challenge_mode}}'],"-1":lang_data['{{custom}}'],"0":lang_data['{{apocalypse_iii}}'],"1":lang_data['{{insanity}}'],"2":lang_data['{{nightmare}}'],"3":lang_data['{{professional}}'],"3I":lang_data['{{intermediate}}'],"3A":lang_data['{{amateur}}']}[cur_evidence]
+        document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} ${lang_data['{{evidence}}']})</span>`.replace("-1",document.getElementById("cust_num_evidence").value).replace("-5",document.getElementById("cust_num_evidence").value)
+    }
     $("#game_mode").fadeIn(500,function () {
         $("#game_mode").delay(500).fadeOut(500);
     });
@@ -1999,6 +2005,20 @@ function highlightWeekly(){
 function checkDifficulty(){
 
     let dif_opt = document.getElementById("num_evidence").value
+
+    if(dif_opt.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)){
+        document.getElementById("cust_num_evidence").value = custom_difficulties[dif_opt].settings.num_evidence
+        document.getElementById("cust_hunt_length").value = custom_difficulties[dif_opt].settings.hunt_duration
+        document.getElementById("ghost_modifier_speed").value = custom_difficulties[dif_opt].settings.ghost_speed
+        document.getElementById("cust_starting_sanity").value = custom_difficulties[dif_opt].settings.starting_sanity
+        document.getElementById("cust_sanity_pill_rest").value = custom_difficulties[dif_opt].settings.sanity_pill_restoration
+        document.getElementById("cust_sanity_drain").value = custom_difficulties[dif_opt].settings.sanity_drain_speed
+        $("#cust_num_evidence").attr("disabled","disabled")
+        $("#cust_hunt_length").attr("disabled","disabled")
+        $("#ghost_modifier_speed").attr("disabled","disabled")
+        return
+    }
+
     if(dif_opt === "-10"){
         document.getElementById("num_evidence").value = "-1"
         if(Object.keys(discord_user).length > 0){
@@ -2029,6 +2049,7 @@ function checkDifficulty(){
     else{
         $("#cust_num_evidence").removeAttr("disabled")
         $("#cust_hunt_length").removeAttr("disabled")
+        $("#ghost_modifier_speed").removeAttr("disabled")
         document.getElementById("num_evidence").style.width = "100%"
         $("#weekly_icon").hide()
     }
@@ -2037,7 +2058,7 @@ function checkDifficulty(){
 function showCustom(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
     var is_h = ![null,"","-8px"].includes(document.getElementById("menu").style.marginBottom)
-    if(["-1","-5"].includes(document.getElementById("num_evidence").value)){
+    if(["-1","-5"].includes(document.getElementById("num_evidence").value) || document.getElementById("num_evidence").value.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)){
         if(mquery.matches){
             document.getElementById("menu").style.height=lang_menu_widths[lang].menu_height_custom;
             if(is_h){

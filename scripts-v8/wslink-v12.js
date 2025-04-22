@@ -185,6 +185,7 @@ function create_room(){
         "map": state['map'],
         'settings': {
             "num_evidences":document.getElementById("num_evidence").value,
+            "dif_name":document.getElementById("num_evidence").options[document.getElementById("num_evidence").selectedIndex].text,
             "cust_num_evidences":document.getElementById("cust_num_evidence").value,
             "cust_hunt_length":document.getElementById("cust_hunt_length").value,
             "cust_starting_sanity": document.getElementById("cust_starting_sanity").value,
@@ -382,6 +383,7 @@ function link_room(){
                     if(incoming_state['settings']['num_evidences'] != document.getElementById("num_evidence").value){
                         $("#cust_num_evidence").removeAttr("disabled")
                         $("#cust_hunt_length").removeAttr("disabled")
+                        $("#ghost_modifier_speed").removeAttr("disabled")
                         document.getElementById("num_evidence").style.width = "100%"
                         $("#weekly_icon").hide()
                     }
@@ -389,7 +391,7 @@ function link_room(){
                         document.getElementById("num_evidence").value = incoming_state['settings']['num_evidences']
                     if(incoming_state['settings']['cust_lobby_type'] != "")
                         document.getElementById("cust_lobby_type").value = incoming_state['settings']['cust_lobby_type']
-                    if (["-5","-1"].includes(incoming_state['settings']['num_evidences'])){
+                    if (["-5","-1"].includes(incoming_state['settings']['num_evidences']) || incoming_state['settings']['num_evidences'].match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)){
                         if(incoming_state['settings']['cust_num_evidences'] != "")
                             document.getElementById("cust_num_evidence").value = incoming_state['settings']['cust_num_evidences']
                         if(incoming_state['settings']['cust_hunt_length'] != "")
@@ -406,6 +408,32 @@ function link_room(){
                             $("#cust_hunt_length").attr("disabled","disabled")
                             document.getElementById("num_evidence").style.width = "calc(100% - 28px)"
                             $("#weekly_icon").show()
+                        }
+
+                        if(incoming_state['settings']['num_evidences'].match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)){
+                            $("#cust_num_evidence").attr("disabled","disabled")
+                            $("#cust_hunt_length").attr("disabled","disabled")
+                            $("#ghost_modifier_speed").attr("disabled","disabled")
+
+                            if($("#num_evidence option[value='"+incoming_state['settings']['num_evidences']+"']").length === 0){
+                                let presets = document.getElementById("num_evidence")
+
+                                if($("#num_evidence option[value='sep4']").length === 0){
+                                    var opt = document.createElement('option');
+                                    opt.value = "sep4";
+                                    opt.innerHTML = "----Shared----"
+                                    opt.disabled = true
+                                    presets.appendChild(opt)
+                                }
+
+                                var opt = document.createElement('option');
+                                opt.value = incoming_state['settings']['num_evidences'];
+                                opt.innerHTML = incoming_state['settings']['dif_name'];
+                                opt.disabled = true
+                                presets.appendChild(opt);
+
+                                document.getElementById("num_evidence").value = incoming_state['settings']['num_evidences']
+                            }
                         }
                     }
                     else{
@@ -947,7 +975,7 @@ function send_evidence_link(reset = false){
             evi_list.push(`${key}:${reset ? 0 : $(document.getElementById(key)).hasClass("block") ? -2 : $(document.getElementById(key).querySelector("#checkbox")).hasClass("faded") ? -1 : value}`)
         }
         var cur_num_evi = document.getElementById("num_evidence").value
-        cur_num_evi = ["-5","-1"].includes(cur_num_evi) ? document.getElementById("cust_num_evidence").value : cur_num_evi
+        cur_num_evi = ["-5","-1"].includes(cur_num_evi) || cur_num_evi.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g) ? document.getElementById("cust_num_evidence").value : cur_num_evi
         dlws.send(`{"action":"EVIDENCE","evidences":"${evi_list}","num_evidence":"${cur_num_evi}"}`)
     }
 }
@@ -1118,6 +1146,7 @@ function send_state() {
             "blood_moon": document.getElementById("blood-moon-icon").classList.contains("blood-moon-active") ? 1 : 0,
             'settings': {
                 "num_evidences":document.getElementById("num_evidence").value,
+                "dif_name":document.getElementById("num_evidence").options[document.getElementById("num_evidence").selectedIndex].text,
                 "cust_num_evidences":document.getElementById("cust_num_evidence").value,
                 "cust_hunt_length":document.getElementById("cust_hunt_length").value,
                 "cust_starting_sanity": document.getElementById("cust_starting_sanity").value,

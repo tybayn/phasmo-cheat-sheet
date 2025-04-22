@@ -430,19 +430,21 @@ function loadAllAndConnect(){
                 Promise.all([translate_wiki(lang)])
                 .then(() => {
                     document.getElementById("page-loading-status").innerText = "loading user settings..."
-                    getLink()
-                    loadSettings()
-                    filter(true)
-                    applyPerms()
-                    auto_link()
-                    openWikiFromURL()
+                    Promise.all([getLink()])
+                    .then(() => {
+                        loadSettings()
+                        filter(true)
+                        applyPerms()
+                        auto_link()
+                        openWikiFromURL()
 
-                    try{heartbeat()} catch(Error){console.warn("Possible latency issues!")}
-                    setInterval(function(){
-                        if(!document.hidden){
-                            try{heartbeat()} catch(Error){console.error("Heartbeat failed!")}
-                        }
-                    }, 300000)
+                        try{heartbeat()} catch(Error){console.warn("Possible latency issues!")}
+                        setInterval(function(){
+                            if(!document.hidden){
+                                try{heartbeat()} catch(Error){console.error("Heartbeat failed!")}
+                            }
+                        }, 300000)
+                    })
                 })
             })
         })
