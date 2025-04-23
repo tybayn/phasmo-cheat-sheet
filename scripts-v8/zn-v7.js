@@ -53,7 +53,7 @@ function checkLink(){
             setCookie("lang",lang,90)
         }
 
-        if (params.get("debug").toLowerCase() == "true"){
+        if (params.get("debug") == "true" || params.get("debug") == "True"){
             startDebugMode()
             $("#debug_tab").show()
         }
