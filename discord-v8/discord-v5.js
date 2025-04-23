@@ -43,48 +43,53 @@ function getLink(){
                 document.getElementById("discord-stats-link").href = `https://zero-network.net/phasmo-stats/?discord-id=${discord_user['id']}-${discord_user['avatar']}&username=${discord_user['username']}`
                 document.getElementById("discord_link_status").className = "connected"
 
-                var cust_settings = JSON.parse(getCookie("settings"))
+                if($("#num_evidence option[value='sep3']").length === 0){
+                    var cust_settings = JSON.parse(getCookie("settings"))
 
-                fetch(`https://zero-network.net/zn/difficulties/${discord_user['id']}?cheatsheet=true`, {signal: AbortSignal.timeout(6000)})
-                .then(data => data.json())
-                .then(data => {
-                    custom_difficulties = data
+                    fetch(`https://zero-network.net/zn/difficulties/${discord_user['id']}?cheatsheet=true`, {signal: AbortSignal.timeout(6000)})
+                    .then(data => data.json())
+                    .then(data => {
+                        custom_difficulties = data
 
-                    $(`#num_evidence option[value='-10']`).remove();
-                    $(`#num_evidence option[value='sep2']`).remove();
+                        $(`#num_evidence option[value='-10']`).remove();
+                        $(`#num_evidence option[value='sep2']`).remove();
 
-                    let presets = document.getElementById("num_evidence")
-                    var opt = document.createElement('option');
-                    opt.value = "sep2";
-                    opt.innerHTML = "---My Customs---"
-                    opt.disabled = true
-                    presets.appendChild(opt)
-                    Object.entries(data).forEach(([id,value]) => {
+                        let presets = document.getElementById("num_evidence")
+                        var opt = document.createElement('option');
+                        opt.value = "sep2";
+                        opt.innerHTML = "---My Customs---"
+                        opt.disabled = true
+                        presets.appendChild(opt)
+                        Object.entries(data).forEach(([id,value]) => {
+                            opt = document.createElement('option');
+                            opt.value = id;
+                            opt.innerHTML = value.name;
+                            presets.appendChild(opt);
+                        })
                         opt = document.createElement('option');
-                        opt.value = id;
-                        opt.innerHTML = value.name;
+                        opt.value = "sep3";
+                        opt.innerHTML = "----------------"
+                        opt.disabled = true
+                        presets.appendChild(opt)
+                        opt = document.createElement('option');
+                        opt.value = "-10";
+                        opt.innerHTML = "Go to Difficulty Builder >>";
                         presets.appendChild(opt);
-                    })
-                    opt = document.createElement('option');
-                    opt.value = "sep3";
-                    opt.innerHTML = "----------------"
-                    opt.disabled = true
-                    presets.appendChild(opt)
-                    opt = document.createElement('option');
-                    opt.value = "-10";
-                    opt.innerHTML = "Go to Difficulty Builder >>";
-                    presets.appendChild(opt);
 
-                    document.getElementById("num_evidence").value = cust_settings.num_evidences
-                })
-                .then(data => {
-                    checkDifficulty();
-                    showCustom();
-                    updateMapDifficulty(cust_settings.num_evidences);
-                    filter();
-                    flashMode();
-                    resolve("Discord linked")
-                })
+                        document.getElementById("num_evidence").value = cust_settings.num_evidences
+                    })
+                    .then(data => {
+                        checkDifficulty();
+                        showCustom();
+                        updateMapDifficulty(cust_settings.num_evidences);
+                        filter();
+                        flashMode();
+                        resolve("Discord linked")
+                    })
+                }
+                else{
+                    resolve("Discord already loaded")
+                }
             })
             
         } catch(Error){
