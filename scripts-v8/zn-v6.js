@@ -53,7 +53,7 @@ function checkLink(){
             setCookie("lang",lang,90)
         }
 
-        if (params.get("debug") == "true"){
+        if (params.get("debug").toLowerCase() == "true"){
             startDebugMode()
             $("#debug_tab").show()
         }
@@ -449,6 +449,13 @@ function loadAllAndConnect(){
             })
         })
     })
+}
+
+
+function copy_user_settings(){
+    var copyText = JSON.stringify(user_settings)
+    navigator.clipboard.writeText(copyText)
+    document.getElementById("debug-console").value += "User Settings copied to clipboard\n"
 }
 
 

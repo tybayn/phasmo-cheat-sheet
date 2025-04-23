@@ -193,6 +193,16 @@
         font-size: 20px;
     }
 
+    .debug-copy{
+        cursor: pointer;
+        text-decoration: underline;
+        padding-top: 10px;
+        color: #ffff00;
+    }
+    .debug-copy:hover{
+        color: #ff9100;
+    }
+
     #blackout_image{
         opacity: 0;
         transition: opacity 0.5s;
