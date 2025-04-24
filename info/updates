@@ -1,6 +1,6 @@
 {
-    "version":"4.1.6",
+    "version":"4.1.7",
     "date":"2025-04-23",
-    "details": "- Added stacktrace to error screen \n\nBug Fixes:\n- Desktop link won't crash if image is not preloaded (it may crash if the image doesn't exist)",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.1.6.msi"
+    "details": "- Added stacktrace to error screen\n- Handle new url issues \n\nBug Fixes:\n- Desktop link won't crash if image is not preloaded",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.1.7.msi"
 }
