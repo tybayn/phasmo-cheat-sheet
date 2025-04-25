@@ -47,7 +47,7 @@ function waitForElementById(id){
 
 function closeMenu(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    var is_c = ["-5","-1"].includes(document.getElementById("num_evidence").value)
+    var is_c = ["-5","-1"].includes(document.getElementById("num_evidence").value) || document.getElementById("num_evidence").value.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)
     if(mquery.matches){
         document.getElementById("menu").style.marginBottom = is_c ? lang_menu_widths[lang].menu_bottom_custom : lang_menu_widths[lang].menu_bottom;
         $("#domovoi").removeClass("domovoi-custom")
@@ -57,7 +57,7 @@ function closeMenu(){
 
 function showMenu(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    var is_c = ["-5","-1"].includes(document.getElementById("num_evidence").value)
+    var is_c = ["-5","-1"].includes(document.getElementById("num_evidence").value) || document.getElementById("num_evidence").value.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)
     if(mquery.matches){
         if(is_c)
             $("#domovoi").addClass("domovoi-custom")
@@ -1821,7 +1821,12 @@ function loadSettings(){
     document.getElementById("compact_cards").checked = load_default('compact_cards',0) == 1
     document.getElementById("offset_value").innerText = ` ${load_default('offset',0.0)}% `
     document.getElementById("ghost_modifier_speed").value = load_default('ghost_modifier',2)
-    document.getElementById("num_evidence").value = load_default('num_evidences','3')
+
+    if(Array.from(document.getElementById("num_evidence").options).map(option => option.value).includes(load_default('num_evidences','3')))
+        document.getElementById("num_evidence").value = load_default('num_evidences','3')
+    else
+        document.getElementById("num_evidence").value = '-1'
+    
     if(load_default('num_evidences','3') === "-5"){
 
         if (weekly_data){
