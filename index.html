@@ -399,7 +399,12 @@
                 <div class="modifier_volume yfont white">{{graphics}}</div> 
                 <div class="modifier_option less_pad">
                     <input type="checkbox" id="disable_particles" name="disable_particles" class="settings_check" onclick="setBloodMoonParticles();changeTheme();saveSettings();"><label for="disable_particles">{{disable_particles}}</label>
-                </div>  
+                </div>
+                <hr>
+                <div class="modifier_volume yfont white">{{misc}}</div> 
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="persist_modes" name="persist_modes" class="settings_check" onclick="saveSettings();"><label for="persist_modes">{{persist_modes}}</label>
+                </div>    
             </div>
             <div id="session">C: -</div>
             <div id="prev-session">P: -</div>
@@ -991,7 +996,7 @@
     <script src="scripts-v8/timer-v4.js"></script>
     <script src="discord-v8/discord-v5.js"></script>
     <script src="wiki-v8/wiki-v1.js"></script>
-    <script src="scripts-v8/filter-v17.js"></script>
+    <script src="scripts-v8/filter-v18.js"></script>
     <script src="scripts-v8/sanity-v2.js"></script>
     <script src="scripts-v8/wslink-v12.js"></script>
     <script src="scripts-v8/zn-v7.js"></script>

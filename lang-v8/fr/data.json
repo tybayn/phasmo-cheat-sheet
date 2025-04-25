@@ -109,6 +109,8 @@
     "{{compact_disclaimer}}": "L'affichage compact est sans effet sur mobile",
     "{{graphics}}": "Graphismes",
     "{{disable_particles}}": "Désactiver les effets de particules",
+    "{{misc}}": "Divers",
+    "{{persist_modes}}": "Persist Blood Moon / Minion Modes",
 
     "{{links}}": "Liens",
     "{{shared_journal_link}}": "Lien vers le journal partagé",
