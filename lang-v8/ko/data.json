@@ -46,6 +46,7 @@
     "{{metal_stairs}}": "금속 계단",
     "{{flesh}}": "피 밟는 소리",
     "{{krampus}}": "크람푸스",
+    "{{forest_spirit}}": "숲의 정령",
     "{{metronome}}": "메트로놈",
     "{{click_to_hear_speed}}": "<span class=\"sound\" onclick=\"toggleSound(1.7,'spirit0')\">&#128266;</span>  표시를 클릭하여 속도를 들으세요.",
     "{{bpm_finder}}": "BPM 탐색기",

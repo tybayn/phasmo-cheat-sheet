@@ -46,6 +46,7 @@
     "{{metal_stairs}}": "Escalier en métal",
     "{{flesh}}": "Chair",
     "{{krampus}}": "Krampus",
+    "{{forest_spirit}}": "Forest Spirit",
     "{{metronome}}": "Métronome",
     "{{click_to_hear_speed}}": "Cliquez sur <span class=\"sound\" onclick=\"toggleSound(1.7,'spirit0')\">&#128266;</span> pour entendre la vitesse",
     "{{bpm_finder}}": "Recherche par BPM",

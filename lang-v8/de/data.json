@@ -46,6 +46,7 @@
     "{{metal_stairs}}": "Metalltreppen",
     "{{flesh}}": "Fleisch",
     "{{krampus}}": "Krampus",
+    "{{forest_spirit}}": "Forest Spirit",
     "{{metronome}}": "Metronom",
     "{{click_to_hear_speed}}": "Drücke <span class=\"sound\" onclick=\"toggleSound(1.7,'spirit0')\">&#128266;</span> um die Geschwindigkeit zu hören",
     "{{bpm_finder}}": "Schritt Zähler",

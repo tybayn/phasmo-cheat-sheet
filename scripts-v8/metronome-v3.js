@@ -17,7 +17,9 @@ loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_squishy_
 loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_krampus.mp3',7)
 loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_krampus_2.mp3',7)
 loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_krampus_3.mp3',7)
-loadSound('assets/click.mp3',8)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_forest_spirit.mp3',8)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_forest_spirit_2.mp3',8)
+loadSound('assets/click.mp3',9)
 
 var speed = 1.7
 var muteTimerToggle = false

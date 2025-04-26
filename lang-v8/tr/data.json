@@ -45,6 +45,7 @@
     "{{metal_stairs}}": "Metal Merdiven",
     "{{flesh}}": "Et",
     "{{krampus}}": "Krampus",
+    "{{forest_spirit}}": "Forest Spirit",
     "{{metronome}}": "Metronom",
     "{{click_to_hear_speed}}": "Hızı duymak için kartlardaki <span class=\"sound\" onclick=\"toggleSound(1.7,'spirit0')\">&#128266;</span> simgesine tıklayın",
     "{{bpm_finder}}": "BPM Bulucu",
