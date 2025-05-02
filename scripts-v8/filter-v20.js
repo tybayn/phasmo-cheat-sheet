@@ -1675,6 +1675,7 @@ function showSearch(){
 
 function showNews(){
     if (document.getElementById("news_box").style.right == "-36px"){
+        document.getElementById("search_box").style.zIndex = "9"
         document.getElementById("language_box").style.zIndex = "9"
         document.getElementById("theme_box").style.zIndex = "9"
         document.getElementById("z3d-box").style.zIndex = "9"
@@ -1695,6 +1696,7 @@ function showNews(){
 
 function showLanguage(){
     if (document.getElementById("language_box").style.right == "-36px"){
+        document.getElementById("search_box").style.zIndex = "9"
         document.getElementById("news_box").style.zIndex = "9"
         document.getElementById("theme_box").style.zIndex = "9"
         document.getElementById("z3d-box").style.zIndex = "9"
@@ -1720,6 +1722,7 @@ function showLanguage(){
 
 function showTheme(){
     if (document.getElementById("theme_box").style.right == "-36px"){
+        document.getElementById("search_box").style.zIndex = "9"
         document.getElementById("news_box").style.zIndex = "9"
         document.getElementById("language_box").style.zIndex = "9"
         document.getElementById("z3d-box").style.zIndex = "9"
@@ -1745,6 +1748,7 @@ function showTheme(){
 
 function show3D(){
     if (document.getElementById("z3d-box").style.right == "-36px"){
+        document.getElementById("search_box").style.zIndex = "9"
         document.getElementById("language_box").style.zIndex = "9"
         document.getElementById("theme_box").style.zIndex = "9"
         document.getElementById("news_box").style.zIndex = "9"
