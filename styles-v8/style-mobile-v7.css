@@ -638,6 +638,14 @@
         display: none;
     }
 
+    #search_box{
+        display: none;
+    }
+
+    #search_tab{
+        display: none;
+    }
+
     #news_box{
         display: none;
     }

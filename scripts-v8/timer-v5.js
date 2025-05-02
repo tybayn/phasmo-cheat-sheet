@@ -1,6 +1,17 @@
 const zeroPad = (num, places) => String(num).padStart(places, '0')
 var bpm_down = false
 document.body.onkeyup = function(e) {
+    if(e.key == "/" ||
+        e.code == "Slash" ||
+        e.keyCode == 47
+    ){
+        closeAll(true,false)
+        showSearch();
+    }
+    
+    if($("#search_bar").is(":focus"))
+        return 
+    
     if (e.key == "f" ||
         e.code == "KeyF" ||      
         e.keyCode == 70      

@@ -158,6 +158,9 @@
     "{{images}}": "Images",
     "{{map_explorer}}": "Explorateur de carte",
 
+    "{{search}}":"Recherche",
+    "{{ghost_card}}":"Cartes fantômes",
+    "{{see_more}}":"Cliquez pour en savoir plus >>",
     "{{news_feed}}": "Fil d'actualités",
     "{{3d_print_models}}": "Modèle d'impression 3D",
     "{{3d_models_disclaimer}}": "Tous les modèles sont fournis gratuitement sous licence CC BY-NC-ND ou CC BY-SA et sont modélisés de A à Z en utilisant uniquement le jeu comme référence visuelle.",

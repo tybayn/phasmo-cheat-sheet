@@ -722,6 +722,40 @@ body{
         border-radius: 0px 5px 5px 0px;
     }
 
+    #search_box{
+        position: fixed;
+        top: 0;
+        z-index: 1;
+        width: 20px;
+        height: 100dvh;
+        background-color: #313248;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: stretch;
+        align-items: flex-start;
+        color: #fff;
+        padding: 5px 8px 5px 8px;
+        font-size: 14px;
+        transition: right 0.5s ease, width 0.5s ease;
+    }
+
+    #search_tab{
+        position: absolute;
+        height: 24px;
+        width: 24px;
+        text-align: center;
+        top: 5px;
+        left: -35px;
+        background-color: #313248;
+        padding: 5px;
+        cursor: pointer;
+        border-style: solid;
+        border-color: #ccc;
+        border-width: 1px 0px 1px 1px;
+        border-radius: 5px 0px 0px 5px;
+    }
+
     #news_box{
         position: fixed;
         top: 0;
@@ -745,7 +779,7 @@ body{
         height: 24px;
         width: 24px;
         text-align: center;
-        top: 5px;
+        top: 46px;
         left: -35px;
         background-color: #313248;
         padding: 5px;
@@ -777,7 +811,7 @@ body{
 
     #language_box{
         position: fixed;
-        top: 46px;
+        top: 87px;
         z-index: 1;
         width: 20px;
         height: 24px;
@@ -811,7 +845,7 @@ body{
 
     #theme_box{
         position: fixed;
-        top: 87px;
+        top: 128px;
         z-index: 1;
         width: 20px;
         height: 24px;
@@ -871,7 +905,7 @@ body{
         height: 24px;
         width: 24px;
         text-align: center;
-        top: 128px;
+        top: 169px;
         left: -35px;
         background-color: #313248;
         padding: 5px;
@@ -892,7 +926,7 @@ body{
         align-content: center;
         justify-content: center;
         text-align: center;
-        top: 169px;
+        top: 210px;
         right: 0px;
         background-color: #313248;
         padding: 5px;
@@ -913,7 +947,7 @@ body{
         align-content: center;
         justify-content: center;
         text-align: center;
-        top: 210px;
+        top: 251px;
         right: 0px;
         background-color: #313248;
         padding: 5px;
@@ -934,7 +968,7 @@ body{
         text-wrap: nowrap;
     }
 
-    #settings_box .icon, #links_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon, #language_box .icon, #theme_box .icon, #z3d-box .icon, .broadcast-content .icon{
+    #settings_box .icon, #links_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #search_box .icon, #news_box .icon, #language_box .icon, #theme_box .icon, #z3d-box .icon, .broadcast-content .icon{
         position: absolute;
         top: 5px;
         right: 4px;
@@ -946,7 +980,7 @@ body{
         cursor: pointer;
     }
 
-    #settings_box .icon:before, #links_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #news_box .icon:before, #language_box .icon:before, #theme_box .icon:before, #z3d-box .icon:before, .broadcast-content .icon:before{
+    #settings_box .icon:before, #links_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #search_box .icon:before, #news_box .icon:before, #language_box .icon:before, #theme_box .icon:before, #z3d-box .icon:before, .broadcast-content .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -956,7 +990,7 @@ body{
         top:4px;
     }
 
-    #settings_box .icon:after, #links_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #news_box .icon:after, #language_box .icon:after, #theme_box .icon:after, #z3d-box .icon:after, .broadcast-content .icon:after{
+    #settings_box .icon:after, #links_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #search_box .icon:after, #news_box .icon:after, #language_box .icon:after, #theme_box .icon:after, #z3d-box .icon:after, .broadcast-content .icon:after{
         content:"";
         position: absolute;
         width:15px;
@@ -1006,6 +1040,101 @@ body{
         margin-left: 0 !important;
         height: 10px;
         cursor: pointer;
+    }
+
+    #search_box .info_block {
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+        box-shadow: inset 0 0 10px #161615;
+        background: rgba(0,0,0,0.25);
+        align-items: flex-start;
+        width: 100%;
+        padding-bottom: 20px;
+        user-select: none;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        margin-bottom: 13px;
+        border-radius: 5px;
+        min-width: 350px;
+    }
+
+    #search_bar{
+        width: 100%;
+        margin-left: 0px;
+        margin: 10px 0px;
+        height: 30px;
+        font-size: 20px;
+        cursor: text;
+    }
+
+    .search_result{
+        padding: 10px;
+        cursor: pointer;
+        background-color: none;
+        width: calc(100% - 20px);
+    }
+    .search_result:hover{
+        background-color: #ffffff20;
+    }
+
+    .search_result img{
+        width: 100%;
+    }
+
+    .result_title{
+        font-size: 16px;
+        font-weight: bold;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .result_location_card{
+        font-size: 10px;
+        color: #0ff;
+        margin-left: 5px;
+    }
+
+    .result_location_guide{
+        font-size: 10px;
+        color: rgb(255, 145, 0);
+        margin-left: 5px;
+    }
+
+    .result_location_event{
+        font-size: 10px;
+        color: rgb(255, 0, 200);
+        margin-left: 5px;
+    }
+
+    .result_preview{
+        color: #ccc;
+        margin-top: 5px;
+    }
+
+    .result_part{
+        margin: 10px;
+        padding: 5px;
+        border-left: 2px solid #ffffffaa;
+        border-radius: 5px;
+    }
+
+    .result_highlight{
+        color: #ff0;
+        font-weight: bold;
+    }
+
+    .result_focus{
+        filter: grayscale(0.7);
+        opacity: 0.8;
+    }
+
+    .click_more{
+        float: right;
+        align-self: flex-end;
+        opacity: 0.4;
+        font-size: 12px;
     }
 
     #news_box .info_block {

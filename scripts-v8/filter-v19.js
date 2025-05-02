@@ -1551,9 +1551,9 @@ function showDiscordLink(){
     }
 }
 
-function showEvent(){
+function showEvent(force_open=false){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("event_box").style.left == (mquery.matches ? "-100%" : "0px")){
+    if (force_open || document.getElementById("event_box").style.left == (mquery.matches ? "-100%" : "0px")){
         document.getElementById("event_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("event_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
@@ -1647,6 +1647,29 @@ function showMaps(forceOpen = false, forceClose = false){
         setTimeout(() => {
             document.getElementById("maps_box").style.zIndex = "1"
         },500)
+    }
+}
+
+function showSearch(){
+    document.getElementById("search_bar").value = document.getElementById("search_bar").value.replace('/','')
+    if (document.getElementById("search_box").style.right == "-36px"){
+        document.getElementById("language_box").style.zIndex = "9"
+        document.getElementById("theme_box").style.zIndex = "9"
+        document.getElementById("z3d-box").style.zIndex = "9"
+        document.getElementById("news_box").style.zIndex = "9"
+        document.getElementById("search_box").style.zIndex = "11"
+        document.getElementById("search_box").style.boxShadow = "-5px 0px 10px 0px #000"
+        document.getElementById("search_tab").style.boxShadow = "-5px 6px 5px -2px #000"
+        document.getElementById("search_box").style.right = "0px"
+        document.getElementById("search_box").style.width = "350px"
+        document.getElementById("search_bar").focus()
+    }
+    else {
+        $(".ghost_card").removeClass("result_focus")
+        document.getElementById("search_box").style.width = "20px"
+        document.getElementById("search_box").style.right = "-36px"
+        document.getElementById("search_box").style.boxShadow = "none"
+        document.getElementById("search_box").style.boxShadow = "none"
     }
 }
 

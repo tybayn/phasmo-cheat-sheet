@@ -153,6 +153,10 @@
     "{{map_images_belong_to}}": "지도 이미지 출처",
     "{{images}}": "이미지",
     "{{map_explorer}}": "지도 탐색기",
+
+    "{{search}}":"검색",
+    "{{ghost_card}}":"고스트 카드",
+    "{{see_more}}":"자세히 보려면 클릭 >>",
     "{{news_feed}}": "뉴스 피드",
     "{{3d_print_models}}": "3D 프린트 가능한 모델",
     "{{3d_models_disclaimer}}": "모든 모델은 CC BY-NC-ND 또는 CC BY-SA 라이센스에 따라 무료로 제공되며, 게임을 시각적 참고 자료로만 사용하여 처음부터 끝까지 모델링되었습니다.",

@@ -152,6 +152,10 @@
     "{{map_images_belong_to}}": "Harita görüntüleri şuna aittir:",
     "{{images}}": "Görüntüler",
     "{{map_explorer}}": "Harita Gezgini",
+
+    "{{search}}":"Arama",
+    "{{ghost_card}}":"Hayalet Kartlar",
+    "{{see_more}}":"Daha fazlasını görmek için tıklayın >>",
     "{{news_feed}}": "Haber Akışı",
     "{{3d_print_models}}": "3B Yazdırılabilir Modeller",
     "{{3d_models_disclaimer}}": "Tüm modeller, ya CC BY-NC-ND ya da CC BY-SA lisansı altında ücretsiz olarak sağlanır ve sadece oyunu görsel referans olarak kullanarak sıfırdan modellenmiştir.",

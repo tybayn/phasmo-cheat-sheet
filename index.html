@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v8/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v8/style-v8.css"/>
-    <link rel="stylesheet" href="styles-v8/style-mobile-v6.css"/>
+    <link rel="stylesheet" href="styles-v8/style-v9.css"/>
+    <link rel="stylesheet" href="styles-v8/style-mobile-v7.css"/>
     <link rel="stylesheet" href="themes-v8/themes-v2.css"/>
     <link rel="stylesheet" href="discord-v8/discord-v2.css" >
     <link rel="stylesheet" href="wiki-v8/wiki-v3.css" >
@@ -647,6 +647,20 @@
         </div>
     </div>
 
+    <div id="search_box" style="right:-36px;">
+        <div id="search_tab" onclick="showSearch();">
+            <img src="imgs/search.png" width="24px"/>
+        </div>
+        <span class="icon" onclick="showSearch()"></span>
+
+        <div class="moving_content">
+            <div class="settings_title yfont white">{{search}}</div>
+            <input type="text" id="search_bar" placeholder="search..." onkeyup="search()">
+            <div class="info_block" id="search_results_block" style="min-height: 10px;">
+            </div>
+        </div>
+    </div>
+
     <div id="news_box" style="right:-36px;">
         <div id="news_tab" onclick="showNews();">
             <img src="imgs/news-icon.png" width="24px" id="feed_icon_img"/>
@@ -666,7 +680,7 @@
     <div id="lang_blockout" class="blockout" style="display: none;" onclick="showLanguage()"></div>
     <div id="language_box" style="right:-36px;">
         <div id="language_tab" onclick="showLanguage();">
-            <img src="imgs/langauge.png" width="24px" id="feed_icon_img"/>
+            <img src="imgs/langauge.png" width="24px"/>
         </div>
         <span class="icon" onclick="showLanguage()"></span>
 
@@ -681,7 +695,7 @@
     <div id="theme_blockout" class="blockout" style="display: none;" onclick="showTheme()"></div>
     <div id="theme_box" style="right:-36px;">
         <div id="theme_tab" onclick="showTheme();">
-            <img src="imgs/theme.png" width="24px" id="feed_icon_img"/>
+            <img src="imgs/theme.png" width="24px"/>
         </div>
         <span class="icon" onclick="showTheme()"></span>
 
@@ -991,16 +1005,17 @@
     </script>
     <script src="scripts-v8/utils-v1.js"></script>
     <script src="lang-v8/lang-v9.js"></script>
-    <script src="themes-v8/themes-v2.js"></script>
+    <script src="themes-v8/themes-v3.js"></script>
     <script src="scripts-v8/audio_controller-v1.js"></script>
     <script src="scripts-v8/metronome-v3.js"></script>
-    <script src="scripts-v8/timer-v4.js"></script>
+    <script src="scripts-v8/timer-v5.js"></script>
     <script src="discord-v8/discord-v5.js"></script>
     <script src="wiki-v8/wiki-v1.js"></script>
-    <script src="scripts-v8/filter-v18.js"></script>
+    <script src="scripts-v8/filter-v19.js"></script>
     <script src="scripts-v8/sanity-v2.js"></script>
     <script src="scripts-v8/wslink-v12.js"></script>
     <script src="scripts-v8/zn-v7.js"></script>
+    <script src="scripts-v8/search-v1.js"></script>
     <script src="events-v8/events-v1.js"></script>
     <script src="models-v8/models-v1.js"></script>
     <script src="feed-v8/feed-v2.js"></script>
