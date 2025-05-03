@@ -168,23 +168,44 @@ function shrink_text(html, searchTerms, contextLength = 80) {
     }
 
     // Find closest pair
-    let bestPair = null;
-    let minDist = Infinity;
-    for (let i = 0; i < positions.length; i++) {
-        for (let j = i + 1; j < positions.length; j++) {
-            const dist = Math.abs(positions[i].index - positions[j].index);
-            if (dist < minDist) {
-                minDist = dist;
-                bestPair = [positions[i], positions[j]];
+    // Find smallest window containing at least one of each unique search term
+    const termSet = new Set(searchTerms.map(term => term.toLowerCase()));
+    let termOccurrences = {};
+
+    positions.sort((a, b) => a.index - b.index);
+    let left = 0, right = 0, bestRange = null;
+
+    while (right < positions.length) {
+        termOccurrences[positions[right].term.toLowerCase()] = (termOccurrences[positions[right].term.toLowerCase()] || 0) + 1;
+
+        while (Object.keys(termOccurrences).length === termSet.size) {
+            const startIdx = positions[left].index;
+            const endIdx = positions[right].index + positions[right].term.length;
+            if (!bestRange || (endIdx - startIdx) < (bestRange.end - bestRange.start)) {
+                bestRange = {
+                    start: startIdx,
+                    end: endIdx
+                };
             }
+
+            // Slide left window edge
+            const leftTerm = positions[left].term.toLowerCase();
+            termOccurrences[leftTerm]--;
+            if (termOccurrences[leftTerm] === 0) {
+                delete termOccurrences[leftTerm];
+            }
+            left++;
         }
+
+        right++;
     }
 
-    bestPair.sort((a, b) => a.index - b.index);
-    const start = Math.max(0, bestPair[0].index - contextLength);
-    const end = Math.min(plainText.length, bestPair[1].index + bestPair[1].term.length + contextLength);
+    if (!bestRange) return null;
 
-    return safelyExtractHTML(html, indexMap, start, end, [bestPair[0].term, bestPair[1].term]);
+    const start = Math.max(0, bestRange.start - contextLength);
+    const end = Math.min(plainText.length, bestRange.end + contextLength);
+
+    return safelyExtractHTML(html, indexMap, start, end, searchTerms);
 }
 
 function safelyExtractHTML(html, indexMap, textStart, textEnd, highlightTerms) {
@@ -227,8 +248,8 @@ function safelyExtractHTML(html, indexMap, textStart, textEnd, highlightTerms) {
 
     // Highlight terms
     highlightTerms.forEach(term => {
-        const regex = new RegExp(`(${escapeRegExp(term)})`, 'gi');
-        snippet = snippet.replace(regex, `<span class="result_highlight">$1</span>`);
+        const regex = new RegExp(escapeRegExp(term), 'i');
+        snippet = snippet.replace(regex, match => `<span class="result_highlight">${match}</span>`);
     });
 
     return snippet;
