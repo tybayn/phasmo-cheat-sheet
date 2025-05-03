@@ -51,14 +51,10 @@ function search() {
             if(entry.querySelectorAll(".wiki_details").length === 0){
                 relatedTerms.forEach(terms => {
                     if(!matched.has(entry)){
-                        if (all_match(entryText,terms)) {
+                        if (all_match(entryText,terms) || all_match(titleText,terms)) {
                             results += parse_wiki(entry, terms);
                             matched.add(entry)
                         } 
-                        if (all_match(titleText,terms)) {
-                            results += parse_wiki(entry.previousElementSibling, terms, true);
-                            matched.add(entry)
-                        }
                     }
                 })
             }
@@ -196,7 +192,41 @@ function shrink_text(html, searchTerms) {
         snippet = snippet.replace(regex, `<span class="result_highlight">$1</span>`);
     }
 
+    snippet = balanceTags(snippet);
+
     return (wrapper.start > 0 ? '...' : '') + snippet.replace(/^[^a-z0-9<]*|[^a-z0-9>]*$/gi, '') + (wrapper.end < html.length ? '...' : '');
+}
+
+function balanceTags(html) {
+    const tagPattern = /<\/?([a-zA-Z0-9\-]+)(\s[^>]*)?>/g;
+    const selfClosing = new Set(['br', 'hr', 'img', 'input', 'meta', 'link']);
+    const stack = [];
+
+    let match;
+    while ((match = tagPattern.exec(html))) {
+        const [fullTag, tagName] = match;
+        const isClosing = fullTag.startsWith('</');
+
+        if (selfClosing.has(tagName)) continue;
+
+        if (isClosing) {
+            if (stack.length && stack[stack.length - 1] === tagName) {
+                stack.pop();
+            } else {
+                // Ignore unmatched closing tag
+            }
+        } else {
+            stack.push(tagName);
+        }
+    }
+
+    // Close any still-open tags
+    while (stack.length) {
+        const tag = stack.pop();
+        html += `</${tag}>`;
+    }
+
+    return html;
 }
 
 function escapeRegExp(str) {
@@ -231,9 +261,14 @@ function findMinimalTagWrapper(html, start, end) {
 
     if (openTags.length === 0) return { start, end };
 
+    // Separate block and inline tags
+    const inlineTags = new Set(['b', 'i', 'span', 'u', 'small', 'strong', 'em']);
+    const blockWrappers = openTags.filter(tag => !inlineTags.has(tag.name.toLowerCase()));
+    const allWrappers = [...blockWrappers, ...openTags]; // fallback to inline if no block found
+
     // Pick the smallest wrapper that covers the span
-    openTags.sort((a, b) => (a.end - a.start) - (b.end - b.start));
-    for (const tag of openTags) {
+    allWrappers.sort((a, b) => (a.end - a.start) - (b.end - b.start));
+    for (const tag of allWrappers) {
         if (tag.start <= start && tag.end >= end) {
             return { start: tag.start, end: tag.end };
         }
@@ -241,6 +276,7 @@ function findMinimalTagWrapper(html, start, end) {
 
     return { start, end };
 }
+
 
 
 function show_card(id){
@@ -279,21 +315,25 @@ function parse_card(elem,queries,is_title=false){
         let title = elem.getElementsByClassName("ghost_name")[0].innerText
         let preview = shrink_text(title,queries)
         
-        return `<div class="search_result" onclick="show_card('${card_id}')"><div class="result_title">${title}<span class="result_location_card"> (${lang_data["{{ghost_card}}"]})</span></div><div class="result_preview">${preview}</div><div class="click_more">${lang_data["{{see_more}}"]}</div></div><hr>`
+        return `<div class="search_result" onclick="show_card('${card_id}')"><div class="result_title">${title}<span class="result_location_card"> (${lang_data["{{ghost_card}}"]})</span></div><div class="result_preview"><div class="result_part">${preview}</div></div><div class="click_more">${lang_data["{{see_more}}"]}</div></div><hr>`
     }
 }
 
 function getLeafMatchesBreadthFirst(elem, queries) {
     const queue = [elem];
     const result = [];
-    const added = new Set();
 
     while (queue.length > 0) {
         const node = queue.shift();
 
+        // Skip <b> and <i> tags entirely
+        if (node.tagName && ['B', 'I'].includes(node.tagName)) continue;
+
         // Skip if any child matches — we only want leaf matches
         let childHasMatch = false;
         for (let child of node.children) {
+            if (['B', 'I'].includes(child.tagName)) continue;
+
             if (all_match(child.innerText.toLowerCase(), queries)) {
                 childHasMatch = true;
                 queue.push(child);
@@ -309,63 +349,52 @@ function getLeafMatchesBreadthFirst(elem, queries) {
 }
 
 
-function parse_wiki(elem, queries, is_title=false){
 
-    if (!is_title){
-        let prev_elem = elem.previousElementSibling
-        let title = prev_elem.innerText.replace(/[^a-z0-9\s()\[\]{}\-\+]/gi, '').trim();
-        let wiki_path = prev_elem.id.replace("wiki-","")
-        
-        while (prev_elem.innerText.includes("└") || prev_elem.innerText.includes("├")){
-            prev_elem = prev_elem.parentElement.previousElementSibling
-            title = prev_elem.innerText.replace(/[^a-z0-9\s()\[\]{}\-\+]/gi, '') + " >> " + title
-            wiki_path = prev_elem.id.replace("wiki-","") + "." + wiki_path
+function parse_wiki(elem, queries){
+
+    let prev_elem = elem.previousElementSibling
+    let title = prev_elem.innerText.replace(/[^a-z0-9\s()\[\]{}\-\+]/gi, '').trim();
+    let wiki_path = prev_elem.id.replace("wiki-","")
+    
+    while (prev_elem.innerText.includes("└") || prev_elem.innerText.includes("├")){
+        prev_elem = prev_elem.parentElement.previousElementSibling
+        title = prev_elem.innerText.replace(/[^a-z0-9\s()\[\]{}\-\+]/gi, '') + " >> " + title
+        wiki_path = prev_elem.id.replace("wiki-","") + "." + wiki_path
+    }
+
+    let results = `<div class="search_result" onclick="$('.ghost_card').removeClass('result_focus');openWikiPath('${wiki_path}')"><div class="result_title">${title}<span class="result_location_guide"> (${lang_data["{{guides}}"]})</span></div><div class="result_preview">`
+
+    // Title
+    if(all_match(title.toLowerCase(),queries))
+        results += `<div class="result_part">${shrink_text(title,queries)}</div>`
+
+    let list_items = getLeafMatchesBreadthFirst(elem, queries);
+    let num_items = 0
+    let added = new Set()
+    list_items.forEach(item => {
+        let skip = false
+        let parent = item.parentElement
+        while (parent){
+            if(added.has(parent)){
+                skip = true
+                break
+            }
+            parent = parent.parentElement
         }
 
-        let results = `<div class="search_result" onclick="$('.ghost_card').removeClass('result_focus');openWikiPath('${wiki_path}')"><div class="result_title">${title}<span class="result_location_guide"> (${lang_data["{{guides}}"]})</span></div><div class="result_preview">`
+        if(skip) return
 
-        let list_items = getLeafMatchesBreadthFirst(elem, queries);
-        let num_items = 0
-        let added = new Set()
-        list_items.forEach(item => {
-            let skip = false
-            let parent = item.parentElement
-            while (parent){
-                if(added.has(parent)){
-                    skip = true
-                    break
-                }
-                parent = parent.parentElement
-            }
-
-            if(skip) return
-
-            if (num_items < 5 && all_match(item.innerText.toLowerCase(),queries)) {
-                results += `<div class="result_part">${shrink_text(item.innerHTML,queries)}</div>`
-                num_items += 1
-            }
-
-            added.add(item)
-        });
-        results += `</div><div class="click_more">${lang_data["{{see_more}}"]}</div></div><hr>`
-
-        return results
-    }
-    else{
-        let prev_elem = elem
-        let title = prev_elem.innerText.replace(/[^a-z0-9\s()\[\]{}\-\+]/gi, '').trim();
-        let wiki_path = prev_elem.id.replace("wiki-","")
-
-        while (prev_elem.innerText.includes("└") || prev_elem.innerText.includes("├")){
-            prev_elem = prev_elem.parentElement.previousElementSibling
-            title = prev_elem.innerText.replace(/[^a-z0-9\s()\[\]{}\-\+]/gi, '') + " >> " + title
-            wiki_path = prev_elem.id.replace("wiki-","") + "." + wiki_path
+        if (num_items < 5 && all_match(item.innerText.toLowerCase(),queries)) {
+            results += `<div class="result_part">${shrink_text(item.innerHTML,queries)}</div>`
+            num_items += 1
         }
 
-        preview = `<div class="result_part">${shrink_text(title,queries)}</div>`
+        added.add(item)
+    });
+    results += `</div><div class="click_more">${lang_data["{{see_more}}"]}</div></div><hr>`
 
-        return `<div class="search_result" onclick="$('.ghost_card').removeClass('result_focus');openWikiPath('${wiki_path}')"><div class="result_title">${title}<span class="result_location_guide"> (${lang_data["{{guides}}"]})</span></div><div class="result_preview">${preview}</div><div class="click_more">${lang_data["{{see_more}}"]}</div></div><hr>`
-    }
+    return results
+
 }
 
 function parse_event(elem, queries){
