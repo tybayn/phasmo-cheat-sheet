@@ -55,7 +55,7 @@ function search() {
                             results += parse_wiki(entry, terms);
                             matched.add(entry)
                         } 
-                        else if (all_match(titleText,terms)) {
+                        if (all_match(titleText,terms)) {
                             results += parse_wiki(entry.previousElementSibling, terms, true);
                             matched.add(entry)
                         }
@@ -115,190 +115,131 @@ function get_text(element) {
     return text.trim();
 }
 
-function shrink_text(html, searchTerms, contextLength = 80) {
-    const tagRegex = /<\/?[^>]+>/g;
+function shrink_text(html, searchTerms) {
+    const lowerHTML = html.toLowerCase();
+    const lowerTerms = searchTerms.map(term => term.toLowerCase());
 
-    // Strip tags to get raw text content and track positions
-    let plainText = '';
-    let indexMap = []; // Maps plainText index → HTML index
-    let lastIndex = 0;
-
-    for (let match of html.matchAll(tagRegex)) {
-        const tagStart = match.index;
-        const tagEnd = match.index + match[0].length;
-
-        // Append text between tags
-        const textSegment = html.slice(lastIndex, tagStart);
-        plainText += textSegment;
-        for (let i = 0; i < textSegment.length; i++) {
-            indexMap.push(lastIndex + i);
+    // Find the earliest and latest occurrence of any of the search terms
+    const matches = [];
+    for (const term of lowerTerms) {
+        const regex = new RegExp(escapeRegExp(term), 'gi');
+        let match;
+        while ((match = regex.exec(lowerHTML)) !== null) {
+            matches.push({ index: match.index, length: match[0].length, term });
         }
-
-        lastIndex = tagEnd;
     }
 
-    // Add remaining text after last tag
-    const trailingText = html.slice(lastIndex);
-    plainText += trailingText;
-    for (let i = 0; i < trailingText.length; i++) {
-        indexMap.push(lastIndex + i);
-    }
+    if (matches.length === 0) return null;
 
-    const lowerText = plainText.toLowerCase();
+    // Sort matches by index
+    matches.sort((a, b) => a.index - b.index);
 
-    // Find all term positions
-    const positions = [];
-    searchTerms.forEach(term => {
-        const lowerTerm = term.toLowerCase();
-        let idx = lowerText.indexOf(lowerTerm);
-        while (idx !== -1) {
-            positions.push({ term, index: idx });
-            idx = lowerText.indexOf(lowerTerm, idx + 1);
-        }
-    });
+    // Find the smallest span that includes at least one of each unique term
+    let bestSpan = null;
+    const termSet = new Set(lowerTerms);
 
-    if (positions.length === 0) return null;
-
-    // If only one term matched
-    if (positions.length === 1 || searchTerms.length === 1) {
-        const { index, term } = positions[0];
-        const start = Math.max(0, index - contextLength);
-        const end = Math.min(plainText.length, index + term.length + contextLength);
-        return safelyExtractHTML(html, indexMap, start, end, [term]);
-    }
-
-    // Find closest pair
-    // Find smallest window containing at least one of each unique search term
-    const termSet = new Set(searchTerms.map(term => term.toLowerCase()));
-    let termOccurrences = {};
-
-    positions.sort((a, b) => a.index - b.index);
-    let left = 0, right = 0, bestRange = null;
-
-    while (right < positions.length) {
-        termOccurrences[positions[right].term.toLowerCase()] = (termOccurrences[positions[right].term.toLowerCase()] || 0) + 1;
-
-        while (Object.keys(termOccurrences).length === termSet.size) {
-            const startIdx = positions[left].index;
-            const endIdx = positions[right].index + positions[right].term.length;
-            if (!bestRange || (endIdx - startIdx) < (bestRange.end - bestRange.start)) {
-                bestRange = {
-                    start: startIdx,
-                    end: endIdx
-                };
-            }
-
-            // Slide left window edge
-            const leftTerm = positions[left].term.toLowerCase();
-            termOccurrences[leftTerm]--;
-            if (termOccurrences[leftTerm] === 0) {
-                delete termOccurrences[leftTerm];
-            }
-            left++;
-        }
-
-        right++;
-    }
-
-    if (!bestRange) return null;
-
-    const start = Math.max(0, bestRange.start - contextLength);
-    const end = Math.min(plainText.length, bestRange.end + contextLength);
-
-    return safelyExtractHTML(html, indexMap, start, end, searchTerms);
-}
-
-function safelyExtractHTML(html, indexMap, textStart, textEnd, highlightTerms) {
-    const htmlStart = indexMap[textStart] || 0;
-    const htmlEnd = indexMap[textEnd - 1] + 1 || html.length;
-
-    let snippet = html.slice(htmlStart, htmlEnd);
-
-    // Find the position of the first matched term in the snippet
-    let firstMatchIndex = snippet.length;
-    highlightTerms.forEach(term => {
-        const regex = new RegExp(escapeRegExp(term), 'i');
-        const match = regex.exec(snippet);
-        if (match && match.index < firstMatchIndex) {
-            firstMatchIndex = match.index;
-        }
-    });
-
-    let before = snippet.slice(0, firstMatchIndex);
-    let after = snippet.slice(firstMatchIndex);
-
-    // Remove all <img> tags before the match
-    before = before.replace(/<img\b[^>]*?>/gi, '');
-
-    // Cut after the first <img> tag after match
-    const imgAfterMatch = after.match(/<img\b[^>]*?>/i);
-    if (imgAfterMatch) {
-        const imgEndIndex = imgAfterMatch.index + imgAfterMatch[0].length;
-        after = after.slice(0, imgEndIndex);
-    }
-
-    snippet = before + after;
-
-    // Fix unclosed or broken tags
-    snippet = fixUnclosedTags(snippet);
-
-    // Add ellipsis if not full start or end
-    if (htmlStart > 0) snippet = '...' + snippet;
-    if (htmlEnd < html.length) snippet += '...';
-
-    // Highlight terms
-    highlightTerms.forEach(term => {
-        const regex = new RegExp(escapeRegExp(term), 'i');
-        snippet = snippet.replace(regex, match => `<span class="result_highlight">${match}</span>`);
-    });
-
-    return snippet;
-}
-
-function fixUnclosedTags(html) {
-    const tagPattern = /<\/?([a-zA-Z0-9\-]+)(\s[^>]*)?>/g;
-    const selfClosing = new Set(['br', 'hr', 'img', 'input', 'meta', 'link']);
-    const stack = [];
-    const result = [];
-
-    let lastIndex = 0;
-    for (const match of html.matchAll(tagPattern)) {
-        const tag = match[0];
-        const tagName = match[1].toLowerCase();
-        const isClosing = tag.startsWith('</');
-
-        result.push(html.slice(lastIndex, match.index));
-        result.push(tag);
-        lastIndex = match.index + tag.length;
-
-        if (selfClosing.has(tagName)) continue;
-
-        if (!isClosing) {
-            stack.push(tagName);
-        } else {
-            const idx = stack.lastIndexOf(tagName);
-            if (idx !== -1) {
-                stack.splice(idx, 1); // Remove matched open tag
-            } else {
-                // Unmatched closing tag; drop it
-                result.pop();
+    for (let start = 0; start < matches.length; start++) {
+        const seen = new Set();
+        for (let end = start; end < matches.length; end++) {
+            seen.add(matches[end].term);
+            if (seen.size === termSet.size) {
+                const spanStart = matches[start].index;
+                const spanEnd = matches[end].index + matches[end].length;
+                if (!bestSpan || (spanEnd - spanStart < bestSpan.end - bestSpan.start)) {
+                    bestSpan = { start: spanStart, end: spanEnd };
+                }
+                break;
             }
         }
     }
 
-    result.push(html.slice(lastIndex));
+    if (!bestSpan) return null;
 
-    // Close any remaining open tags
-    while (stack.length > 0) {
-        const openTag = stack.pop();
-        result.push(`</${openTag}>`);
+    // Expand outward to include full tags
+    let htmlStart = bestSpan.start;
+    let htmlEnd = bestSpan.end;
+
+    // Expand start
+    while (htmlStart > 0 && html[htmlStart] !== '<') htmlStart--;
+
+    // Make sure we're not starting on a closing tag
+    if (html.slice(htmlStart, htmlStart + 2) === '</') {
+        // Move back to find the previous tag
+        htmlStart--;
+        while (htmlStart > 0 && html[htmlStart] !== '<') htmlStart--;
     }
 
-    return result.join('');
+    // Expand end
+    while (htmlEnd < html.length && html[htmlEnd] !== '>') htmlEnd++;
+    htmlEnd++; // include the closing '>'
+
+    // Now backtrack to the outermost tag that wraps all matched terms
+    const wrapper = findMinimalTagWrapper(html, htmlStart, htmlEnd);
+    if (!wrapper) return null;
+
+    // Attempt to include an <img> tag that is shortly after the snippet
+    const postSnippet = html.slice(wrapper.end, wrapper.end + 200); // Look ahead 200 chars
+    const imgMatch = postSnippet.match(/<img\b[^>]*?>/i);
+
+    let snippit
+    if (imgMatch) {
+        const imgStart = wrapper.end + imgMatch.index;
+        const imgEnd = imgStart + imgMatch[0].length;
+        snippet = html.slice(wrapper.start, imgEnd);
+    } else {
+        snippet = html.slice(wrapper.start, wrapper.end);
+    }
+
+    // Highlight one instance of each term
+    for (const term of lowerTerms) {
+        const regex = new RegExp(`(${escapeRegExp(term)})`, 'i');
+        snippet = snippet.replace(regex, `<span class="result_highlight">$1</span>`);
+    }
+
+    return (wrapper.start > 0 ? '...' : '') + snippet.replace(/^[^a-z0-9<]*|[^a-z0-9>]*$/gi, '') + (wrapper.end < html.length ? '...' : '');
 }
 
 function escapeRegExp(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Finds the smallest tag block that wraps the content between start and end
+function findMinimalTagWrapper(html, start, end) {
+    const tagPattern = /<\/?([a-zA-Z0-9\-]+)(\s[^>]*)?>/g;
+    const stack = [];
+    let openTags = [];
+
+    for (let i = start; i < end; i++) {
+        tagPattern.lastIndex = i;
+        const match = tagPattern.exec(html);
+        if (!match || match.index >= end) break;
+
+        const [tag, tagName] = match;
+        const tagIndex = match.index;
+
+        if (tag.startsWith('</')) {
+            if (stack.length && stack[stack.length - 1].tag === tagName) {
+                const openTag = stack.pop();
+                openTags.push({ name: tagName, start: openTag.index, end: tagIndex + tag.length });
+            }
+        } else if (!tag.endsWith('/>')) {
+            stack.push({ tag: tagName, index: tagIndex });
+        }
+
+        i = match.index + tag.length - 1;
+    }
+
+    if (openTags.length === 0) return { start, end };
+
+    // Pick the smallest wrapper that covers the span
+    openTags.sort((a, b) => (a.end - a.start) - (b.end - b.start));
+    for (const tag of openTags) {
+        if (tag.start <= start && tag.end >= end) {
+            return { start: tag.start, end: tag.end };
+        }
+    }
+
+    return { start, end };
 }
 
 
@@ -342,6 +283,32 @@ function parse_card(elem,queries,is_title=false){
     }
 }
 
+function getLeafMatchesBreadthFirst(elem, queries) {
+    const queue = [elem];
+    const result = [];
+    const added = new Set();
+
+    while (queue.length > 0) {
+        const node = queue.shift();
+
+        // Skip if any child matches — we only want leaf matches
+        let childHasMatch = false;
+        for (let child of node.children) {
+            if (all_match(child.innerText.toLowerCase(), queries)) {
+                childHasMatch = true;
+                queue.push(child);
+            }
+        }
+
+        if (!childHasMatch && all_match(node.innerText.toLowerCase(), queries)) {
+            result.push(node);
+        }
+    }
+
+    return result;
+}
+
+
 function parse_wiki(elem, queries, is_title=false){
 
     if (!is_title){
@@ -357,7 +324,7 @@ function parse_wiki(elem, queries, is_title=false){
 
         let results = `<div class="search_result" onclick="$('.ghost_card').removeClass('result_focus');openWikiPath('${wiki_path}')"><div class="result_title">${title}<span class="result_location_guide"> (${lang_data["{{guides}}"]})</span></div><div class="result_preview">`
 
-        let list_items = elem.querySelectorAll("*")
+        let list_items = getLeafMatchesBreadthFirst(elem, queries);
         let num_items = 0
         let added = new Set()
         list_items.forEach(item => {
