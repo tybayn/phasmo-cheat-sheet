@@ -384,6 +384,7 @@ function link_room(){
                         $("#cust_num_evidence").removeAttr("disabled")
                         $("#cust_hunt_length").removeAttr("disabled")
                         $("#ghost_modifier_speed").removeAttr("disabled")
+                        $("#ghost_modifier_speed").removeClass("prevent")
                         document.getElementById("num_evidence").style.width = "100%"
                         $("#weekly_icon").hide()
                     }
@@ -406,6 +407,8 @@ function link_room(){
                         if(incoming_state['settings']['num_evidences'] === "-5"){
                             $("#cust_num_evidence").attr("disabled","disabled")
                             $("#cust_hunt_length").attr("disabled","disabled")
+                            $("#ghost_modifier_speed").attr("disabled","disabled")
+                            $("#ghost_modifier_speed").addClass("prevent")
                             document.getElementById("num_evidence").style.width = "calc(100% - 28px)"
                             $("#weekly_icon").show()
                         }
@@ -414,6 +417,7 @@ function link_room(){
                             $("#cust_num_evidence").attr("disabled","disabled")
                             $("#cust_hunt_length").attr("disabled","disabled")
                             $("#ghost_modifier_speed").attr("disabled","disabled")
+                            $("#ghost_modifier_speed").addClass("prevent")
 
                             if($("#num_evidence option[value='"+incoming_state['settings']['num_evidences']+"']").length === 0){
                                 let presets = document.getElementById("num_evidence")

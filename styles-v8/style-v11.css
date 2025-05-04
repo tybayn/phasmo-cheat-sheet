@@ -95,6 +95,10 @@ body{
     color: #da0000 !important;
 }
 
+.prevent{
+    opacity: 0.3;
+}
+
 @media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
 
     #page-loading{
