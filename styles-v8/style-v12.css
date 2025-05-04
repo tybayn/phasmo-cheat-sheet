@@ -421,7 +421,7 @@ body{
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 21px;
+        width: 22px;
         height: 30px;
         text-align: center;
         top: 6px;
@@ -533,7 +533,7 @@ body{
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 15px;
+        width: 16px;
         height: 90px;
         text-align: center;
         top: 48px;
@@ -571,7 +571,7 @@ body{
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 15px;
+        width: 16px;
         height: 90px;
         text-align: center;
         top: 156px;
@@ -609,7 +609,7 @@ body{
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 15px;
+        width: 16px;
         height: 90px;
         text-align: center;
         top: 264px;
@@ -647,7 +647,7 @@ body{
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 15px;
+        width: 16px;
         height: 90px;
         text-align: center;
         top: 372px;
@@ -712,7 +712,7 @@ body{
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 15px;
+        width: 16px;
         height: 90px;
         text-align: center;
         top: 480px;
@@ -747,7 +747,7 @@ body{
     #search_tab{
         position: absolute;
         height: 24px;
-        width: 24px;
+        width: 25px;
         text-align: center;
         top: 5px;
         left: -35px;
@@ -781,7 +781,7 @@ body{
     #news_tab{
         position: absolute;
         height: 24px;
-        width: 24px;
+        width: 25px;
         text-align: center;
         top: 46px;
         left: -35px;
@@ -834,7 +834,7 @@ body{
     #language_tab{
         position: absolute;
         height: 24px;
-        width: 24px;
+        width: 25px;
         text-align: center;
         top: 0px;
         left: -35px;
@@ -868,7 +868,7 @@ body{
     #theme_tab{
         position: absolute;
         height: 24px;
-        width: 24px;
+        width: 25px;
         text-align: center;
         top: 0px;
         left: -35px;
@@ -907,7 +907,7 @@ body{
     #z3d-tab{
         position: absolute;
         height: 24px;
-        width: 24px;
+        width: 25px;
         text-align: center;
         top: 169px;
         left: -35px;
