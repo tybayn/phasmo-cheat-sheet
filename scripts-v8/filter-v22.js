@@ -1863,6 +1863,7 @@ function loadSettings(){
             user_settings['cust_starting_sanity'] = weekly_data.starting_sanity
             user_settings['cust_sanity_pill_rest'] = Object.keys(sanity_rest).find(e => sanity_rest[e] == weekly_data.sanity_pill_restoration)
             user_settings['cust_sanity_drain'] = weekly_data.sanity_drain
+            user_settings['ghost_modifier'] = Math.round(weekly_data.ghost_speed / 25) - 2
             user_settings['map'] = weekly_data.map_id
         }
         $("#cust_num_evidence").attr("disabled","disabled")
@@ -2073,6 +2074,7 @@ function checkDifficulty(){
         document.getElementById("cust_starting_sanity").value = weekly_data.starting_sanity
         document.getElementById("cust_sanity_pill_rest").value = Object.keys(sanity_rest).find(e => sanity_rest[e] == weekly_data.sanity_pill_restoration)
         document.getElementById("cust_sanity_drain").value = weekly_data.sanity_drain_speed
+        document.getElementById("ghost_modifier_speed").value = Math.round(weekly_data.ghost_speed / 25) - 2
 
         changeMap(document.getElementById(weekly_data.map_id),all_maps[weekly_data.map_id])
 
@@ -2192,7 +2194,7 @@ function setSpeedLogicType(){
 
 function setGhostSpeedFromDifficulty(dif){
     if(dif == '-5'){
-        document.getElementById("ghost_modifier_speed").value = Object.keys(ghost_speed_modifier).find(e => ghost_speed_modifier[e] == weekly_data.ghost_speed)
+        document.getElementById("ghost_modifier_speed").value = Math.round(weekly_data.ghost_speed / 25) - 2
     }
     else{
         speed = {"-1":2,"0":4,"1":2,"2":2,"3":2,"3I":2,"3A":2}[dif]
