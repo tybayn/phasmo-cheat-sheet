@@ -1,0 +1,136 @@
+@font-face {
+    font-family: 'ZNPrimary';
+    src: url('../../styles-v8/fonts/unutterable.ttf');
+}
+
+@font-face {
+    font-family: 'ZNSecondary';
+    src: url('../../styles-v8/fonts/yahfie.ttf');
+}
+
+
+
+/* Desktop Adjustments */
+@media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
+
+    .filter_tool_button{
+        font-size: 19px !important;
+    }
+    
+    .ghost_name{
+        font-size: 20px !important;
+        font-weight: lighter !important;
+    }
+
+    .data{
+        grid-template-columns: 220px auto !important;
+    }
+
+    .label{
+        letter-spacing: 1px;
+    }
+
+    #settings_box, #links_box, #discord_link_box, #event_box, #wiki_box {
+        width: 209px;
+    }
+
+    #maps_box{
+        min-width: 597px !important;
+    }
+
+    #discord_link_tab{
+        height: 115px !important;
+    }
+
+    #event_tab{
+        height: 130px !important;
+        top: 289px !important;
+    }
+
+    #wiki_tab{   
+        top: 437px !important;
+    }
+
+    #maps_tab {
+        top: 545px !important;
+    }
+
+    #game_mode {
+        font-size: 24px !important;
+    }
+
+    .discord-entry{
+        font-size: 9px !important;
+    }
+
+    .modifier .modifier_note{
+        display: block !important;
+    }
+}
+
+/* Mobile Adjustments */
+@media screen and (pointer: coarse) and (max-device-width: 600px) {
+    .ghost_card{
+        grid-template-columns: 40% 60% !important;
+    }
+
+    .ghost_name{
+        font-size: 20px !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        padding-left: 15px !important;
+    }
+
+    .ghost_evidence{
+        align-items: flex-end !important;
+        padding-right: 15px !important;
+    }
+
+    .ghost_evidence_item{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .evidence-row{
+        width: auto !important;
+    }
+
+    .speed .tricheck {
+        width: 20% !important;
+    }
+    .speed .tricheck:last-child {
+        width: 40% !important;
+    }
+
+    .menu{
+        height: 620px;
+    }
+
+    #reset{
+        font-size: 38px !important;
+        letter-spacing: -1px;
+    }
+
+    #discord_link_tab{
+        height: 235px !important;
+    }
+
+    #wiki_tab{
+        top: 605px !important;
+    }
+
+    #maps_tab{
+        top: 834px !important;
+    }
+
+    #event_tab{
+        height: 280px !important;
+        top: 1062px !important;
+    }
+
+    .modifier .modifier_note{
+        font-size: 23px !important;
+        padding-top: 0 !important;
+    }
+}

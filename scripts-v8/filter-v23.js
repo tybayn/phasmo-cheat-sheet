@@ -2043,16 +2043,18 @@ function checkDifficulty(){
     let dif_opt = document.getElementById("num_evidence").value
 
     if(dif_opt.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)){
-        document.getElementById("cust_num_evidence").value = custom_difficulties[dif_opt].settings.num_evidence
-        document.getElementById("cust_hunt_length").value = custom_difficulties[dif_opt].settings.hunt_duration
-        document.getElementById("ghost_modifier_speed").value = custom_difficulties[dif_opt].settings.ghost_speed
-        document.getElementById("cust_starting_sanity").value = custom_difficulties[dif_opt].settings.starting_sanity
-        document.getElementById("cust_sanity_pill_rest").value = custom_difficulties[dif_opt].settings.sanity_pill_restoration
-        document.getElementById("cust_sanity_drain").value = custom_difficulties[dif_opt].settings.sanity_drain_speed
+        
         $("#cust_num_evidence").attr("disabled","disabled")
         $("#cust_hunt_length").attr("disabled","disabled")
         $("#ghost_modifier_speed").attr("disabled","disabled")
         $("#ghost_modifier_speed").addClass("prevent")
+        document.getElementById("cust_num_evidence").value = custom_difficulties[dif_opt].settings.num_evidence
+        document.getElementById("cust_hunt_length").value = custom_difficulties[dif_opt].settings.hunt_duration
+        document.getElementById("ghost_modifier_speed").value = parseInt(custom_difficulties[dif_opt].settings.ghost_speed)
+        document.getElementById("cust_starting_sanity").value = custom_difficulties[dif_opt].settings.starting_sanity
+        document.getElementById("cust_sanity_pill_rest").value = custom_difficulties[dif_opt].settings.sanity_pill_restoration
+        document.getElementById("cust_sanity_drain").value = custom_difficulties[dif_opt].settings.sanity_drain_speed
+
         return
     }
 
@@ -2196,7 +2198,7 @@ function setGhostSpeedFromDifficulty(dif){
     if(dif == '-5'){
         document.getElementById("ghost_modifier_speed").value = Math.round(weekly_data.ghost_speed / 25) - 2
     }
-    else{
+    else if(!dif.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)){
         speed = {"-1":2,"0":4,"1":2,"2":2,"3":2,"3I":2,"3A":2}[dif]
         document.getElementById("ghost_modifier_speed").value = speed
     }

@@ -3270,6 +3270,7 @@ input{
         display: flex;
         align-content: center;
         justify-content: center;
+        align-items: center;
     }
 
     .evidence-row{
@@ -3323,7 +3324,7 @@ input{
         border-radius: 2px;
         width: 12px;
         height: 8px;
-        top: 9px;
+        margin-top: 4px;
         position: absolute;
     }
     
