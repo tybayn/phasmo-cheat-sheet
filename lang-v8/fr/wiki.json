@@ -94,7 +94,7 @@
     "{{wiki_music_box_p1}}": "Lorsqu'elle est utilisée, la boîte à musique jouera de la musique pendant un certain temps. Si la boîte à musique est amenée à moins de 20 m de l'entité, celle-ci commencera à chanter, révélant son emplacement mais restant invisible.",
     "{{wiki_music_box_p2}}": "Si la boîte est à moins de 5 m de l'entité, l'entité démarrera un événement où elle devient visible et commence à marcher vers la boîte.",
     "{{wiki_music_box_h2}}": "Le coût :",
-    "{{wiki_music_box_p3}}": "Se trouver à moins de 2,5 m de la boîte à musique drainera 2,5% de santé mentale par seconde pendant que la musique joue, pour un total de 75% perdu si la boîte à musique peut jouer sa musique entièrement.",
+    "{{wiki_music_box_p3}}": "Se trouver à moins de 3 m de la boîte à musique drainera 2,6% de santé mentale par seconde pendant que la musique joue, pour un total de 77% perdu si la boîte à musique peut jouer sa musique entièrement.",
     "{{wiki_music_box_h3}}": "Chasse maudite :",
     "{{wiki_music_box_p4}}": "Une chasse maudite commencera si l'une des conditions suivantes se produit :",
     "{{wiki_music_box_p5}}": "Le joueur jette la boîte au lieu de la placer, la fermant brusquement",

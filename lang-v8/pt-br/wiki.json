@@ -88,7 +88,7 @@
     "{{wiki_music_box_p1}}": "Quando usada, a caixa de música tocará uma melodia durante algum tempo. Se a caixa se aproximar até 20m do fantasma, este começará a cantar revelando a sua posição, mas permanecendo invisível.",
     "{{wiki_music_box_p2}}": "No entanto, se a caixa chegar a 5m do fantasma, iniciará um evento tornando-se visível e caminhará em direção à caixa.",
     "{{wiki_music_box_h2}}": "Custo:",
-    "{{wiki_music_box_p3}}": "Ficar perto da Caixa de Música (dentro de 2.5m) irá drenar 2.5% de sanidade por segundo enquanto a melodia toca. Se ficar perto da caixa durante a melodia inteira, perderá um total de 75% de sanidade.",
+    "{{wiki_music_box_p3}}": "Ficar perto da Caixa de Música (dentro de 3m) irá drenar 2.6% de sanidade por segundo enquanto a melodia toca. Se ficar perto da caixa durante a melodia inteira, perderá um total de 77% de sanidade.",
     "{{wiki_music_box_h3}}": "Caça Amaldiçoada:",
     "{{wiki_music_box_p4}}": "Uma caça amaldiçoada terá início se qualquer uma das seguintes condições acontecer:",
     "{{wiki_music_box_p5}}": "O jogador atira a caixa em vez de a colocar, fazendo com que esta se feche com força",

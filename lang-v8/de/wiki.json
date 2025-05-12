@@ -94,7 +94,7 @@
     "{{wiki_music_box_p1}}": "Wenn verwendet, beginnt die Box für eine gewisse Zeit Musik zu spielen. Wenn die Box unter 20m vom Geist entfernt ist, wird der Geist anfangen mitzusingen, zeigt damit seinen Standort aber bleibt unsichtbar.",
     "{{wiki_music_box_p2}}": "Wenn die Box in unter 5m Entfernung vom Geist entfernt kommt, der Geist startet ein Event, wird sichtbar und läuft in Richtung der Box.",
     "{{wiki_music_box_h2}}": "Die Kosten:",
-    "{{wiki_music_box_p3}}": "In 2,5m Entfernung von der Musik Box senkt 2.5% Geisteszustand pro Sekunde während der Song spielt, bis zu einem Verlust von 75% wenn die Musikbox die volle Länge spielt.",
+    "{{wiki_music_box_p3}}": "In 3m Entfernung von der Musik Box senkt 2.6% Geisteszustand pro Sekunde während der Song spielt, bis zu einem Verlust von 77% wenn die Musikbox die volle Länge spielt.",
     "{{wiki_music_box_h3}}": "Verfluchte Jagd:",
     "{{wiki_music_box_p4}}": "Eine verfluchte Jagd beginnt wenn eine der folgenden Ereignisse geschehen:",
     "{{wiki_music_box_p5}}": "Der Spieler wirft die Box anstatt sie zu platzieren, die Box fällt dadurch zu",

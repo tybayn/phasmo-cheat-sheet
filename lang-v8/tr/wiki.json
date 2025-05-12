@@ -88,7 +88,7 @@
     "{{wiki_music_box_p1}}": "Kullanıldığında, müzik kutusu bir süre müzik çalar. Müzik kutusu hayaletin 20m yakınına getirilirse, hayalet şarkı söylemeye başlar ve yerini belli eder, ancak görünmez kalır.",
     "{{wiki_music_box_p2}}": "Kutu hayaletin 5m yakınına gelirse, hayalet görünür hale geldiği ve kutuya doğru yürümeye başladığı bir etkinlik başlatır.",
     "{{wiki_music_box_h2}}": "Bedeli:",
-    "{{wiki_music_box_p3}}": "Müzik kutusunun 2.5m yakınında olmak, şarkı çalarken saniyede %2.5 akıl sağlığının azalmasına neden olur. Müzik kutusu tam süresince çalmasına izin verilirse toplam %75 akıl sağlığı kaybı olur.",
+    "{{wiki_music_box_p3}}": "Müzik kutusunun 3m yakınında olmak, şarkı çalarken saniyede %2.6 akıl sağlığının azalmasına neden olur. Müzik kutusu tam süresince çalmasına izin verilirse toplam %77 akıl sağlığı kaybı olur.",
     "{{wiki_music_box_h3}}": "Lanetli Avlanma:",
     "{{wiki_music_box_p4}}": "Aşağıdaki koşullardan herhangi biri gerçekleşirse lanetli bir avlanma başlar:",
     "{{wiki_music_box_p5}}": "Oyuncu, kutuyu yerleştirmek yerine fırlatırsa ve kapanmasına neden olursa",

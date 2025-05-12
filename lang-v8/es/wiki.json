@@ -88,7 +88,7 @@
     "{{wiki_music_box_p1}}": "Cuando se usa, la caja de música sonará por un tiempo. Si la caja está a menos de 20m del fantasma, este comenzará a cantar a la vez, revelando su localizacion pero se mantiene invisible.",
     "{{wiki_music_box_p2}}": "Si la caja está a menos de 5m del fantasma, este empezará un evento donde se vuelve visible y comienza a caminar hacia la caja.",
     "{{wiki_music_box_h2}}": "Coste:",
-    "{{wiki_music_box_p3}}": "Estando a 2.5m alrededor de la caja perderá 2.5% de cordura por segundo mientras suena la canción, hasta un total de 75% si la caja de música puede sonar hasta el final.",
+    "{{wiki_music_box_p3}}": "Estando a 3m alrededor de la caja perderá 2.6% de cordura por segundo mientras suena la canción, hasta un total de 77% si la caja de música puede sonar hasta el final.",
     "{{wiki_music_box_h3}}": "Cacería maldita:",
     "{{wiki_music_box_p4}}": "Si una de estas condiciones se cumple comenzará una cacería maldita:",
     "{{wiki_music_box_p5}}": "El jugador lanza la caja en lugar de colocarla, cerrándose bruscamente.",
