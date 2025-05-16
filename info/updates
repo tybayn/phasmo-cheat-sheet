@@ -1,6 +1,6 @@
 {
-    "version":"4.2.1",
-    "date":"2025-05-09",
-    "details": "- Overlays will now show on screen on restart if set\n\nBug Fixes:\n- Overlays will now show on screen on restart if set",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v4.2.1.msi"
+    "version":"5.0.0",
+    "date":"2025-05-15",
+    "details": "- Added new in-game text chat if both Desktop Link and Shared Journal Link are active.\n\nBug Fixes:\n- Issue with setting bloodmoon hotkey",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v5.0.0.msi"
 }

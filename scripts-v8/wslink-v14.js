@@ -245,6 +245,7 @@ function link_room(){
         $('.card_icon_guess').show()
         document.getElementById("room_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{connected}}']}`
         document.getElementById("settings_status").className = "connected"
+        sync_sjl_dl()
         ws_ping = setInterval(function(){
             send_ping()
         }, 30000)
@@ -617,6 +618,7 @@ function link_link(reconnect = false){
         toggleSanitySettings()
         document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{awaiting_link}}']}`
         document.getElementById("dllink_status").className = "pending"
+        sync_sjl_dl()
     }
     dlws.onerror = function(event){
         if(!reconnecting){
@@ -1133,6 +1135,12 @@ function request_guess(){
 function send_ping(){
     if(hasLink){
         ws.send('{"action":"PING"}')
+    }
+}
+
+function sync_sjl_dl(){
+    if(hasDLLink && hasLink){
+        ws.send(`{"action":"SJLDLLINK","value":"${document.getElementById("link_id").value}"}`)
     }
 }
 
