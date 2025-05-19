@@ -741,6 +741,7 @@ function link_link(reconnect = false){
                         setCookie("link_id",incoming_state.message,1)
                     }
                     dlws.send('{"action":"LINK"}')
+                    send_discord_link()
                     send_map_preload_link()
                     send_sanity_link(Math.round(sanity),sanity_color())
                     send_timer_link("TIMER_VAL","0:00")
@@ -1060,6 +1061,12 @@ function send_ping_link(){
     }
 }
 
+function send_discord_link(){
+    if(hasDLLink && Object.keys(discord_user).length > 0){
+        dlws.send(`{"action":"DISCORD","username":"${discord_user.username}"}`)
+    }
+}
+
 function send_reset_link(){
     if(hasDLLink){
         send_ghost_link("",0)
@@ -1159,6 +1166,7 @@ function send_state() {
             'sanity': state['sanity'],
             'ghosts': state['ghosts'],
             "map": state['map'],
+            "map_size": state['map_size'],
             "prev_monkey_state": state['prev_monkey_state'],
             "forest_minion": document.getElementById("forest-minion-icon").classList.contains("forest-minion-active") ? 1 : 0,
             "blood_moon": document.getElementById("blood-moon-icon").classList.contains("blood-moon-active") ? 1 : 0,
