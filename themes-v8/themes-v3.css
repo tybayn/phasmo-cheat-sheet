@@ -10,8 +10,8 @@
 }
 
 .theme-default{
-    background: #313248;
-    background-attachment: inherit;
+    background: linear-gradient(45deg,rgba(49, 50, 72, 1) 25%, rgba(64, 49, 72, 1) 75%);
+    background-attachment: fixed;
 }
 
 .theme-berry{

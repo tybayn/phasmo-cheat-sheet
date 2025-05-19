@@ -337,6 +337,12 @@ function link_room(){
                 }
                 if (incoming_state['action'].toUpperCase() == "CHANGE"){
                     document.getElementById("room_id_note").innerText = `STATUS: Connected (${incoming_state['players']})`
+                    send_ml_state()
+                }
+                if (incoming_state['action'].toUpperCase() == "EVIDENCE"){
+                    if(!$(document.getElementById(incoming_state['evidence']).querySelector("#checkbox")).hasClass("block")){
+                        tristate(document.getElementById(incoming_state['evidence']))
+                    }
                 }
                 if (incoming_state['action'].toUpperCase() == "POLL"){
                     polled = true
@@ -1169,5 +1175,27 @@ function send_state() {
             }
         })
         ws.send(outgoing_state)
+        send_ml_state()
     }
+}
+
+function send_ml_state(){
+    if (hasLink){
+        var ghost_list = [];
+        for (const [key, value] of Object.entries(state['ghosts'])){ 
+            if($(document.getElementById(key)).hasClass("hidden")){
+                ghost_list.push(`${key}:-1:${bpm_list.includes(key)? 1 : bpm_los_list.includes(key) ? 2 : 0}`)
+            }
+            else{
+                ghost_list.push(`${key}:${value}:${bpm_list.includes(key) ? 1 : bpm_los_list.includes(key) ? 2 : 0}`)
+            }
+        }
+        ws.send(`{"action":"ML-GHOSTS","ghost":"${ghost_list}"}`)
+
+        var evi_list = [];
+        for (const [key, value] of Object.entries(state['evidence'])){ 
+            evi_list.push(`${key}:${$(document.getElementById(key)).hasClass("block") ? -2 : $(document.getElementById(key).querySelector("#checkbox")).hasClass("faded") ? -1 : value}`)
+        }
+        ws.send(`{"action":"ML-EVIDENCE","evidences":"${evi_list}"}`)
+    }   
 }
