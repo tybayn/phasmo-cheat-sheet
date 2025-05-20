@@ -1,6 +1,6 @@
 {
-    "version":"5.0.1",
+    "version":"5.0.2",
     "date":"2025-05-19",
-    "details": "- Added support for Discord Link to show Discord username in chat instead of 'Player #'\n\nBug Fixes:\n- None",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v5.0.1.msi"
+    "details": "- Added support for Discord Link to show Discord username in chat instead of 'Player #'\n\nBug Fixes:\n- Chat opacity fixed\n- 'Player #' will now show correctly in chat",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v5.0.2.msi"
 }
