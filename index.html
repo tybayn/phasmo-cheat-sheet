@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="styles-v8/style-v13.css"/>
     <link rel="stylesheet" href="styles-v8/style-mobile-v8.css"/>
     <link rel="stylesheet" href="themes-v8/themes-v3.css"/>
-    <link rel="stylesheet" href="discord-v8/discord-v2.css" >
+    <link rel="stylesheet" href="discord-v8/discord-v3.css" >
     <link rel="stylesheet" href="wiki-v8/wiki-v3.css" >
     <link rel="stylesheet" href="wiki-v8/wiki-spoiler-v1.css" >
     <link rel="stylesheet" href="events-v8/events-v1.css" >
@@ -449,6 +449,15 @@
                     </div>
                 </div>
                 <div id="room_id_note" class="modifier_note" style="user-select: text;">({{status}}: {{not_connected}})</div>
+                <hr class="znml" style="display: none;">
+                <div class="znml modifier_volume yfont white" style="display: none;">{{mobile_link}}</div>
+                <div class="znml journal_link" style="display: none;">
+                    <div class="journal_link_buttons">
+                        <a href="https://zero-network.net/phasmo-cheat-sheet/mobile-link" target="_blank" class="journal_link_buttons" style="text-decoration: none;">
+                            <button class="journal_link_button">{{open_ml}}</button>
+                        </a>
+                    </div>
+                </div>
                 <hr>
                 <div class="modifier_volume yfont white">
                     <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo(event)">
@@ -986,6 +995,7 @@
             document.getElementById("maps_box").style.left = "-100%";
             document.getElementById("link_id_create_launch").style.display = "none";
             document.getElementById("calibrate-button").style.display = "none";
+            $('.znml').show()
         }
         else{
             document.getElementById("settings_box").style.left = "0px";

@@ -149,14 +149,14 @@
     }
 
     #discord_link_date{
-        font-size: 20px;
+        font-size: 35px;
         color: #ffffffa0;
         margin-top: 2px;
     }
 
     .discord_note{
         color: #FFF;
-        font-size: 16px;
+        font-size: 35px;
         padding-top: 30px;
         width: 75%;
     }
@@ -213,7 +213,7 @@
     #discord_instructions{
         width: 75%;
         padding-top: 30px;
-        font-size: 16px;
+        font-size: 35px;
     }
 
     #discord_instructions ul{
@@ -246,6 +246,7 @@
 
     .discord_instructions_text{
         margin-left: 100px;
+        font-size: 30px;
     }
 
     #phasmo-stats{

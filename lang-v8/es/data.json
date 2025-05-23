@@ -123,6 +123,8 @@
     "{{awaiting_link}}": "Esperando el Enlace de Escritorio",
     "{{linked}}": "Enlazado",
     "{{link_lost}}": "¡El enlace perdió la conexión!",
+    "{{mobile_link}}": "Mobile Link",
+    "{{open_ml}}": "Abrir ZN Mobile Link",
     "{{desktop_link}}": "Enlace de<br>Escritorio",
     "{{create_and_launch}}": "Crear e Iniciar",
     "{{sanity_settings}}": "Ajustes de Cordura",

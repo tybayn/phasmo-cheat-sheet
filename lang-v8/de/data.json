@@ -128,6 +128,8 @@
     "{{awaiting_link}}": "Warten auf Desktop-Link",
     "{{linked}}": "Verknüpft",
     "{{link_lost}}": "Verbindung verloren!",
+    "{{mobile_link}}": "Mobile-Link",
+    "{{open_ml}}": "ZN Mobile-Link öffnen",
     "{{desktop_link}}": "Desktop-Link",
     "{{create_and_launch}}": "Erstellen & Starten",
     "{{sanity_settings}}": "Geisteszustand Einstellungen",

@@ -125,6 +125,8 @@
     "{{awaiting_link}}": "Desktop Link 대기 중",
     "{{linked}}": "연결됨",
     "{{link_lost}}": "연결이 끊어졌습니다!",
+    "{{mobile_link}}": "Mobile Link",
+    "{{open_ml}}": "ZN Mobile Link 열기",
     "{{desktop_link}}": "Desktop Link",
     "{{create_and_launch}}": "생성 & 실행",
     "{{sanity_settings}}": "정신력 설정",

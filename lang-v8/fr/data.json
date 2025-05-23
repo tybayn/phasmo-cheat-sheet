@@ -128,6 +128,8 @@
     "{{awaiting_link}}": "Attente de liaison avec l'application de bureau",
     "{{linked}}": "Lié",
     "{{link_lost}}": "Connexion perdue !",
+    "{{mobile_link}}": "Lien du mobile",
+    "{{open_ml}}": "Ouvrir le lien du mobile ZN",
     "{{desktop_link}}": "Lien avec l'application de bureau",
     "{{create_and_launch}}": "Créer & Lancer",
     "{{sanity_settings}}": "Paramètres de santé mentale",

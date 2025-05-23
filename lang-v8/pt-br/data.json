@@ -128,6 +128,8 @@
     "{{awaiting_link}}": "Aguardando Desktop Link",
     "{{linked}}": "Linkado",
     "{{link_lost}}": "O Link perdeu conexão!",
+    "{{mobile_link}}": "Mobile Link",
+    "{{open_ml}}": "Abrir ligação ZN Mobile",
     "{{desktop_link}}": "Desktop Link",
     "{{create_and_launch}}": "Criar e abrir App",
     "{{sanity_settings}}": "Configurações da Sanidade",

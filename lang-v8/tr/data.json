@@ -124,6 +124,8 @@
     "{{awaiting_link}}": "Masaüstü Bağlantısı Bekleniyor",
     "{{linked}}": "Bağlandı",
     "{{link_lost}}": "Bağlantı Kaybedildi!",
+    "{{mobile_link}}": "Mobil Bağlantısı",
+    "{{open_ml}}": "ZN Mobil Bağlantısını Aç",
     "{{desktop_link}}": "Masaüstü Bağlantısı",
     "{{create_and_launch}}": "Oluştur ve Başlat",
     "{{sanity_settings}}": "Akıl Sağlığı Ayarları",
