@@ -154,164 +154,134 @@ function loadAllAndConnect(){
         if(!lang){
             lang = 'en'
         }
-        fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=${lang}`, {cache: 'default', signal: AbortSignal.timeout(10000)})
-        .then(data => data.json())
-        .then(data => {
-
-            all_ghosts = Object.fromEntries(data.ghosts.map(a => [a.ghost,a.name]))
-            all_evidence = data.evidence
-
-            var cards = document.getElementById('cards')
-            var wiki = document.getElementById('wiki-0-evidence-data')
-            var cur_version = document.getElementById('current-version-label')
-            var evidence_list = document.getElementById('evidence')
-    
-            evidence_list.innerHTML = "";
-            Object.entries(data.evidence).forEach(([key,value]) => {
-                evidence_list.innerHTML += `
-                <div class="evidence-row">
-                    <img class="monkey-smudge" style="display:none;" src="imgs/smudge.png">
-                    <button id="${key}" class="tricheck white" name="evidence" onclick="tristate(this)" value="${key}">
-                        <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label">${value}</div>
-                    </button>
-                    <img class="monkey-paw-select" src="imgs/paw-icon.png" onclick="monkeyPawFilter(this)">
-                </div>
-                `
-            })
-    
-            cards.innerHTML = "";
-            wiki.innerHTML = "";
-            for(var i = 0; i < data.ghosts.length; i++){
-                bpm_speeds.add(data.ghosts[i].min_speed)
-                if(data.ghosts[i].max_speed != null){bpm_speeds.add(data.ghosts[i].max_speed)}
-                if(data.ghosts[i].alt_speed != null){bpm_speeds.add(data.ghosts[i].alt_speed)}
-                var ghost = new Ghost(data.ghosts[i],data.evidence);
-                cards.innerHTML += `${ghost.ghostTemplate}`
-                wiki.innerHTML += (i == data.ghosts.length-1 ? `${ghost.wikiTemplate.replace("&#9500;","&#9492;")}` : `${ghost.wikiTemplate}`)
-            }
-            cur_version.innerHTML = `${data.version}`
-            
-        })
-        .then(data => {
-            var raw_state = getCookie("state")
-
-            if (!raw_state || raw_state == '' || raw_state == null){
-                console.log("No State found")
-                for (var i = 0; i < Object.keys(all_evidence).length; i++){
-                    state["evidence"][Object.keys(all_evidence)[i]] = 0
-                }
-                for (var i = 0; i < Object.keys(all_ghosts).length; i++){
-                    state["ghosts"][Object.keys(all_ghosts)[i]] = 1
-                }
-                state["prev_monkey_state"] = 0
-
-                var read_state = JSON.parse(JSON.stringify(state))
-            }
-            else{
-                var read_state = JSON.parse(raw_state)
-            }
-
-            for (const [key, value] of Object.entries(read_state["evidence"])){ 
-                if($(document.getElementById(key)).parent().find(".monkey-paw-select").hasClass("monkey-paw-selected"))
-                    monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"))
-
-                if (value == 1){
-                    tristate(document.getElementById(key));
-                }
-                else if (value == -1){
-                    tristate(document.getElementById(key));
-                    tristate(document.getElementById(key));
-                }
-                else if (value == -2){
-                    monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"))
-                }
-            }
-            for (const [key, value] of Object.entries(read_state["speed"])){ 
-                if (value == 1){
-                    $("#"+key)[0].click();
-                }
-            }
-            for (const [key, value] of Object.entries(read_state["sanity"])){ 
-                if (value == 1){
-                    $("#"+key)[0].click();
-                }
-            }
-            prev_monkey_state = read_state["prev_monkey_state"] ?? 0
-
-            if (state['los'] == 1){
-                tristate(document.getElementById("LOS"));
-            }
-            else if (state['los'] == 0){
-                tristate(document.getElementById("LOS"));
-                tristate(document.getElementById("LOS"));
-            }
-
-            for (const [key, value] of Object.entries(read_state['ghosts'])){ 
-                if (value == 0){
-                    fade(document.getElementById(key), true);
-                }
-                else if (value == -2){
-                    died(document.getElementById(key), true, true);
-                }
-                else if (value == -1){
-                    remove(document.getElementById(key), true, true);
-                }
-                else if (value == 2){
-                    select(document.getElementById(key), true, true);
-                }
-                else if (value == 3){
-                    guess(document.getElementById(key), true, true);
-                }
-                else{
-                    state['ghosts'][key] = value
-                }
-            }
-        })
-        .then(() => {
-            resolve("Ghost data loaded")
-        })
-        .catch(error => {
-            console.error(error)
-    
-            fetch("backup-data/ghosts_backup.json")
+        try{
+            fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=${lang}`, {cache: 'default', signal: AbortSignal.timeout(10000)})
             .then(data => data.json())
             .then(data => {
 
                 all_ghosts = Object.fromEntries(data.ghosts.map(a => [a.ghost,a.name]))
                 all_evidence = data.evidence
-            
+
                 var cards = document.getElementById('cards')
                 var wiki = document.getElementById('wiki-0-evidence-data')
                 var cur_version = document.getElementById('current-version-label')
                 var evidence_list = document.getElementById('evidence')
-    
+        
                 evidence_list.innerHTML = "";
-                for(var i = 0; i < data.evidence.length; i++){
+                Object.entries(data.evidence).forEach(([key,value]) => {
                     evidence_list.innerHTML += `
                     <div class="evidence-row">
                         <img class="monkey-smudge" style="display:none;" src="imgs/smudge.png">
-                        <button id="${data.evidence[i]}" class="tricheck white" name="evidence" onclick="tristate(this)" value="${data.evidence[i]}">
+                        <button id="${key}" class="tricheck white" name="evidence" onclick="tristate(this)" value="${key}">
                             <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                            <div class="label">${data.evidence[i]}</div>
+                            <div class="label">${value}</div>
                         </button>
                         <img class="monkey-paw-select" src="imgs/paw-icon.png" onclick="monkeyPawFilter(this)">
                     </div>
                     `
-                }
+                })
+        
                 cards.innerHTML = "";
                 wiki.innerHTML = "";
                 for(var i = 0; i < data.ghosts.length; i++){
-                    var ghost = new Ghost(data.ghosts[i]);
+                    bpm_speeds.add(data.ghosts[i].min_speed)
+                    if(data.ghosts[i].max_speed != null){bpm_speeds.add(data.ghosts[i].max_speed)}
+                    if(data.ghosts[i].alt_speed != null){bpm_speeds.add(data.ghosts[i].alt_speed)}
+                    var ghost = new Ghost(data.ghosts[i],data.evidence);
                     cards.innerHTML += `${ghost.ghostTemplate}`
                     wiki.innerHTML += (i == data.ghosts.length-1 ? `${ghost.wikiTemplate.replace("&#9500;","&#9492;")}` : `${ghost.wikiTemplate}`)
                 }
                 cur_version.innerHTML = `${data.version}`
+                
             })
             .then(data => {
-                resolve("Backup ghost data loaded")
+                var raw_state = getCookie("state")
+
+                if (!raw_state || raw_state == '' || raw_state == null){
+                    console.log("No State found")
+                    for (var i = 0; i < Object.keys(all_evidence).length; i++){
+                        state["evidence"][Object.keys(all_evidence)[i]] = 0
+                    }
+                    for (var i = 0; i < Object.keys(all_ghosts).length; i++){
+                        state["ghosts"][Object.keys(all_ghosts)[i]] = 1
+                    }
+                    state["prev_monkey_state"] = 0
+
+                    var read_state = JSON.parse(JSON.stringify(state))
+                }
+                else{
+                    var read_state = JSON.parse(raw_state)
+                }
+
+                for (const [key, value] of Object.entries(read_state["evidence"])){ 
+                    if($(document.getElementById(key)).parent().find(".monkey-paw-select").hasClass("monkey-paw-selected"))
+                        monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"))
+
+                    if (value == 1){
+                        tristate(document.getElementById(key));
+                    }
+                    else if (value == -1){
+                        tristate(document.getElementById(key));
+                        tristate(document.getElementById(key));
+                    }
+                    else if (value == -2){
+                        monkeyPawFilter($(document.getElementById(key)).parent().find(".monkey-paw-select"))
+                    }
+                }
+                for (const [key, value] of Object.entries(read_state["speed"])){ 
+                    if (value == 1){
+                        $("#"+key)[0].click();
+                    }
+                }
+                for (const [key, value] of Object.entries(read_state["sanity"])){ 
+                    if (value == 1){
+                        $("#"+key)[0].click();
+                    }
+                }
+                prev_monkey_state = read_state["prev_monkey_state"] ?? 0
+
+                if (state['los'] == 1){
+                    tristate(document.getElementById("LOS"));
+                }
+                else if (state['los'] == 0){
+                    tristate(document.getElementById("LOS"));
+                    tristate(document.getElementById("LOS"));
+                }
+
+                for (const [key, value] of Object.entries(read_state['ghosts'])){ 
+                    if (value == 0){
+                        fade(document.getElementById(key), true);
+                    }
+                    else if (value == -2){
+                        died(document.getElementById(key), true, true);
+                    }
+                    else if (value == -1){
+                        remove(document.getElementById(key), true, true);
+                    }
+                    else if (value == 2){
+                        select(document.getElementById(key), true, true);
+                    }
+                    else if (value == 3){
+                        guess(document.getElementById(key), true, true);
+                    }
+                    else{
+                        state['ghosts'][key] = value
+                    }
+                }
             })
-        })
+            .then(() => {
+                resolve("Ghost data loaded")
+            })
+            .catch(error => {
+                console.error(error)
+                document.getElementById("page-loading-status").innerText = "failed to load ghost data!"
+                reject("Could not load ghost data")
+            })
+        }
+        catch{
+            document.getElementById("page-loading-status").innerText = "failed to load ghost data!"
+            reject("Could not load ghost data")
+        }
     })
 
     let loadMaps = new Promise((resolve, reject) => {
@@ -343,6 +313,7 @@ function loadAllAndConnect(){
         })
         .catch(error => {
             console.error(error)
+            document.getElementById("page-loading-status").innerText = "failed to load map data!"
             reject("Failed to load map data")
         })
 
