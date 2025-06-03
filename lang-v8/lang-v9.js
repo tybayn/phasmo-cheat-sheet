@@ -4,7 +4,7 @@ var lang_data = null
 // ----------------------------------
 
 const lang_currency = [
-    "de", "es", "fr", "pt-br", "tr"
+    "de", "es", "fr", "pt-br", "tr", "zh-cn"
 ]
 
 const lang_menu_widths = {
@@ -70,6 +70,9 @@ const lang_menu_widths = {
         "menu_bottom_custom":"-760px",
         "menu_height":"740px",
         "menu_height_custom":"795px"
+    },
+    "zh-cn":{
+        
     },
 }
 
