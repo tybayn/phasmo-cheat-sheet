@@ -211,15 +211,23 @@ function openWikiPath(path){
         showWiki()
     path.split(delim).forEach(id => {
         if(!$(document.getElementById(`wiki-${id}`)).hasClass("wiki_active")){
-            accordian(document.getElementById(`wiki-${id}`))
+            let wiki_elem = document.getElementById(`wiki-${id}`)
+            if(wiki_elem.tagName == "DIV")
+                accordian(document.getElementById(`wiki-${id}`))
         }
     })
     document.getElementById(`wiki-${path.split(delim)[path.split(delim).length - 1]}`).scrollIntoView({alignToTop:true,behavior:"smooth"})
 }
 
-function generateWikiShareLink(elem){
+function generateWikiShareLink(elem,inline=false){
     let url = ""
     let e = elem.parentElement.previousElementSibling
+    if(inline){
+        let e2 = elem.previousElementSibling
+        while (!e2.id.includes("wiki-"))
+            e2 = e2.previousElementSibling
+        e = e2
+    }
     do {
         url = `${e.id.replace("wiki-","")}${url == "" ? "" : "."}${url}`
         e = e.parentElement.previousElementSibling

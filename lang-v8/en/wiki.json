@@ -224,8 +224,10 @@
     "{{wiki_voodoo_doll_p5}}": "If a player's sanity is at 0%, all of the remaining pins will be pressed in at once. This will cause multiple interactions (one per pin pressed) to happen at the same time and start a cursed hunt.",
 
     "{{wiki_evidence_equipment}}": "Evidence Equipment",
+    "{{wiki_equipment}}": "Equipment",
 
     "{{wiki_emf_title}}": "EMF Reader",
+    "{{wiki_emf}}": "EMF",
     "{{wiki_emf_using_title}}": "Using the EMF Reader",
     "{{wiki_emf_using_tier_1_title}}": "Tier 1",
     "{{wiki_emf_using_tier_1_p1}}": "The Tier 1 EMF Reader features a needle that will indicate the EMF level by pointing to (or near) the number matching the level. It should be noted that in general, the needle must go past the number for it to be considered that number.",
@@ -396,6 +398,89 @@
     "{{wiki_los_thaye_p3}}": "Moroi without LOS will be slower than young Thayes, moving at only 2.25m/s (dotted line), but they are able to reach a speed much faster than Thayes while in continuous LOS (solid line).",
     "{{wiki_los_deogen_p1}}": "Deogens do not have a LOS speed up. Instead, they are always able to sense their target and will move at 3.0m/s until they are close to the targeted player and will slow down to 0.4m/s.",
     "{{wiki_los_mimic_p1}}": "The Mimic is capable of ANY hunt pattern and should be remembered.",
+
+    "{{wiki_misconceptions}}": "Common Misconceptions",
+    "{{wiki_misconceptions_claim}}": "Claim",
+    "{{wiki_misconceptions_reality}}": "Reality",
+
+    "{{wiki_misconceptions_spirit_1_c}}": "\"Only a Spirit will take 180 seconds to hunt again after being smudged.\"",
+    "{{wiki_misconceptions_spirit_1_r}}": "Any ghost can take 180 seconds to hunt again after being smudged, but Spirit must wait this long.",
+
+    "{{wiki_misconceptions_wraith_1_c}}": "\"The Wraith can walk through walls and see through doors\"",
+    "{{wiki_misconceptions_wraith_1_r}}": "False, this is a misinterpretation of the flavor text in the in-game journal. The Wraith tracks and paths identically to other ghosts during hunts.",
+
+    "{{wiki_misconceptions_phantom_1_c}}": "\"The Phantom will not appear in any photos\"",
+    "{{wiki_misconceptions_phantom_1_r}}": "In order for the Phantom to disappear from a photo and not be visible, the photo must be labelled as a \"Ghost\" photo in the journal",
+
+    "{{wiki_misconceptions_banshee_1_c}}": "\"Only a Banshee's target can hear the Banshee's scream through a parabolic microphone\"",
+    "{{wiki_misconceptions_banshee_1_r}}": "Any player can hear the Banshee's scream through the parabolic microphone",
+
+    "{{wiki_misconceptions_banshee_2_c}}": "\"The ghost only hunts based on the sanity of people in the house / investigation area\"",
+    "{{wiki_misconceptions_banshee_2_r}}": "The ghost will hunt based on the teams average sanity regardless of where those team members are. The Banshee is the only exception to this as they will hunt based on their target's sanity (but it still doesn't matter if the target is inside or outside).",
+
+    "{{wiki_misconceptions_banshee_3_c}}": "\"If the ghost hunts from another room or another room gets cold that means the ghost changed rooms\"",
+    "{{wiki_misconceptions_banshee_3_r}}": "False. Ghosts can hunt from wherever they happen to be at the time. Since ghosts can roam out of their rooms, they can hunt from anywhere the roam takes them. As far as temperatures go, the temps will drop in any room that the ghost has spent time in, which can be the result of roaming frequently or stalking behavior (Banshee). The only way to confirm a room change is to observe ghost orbs being in a different room than before or if the mirror shows a new room.",
+
+    "{{wiki_misconceptions_mare_1_c}}": "\"Mare will wander from lit rooms to dark rooms\"",
+    "{{wiki_misconceptions_mare_1_r}}": "This is not quite accurate. The Mare will simply roam more if the lights are on in its current room, causing it to leave more often but with no affinity for ending up in a dark room.",
+
+    "{{wiki_misconceptions_shade_1_c}}": "\"A shade will not hunt if you are in the ghost's favorite room\"",
+    "{{wiki_misconceptions_shade_1_r}}": "This behavior of the Shade is not limited to just the favorite room. A Shade will not perform any action that results in an EMF reading or hunt while in the same room as the player, favorite room or not. It is possible for the ghost to wander out of the room and hunt from an adjacent room or reach back into the room to interact with objects.",
+
+    "{{wiki_misconceptions_oni_1_c}}": "\"If I hear a \"hiss\" from an event, it was an airball / ghost mist event\"",
+    "{{wiki_misconceptions_oni_1_r}}": "While this event does produce this sound, the walking manifestation event can also produce the same \"hiss\" sound. Be sure you saw the airball / ghost mist before ruling out Oni.",
+
+    "{{wiki_misconceptions_hantu_1_c}}": "\"The Hantu chills a room faster\" or \"The Hantu is colder than other ghosts with Freezing Temps\"",
+    "{{wiki_misconceptions_hantu_1_r}}": "False, during hunts, the Hantu moves faster in colder rooms, but it does not make rooms colder faster or reach a lower temperature than other ghosts.",
+
+    "{{wiki_misconceptions_goryo_1_c}}": "\"If the bone is in the ghost's favorite room, it is a Goryo\"",
+    "{{wiki_misconceptions_goryo_1_r}}": "False, this is simply RNG. The bone can happen to be in the ghost's favorite room of any ghost.",
+
+    "{{wiki_misconceptions_myling_1_c}}": "\"The Myling can't make vocal sounds during a hunt\"",
+    "{{wiki_misconceptions_myling_1_r}}": "False, the Myling can make vocal sounds during hunts just like any other ghost. The Myling is also stop being heard from 12m away instead of 20m, which indirectly does cause them to be slightly quiter at the same distance as a normal ghost because of the sound fade out caused by distance.",
+
+    "{{wiki_misconceptions_onryo_1_c}}": "\"Onryo will actively try to avoid firelights and will move away from them\"",
+    "{{wiki_misconceptions_onryo_1_r}}": "False, this is derived from the flavor text of the in-game journal. Onryo's don't avoid firelights, they simply blow out a firelight instead of using a crucifix if they attempt to hunt within range of one.",
+
+    "{{wiki_misconceptions_onryo_2_c}}": "\"Onryo only has a chance to hunt after blowing out 3 flames\" or \"Onryo has a chance to hunt after blowing out a every flame after the initial 3\"",
+    "{{wiki_misconceptions_onryo_2_r}}": "Onryo will always attempt to hunt after blowing out every 3rd flame. Note: It queues the hunt after the 3rd blowout but if it can't initiate it (because if an existing hunt or a cooldown) then it will get delayed (after the cooldown smudge timers also delay the hunt) and any candles blown during that time won't count towards the cycle (as the counter will only get reset at the start if the ability hunt).",
+
+    "{{wiki_misconceptions_twins_1_c}}": "\"The Twins is 2 separate ghosts\"",
+    "{{wiki_misconceptions_twins_1_r}}": "The Twins is a single ghost with 2 interaction ranges; one larger and one smaller",
+
+    "{{wiki_misconceptions_twins_2_c}}": "\"You can tell its The Twins by a 'curve' on the activity board (Twinteraction)\"",
+    "{{wiki_misconceptions_twins_2_r}}": "False. Although The Twins are more likely to produce this pattern on the activity board because of their ability, any ghost is able to produce that pattern by doing multiple interactions in quick succession.",
+
+    "{{wiki_misconceptions_obake_1_c}}": "\"Two left footprints or two right footprints in a row mean the ghost missed a step\"",
+    "{{wiki_misconceptions_obake_1_r}}": "False, there is no rhyme or reason to the footstep orientation as any ghost can leave multiple left or multiple right footprints in a row.",
+
+    "{{wiki_misconceptions_obake_2_c}}": "\"Any ghost can miss a footstep after stepping in salt if they stop walking and then start walking again\"",
+    "{{wiki_misconceptions_obake_2_r}}": "After stepping in salt, a ghost will leave 0 - 4 audible footsteps (with UV footprint if ghost has UV). If at any point the ghost stops, the footsteps will stop too and not resume after the ghost starts moving again. ",
+
+    "{{wiki_misconceptions_mimic_1_c}}": "\"Mimic orbs follow the ghost and don't stay in the favorite room\"",
+    "{{wiki_misconceptions_mimic_1_r}}": "False, this was a rumor started by a YouTuber. Mimic orbs behave identically to other ghosts orbs and will remain in the favorite room. They also do not have any visual differences.",
+
+    "{{wiki_misconceptions_mimic_2_c}}": "\"Guaranteed evidence means it can still be found on 0 evidence games\"",
+    "{{wiki_misconceptions_mimic_2_r}}": "There is 0 evidence in 0 evidence games. Guaranteed evidence simply means that if an evidence is available, those ghosts with said evidences must show those evidences. On 0 evidence games they won't show any evidence, including guaranteed ones. The only exception to this is Mimic orbs because they are an ability and not an actual evidence.",
+
+    "{{wiki_misconceptions_emf_1_c}}": "\"EMF 10 on the board means an event or a hunt\"",
+    "{{wiki_misconceptions_emf_1_r}}": "Though this may be because of a hunt or event, the activity monitor displays the total EMF activity in the map. Because of that you can get to 10 with a few interactions as well",
+
+    "{{wiki_misconceptions_freezing_1_c}}": "\"Seeing your breath means the ghost has freezing temperatures\"",
+    "{{wiki_misconceptions_freezing_1_r}}": "Not any more. This used to be the case, but ever since v0.9.0.0 you can see your breath with any temperature lower than 5° Celsius",
+
+    "{{wiki_misconceptions_comms_1_c}}": "\"What the comms guy says at the beginning of a contract gives us some clues\"",
+    "{{wiki_misconceptions_comms_1_r}}": "Not at all. It is only flavor text as confirmed by the devs.",
+
+    "{{wiki_misconceptions_ouija_1_c}}": "\"The Ouija board tells you the ghost's favorite room\"",
+    "{{wiki_misconceptions_ouija_1_r}}": "The Ouija board will tell you the ghost's current location. Only the mirror will show you the favorite room.",
+
+    "{{wiki_misconceptions_radio_1_c}}": "\"Using the global radio during a hunt will cause the ghost to sense other players\"",
+    "{{wiki_misconceptions_radio_1_r}}": "Using the global radio will only alert the ghost to your position as it counts as turning on a held electronic device.",
+
+    "{{wiki_misconceptions_insurance_1_c}}": "\"You have to take photos of dead teammates to get insurance money\"",
+    "{{wiki_misconceptions_insurance_1_r}}": "Insurance is based on difficulty and if you die, no photo necessary.",
+    "{{wiki_radio}}": "Radio",
 
     "{{wiki_puzzles}}": "Puzzles / Unlockables",
 

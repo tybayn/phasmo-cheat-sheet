@@ -229,11 +229,22 @@
         font-weight: 100;
     }
 
-    .wiki-share:hover{
+    .wiki-search{
+        cursor: pointer;
+        opacity: 0.9;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin: 12px;
+        font-size: 14px;
+        font-weight: 100;
+    }
+
+    .wiki-share:hover, .wiki-search:hover{
         opacity: 1.0;
     }
 
-    .wiki-share img{
+    .wiki-share img, .wiki-search img{
         height: 24px;
         width: 24px !important;
         padding-left: 5px;
@@ -438,6 +449,30 @@
 
     #map-explorer:hover{
         background-color: rgb(128,128,128);
+    }
+
+    .mis{
+        margin: 10px;
+        padding: 10px 10px 20px 10px;
+        border-radius: 10px;
+        background-color: rgba(255,255,255,0.1);
+    }
+    .mis_sect{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .mis_sect img{
+        width: 30px;
+        height: 30px;
+        margin-top: 13px;
+    }
+    .mis_wrong{
+        margin-left: 10px;
+    }
+    .mis_right{
+        margin-left: 10px;
     }
 }
 
@@ -728,6 +763,10 @@
         font-weight: 100;
     }
 
+    .wiki-search{
+        display: none;
+    }
+
     .wiki-share:hover{
         opacity: 1.0;
     }
@@ -839,5 +878,33 @@
 
     #map-explorer:hover{
         background-color: rgb(128,128,128);
+    }
+
+    .mis{
+        margin: 10px;
+        padding: 25px;
+        border-radius: 10px;
+        background-color: rgba(255,255,255,0.1);
+    }
+    .mis h3{
+        font-size: 40px;
+    }
+    .mis_sect{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .mis_sect img{
+        width: 70px;
+        height: 70px;
+        margin-top: 13px;
+    }
+    .mis_wrong{
+        margin-left: 25px;
+        margin-bottom: 15px;
+    }
+    .mis_right{
+        margin-left: 25px;
     }
 }

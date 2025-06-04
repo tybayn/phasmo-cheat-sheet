@@ -1106,9 +1106,15 @@ body{
         margin-left: 5px;
     }
 
+    .result_location_misconception{
+        font-size: 10px;
+        color: rgb(255, 0, 0);
+        margin-left: 5px;
+    }
+
     .result_location_event{
         font-size: 10px;
-        color: rgb(255, 0, 200);
+        color: rgb(255, 255, 0);
         margin-left: 5px;
     }
 

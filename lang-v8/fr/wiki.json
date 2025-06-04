@@ -224,8 +224,10 @@
     "{{wiki_voodoo_doll_p5}}": "Si la santé mentale d'un joueur est à 0%, toutes les épingles restantes seront enfoncées en même temps. Cela provoquera plusieurs interactions (une par épingle enfoncée) en même temps et démarrera une chasse maudite.",
 
     "{{wiki_evidence_equipment}}": "Équipement des preuves",
+    "{{wiki_equipment}}": "Équipement",
 
     "{{wiki_emf_title}}": "Lecteur EMF",
+    "{{wiki_emf}}": "EMF",
     "{{wiki_emf_using_title}}": "Utiliser le Lecteur EMF",
     "{{wiki_emf_using_tier_1_title}}": "Rang 1",
     "{{wiki_emf_using_tier_1_p1}}": "Le Lecteur EMF Rang 1 comporte une aiguille qui indiquera le niveau d'EMF en pointant vers le nombre correspondant au niveau. Il est à noter qu'en général, l'aiguille doit dépasser le nombre pour que cela soit considéré comme ce nombre.",
@@ -396,6 +398,89 @@
     "{{wiki_los_thaye_p3}}": "Les Moroï sans LdV seront plus lents que les Thayé jeunes, se déplaçant à seulement 2,25 m/s (ligne pointillée), mais ils sont capables d'atteindre une vitesse beaucoup plus rapide que les Thayé avec une LdV continue (ligne continue).",
     "{{wiki_los_deogen_p1}}": "Les Deogen n'ont pas d'accélération en LdV. Au lieu de cela, ils sont toujours capables de détecter leur cible et se déplaceront à 3,0 m/s jusqu'à ce qu'ils soient proches du joueur ciblé et ralentiront à 0,4 m/s.",
     "{{wiki_los_mimic_p1}}": "Le Mimic est capable de TOUT schéma de chasse et doit être gardé à l'esprit.",
+
+    "{{wiki_misconceptions}}": "Idées reçues courantes",
+    "{{wiki_misconceptions_claim}}": "Affirmation",
+    "{{wiki_misconceptions_reality}}": "Réalité",
+
+    "{{wiki_misconceptions_spirit_1_c}}": "\"Seul un Esprit mettra 180 secondes avant de chasser de nouveau après avoir été affecté par l'encens\"",
+    "{{wiki_misconceptions_spirit_1_r}}": "N'importe quelle entité peut attendre 180 secondes avant de chasser de nouveau après avoir été affecté par l'encens, mais l'Esprit, lui, doit obligatoirement attendre aussi longtemps",
+
+    "{{wiki_misconceptions_wraith_1_c}}": "\"Le Spectre peut traverser les murs et voir à travers les portes\"",
+    "{{wiki_misconceptions_wraith_1_r}}": "Faux, c'est une mauvaise interprétation du texte dans le journal du jeu. Le Spectre traque et se déplace exactement comme les autres entités pendant les chasses",
+
+    "{{wiki_misconceptions_phantom_1_c}}": "\"Le Fantôme n'apparaît sur aucune photo\"",
+    "{{wiki_misconceptions_phantom_1_r}}": "Pour que le Fantôme disparaisse d'une photo et ne soit pas visible, celle-ci doit être étiquetée comme photo de \"Fantôme\" dans le journal",
+
+    "{{wiki_misconceptions_banshee_1_c}}": "\"Seule la cible de la Banshee peut entendre son cri à travers un microphone parabolique\"",
+    "{{wiki_misconceptions_banshee_1_r}}": "N'importe quel joueur peut entendre le cri de la Banshee à travers le microphone parabolique",
+
+    "{{wiki_misconceptions_banshee_2_c}}": "\"L'entité ne chasse qu'en fonction de la santé mentale des personnes présentes dans la maison / zone d'enquête\"",
+    "{{wiki_misconceptions_banshee_2_r}}": "L'entité chasse en fonction de la santé mentale moyenne de l'équipe, peu importe où se trouvent les membres. La Banshee est la seule exception : elle chasse en fonction de la santé mentale de sa cible (peu importe que la cible soit à l'intérieur ou à l'extérieur).",
+
+    "{{wiki_misconceptions_banshee_3_c}}": "\"Si l'entité chasse depuis une autre pièce ou qu'une autre pièce devient froide, cela signifie qu'elle a changé de pièce\"",
+    "{{wiki_misconceptions_banshee_3_r}}": "Faux. Les entités peuvent chasser depuis l'endroit où elles se trouvent à ce moment-là. Puisqu'elles peuvent se déplacer en dehors de leur pièce, elles peuvent lancer une chasse depuis n'importe quel endroit atteint lors de leur déplacement. En ce qui concerne la température, elle baisse dans toute pièce où l'entité a passé du temps, ce qui peut être dû à des déplacements fréquents ou à un comportement de traque (comme celui de la Banshee). La seule façon fiable de confirmer un changement de pièce est d'observer des orbes fantomatiques dans une pièce différente ou que le miroir montre une nouvelle pièce.",
+
+    "{{wiki_misconceptions_mare_1_c}}": "\"Le Cauchemar se déplacera des pièces éclairées pour aller vers des pièces non éclairées\"",
+    "{{wiki_misconceptions_mare_1_r}}": "Ce n'est pas tout à fait exact. Le Cauchemar se déplacera simplement davantage si les lumières sont allumées dans sa pièce actuelle, ce qui le pousse à sortir plus souvent, mais sans préférence particulière pour une pièce non éclairée.",
+
+    "{{wiki_misconceptions_shade_1_c}}": "\"Une Ombre ne chassera pas si vous vous trouvez dans sa pièce préférée\"",
+    "{{wiki_misconceptions_shade_1_r}}": "Ce comportement de l'Ombre ne se limite pas à sa pièce préférée. Une Ombre n'effectuera aucune action entraînant une mesure EMF ni ne lancera de chasse si elle se trouve dans la même pièce que le joueur, que ce soit sa pièce préférée ou non. Elle peut cependant sortir de la pièce et chasser depuis une pièce adjacente, ou encore interagir avec des objets depuis celle-ci.",
+
+    "{{wiki_misconceptions_oni_1_c}}": "\"Si j'entends un \"souffle\" lors d’un événement, c'était un événement de bulle d'air ou de brouillard fantomatique\"",
+    "{{wiki_misconceptions_oni_1_r}}": "Bien que cet événement produise ce son, l'événement de l'apparition en marche peut aussi émettre le même \"souffle\". Assurez-vous d'avoir vu la bulle d'air ou le brouillard fantomatique avant d'écarter la possibilité d'un Oni.",
+
+    "{{wiki_misconceptions_hantu_1_c}}": "\"Le Hantu refroidit une pièce plus rapidement\" ou \"Le Hantu est plus froid que les autres entités lorsqu'il y a des températures glaciales\"",
+    "{{wiki_misconceptions_hantu_1_r}}": "Faux, pendant les chasses, le Hantu se déplace plus vite dans les pièces froides, mais il ne refroidit pas les pièces plus rapidement ni n'atteint des températures plus basses que les autres entités.",
+
+    "{{wiki_misconceptions_goryo_1_c}}": "\"Si l'os se trouve dans la pièce préférée de l'entité, c'est un Goryo\"",
+    "{{wiki_misconceptions_goryo_1_r}}": "Faux, c'est simplement dû au hasard. L'os peut se trouver dans la pièce préférée de n'importe quelle entité.",
+
+    "{{wiki_misconceptions_myling_1_c}}": "\"Le Myling ne peut pas émettre de sons vocaux pendant une chasse\"",
+    "{{wiki_misconceptions_myling_1_r}}": "Faux, le Myling peut émettre des sons vocaux pendant les chasses comme n'importe quelle autre entité. De plus, la portée d'audition de ses sons n'est qu'à 12 mètres au lieu de 20, ce qui le rend indirectement un peu plus discret à la même distance qu'une entité normale en raison de l'atténuation du son liée à la distance.",
+
+    "{{wiki_misconceptions_onryo_1_c}}": "\"L'Onryo cherchera activement à éviter les sources de feu et s'en éloignera\"",
+    "{{wiki_misconceptions_onryo_1_r}}": "Faux, cela provient du texte dans le journal du jeu. Les Onryo n'évitent pas les sources de feu, ils soufflent simplement une flamme plutôt que d'utiliser un crucifix s'ils tentent de chasser à proximité",
+
+    "{{wiki_misconceptions_onryo_2_c}}": "\"L'Onryo n'a une chance de chasser qu'après avoir soufflé 3 flammes\" ou \"L'Onryo a une chance de chasser après avoir soufflé chaque flamme après les 3 premières\"",
+    "{{wiki_misconceptions_onryo_2_r}}": "L'Onryo tentera toujours de chasser après avoir soufflé chaque 3ème flamme. Note : la chasse est mise en file d'attente après la 3ème extinction, mais si elle ne peut pas être lancée (à cause d'une chasse en cours ou d'un temps de recharge), elle sera retardée (les temps de recharge liés à l'encens retardent aussi la chasse) et les bougies soufflées pendant ce délai ne seront pas prises en compte dans le cycle, car le compteur ne sera réinitialisé qu’au début de la chasse.",
+
+    "{{wiki_misconceptions_twins_1_c}}": "\"Les Jumeaux sont 2 entités distinctes\"",
+    "{{wiki_misconceptions_twins_1_r}}": "Les Jumeaux sont une seule entité avec deux portées d'interaction : une plus grande et une plus petite",
+
+    "{{wiki_misconceptions_twins_2_c}}": "\"On peut reconnaître les Jumeaux grâce à une \"courbe\" sur le tableau d'activité (Twinteraction)\"",
+    "{{wiki_misconceptions_twins_2_r}}": "Faux. Même si les Jumeaux ont plus de chances de produire ce motif sur le tableau d'activité grâce à leur capacité, n'importe quelle entité peut créer ce type de courbe en effectuant plusieurs interactions rapidement à la suite.",
+
+    "{{wiki_misconceptions_obake_1_c}}": "\"Deux empreintes de pas gauches ou deux empreintes de pas droites d'affilée signifient que l'entité a manqué une foulée\"",
+    "{{wiki_misconceptions_obake_1_r}}": "Faux, il n'y a aucune logique dans l'orientation des empreintes de pas, car n'importe quelle entité peut laisser plusieurs empreintes gauches ou droites d'affilée.",
+
+    "{{wiki_misconceptions_obake_2_c}}": "\"N'importe quelle entité peut manquer une empreinte après avoir marché dans du sel si elle s'arrête puis recommence à marcher\"",
+    "{{wiki_misconceptions_obake_2_r}}": "Après avoir marché dans du sel, une entité laissera entre 0 et 4 empreintes audibles (avec empreintes UV si l'entité a cette preuve). Si à un moment donné l'entité s'arrête, les empreintes s'arrêtent aussi et ne reprendront pas quand elle recommencera à bouger.",
+
+    "{{wiki_misconceptions_mimic_1_c}}": "\"Les orbes du Mimic suivent l'entité et ne restent pas dans sa pièce préférée\"",
+    "{{wiki_misconceptions_mimic_1_r}}": "Faux, c'est une rumeur lancée par un YouTubeur. Les orbes du Mimic se comportent exactement comme les orbes d'autres entités et restent dans la pièce préférée. Elles n'ont également aucune différence visuelle",
+
+    "{{wiki_misconceptions_mimic_2_c}}": "\"La preuve garantie signifie qu'elle peut quand même être trouvée sur des parties à 0 preuve\"",
+    "{{wiki_misconceptions_mimic_2_r}}": "Il n'y a aucune preuve dans les parties à 0 preuve. La preuve garantie signifie simplement que si une preuve est disponible, les entités concernées doivent la montrer. Dans les parties à 0 preuve, elles ne montreront aucune preuve, même celles garanties. La seule exception concerne les orbes du Mimic, car c'est une capacité et non une preuve réelle.",
+
+    "{{wiki_misconceptions_emf_1_c}}": "\"Un EMF niveau 10 sur le tableau signifie un événement ou une chasse\"",
+    "{{wiki_misconceptions_emf_1_r}}": "Même si cela peut être dû à une chasse ou un événement, le moniteur d'activité affiche l'activité EMF totale sur la carte. Ainsi, on peut atteindre le niveau 10 après seulement quelques interactions",
+
+    "{{wiki_misconceptions_freezing_1_c}}": "\"Voir sa respiration signifie que l'entité provoque des températures glaciales\"",
+    "{{wiki_misconceptions_freezing_1_r}}": "Ce n'est plus vrai. Ça l'était avant, mais depuis la v0.9.0.0, on peut voir sa respiration à toute température inférieure à 5°C.",
+
+    "{{wiki_misconceptions_comms_1_c}}": "\"Ce que dit la personne à la radio au début d'un contrat nous donne quelques indices\"",
+    "{{wiki_misconceptions_comms_1_r}}": "Pas du tout. C'est juste du texte d'ambiance, comme l'ont confirmé les développeurs.",
+
+    "{{wiki_misconceptions_ouija_1_c}}": "\"La planche Ouija indique la pièce préférée de l'entité\"",
+    "{{wiki_misconceptions_ouija_1_r}}": "La planche Ouija vous indique la position actuelle de l'entité. Seul le miroir vous montre sa pièce préférée.",
+
+    "{{wiki_misconceptions_radio_1_c}}": "\"Utiliser la radio globale pendant une chasse fera que l'entité détectera les autres joueurs\"",
+    "{{wiki_misconceptions_radio_1_r}}": "Utiliser la radio globale n'alertera l'entité qu'à votre position, car c'est considéré comme allumer un appareil électronique tenu en main.",
+
+    "{{wiki_misconceptions_insurance_1_c}}": "\"Il faut prendre des photos des coéquipiers morts pour obtenir de l'argent de l'assurance\"",
+    "{{wiki_misconceptions_insurance_1_r}}": "L'assurance dépend de la difficulté et, si vous mourez, aucune photo n'est nécessaire.",
+    "{{wiki_radio}}": "Radio",
 
     "{{wiki_puzzles}}": "Énigmes / Débloquables",
 

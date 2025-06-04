@@ -1,6 +1,8 @@
 function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";");for(let n=0;n<i.length;n++){let o=i[n];for(;" "==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(t))return o.substring(t.length,o.length)}return""}
 function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
 
+let openSearchTab = false
+
 function startDebugMode(){
 
     if(typeof console != 'undefined')
@@ -56,6 +58,10 @@ function checkLink(){
         if (params.get("debug") == "true" || params.get("debug") == "True"){
             startDebugMode()
             $("#debug_tab").show()
+        }
+
+        if (params.get("search")){
+            openSearchTab = true
         }
 
         resolve("URL parsed")
@@ -408,6 +414,7 @@ function loadAllAndConnect(){
                         applyPerms()
                         auto_link()
                         openWikiFromURL()
+                        loadSearch()
 
                         try{heartbeat()} catch(Error){console.warn("Possible latency issues!")}
                         setInterval(function(){
@@ -420,6 +427,19 @@ function loadAllAndConnect(){
             })
         })
     })
+}
+
+function loadSearch(){
+    mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
+    params = new URL(window.location.href).searchParams
+    if(!mquery.matches && openSearchTab){
+        document.getElementById("search_bar").value = params.get("search")
+        showSearch()
+        search()
+        let url = new URL(window.location.href)
+        url.searchParams.delete("search")
+        history.replaceState(history.state,"",url.href)
+    }
 }
 
 

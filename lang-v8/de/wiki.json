@@ -224,8 +224,10 @@
     "{{wiki_voodoo_doll_p5}}": "Wenn der Geisteszustand des Spielers 0% ist, werden beim Verwenden alle übrigen Nadel gleichzeitig verwendet. Das wird pro Nadel eine Interaktion gleichzeitig bewirken und eine verfluchte Jagd starten.",
 
     "{{wiki_evidence_equipment}}": "Beweis Ausrüstung",
+    "{{wiki_equipment}}": "",
 
     "{{wiki_emf_title}}": "EMF Reader",
+    "{{wiki_emf}}": "",
     "{{wiki_emf_using_title}}": "Das Verwenden des EMF Messgeräts",
     "{{wiki_emf_using_tier_1_title}}": "Stufe 1",
     "{{wiki_emf_using_tier_1_p1}}": "Das Stufe 1 EMF Messgerät hat einen Zeiger der auf oder in die Nähe der Nummer zeigt die zur EMF Stärke passt. Der Zeiger muss an der Nummer vorbei gehen damit man sicher sagen kann das die Stärke gemessen wurde.",
@@ -396,6 +398,89 @@
     "{{wiki_los_thaye_p3}}": "Moroi ohne Sichtlinie sind langsamer als junge Thayes und bewegen sich mit nur 2,25 m/s (gestrichelte Linie), aber sie können eine Geschwindigkeit erreichen, die viel schneller ist als Thayes, während sie sich in dauerhafter Sichtlinie befinden (durchgezogene Linie)..",
     "{{wiki_los_deogen_p1}}": "Deogens haben keine Sichtlinien- Beschleunigung. Stattdessen sind sie immer in der Lage, ihr Ziel zu wahrzunehmen und bewegen sich mit einer Geschwindigkeit von 3,0 m/s, wenn sie sich dem anvisierten Spieler nähern, verlangsamen sie auf 0,4 m/s.",
     "{{wiki_los_mimic_p1}}": "Der Mimik ist zu JEDEM Jagdverhalten fähig und sollte immer überprüft oder ausgeschlossen werden.",
+
+    "{{wiki_misconceptions}}": "( Arbeit in Arbeit... )",
+    "{{wiki_misconceptions_claim}}": "",
+    "{{wiki_misconceptions_reality}}": "",
+
+    "{{wiki_misconceptions_spirit_1_c}}": "",
+    "{{wiki_misconceptions_spirit_1_r}}": "",
+
+    "{{wiki_misconceptions_wraith_1_c}}": "",
+    "{{wiki_misconceptions_wraith_1_r}}": "",
+
+    "{{wiki_misconceptions_phantom_1_c}}": "",
+    "{{wiki_misconceptions_phantom_1_r}}": "",
+
+    "{{wiki_misconceptions_banshee_1_c}}": "",
+    "{{wiki_misconceptions_banshee_1_r}}": "",
+
+    "{{wiki_misconceptions_banshee_2_c}}": "",
+    "{{wiki_misconceptions_banshee_2_r}}": "",
+
+    "{{wiki_misconceptions_banshee_3_c}}": "",
+    "{{wiki_misconceptions_banshee_3_r}}": "",
+
+    "{{wiki_misconceptions_mare_1_c}}": "",
+    "{{wiki_misconceptions_mare_1_r}}": "",
+
+    "{{wiki_misconceptions_shade_1_c}}": "",
+    "{{wiki_misconceptions_shade_1_r}}": "",
+
+    "{{wiki_misconceptions_oni_1_c}}": "",
+    "{{wiki_misconceptions_oni_1_r}}": "",
+
+    "{{wiki_misconceptions_hantu_1_c}}": "",
+    "{{wiki_misconceptions_hantu_1_r}}": "",
+
+    "{{wiki_misconceptions_goryo_1_c}}": "",
+    "{{wiki_misconceptions_goryo_1_r}}": "",
+
+    "{{wiki_misconceptions_myling_1_c}}": "",
+    "{{wiki_misconceptions_myling_1_r}}": "",
+
+    "{{wiki_misconceptions_onryo_1_c}}": "",
+    "{{wiki_misconceptions_onryo_1_r}}": "",
+
+    "{{wiki_misconceptions_onryo_2_c}}": "",
+    "{{wiki_misconceptions_onryo_2_r}}": "",
+
+    "{{wiki_misconceptions_twins_1_c}}": "",
+    "{{wiki_misconceptions_twins_1_r}}": "",
+
+    "{{wiki_misconceptions_twins_2_c}}": "",
+    "{{wiki_misconceptions_twins_2_r}}": "",
+
+    "{{wiki_misconceptions_obake_1_c}}": "",
+    "{{wiki_misconceptions_obake_1_r}}": "",
+
+    "{{wiki_misconceptions_obake_2_c}}": "",
+    "{{wiki_misconceptions_obake_2_r}}": "",
+
+    "{{wiki_misconceptions_mimic_1_c}}": "",
+    "{{wiki_misconceptions_mimic_1_r}}": "",
+
+    "{{wiki_misconceptions_mimic_2_c}}": "",
+    "{{wiki_misconceptions_mimic_2_r}}": "",
+
+    "{{wiki_misconceptions_emf_1_c}}": "",
+    "{{wiki_misconceptions_emf_1_r}}": "",
+
+    "{{wiki_misconceptions_freezing_1_c}}": "",
+    "{{wiki_misconceptions_freezing_1_r}}": "",
+
+    "{{wiki_misconceptions_comms_1_c}}": "",
+    "{{wiki_misconceptions_comms_1_r}}": "",
+
+    "{{wiki_misconceptions_ouija_1_c}}": "",
+    "{{wiki_misconceptions_ouija_1_r}}": "",
+
+    "{{wiki_misconceptions_radio_1_c}}": "",
+    "{{wiki_misconceptions_radio_1_r}}": "",
+
+    "{{wiki_misconceptions_insurance_1_c}}": "",
+    "{{wiki_misconceptions_insurance_1_r}}": "",
+    "{{wiki_radio}}": "",
 
     "{{wiki_puzzles}}": "Puzzles / Abzeichen",
 

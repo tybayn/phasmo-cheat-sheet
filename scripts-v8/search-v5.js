@@ -331,6 +331,7 @@ function getLeafMatchesBreadthFirst(elem, queries) {
 
         // Skip if any child matches — we only want leaf matches
         let childHasMatch = false;
+
         for (let child of node.children) {
             if (['B', 'I'].includes(child.tagName)) continue;
 
@@ -348,7 +349,36 @@ function getLeafMatchesBreadthFirst(elem, queries) {
     return result;
 }
 
+function findMisContainerHTML(elem) {
+    let current = elem;
+    while (current) {
+        if (current.classList && current.classList.contains("mis")) {
+            return current;
+        }
+        current = current.parentElement;
+    }
+    return null;
+}
 
+function cleanMis(html, searchTerms) {
+    const lowerTerms = searchTerms.map(term => term.toLowerCase());
+
+    html = html.replace(/<img\b[^>]*>/gi, '');
+    html = html.replace(/\sclass="[^"]*"/gi, '');
+
+    html = html.replace(/<h3\b[^>]*>/gi, '<div style="margin-top:15px;"><b>');
+    html = html.replace('<div style="margin-top:15px;">','<div>')
+    html = html.replace(/<\/h3>/gi, '</b></div>');
+
+
+    // Highlight one instance of each term
+    for (const term of lowerTerms) {
+        const regex = new RegExp(`(${escapeRegExp(term)})`, 'gi');
+        html = html.replace(regex, `<span class="result_highlight">$1</span>`);
+    }
+
+    return html;
+}
 
 function parse_wiki(elem, queries){
 
@@ -362,39 +392,83 @@ function parse_wiki(elem, queries){
         wiki_path = prev_elem.id.replace("wiki-","") + "." + wiki_path
     }
 
-    let results = `<div class="search_result" onclick="$('.ghost_card').removeClass('result_focus');openWikiPath('${wiki_path}')"><div class="result_title">${title}<span class="result_location_guide"> (${lang_data["{{guides}}"]})</span></div><div class="result_preview">`
+    let results
+    if (title.includes(lang_data['{{misconceptions}}'].replace(/[^a-z0-9\s()\[\]{}\-\+]/gi, '').trim())){
+        
+        
+        
+        let list_items = getLeafMatchesBreadthFirst(elem, queries);
+        let num_items = 0
+        let added = new Set()
 
-    // Title
-    if(all_match(title.toLowerCase(),queries))
-        results += `<div class="result_part">${shrink_text(title,queries)}</div>`
+        results = ""
+        list_items.forEach(item => {
+            const misHTML = findMisContainerHTML(item);
 
-    let list_items = getLeafMatchesBreadthFirst(elem, queries);
-    let num_items = 0
-    let added = new Set()
-    list_items.forEach(item => {
-        let skip = false
-        let parent = item.parentElement
-        while (parent){
-            if(added.has(parent)){
-                skip = true
-                break
+            if(added.has(misHTML) || item.tagName == "H3"){
+                return
             }
-            parent = parent.parentElement
-        }
 
-        if(skip) return
+            console.log(item)
 
-        if (num_items < 5 && all_match(item.innerText.toLowerCase(),queries)) {
-            results += `<div class="result_part">${shrink_text(item.innerHTML,queries)}</div>`
-            num_items += 1
-        }
+            let final_elem = item.parentElement.parentElement
+            while(!final_elem.id.includes("wiki-"))
+                final_elem = final_elem.previousElementSibling
 
-        added.add(item)
-    });
-    results += `</div><div class="click_more">${lang_data["{{see_more}}"]}</div></div><hr>`
+            let final_path = wiki_path + "." + final_elem.id.replace("wiki-","")
+            let final_title = title + " >> " + final_elem.innerText.replace(/[^a-z0-9\s()\[\]{}\-\+]/gi, '')
+
+            if (misHTML && num_items < 5) {
+
+                results += `<div class="search_result" onclick="$('.ghost_card').removeClass('result_focus');openWikiPath('${final_path}')"><div class="result_title">${final_title}<span class="result_location_misconception"> (${lang_data["{{misconceptions}}"]})</span></div><div class="result_preview">`
+                results += `<div class="result_part">${cleanMis(misHTML.innerHTML,queries)}</div>`
+                results += `</div><div class="click_more">${lang_data["{{see_more}}"]}</div></div><hr>`
+                num_items += 1
+            }
+
+            added.add(misHTML)
+
+            
+        });
+    }
+    else {
+        results = `<div class="search_result" onclick="$('.ghost_card').removeClass('result_focus');openWikiPath('${wiki_path}')"><div class="result_title">${title}<span class="result_location_guide"> (${lang_data["{{guides}}"]})</span></div><div class="result_preview">`
+
+        // Title
+        if(all_match(title.toLowerCase(),queries))
+            results += `<div class="result_part">${shrink_text(title,queries)}</div>`
+
+        let list_items = getLeafMatchesBreadthFirst(elem, queries);
+        let num_items = 0
+        let added = new Set()
+        list_items.forEach(item => {
+            let skip = false
+            let parent = item.parentElement
+
+            while (parent){
+                if(added.has(parent)){
+                    skip = true
+                    break
+                }
+
+                parent = parent.parentElement
+            }
+
+            if(skip) return
+
+            if (num_items < 5 && all_match(item.innerText.toLowerCase(),queries)) {
+                results += `<div class="result_part">${shrink_text(item.innerHTML,queries)}</div>`
+                num_items += 1
+            }
+
+            added.add(item)
+        });
+        results += `</div><div class="click_more">${lang_data["{{see_more}}"]}</div></div><hr>`
+    }
+
+    
 
     return results
-
 }
 
 function parse_event(elem, queries){

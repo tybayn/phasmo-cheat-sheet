@@ -208,6 +208,9 @@ function translate(to_lang){
             Object.entries(all_ghosts).forEach(([key,value]) => {
                 body = body.replaceAll(`{{${key}}}`,value)
             })
+            Object.entries(all_evidence).forEach(([key,value]) => {
+                body = body.replaceAll(`{{${key}}}`,value)
+            })
             document.body.innerHTML = body
             if(to_lang != "en")
                 $(".vcs").hide()
