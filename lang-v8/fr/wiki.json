@@ -79,7 +79,7 @@
     "{{wiki_monkey_paw_p15}}": "Lenteur et vision obscurcie pour le joueur pendant 5 secondes",
     "{{wiki_monkey_paw_h10}}": "\"Je souhaite avoir de l'information\"",
     "{{wiki_monkey_paw_p16}}": "Retire 1 preuve incorrecte du journal et barre les entités associées",
-    "{{wiki_monkey_paw_p17}}": "Démarre une chasse et la vision et l'ouïe du joueur sont réduites pour le reste de la partie",
+    "{{wiki_monkey_paw_p17}}": "Démarre une chasse près du joueur et la vision et l'ouïe de ce dernier sont réduites jusqu'à la mort ou la fin de la partie",
     "{{wiki_monkey_paw_h11}}": "\"Je souhaite avoir [météo]\"",
     "{{wiki_monkey_paw_p18}}": "Change la météo en celle spécifiée",
     "{{wiki_monkey_paw_p19}}": "Enlève 25% de santé mentale",

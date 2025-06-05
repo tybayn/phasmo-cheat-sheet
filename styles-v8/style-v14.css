@@ -881,7 +881,12 @@ body{
         border-radius: 5px 0px 0px 5px;
     }
 
-    .language, .theme{
+    .language{
+        width: 195px;
+        cursor: pointer;
+    }
+
+    .theme{
         width: 135px;
         cursor: pointer;
     }
@@ -1098,24 +1103,28 @@ body{
         font-size: 10px;
         color: #0ff;
         margin-left: 5px;
+        text-wrap-mode: nowrap;
     }
 
     .result_location_guide{
         font-size: 10px;
         color: rgb(255, 145, 0);
         margin-left: 5px;
+        text-wrap-mode: nowrap;
     }
 
     .result_location_misconception{
         font-size: 10px;
         color: rgb(255, 0, 0);
         margin-left: 5px;
+        text-wrap-mode: nowrap;
     }
 
     .result_location_event{
         font-size: 10px;
         color: rgb(255, 255, 0);
         margin-left: 5px;
+        text-wrap-mode: nowrap;
     }
 
     .result_preview{

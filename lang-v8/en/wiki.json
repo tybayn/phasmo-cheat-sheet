@@ -79,7 +79,7 @@
     "{{wiki_monkey_paw_p15}}": "Player slowness and darkened vision for 5 secs",
     "{{wiki_monkey_paw_h10}}": "\"I wish for knowledge\"",
     "{{wiki_monkey_paw_p16}}": "Removes 1 incorrect evidence from the journal and crosses out associated ghosts",
-    "{{wiki_monkey_paw_p17}}": "Starts a hunt and player vision and audio is reduced the rest of that round",
+    "{{wiki_monkey_paw_p17}}": "Starts a hunt near the player and player vision and audio is reduced until either death or the end of the round",
     "{{wiki_monkey_paw_h11}}": "\"I wish for [weather]\"",
     "{{wiki_monkey_paw_p18}}": "Changes the weather to the one specified",
     "{{wiki_monkey_paw_p19}}": "Drops sanity by 25%",

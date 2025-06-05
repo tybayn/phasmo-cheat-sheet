@@ -335,7 +335,7 @@
                     <span id="minus_speed" class="speed_icon" onclick="adjustOffset(0.1);setTempo();saveSettings();">+.1</span>
                     <span id="minus_speed" class="speed_icon" onclick="adjustOffset(1);setTempo();saveSettings();">+1</span>
                 </div>
-                <button id="calibrate-button" class="yfont" onclick="showCalibrate();">Calibrate</button>
+                <button id="calibrate-button" class="yfont" onclick="showCalibrate();">{{calibrate}}</button>
                 <div class="modifier_note">({{adjust_speed}})</div>
                 <hr>
                 <div class="modifier_volume yfont white">{{speed_filter_logic}}</div>
@@ -925,7 +925,7 @@
                     </button>
                     <button id="Normal" class="tricheck white" name="speed" onclick="dualstate(this)" value="Normal">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label">{{normal}}</div>
+                        <div class="label">{{speed_normal}}</div>
                     </button>
                     <button id="Fast" class="tricheck white" name="speed" onclick="dualstate(this)" value="Fast">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
@@ -947,7 +947,7 @@
                     </button>
                     <button id="Average" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Average">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
-                        <div class="label">{{normal}} <span class="hunt_sanity_num">(>40%)</span></div>
+                        <div class="label">{{sanity_normal}} <span class="hunt_sanity_num">(>40%)</span></div>
                     </button>
                     <button id="Early" class="tricheck white" name="hunt-sanity" onclick="dualstate(this,false,true)" value="Early">
                         <div id="checkbox" class="neutral"><span class="icon"></span></div>
@@ -1014,18 +1014,18 @@
             document.body.style.position = 'fixed';
     </script>
     <script src="scripts-v8/utils-v1.js"></script>
-    <script src="lang-v8/lang-v10.js"></script>
+    <script src="lang-v8/lang-v11.js"></script>
     <script src="themes-v8/themes-v3.js"></script>
     <script src="scripts-v8/audio_controller-v1.js"></script>
     <script src="scripts-v8/metronome-v3.js"></script>
     <script src="scripts-v8/timer-v5.js"></script>
     <script src="discord-v8/discord-v5.js"></script>
     <script src="wiki-v8/wiki-v2.js"></script>
-    <script src="scripts-v8/filter-v24.js"></script>
+    <script src="scripts-v8/filter-v25.js"></script>
     <script src="scripts-v8/sanity-v2.js"></script>
     <script src="scripts-v8/wslink-v16.js"></script>
     <script src="scripts-v8/zn-v9.js"></script>
-    <script src="scripts-v8/search-v5.js"></script>
+    <script src="scripts-v8/search-v6.js"></script>
     <script src="events-v8/events-v1.js"></script>
     <script src="models-v8/models-v1.js"></script>
     <script src="feed-v8/feed-v2.js"></script>
