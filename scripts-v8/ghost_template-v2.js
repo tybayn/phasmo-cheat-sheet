@@ -148,7 +148,7 @@ class Ghost {
         var data = "<ul>"
 
         if(value.length == 0){
-            data += `<li class="non-definitive"><i>({{no_confirmation_tests}} ${ghost_name})</i></li>`
+            data += `<li class="non-definitive"><i>({{no_confirmation_tests,${ghost_name}}})</i></li>`
         }
 
         for(var i in value){
@@ -171,7 +171,7 @@ class Ghost {
         var data = "<ul>"
 
         if(value.length == 0){
-            data += `<li class="non-definitive"><i>({{no_elimination_tests}} ${ghost_name})</i></li>`
+            data += `<li class="non-definitive"><i>({{no_elimination_tests,${ghost_name}}})</i></li>`
         }
 
         for(var i in value){

@@ -200,8 +200,8 @@
     "{{mimic_disclaimer}}": "Der Mimik kann Fähigkeiten und Verhalten anderer Geister übernehmen, das bedeutet fast jeder Bestätigungstest kann auch ein Mimik sein",
     "{{copy_share_link}}": "Teilen",
     "{{empty_data_link}}": "Klicken Sie auf einen Geist, um seine Erzählungen und Verhaltensweisen zu sehen\n (Verwenden Sie ' [ ' und ' ] ', um durch die Geister zu gehen)",
-    "{{no_elimination_tests}}": "Es gibt keine Ausschluss Test für",
-    "{{no_confirmation_tests}}": "Es gibt keine Bestätigung Tests für",
+    "{{no_elimination_tests}}": "Es gibt keine Ausschluss Test für {0}",
+    "{{no_confirmation_tests}}": "Es gibt keine Bestätigung Tests für {0}",
 
     "{{weekly_map}}": "Karte",
     "{{weekly_player_speed}}": "Spieler Geschwindigkeit",

@@ -200,8 +200,8 @@
     "{{mimic_disclaimer}}": "Le Mimic peut copier les capacités et les comportements des autres entités, ce qui signifie que (presque) n'importe quel test de confirmation peut également correspondre à un Mimic",
     "{{copy_share_link}}": "Copier le lien de partage",
     "{{empty_data_link}}": "Cliquez sur une entité pour voir ses indices et comportements\n(Utilisez ' [ ' et ' ] ' pour faire défiler les entités)",
-    "{{no_elimination_tests}}": "Il n'y a pas de test d'élimination pour ",
-    "{{no_confirmation_tests}}": "Il n'y a pas de test de confirmation pour ",
+    "{{no_elimination_tests}}": "Il n'y a pas de test d'élimination pour {0}",
+    "{{no_confirmation_tests}}": "Il n'y a pas de test de confirmation pour {0}",
 
     "{{weekly_map}}": "Carte",
     "{{weekly_player_speed}}": "Vitesse du joueur",

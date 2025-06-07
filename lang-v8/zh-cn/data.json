@@ -200,8 +200,8 @@
     "{{mimic_disclaimer}}": "拟魂能模仿其他鬼魂的能力和行为特征，这意味着（几乎）任何确认性测试都可能是拟魂",
     "{{copy_share_link}}": "复制分享链接",
     "{{empty_data_link}}": "点击鬼魂查看其关键征兆与行为特征\n（使用 [ 和 ] 键切换鬼魂）",
-    "{{no_elimination_tests}}": "没有针对{ghost}的排除性测试",
-    "{{no_confirmation_tests}}": "没有针对{ghost}的确认性测试",
+    "{{no_elimination_tests}}": "没有针对{0}的排除性测试",
+    "{{no_confirmation_tests}}": "没有针对{0}的确认性测试",
 
     "{{weekly_map}}": "地图",
     "{{weekly_player_speed}}": "玩家移速",

@@ -211,8 +211,18 @@ function translate(to_lang){
         fetch(`lang-v8/${to_lang}/data.json`)
         .then(data => data.json())
         .then(data => {
-            Object.entries(data).forEach(([key,value]) => {
-                body = body.replaceAll(key,value)
+            body = body.replace(/{{([^{}]+)}}/g, (match,inner) => {
+                let parts = inner.split(',')
+                let baseKey = `{{${parts[0]}}}`
+                let args = parts.slice(1)
+
+                if(!(baseKey in data)) return match
+
+                let value = data[baseKey]
+                args.forEach((arg,i) => {
+                    value = value.replace(new RegExp(`\\{${i}\\}`,'g'),arg)
+                })
+                return value
             })
             Object.entries(all_ghosts).forEach(([key,value]) => {
                 body = body.replaceAll(`{{${key}}}`,value)
@@ -238,8 +248,18 @@ function translate_wiki(to_lang){
         fetch(`lang-v8/${to_lang}/wiki.json`)
         .then(data => data.json())
         .then(data => {
-            Object.entries(data).forEach(([key,value]) => {
-                body = body.replaceAll(key,value)
+            body = body.replace(/{{([^{}]+)}}/g, (match,inner) => {
+                let parts = inner.split(',')
+                let baseKey = `{{${parts[0]}}}`
+                let args = parts.slice(1)
+
+                if(!(baseKey in data)) return match
+
+                let value = data[baseKey]
+                args.forEach((arg,i) => {
+                    value = value.replace(new RegExp(`\\{${i}\\}`,'g'),arg)
+                })
+                return value
             })
             document.body.innerHTML = lang_currency.includes(to_lang) ? convert_currency(body) : body
             resolve("Translation complete")

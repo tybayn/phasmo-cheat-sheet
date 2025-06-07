@@ -200,8 +200,8 @@
     "{{mimic_disclaimer}}": "O Mímico pode copiar habilidades e comportamentos de outros fantasmas, isso significa que (quase) qualquer teste de confirmação será positivo se for um Mímico",
     "{{copy_share_link}}": "Copiar Link de compartilhamento",
     "{{empty_data_link}}": "Clique em um fantasma pra ver seus indicios e comportamentos\n(Use ' [ ' e ' ] ' para navegar entre os fantasmas)",
-    "{{no_elimination_tests}}": "Não há teste eliminatório para",
-    "{{no_confirmation_tests}}": "Não há teste de confirmação para",
+    "{{no_elimination_tests}}": "Não há teste eliminatório para {0}",
+    "{{no_confirmation_tests}}": "Não há teste de confirmação para {0}",
 
     "{{weekly_map}}": "Mapa",
     "{{weekly_player_speed}}": "Velocidade do Jogador",

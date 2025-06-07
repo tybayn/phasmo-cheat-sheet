@@ -200,8 +200,8 @@
     "{{mimic_disclaimer}}": "The Mimic can copy abilities and behaviors of other ghosts, meaning that (almost) any confirmation test could also be a Mimic",
     "{{copy_share_link}}": "Copy Share Link",
     "{{empty_data_link}}": "Click a ghost to see its tells and behaviors\n(Use ' [ ' and ' ] ' to cycle through ghosts)",
-    "{{no_elimination_tests}}": "There are no elimination tests for",
-    "{{no_confirmation_tests}}": "There are no confirmation tests for",
+    "{{no_elimination_tests}}": "There are no elimination tests for {0}",
+    "{{no_confirmation_tests}}": "There are no confirmation tests for {0}",
 
     "{{weekly_map}}": "Map",
     "{{weekly_player_speed}}": "Player Speed",
