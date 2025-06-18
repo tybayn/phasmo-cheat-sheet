@@ -9,7 +9,7 @@
     "{{wiki_interaction_p2}}": "The interaction range for ghosts and The Twins are twice as big on large maps.",
     "{{wiki_interaction_h1}}": "Small/Medium Maps",
     "{{wiki_interaction_h2}}": "Standard Interaction Range",
-    "{{wiki_interaction_p3}}": "The distance from the center to the edge of the interaction box is 1.5m, giving the standard ghost an effective interaction radius of 2.42m.",
+    "{{wiki_interaction_p3}}": "The distance from the center to the edge of the interaction box is 1.5m, giving the standard ghost an effective interaction radius of 2.12m.",
     "{{wiki_interaction_h3}}": "Twins Interaction Range",
     "{{wiki_interaction_p4}}": "The distance from the center to the edge of the interaction box is 6m, giving the Twins an effective interaction radius of 8.48m.",
     "{{wiki_interaction_h4}}": "Large Maps",

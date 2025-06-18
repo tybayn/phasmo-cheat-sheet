@@ -9,7 +9,7 @@
     "{{wiki_interaction_p2}}": "La portée d'interaction pour les entités et Les Jumeaux est deux fois plus grande sur les cartes grandes.",
     "{{wiki_interaction_h1}}": "Cartes petites/moyennes",
     "{{wiki_interaction_h2}}": "Portée d'interaction standard",
-    "{{wiki_interaction_p3}}": "La distance entre le centre et le côté de la boîte d'interaction est de 1,5 m, donnant à l'entité standard un rayon d'interaction effectif de 2,42 m.",
+    "{{wiki_interaction_p3}}": "La distance entre le centre et le côté de la boîte d'interaction est de 1,5 m, donnant à l'entité standard un rayon d'interaction effectif de 2,12 m.",
     "{{wiki_interaction_h3}}": "Portée d'interaction des Jumeaux",
     "{{wiki_interaction_p4}}": "La distance entre le centre et le côté de la boîte d'interaction est de 6 m, donnant aux Jumeaux un rayon d'interaction effectif de 8,48 m.",
     "{{wiki_interaction_h4}}": "Grandes cartes",

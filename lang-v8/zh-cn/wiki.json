@@ -8,7 +8,7 @@
     "{{wiki_interaction_p2}}": "在大型地图上，鬼魂和孪魂的互动范围是普通地图的两倍。",
     "{{wiki_interaction_h1}}": "小型/中型地图",
     "{{wiki_interaction_h2}}": "标准的互动范围",
-    "{{wiki_interaction_p3}}": "从中心到互动盒边缘的距离为1.5m，这使得正常鬼魂的有效交互半径为2.42m。",
+    "{{wiki_interaction_p3}}": "从中心到互动盒边缘的距离为1.5m，这使得正常鬼魂的有效交互半径为2.12m。",
     "{{wiki_interaction_h3}}": "孪魂的互动范围",
     "{{wiki_interaction_p4}}": "从中心到互动盒边缘的距离为6m，这使得孪魂的有效交互半径为8.48m。",
     "{{wiki_interaction_h4}}": "大型地图",
