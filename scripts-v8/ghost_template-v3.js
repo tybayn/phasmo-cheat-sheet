@@ -154,8 +154,16 @@ class Ghost {
         for(var i in value){
             data += `<li${value[i]["definitive"] ? "" : " class=\"non-definitive\""}><b>{{${value[i]["type"].toLowerCase().replace(' ','_')}}} (${value[i]["definitive"] ? "{{definitive}}" : "{{non_definitive}}"})</b>: ${value[i]["data"]}`
 
-            if(value[i]["image"] != null)
-                data += `<br><img loading="lazy" class="zoomable" src="${value[i]["image"]}" onclick="zoomImage(this${value[i].hasOwnProperty("subtitle") ? ",'"+value[i]['subtitle']+"'" : ""})">`
+            if(value[i]["image"] != null){
+                if(Array.isArray(value[i]["image"])){
+                    value[i]["image"].forEach(img => {
+                        data += `<br><img loading="lazy" class="zoomable" src="${img}" onclick="zoomImage(this)">`
+                    });
+                }
+                else{
+                    data += `<br><img loading="lazy" class="zoomable" src="${value[i]["image"]}" onclick="zoomImage(this${value[i].hasOwnProperty("subtitle") ? ",'"+value[i]['subtitle']+"'" : ""})">`
+                }
+            }
 
             if(value[i]["definitive"])
                 data += `<div class="wiki_mark_ghost" onclick='select(document.getElementById("${ghost}"))'>&#x2714; {{mark_ghost}}</div>`
@@ -177,8 +185,16 @@ class Ghost {
         for(var i in value){
             data += `<li><b>{{${value[i]["type"].toLowerCase().replace(' ','_')}}}</b>: ${value[i]["data"]}`
 
-            if(value[i]["image"] != null)
-                data += `<br><img loading="lazy" class="zoomable" src="${value[i]["image"]}" onclick="zoomImage(this)">`
+            if(value[i]["image"] != null){
+                if(Array.isArray(value[i]["image"])){
+                    value[i]["image"].forEach(img => {
+                        data += `<br><img loading="lazy" class="zoomable" src="${img}" onclick="zoomImage(this)">`
+                    })
+                }
+                else{
+                    data += `<br><img loading="lazy" class="zoomable" src="${value[i]["image"]}" onclick="zoomImage(this)">`
+                }
+            }
 
             data += `<div class="wiki_mark_ghost" onclick='fade(document.getElementById("${ghost}"))'>&#x2717; {{mark_ghost}}</div></li>`
         }
