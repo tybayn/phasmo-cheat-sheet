@@ -21,20 +21,20 @@
         };
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
-    <script src="scripts-v8/ghost_template-v3.js"></script>
-    <link rel="stylesheet" href="styles-v8/style-v14.css"/>
-    <link rel="stylesheet" href="styles-v8/style-mobile-v8.css"/>
-    <link rel="stylesheet" href="themes-v8/themes-v3.css"/>
-    <link rel="stylesheet" href="discord-v8/discord-v3.css" >
-    <link rel="stylesheet" href="wiki-v8/wiki-v4.css" >
-    <link rel="stylesheet" href="wiki-v8/wiki-spoiler-v1.css" >
-    <link rel="stylesheet" href="events-v8/events-v1.css" >
-    <link rel="stylesheet" href="models-v8/models-v1.css" >
-    <link rel="stylesheet" href="feed-v8/feed-v1.css" >
-    <link rel="stylesheet" href="styles-v8/plugins-v1/plugins-v1.css" >
-    <link rel="stylesheet" href="styles-v8/plugins-v1/makeship-v1.css" >
-    <link rel="stylesheet" href="styles-v8/plugins-v1/musicboxstore-v1.css" >
-    <link rel="stylesheet" href="styles-v8/sparkles-v1.css" >
+    <script src="scripts-v9/ghost_template-v1.js"></script>
+    <link rel="stylesheet" href="styles-v9/style-v1.css"/>
+    <link rel="stylesheet" href="styles-v9/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="themes-v9/themes-v1.css"/>
+    <link rel="stylesheet" href="discord-v9/discord-v1.css" >
+    <link rel="stylesheet" href="wiki-v9/wiki-v1.css" >
+    <link rel="stylesheet" href="wiki-v9/wiki-spoiler-v1.css" >
+    <link rel="stylesheet" href="events-v9/events-v1.css" >
+    <link rel="stylesheet" href="models-v9/models-v1.css" >
+    <link rel="stylesheet" href="feed-v9/feed-v1.css" >
+    <link rel="stylesheet" href="styles-v9/plugins-v1/plugins-v1.css" >
+    <link rel="stylesheet" href="styles-v9/plugins-v1/makeship-v1.css" >
+    <link rel="stylesheet" href="styles-v9/plugins-v1/musicboxstore-v1.css" >
+    <link rel="stylesheet" href="styles-v9/sparkles-v1.css" >
 </head>
 
 <body>
@@ -621,9 +621,13 @@
             <div class="settings_title yfont white">{{guides}}</div>
             <div class="title_note">( '◄' {{to_close}}, 'G' {{to_toggle}})</div>
             <div id="wiki-body" class="info_block"></div>
+
             <div class="data-warning">
                 <img src="https://zero-network.net/phasmophobia/static/imgs/warn.png">
                 {{verification_warning}}
+            </div>
+            <div class="research-link">
+                <a href="https://www.youtube.com/@severelyzero" target="_blank">{{research_link}}</a>
             </div>
         </div>
     </div>
@@ -736,6 +740,12 @@
         </div>
     </a>
 
+    <a href="https://www.youtube.com/@severelyzero" target="_blank" >
+        <div id="youtube_tab">
+            <img src="https://zero-network.net/phasmophobia/static/imgs/yt-icon.png" width="21">
+        </div>
+    </a>
+
     <div id="debug_tab" style="display: none;" onclick="showDebug(event)">
         <img src="imgs/terminal.png" width="21">
     </div>
@@ -750,7 +760,7 @@
                 <div class="timer_title yfont white">
                     {{timers}}
                     <img id="blood-moon-icon-2" class="blood-moon-icon" src="imgs/moon-w.png" title="{{blood_moon_weather}}" onclick="toggleBloodMoon();bpm_calc(true);saveSettings();">
-                    <img id="forest-minion-icon-2" class="forest-minion-icon" src="imgs/minion-w.png" title="{{forest_minion_weather}}" onclick="toggleForestMinion();bpm_calc(true);saveSettings();">
+                    <img id="forest-minion-icon-2" style="display: none;" class="forest-minion-icon" src="imgs/minion-w.png" title="{{forest_minion_weather}}" onclick="toggleForestMinion();bpm_calc(true);saveSettings();">
                 </div>
                 <div class="timers">
                     <div class="timer_block">
@@ -876,7 +886,7 @@
                 <div class="evidence_title yfont white">
                     {{evidence}}
                     <img id="blood-moon-icon" class="blood-moon-icon" src="imgs/moon-w.png" title="{{blood_moon_weather}}" onclick="toggleBloodMoon();bpm_calc(true);saveSettings();">
-                    <img id="forest-minion-icon" class="forest-minion-icon" src="imgs/minion-w.png" title="{{forest_minion_weather}}" onclick="toggleForestMinion();bpm_calc(true);saveSettings();">
+                    <img id="forest-minion-icon" style="display: none;" class="forest-minion-icon" src="imgs/minion-w.png" title="{{forest_minion_weather}}" onclick="toggleForestMinion();bpm_calc(true);saveSettings();">
                 </div>
                 
                 <div class="difficulty_holder">
@@ -1013,25 +1023,25 @@
         if(navigator.userAgent.includes("CriOS") && (/iPad/.test(navigator.userAgent) || (navigator.platform.toLowerCase().includes('mac') && 'ontouchend' in document)))
             document.body.style.position = 'fixed';
     </script>
-    <script src="scripts-v8/utils-v1.js"></script>
-    <script src="lang-v8/lang-v12.js"></script>
-    <script src="themes-v8/themes-v3.js"></script>
-    <script src="scripts-v8/audio_controller-v1.js"></script>
-    <script src="scripts-v8/metronome-v3.js"></script>
-    <script src="scripts-v8/timer-v5.js"></script>
-    <script src="discord-v8/discord-v5.js"></script>
-    <script src="wiki-v8/wiki-v2.js"></script>
-    <script src="scripts-v8/filter-v25.js"></script>
-    <script src="scripts-v8/sanity-v2.js"></script>
-    <script src="scripts-v8/wslink-v16.js"></script>
-    <script src="scripts-v8/zn-v9.js"></script>
-    <script src="scripts-v8/search-v6.js"></script>
-    <script src="events-v8/events-v1.js"></script>
-    <script src="models-v8/models-v1.js"></script>
-    <script src="feed-v8/feed-v2.js"></script>
-    <script src="scripts-v8/voice_en-v3.js"></script>
-    <script src="scripts-v8/voice_recognition-v4.js"></script>
-    <script src="scripts-v8/sparkles-v1.js"></script>
+    <script src="scripts-v9/utils-v1.js"></script>
+    <script src="lang-v9/lang-v1.js"></script>
+    <script src="themes-v9/themes-v1.js"></script>
+    <script src="scripts-v9/audio_controller-v1.js"></script>
+    <script src="scripts-v9/metronome-v1.js"></script>
+    <script src="scripts-v9/timer-v1.js"></script>
+    <script src="discord-v9/discord-v1.js"></script>
+    <script src="wiki-v9/wiki-v1.js"></script>
+    <script src="scripts-v9/filter-v1.js"></script>
+    <script src="scripts-v9/sanity-v1.js"></script>
+    <script src="scripts-v9/wslink-v1.js"></script>
+    <script src="scripts-v9/zn-v1.js"></script>
+    <script src="scripts-v9/search-v1.js"></script>
+    <script src="events-v9/events-v1.js"></script>
+    <script src="models-v9/models-v1.js"></script>
+    <script src="feed-v9/feed-v1.js"></script>
+    <script src="scripts-v9/voice_en-v1.js"></script>
+    <script src="scripts-v9/voice_recognition-v1.js"></script>
+    <script src="scripts-v9/sparkles-v1.js"></script>
     <script>
         document.onclick = hideResetMenu;
         document.addEventListener('touchstart', startSwipe, false);
@@ -1039,7 +1049,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v8/wiki-v6.html",() => {
+                $("#wiki-body").load("wiki-v9/wiki-v1.html",() => {
                     resolve("Ghost data loaded")
                 })
             })

@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'ZNPrimary';
+    src: url('../../styles-v9/fonts/october_crow.ttf');
+}
+
+@font-face {
+    font-family: 'ZNSecondary';
+    src: url('../../styles-v9/fonts/yahfie.ttf');
+}
