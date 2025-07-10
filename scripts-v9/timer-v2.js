@@ -86,6 +86,7 @@ var timer_snd = []
 var smudge_worker;
 var cooldown_worker;
 var hunt_worker;
+var sound_worker;
 
 var count_direction = 0;
 var map_size = 0;
@@ -675,6 +676,196 @@ function start_hunt_timer(){
     const url = window.URL.createObjectURL(blob)
     hunt_worker = new Worker(url)
     hunt_worker.onmessage = () => {
+        progress()
+    }
+}
+
+function toggle_sound_timer(force_start = false, force_stop = false){
+    if(force_start){
+        if($("#play_sound_button").hasClass("playing")){
+            sound_worker.terminate();
+            start_sound_timer();
+        }
+        else{
+            $("#play_sound_button").addClass("playing")
+            $("#play_sound_button").attr('src','imgs/pause.png')
+            start_sound_timer()
+        }
+    }
+
+    else if(force_stop){
+        if($("#play_sound_button").hasClass("playing")){
+            $("#play_sound_button").removeClass("playing")
+            $("#play_sound_button").attr('src','imgs/play.png')
+            sound_worker.terminate();
+        }
+        if(!muteTimerToggle){
+            stop_sound = timer_snd[14].cloneNode()
+            stop_sound.volume = volume
+            stop_sound.play()
+        }
+    }
+
+    else if($("#play_sound_button").hasClass("playing")){
+        $("#play_sound_button").removeClass("playing")
+        $("#play_sound_button").attr('src','imgs/play.png')
+        sound_worker.terminate();
+        if(!muteTimerToggle){
+            stop_sound = timer_snd[14].cloneNode()
+            stop_sound.volume = volume
+            stop_sound.play()
+        }
+    }
+    else{
+        $("#play_sound_button").addClass("playing")
+        $("#play_sound_button").attr('src','imgs/pause.png')
+        start_sound_timer()
+    }
+}
+
+function start_sound_timer(){
+    if(!muteTimerToggle){
+        start_sound = timer_snd[13].cloneNode()
+        start_sound.volume = volume
+        start_sound.play()
+    }
+
+    var time = 80 +1;
+    var prev_t = ""
+    var snds_played = [0,0,0,0,0,0,0]
+
+    var deadline = new Date(Date.now() + time *1000);
+    var min_obj = document.getElementById("minute_sound")
+    var sec_obj = document.getElementById("second_sound")
+    var progress_bar = $('#soundProgressBar')
+    var progress_bar_inner = document.getElementById('soundProgressBarInner')
+    
+    function progress() {
+        var t = deadline - Date.now();
+        var dt = t;
+        var timeleft = Math.floor(t / 1000);
+        var is_normal = timeleft <= 15;
+        var is_split = document.getElementById("timer_split").checked
+        if (count_direction == 1){
+            t = ((map_sound_lengths[map_difficulty][map_size]+1)*1000) - t
+            dt = t
+        }
+        else{
+            dt = !is_normal && is_split ? t - (15*1000) : t
+        }
+
+        var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((t % (1000 * 60)) / 1000);
+        var d_minutes = Math.floor((dt % (1000 * 60 * 60)) / (1000 * 60));
+        var d_seconds = Math.floor((dt % (1000 * 60)) / 1000);
+
+        if(!muteTimerCountdown){
+            if (timeleft == 23){
+                if(snds_played[0] == 0){
+                    cur_sound = timer_snd[16].cloneNode()
+                    cur_sound.volume = volume
+                    cur_sound.play()
+                    snds_played[0] = 1
+                    snds_played[6] = 0
+                }
+            }
+            if (timeleft == 8){
+                if(snds_played[0] == 0){
+                    cur_sound = timer_snd[15].cloneNode()
+                    cur_sound.volume = volume
+                    cur_sound.play()
+                    snds_played[0] = 1
+                    snds_played[6] = 0
+                }
+            }
+
+            if (timeleft == 20 || timeleft == 5){
+                if(snds_played[1] == 0){
+                    cur_sound = timer_snd[5].cloneNode()
+                    cur_sound.volume = volume
+                    cur_sound.play()
+                    snds_played[1] = 1
+                    snds_played[0] = 0
+                }
+            }
+
+            if (timeleft == 19 || timeleft == 4){
+                if(snds_played[2] == 0){
+                    cur_sound = timer_snd[4].cloneNode()
+                    cur_sound.volume = volume
+                    cur_sound.play()
+                    snds_played[2] = 1
+                    snds_played[1] = 0
+                }
+            }
+        
+            if (timeleft == 18 || timeleft == 3){
+                if(snds_played[3] == 0){
+                    cur_sound = timer_snd[3].cloneNode()
+                    cur_sound.volume = volume
+                    cur_sound.play()
+                    snds_played[3] = 1
+                    snds_played[2] = 0
+                }
+            }
+            if (timeleft == 17 || timeleft == 2){
+                if(snds_played[4] == 0){
+                    cur_sound = timer_snd[2].cloneNode()
+                    cur_sound.volume = volume
+                    cur_sound.play()
+                    snds_played[4] = 1
+                    snds_played[3] = 0
+                }
+            }
+            if (timeleft == 16 || timeleft == 1){
+                if(snds_played[5] == 0){
+                    cur_sound = timer_snd[1].cloneNode()
+                    cur_sound.volume = volume
+                    cur_sound.play()
+                    snds_played[5] = 1
+                    snds_played[4] = 0
+                }
+            }
+            if (timeleft == 15 || timeleft == 0){
+                if(snds_played[6] == 0){
+                    cur_sound = timer_snd[0].cloneNode()
+                    cur_sound.volume = volume
+                    cur_sound.play()
+                    snds_played[6] = 1
+                    snds_played[5] = 0
+                }
+            }
+        }
+
+        min_val = t<0 ? "00" : zeroPad(minutes,2);
+        sec_val = t<0 ? "00" : zeroPad(seconds,2);
+        d_min_val = t<0 ? "00" : zeroPad(d_minutes,2);
+        d_sec_val = t<0 ? "00" : zeroPad(d_seconds,2);
+        d_val = `${d_min_val[1]}:${d_sec_val}`
+        if(prev_t != d_val){
+
+            send_timer_link("HUNT_VAL",`${d_val}`,is_split && is_normal ? 1 : 0)
+
+            min_obj.innerHTML = min_val
+            sec_obj.innerHTML = sec_val
+
+            var progressBarWidth = count_direction == 0 ? timeleft * progress_bar.width() / (time-1) : (80 - timeleft) * progress_bar.width() / (time-1);
+            progress_bar_inner.style.width = progressBarWidth;
+
+            prev_t = d_val
+        }
+
+        if(timeleft <= 0){
+            sound_worker.terminate();
+            $("#play_sound_button").removeClass("playing")
+            $("#play_sound_button").attr('src','imgs/play.png')
+        }
+    };
+
+    const blob = new Blob([`(function(e){setInterval(function(){this.postMessage(null)},100)})()`])
+    const url = window.URL.createObjectURL(blob)
+    sound_worker = new Worker(url)
+    sound_worker.onmessage = () => {
         progress()
     }
 }

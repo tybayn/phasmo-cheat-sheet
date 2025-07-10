@@ -92,6 +92,10 @@
         width: auto !important;
     }
 
+    .tricheck{
+        margin: 22px 0px !important;    
+    }
+
     .speed .tricheck {
         width: 20% !important;
     }

@@ -335,6 +335,14 @@ function link_room(){
                         toggle_hunt_timer()
                     }
                 }
+                if (incoming_state['action'].toUpperCase() == "SOUNDTIMER"){
+                    if(incoming_state.hasOwnProperty("force_start") && incoming_state.hasOwnProperty("force_stop")){
+                        toggle_sound_timer(incoming_state["force_start"], incoming_state["force_stop"])
+                    }
+                    else{
+                        toggle_sound_timer()
+                    }
+                }
                 if (incoming_state['action'].toUpperCase() == "CHANGE"){
                     document.getElementById("room_id_note").innerText = `STATUS: Connected (${incoming_state['players']})`
                     send_ml_state()
@@ -728,6 +736,11 @@ function link_link(reconnect = false){
                     toggle_hunt_timer(force_start)
                     send_hunt_timer(force_start)
                 }
+                if (incoming_state['action'].toUpperCase() == "SOUNDTIMER"){
+                    let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
+                    toggle_sound_timer(force_start)
+                    send_sound_timer(force_start)
+                }
                 if(incoming_state['action'].toUpperCase() == "RECONN"){
                     reconn_id = incoming_state.message
                 }
@@ -747,6 +760,7 @@ function link_link(reconnect = false){
                     send_timer_link("TIMER_VAL","0:00")
                     send_timer_link("COOLDOWN_VAL","0:00")
                     send_timer_link("HUNT_VAL","0:00")
+                    send_timer_link("SOUND_VAL","0:00")
                     send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
                     send_blood_moon_link($("#blood-moon-icon").hasClass("blood-moon-active"))
                     send_forest_minion_link($("#forest-minion-icon").hasClass("forest-minion-active"))
@@ -1076,6 +1090,7 @@ function send_reset_link(){
         send_timer_link("TIMER_VAL","0:00")
         send_timer_link("COOLDOWN_VAL","0:00")
         send_timer_link("HUNT_VAL","0:00")
+        send_timer_link("SOUND_VAL","0:00")
         send_empty_data_link()
         dlws.send('{"action":"REQUESTRESET"}')
         dlws.send('{"action":"UNLINK"}')
@@ -1128,6 +1143,12 @@ function send_cooldown_timer(force_start = false, force_stop = false){
 function send_hunt_timer(force_start = false, force_stop = false){
     if(hasLink){
         ws.send(`{"action":"HUNTTIMER","force_start":${force_start},"force_stop":${force_stop}}`)
+    }
+}
+
+function send_sound_timer(force_start = false, force_stop = false){
+    if(hasLink){
+        ws.send(`{"action":"SOUNDTIMER","force_start":${force_start},"force_stop":${force_stop}}`)
     }
 }
 

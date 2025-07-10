@@ -12,55 +12,55 @@ const lang_menu_widths = {
         "left":"196px",
         "width":"168px",
         "maps":"calc(100% - 265px)",
-        "menu_bottom":"-585px",
-        "menu_bottom_custom":"-640px",
-        "menu_height":"620px",
-        "menu_height_custom":"675px"
+        "menu_bottom":"-715px",
+        "menu_bottom_custom":"-770px",
+        "menu_height":"750px",
+        "menu_height_custom":"805px"
     },
     "de":{
         "left":"240px",
         "width":"219px",
         "maps":"calc(100% - 309px)",
-        "menu_bottom":"-610px",
-        "menu_bottom_custom":"-665px",
-        "menu_height":"645px",
-        "menu_height_custom":"700px"
+        "menu_bottom":"-660px",
+        "menu_bottom_custom":"-715px",
+        "menu_height":"695px",
+        "menu_height_custom":"750px"
     },
     "fr":{
         "left":"230px",
         "width":"209px",
         "maps":"calc(100% - 299px)",
-        "menu_bottom":"-585px",
-        "menu_bottom_custom":"-640px",
-        "menu_height":"620px",
-        "menu_height_custom":"675px"
+        "menu_bottom":"-660px",
+        "menu_bottom_custom":"-715px",
+        "menu_height":"695px",
+        "menu_height_custom":"750px"
     },
     "es":{
         "left":"230px",
         "width":"209px",
         "maps":"calc(100% - 299px)",
-        "menu_bottom":"-585px",
-        "menu_bottom_custom":"-640px",
-        "menu_height":"620px",
-        "menu_height_custom":"675px"
+        "menu_bottom":"-660px",
+        "menu_bottom_custom":"-715px",
+        "menu_height":"695px",
+        "menu_height_custom":"750px"
     },
     "ko":{
         "left":"221px",
         "width":"193px",
         "maps":"calc(100% - 290px)",
-        "menu_bottom":"-635px",
-        "menu_bottom_custom":"-690px",
-        "menu_height":"670px",
-        "menu_height_custom":"725px"
+        "menu_bottom":"-680px",
+        "menu_bottom_custom":"-735px",
+        "menu_height":"715px",
+        "menu_height_custom":"770px"
     },
     "pt-br":{
         "left":"196px",
         "width":"168px",
         "maps":"calc(100% - 265px)",
-        "menu_bottom":"-625px",
-        "menu_bottom_custom":"-680px",
-        "menu_height":"660px",
-        "menu_height_custom":"715px"
+        "menu_bottom":"-660px",
+        "menu_bottom_custom":"-715px",
+        "menu_height":"695px",
+        "menu_height_custom":"750px"
     },
     "tr":{
         "left":"236px",
@@ -75,9 +75,9 @@ const lang_menu_widths = {
         "left":"221px",
         "width":"193px",
         "maps":"calc(100% - 290px)",
-        "menu_bottom":"-665px",
-        "menu_bottom_custom":"-715px",
-        "menu_height":"695px",
+        "menu_bottom":"-695px",
+        "menu_bottom_custom":"-745px",
+        "menu_height":"725px",
         "menu_height_custom":"750px"
     }
 }
@@ -122,7 +122,9 @@ function load_voice(){
         new Audio(`lang-v9/${lang}/assets/standard_hunt.mp3`),
         new Audio(`lang-v9/${lang}/assets/cursed_hunt.mp3`),
         new Audio('assets/start.mp3'),
-        new Audio('assets/stop.mp3')];
+        new Audio('assets/stop.mp3'),
+        new Audio(`lang-v9/${lang}/assets/sound_cooldown.mp3`),
+        new Audio(`lang-v9/${lang}/assets/myling_cooldown.mp3`)];
     timer_snd[0].preload = 'auto';
     timer_snd[1].preload = 'auto';
     timer_snd[2].preload = 'auto';
@@ -138,6 +140,8 @@ function load_voice(){
     timer_snd[12].preload = 'auto';
     timer_snd[13].preload = 'auto';
     timer_snd[14].preload = 'auto';
+    timer_snd[15].preload = 'auto';
+    timer_snd[16].preload = 'auto';
     timer_snd[0].load();
     timer_snd[1].load();
     timer_snd[2].load();
@@ -153,6 +157,8 @@ function load_voice(){
     timer_snd[12].load();
     timer_snd[13].load();
     timer_snd[14].load();
+    timer_snd[15].load();
+    timer_snd[16].load();
 }
 
 function load_translation(){

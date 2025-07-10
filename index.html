@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v9/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v9/style-v1.css"/>
-    <link rel="stylesheet" href="styles-v9/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="styles-v9/style-v2.css"/>
+    <link rel="stylesheet" href="styles-v9/style-mobile-v2.css"/>
     <link rel="stylesheet" href="themes-v9/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v9/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v9/wiki-v1.css" >
@@ -766,7 +766,6 @@
                     <div class="timer_block">
                         <div class="modifier_smudge_timer yfont white" onclick="toggle_timer();send_timer();">
                             {{smudge}}
-                            <div class="modifier_note_2">('T' {{to_start_stop}})</div>
                         </div>
                         <div class="line_labels" onclick="toggle_timer();send_timer();">
                             <div class="spirit_line_label">{{Spirit}}</div>
@@ -780,16 +779,15 @@
                                 <div class="ghost_line"></div>
                                 <div class="spirit_line"></div>
                             </div>
-                        </div>
-                        <div id="time_left" onclick="toggle_timer();send_timer();">
-                            <span id="minute">03</span>:<span id="second">00</span>
+                            <div id="time_left" onclick="toggle_timer();send_timer();">
+                                <span id="minute">03</span>:<span id="second">00</span>
+                            </div>
                         </div>
                     </div>
                     <hr>
                     <div class="timer_block">
                         <div class="modifier_smudge_timer yfont white" onclick="toggle_cooldown_timer();send_cooldown_timer();">
                             {{cooldown}}
-                            <div class="modifier_note_2">('C' {{to_start_stop}})</div>
                         </div>
                         <div class="line_labels" onclick="toggle_cooldown_timer();send_cooldown_timer();">
                             <div class="cooldown_demon_line_label">{{Demon}}</div>
@@ -801,21 +799,19 @@
                                 <div class="ghost_line"></div>
                                 <div class="demon_line"></div>
                             </div>
+                            <div id="time_left_cooldown" onclick="toggle_cooldown_timer();send_cooldown_timer();">
+                                <span id="minute_cooldown">00</span>:<span id="second_cooldown">25</span>
+                            </div>
                         </div>
-                        <div id="time_left_cooldown" onclick="toggle_cooldown_timer();send_cooldown_timer();">
-                            <span id="minute_cooldown">00</span>:<span id="second_cooldown">25</span>
-                        </div>
-                        
                     </div>
                     <hr>
                     <div class="timer_block">
                         <div class="modifier_smudge_timer yfont white" onclick="toggle_hunt_timer();send_hunt_timer();">
                             {{hunt}}
-                            <div class="modifier_note_2">('H' {{to_start_stop}})</div>
+                            <div class="hunt_size_label">{{map}}: S, {{hunt}}: L</div>
                         </div>
                         <div class="line_labels" onclick="toggle_hunt_timer();send_hunt_timer();">
                             <div class="hunt_cursed_line_label">{{cursed}}</div>
-                            <div class="hunt_size_label">{{map}}: S, {{hunt}}: L</div>
                         </div>
                         <div id="huntProgress" onclick="toggle_hunt_timer();send_hunt_timer();">
                             <img src="imgs/play.png" id="play_hunt_button" class="play_button">
@@ -824,9 +820,29 @@
                                 <div class="normal_line"></div>
                                 <div class="cursed_line"></div>
                             </div>
+                            <div id="time_left_hunt" onclick="toggle_hunt_timer();send_hunt_timer();">
+                                <span id="minute_hunt">00</span>:<span id="second_hunt">50</span>
+                            </div>
                         </div>
-                        <div id="time_left_hunt" onclick="toggle_hunt_timer();send_hunt_timer();">
-                            <span id="minute_hunt">00</span>:<span id="second_hunt">50</span>
+                    </div>
+                    <hr>
+                    <div class="timer_block">
+                        <div class="modifier_smudge_timer yfont white" onclick="toggle_sound_timer();send_sound_timer();">
+                            {{sound}}
+                        </div>
+                        <div class="line_labels" onclick="toggle_sound_timer();send_sound_timer();">
+                            <div class="sound_myling_line_label">{{Myling}}</div>
+                        </div>
+                        <div id="huntProgress" onclick="toggle_sound_timer();send_sound_timer();">
+                            <img src="imgs/play.png" id="play_sound_button" class="play_button">
+                            <div id="soundProgressBar">
+                                <div id="soundProgressBarInner" class="bar"></div>
+                                <div class="normal_line"></div>
+                                <div class="myling_line"></div>
+                            </div>
+                            <div id="time_left_sound" onclick="toggle_sound_timer();send_sound_timer();">
+                                <span id="minute_sound">01</span>:<span id="second_sound">20</span>
+                            </div>
                         </div>
                         
                     </div>
@@ -1024,16 +1040,16 @@
             document.body.style.position = 'fixed';
     </script>
     <script src="scripts-v9/utils-v1.js"></script>
-    <script src="lang-v9/lang-v1.js"></script>
+    <script src="lang-v9/lang-v2.js"></script>
     <script src="themes-v9/themes-v1.js"></script>
     <script src="scripts-v9/audio_controller-v1.js"></script>
     <script src="scripts-v9/metronome-v1.js"></script>
-    <script src="scripts-v9/timer-v1.js"></script>
+    <script src="scripts-v9/timer-v2.js"></script>
     <script src="discord-v9/discord-v1.js"></script>
     <script src="wiki-v9/wiki-v1.js"></script>
     <script src="scripts-v9/filter-v1.js"></script>
     <script src="scripts-v9/sanity-v1.js"></script>
-    <script src="scripts-v9/wslink-v1.js"></script>
+    <script src="scripts-v9/wslink-v2.js"></script>
     <script src="scripts-v9/zn-v1.js"></script>
     <script src="scripts-v9/search-v1.js"></script>
     <script src="events-v9/events-v1.js"></script>

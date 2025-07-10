@@ -53,6 +53,10 @@
 /* Mobile Adjustments */
 @media screen and (pointer: coarse) and (max-device-width: 600px) {
 
+    .tricheck{
+        margin: 10px 0px !important;    
+    }
+
     .ghost_card{
         grid-template-columns: 38% 62% !important
     }
