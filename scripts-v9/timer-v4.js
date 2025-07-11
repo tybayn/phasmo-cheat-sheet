@@ -747,7 +747,7 @@ function start_sound_timer(){
         var is_normal = timeleft <= 15;
         var is_split = document.getElementById("timer_split").checked
         if (count_direction == 1)
-            t = (121*1000) - t
+            t = (81*1000) - t
         dt = t
 
         var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
