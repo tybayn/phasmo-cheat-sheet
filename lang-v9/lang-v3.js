@@ -194,21 +194,35 @@ function load_translation(){
     })
 }
 
-function convert_currency(content){
+function convert_currency(content) {
     return content.replace(/\b(\d+)\.(\d+)\b/g, (match, p1, p2, offset, string) => {
         const before = string.slice(0, offset);
+        const after = string.slice(offset + match.length);
+
+        // Skip function call arguments or chained decimals
         if (/\b\w+\($/.test(before) || /\d\.\d*$/.test(before)) {
             return match;
         }
 
-        const after = string.slice(offset + match.length);
         if (/^\.\d/.test(after)) {
+            return match;
+        }
+
+        // Skip if match is within a CSS style attribute or CSS block
+        const styleAttrStart = string.lastIndexOf('style="', offset);
+        const styleAttrEnd = string.indexOf('"', styleAttrStart + 7);
+        if (styleAttrStart !== -1 && styleAttrEnd !== -1 && offset > styleAttrStart && offset < styleAttrEnd) {
+            return match;
+        }
+
+        const styleAttrStart2 = string.lastIndexOf("style='", offset);
+        const styleAttrEnd2 = string.indexOf("'", styleAttrStart2 + 7);
+        if (styleAttrStart2 !== -1 && styleAttrEnd2 !== -1 && offset > styleAttrStart2 && offset < styleAttrEnd2) {
             return match;
         }
 
         return `${p1},${p2}`;
     });
-    
 }
 
 function translate(to_lang){

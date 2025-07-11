@@ -94,7 +94,7 @@
     "{{calibration_complete}}": "Kalibrierung abgeschlossen! Offset ist:",
     "{{calibration_failed}}": "Status: Kalibrierung fehlgeschlagen!",
     "{{adjust_speed}}": "Geschwindigkeit der Schritte anpassen",
-    "{{speed_filter_logic}}": "Geschwindigkeitsfilterlogik",
+    "{{speed_filter_logic}}": "Geschwindigkeits-filterlogik",
     "{{or}}": "ODER",
     "{{and}}": "UND",
     "{{bpm_to_ms}}": "BPM to m/s",

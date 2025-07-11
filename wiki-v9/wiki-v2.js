@@ -222,8 +222,10 @@ function openWikiPath(path){
 function generateWikiShareLink(elem,inline=false){
     let url = ""
     let e = elem.parentElement.previousElementSibling
+    console.log(e)
     if(inline){
         let e2 = elem.previousElementSibling
+        console.log(e2)
         while (!e2.id.includes("wiki-"))
             e2 = e2.previousElementSibling
         e = e2
@@ -235,14 +237,14 @@ function generateWikiShareLink(elem,inline=false){
 
     navigator.clipboard.writeText(`${window.location.href}${window.location.href.includes("?") ? "&" : "?"}wiki=${url}`)
 
-    $(".wiki-share").html('Copy Share Link <img loading="lazy" src="imgs/share.png">')
-    elem.innerHTML = 'Copied! <img loading="lazy" src="imgs/share.png">'
+    $(".wiki-share").html(`${lang_data['{{copy_share_link}}']} <img loading="lazy" src="imgs/share.png">`)
+    elem.innerHTML = `${lang_data['{{copied}}']} <img loading="lazy" src="imgs/share.png">`
 }
 
 function generateEventShareLink(elem){
     navigator.clipboard.writeText(`${window.location.href}${window.location.href.includes("?") ? "&" : "?"}wiki=current-event`)
-    $(".wiki-share").html('Copy Share Link <img loading="lazy" src="imgs/share.png">')
-    elem.innerHTML = 'Copied! <img loading="lazy" src="imgs/share.png">'
+    $(".wiki-share").html(`${lang_data['{{copy_share_link}}']} <img loading="lazy" src="imgs/share.png">`)
+    elem.innerHTML = `${lang_data['{{copied}}']} <img loading="lazy" src="imgs/share.png">`
 }
 
 function zoomImage(elem,subtitle=null){

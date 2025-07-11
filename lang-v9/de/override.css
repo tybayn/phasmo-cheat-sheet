@@ -65,6 +65,14 @@
         display: block !important;
     }
 
+    .moving_content .modifier_note{
+        text-align: center !important;
+    }
+
+    #calibrate-button{
+        width: 70% !important;
+    }
+
     #wiki-ghost-speeds .wiki_subtitle{
         width: 60%;
     }
