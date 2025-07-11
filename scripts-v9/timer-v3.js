@@ -746,13 +746,9 @@ function start_sound_timer(){
         var timeleft = Math.floor(t / 1000);
         var is_normal = timeleft <= 15;
         var is_split = document.getElementById("timer_split").checked
-        if (count_direction == 1){
-            t = ((map_sound_lengths[map_difficulty][map_size]+1)*1000) - t
-            dt = t
-        }
-        else{
-            dt = !is_normal && is_split ? t - (15*1000) : t
-        }
+        if (count_direction == 1)
+            t = (121*1000) - t
+        dt = t
 
         var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((t % (1000 * 60)) / 1000);
@@ -844,7 +840,7 @@ function start_sound_timer(){
         d_val = `${d_min_val[1]}:${d_sec_val}`
         if(prev_t != d_val){
 
-            send_timer_link("HUNT_VAL",`${d_val}`,is_split && is_normal ? 1 : 0)
+            send_timer_link("SOUND_VAL",`${d_val}`,is_split && is_normal ? 1 : 0)
 
             min_obj.innerHTML = min_val
             sec_obj.innerHTML = sec_val

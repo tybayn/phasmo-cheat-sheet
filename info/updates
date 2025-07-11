@@ -1,6 +1,6 @@
 {
-    "version":"5.1.0",
-    "date":"2025-05-23",
-    "details": "- Bug Fixes'\n\nBug Fixes:\n- Completely rewrote chat overlay handler to ensure that keyboard is recognized when opened.",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v5.1.0.msi"
+    "version":"5.2.0",
+    "date":"2025-07-11",
+    "details": "- Added Paranormal \"Sound\" timer\n- Moved BPM to smaller location\n\nBug Fixes:\n N/A\n\nNote:\n- Legacy layout will be deprecated in v6",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v5.2.0.msi"
 }
