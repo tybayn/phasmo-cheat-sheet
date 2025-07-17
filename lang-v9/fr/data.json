@@ -153,6 +153,7 @@
     "{{guides}}": "Guides",
     "{{misconceptions}}": "Idées reçues",
     "{{verification_warning}}": "Les données portant ce symbole peuvent ne pas être entièrement vérifiées ou n'être que partiellement vérifiées, mais des tests approfondis montrent que ces données sont correctes.",
+    "{{bug_warning}}": "Les données avec ce symbole sont actuellement buguées dans le jeu et peuvent ne pas fonctionner comme prévu",
     "{{research_link}}": "Pour découvrir nos recherches, rendez-vous sur notre chaîne YouTube >>",
     "{{map}}": "Carte",
     "{{maps}}": "Cartes",

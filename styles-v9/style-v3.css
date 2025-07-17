@@ -686,6 +686,20 @@ body{
         padding-right:10px
     }
 
+    .data-bug {
+        display: flex;
+        align-items: center;
+        font-size: 10px;
+        color: #ff7279;
+        padding-right: 10px;
+        margin-top: 10px;
+    }
+
+    .data-bug img{
+        height: 20px;
+        padding-right:10px
+    }
+
     .research-link{
         display: flex;
         justify-content: center;

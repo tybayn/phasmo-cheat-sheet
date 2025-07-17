@@ -596,12 +596,26 @@
         padding-right:20px
     }
 
+    .data-warning {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        color: #ff7279;
+        margin-top: 10px;
+    }
+
+    .data-warning img{
+        height: 50px;
+        padding-right:20px
+    }
+
     .research-link{
         display: flex;
         justify-content: center;
         color: #fbfe9f;
         margin-top: 10px;
         margin-bottom: 15px;
+        font-size: 22px;
     }
 
     .research-link a{

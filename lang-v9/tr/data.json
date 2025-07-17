@@ -148,6 +148,7 @@
     "{{guides}}": "Rehberler",
     "{{misconceptions}}": "Yanlış Bilinenler",
     "{{verification_warning}}": "Bu sembolü taşıyan veriler tam olarak doğrulanmamış veya kısmen doğrulanmış olabilir, ancak kapsamlı testler verilerin doğru olduğunu göstermektedir.",
+    "{{bug_warning}}": "Bu sembol ile işaretlenmiş veriler şu anda oyunda hatalı ve amaçlandığı gibi çalışmayabilir.",
     "{{research_link}}": "Araştırmalarımızı görmek için YouTube kanalımızı ziyaret edin >>",
     "{{map}}": "Harita",
     "{{maps}}": "Haritalar",

@@ -153,6 +153,7 @@
     "{{guides}}": "Handbuch",
     "{{misconceptions}}": "Missverständnisse",
     "{{verification_warning}}": "Daten mit diesem Symbol sind möglicherweise nicht vollständig oder nur teilweise verifiziert, aber erweiterte Tests zeigen, dass die Daten korrekt sind.",
+    "{{bug_warning}}": "Daten mit diesem Symbol sind derzeit im Spiel fehlerhaft und funktionieren möglicherweise nicht wie vorgesehen.",
     "{{research_link}}": "Um unsere Forschungsergebnisse zu sehen, besuchen Sie unseren YouTube-Kanal >>",
     "{{map}}": "Karte",
     "{{maps}}": "Karten",

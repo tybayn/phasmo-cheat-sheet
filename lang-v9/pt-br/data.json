@@ -153,6 +153,7 @@
     "{{guides}}": "Guias",
     "{{misconceptions}}": "Equívocos",
     "{{verification_warning}}": "Informações com esse símbolo podem não ser totalmente verificadas ou somente parcialmente verificadas, mas através de testes extensos a informação se mostra correta.",
+    "{{bug_warning}}": "Dados com este símbolo estão no momento bugados no jogo e podem não funcionar como intencionado",
     "{{research_link}}": "Para ver nossa pesquisa, visite nosso canal no YouTube >>",
     "{{map}}": "Mapa",
     "{{maps}}": "Mapas",
