@@ -596,7 +596,7 @@
         padding-right:20px
     }
 
-    .data-warning {
+    .data-bug {
         display: flex;
         align-items: center;
         font-size: 22px;
@@ -604,7 +604,7 @@
         margin-top: 10px;
     }
 
-    .data-warning img{
+    .data-bug img{
         height: 50px;
         padding-right:20px
     }
