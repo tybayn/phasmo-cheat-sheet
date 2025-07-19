@@ -45,7 +45,7 @@
     "{{wiki_haunted_mirror_h1}}": "How it Works:",
     "{{wiki_haunted_mirror_p1}}": "Holding the mirror and activating it will show you the ghost's favorite room.",
     "{{wiki_haunted_mirror_h2}}": "The Cost:",
-    "{{wiki_haunted_mirror_p2}}": "Looking into the mirror will drain sanity at a rate of 7.5% per second, witha minimum drain of 20%.",
+    "{{wiki_haunted_mirror_p2}}": "Looking into the mirror will drain sanity at a rate of 7.5% per second, with a minimum drain of 20%.",
     "{{wiki_haunted_mirror_h3}}": "Cursed Hunt:",
     "{{wiki_haunted_mirror_p3}}": "The mirror will break if the user runs out of sanity, whether by using it for too long or attempting to use with a sanity of less than 20%. The mirror breaking will start a cursed hunt.",
     "{{wiki_haunted_mirror_h4}}": "Notes:",
@@ -106,7 +106,7 @@
 
     "{{wiki_ouija_board_title}}": "Ouija Board",
     "{{wiki_ouija_board_h1}}": "How it Works:",
-    "{{wiki_ouija_board_p1}}": "When used, the player is able to ask questions and get responses regarding the ghost or its whereabouts. Asking a valid question will cause the board to respond by spelling out its answer using the planchet. Once done asking questions, the player must say goodbye to end a session.",
+    "{{wiki_ouija_board_p1}}": "When used, the player is able to ask questions and get responses regarding the ghost or its whereabouts. Asking a valid question will cause the board to respond by spelling out its answer using the planchette. Once done asking questions, the player must say goodbye to end a session.",
     "{{wiki_ouija_board_h2}}": "Questions:",
     "{{wiki_ouija_board_h3}}": "\"Where are you?\"",
     "{{wiki_ouija_board_p2}}": "Gives the current room of the ghost (not the favorite room)",
@@ -407,7 +407,7 @@
     "{{wiki_los_normal_p1}}": "A standard speed ghost will hunt at 1.7m/s. Once the ghost has LOS with the player (A), the ghost will increase in speed over 13 seconds of continuous LOS until a maximum speed of 1.65x base speed is reached (B).",
     "{{wiki_los_twins_p1}}": "The Twins move at different speeds when hunting. The main twin is 10% slower than a standard ghost, while the \"roaming\" twin is 10% faster.",
     "{{wiki_los_twins_p2}}": "The BPM Plot will keep a history of the previous hunt that was tapped as a dotted red line. Using this line you can see how the previous hunt compares to the current hunt. A different base speed can indicate the Twins.",
-    "{{wiki_los_twins_p3}}": "In the example below, you can see that the previous hunt was at 1.53m/s while the next hunt was at 1.87m/s.",
+    "{{wiki_los_twins_p3}}": "In the example below, you can see that the previous hunt was at 1.5m/s while the next hunt was at 1.9m/s.",
     "{{wiki_los_raiju_p1}}": "A Raiju always moves at a fixed speed of 2.5m/s (at 100% ghost speed) while near active electronic player equipment both placed or held. This results in flat spots near 2.5m/s interrupting an otherwise standard hunting pattern.",
     "{{wiki_los_raiju_p2}}": "In the following example, the Raiju came into range of electronics (A) and immediately sped up until it was out of range (B). The Raiju then gained LOS (C) and began the standard increase until it came into electronic range again (D). Once it left the range of electronics, the Raiju's speed returned to that of its LOS increase (E) and continued to increase LOS speed until it reached its max LOS speed (F).",
     "{{wiki_los_raiju_p3}}": "The Raiju's biggest tell is multiple flat spots at 2.5m/s (A-B & D-E).",
@@ -415,7 +415,7 @@
     "{{wiki_los_hantu_p1}}": "The Hantu has no LOS increase, but its speed is based on the temperature of the room it is currently in. This leads to very variable speeds while hunting <b><i>IF</i></b> it wanders through multiple different temperature rooms during a hunt. The longer a Hantu is in a room, the colder it will get, and this will affect its speed.",
     "{{wiki_los_moroi_title}}": "with LOS + Smudge",
     "{{wiki_los_moroi_p1}}": "A Moroi's speed is dependent on the team's average sanity. At 0% sanity, a Moroi's base speed starts at 2.25m/s until it has LOS (A). With 13 seconds of continuous LOS, a Moroi can max out at 3.71m/s (D), the fastest of any ghost.",
-    "{{wiki_los_moroi_p2}}": "A Moroi also has the longest \"blindness\" period when smudged of any ghost. If a Moroi has a LOS speed increase when smudged (B), the speed will slowly decrease for 7.5 seconds instead of the standard 5 seconds. After the smudge wears off, if LOS is regained (C), the speed will continue to increase.",
+    "{{wiki_los_moroi_p2}}": "A Moroi also has the longest \"blindness\" period when smudged of any ghost. If a Moroi has a LOS speed increase when smudged (B), the speed will slowly decrease for 7 seconds instead of the standard 5 seconds. After the smudge wears off, if LOS is regained (C), the speed will continue to increase.",
     "{{wiki_los_thaye_p1}}": "The Moroi and Thaye are some of the fastest ghosts in the game and are sometimes hard to distinguish, but there is a key difference: a Thaye will never speed up with LOS.",
     "{{wiki_los_thaye_p2}}": "Thayes age and grow weaker and slower the longer players are around them. The youngest Thaye will always move at 2.75m/s at 100% speed, even with LOS, and will become slower with each hunt if exposed to players.",
     "{{wiki_los_thaye_p3}}": "Moroi without LOS will be slower than young Thayes, moving at only 2.25m/s (dotted line), but they are able to reach a speed much faster than Thayes while in continuous LOS (solid line).",
@@ -590,7 +590,7 @@
     "{{wiki_misconceptions_banshee_1_r}}": "Any player can hear the Banshee's scream through the parabolic microphone",
 
     "{{wiki_misconceptions_banshee_2_c}}": "\"The ghost only hunts based on the sanity of people in the house / investigation area\"",
-    "{{wiki_misconceptions_banshee_2_r}}": "The ghost will hunt based on the teams average sanity regardless of where those team members are. The Banshee is the only exception to this as they will hunt based on their target's sanity (but it still doesn't matter if the target is inside or outside).",
+    "{{wiki_misconceptions_banshee_2_r}}": "The ghost will hunt based on the team's average sanity regardless of where those team members are. The Banshee is the only exception to this as they will hunt based on their target's sanity (but it still doesn't matter if the target is inside or outside).",
 
     "{{wiki_misconceptions_banshee_3_c}}": "\"If the ghost hunts from another room or another room gets cold that means the ghost changed rooms\"",
     "{{wiki_misconceptions_banshee_3_r}}": "False. Ghosts can hunt from wherever they happen to be at the time. Since ghosts can roam out of their rooms, they can hunt from anywhere the roam takes them. As far as temperatures go, the temps will drop in any room that the ghost has spent time in, which can be the result of roaming frequently or stalking behavior (Banshee). The only way to confirm a room change is to observe ghost orbs being in a different room than before or if the mirror shows a new room.",
@@ -611,18 +611,18 @@
     "{{wiki_misconceptions_goryo_1_r}}": "False, this is simply RNG. The bone can happen to be in the ghost's favorite room of any ghost.",
 
     "{{wiki_misconceptions_myling_1_c}}": "\"The Myling can't make vocal sounds during a hunt\"",
-    "{{wiki_misconceptions_myling_1_r}}": "False, the Myling can make vocal sounds during hunts just like any other ghost. The Myling is also stop being heard from 12m away instead of 20m, which indirectly does cause them to be slightly quiter at the same distance as a normal ghost because of the sound fade out caused by distance.",
+    "{{wiki_misconceptions_myling_1_r}}": "False, the Myling can make vocal sounds during hunts just like any other ghost. The Myling also stops being heard from 12m away instead of 20m, which indirectly does cause them to be slightly quiter at the same distance as a normal ghost.",
 
     "{{wiki_misconceptions_onryo_1_c}}": "\"Onryo will actively try to avoid firelights and will move away from them\"",
-    "{{wiki_misconceptions_onryo_1_r}}": "False, this is derived from the flavor text of the in-game journal. Onryo's don't avoid firelights, they simply blow out a firelight instead of using a crucifix if they attempt to hunt within range of one.",
+    "{{wiki_misconceptions_onryo_1_r}}": "False, this is derived from the flavor text of the in-game journal. Onryos don't avoid firelights, they simply blow out a firelight instead of using a crucifix if they attempt to hunt within range of one.",
 
     "{{wiki_misconceptions_onryo_2_c}}": "\"Onryo only has a chance to hunt after blowing out 3 flames\" or \"Onryo has a chance to hunt after blowing out a every flame after the initial 3\"",
-    "{{wiki_misconceptions_onryo_2_r}}": "Onryo will always attempt to hunt after blowing out every 3rd flame. Note: It queues the hunt after the 3rd blowout but if it can't initiate it (because if an existing hunt or a cooldown) then it will get delayed (after the cooldown smudge timers also delay the hunt) and any candles blown during that time won't count towards the cycle (as the counter will only get reset at the start if the ability hunt).",
+    "{{wiki_misconceptions_onryo_2_r}}": "Onryo will always attempt to hunt after blowing out every 3rd flame. Note: It queues the hunt after the 3rd blowout but if it can't initiate it (because of an existing hunt or a cooldown) then it will get delayed (after the cooldown smudge timers also delay the hunt) and any candles blown during that time won't count towards the cycle (as the counter will only get reset at the start of the ability hunt).",
 
     "{{wiki_misconceptions_twins_1_c}}": "\"The Twins is 2 separate ghosts\"",
     "{{wiki_misconceptions_twins_1_r}}": "The Twins is a single ghost with 2 interaction ranges; one larger and one smaller",
 
-    "{{wiki_misconceptions_twins_2_c}}": "\"You can tell its The Twins by a 'curve' on the activity board (Twinteraction)\"",
+    "{{wiki_misconceptions_twins_2_c}}": "\"You can tell it's The Twins by a 'curve' on the activity board (Twinteraction)\"",
     "{{wiki_misconceptions_twins_2_r}}": "False. Although The Twins are more likely to produce this pattern on the activity board because of their ability, any ghost is able to produce that pattern by doing multiple interactions in quick succession.",
 
     "{{wiki_misconceptions_obake_1_c}}": "\"Two left footprints or two right footprints in a row mean the ghost missed a step\"",
