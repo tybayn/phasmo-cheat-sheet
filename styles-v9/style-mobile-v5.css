@@ -2126,6 +2126,7 @@
         flex-wrap: nowrap;
         align-items: center;
         justify-content: left;
+        padding-left: 13px;
     }
 
     .copyright img{
@@ -2325,6 +2326,10 @@
     .maps_button .l{
         background-color: #e90000;
         color: #fff;
+    }
+
+    #kofi{
+        display: none;
     }
 
     #active-users{

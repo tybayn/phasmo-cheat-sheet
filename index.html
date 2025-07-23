@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v9/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v9/style-v3.css"/>
-    <link rel="stylesheet" href="styles-v9/style-mobile-v4.css"/>
+    <link rel="stylesheet" href="styles-v9/style-v4.css"/>
+    <link rel="stylesheet" href="styles-v9/style-mobile-v5.css"/>
     <link rel="stylesheet" href="themes-v9/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v9/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v9/wiki-v1.css" >
@@ -996,8 +996,9 @@
                 6 Tanglewood Drive
             </button>
             <button id="reset" class="yfont standard_reset" onclick="reset()" onmouseenter="checkResetButton()" onmouseleave="resetResetButton()" oncontextmenu="showResetMenu(event)">{{reset}}</button>
+            <a id="kofi" href="https://ko-fi.com/severelyzero" target="_blank"><span>Support us on</span><img src="https://zero-network.net/phasmophobia/static/imgs/kofi.png"></a>
             <div id="active-users"><span id="current-version-label"></span> | <span id="active-users-label">{{active_users}}: -</span></div>
-            <div class="copyright" onclick="showInfo(event)"><img class="question" src="imgs/question.png"> {{info_copyright}}</div>
+            <div class="copyright" onclick="showInfo(event)">{{info_copyright}}</div>
             <div id="close-menu-button" onclick="closeMenu()"></div>
             
 
@@ -1034,6 +1035,7 @@
             document.getElementById("event_box").style.left = "0px";
             document.getElementById("wiki_box").style.left = "0px";
             document.getElementById("maps_box").style.left = "-388px";
+            document.getElementById("active-users").innerHTML = document.getElementById("active-users").innerHTML.replace(" | ","<br>")
         }
         if(!navigator.platform.toLowerCase().includes('win')){
             document.getElementById("zndl-download-icon").style.display = "none"
