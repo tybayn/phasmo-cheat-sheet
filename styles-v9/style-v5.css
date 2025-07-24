@@ -2701,7 +2701,7 @@ body{
         color: rgb(173, 173, 173);
         font-size: 10px;
         cursor: pointer;
-        margin-left: calc(45% + 15px);
+        margin-left: calc(45% + 12px);
         padding-top: 6px;
     }
 
@@ -2975,7 +2975,7 @@ body{
         font-size: 9px;
         padding-top: 3px;
         z-index: 50;
-        margin-left: calc(45% + 15px);
+        margin-left: calc(45% + 12px);
     }
 
     #active-users-label{
