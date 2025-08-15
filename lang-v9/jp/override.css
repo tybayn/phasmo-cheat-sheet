@@ -1,0 +1,181 @@
+@font-face {
+    font-family: 'ZNPrimary';
+    src: url('../../styles-v9/fonts/Chalk-S-JP.otf');
+}
+
+@font-face {
+    font-family: 'ZNSecondary';
+    src: url('../../styles-v9/fonts/kiwimaru.ttf');
+}
+
+
+/* Desktop Adjustments */
+@media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
+
+    .tricheck{
+        font-size: 14px !important;
+    }
+
+    .filter_tool_button{
+        font-size: 16px !important;
+    }
+    
+    .ghost_name{
+        font-size: 20px !important;
+        font-weight: lighter !important;
+    }
+
+    .data{
+        grid-template-columns: 220px auto !important;
+    }
+
+    .label{
+        letter-spacing: 1px;
+    }
+
+    #settings_box, #links_box, #discord_link_box, #event_box, #wiki_box {
+        width: 209px;
+    }
+
+    #maps_box{
+        min-width: 597px !important;
+    }
+
+    #discord_link_tab{
+        height: 115px !important;
+    }
+
+    #event_tab{
+        height: 130px !important;
+        top: 289px !important;
+    }
+
+    #wiki_tab{   
+        top: 437px !important;
+    }
+
+    #maps_tab {
+        top: 545px !important;
+    }
+
+    #game_mode {
+        font-size: 24px !important;
+    }
+
+    .discord-entry{
+        font-size: 9px !important;
+    }
+
+    .modifier .modifier_note{
+        display: block !important;
+    }
+
+    .evidence_title{
+        font-size: 24px !important;
+        padding-top: 0px !important;
+    }
+
+    .blood-moon-icon{
+        padding-top: 8px !important;
+    }
+
+    .hunt_sanity_title, .speed_title, .timer_title, .modifier_title{
+        margin-top: 0px !important;
+    }
+
+    .timer_title{
+        padding-top: 0px;
+    }
+
+    .modifier_volume, .sanity_labels{
+        font-size: 13px !important;
+    }
+
+    .modifier_ghost_speed, .modifier_bpm_finder {
+        font-size: 13px !important;
+    }
+
+    .hunt_size_label{
+        font-size: 11px !important;
+        width: 35% !important;
+    }
+
+    #cur_map_label{
+        margin-top: 0px !important;
+    }
+
+    #reset{
+        font-size: 16px !important;
+        padding-top: 0px !important;
+    }
+
+    .reset_note{
+        margin-top: -4px !important;
+        padding-top: 0px !important;
+        font-size: 11px !important;
+    }
+}
+
+/* Mobile Adjustments */
+@media screen and (pointer: coarse) and (max-device-width: 600px) {
+
+    .filter_tool_button{
+        font-size: 38px !important;
+        line-height: 1 !important;
+    }
+
+    .num_evidence, .cust_num_evidence{
+        font-size: 28px !important;
+    }
+
+    .evidence-row{
+        width: 50% !important;
+    }
+
+    .tricheck{
+        margin: 12px 0px !important;    
+        width: auto !important;
+    }
+
+    .hunt_sanity{
+        justify-content: space-around !important;
+    }
+
+    .speed .tricheck {
+        width: 20% !important;
+    }
+
+    .speed .tricheck:last-child {
+        width: 30% !important;
+    }
+
+    .menu{
+        height: 850px;
+    }
+
+    .evidence_title, .speed_title, .hunt_sanity_title, .timer_title, .modifier_title{
+        font-size: 36px !important;
+    }
+
+    .speed_title, .hunt_sanity_title, .modifier_title{
+        margin-top: -14px !important;
+    }
+
+    #wiki_tab{
+        height: 240px !important;
+    }
+
+    #maps_tab{
+        top: 843px !important;
+    }
+
+    #event_tab{
+        height: 280px !important;
+        top: 1075px !important;
+    }
+
+    #reset {
+        font-size: 38px !important;
+        padding: 0px 10px 10px 10px !important;
+    }
+}
