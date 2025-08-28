@@ -58,14 +58,14 @@ function rand_normal(mean = 0.5, stddev = 0.25) {
 }
 
 blinks = {
-    "12": "https://i.imgur.com/j0JhpT4.png",
-    "27": "https://i.imgur.com/UsN4kIZ.png",
-    "39": "https://i.imgur.com/U2cHXrN.png",
-    "54": "https://i.imgur.com/Ek0n29p.png",
-    "62": "https://i.imgur.com/j0JhpT4.png",
-    "80": "https://i.imgur.com/UsN4kIZ.png",
-    "105": "https://i.imgur.com/U2cHXrN.png",
-    "120": "https://i.imgur.com/Ek0n29p.png",
+    "12": "https://file.garden/Z-9fual_RynAMoLc/wiki/hunts/ghost-1.webp",
+    "27": "https://file.garden/Z-9fual_RynAMoLc/wiki/hunts/ghost-2.webp",
+    "39": "https://file.garden/Z-9fual_RynAMoLc/wiki/hunts/ghost.webp",
+    "54": "https://file.garden/Z-9fual_RynAMoLc/wiki/hunts/ghost-3.webp",
+    "62": "https://file.garden/Z-9fual_RynAMoLc/wiki/hunts/ghost-1.webp",
+    "80": "https://file.garden/Z-9fual_RynAMoLc/wiki/hunts/ghost-2.webp",
+    "105": "https://file.garden/Z-9fual_RynAMoLc/wiki/hunts/ghost.webp",
+    "120": "https://file.garden/Z-9fual_RynAMoLc/wiki/hunts/ghost-3.webp",
 }
 
 let ghost_flicker_data = {
@@ -150,7 +150,7 @@ function startFlicker(elem, is_obake = false){
                 $(obj_img).attr('src',blinks[num_blink.toString()])
             }
             if (is_obake && blinks.hasOwnProperty((num_blink - 1).toString())){
-                $(obj_img).attr('src','https://i.imgur.com/U2cHXrN.png')
+                $(obj_img).attr('src','https://file.garden/Z-9fual_RynAMoLc/wiki/hunts/ghost.webp')
             }
             let r = flicker_ghost.invis_rand == Math.random ? flicker_ghost.invis_rand(flicker_ghost.invis_mean,flicker_ghost.invis_stddev) : flicker_ghost.invis_rand()
             let flicker_off_time = (r * (invis_max - invis_min) + invis_min)
