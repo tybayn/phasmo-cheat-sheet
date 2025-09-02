@@ -1,6 +1,6 @@
 {
-    "version":"6.0.1",
+    "version":"6.0.2",
     "date":"2025-09-01",
-    "details": "- Removed Legacy Layout\n- Various changes to make maps and sockets thread-safe\n\nBug Fixes:\n- Changes made to sockets to help prevent random disconnects\n- Rewrote how broadcast and chat notifs are handled",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.0.1.msi"
+    "details": "- Removed Legacy Layout\n- Various changes to make maps and sockets thread-safe\n\nBug Fixes:\n- Changes made to sockets to help prevent random disconnects\n- Rewrote how broadcast and chat notifs are handled\n - Potential fixes to random crashes for some users",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.0.2.msi"
 }

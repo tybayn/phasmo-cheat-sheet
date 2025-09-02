@@ -253,10 +253,9 @@ function toggleBloodMoon(force_on = false, force_off = false, ignore_link=false)
         clearInterval(bloodMoonEffectInterval)
         send_blood_moon_link(false)
         blood_moon = 0
-        return
     }
 
-    if(!$("#blood-moon-icon").hasClass("blood-moon-active") || force_on){
+    else if(!$("#blood-moon-icon").hasClass("blood-moon-active") || force_on){
         $('#blood-moon-icon').addClass('blood-moon-active')
         $('#blood-moon-icon').attr("src","imgs/moon-r.png")
         $('#blood-moon-icon-2').addClass('blood-moon-active')

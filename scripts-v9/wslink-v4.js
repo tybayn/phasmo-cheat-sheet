@@ -683,6 +683,7 @@ function link_link(reconnect = false){
                     changeMap(cur_map_elem,cur_map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
                     saveSettings()
                     send_cur_map_link()
+                    send_state()
                 }
                 if (incoming_state['action'].toUpperCase() == "PREVMAP"){
                     let cur_map_elem = document.getElementById("maps_list").querySelector(".selected_map").previousSibling
@@ -691,6 +692,7 @@ function link_link(reconnect = false){
                     changeMap(cur_map_elem,cur_map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
                     saveSettings()
                     send_cur_map_link()
+                    send_state()
                 }
                 if (incoming_state['action'].toUpperCase() == "EVENTMAP"){
                     document.getElementById("map_event_check_box").checked = !document.getElementById("map_event_check_box").checked
