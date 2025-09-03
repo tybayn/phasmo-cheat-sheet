@@ -642,6 +642,7 @@ function link_link(reconnect = false){
         }
     }
     dlws.onclose = function(event){
+        console.log(event)
         hasDLLink = false
         relink_live = false
         setTimeout(() => {
