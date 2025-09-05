@@ -20,6 +20,7 @@ loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_krampus_
 loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_forest_spirit.mp3',8)
 loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_forest_spirit_2.mp3',8)
 loadSound('assets/click.mp3',9)
+loadSound('https://zero-network.net/phasmophobia/static/assets/footstep_example.mp3',10)
 
 var speed = 1.7
 var muteTimerToggle = false
@@ -112,6 +113,15 @@ function toggleSound(set_tempo,id){
         },step_duration)
     }
     last_id = id
+}
+
+function toggleExample(set_tempo,id){
+    if(snd_choice==7){
+        playExample()   
+    }
+    else{
+        toggleSound(set_tempo,id)
+    }
 }
 
 // ------------------------------------------------------------------------------

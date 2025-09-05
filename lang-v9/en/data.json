@@ -51,7 +51,7 @@
     "{{krampus}}": "Krampus",
     "{{forest_spirit}}": "Forest Spirit",
     "{{metronome}}": "Metronome",
-    "{{click_to_hear_speed}}": "Click <span class=\"sound\" onclick=\"toggleSound(1.7,'spirit0')\">&#128266;</span> on cards to hear speed",
+    "{{click_to_hear_speed}}": "Click <span class=\"sound\" onclick=\"toggleExample(1.7,'spirit0')\">&#128266;</span> on cards to hear speed",
     "{{bpm_finder}}": "BPM Finder",
     "{{tap}}": "Tap",
     "{{press_f}}": "or press 'F'",

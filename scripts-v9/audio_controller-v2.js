@@ -64,6 +64,14 @@ function playStep(time) {
     source.start(context.currentTime + time);
 }
 
+function playExample(){
+    gainNode.gain.value = volume
+    let source = context.createBufferSource();
+    source.connect(gainNode);
+    source.buffer = stepBuffer[10][0];
+    source.start(context.currentTime);
+}
+
 function scheduleStep(time) {
     playStep(time)
 }
