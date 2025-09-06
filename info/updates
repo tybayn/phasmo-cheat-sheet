@@ -1,6 +1,6 @@
 {
-    "version":"6.1.1",
-    "date":"2025-09-03",
-    "details": "- Removed Legacy Layout\n- Various changes to make maps and sockets thread-safe\n\nBug Fixes:\n- Fixed issue with \"show when focused\" not working\n- Changes to reconnect logic so that they are silent for users with frequent drops\n- Removed lock on ws sends",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.1.1.msi"
+    "version":"6.1.2",
+    "date":"2025-09-05",
+    "details": "- Removed Legacy Layout\n- Various changes to make maps and sockets thread-safe\n\nBug Fixes:\n-Fixed issue with close behavior\n- Fixed issue with \"show when focused\" not working\n- Changes to reconnect logic so that they are silent for users with frequent drops\n- Removed lock on ws sends",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.1.2.msi"
 }
