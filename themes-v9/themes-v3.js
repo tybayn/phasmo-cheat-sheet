@@ -47,7 +47,7 @@ function changeTheme(name = null){
         "#news_box","#news_tab","#language_box","#language_tab","#debug_tab",
         "#z3d-tab","#z3d-box","#theme_box","#theme_tab","#discord_tab", "#youtube_tab", "#info_box","#info_box_voice",
         "#info_box_debug","#info_box_zndl","#info_box_calibrate", "#info_box_weekly", "#resetMenu", "#broadcast-content",
-        "#search_box","#search_tab"
+        "#search_box","#search_tab", "#partner-box", "#partner-tab"
     ]
 
     if(isAltered){

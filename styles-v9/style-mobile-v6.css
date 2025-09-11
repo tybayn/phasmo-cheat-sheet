@@ -717,6 +717,14 @@
         display: none;
     }
 
+    #partner-box{
+        display: none;
+    }
+
+    #partner-tab{
+        display: none;
+    }
+
     #debug_tab{
         position: fixed;
         width: 70px;

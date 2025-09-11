@@ -972,18 +972,31 @@ body{
         border-radius: 5px 0px 0px 5px;
     }
 
-    #youtube_tab{
+    #partner-box{
         position: fixed;
-        height: 24px;
-        width: 24px;
+        top: 0;
         z-index: 1;
+        width: 20px;
+        height: 100dvh;
+        background-color: #313248;
         display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: stretch;
+        align-items: flex-start;
+        color: #fff;
+        padding: 5px 8px 5px 8px;
+        font-size: 14px;
+        transition: right 0.5s ease, width 0.5s ease;
+    }
+
+    #partner-tab{
+        position: absolute;
+        height: 24px;
+        width: 25px;
         text-align: center;
         top: 251px;
-        right: 0px;
+        left: -35px;
         background-color: #313248;
         padding: 5px;
         cursor: pointer;
@@ -1024,7 +1037,7 @@ body{
         text-wrap: nowrap;
     }
 
-    #settings_box .icon, #links_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #search_box .icon, #news_box .icon, #language_box .icon, #theme_box .icon, #z3d-box .icon, .broadcast-content .icon{
+    #settings_box .icon, #links_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #search_box .icon, #news_box .icon, #language_box .icon, #theme_box .icon, #z3d-box .icon, #partner-box .icon, .broadcast-content .icon{
         position: absolute;
         top: 5px;
         right: 4px;
@@ -1036,7 +1049,7 @@ body{
         cursor: pointer;
     }
 
-    #settings_box .icon:before, #links_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #search_box .icon:before, #news_box .icon:before, #language_box .icon:before, #theme_box .icon:before, #z3d-box .icon:before, .broadcast-content .icon:before{
+    #settings_box .icon:before, #links_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #search_box .icon:before, #news_box .icon:before, #language_box .icon:before, #theme_box .icon:before, #z3d-box .icon:before, #partner-box .icon:before, .broadcast-content .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -1046,7 +1059,7 @@ body{
         top:4px;
     }
 
-    #settings_box .icon:after, #links_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #search_box .icon:after, #news_box .icon:after, #language_box .icon:after, #theme_box .icon:after, #z3d-box .icon:after, .broadcast-content .icon:after{
+    #settings_box .icon:after, #links_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #search_box .icon:after, #news_box .icon:after, #language_box .icon:after, #theme_box .icon:after, #z3d-box .icon:after, #partner-box .icon:after, .broadcast-content .icon:after{
         content:"";
         position: absolute;
         width:15px;
@@ -1220,7 +1233,7 @@ body{
         min-width: 350px;
     }
 
-    #z3d-box .info_block {
+    #z3d-box .info_block, #partner-box .info_block {
         display: flex;
         flex-direction: column;
         z-index: 2;
