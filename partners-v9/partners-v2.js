@@ -4,6 +4,9 @@ $(window).on('load', function() {
     .then(data => {
         setTimeout(() => {
             document.getElementById('partner_info_block').innerHTML += data
+            if(data.includes("LIVE NOW!")){
+                $("#partner-tab").addClass("partner-live")
+            }
         },1000);
     })
     .catch(error => {
