@@ -50,6 +50,11 @@
     align-items: center;
 }
 
+.partner_main_link_game{
+    display: flex;
+    align-items: flex-start;
+}
+
 .partner_desc{
     font-size: 12px;
     padding-left: 10px;
@@ -91,4 +96,23 @@
 
 .partner-live{
     border-color: #f00 !important;
+}
+
+.partner_cur_game_img{
+    width: 80px;
+}
+
+.partner_cur_playing{
+    font-size: 11px;
+    color:#ffffff77;
+}
+
+.partner_cur_game{
+    font-size: 20px;
+    padding: 2px 0px;
+}
+
+.partner_stream_desc{
+    font-size: 11px;
+    opacity: 0.8;
 }
