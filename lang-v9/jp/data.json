@@ -168,6 +168,7 @@
     "{{3d_models_disclaimer}}": "すべてのモデルは無料で提供されており、CC BY-NC-NDまたはCC BY-SAライセンスのもとで、ゲームを視覚的な参考資料として一から設計されている。",
     "{{partners}}": "ZNパートナーズ",
     "{{twitch_drops}}": "Twitch Drops",
+    "{{no_drops}}": "(現在、報酬はありません)",
     "{{has_los}}": "視線が通り",
     "{{not_los}}": "視線が通らない",
     "{{select_ghost}}": "ゴーストを選択",

@@ -22,7 +22,7 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v9/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v9/style-v7.css"/>
+    <link rel="stylesheet" href="styles-v9/style-v8.css"/>
     <link rel="stylesheet" href="styles-v9/style-mobile-v6.css"/>
     <link rel="stylesheet" href="themes-v9/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v9/discord-v1.css" >
@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="wiki-v9/wiki-spoiler-v1.css" >
     <link rel="stylesheet" href="events-v9/events-v1.css" >
     <link rel="stylesheet" href="models-v9/models-v1.css" >
-    <link rel="stylesheet" href="partners-v9/partners-v4.css" >
+    <link rel="stylesheet" href="partners-v9/partners-v5.css" >
     <link rel="stylesheet" href="feed-v9/feed-v1.css" >
     <link rel="stylesheet" href="styles-v9/plugins-v1/plugins-v1.css" >
     <link rel="stylesheet" href="styles-v9/plugins-v1/makeship-v1.css" >
@@ -753,9 +753,12 @@
 
         <div class="moving_content"></div>
             <div class="settings_title yfont white">{{partners}}</div>
-            <div class="info_block" id="partner_info_block"></div>
+            <div class="info_block" id="partner_info_block" style="flex: 1;"></div>
+            <div class="scroll-hint" id="scrollHint" aria-hidden="true" role="presentation">
+                <div class="arrow"></div>
+            </div>
             <div class="settings_title yfont white">{{twitch_drops}}</div>
-            <div class="info_block" id="drops_info_block"></div>
+            <div class="info_block" id="drops_info_block" style="min-height:auto;"><div style="padding: 15px;">{{no_drops}}</div></div>
         </div>
     </div>
 
@@ -1068,7 +1071,7 @@
     <script src="scripts-v9/zn-v1.js"></script>
     <script src="scripts-v9/search-v1.js"></script>
     <script src="events-v9/events-v1.js"></script>
-    <script src="partners-v9/partners-v3.js"></script>
+    <script src="partners-v9/partners-v5.js"></script>
     <script src="models-v9/models-v2.js"></script>
     <script src="feed-v9/feed-v1.js"></script>
     <script src="scripts-v9/voice_en-v1.js"></script>

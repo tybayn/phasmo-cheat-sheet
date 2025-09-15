@@ -4,6 +4,7 @@
     border: 0.5px solid #ccc;
     border-radius: 10px;
     background: linear-gradient(#ffffff40,#ffffff00);
+    position: relative;
 }
 
 .live{
@@ -117,6 +118,16 @@
     opacity: 0.8;
 }
 
+.partner_drops_icon{
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 64px;
+    height: 64px;
+    transform: rotate(20deg);
+    filter: drop-shadow(2px 4px 6px black);
+}
+
 #drops_info_block{
     min-height: 350px;
     align-items: center !important;
@@ -181,3 +192,38 @@
     color: #ffffff77;
     text-align: center;
 }
+
+.scroll-hint {
+    margin-top: -73px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.8) 80%);
+    color: #fff;
+    opacity: 1;
+    transition: opacity .2s ease, transform .2s ease;
+    z-index: 5;
+ }
+
+.scroll-hint.is-hidden {
+    opacity: 0;
+}
+
+.scroll-hint .arrow {
+    width: 18px;
+    height: 18px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    animation: bounce 1.3s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(45deg); }
+    50%      { transform: translateY(4px) rotate(45deg); }
+  }
