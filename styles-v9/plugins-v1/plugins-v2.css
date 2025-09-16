@@ -23,6 +23,11 @@
     font-size: 15px;
 }
 
+.plugin_subtitle{
+    font-size: 12px;
+    opacity: 0.7;
+}
+
 .plugin_price{
     grid-column: 3;
     grid-row: 2;
