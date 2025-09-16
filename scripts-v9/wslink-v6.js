@@ -1027,7 +1027,7 @@ function send_ghosts_link(reset = false){
 
 function send_blood_moon_link(value){
     if(hasDLLink){
-        if ($("#forest-minion-icon").hasClass("forest-minion-active")){
+        if (($("#forest-minion-icon").css("display") != "none") && $("#forest-minion-icon").hasClass("forest-minion-active")){
             if(value)
                 dlws.send(`{"action":"BLOODMINION","value":1}`)
             else
