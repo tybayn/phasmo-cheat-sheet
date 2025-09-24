@@ -22,8 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v9/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v9/style-v8.css"/>
-    <link rel="stylesheet" href="styles-v9/style-mobile-v6.css"/>
+    <link rel="stylesheet" href="styles-v9/style-v9.css"/>
+    <link rel="stylesheet" href="styles-v9/style-mobile-v7.css"/>
     <link rel="stylesheet" href="themes-v9/themes-v1.css"/>
     <link rel="stylesheet" href="discord-v9/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v9/wiki-v1.css" >
@@ -41,7 +41,9 @@
 <body>
     <div id="page-loading">
         <div id="page-loading-status"></div>
-        <div class="dot-loading"></div>
+        <div class="loading-container">
+            <div class="loading-bar" id="loading-bar"></div>
+        </div>
         <div class="not-loading">Page not loading? Check our <a href="https://zero-network.net/status" target="_blank">status</a> or join our <a href="https://discord.gg/afpvC7Bf7Y" target="_blank">Discord</a></div>
     </div>
     <div id="resetMenu" style="display: none;">
@@ -463,7 +465,7 @@
                 <div class="modifier_volume yfont white">
                     <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo(event)">
                     {{desktop_link}}
-                    <a id="zndl-download-icon" class="download" href="assets/ZN-Desktop-Link-Installer-v6.1.4.msi" download="ZN-Desktop-Link-Installer-v6.1.4.msi" onclick="showZNDLInfo(event)"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
+                    <a id="zndl-download-icon" class="download" href="assets/ZN-Desktop-Link-Installer-v6.2.0.msi" download="ZN-Desktop-Link-Installer-v6.2.0.msi" onclick="showZNDLInfo(event)"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
                 </div>
                 <div class="journal_link">
                     <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="" disabled style="color:#444;">
@@ -472,7 +474,7 @@
                     <div class="journal_link_buttons">
                         <button id="link_id_create" class="desktop_link_button" style="display: none;" onclick="create_link(false)">{{create}}</button>
                         <button id="link_id_create_launch" class="desktop_link_button" style="display: none;" onclick="create_link(true)">{{create_and_launch}}</button>
-                        <button id="link_id_disconnect" class="desktop_link_button" style="display: none;" onclick="disconnect_link()">{{disconnect}}</button>
+                        <button id="link_id_disconnect" class="desktop_link_button" style="display: none;" onclick="disconnect_link(false,false,1000,'Cheat Sheet requested disconnect')">{{disconnect}}</button>
                     </div>
                 </div>
                 <div id="link_id_note" class="modifier_note">({{status}}: {{not_linked}})</div>
@@ -524,7 +526,7 @@
             </div>
             <div id="zndl-download-button" class="find-overlay">
                 {{looking_for_overlay}}<br>
-                <a href="assets/ZN-Desktop-Link-Installer-v6.1.4.msi" download="ZN-Desktop-Link-Installer-v6.1.4.msi" onclick="showZNDLInfo(event)" style="text-decoration: none;">
+                <a href="assets/ZN-Desktop-Link-Installer-v6.2.0.msi" download="ZN-Desktop-Link-Installer-v6.2.0.msi" onclick="showZNDLInfo(event)" style="text-decoration: none;">
                     <div class="button-zn"><img class="download_icon" src="imgs/download.png" style="filter: invert(1); padding-right: 5px;">ZN-Desktop-Link</div>
                 </a>
             </div>
@@ -658,7 +660,16 @@
             <div class="maps_credit">{{map_images_belong_to}} <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">{{images}}</a>)</div>
         </div>
         <div id="maps_list" class="maps_buttons"></div>
-        <div class="flex-holder-right">
+        <div class="flex-holder-split">
+            <div class="map-type-container">
+                {{map_type}}:
+                <select id="map-type" onchange="switchMapType();send_cur_map_link();saveSettings();">
+                    <option value="0">{{normal_map}}</option>
+                    <option value="1">{{ghost_room_map}}</option>
+                    <option value="2">{{sanity_drain_map}}</option>
+                    <option value="3">{{temperature_map}}</option>
+                </select>
+            </div>
             <a id="map-explorer-link-2" target="_blank" href="https://zero-network.net/phasmo-cheat-sheet/map-explorer/">
                 <div class="button-gray">{{map_explorer}} »</div>
             </a>
@@ -1065,14 +1076,14 @@
     <script src="scripts-v9/timer-v4.js"></script>
     <script src="discord-v9/discord-v1.js"></script>
     <script src="wiki-v9/wiki-v3.js"></script>
-    <script src="scripts-v9/filter-v4.js"></script>
+    <script src="scripts-v9/filter-v5.js"></script>
     <script src="scripts-v9/sanity-v1.js"></script>
-    <script src="scripts-v9/wslink-v6.js"></script>
-    <script src="scripts-v9/zn-v1.js"></script>
+    <script src="scripts-v9/wslink-v7.js"></script>
+    <script src="partners-v9/partners-v6.js"></script>
+    <script src="models-v9/models-v3.js"></script>
+    <script src="scripts-v9/zn-v2.js"></script>
     <script src="scripts-v9/search-v1.js"></script>
     <script src="events-v9/events-v1.js"></script>
-    <script src="partners-v9/partners-v5.js"></script>
-    <script src="models-v9/models-v2.js"></script>
     <script src="feed-v9/feed-v1.js"></script>
     <script src="scripts-v9/voice_en-v1.js"></script>
     <script src="scripts-v9/voice_recognition-v1.js"></script>

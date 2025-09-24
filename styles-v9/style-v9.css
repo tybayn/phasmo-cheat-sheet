@@ -146,56 +146,20 @@ body{
         color: #00ff00;
     }
 
-    .dot-loading {
-        margin: 10px;
-        align-self: center;
-        position: relative;
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
-        background-color: #393c64;
-        color: #393c64;
-        animation: dotLoading 1s infinite linear alternate;
-        animation-delay: .5s;
+    .loading-container {
+        width: 200px;
+        height: 8px;
+        border-radius: 4px;
+        background: rgba(255,255,255,0.1);
+        overflow: hidden;
     }
-    
-    .dot-loading::before, .dot-loading::after {
-        content: '';
-        display: inline-block;
-        position: absolute;
-        top: 0;
-    }
-    
-    .dot-loading::before {
-        left: -15px;
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
-        background-color: #393c64;
-        color: #393c64;
-        animation: dotLoading 1s infinite alternate;
-        animation-delay: 0s;
-    }
-    
-    .dot-loading::after {
-        left: 15px;
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
-        background-color: #393c64;
-        color: #393c64;
-        animation: dotLoading 1s infinite alternate;
-        animation-delay: 1s;
-    }
-    
-    @keyframes dotLoading {
-        0% {
-            background-color: #393c64;
-        }
-        50%,
-        100% {
-            background-color: #ccc;
-        }
+
+    .loading-bar {
+        height: 100%;
+        width: 0%;
+        background: #ccc;
+        border-radius: 4px;
+        transition: width 0.5s ease-in-out;
     }
 
     hr{
@@ -2851,6 +2815,29 @@ body{
         filter: opacity(0.8);
         top: 5px;
         left: 5px;
+    }
+
+    .map-type-container{
+        display: flex;
+        align-items: center;
+    }
+
+    #map-type{
+        width: 20%;
+        min-width: 200px;
+        border-radius: 5px;
+        border: none;
+        color: #FFF;
+        background: rgba(0,0,0,0.25);
+        box-shadow: inset 0 0 10px #161615;
+        height: 25px;
+        font-size: 16px;
+        padding: 0px 3px;
+        padding-top: 1px;
+        margin-left: 5px;
+        font-family: 'ZNSecondary';
+        float: right;
+        cursor: pointer;
     }
 
     .maps_credit{

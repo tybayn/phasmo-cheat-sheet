@@ -983,7 +983,7 @@ function parse_speech(vtext){
         if(hasLink)
             disconnect_room()
         if(hasDLLink)
-            disconnect_link()
+            disconnect_link(false,false,1000,"Cheat Sheet requested disconnect")
         stop_voice()
     }
     else if(vtext.startsWith('launch desktop link')){

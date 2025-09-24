@@ -1,6 +1,6 @@
 {
-    "version":"6.1.4",
+    "version":"6.2.0",
     "date":"2025-09-15",
-    "details": "- Made map overlay stream safe\n\nBug Fixes:- Transparency setting will now persist",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.1.4.msi"
+    "details": "- Added hotkeys and infrastructure for map type cycle\n- Added better close logs\n\nBug Fixes:\n- Disconnect from Cheat Sheet will fully close socket",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.2.0.msi"
 }

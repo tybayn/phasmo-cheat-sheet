@@ -1,4 +1,4 @@
-$(window).on('load', function() {
+function load_models() {
     fetch("https://zero-network.net/phasmophobia/data/3d-models.json", {signal: AbortSignal.timeout(6000)})
     .then(data => data.json())
     .then(data => {
@@ -22,4 +22,4 @@ $(window).on('load', function() {
     .catch(error => {
         // Om nom nom
     })
-})
+}

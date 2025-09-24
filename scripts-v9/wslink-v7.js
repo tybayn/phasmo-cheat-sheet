@@ -604,7 +604,7 @@ function reconnect_link(){
     relink_timeout = setTimeout(() => {
         console.warn("Unable to reconnect to server!")
         clearInterval(relink_interval)
-        disconnect_link(false)
+        disconnect_link(false,false,1005,"Cheat Sheet unable to reconnect")
         document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`
         document.getElementById("dllink_status").className = "error"
         setCookie("link_id","",-1)
@@ -615,7 +615,7 @@ function link_link(reconnect = false){
     var link_id = reconnect ? reconn_id : document.getElementById("link_id").value 
 
     try{
-        dlws = new WebSocket(`wss://zero-network.net/phasmolink/link/${link_id}${reconnect ? '?reconnect=true' : ''}`);
+        dlws = new WebSocket(`wss://zero-network.net/phasmolink/link/${link_id}?me=ZNCS${reconnect ? '&reconnect=true' : ''}`);
     }
     catch(e){
         relink_live = false
@@ -671,6 +671,9 @@ function link_link(reconnect = false){
             var incoming_state = JSON.parse(event.data)
 
             if (incoming_state.hasOwnProperty("action")){
+                if (incoming_state['action'] == "?"){
+                    dlws.send('{"action":"!"}')
+                }
                 if (incoming_state['action'].toUpperCase() == "PONG"){
                     await_dlws_pong = false
                 }
@@ -694,6 +697,16 @@ function link_link(reconnect = false){
                     saveSettings()
                     send_cur_map_link()
                     send_state()
+                }
+                if (incoming_state['action'].toUpperCase() == "NEXTMAPTYPE"){
+                    switchMapType(true,false)
+                    saveSettings()
+                    send_cur_map_link()
+                }
+                if (incoming_state['action'].toUpperCase() == "PREVMAPTYPE"){
+                    switchMapType(false,true)
+                    saveSettings()
+                    send_cur_map_link()
                 }
                 if (incoming_state['action'].toUpperCase() == "EVENTMAP"){
                     document.getElementById("map_event_check_box").checked = !document.getElementById("map_event_check_box").checked
@@ -793,7 +806,7 @@ function link_link(reconnect = false){
                 }
                 if (incoming_state['action'].toUpperCase() == "UNLINK"){
                     kill_gracefully = true
-                    disconnect_link()
+                    disconnect_link(false,false,1000,"Server or Desktop Link requested Cheat Sheet to disconnect")
                 }
                 if (incoming_state['action'].toUpperCase() == "DL_STEP"){
                     if (incoming_state.hasOwnProperty("timestamp")){
@@ -878,7 +891,7 @@ function link_link(reconnect = false){
 
             if (incoming_state.hasOwnProperty("disconnect") && incoming_state['disconnect']){
                 kill_gracefully = true
-                disconnect_link(false,true)
+                disconnect_link(false,true,1000,"Server or Desktop Link requested Cheat Sheet to disconnect")
             }
 
         } catch (error){
@@ -1061,7 +1074,7 @@ function send_sanity_link(value, color){
 function send_map_preload_link(){
     if(hasDLLink){
         cur_map_link = document.getElementById("map_image").style.backgroundImage.slice(4,-1).replace(/"/g,"")
-        dlws.send(`{"action":"MAPPRELOAD","message":"${cur_map_link}","list":["${Object.values(all_maps).join('","')}"]}`)
+        dlws.send(`{"action":"MAPPRELOAD","message":"${cur_map_link}","list":["${Object.values(all_maps).join('","')}","${Object.values(all_maps).join('","').replaceAll(".png","_ghost.png").replaceAll(".webp","_ghost.webp")}","${Object.values(all_maps).join('","').replaceAll(".png","_sanity.png").replaceAll(".webp","_sanity.webp")}","${Object.values(all_maps).join('","').replaceAll(".png","_temperature.png").replaceAll(".webp","_temperature.webp")}"]}`)
     }
 }
 
@@ -1100,7 +1113,7 @@ function send_reset_link(){
     }
 }
 
-function disconnect_link(reset=false,has_status=false){
+function disconnect_link(reset=false,has_status=false,code=1005,reason=null){
     clearInterval(relink_interval)
     clearTimeout(relink_timeout)
     clearInterval(dlws_ping)
@@ -1128,7 +1141,7 @@ function disconnect_link(reset=false,has_status=false){
         toggleSanitySettings()
     }
     kill_gracefully = true
-    dlws.close()
+    dlws.close(code,reason)
 }
 
 function send_timer(force_start = false, force_stop = false){

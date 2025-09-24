@@ -20,7 +20,7 @@ function updateHint() {
     }
 }
 
-$(window).on('load', function() {
+function load_partners() {
     fetch("https://zero-network.net/zn/partners.html", {signal: AbortSignal.timeout(6000)})
     .then(data => data.text())
     .then(data => {
@@ -41,7 +41,8 @@ $(window).on('load', function() {
     .then(data => data.text())
     .then(data => {
         setTimeout(() => {
-            document.getElementById('drops_info_block').innerHTML = data
+            if(data != "")
+                document.getElementById('drops_info_block').innerHTML = data
         },1500);
     })
     .catch(error => {
@@ -56,4 +57,4 @@ $(window).on('load', function() {
         requestAnimationFrame(updateHint);
     });
     mutationObs.observe(area, { childList: true, subtree: true, characterData: true });
-})
+}

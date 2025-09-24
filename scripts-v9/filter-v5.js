@@ -13,7 +13,7 @@ let prev_monkey_state = 0
 let weekly_data = {}
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood","map_size":"S","prev_monkey_state":0}
-var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"voice_prefix":0}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
 
 let znid = getCookie("znid")
 
@@ -1840,6 +1840,7 @@ function saveSettings(reset = false){
     user_settings['disable_particles'] = document.getElementById("disable_particles").checked ? 1 : 0;
     user_settings['persist_modes'] = document.getElementById("persist_modes").checked ? 1 : 0;
     user_settings['show_event_maps'] = document.getElementById("map_event_check_box").checked ? 1 : 0;
+    user_settings['map_type'] = document.getElementById("map-type").value
     user_settings['map'] = $(".selected_map")[0] ? $(".selected_map")[0].id : 'tanglewood'
     user_settings['theme'] = $("#theme").val();
     user_settings['forest_minion'] = $("#forest-minion-icon").hasClass("forest-minion-active") ? 1 : 0
@@ -1855,7 +1856,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"voice_prefix":0}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
     }
 
     user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
@@ -1918,6 +1919,7 @@ function loadSettings(){
     document.getElementById("disable_particles").checked = load_default('disable_particles',0) == 1;
     document.getElementById("persist_modes").checked = load_default('persist_modes',0) == 1;
     document.getElementById("map_event_check_box").checked = load_default('show_event_maps',0) == 1;
+    document.getElementById("map-type").value = load_default('map_type','0');
     document.getElementById("voice_prefix").checked = load_default('voice_prefix',0) == 1;
 
     // Fix for depricated
@@ -1982,8 +1984,7 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    console.log("Resetting")
-    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"voice_prefix":0}
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
     document.getElementById("modifier_volume").value = load_default('volume',50)
     document.getElementById("mute_broadcast").checked = load_default('mute_broadcast',0) == 1 
     document.getElementById("mute_timer_toggle").checked = load_default('mute_timer_toggle',0) == 1 
@@ -2008,6 +2009,7 @@ function resetSettings(){
     document.getElementById("disable_particles").checked = load_default('disable_particles',0) == 1
     document.getElementById("persist_modes").checked = load_default('persist_modes',0) == 1
     document.getElementById("map_event_check_box").checked = load_default('show_event_maps',0) == 1;
+    document.getElementById("map-type").value = load_default('map_type','0')
     document.getElementById("voice_prefix").checked = load_default('voice_prefix',0) == 1;
     document.getElementById("tanglewood").click()
     document.getElementById("theme").value = user_settings['theme']
@@ -2169,7 +2171,7 @@ function changeMap(elem,map,ignore_link=false){
     $(".maps_button").removeClass("selected_map")
     $("#cur_map").html($(elem).html())
     $(elem).addClass("selected_map")
-    $(".map_image").css("background-image",document.getElementById("map_event_check_box").checked && all_maps.hasOwnProperty(`${elem.id}-e`) ? `url(${all_maps[`${elem.id}-e`]})` : "url("+map+")")
+    $(".map_image").css("background-image",document.getElementById("map_event_check_box").checked && document.getElementById("map-type").value == '0' && all_maps.hasOwnProperty(`${elem.id}-e`) ? `url(${all_maps[`${elem.id}-e`]})` : "url("+map+")")
 
     var room_id = document.getElementById("room_id").value
     if(room_id != '')
@@ -2180,11 +2182,40 @@ function changeMap(elem,map,ignore_link=false){
     state['map'] = elem.id
     state['map_size'] = elem.querySelector(".map_size").innerText
     setCookie("state",JSON.stringify(state),1)
+    switchMapType()
     updateMapSize(elem.querySelector(".map_size").innerText)
     send_cur_map_link()
     if(!ignore_link){
         send_state()
     }
+}
+
+function switchMapType(next=false,prev=false){
+    const mtypes = {
+        "0":"",
+        "1":"_ghost",
+        "2":"_sanity",
+        "3":"_temperature"
+    }
+
+    let cur_type = document.getElementById("map-type").value
+    let cur_map = $('.selected_map')[0].id
+
+    Object.entries(mtypes).forEach(([k,v]) => {
+        cur_map = cur_map.replace(`${v}.png`,'.png').replace(`${v}.webp`,'.png')
+    })
+
+    if(next){
+        cur_type = ((parseInt(cur_type) + 1 ) % 4).toString()
+        document.getElementById("map-type").value = cur_type
+    }
+    else if(prev){
+        cur_type = ((parseInt(cur_type) - 1 ) % 4).toString().replace("-1","3")
+        document.getElementById("map-type").value = cur_type
+    }
+
+    let next_map = all_maps[cur_map].replace(".png",`${mtypes[cur_type]}.png`).replace(".webp",`${mtypes[cur_type]}.webp`)
+    $(".map_image").css("background-image",`url(${next_map})`)
 }
 
 function zoomMap(elem){

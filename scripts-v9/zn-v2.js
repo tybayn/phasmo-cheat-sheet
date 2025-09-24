@@ -23,6 +23,12 @@ function startDebugMode(){
     }
 }
 
+function setLoading(percent) {
+    const bar = document.getElementById("loading-bar");
+    percent = Math.max(0, Math.min(100, percent));
+    bar.style.width = percent + "%";
+}
+
 function checkLink(){
     return new Promise((resolve, reject) => {
         params = new URL(window.location.href).searchParams
@@ -393,28 +399,35 @@ function loadAllAndConnect(){
             reject("Failed to load language data")
         })
     })
-    
+    setLoading(25)
     document.getElementById("page-loading-status").innerText = "loading language data..."
     Promise.all([load_translation()])
     .then(() => {
+        setLoading(40)
         document.getElementById("page-loading-status").innerText = "loading ghost & map data..."
         Promise.all([loadZN,loadData,loadMaps,loadWeekly,loadLanguages])
         .then(() => {
+            setLoading(80)
             document.getElementById("page-loading-status").innerText = "translating page..."
             Promise.all([translate(lang)])
             .then(() => {
+                setLoading(90)
                 document.getElementById("page-loading-status").innerText = "translating wiki..."
                 Promise.all([translate_wiki(lang)])
                 .then(() => {
+                    setLoading(99)
                     document.getElementById("page-loading-status").innerText = "loading user settings..."
                     Promise.all([getLink()])
                     .then(() => {
+                        setLoading(100)
                         loadSettings()
                         filter(true)
                         applyPerms()
                         auto_link()
                         openWikiFromURL()
                         loadSearch()
+                        load_partners()
+                        load_models()
 
                         try{heartbeat()} catch(Error){console.warn("Possible latency issues!")}
                         setInterval(function(){
