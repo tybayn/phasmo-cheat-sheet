@@ -1,6 +1,6 @@
 {
-    "version":"6.2.0",
-    "date":"2025-09-23",
-    "details": "- Added hotkeys and infrastructure for map type cycle\n- Added better close logs\n\nBug Fixes:\n- Disconnect from Cheat Sheet will fully close socket",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.2.0.msi"
+    "version":"6.2.1",
+    "date":"2025-09-24",
+    "details": "- Added hotkeys and infrastructure for map type cycle\n- Added better close logs\n\nBug Fixes:\n- Changed hotkey handler (specifically mouse) to be more thread safe\n- Disconnect from Cheat Sheet will fully close socket",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.2.1.msi"
 }
