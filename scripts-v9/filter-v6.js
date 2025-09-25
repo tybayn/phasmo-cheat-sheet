@@ -2193,9 +2193,8 @@ function changeMap(elem,map,ignore_link=false){
 function switchMapType(next=false,prev=false){
     const mtypes = {
         "0":"",
-        "1":"_ghost",
-        "2":"_sanity",
-        "3":"_temperature"
+        "1":"_sanity",
+        "2":"_temperature"
     }
 
     let cur_type = document.getElementById("map-type").value
@@ -2206,11 +2205,11 @@ function switchMapType(next=false,prev=false){
     })
 
     if(next){
-        cur_type = ((parseInt(cur_type) + 1 ) % 4).toString()
+        cur_type = ((parseInt(cur_type) + 1 ) % 3).toString()
         document.getElementById("map-type").value = cur_type
     }
     else if(prev){
-        cur_type = ((parseInt(cur_type) - 1 ) % 4).toString().replace("-1","3")
+        cur_type = ((parseInt(cur_type) - 1 ) % 3).toString().replace("-1","2")
         document.getElementById("map-type").value = cur_type
     }
 

@@ -157,8 +157,8 @@
     "{{hover_touch}}": "Pasa el cursor por encima/Clickea para hacer zoom",
     "{{show_event_maps}}": "Mostrar el mapa de eventos",
     "{{map_type}}": "Tipo de mapa",
-    "{{normal_map}}": "Normal / Límites de la sala",
-    "{{ghost_room_map}}": "Válido Ghost Rooms",
+
+    "{{ghost_room_map}}": "Normal / Válido Ghost Rooms",
     "{{sanity_drain_map}}": "Prevención de fugas",
     "{{temperature_map}}": "Temperaturas ambiente",
     "{{map_images_belong_to}}": "Las imágenes de los mapas pertenecen a",
