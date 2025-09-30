@@ -75,10 +75,10 @@ const lang_menu_widths = {
         "left":"240px",
         "width":"219px",
         "maps":"calc(100% - 309px)",
-        "menu_bottom":"-725px",
-        "menu_bottom_custom":"-780px",
-        "menu_height":"760px",
-        "menu_height_custom":"815px"
+        "menu_bottom":"-660px",
+        "menu_bottom_custom":"-715px",
+        "menu_height":"695px",
+        "menu_height_custom":"750px"
     },
     "tr":{
         "left":"236px",

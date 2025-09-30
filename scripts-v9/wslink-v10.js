@@ -22,6 +22,8 @@ let broadcast_audio = new Audio("assets/broadcast-alert.mp3")
 broadcast_audio.preload = 'auto';
 broadcast_audio.load();
 
+let connectionState = "closed"; // "connecting" | "connected" | "reconnecting" | "closed"
+
 var my_pos = 0
 var pos_colors = {
     1:"ff0000",
@@ -282,21 +284,21 @@ function link_room(){
                 request_guess()
             }
             else if (incoming_state.hasOwnProperty("action")){
-                if (incoming_state['action'].toUpperCase() == "RESET"){
+                if (action == "RESET"){
                     reset(true)
                 }
-                if(incoming_state['action'].toUpperCase() == "BROADCAST"){
+                if(action == "BROADCAST"){
                     document.getElementById("room_id_note").innerText = incoming_state['message']
                     broadcast(incoming_state['message'])
                 }
-                if (incoming_state['action'].toUpperCase() == "UNLINK"){
+                if (action == "UNLINK"){
                     document.getElementById("room_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{timeout}}']}`
                     document.getElementById("settings_status").className = "pending"
                     document.getElementById("room_id").value = ""
                     disconnect_room(false, true)
                     return
                 }
-                if (incoming_state['action'].toUpperCase() == "GUESS"){
+                if (action == "GUESS"){
                     try { document.getElementById(`guess_pos_${incoming_state['pos']}`).remove()} catch (error) {} 
                     if(incoming_state['ghost']){
                         document.getElementById(incoming_state['ghost']).querySelector(".ghost_guesses").innerHTML += `
@@ -306,12 +308,12 @@ function link_room(){
                         `
                     }
                 }
-                if (incoming_state['action'].toUpperCase() == "GUESSSTATE"){
+                if (action == "GUESSSTATE"){
                     if($(".guessed").length > 0){
                         send_guess($(".guessed")[0].id)
                     }
                 }
-                if (incoming_state['action'].toUpperCase() == "TIMER"){
+                if (action == "TIMER"){
                     if(incoming_state.hasOwnProperty("force_start") && incoming_state.hasOwnProperty("force_stop")){
                         toggle_timer(incoming_state["force_start"], incoming_state["force_stop"])
                     }
@@ -319,7 +321,7 @@ function link_room(){
                         toggle_timer()
                     }
                 }
-                if (incoming_state['action'].toUpperCase() == "COOLDOWNTIMER"){
+                if (action == "COOLDOWNTIMER"){
                     if(incoming_state.hasOwnProperty("force_start") && incoming_state.hasOwnProperty("force_stop")){
                         toggle_cooldown_timer(incoming_state["force_start"], incoming_state["force_stop"])
                     }
@@ -327,7 +329,7 @@ function link_room(){
                         toggle_cooldown_timer()
                     }
                 }
-                if (incoming_state['action'].toUpperCase() == "HUNTTIMER"){
+                if (action == "HUNTTIMER"){
                     if(incoming_state.hasOwnProperty("force_start") && incoming_state.hasOwnProperty("force_stop")){
                         toggle_hunt_timer(incoming_state["force_start"], incoming_state["force_stop"])
                     }
@@ -335,7 +337,7 @@ function link_room(){
                         toggle_hunt_timer()
                     }
                 }
-                if (incoming_state['action'].toUpperCase() == "SOUNDTIMER"){
+                if (action == "SOUNDTIMER"){
                     if(incoming_state.hasOwnProperty("force_start") && incoming_state.hasOwnProperty("force_stop")){
                         toggle_sound_timer(incoming_state["force_start"], incoming_state["force_stop"])
                     }
@@ -343,16 +345,16 @@ function link_room(){
                         toggle_sound_timer()
                     }
                 }
-                if (incoming_state['action'].toUpperCase() == "CHANGE"){
+                if (action == "CHANGE"){
                     document.getElementById("room_id_note").innerText = `STATUS: Connected (${incoming_state['players']})`
                     send_ml_state()
                 }
-                if (incoming_state['action'].toUpperCase() == "EVIDENCE"){
+                if (action == "EVIDENCE"){
                     if(!$(document.getElementById(incoming_state['evidence']).querySelector("#checkbox")).hasClass("block")){
                         tristate(document.getElementById(incoming_state['evidence']))
                     }
                 }
-                if (incoming_state['action'].toUpperCase() == "POLL"){
+                if (action == "POLL"){
                     polled = true
                     if(Object.keys(discord_user).length > 0){
                         if (hasSelected()){
@@ -611,288 +613,328 @@ function reconnect_link(reconnect=true){
     },5 * 60 * 1000)
 }
 
+function scheduleReconnect(force = false) {
+    if (kill_gracefully) return;
+
+    connectionState = "reconnecting";
+
+    reconnectAttempts++;
+    const delay = Math.min(5000, 500 * Math.pow(2, reconnectAttempts)); // exponential backoff up to 5s
+
+    console.log(`[WS] Reconnecting in ${delay}ms... (attempt ${reconnectAttempts})`);
+    setTimeout(() => link_link(true), delay);
+}
+
+function start_dlws_ping() {
+    if (dlws_ping) clearInterval(dlws_ping);
+    missedPongs = 0;
+    await_dlws_pong = false;
+
+    dlws_ping = setInterval(() => {
+        if (await_dlws_pong) {
+            missedPongs++;
+            console.warn(`[WS] Missed pong ${missedPongs}/3`);
+            if (missedPongs >= 3) {
+                console.error("[WS] No pong after 3 intervals — closing");
+                disconnect_link(false,false,1000,"Desktop Link Stopped Responding");
+            }
+        } else {
+            send_ping_link();
+            await_dlws_pong = true;
+        }
+    }, 30000);
+}
+
 function link_link(reconnect = false){
     var link_id = reconnect ? reconn_id : document.getElementById("link_id").value 
 
-    try{
-        dlws = new WebSocket(`wss://zero-network.net/phasmolink/link/${link_id}?me=ZNCS${reconnect ? '&reconnect=true' : ''}`);
+    // Prevent overlapping reconnect attempts
+    if (reconnecting && reconnect) return;
+
+    reconnecting = reconnect;
+    connectionState = reconnect ? "reconnecting" : "connecting";
+    console.log(`[WS] Connecting... reconnect=${reconnect}, link_id=${link_id}`);
+
+    // Clear old websocket if needed
+    if (dlws && dlws.readyState !== WebSocket.CLOSED) {
+        try { dlws.close(); } catch {}
     }
-    catch(e){
-        relink_live = false
-        return
+
+    try {
+        dlws = new WebSocket(`wss://zero-network.net/phasmolink/link/${link_id}?me=ZNCS${reconnect ? "&reconnect=true" : ""}`);
+    } catch (e) {
+        console.error("[WS] Connection failed:", e);
+        scheduleReconnect();
+        return;
     }
     
-    setCookie("link_id",link_id,1)
+    if (!reconnect && link_id) setCookie("link_id", link_id, 1);
 
-    dlws.onopen = function(event){
+    dlws.onopen = function () {
+        console.log("[WS] Connected!");
+        connectionState = "connected";
+        reconnecting = false;
+        reconnectAttempts = 0;
+        missedPongs = 0;
+        kill_gracefully = false;
+        await_dlws_pong = false;
         hasDLLink = true;
-        $("#link_id_create").hide()
-        $("#link_id_create_launch").hide()
-        $("#link_id_disconnect").show()
-        toggleSanitySettings()
-        document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{awaiting_link}}']}`
-        document.getElementById("dllink_status").className = "pending"
-        sync_sjl_dl()
-    }
-    dlws.onerror = function(event){
-        if(!reconnecting){
-            document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`
-            document.getElementById("dllink_status").className = "error"
-            setCookie("link_id",reconn_id,1)
+
+        clearInterval(dlws_ping);
+        dlws_ping = null;
+
+        $("#link_id_create").hide();
+        $("#link_id_create_launch").hide();
+        $("#link_id_disconnect").show();
+
+        toggleSanitySettings();
+        document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{awaiting_link}}']}`;
+        document.getElementById("dllink_status").className = "pending";
+        sync_sjl_dl();
+    };
+
+    dlws.onerror = function (event) {
+        console.error("[WS] Error:", event);
+        if (connectionState !== "reconnecting") {
+            document.getElementById("link_id_note").innerText =
+                `${lang_data['{{error}}']}: ${lang_data['{{could_not_connect}}']}`;
+            document.getElementById("dllink_status").className = "error";
         }
-    }
-    dlws.onclose = function(event){
-        console.log(event)
-        hasDLLink = false
-        relink_live = false
-        setTimeout(() => {
-            if(!kill_gracefully){
-                if(!reconnecting){
-                    reconnecting = true
-                    document.getElementById("dllink_status").className = "pending"
-                    document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{awaiting_link}}']}`
-                    setCookie("link_id","",-1)
-                    reconnect_link(event.reason != "keepalive ping timeout")
-                }
-            }
-        },500)
-        
-    }
+    };
+
+    dlws.onclose = function (event) {
+        console.warn(`[WS] Closed: code=${event.code}, reason=${event.reason}`);
+        connectionState = "closed";
+        hasDLLink = false;
+
+        clearInterval(dlws_ping);
+        dlws_ping = null;
+
+        if (!kill_gracefully) {
+            scheduleReconnect(event.reason !== "keepalive ping timeout");
+        }
+    };
+
     dlws.onmessage = function(event) {
         try {
-            clearInterval(relink_interval)
-            clearTimeout(relink_timeout)
-            reconnecting = false
-            kill_gracefully = false
-            relink_live = false
-            relink_interval = null
-            relink_timeout = null
+            const incoming_state = JSON.parse(event.data);
 
-            var incoming_state = JSON.parse(event.data)
+            // Reset reconnect flags on valid messages
+            missedPongs = 0;
+            reconnecting = false;
+            connectionState = "connected";
+            kill_gracefully = false;
 
-            if (incoming_state.hasOwnProperty("action")){
-                if (incoming_state['action'] == "?"){
-                    dlws.send('{"action":"!"}')
+            if (!incoming_state.action && incoming_state.error) {
+                document.getElementById("link_id_note").innerText =
+                    `${lang_data['{{error}}']}: ${incoming_state['error']}!`;
+                document.getElementById("dllink_status").className = "error";
+                return;
+            }
+
+            if (incoming_state.hasOwnProperty("disconnect") && incoming_state["disconnect"]) {
+                disconnect_link(false,true,1000,"Server or Desktop Link requested Cheat Sheet to disconnect")
+                return;
+            }
+
+            const action = incoming_state.action ? incoming_state.action.toUpperCase() : null;
+            if (!action) return;
+
+            if (action === "?") return dlws.send('{"action":"!"}');
+            if (action === "PONG") { await_dlws_pong = false; missedPongs = 0; return; }
+            if (action === "RECONN") { reconn_id = incoming_state.message; return; }
+            if (action === "BROADCAST") { broadcast(incoming_state['message']); return; }
+            if (action == "FORCERESET" ){ reset(); return; }
+
+            if (action === "LINKED") {
+                document.getElementById("link_id_note").innerText =
+                    `${lang_data['{{status}}']}: ${lang_data['{{linked}}']}`;
+                document.getElementById("dllink_status").className = "connected";
+
+                if (incoming_state.hasOwnProperty("message")) {
+                    console.log(`Relinked with new link_id: ${incoming_state.message}`);
+                    document.getElementById("link_id").value = incoming_state.message;
+                    setCookie("link_id", incoming_state.message, 1);
                 }
-                if (incoming_state['action'].toUpperCase() == "PONG"){
-                    await_dlws_pong = false
-                }
-                if (incoming_state['action'].toUpperCase() == "BROADCAST"){
-                    broadcast(incoming_state['message'])
-                }
-                if (incoming_state['action'].toUpperCase() == "NEXTMAP"){
-                    let cur_map_elem = document.getElementById("maps_list").querySelector(".selected_map").nextSibling
-                    if (cur_map_elem === undefined || cur_map_elem === null)
-                        cur_map_elem = document.getElementById("maps_list").children[0]
-                    changeMap(cur_map_elem,cur_map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
-                    saveSettings()
-                    send_cur_map_link()
-                    send_state()
-                }
-                if (incoming_state['action'].toUpperCase() == "PREVMAP"){
-                    let cur_map_elem = document.getElementById("maps_list").querySelector(".selected_map").previousSibling
-                    if (cur_map_elem === undefined || cur_map_elem === null)
-                        cur_map_elem = document.getElementById("maps_list").children[document.getElementById("maps_list").children.length-1]
-                    changeMap(cur_map_elem,cur_map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
-                    saveSettings()
-                    send_cur_map_link()
-                    send_state()
-                }
-                if (incoming_state['action'].toUpperCase() == "NEXTMAPTYPE"){
-                    switchMapType(true,false)
-                    saveSettings()
-                    send_cur_map_link()
-                }
-                if (incoming_state['action'].toUpperCase() == "PREVMAPTYPE"){
-                    switchMapType(false,true)
-                    saveSettings()
-                    send_cur_map_link()
-                }
-                if (incoming_state['action'].toUpperCase() == "EVENTMAP"){
-                    document.getElementById("map_event_check_box").checked = !document.getElementById("map_event_check_box").checked
-                    changeMap(document.getElementById('maps_list').querySelector('.selected_map'),all_maps[document.getElementById('maps_list').querySelector('.selected_map').id])
-                    saveSettings()
-                    send_cur_map_link()
-                }
-                if (incoming_state['action'].toUpperCase() == "GHOSTDATA"){
-                    send_ghost_data_link(incoming_state['ghost'])
-                }
-                if (incoming_state['action'].toUpperCase() == "GHOSTTESTS"){
-                    send_ghost_tests_link(incoming_state['ghost'])
-                }
-                if (incoming_state['action'].toUpperCase() == "GHOSTSELECT"){
-                    select(document.getElementById(incoming_state['ghost']))
-                }
-                if (incoming_state['action'].toUpperCase() == "GHOSTNOT"){
-                    fade(document.getElementById(incoming_state['ghost']))
-                }
-                if (incoming_state['action'].toUpperCase() == "GHOSTDIED"){
+
+                dlws.send('{"action":"LINK"}');
+                send_discord_link();
+                send_map_preload_link();
+                send_sanity_link(Math.round(sanity), sanity_color());
+                send_timer_link("TIMER_VAL", "0:00");
+                send_timer_link("COOLDOWN_VAL", "0:00");
+                send_timer_link("HUNT_VAL", "0:00");
+                send_timer_link("SOUND_VAL", "0:00");
+                send_bpm_link("-", "-", ["50%", "75%", "100%", "125%", "150%"][parseInt($("#ghost_modifier_speed").val())]);
+                send_blood_moon_link($("#blood-moon-icon").hasClass("blood-moon-active"));
+                send_forest_minion_link($("#forest-minion-icon").hasClass("forest-minion-active"));
+                filter();
+
+                start_dlws_ping();
+                return;
+            }
+
+            if (action == "NEXTMAP"){
+                let cur_map_elem = document.getElementById("maps_list").querySelector(".selected_map").nextSibling
+                if (cur_map_elem === undefined || cur_map_elem === null)
+                    cur_map_elem = document.getElementById("maps_list").children[0]
+                changeMap(cur_map_elem,cur_map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
+                saveSettings()
+                send_cur_map_link()
+                send_state()
+            }
+
+            else if (action == "PREVMAP"){
+                let cur_map_elem = document.getElementById("maps_list").querySelector(".selected_map").previousSibling
+                if (cur_map_elem === undefined || cur_map_elem === null)
+                    cur_map_elem = document.getElementById("maps_list").children[document.getElementById("maps_list").children.length-1]
+                changeMap(cur_map_elem,cur_map_elem.onclick.toString().match(/(http.+?)'\)/)[1],true)
+                saveSettings()
+                send_cur_map_link()
+                send_state()
+            }
+
+            else if (action == "NEXTMAPTYPE"){
+                switchMapType(true,false)
+                saveSettings()
+                send_cur_map_link()
+            }
+
+            else if (action == "PREVMAPTYPE"){
+                switchMapType(false,true)
+                saveSettings()
+                send_cur_map_link()
+            }
+
+            else if (action == "EVENTMAP"){
+                document.getElementById("map_event_check_box").checked = !document.getElementById("map_event_check_box").checked
+                changeMap(document.getElementById('maps_list').querySelector('.selected_map'),all_maps[document.getElementById('maps_list').querySelector('.selected_map').id])
+                saveSettings()
+                send_cur_map_link()
+            }
+
+            else if (action == "GHOSTDATA"){ send_ghost_data_link(incoming_state['ghost']); return; }
+            else if (action == "GHOSTTESTS"){ send_ghost_tests_link(incoming_state['ghost']); return; }
+            else if (action == "GHOSTSELECT"){ select(document.getElementById(incoming_state['ghost'])); return; }
+            else if (action == "GHOSTNOT"){ fade(document.getElementById(incoming_state['ghost'])); return; }
+            else if (action == "GHOSTDIED"){ died(document.getElementById(incoming_state['ghost'])); return; }
+
+            else if (action == "GHOSTCYCLE"){
+                if($(document.getElementById(incoming_state['ghost'])).hasClass(["selected","died"])){
                     died(document.getElementById(incoming_state['ghost']))
                 }
-                if (incoming_state['action'].toUpperCase() == "GHOSTCYCLE"){
-                    if($(document.getElementById(incoming_state['ghost'])).hasClass(["selected","died"])){
-                        died(document.getElementById(incoming_state['ghost']))
-                    }
-                    else{
-                        select(document.getElementById(incoming_state['ghost']))
-                    }
+                else{
+                    select(document.getElementById(incoming_state['ghost']))
                 }
-                if (incoming_state['action'].toUpperCase() == "TIMER"){
-                    let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
-                    toggle_timer(force_start)
-                    send_timer(force_start)
-                }
-                if (incoming_state['action'].toUpperCase() == "COOLDOWNTIMER"){
-                    let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
-                    toggle_cooldown_timer(force_start)
-                    send_cooldown_timer(force_start)
-                }
-                if (incoming_state['action'].toUpperCase() == "HUNTTIMER"){
-                    let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
-                    toggle_hunt_timer(force_start)
-                    send_hunt_timer(force_start)
-                }
-                if (incoming_state['action'].toUpperCase() == "SOUNDTIMER"){
-                    let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
-                    toggle_sound_timer(force_start)
-                    send_sound_timer(force_start)
-                }
-                if(incoming_state['action'].toUpperCase() == "RECONN"){
-                    reconn_id = incoming_state.message
-                }
-                if (incoming_state['action'].toUpperCase() == "LINKED"){
+            }
 
-                    document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{linked}}']}`
-                    document.getElementById("dllink_status").className = "connected"
-                    if(incoming_state.hasOwnProperty("message")){
-                        console.log(`Relinked with new link_id: ${incoming_state.message}`)
-                        document.getElementById("link_id").value = incoming_state.message
-                        setCookie("link_id",incoming_state.message,1)
-                    }
-                    dlws.send('{"action":"LINK"}')
-                    send_discord_link()
-                    send_map_preload_link()
-                    send_sanity_link(Math.round(sanity),sanity_color())
-                    send_timer_link("TIMER_VAL","0:00")
-                    send_timer_link("COOLDOWN_VAL","0:00")
-                    send_timer_link("HUNT_VAL","0:00")
-                    send_timer_link("SOUND_VAL","0:00")
-                    send_bpm_link("-","-",["50%","75%","100%","125%","150%"][parseInt($("#ghost_modifier_speed").val())])
-                    send_blood_moon_link($("#blood-moon-icon").hasClass("blood-moon-active"))
-                    send_forest_minion_link($("#forest-minion-icon").hasClass("forest-minion-active"))
-                    filter()
-                    await_dlws_pong = false
-                    dlws_ping = setInterval(function(){
-                        if (await_dlws_pong){
-                            clearInterval(dlws_ping)
-                            dlws.send('{"action":"PINGKILL"}')
-                            $("#link_id_create").show()
-                            mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-                            if (!mquery.matches && navigator.platform.toLowerCase().includes('win'))
-                                $("#link_id_create_launch").show()
-                            $("#link_id_disconnect").hide()
-                            document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${lang_data['{{link_lost}}']}`
-                            document.getElementById("dllink_status").className = "error"
-                            document.getElementById("link_id").value = ""
-                            setCookie("link_id","",-1)
-                            hasDLLink=false
-                            dlws.close()
-                        }
-                        else{
-                            send_ping_link()
-                            await_dlws_pong = true
-                        }
-                    }, 30000)
+            else if (action == "TIMER"){
+                let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
+                toggle_timer(force_start)
+                send_timer(force_start)
+            }
+
+            else if (action == "COOLDOWNTIMER"){
+                let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
+                toggle_cooldown_timer(force_start)
+                send_cooldown_timer(force_start)
+            }
+
+            else if (action == "HUNTTIMER"){
+                let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
+                toggle_hunt_timer(force_start)
+                send_hunt_timer(force_start)
+            }
+
+            else if (action == "SOUNDTIMER"){
+                let force_start = incoming_state.hasOwnProperty("reset") && incoming_state["reset"] ? true : false;
+                toggle_sound_timer(force_start)
+                send_sound_timer(force_start)
+            }
+
+            else if (action == "DL_STEP"){
+                if (incoming_state.hasOwnProperty("timestamp")){
+                    bpm_tap(incoming_state["timestamp"])
                 }
-                if (incoming_state['action'].toUpperCase() == "UNLINK"){
-                    kill_gracefully = true
-                    disconnect_link(false,false,1000,"Server or Desktop Link requested Cheat Sheet to disconnect")
+                else{
+                    bpm_tap()
                 }
-                if (incoming_state['action'].toUpperCase() == "DL_STEP"){
-                    if (incoming_state.hasOwnProperty("timestamp")){
-                        bpm_tap(incoming_state["timestamp"])
-                    }
-                    else{
-                        bpm_tap()
-                    }
+            }
+
+            else if (action == "BLOODMOON"){
+                toggleBloodMoon(true,false)
+                toggleForestMinion(false,true)
+            }
+
+            else if (action == "FORESTMINION"){
+                toggleBloodMoon(false,true)
+                toggleForestMinion(true,false)
+            }
+
+            else if (action == "BLOODMINION"){
+                toggleBloodMoon(true,false)
+                toggleForestMinion(true,false)
+            }
+
+            else if (action == "NOMODIFER"){
+                toggleBloodMoon(false,true)
+                toggleForestMinion(false,true)
+            }
+
+            else if (action == "SANITY"){
+                if(incoming_state['value'].toUpperCase() == "TOGGLE"){
+                    toggle_sanity_drain()
                 }
-                if (incoming_state['action'].toUpperCase() == "BLOODMOON"){
-                    toggleBloodMoon(true,false)
-                    toggleForestMinion(false,true)
+                else if(incoming_state['value'].toUpperCase() == "RESTORE"){
+                    restore_sanity()
                 }
-                if (incoming_state['action'].toUpperCase() == "FORESTMINION"){
-                    toggleBloodMoon(false,true)
-                    toggleForestMinion(true,false)
+                else if(incoming_state['value'].toUpperCase() == "RESET"){
+                    reset_sanity()
                 }
-                if (incoming_state['action'].toUpperCase() == "BLOODMINION"){
-                    toggleBloodMoon(true,false)
-                    toggleForestMinion(true,false)
+                else{
+                    adjust_sanity(parseInt(incoming_state['value']))
                 }
-                if (incoming_state['action'].toUpperCase() == "NOMODIFER"){
-                    toggleBloodMoon(false,true)
-                    toggleForestMinion(false,true)
-                }
-                if (incoming_state['action'].toUpperCase() == "SANITY"){
-                    if(incoming_state['value'].toUpperCase() == "TOGGLE"){
-                        toggle_sanity_drain()
-                    }
-                    else if(incoming_state['value'].toUpperCase() == "RESTORE"){
-                        restore_sanity()
-                    }
-                    else if(incoming_state['value'].toUpperCase() == "RESET"){
-                        reset_sanity()
-                    }
-                    else{
-                        adjust_sanity(parseInt(incoming_state['value']))
-                    }
-                }
-                if (incoming_state['action'].toUpperCase() == "DL_RESET"){
-                    bpm_clear()
-                    saveSettings()
-                }
-                if (incoming_state['action'].toUpperCase() == "MENUFLIP"){
-                    toggleFilterTools()
-                }
-                if(incoming_state['action'].toUpperCase() == "SAVERESET"){
-                    if(Object.keys(discord_user).length > 0){
-                        if(!hasSelected()){
-                            send_ghost_link("None Selected!",-1)
-                            $("#reset").removeClass("standard_reset")
-                            $("#reset").addClass("reset_pulse")
-                            $("#reset").html(`${lang_data['{{no_ghost_selected}}']}<div class='reset_note'>${lang_data['{{say_force_reset}}']}</div>`)
-                            $("#reset").prop("onclick",null)
-                            $("#reset").prop("ondblclick","reset()")
-                            reset_voice_status()
-                        }
-                        else{
-                            reset()
-                        }
+            }
+
+            else if (action == "DL_RESET"){
+                bpm_clear()
+                saveSettings()
+            }
+
+            else if (action == "MENUFLIP"){ toggleFilterTools()}
+
+            else if(action == "SAVERESET"){
+                if(Object.keys(discord_user).length > 0){
+                    if(!hasSelected()){
+                        send_ghost_link("None Selected!",-1)
+                        $("#reset").removeClass("standard_reset")
+                        $("#reset").addClass("reset_pulse")
+                        $("#reset").html(`${lang_data['{{no_ghost_selected}}']}<div class='reset_note'>${lang_data['{{say_force_reset}}']}</div>`)
+                        $("#reset").prop("onclick",null)
+                        $("#reset").prop("ondblclick","reset()")
+                        reset_voice_status()
                     }
                     else{
                         reset()
                     }
                 }
-                if(incoming_state['action'].toUpperCase() == "FORCERESET"){
+                else{
                     reset()
                 }
-
-                if (incoming_state['action'].toUpperCase() == "EVIDENCE"){
-                    if(!$(document.getElementById(incoming_state['evidence']).querySelector("#checkbox")).hasClass("block")){
-                        tristate(document.getElementById(incoming_state['evidence']))
-                    }
+            }
+            
+            else if (action == "EVIDENCE"){
+                if(!$(document.getElementById(incoming_state['evidence']).querySelector("#checkbox")).hasClass("block")){
+                    tristate(document.getElementById(incoming_state['evidence']))
                 }
-                return
             }
 
-            if (incoming_state.hasOwnProperty("error")){
-                document.getElementById("link_id_note").innerText = `${lang_data['{{error}}']}: ${incoming_state['error']}!`
-                document.getElementById("dllink_status").className = "error"
-            }
-
-            if (incoming_state.hasOwnProperty("disconnect") && incoming_state['disconnect']){
+            else if (action == "UNLINK"){
                 kill_gracefully = true
-                disconnect_link(false,true,1000,"Server or Desktop Link requested Cheat Sheet to disconnect")
+                disconnect_link(false,false,1000,"Server or Desktop Link requested Cheat Sheet to disconnect")
             }
+
+            return
 
         } catch (error){
             console.log(event.data)
@@ -1113,36 +1155,68 @@ function send_reset_link(){
     }
 }
 
-function disconnect_link(reset=false,has_status=false,code=1005,reason=null){
-    clearInterval(relink_interval)
-    clearTimeout(relink_timeout)
-    clearInterval(dlws_ping)
-    reconnecting = false
-    kill_gracefully = false
-    relink_live = false
-    relink_interval = null
-    relink_timeout = null
-    if(!reset){
-        if(hasDLLink){
-            dlws.send('{"action":"KILL"}')
+function disconnect_link(reset = false, has_status = false, code = 1005, reason = null) {
+    console.log(`[WS] Disconnect link: code=${code}, reason=${reason}, reset=${reset}, has_status=${has_status}`);
+
+    // 🔹 Clear all reconnection & ping timers
+    clearInterval(relink_interval);
+    clearTimeout(relink_timeout);
+    clearInterval(dlws_ping);
+
+    relink_live = false;
+    reconnecting = false;
+    kill_gracefully = false;
+    relink_interval = null;
+    relink_timeout = null;
+
+    // 🔹 Send KILL action before closing (only if linked & not reset)
+    if (!reset && hasDLLink && dlws && dlws.readyState === WebSocket.OPEN) {
+        try {
+            dlws.send('{"action":"KILL"}');
+        } catch (err) {
+            console.warn("[WS] Could not send KILL:", err);
         }
-        $("#link_id_create").show()
-        mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-        if (!mquery.matches && navigator.platform.toLowerCase().includes('win'))
-            $("#link_id_create_launch").show()
-        $("#link_id_disconnect").hide()
-        if(!has_status){
-            document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{not_linked}}']}`
-            document.getElementById("dllink_status").className = null
-            document.getElementById("link_id").value = ""
-        }
-        setCookie("link_id","",-1)
-        hasDLLink=false
-        toggleSanitySettings()
     }
-    kill_gracefully = true
-    dlws.close(code,reason)
+
+    // 🔹 UI Reset
+    $("#link_id_create").show();
+
+    const mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)");
+    if (!mquery.matches && navigator.platform.toLowerCase().includes('win'))
+        $("#link_id_create_launch").show();
+
+    $("#link_id_disconnect").hide();
+
+    // 🔹 Update status / fields if not in reset mode
+    if (!reset) {
+        if (!has_status) {
+            document.getElementById("link_id_note").innerText =
+                `${lang_data['{{status}}']}: ${lang_data['{{not_linked}}']}`;
+            document.getElementById("dllink_status").className = null;
+            document.getElementById("link_id").value = "";
+        }
+
+        // Clear link_id cookie
+        setCookie("link_id", "", -1);
+        hasDLLink = false;
+        toggleSanitySettings();
+    }
+
+    // 🔹 Graceful close
+    kill_gracefully = true;
+    connectionState = "closed";
+
+    if (dlws && dlws.readyState !== WebSocket.CLOSED) {
+        try {
+            dlws.close(code, reason || "Graceful disconnect");
+        } catch (e) {
+            console.warn("[WS] Error closing socket:", e);
+        }
+    }
+
+    console.log("[WS] Disconnect complete");
 }
+
 
 function send_timer(force_start = false, force_stop = false){
     if(hasLink){

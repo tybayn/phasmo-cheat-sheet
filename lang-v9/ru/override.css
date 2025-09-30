@@ -47,11 +47,6 @@
         padding-top: 5px !important;
     }
 
-    .ghost_card{
-        grid-template-rows: 35px 55px 45px !important;
-        height: 135px !important;
-    }
-
     .ghost_name{
         font-weight: lighter !important;
     }
@@ -96,10 +91,6 @@
 
     #maps_box{
         min-width: 607px !important;
-    }
-
-    #wiki_tab{
-        height: 60px !important;   
     }
 
     #game_mode {
@@ -167,8 +158,7 @@
     }
 
     .ghost_card{
-        grid-template-columns: 40% 60% !important;
-        align-items: start !important;
+        grid-template-columns: 50% 50% !important;
     }
 
     .ghost_name{
@@ -176,14 +166,6 @@
         font-weight: bold !important;
         text-align: left !important;
         padding-left: 15px !important;
-        grid-column: 1 / 3 !important;
-    }
-
-    .ghost_evidence{
-        padding-right: 15px !important;
-        grid-column: 1 / 3 !important;
-        margin-top: 30px !important;
-        align-items: center !important;
     }
 
     .ghost_evidence_item{
