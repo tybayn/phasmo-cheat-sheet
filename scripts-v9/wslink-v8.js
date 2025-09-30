@@ -587,13 +587,13 @@ function link_room(){
     }
 }
 
-function reconnect_link(){
+function reconnect_link(reconnect=true){
     relink_interval = setInterval(() =>{
         try{
             if(!relink_live){
             console.log(`Attempting to reconnect...`)
                 relink_live = true
-                link_link(true)
+                link_link(reconnect)
             }
         }catch(e){
             console.error(e)
@@ -652,7 +652,7 @@ function link_link(reconnect = false){
                     document.getElementById("dllink_status").className = "pending"
                     document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{awaiting_link}}']}`
                     setCookie("link_id","",-1)
-                    reconnect_link()
+                    reconnect_link(event.reason == "keepalive ping timeout")
                 }
             }
         },500)

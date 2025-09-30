@@ -4,7 +4,7 @@ var lang_data = null
 // ----------------------------------
 
 const lang_currency = [
-    "de", "es", "fr", "pt-br", "tr"
+    "de", "es", "fr", "pt-br", "ru", "tr"
 ]
 
 const lang_menu_widths = {
@@ -70,6 +70,15 @@ const lang_menu_widths = {
         "menu_bottom_custom":"-715px",
         "menu_height":"695px",
         "menu_height_custom":"750px"
+    },
+    "ru":{
+        "left":"240px",
+        "width":"219px",
+        "maps":"calc(100% - 309px)",
+        "menu_bottom":"-725px",
+        "menu_bottom_custom":"-780px",
+        "menu_height":"760px",
+        "menu_height_custom":"815px"
     },
     "tr":{
         "left":"236px",
