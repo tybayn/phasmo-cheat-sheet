@@ -652,7 +652,7 @@ function link_link(reconnect = false){
                     document.getElementById("dllink_status").className = "pending"
                     document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${lang_data['{{awaiting_link}}']}`
                     setCookie("link_id","",-1)
-                    reconnect_link(event.reason == "keepalive ping timeout")
+                    reconnect_link(event.reason != "keepalive ping timeout")
                 }
             }
         },500)
