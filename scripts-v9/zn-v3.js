@@ -167,7 +167,7 @@ function loadAllAndConnect(){
             lang = 'en'
         }
         try{
-            fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=${lang}`, {cache: 'default', signal: AbortSignal.timeout(10000)})
+            fetch(`https://zero-network.net/phasmophobia-nope/data/ghosts.json?lang=${lang}`, {cache: 'default', signal: AbortSignal.timeout(10000)})
             .then(data => data.json())
             .then(data => {
 
@@ -438,6 +438,11 @@ function loadAllAndConnect(){
                     })
                 })
             })
+        })
+        .catch(e => {
+            // Maintainence Block
+            if (new Date().toDateString() == new Date('10/10/2025').toDateString())
+                $("#maintainence-block").fadeIn(1000)
         })
     })
 }

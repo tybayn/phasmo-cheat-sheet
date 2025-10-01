@@ -122,6 +122,49 @@ body{
         font-family: "ZNDefault";
         font-size: 18px;
     }
+
+    #maintainence-block{
+        width: 550px;
+        background: linear-gradient(45deg,rgba(49,50,72,1) 25%, rgba(64,49,72,1) 75%);
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        position: fixed;
+    }
+
+    .maintainence-img{
+        width: 100%;
+    }
+
+    .maintainence-info{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .maintainence-title{
+        font-size: 32px;
+        padding: 15px;
+        text-align: center;
+        font-weight: bolder;
+    }
+
+    .maintainence-desc{
+        padding: 0px 20px;
+    }
+
+    .maintainence-desc a{
+        color: #fbfe9f;
+    }
+
+    .maintainence-window{
+        font-size: 24px;
+        padding-top: 20px;
+        text-align: center;
+        font-weight: bolder;
+    }
     
     .not-loading{
         position: absolute;
@@ -152,6 +195,7 @@ body{
         border-radius: 4px;
         background: rgba(255,255,255,0.1);
         overflow: hidden;
+        margin-top: 10px;
     }
 
     .loading-bar {
