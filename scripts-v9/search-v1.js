@@ -5,7 +5,8 @@ const RELATED = [
     ['breaker','circuit'],
     ['extinguish','blow out','blows out'],
     ['paramic','parabolic'],
-    ['guaranteed','forced']
+    ['guaranteed','forced'],
+    ['picture','photo']
 ]
 
 
