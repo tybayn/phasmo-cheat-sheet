@@ -167,7 +167,7 @@ function loadAllAndConnect(){
             lang = 'en'
         }
         try{
-            fetch(`https://zero-network.net/phasmophobia-nope/data/ghosts.json?lang=${lang}`, {cache: 'default', signal: AbortSignal.timeout(10000)})
+            fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=${lang}`, {cache: 'default', signal: AbortSignal.timeout(10000)})
             .then(data => data.json())
             .then(data => {
 
