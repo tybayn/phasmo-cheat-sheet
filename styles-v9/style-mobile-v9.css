@@ -26,7 +26,7 @@
         font-size: 75px;
     }
 
-    #maintainence-block{
+    #maintenance-block{
         width: 80%;
         background: linear-gradient(45deg,rgba(49,50,72,1) 25%, rgba(64,49,72,1) 75%);
         padding: 40px;
@@ -38,31 +38,31 @@
         position: fixed;
     }
 
-    .maintainence-img{
+    .maintenance-img{
         width: 100%;
     }
 
-    .maintainence-info{
+    .maintenance-info{
         display: flex;
         flex-direction: column;
     }
 
-    .maintainence-title{
+    .maintenance-title{
         font-size: 46px;
         padding: 20px;
         text-align: center;
         font-weight: bolder;
     }
 
-    .maintainence-desc{
+    .maintenance-desc{
         padding: 0px 40px;
         font-size: 36px;
     }
-    .maintainence-desc a{
+    .maintenance-desc a{
         color: #fbfe9f;
     }
 
-    .maintainence-window{
+    .maintenance-window{
         font-size: 40px;
         padding-top: 20px;
         text-align: center;

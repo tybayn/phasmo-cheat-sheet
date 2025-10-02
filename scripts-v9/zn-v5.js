@@ -440,9 +440,9 @@ function loadAllAndConnect(){
             })
         })
         .catch(e => {
-            // Maintainence Block
+            // Maintenance Block
             if (new Date().toDateString() == new Date('10/10/2025').toDateString())
-                $("#maintainence-block").fadeIn(1000)
+                $("#maintenance-block").fadeIn(1000)
         })
     })
 }
