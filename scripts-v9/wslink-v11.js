@@ -284,6 +284,7 @@ function link_room(){
                 request_guess()
             }
             else if (incoming_state.hasOwnProperty("action")){
+                action = incoming_state.action.toUpperCase()
                 if (action == "RESET"){
                     reset(true)
                 }
