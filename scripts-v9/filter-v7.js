@@ -240,53 +240,158 @@ function toggleForestMinion(force_on = false, force_off = false, ignore_link=fal
     if(!ignore_link){filter(ignore_link)}
 }
 
-let bloodMoonEffectInterval = null
-function toggleBloodMoon(force_on = false, force_off = false, ignore_link=false){
+let particleCanvas, particleCtx, bloodMoonParticles = [];
+let bloodMoonRunning = false;
+let bloodMoonAnimFrame;
+const PARTICLE_COUNT = 60;
 
-    if(force_off){
-        $('#blood-moon-icon').removeClass('blood-moon-active')
-        $('#blood-moon-icon').attr("src","imgs/moon-w.png")
-        $('#blood-moon-icon-2').removeClass('blood-moon-active')
-        $('#blood-moon-icon-2').attr("src","imgs/moon-w.png")
-        $("#blood-moon-effect-top").removeClass("blood-moon-effect-top")
-        $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom")
-        clearInterval(bloodMoonEffectInterval)
-        send_blood_moon_link(false)
-        blood_moon = 0
-    }
+function toggleBloodMoon(force_on = false, force_off = false, ignore_link = false) {
+    const icon1 = $('#blood-moon-icon');
+    const icon2 = $('#blood-moon-icon-2');
+    const isActive = icon1.hasClass('blood-moon-active');
 
-    else if(!$("#blood-moon-icon").hasClass("blood-moon-active") || force_on){
-        $('#blood-moon-icon').addClass('blood-moon-active')
-        $('#blood-moon-icon').attr("src","imgs/moon-r.png")
-        $('#blood-moon-icon-2').addClass('blood-moon-active')
-        $('#blood-moon-icon-2').attr("src","imgs/moon-r.png")
-        $("#blood-moon-effect-top").addClass("blood-moon-effect-top")
-        $("#blood-moon-effect-bottom").addClass("blood-moon-effect-bottom")
-        if(!document.getElementById("disable_particles").checked){
-            bloodMoonEffectInterval = setInterval(createBMEffectParticle, 250);
+    if (force_off || (isActive && !force_on)) {
+        icon1.removeClass('blood-moon-active').attr("src", "imgs/moon-w.png");
+        icon2.removeClass('blood-moon-active').attr("src", "imgs/moon-w.png");
+        $("#blood-moon-effect-top").removeClass("blood-moon-effect-top");
+        $("#blood-moon-effect-top").removeClass("blood-moon-effect-top-anim");
+        $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom");
+        $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom-anim");
+        stopBloodMoonParticles();
+        send_blood_moon_link(false);
+        blood_moon = 0;
+    } else {
+        icon1.addClass('blood-moon-active').attr("src", "imgs/moon-r.png");
+        icon2.addClass('blood-moon-active').attr("src", "imgs/moon-r.png");
+        $("#blood-moon-effect-top").addClass("blood-moon-effect-top");
+        $("#blood-moon-effect-bottom").addClass("blood-moon-effect-bottom");
+        if (!document.getElementById("disable_particles").checked){
+            $("#blood-moon-effect-top").addClass("blood-moon-effect-top-anim");
+            $("#blood-moon-effect-bottom").addClass("blood-moon-effect-bottom-anim");
         }
-        send_blood_moon_link(true)
-        blood_moon = 1
-    }
-    else{
-        $('#blood-moon-icon').removeClass('blood-moon-active')
-        $('#blood-moon-icon').attr("src","imgs/moon-w.png")
-        $('#blood-moon-icon-2').removeClass('blood-moon-active')
-        $('#blood-moon-icon-2').attr("src","imgs/moon-w.png")
-        $("#blood-moon-effect-top").removeClass("blood-moon-effect-top")
-        $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom")
-        clearInterval(bloodMoonEffectInterval)
-        send_blood_moon_link(false)
-        blood_moon = 0
+        startBloodMoonParticles();
+        send_blood_moon_link(true);
+        blood_moon = 1;
     }
 
-    if(!ignore_link){filter(ignore_link)}
+    if (!ignore_link) filter(ignore_link);
 }
 
-function setBloodMoonParticles(){
-    clearInterval(bloodMoonEffectInterval)
-    if(!document.getElementById("disable_particles").checked && blood_moon){
-        bloodMoonEffectInterval = setInterval(createBMEffectParticle, 250);
+function startBloodMoonParticles() {
+    if (!$('#blood-moon-icon').hasClass('blood-moon-active'))
+        return;
+
+    stopBloodMoonParticles();
+
+    const disableParticles = document.getElementById("disable_particles")?.checked;
+    const top = $("#blood-moon-effect-top");
+    const bottom = $("#blood-moon-effect-bottom");
+
+    // toggle pulse
+    if (disableParticles) {
+        top.removeClass("blood-moon-effect-top-anim");
+        bottom.removeClass("blood-moon-effect-bottom-anim");
+        return;
+    } else {
+        if (!top.hasClass("blood-moon-effect-top-anim")) {
+            top.addClass("blood-moon-effect-top-anim");
+            bottom.addClass("blood-moon-effect-bottom-anim");
+        }
+    }
+
+    particleCanvas = document.getElementById('particle-canvas');
+    particleCtx = particleCanvas.getContext('2d');
+
+    function resizeCanvas() {
+        particleCanvas.width = window.innerWidth;
+        particleCanvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const h = particleCanvas.height;
+
+    bloodMoonParticles = Array.from({ length: PARTICLE_COUNT }, () => {
+        const up = Math.random() > 0.5; // 50% go up, 50% go down
+        const yStart = up ? h : 0; // start bottom or top
+        return {
+            x: Math.random() * particleCanvas.width,
+            y: yStart,
+            baseY: yStart,
+            vy: (Math.random() * 0.3 + 0.15) * (up ? -1 : 1),
+            size: Math.random() * 3 + 2,
+            color: Math.random() < 0.25 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)',
+            life: Math.random() * 2 + 2, // seconds
+            age: 0,
+            delay: Math.random() * 10,
+            up
+        };
+    });
+
+    bloodMoonRunning = true;
+    animateBloodMoonParticles(performance.now());
+}
+
+function animateBloodMoonParticles(lastTime) {
+    if (!bloodMoonRunning) return;
+
+    const now = performance.now();
+    const delta = (now - lastTime) / 1000;
+    const ctx = particleCtx;
+    const w = particleCanvas.width;
+    const h = particleCanvas.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    const travel = h * 0.3;
+
+    for (const p of bloodMoonParticles) {
+
+        if (p.delay > 0) {
+            p.delay -= delta;
+            continue; // skip updating/drawing this frame
+        }
+        
+        p.age += delta;
+        const progress = p.age / p.life;
+        const alpha = 1 - progress; // fade out
+
+        // move within travel distance
+        p.y = p.baseY + travel * progress * (p.up ? -1 : 1);
+
+        ctx.beginPath();
+        ctx.globalAlpha = alpha * 0.7;
+        ctx.fillStyle = p.color;
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (progress >= 1) {
+            // reset particle
+            p.x = Math.random() * w;
+            p.baseY = p.up ? h : 0;
+            p.y = p.baseY;
+            p.life = Math.random() * 2 + 4;
+            p.age = Math.random() * p.life;
+            p.size = Math.random() * 2 + 1;
+            p.color = Math.random() < 0.5 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)';
+        }
+    }
+
+    ctx.globalAlpha = 1;
+    bloodMoonAnimFrame = requestAnimationFrame(() => animateBloodMoonParticles(now));
+}
+
+function stopBloodMoonParticles() {
+    bloodMoonRunning = false;
+    if (bloodMoonAnimFrame) cancelAnimationFrame(bloodMoonAnimFrame);
+
+    const top = $("#blood-moon-effect-top");
+    const bottom = $("#blood-moon-effect-bottom");
+    top.removeClass("blood-moon-effect-top-anim");
+    bottom.removeClass("blood-moon-effect-bottom-anim");
+
+    if (particleCtx) {
+        particleCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
     }
 }
 

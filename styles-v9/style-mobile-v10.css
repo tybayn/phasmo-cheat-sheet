@@ -1262,12 +1262,18 @@
     .blood-moon-effect-top {
         top: 0;
         background: linear-gradient(180deg, rgba(255, 74, 74, 0.5) 0%, rgba(255, 74, 74,0) 80%);
+    }
+
+    .blood-moon-effect-top-anim {
         animation: blood-moon-pulse-top 10s infinite;
     }
     
     .blood-moon-effect-bottom {
         bottom: 0;
         background: linear-gradient(0deg, rgba(255, 74, 74, 0.5) 0%, rgba(255, 74, 74,0) 80%);
+    }
+
+    .blood-moon-effect-bottom-anim {
         animation: blood-moon-pulse-bot 10s infinite;
     }
     

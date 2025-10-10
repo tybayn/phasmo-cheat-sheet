@@ -68,8 +68,7 @@ function changeTheme(name = null){
         light.remove()
     })
 
-    clearInterval(bloodMoonInterval)
-    clearInterval(snowInterval)
+    stopThemeParticles();
     cg = document.getElementById("candle-group")
     if(cg) cg.remove()
     sl = document.getElementById("string-lights")
@@ -97,13 +96,13 @@ function changeTheme(name = null){
 
     if(themes[theme_name] == "theme-blood-moon-particle"){
         if(!document.getElementById("disable_particles").checked){
-            bloodMoonInterval = setInterval(createBMParticle, 80);
+            startThemeParticles(themes[theme_name]);
         }
         document.body.style.backgroundImage = "radial-gradient(circle, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://zero-network.net/phasmophobia/static/imgs/bm-background.jpg')"
     }
     else if(themes[theme_name] == "theme-snow-particle"){
         if(!document.getElementById("disable_particles").checked){
-            snowInterval = setInterval(createSnowParticle, 200);
+            startThemeParticles(themes[theme_name]);
         }
         document.body.style.backgroundImage = "radial-gradient(circle, rgba(0,0,0,0.75), rgba(0,0,0,1)), url('https://zero-network.net/phasmophobia/static/imgs/background.jpg')"
     }
@@ -265,73 +264,128 @@ function createCozyLights(){
     particleContainer.appendChild(lightdiv);
 }
 
-function createBMParticle() {
-    particleContainer = document.getElementById('particle-container');
-    const particle = document.createElement('div');
-    particle.classList.add('bm-particle');
-    particle.style.backgroundColor = Math.floor(Math.random() * 3) == 0 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)';
-    const randomX = Math.random() * window.innerWidth;
-    particle.style.left = `${randomX}px`;
-    const size = Math.random() * 3 + 2;
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
-    const duration = Math.random() * 3 + 2;
-    particle.style.animationDuration = `${duration}s`;
-    particleContainer.appendChild(particle);
-    setTimeout(() => {
-        particle.remove();
-    }, duration * 1000);
+/// -------------------
+// THEME PARTICLE ENGINE
+// -------------------
+
+
+let particleThemeCanvas, themeParticleCtx, themeParticles = [];
+let animFrameTheme = null;
+let currentTheme = null;
+
+function createThemeParticle(theme, w, h) {
+    if (theme === "theme-blood-moon-particle") {
+        const yStart = h;
+        return {
+            x: Math.random() * w,
+            y: yStart,
+            baseY: yStart,
+            vy: (Math.random() * 0.3 + 0.15) * -1,
+            size: Math.random() * 2 + 1,
+            color: Math.random() > 0.33 ? 'rgb(160,0,0)' : 'rgb(40,40,40)',
+            life: Math.random() * 2 + 4,
+            age: 0,
+            delay: Math.random() * 10,
+            type: 'bm'
+        };
+    } else if (theme === "theme-snow-particle") {
+        return {
+            x: Math.random() * w,
+            y: 0,
+            baseY: 0,
+            vy: Math.random() * 0.5 + 0.2,
+            size: Math.random() * 2 + 1,
+            color: Math.random() < 0.33 ? 'rgb(200,200,200)' : 'rgb(200,200,220)',
+            age: 0,
+            delay: Math.random() * 30,
+            type: 'snow'
+        };
+    }
 }
 
-function createSnowParticle() {
-    particleContainer = document.getElementById('particle-container');
-    const particle = document.createElement('div');
-    particle.classList.add('snow-particle');
-    particle.style.backgroundColor = Math.floor(Math.random() * 3) == 0 ? 'rgb(200, 200, 200)' : 'rgb(200, 200, 220)';
-    const randomX = Math.random() * window.innerWidth;
-    particle.style.left = `${randomX}px`;
-    const size = Math.random() * 3 + 2;
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
-    const duration = Math.random() * 10 + 10;
-    particle.style.animationDuration = `${duration}s`;
-    particleContainer.appendChild(particle);
-    setTimeout(() => {
-        particle.remove();
-    }, duration * 1000);
+function animateThemeParticles(lastTime) {
+    if (!currentTheme) return;
+
+    const now = performance.now();
+    const delta = (now - lastTime) / 1000;
+    const w = particleThemeCanvas.width;
+    const h = particleThemeCanvas.height;
+    const travel = h * 0.4;
+
+    themeParticleCtx.clearRect(0, 0, w, h);
+
+    for (const p of themeParticles) {
+
+        if (p.delay > 0) {
+            p.delay -= delta;
+            continue; // skip updating/drawing this frame
+        }
+
+        if (p.type == 'bm') {
+            p.age += delta;
+            const progress = p.age / p.life;
+            const alpha = 1 - progress;
+            p.y = p.baseY + travel * progress * -1;
+            themeParticleCtx.beginPath();
+            themeParticleCtx.globalAlpha = alpha * 0.7;
+            themeParticleCtx.fillStyle = p.color;
+            themeParticleCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            themeParticleCtx.fill();
+
+            if (progress >= 1) Object.assign(p, createThemeParticle(currentTheme, w, h) || p);
+        } else if (p.type == 'snow') {
+            p.y += p.vy;
+            p.age = Math.random() * h / p.vy;
+            themeParticleCtx.beginPath();
+            themeParticleCtx.globalAlpha = 0.7;
+            themeParticleCtx.fillStyle = p.color;
+            themeParticleCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            themeParticleCtx.fill();
+
+            if (p.y > h) Object.assign(p, createThemeParticle(currentTheme, w, h) || p);
+        }
+    }
+
+    themeParticleCtx.globalAlpha = 1;
+    animFrameTheme = requestAnimationFrame(() => animateThemeParticles(now));
 }
 
-function createBMEffectParticle() {
-    particleContainer = document.getElementById('particle-container');
-    const top_particle = document.createElement('div');
-    top_particle.classList.add('bm-particle');
-    top_particle.style.backgroundColor = Math.floor(Math.random() * 4) == 0 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)';
-    const top_randomX = Math.random() * window.innerWidth;
-    top_particle.style.left = `${top_randomX}px`;
-    const top_size = Math.random() * 3 + 2;
-    top_particle.style.width = `${top_size}px`;
-    top_particle.style.height = `${top_size}px`;
-    const top_duration = Math.random() * 3 + 2;
-    top_particle.style.animationDuration = `${top_duration}s`;
-    particleContainer.appendChild(top_particle);
-    setTimeout(() => {
-        top_particle.remove();
-    }, top_duration * 1000);
-    const bot_particle = document.createElement('div');
-    bot_particle.classList.add('bm-particle-top');
-    bot_particle.style.backgroundColor = Math.floor(Math.random() * 4) == 0 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)';
-    const bot_randomX = Math.random() * window.innerWidth;
-    bot_particle.style.left = `${bot_randomX}px`;
-    const bot_size = Math.random() * 3 + 2;
-    bot_particle.style.width = `${bot_size}px`;
-    bot_particle.style.height = `${bot_size}px`;
-    const bot_duration = Math.random() * 3 + 2;
-    bot_particle.style.animationDuration = `${bot_duration}s`;
-    particleContainer.appendChild(bot_particle);
-    setTimeout(() => {
-        bot_particle.remove();
-    }, bot_duration * 1000);
+function startThemeParticles(theme) {
+    stopThemeParticles();
+
+    currentTheme = theme;
+    if (document.getElementById("disable_particles")?.checked) return;
+    
+
+    particleThemeCanvas = document.getElementById('particle-theme-canvas');
+    themeParticleCtx = particleThemeCanvas.getContext('2d');
+
+    function resizeCanvas() {
+        particleThemeCanvas.width = window.innerWidth;
+        particleThemeCanvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const count = theme === "theme-snow-particle" ? 60 : 60;
+    const h = particleThemeCanvas.height;
+    const w = particleThemeCanvas.width;
+
+    themeParticles = Array.from({ length: count }, () => createThemeParticle(theme, w, h));
+
+    animateThemeParticles(performance.now());
 }
+
+function stopThemeParticles() {
+    if (animFrameTheme) cancelAnimationFrame(animFrameTheme);
+    themeParticles = [];
+    currentTheme = null;
+    if(themeParticleCtx)
+        themeParticleCtx.clearRect(0, 0, particleThemeCanvas.width, particleThemeCanvas.height);
+}
+
+// -------------------
+
 
 function saveOriginalStyles(elem, styles) {
     styles.forEach(style => {

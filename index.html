@@ -22,9 +22,9 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v9/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v9/style-v11.css"/>
-    <link rel="stylesheet" href="styles-v9/style-mobile-v9.css"/>
-    <link rel="stylesheet" href="themes-v9/themes-v1.css"/>
+    <link rel="stylesheet" href="styles-v9/style-v12.css"/>
+    <link rel="stylesheet" href="styles-v9/style-mobile-v10.css"/>
+    <link rel="stylesheet" href="themes-v9/themes-v2.css"/>
     <link rel="stylesheet" href="discord-v9/discord-v1.css" >
     <link rel="stylesheet" href="wiki-v9/wiki-v1.css" >
     <link rel="stylesheet" href="wiki-v9/wiki-spoiler-v1.css" >
@@ -78,6 +78,8 @@
     <div id="blood-moon-effect-top"></div>
     <div id="blood-moon-effect-bottom"></div>
     <div id="particle-container"></div>
+    <canvas id="particle-canvas"></canvas>
+    <canvas id="particle-theme-canvas"></canvas>
 
     <div id="blackout" style="display: none;">
         <div id="info_blockout" class="blockout-invis" style="display: none;" onclick="showInfo(event)"></div>
@@ -413,7 +415,7 @@
                 <hr>
                 <div class="modifier_volume yfont white">{{graphics}}</div> 
                 <div class="modifier_option less_pad">
-                    <input type="checkbox" id="disable_particles" name="disable_particles" class="settings_check" onclick="setBloodMoonParticles();changeTheme();saveSettings();"><label for="disable_particles">{{disable_particles}}</label>
+                    <input type="checkbox" id="disable_particles" name="disable_particles" class="settings_check" onclick="startBloodMoonParticles();changeTheme();saveSettings();"><label for="disable_particles">{{disable_particles}}</label>
                 </div>
                 <hr>
                 <div class="modifier_volume yfont white">{{misc}}</div> 
@@ -1081,13 +1083,13 @@
     </script>
     <script src="scripts-v9/utils-v1.js"></script>
     <script src="lang-v9/lang-v6.js"></script>
-    <script src="themes-v9/themes-v4.js"></script>
+    <script src="themes-v9/themes-v5.js"></script>
     <script src="scripts-v9/audio_controller-v2.js"></script>
     <script src="scripts-v9/metronome-v3.js"></script>
     <script src="scripts-v9/timer-v4.js"></script>
     <script src="discord-v9/discord-v1.js"></script>
     <script src="wiki-v9/wiki-v3.js"></script>
-    <script src="scripts-v9/filter-v6.js"></script>
+    <script src="scripts-v9/filter-v7.js"></script>
     <script src="scripts-v9/sanity-v1.js"></script>
     <script src="scripts-v9/wslink-v11.js"></script>
     <script src="partners-v9/partners-v6.js"></script>
