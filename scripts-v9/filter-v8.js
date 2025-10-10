@@ -319,11 +319,10 @@ function startBloodMoonParticles() {
             y: yStart,
             baseY: yStart,
             vy: (Math.random() * 0.3 + 0.15) * (up ? -1 : 1),
-            size: Math.random() * 3 + 2,
-            color: Math.random() < 0.25 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)',
+            size: Math.random() * 2 + 2,
+            color: Math.random() < 0.5 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)',
             life: Math.random() * 2 + 2, // seconds
             age: 0,
-            delay: Math.random() * 10,
             up
         };
     });
@@ -346,11 +345,6 @@ function animateBloodMoonParticles(lastTime) {
     const travel = h * 0.3;
 
     for (const p of bloodMoonParticles) {
-
-        if (p.delay > 0) {
-            p.delay -= delta;
-            continue; // skip updating/drawing this frame
-        }
         
         p.age += delta;
         const progress = p.age / p.life;
@@ -360,7 +354,7 @@ function animateBloodMoonParticles(lastTime) {
         p.y = p.baseY + travel * progress * (p.up ? -1 : 1);
 
         ctx.beginPath();
-        ctx.globalAlpha = alpha * 0.7;
+        ctx.globalAlpha = alpha;
         ctx.fillStyle = p.color;
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
@@ -372,7 +366,7 @@ function animateBloodMoonParticles(lastTime) {
             p.y = p.baseY;
             p.life = Math.random() * 2 + 4;
             p.age = Math.random() * p.life;
-            p.size = Math.random() * 2 + 1;
+            p.size = Math.random() * 2 + 2;
             p.color = Math.random() < 0.5 ? 'rgb(160, 0, 0)' : 'rgb(40, 40, 40)';
         }
     }

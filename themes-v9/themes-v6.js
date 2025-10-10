@@ -281,7 +281,7 @@ function createThemeParticle(theme, w, h) {
             y: yStart,
             baseY: yStart,
             vy: (Math.random() * 0.3 + 0.15) * -1,
-            size: Math.random() * 2 + 1,
+            size: Math.random() * 2 + 2,
             color: Math.random() > 0.33 ? 'rgb(160,0,0)' : 'rgb(40,40,40)',
             life: Math.random() * 2 + 4,
             age: 0,
@@ -294,7 +294,7 @@ function createThemeParticle(theme, w, h) {
             y: 0,
             baseY: 0,
             vy: Math.random() * 0.5 + 0.2,
-            size: Math.random() * 2 + 1,
+            size: Math.random() * 2 + 2,
             color: Math.random() < 0.33 ? 'rgb(200,200,200)' : 'rgb(200,200,220)',
             age: 0,
             delay: Math.random() * 30,
@@ -327,7 +327,7 @@ function animateThemeParticles(lastTime) {
             const alpha = 1 - progress;
             p.y = p.baseY + travel * progress * -1;
             themeParticleCtx.beginPath();
-            themeParticleCtx.globalAlpha = alpha * 0.7;
+            themeParticleCtx.globalAlpha = alpha;
             themeParticleCtx.fillStyle = p.color;
             themeParticleCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             themeParticleCtx.fill();
