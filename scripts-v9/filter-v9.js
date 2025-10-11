@@ -2313,7 +2313,8 @@ function switchMapType(next=false,prev=false){
     }
 
     let next_map = all_maps[cur_map].replace(".png",`${mtypes[cur_type]}.png`).replace(".webp",`${mtypes[cur_type]}.webp`)
-    $(".map_image").css("background-image",`url(${next_map})`)
+
+    $(".map_image").css("background-image",document.getElementById("map_event_check_box").checked && cur_type == '0' && all_maps.hasOwnProperty(`${cur_map}-e`) ? `url(${all_maps[`${cur_map}-e`]})` : `url(${next_map})`)
 }
 
 function zoomMap(elem){
