@@ -124,7 +124,7 @@ body{
     }
 
     #maintenance-block{
-        width: 550px;
+        width: 300px;
         background: linear-gradient(45deg,rgba(49,50,72,1) 25%, rgba(64,49,72,1) 75%);
         padding: 25px;
         display: flex;
