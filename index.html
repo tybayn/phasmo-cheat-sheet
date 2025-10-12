@@ -402,6 +402,9 @@
                 <hr>
                 <div class="modifier_volume yfont white">{{ghost_cards}}</div> 
                 <div class="modifier_option less_pad">
+                    <input type="checkbox" id="force_selection" name="force_selection" class="settings_check" onclick="saveSettings();"><label for="force_selection">{{force_selection}}</label>
+                </div>  
+                <div class="modifier_option less_pad">
                     <input type="checkbox" id="adaptive_evidence" name="adaptive_evidence" class="settings_check" onclick="filter();saveSettings();"><label for="adaptive_evidence">{{adaptive_evidence}}</label>
                 </div>     
                 <div class="modifier_option less_pad">
@@ -1088,9 +1091,9 @@
     <script src="scripts-v9/timer-v4.js"></script>
     <script src="discord-v9/discord-v1.js"></script>
     <script src="wiki-v9/wiki-v3.js"></script>
-    <script src="scripts-v9/filter-v9.js"></script>
+    <script src="scripts-v9/filter-v10.js"></script>
     <script src="scripts-v9/sanity-v1.js"></script>
-    <script src="scripts-v9/wslink-v11.js"></script>
+    <script src="scripts-v9/wslink-v12.js"></script>
     <script src="partners-v9/partners-v6.js"></script>
     <script src="models-v9/models-v3.js"></script>
     <script src="scripts-v9/zn-v6.js"></script>

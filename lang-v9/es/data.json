@@ -103,6 +103,7 @@
     "{{timer_count_up}}": "Contador de Tiempo",
     "{{split_timer}}": "Separar las Partes del Temporizador (Enlace de Escritorio)",
     "{{ghost_cards}}": "Cartas de los Fantasmas",
+    "{{force_selection}}": "Selección de fuerza (enlace de Discord)",
     "{{adaptive_evidence}}": "Evidencia Adaptativa",
     "{{hide_behaviors}}": "Esconder Comportamientos",
     "{{compact_view}}": "Vista Compacta",

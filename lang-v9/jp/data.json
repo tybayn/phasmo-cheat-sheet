@@ -104,6 +104,7 @@
     "{{timer_count_up}}": "タイマーのカウントアップ",
     "{{split_timer}}": "タイマーを分割表示（デスクトップリンク）",
     "{{ghost_cards}}": "ゴーストカード",
+    "{{force_selection}}": "フォース選択 (Discordリンク)",
     "{{adaptive_evidence}}": "出てない証拠のみ表示",
     "{{hide_behaviors}}": "特徴を非表示",
     "{{compact_view}}": "カードをコンパクトにする",

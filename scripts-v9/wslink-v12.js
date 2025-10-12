@@ -357,7 +357,7 @@ function link_room(){
                 }
                 if (action == "POLL"){
                     polled = true
-                    if(Object.keys(discord_user).length > 0){
+                    if(Object.keys(discord_user).length > 0 && document.getElementById("force_selection").checked){
                         if (hasSelected()){
                             ws.send('{"action":"READY"}')
                             $("#reset").html(lang_data['{{waiting_for_others}}'])
@@ -905,7 +905,7 @@ function link_link(reconnect = false){
             else if (action == "MENUFLIP"){ toggleFilterTools()}
 
             else if(action == "SAVERESET"){
-                if(Object.keys(discord_user).length > 0){
+                if(Object.keys(discord_user).length > 0 && document.getElementById("force_selection").checked){
                     if(!hasSelected()){
                         send_ghost_link("None Selected!",-1)
                         $("#reset").removeClass("standard_reset")

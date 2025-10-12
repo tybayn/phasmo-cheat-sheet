@@ -107,6 +107,7 @@
     "{{timer_count_up}}": "Inverser le sens du minuteur",
     "{{split_timer}}": "Séparation des minuteurs (Lien avec l'application de bureau)",
     "{{ghost_cards}}": "Cartes des entités",
+    "{{force_selection}}": "Sélection forcée (lien Discord)",
     "{{adaptive_evidence}}": "Adaptation des preuves",
     "{{hide_behaviors}}": "Cacher les comportements",
     "{{compact_view}}": "Affichage compact",

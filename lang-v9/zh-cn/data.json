@@ -107,6 +107,7 @@
     "{{timer_count_up}}": "计时器累加模式",
     "{{split_timer}}": "拆分计时（需Zn-Desktop-link）",
     "{{ghost_cards}}": "鬼魂卡片",
+    "{{force_selection}}": "强制选择（Discord链接）",
     "{{adaptive_evidence}}": "动态显示证据",
     "{{hide_behaviors}}": "隐藏鬼魂特征",
     "{{compact_view}}": "紧凑视图",
