@@ -24,7 +24,7 @@ function load_partners() {
     let drop_live = false
     let has_drop = false
     
-    let loadPartners= new Promise((resolve, reject) => {
+    let loadPartners = new Promise((resolve, reject) => {
         fetch("https://zero-network.net/zn/partners.html", {signal: AbortSignal.timeout(6000)})
         .then(data => data.text())
         .then(data => {
@@ -65,7 +65,7 @@ function load_partners() {
         })
     })
 
-    Promise.all([loadPartners(), loadDrops()])
+    Promise.all([loadPartners, loadDrops])
     .then(() => {
         if(has_drop && drop_live){
             $("#partner-tab").addClass("live_drops")
