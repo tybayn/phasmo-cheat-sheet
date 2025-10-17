@@ -152,7 +152,7 @@
 .drop_live{
     opacity: 1 !important;
     background: linear-gradient(#8956fbb8,#ffffff00) !important;
-    border: 0.5px solid #8956fb !important;
+    border: 0.5px solid rgb(137, 86, 251) !important;
 }
 
 .drop_live_dates{
@@ -231,3 +231,26 @@
     0%, 100% { transform: translateY(0) rotate(45deg); }
     50%      { transform: translateY(4px) rotate(45deg); }
   }
+
+.drop-active{
+    background: linear-gradient(45deg, rgba(137,36,251,1) 0%, rgba(68,55,83,1) 100%) !important;
+}
+
+.live-drops{
+    box-shadow: 0 0 0 0 rgba(137,36,251,1);
+    animation: droppulse 2s 3;
+}
+
+@keyframes droppulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(137,36,251,0.8);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(137,36,251,0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(137,36,251,0);
+    }
+}
