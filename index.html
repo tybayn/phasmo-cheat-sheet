@@ -22,7 +22,8 @@
     </script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v9/ghost_template-v1.js"></script>
-    <link rel="stylesheet" href="styles-v9/style-v13.css"/>
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+    <link rel="stylesheet" href="styles-v9/style-v14.css"/>
     <link rel="stylesheet" href="styles-v9/style-mobile-v10.css"/>
     <link rel="stylesheet" href="themes-v9/themes-v2.css"/>
     <link rel="stylesheet" href="discord-v9/discord-v1.css" >
@@ -30,7 +31,7 @@
     <link rel="stylesheet" href="wiki-v9/wiki-spoiler-v1.css" >
     <link rel="stylesheet" href="events-v9/events-v1.css" >
     <link rel="stylesheet" href="models-v9/models-v1.css" >
-    <link rel="stylesheet" href="partners-v9/partners-v7.css" >
+    <link rel="stylesheet" href="partners-v9/partners-v8.css" >
     <link rel="stylesheet" href="feed-v9/feed-v1.css" >
     <link rel="stylesheet" href="styles-v9/plugins-v1/plugins-v2.css" >
     <link rel="stylesheet" href="styles-v9/plugins-v1/makeship-v1.css" >
@@ -330,6 +331,13 @@
     <div id="blackout_image" style="display: none;" onclick="zoomOutImage()">
         <img loading="lazy" id="zoom_image" src="" onclick="zoomOutImage()">
         <div id="blackout_image_subtitle" style="display: none;"></div>
+    </div>
+
+    <div id="blackout_twitch" style="display: none;">
+        <div id="info_box_twitch">
+            <span class="icon" style="border-radius: 50%; background: #444;" onclick="closeTwitch()"></span>
+            <div id="twitch-embed"></div>
+        </div>
     </div>
 
     <div id="settings_box" style="left: -1000px;">
@@ -1094,7 +1102,7 @@
     <script src="scripts-v9/filter-v10.js"></script>
     <script src="scripts-v9/sanity-v1.js"></script>
     <script src="scripts-v9/wslink-v12.js"></script>
-    <script src="partners-v9/partners-v8.js"></script>
+    <script src="partners-v9/partners-v9.js"></script>
     <script src="models-v9/models-v3.js"></script>
     <script src="scripts-v9/zn-v6.js"></script>
     <script src="scripts-v9/search-v1.js"></script>

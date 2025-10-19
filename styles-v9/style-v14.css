@@ -298,7 +298,7 @@ body{
     }
     
 
-    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image, #blackout_calibrate, #blackout_weekly{
+    #blackout, #blackout_voice, #blackout_zndl, #blackout_debug, #blackout_image, #blackout_calibrate, #blackout_weekly, #blackout_twitch{
         position: fixed;
         background: rgba(0,0,0,0.9);
         left: 0;
@@ -1352,7 +1352,26 @@ body{
         font-size: 12px;
     }
 
-    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon, #info_box_debug .icon, #info_box_calibrate .icon, #info_box_weekly .icon{
+    #info_box_twitch{
+        z-index: 100;
+        overflow: hidden;
+        width: calc(100% - 100px);
+        height: calc(100vh - 100px);
+        background-color: #313248;
+        border-radius: 5px;  
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        flex-wrap: nowrap;
+        align-content: stretch;
+        align-items: flex-start;
+        color: #fff;
+        padding: 20px;
+        overflow-y: scroll;
+        font-size: 12px;
+    }
+
+    #info_box .icon, #info_box_voice .icon, #info_box_zndl .icon, #info_box_debug .icon, #info_box_calibrate .icon, #info_box_weekly .icon, #info_box_twitch .icon{
         position: absolute;
         top: 10px;
         right: 10px;
@@ -1364,7 +1383,7 @@ body{
         cursor: pointer;
     }
 
-    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before, #info_box_debug .icon:before, #info_box_calibrate .icon:before, #info_box_weekly .icon:before{
+    #info_box .icon:before, #info_box_voice .icon:before, #info_box_zndl .icon:before, #info_box_debug .icon:before, #info_box_calibrate .icon:before, #info_box_weekly .icon:before, #info_box_twitch .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -1374,7 +1393,7 @@ body{
         top:4px;
     }
 
-    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after, #info_box_debug .icon:after, #info_box_calibrate .icon:after, #info_box_weekly .icon:after{
+    #info_box .icon:after, #info_box_voice .icon:after, #info_box_zndl .icon:after, #info_box_debug .icon:after, #info_box_calibrate .icon:after, #info_box_weekly .icon:after, #info_box_twitch .icon:after{
         content:"";
         position: absolute;
         width:15px;

@@ -81,3 +81,46 @@ function load_partners() {
     });
     mutationObs.observe(area, { childList: true, subtree: true, characterData: true });
 }
+
+// TWITCH
+
+let twitchEmbed = null;
+let currentChannel = null;
+let resizeTimeout = null;
+
+function openTwitch(channel) {
+  $("#blackout_twitch").fadeIn(100);
+  currentChannel = channel;
+  createTwitchEmbed()
+}
+
+function createTwitchEmbed() {
+  // Clear existing embed if any
+  document.getElementById("twitch-embed").innerHTML = "";
+  
+  const width = window.innerWidth - 100;
+  const height = window.innerHeight - 100;
+
+  twitchEmbed = new Twitch.Embed("twitch-embed", {
+    width,
+    height,
+    channel: currentChannel,
+    parent: ["tybayn.github.io", "zero-network.net"]
+  });
+}
+
+function closeTwitch() {
+  $("#blackout_twitch").fadeOut(100, () => {
+    document.getElementById("twitch-embed").innerHTML = "";
+    twitchEmbed = null;
+    currentChannel = null;
+  });
+}
+
+window.addEventListener("resize", () => {
+  if (!twitchEmbed) return;
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    createTwitchEmbed();
+  }, 200);
+})
