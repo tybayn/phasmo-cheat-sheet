@@ -120,7 +120,7 @@ function interact_post(title, sentiment, value){
         "value":value
     }
 
-    fetch("https://zero-network.net/phasmophobia/zn/feed/interact",{
+    fetch("https://zero-network.net/zn/feed/interact",{
         method:"POST",
         headers:{
             'Content-Type':'application/json'
