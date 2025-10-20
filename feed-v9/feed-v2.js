@@ -2,7 +2,7 @@ let feed_recent_date = null
 let feed_interactions = {}
 
 let load_feed = new Promise((resolve, reject) => {
-    fetch("https://zero-network.net/phasmophobia/data/feed.json", {signal: AbortSignal.timeout(6000)})
+    fetch("https://zero-network.net/zn/feed.json", {signal: AbortSignal.timeout(6000)})
     .then(data => data.json())
     .then(data => {
         let feed_found = false
@@ -120,7 +120,7 @@ function interact_post(title, sentiment, value){
         "value":value
     }
 
-    fetch("https://zero-network.net/phasmophobia/data/feed/interact",{
+    fetch("https://zero-network.net/phasmophobia/zn/feed/interact",{
         method:"POST",
         headers:{
             'Content-Type':'application/json'
