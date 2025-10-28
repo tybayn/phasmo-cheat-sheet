@@ -58,7 +58,7 @@ function getLink(){
                 stats_info += '</div>'
 
                 document.getElementById("data_stats").innerHTML = stats_info
-                document.getElementById("data-stats-link").href = `https://zero-network.net/phasmo-stats/?data-id=${data_user['id']}-${data_user['type'] == 'discord' ? ('https://cdn.discordapp.com/avatars/'+data_user['id']+'/'+data_user['avatar']) : data_user['avatar']}&username=${data_user['username']}`
+                document.getElementById("data-stats-link").href = `https://zero-network.net/phasmo-stats/?data-id=${data_user['id']}&avatar=${data_user['type'] == 'discord' ? ('https://cdn.discordapp.com/avatars/'+data_user['id']+'/'+data_user['avatar']) : data_user['avatar']}&username=${data_user['username']}`
                 document.getElementById("data_link_status").className = "connected"
 
                 if($("#num_evidence option[value='sep3']").length === 0){
