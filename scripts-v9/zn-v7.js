@@ -34,17 +34,18 @@ function checkLink(){
         params = new URL(window.location.href).searchParams
 
         if (params.get("id")){
-            discord_link = {
+            data_link = {
                 "id":params.get("id"),
                 "username":params.get("username"),
                 "avatar":params.get("avatar"),
-                "last_linked":params.get("last_linked")
+                "last_linked":params.get("last_linked"),
+                "type":params.get("type")
             }
 
             znid = getCookie("znid")
 
-            setCookie("discord_link",JSON.stringify(discord_link),30)
-            fetch(`https://zero-network.net/zn/${znid}/attach/${discord_link['id']}`, {method:"POST",signal: AbortSignal.timeout(6000)})
+            setCookie("data_link",JSON.stringify(data_link),30)
+            fetch(`https://zero-network.net/zn/${znid}/attach/${data_link['id']}`, {method:"POST",signal: AbortSignal.timeout(6000)})
             .then(data => {
                 window.location.href = window.location.href.split("?")[0]
             })
@@ -120,11 +121,11 @@ function loadAllAndConnect(){
         else{
             var id;
             try{
-                id = JSON.parse(getCookie("discord_link"))['id'];
+                id = JSON.parse(getCookie("data_link"))['id'];
             } catch(Error) {
                 id = false;
             }
-            fetch(`https://zero-network.net/zn/?lang=${lang}${id ? '&discord_id='+id : ''}`,{headers:{Accept:"application/json"}, signal: AbortSignal.timeout(10000)})
+            fetch(`https://zero-network.net/zn/?lang=${lang}${id ? '&data_id='+id : ''}`,{headers:{Accept:"application/json"}, signal: AbortSignal.timeout(10000)})
             .then(e=>e.json())
             .then(e => {
                 znid = e.znid

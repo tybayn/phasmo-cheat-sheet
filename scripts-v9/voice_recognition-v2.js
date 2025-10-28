@@ -945,7 +945,7 @@ function parse_speech(vtext){
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized reset command")
         console.log(`Heard '${vtext}'`)
-        if(Object.keys(discord_user).length > 0){
+        if(Object.keys(data_user).length > 0){
             if(!hasSelected()){
                 $("#reset").removeClass("standard_reset")
                 $("#reset").addClass("reset_pulse")
@@ -1003,8 +1003,8 @@ function parse_speech(vtext){
         vtext.startsWith("hello domo") || vtext.startsWith("hello domovoi")|| vtext.startsWith("hello zero") ||
         vtext.startsWith("hi domo") || vtext.startsWith("hi domovoi")|| vtext.startsWith("hi zero")
     ){
-        if(Object.keys(discord_user).length > 0){
-            domovoi_heard(`hello ${discord_user['username']}!`)
+        if(Object.keys(data_user).length > 0){
+            domovoi_heard(`hello ${data_user['username']}!`)
         }
         else{
             domovoi_heard("hello!")

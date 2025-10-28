@@ -27,7 +27,7 @@
         letter-spacing: 1px;
     }
 
-    #settings_box, #links_box, #discord_link_box, #event_box, #wiki_box {
+    #settings_box, #links_box, #data_link_box, #event_box, #wiki_box {
         width: 219px;
     }
 
@@ -53,11 +53,11 @@
         font-size: 24px !important;
     }
 
-    .discord-entry{
+    .data-entry{
         font-size: 9px !important;
     }
 
-    #discord_login_button, #discord_unlink_button{
+    #data_login_button, #data_unlink_button{
         padding: 6px !important;
     }
 

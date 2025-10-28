@@ -48,7 +48,7 @@
         font-weight: lighter !important;
     }
 
-    #settings_box, #links_box, #discord_link_box, #event_box, #wiki_box {
+    #settings_box, #links_box, #data_link_box, #event_box, #wiki_box {
         width: 193px;
     }
 

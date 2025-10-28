@@ -298,7 +298,7 @@
         position: fixed;
         top: 0;
         width: calc(100% - 40px);
-        height: 100%;
+        height: calc(100vh - 40px);
         background-color: #313248;
         display: flex;
         flex-direction: column;
@@ -353,7 +353,7 @@
         width: 40px;
     }
 
-    #settings_status, #discord_link_status{
+    #settings_status, #data_link_status{
         width: 50px;
         height: 10px;
         border-radius: 0px 20px 0px 0px;
@@ -463,11 +463,11 @@
         font-size: 30px;
     }
 
-    #discord_link_box{
+    #data_link_box{
         position: fixed;
         top: 0;
         width: calc(100% - 40px);
-        height: 100%;
+        height: calc(100vh - 40px);
         background-color: #313248;
         display: flex;
         flex-direction: column;
@@ -480,7 +480,7 @@
         transition: left 0.5s ease;
     }
 
-    #discord_link_tab{
+    #data_link_tab{
         position: absolute;
         display: flex;
         justify-content: center;
@@ -505,7 +505,7 @@
         position: fixed;
         top: 0;
         width: calc(100% - 40px);
-        height: 100%;
+        height: calc(100vh - 40px);
         background-color: #313248;
         display: flex;
         flex-direction: column;
@@ -546,7 +546,7 @@
         position: fixed;
         top: 0;
         width: calc(100% - 40px);
-        height: 100%;
+        height: calc(100vh - 40px);
         background-color: #313248;
         display: flex;
         flex-direction: column;
@@ -635,7 +635,7 @@
         position: fixed;
         top: 0;
         width: calc(100% - 40px);
-        height: 100%;
+        height: calc(100vh - 40px);
         background-color: #313248;
         display: flex;
         flex-direction: column;
@@ -710,7 +710,7 @@
         display: none;
     }
 
-    #discord_tab{
+    #data_tab{
         display: none;
     }
 
@@ -764,7 +764,7 @@
         flex-direction: column;
     }
 
-    #settings_box .icon, #links_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon, #info_box_zndl .icon, .broadcast-content .icon{
+    #settings_box .icon, #links_box .icon, #data_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #news_box .icon, #info_box_zndl .icon, .broadcast-content .icon{
         position: absolute;
         top: 24px;
         right: 24px;
@@ -776,7 +776,7 @@
         cursor: pointer;
     }
 
-    #settings_box .icon:before, #links_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #news_box .icon:before, #info_box_zndl .icon:before, .broadcast-content .icon:before{
+    #settings_box .icon:before, #links_box .icon:before, #data_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #news_box .icon:before, #info_box_zndl .icon:before, .broadcast-content .icon:before{
         content:"";
         position: absolute;
         width:8px;
@@ -786,7 +786,7 @@
         top:0px;
     }
 
-    #settings_box .icon:after, #links_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #news_box .icon:after, #info_box_zndl .icon:after, .broadcast-content .icon:after{
+    #settings_box .icon:after, #links_box .icon:after, #data_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #news_box .icon:after, #info_box_zndl .icon:after, .broadcast-content .icon:after{
         content:"";
         position: absolute;
         width:50px;
@@ -796,7 +796,7 @@
         top:20px;
     }
 
-    #settings_box .info_block, #links_box .info_block, #discord_link_box .info_block, #event_box .info_block, #wiki_box .info_block, #info_box_weekly .info_block{
+    #settings_box .info_block, #links_box .info_block, #data_link_box .info_block, #event_box .info_block, #wiki_box .info_block, #info_box_weekly .info_block{
         display: flex;
         flex-direction: column;
         z-index: 2;

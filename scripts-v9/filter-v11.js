@@ -1261,7 +1261,7 @@ function all_not_los(){
 
 function autoPreSelect(){
 
-    if(Object.keys(discord_user).length > 0 || hasDLLink){
+    if(Object.keys(data_user).length > 0 || hasDLLink){
         var cur_selected = []
         var has_selected = false
         var selected = "";
@@ -1290,7 +1290,7 @@ function autoPreSelect(){
         }
 
         if ((cur_selected.length == 1 || last_guessed != null) && selected == "" && died == ""){
-            if(Object.keys(discord_user).length > 0){
+            if(Object.keys(data_user).length > 0){
                 if (last_guessed != null)
                     $(ghosts[last_guessed]).addClass("preguessed")
                 else
@@ -1311,7 +1311,7 @@ function autoPreSelect(){
 }
 
 function autoSelect(){
-    if(Object.keys(discord_user).length > 0 || hasDLLink){
+    if(Object.keys(data_user).length > 0 || hasDLLink){
         var cur_selected = []
         var has_selected = false
         var selected = "";
@@ -1341,7 +1341,7 @@ function autoSelect(){
         }
 
         if (!has_selected && cur_selected.length == 1){
-            if(Object.keys(discord_user).length > 0){
+            if(Object.keys(data_user).length > 0){
                 guess(ghosts[cur_selected[0]],internal=true)
                 send_ghost_link(ghosts[cur_selected[0]].id,1)
             }
@@ -1376,7 +1376,7 @@ function autoSelect(){
 }
 
 function hasSelected(){
-    if(Object.keys(discord_user).length > 0){
+    if(Object.keys(data_user).length > 0){
         var ghosts = document.getElementsByClassName("ghost_card")
         for (var i = 0; i < ghosts.length; i++){
             if(ghosts[i].className.includes("selected") || ghosts[i].className.includes("died")){
@@ -1388,7 +1388,7 @@ function hasSelected(){
 }
 
 function checkResetButton(){
-    if(Object.keys(discord_user).length > 0 && document.getElementById("force_selection").checked){
+    if(Object.keys(data_user).length > 0 && document.getElementById("force_selection").checked){
         if(!hasSelected()){
             $("#reset").removeClass("standard_reset")
             $("#reset").addClass("reset_pulse")
@@ -1402,7 +1402,7 @@ function checkResetButton(){
 function resetResetButton(){
     $("#reset").removeClass("reset_pulse")
     $("#reset").addClass("standard_reset")
-    if(Object.keys(discord_user).length > 0){
+    if(Object.keys(data_user).length > 0){
         $("#reset").html(`${lang_data['{{save_and_reset}}']}<div class='reset_note'>(${lang_data['{{right_click_for_more}}']})</div>`)
     }
     else{
@@ -1507,12 +1507,12 @@ function closeAll(skip_map=false,skip_wiki=false){
     document.getElementById("links_box").style.boxShadow = "none"
     $("#links_box").removeClass("tab-open")
 
-    document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "0px")
+    document.getElementById("data_link_box").style.left = (mquery.matches ? "-100%" : "0px")
     if (!mquery.matches)
-        document.getElementById("discord_link_box").style.width = lang_menu_widths[lang].width
-    document.getElementById("discord_link_box").style.boxShadow = "none"
-    document.getElementById("discord_link_tab").style.boxShadow = "none"
-    $("#discord_link_box").removeClass("tab-open")
+        document.getElementById("data_link_box").style.width = lang_menu_widths[lang].width
+    document.getElementById("data_link_box").style.boxShadow = "none"
+    document.getElementById("data_link_tab").style.boxShadow = "none"
+    $("#data_link_box").removeClass("tab-open")
 
     document.getElementById("event_box").style.left = (mquery.matches ? "-100%" : "0px")
     if (!mquery.matches)
@@ -1540,7 +1540,7 @@ function closeAll(skip_map=false,skip_wiki=false){
 
     document.getElementById("settings_box").style.zIndex = "1"
     document.getElementById("links_box").style.zIndex = "1"
-    document.getElementById("discord_link_box").style.zIndex= "1"
+    document.getElementById("data_link_box").style.zIndex= "1"
     document.getElementById("event_box").style.zIndex= "1"
     if (!skip_wiki) document.getElementById("wiki_box").style.zIndex= "1"
     if (!skip_map) document.getElementById("maps_box").style.zIndex= "1"
@@ -1553,7 +1553,7 @@ function showSettings(){
         document.getElementById("settings_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("settings_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("links_box").style.zIndex = "1"
-        document.getElementById("discord_link_box").style.zIndex= "1"
+        document.getElementById("data_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
@@ -1587,7 +1587,7 @@ function showLinks(){
         document.getElementById("links_box").style.boxShadow = "5px 0px 10px 0px #000"
         document.getElementById("links_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
-        document.getElementById("discord_link_box").style.zIndex= "1"
+        document.getElementById("data_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
@@ -1617,28 +1617,28 @@ function showLinks(){
 
 function showDiscordLink(){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    if (document.getElementById("discord_link_box").style.left == (mquery.matches ? "-100%" : "0px")){
-        document.getElementById("discord_link_box").style.boxShadow = "5px 0px 10px 0px #000"
-        document.getElementById("discord_link_tab").style.boxShadow = "5px 6px 5px -2px #000"
+    if (document.getElementById("data_link_box").style.left == (mquery.matches ? "-100%" : "0px")){
+        document.getElementById("data_link_box").style.boxShadow = "5px 0px 10px 0px #000"
+        document.getElementById("data_link_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("links_box").style.zIndex = "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
-        document.getElementById("discord_link_box").style.zIndex= (mquery.matches ? "10" : "2")
-        document.getElementById("discord_link_box").style.left = (mquery.matches ? "0px" : lang_menu_widths[lang].left)
+        document.getElementById("data_link_box").style.zIndex= (mquery.matches ? "10" : "2")
+        document.getElementById("data_link_box").style.left = (mquery.matches ? "0px" : lang_menu_widths[lang].left)
         if (!mquery.matches)
-            document.getElementById("discord_link_box").style.width = "200px"
-        $("#discord_link_box").addClass("tab-open")
+            document.getElementById("data_link_box").style.width = "200px"
+        $("#data_link_box").addClass("tab-open")
         tabOpen = true
     }
     else {
         if (!mquery.matches)
-            document.getElementById("discord_link_box").style.width = lang_menu_widths[lang].width
-        document.getElementById("discord_link_box").style.left = (mquery.matches ? "-100%" : "0px")
-        document.getElementById("discord_link_box").style.boxShadow = "none"
-        document.getElementById("discord_link_tab").style.boxShadow = "none"
-        $("#discord_link_box").removeClass("tab-open")
+            document.getElementById("data_link_box").style.width = lang_menu_widths[lang].width
+        document.getElementById("data_link_box").style.left = (mquery.matches ? "-100%" : "0px")
+        document.getElementById("data_link_box").style.boxShadow = "none"
+        document.getElementById("data_link_tab").style.boxShadow = "none"
+        $("#data_link_box").removeClass("tab-open")
         tabOpen = false
         if(mquery.matches){
             $("#cards").scrollTop($("#cards").scrollTop() - 1);
@@ -1657,7 +1657,7 @@ function showEvent(force_open=false){
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("links_box").style.zIndex = "1"
         document.getElementById("wiki_box").style.zIndex= "1"
-        document.getElementById("discord_link_box").style.zIndex= "1"
+        document.getElementById("data_link_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= (mquery.matches ? "10" : "2")
         document.getElementById("event_box").style.left = (mquery.matches ? "0px" : lang_menu_widths[lang].left)
@@ -1690,7 +1690,7 @@ function showWiki(forceOpen = false, forceClose = false){
         document.getElementById("wiki_tab").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("links_box").style.zIndex = "1"
-        document.getElementById("discord_link_box").style.zIndex= "1"
+        document.getElementById("data_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= (mquery.matches ? "10" : "2")
@@ -1725,7 +1725,7 @@ function showMaps(forceOpen = false, forceClose = false){
         document.getElementById("maps_box").style.boxShadow = "5px 6px 5px -2px #000"
         document.getElementById("settings_box").style.zIndex = "1"
         document.getElementById("links_box").style.zIndex = "1"
-        document.getElementById("discord_link_box").style.zIndex= "1"
+        document.getElementById("data_link_box").style.zIndex= "1"
         document.getElementById("event_box").style.zIndex= "1"
         document.getElementById("wiki_box").style.zIndex= "1"
         document.getElementById("maps_box").style.zIndex= (mquery.matches ? "10" : "2")
@@ -2193,8 +2193,8 @@ function checkDifficulty(){
 
     if(dif_opt === "-10"){
         document.getElementById("num_evidence").value = "-1"
-        if(Object.keys(discord_user).length > 0){
-            let url_params = new URLSearchParams(discord_user).toString()
+        if(Object.keys(data_user).length > 0){
+            let url_params = new URLSearchParams(data_user).toString()
             window.open(`https://zero-network.net/phasmo-cheat-sheet/difficulty-builder/?${url_params}`, '_blank').focus();
         }
         else{
@@ -2412,7 +2412,7 @@ function toggleVoicePrefix(){
 
 function showResetMenu(event){
 
-    if(Object.keys(discord_user).length > 0){
+    if(Object.keys(data_user).length > 0){
         event.preventDefault()
         event.stopPropagation() //important!!
 

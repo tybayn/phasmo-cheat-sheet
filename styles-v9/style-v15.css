@@ -447,7 +447,7 @@ body{
         width: 19px;
     }
 
-    #settings_status, #discord_link_status{
+    #settings_status, #data_link_status{
         width: 25px;
         height: 5px;
         border-radius: 0px 15px 0px 0px;
@@ -555,7 +555,7 @@ body{
         border-radius: 0px 5px 5px 0px;
     }
 
-    #discord_link_box{
+    #data_link_box{
         position: fixed;
         top: 0;
         z-index: 1;
@@ -573,7 +573,7 @@ body{
         transition: left 0.5s ease, width 0.5s ease;
     }
 
-    #discord_link_tab{
+    #data_link_tab{
         position: absolute;
         display: flex;
         justify-content: center;
@@ -959,7 +959,7 @@ body{
         border-radius: 5px 0px 0px 5px;
     }
 
-    #discord_tab{
+    #data_tab{
         position: fixed;
         height: 24px;
         width: 24px;
@@ -1035,7 +1035,7 @@ body{
         border-radius: 5px 0px 0px 5px;
     }
 
-    /* #settings_tab:hover, #discord_link_tab:hover, #event_tab:hover, #wiki_tab:hover, #maps_tab:hover{
+    /* #settings_tab:hover, #data_link_tab:hover, #event_tab:hover, #wiki_tab:hover, #maps_tab:hover{
         background-color: #ffffff60;
     } */
 
@@ -1045,7 +1045,7 @@ body{
         text-wrap: nowrap;
     }
 
-    #settings_box .icon, #links_box .icon, #discord_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #search_box .icon, #news_box .icon, #language_box .icon, #theme_box .icon, #z3d-box .icon, #partner-box .icon, .broadcast-content .icon{
+    #settings_box .icon, #links_box .icon, #data_link_box .icon, #event_box .icon, #wiki_box .icon, #maps_box .icon, #search_box .icon, #news_box .icon, #language_box .icon, #theme_box .icon, #z3d-box .icon, #partner-box .icon, .broadcast-content .icon{
         position: absolute;
         top: 5px;
         right: 4px;
@@ -1057,7 +1057,7 @@ body{
         cursor: pointer;
     }
 
-    #settings_box .icon:before, #links_box .icon:before, #discord_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #search_box .icon:before, #news_box .icon:before, #language_box .icon:before, #theme_box .icon:before, #z3d-box .icon:before, #partner-box .icon:before, .broadcast-content .icon:before{
+    #settings_box .icon:before, #links_box .icon:before, #data_link_box .icon:before, #event_box .icon:before, #wiki_box .icon:before, #maps_box .icon:before, #search_box .icon:before, #news_box .icon:before, #language_box .icon:before, #theme_box .icon:before, #z3d-box .icon:before, #partner-box .icon:before, .broadcast-content .icon:before{
         content:"";
         position: absolute;
         width:3px;
@@ -1067,7 +1067,7 @@ body{
         top:4px;
     }
 
-    #settings_box .icon:after, #links_box .icon:after, #discord_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #search_box .icon:after, #news_box .icon:after, #language_box .icon:after, #theme_box .icon:after, #z3d-box .icon:after, #partner-box .icon:after, .broadcast-content .icon:after{
+    #settings_box .icon:after, #links_box .icon:after, #data_link_box .icon:after, #event_box .icon:after, #wiki_box .icon:after, #maps_box .icon:after, #search_box .icon:after, #news_box .icon:after, #language_box .icon:after, #theme_box .icon:after, #z3d-box .icon:after, #partner-box .icon:after, .broadcast-content .icon:after{
         content:"";
         position: absolute;
         width:15px;
@@ -1084,7 +1084,7 @@ body{
         flex-direction: column;
     }
 
-    #settings_box .info_block, #links_box .info_block, #discord_link_box .info_block, #event_box .info_block, #wiki_box .info_block, #info_box_weekly .info_block{
+    #settings_box .info_block, #links_box .info_block, #data_link_box .info_block, #event_box .info_block, #wiki_box .info_block, #info_box_weekly .info_block{
         display: flex;
         flex-direction: column;
         z-index: 2;
@@ -1101,7 +1101,7 @@ body{
         float: right;
     }
 
-    #settings_box .info_block, #links_box .info_block, #discord_link_box .info_block {
+    #settings_box .info_block, #links_box .info_block, #data_link_box .info_block {
         min-width: 200px;
     }
     

@@ -357,7 +357,7 @@ function link_room(){
                 }
                 if (action == "POLL"){
                     polled = true
-                    if(Object.keys(discord_user).length > 0 && document.getElementById("force_selection").checked){
+                    if(Object.keys(data_user).length > 0 && document.getElementById("force_selection").checked){
                         if (hasSelected()){
                             ws.send('{"action":"READY"}')
                             $("#reset").html(lang_data['{{waiting_for_others}}'])
@@ -759,7 +759,7 @@ function link_link(reconnect = false){
                 }
 
                 dlws.send('{"action":"LINK"}');
-                send_discord_link();
+                send_data_link();
                 send_map_preload_link();
                 send_sanity_link(Math.round(sanity), sanity_color());
                 send_timer_link("TIMER_VAL", "0:00");
@@ -905,7 +905,7 @@ function link_link(reconnect = false){
             else if (action == "MENUFLIP"){ toggleFilterTools()}
 
             else if(action == "SAVERESET"){
-                if(Object.keys(discord_user).length > 0 && document.getElementById("force_selection").checked){
+                if(Object.keys(data_user).length > 0 && document.getElementById("force_selection").checked){
                     if(!hasSelected()){
                         send_ghost_link("None Selected!",-1)
                         $("#reset").removeClass("standard_reset")
@@ -963,7 +963,7 @@ function disconnect_room(reset=false,has_status=false){
     try { document.getElementById(`guess_pos_4`).remove()} catch (error) {} 
     var lmap = document.getElementsByClassName("selected_map")[0].id
     document.getElementById("map-explorer-link-2").href = `https://zero-network.net/phasmo-cheat-sheet/map-explorer/?share=${lmap}`
-    if (Object.keys(discord_user).length == 0)
+    if (Object.keys(data_user).length == 0)
         $('.card_icon_guess').hide()
     clearInterval(ws_ping)
     if (!reset){
@@ -1134,9 +1134,9 @@ function send_ping_link(){
     }
 }
 
-function send_discord_link(){
-    if(hasDLLink && Object.keys(discord_user).length > 0){
-        dlws.send(`{"action":"DISCORD","username":"${discord_user.username}"}`)
+function send_data_link(){
+    if(hasDLLink && Object.keys(data_user).length > 0){
+        dlws.send(`{"action":"DISCORD","username":"${data_user.username}"}`)
     }
 }
 
@@ -1245,8 +1245,8 @@ function send_sound_timer(force_start = false, force_stop = false){
 
 function send_guess(ghost){
     if(hasLink){
-        ds_name = Object.keys(discord_user).length > 0 ? discord_user['username'] : ""
-        ds_image = Object.keys(discord_user).length > 0 ? `https://cdn.discordapp.com/avatars/${discord_user['id']}/${discord_user['avatar']}`: ""
+        ds_name = Object.keys(data_user).length > 0 ? data_user['username'] : ""
+        ds_image = Object.keys(data_user).length > 0 ? `https://cdn.discordapp.com/avatars/${data_user['id']}/${data_user['avatar']}`: ""
         ws.send(`{"action":"GUESS","pos":${my_pos},"ghost":"${ghost}","ds_name":"${ds_name}","ds_image":"${ds_image}"}`)
     }
 }
