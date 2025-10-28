@@ -147,8 +147,8 @@
     "{{looking_for_overlay}}": "正在寻找悬浮窗？",
     "{{copied}}": "已复制！",
 
-    "{{login}}": "ZN Login",
-    "{{data_link}}": "绑定Discord",
+    "{{login}}": "ZN 登录",
+    "{{data_link}}": "链接数据",
     "{{current_event}}": "当前活动",
     "{{current_event_title}}": "当前没有活动！",
     "{{current_event_text}}": "下次游戏更新再来看看？",
@@ -270,11 +270,10 @@
     "{{infocopy_p11}}": "发现漏洞？有创意提议？想组队猎鬼？",
     "{{infocopy_p12}}": "立即加入「Zero-Network: Ghost Hunters」服务器",
 
-    "{{data_link_h1}}": "绑定Discord",
-    "{{data_link_p1}}": "绑定您的 Discord 账号将允许您记录您输入到本攻略的内容，让您查看关于鬼魂、证据和游戏风格的统计信息！",
-    "{{data_link_p2}}": "(1) 绑定不会保持与 Discord 的活跃连接，您需要每 30 天重新绑定一次，或者在更新您的 Discord 个人资料时重新绑定。(2) 提供的统计数据仅来自于使用此攻略。我们与 Phasmophobia 游戏或 Steam 没有任何连接。",
-
-    "{{data_link_h2}}": "上一次链接：",
+    "{{data_link_h1}}": "登录到 Zero-Network",
+    "{{data_link_p1}}": "登录后，您将能够：<ol><li>查看记录到本攻略的内容，查看有关鬼魂、证据和游玩风格的统计信息</li><li>从难度生成器中导入自定义难度，并保存自定义难度到网页版攻略表的难度下拉菜单中作为预设</li></ol>",
+    "{{data_link_p2}}": "(1) 登录不会保持与 Discord/Twitch 的活跃连接，您需要每 30 天重新登录一次，或者在更新 Discord/Twitch 个人资料后重新登录。(2) 您提供的数据仅用于本攻略的使用。我们不会以任何方式连接到 Phasmophobia 或 Steam。",
+    "{{data_link_h2}}": "上一次登录：",
     "{{data_link_h3}}": "总对局数：",
     "{{data_link_h4}}": "鬼魂",
     "{{data_link_p3}}": "未知",
@@ -286,9 +285,9 @@
     "{{data_link_h8}}": "被鬼魂猎杀",
     "{{data_link_p6}}": "选择实际的鬼魂类型 <i>然后</i> 标记是这种鬼魂杀了您。",
     "{{data_link_b1}}": "我的统计数据",
-    "{{data_link_h9}}": "您已经成功绑定了您的Discord账户！为了确保您统计数据的准确性，请确保选择正确的证据数量并标记正确的鬼魂，之后再点击“保存并重置”",
+    "{{data_link_h9}}": "您已经成功登录！为了确保统计数据尽可能准确，在点击“保存&重置”之前，最好选择正确的证据数量并标记正确的鬼魂类型",
     "{{data_link_p7}}": "要重置或调整您的统计数据，请在我们的Discord上提出请求。",
-    "{{data_link_b4}}": "解绑",
-    "{{data_link_b5}}": "Login with Discord",
-    "{{data_link_b6}}": "Login with Twitch"
+    "{{data_link_b4}}": "登出",
+    "{{data_link_b5}}": "使用 Discord 登录",
+    "{{data_link_b6}}": "使用 Twitch 登录"
 }
