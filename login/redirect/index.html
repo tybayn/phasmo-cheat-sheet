@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Redirecting...</title>
+        <script>
+            function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
+            window.addEventListener("DOMContentLoaded", () => {
+                const params = new URLSearchParams(window.location.search);
+                const data_link = {
+                    id: params.get("id"),
+                    username: params.get("username"),
+                    avatar: params.get("avatar"),
+                    last_linked: params.get("last_linked"),
+                    type: params.get("type")
+                };
+
+                setCookie("data_link", JSON.stringify(data_link), 30);
+                let redirectUrl = "https://zero-network.net/phasmo-cheat-sheet/";
+                if (params.has("redirect")) {
+                    redirectUrl = decodeURIComponent(params.get("redirect"));
+                }
+                const newParams = new URLSearchParams();
+                for (const [key, value] of params.entries()) {
+                    if (key !== "redirect") {
+                        newParams.set(key, value);
+                    }
+                }
+                const separator = redirectUrl.includes("?") ? "&" : "?";
+                redirectUrl += newParams.toString() ? separator + newParams.toString() : "";
+                document.getElementById("link").href = redirectUrl;
+                setTimeout(() => window.location.replace(redirectUrl), 500);
+            });
+        </script>
+    </head>
+    <body style="font-family:sans-serif;text-align:center;margin-top:20%">
+        You are being redirected to <a id="link" href="#">zero-network.net</a>...
+    </body>
+</html>
