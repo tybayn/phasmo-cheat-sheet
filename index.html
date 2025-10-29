@@ -12,15 +12,27 @@
     <meta property="og:title" content="Zero-Network | Unofficial Phasmo Cheat Sheet">
     <meta property="og:description" content="The ultimate Phasmo Cheat Sheet! Smart filters, ghost behaviors, footstep speeds, bpm finder, maps, and more!">
     <meta property="og:image" content="https://file.garden/Z-9fual_RynAMoLc/zn-logo-2.png">
-
+    <script src="jquery/jquery-3.6.2.min.js"></script>
     <script>
         AbortSignal.timeout = ms => {
             const controller = new AbortController();
             setTimeout(() => controller.abort(), ms);
             return controller.signal;
         };
+
+        (async () => {
+            try {
+                const res = await fetch("https://zero-network.net/zn/health", {
+                    signal: AbortSignal.timeout(5000),
+                    cache: "no-store"
+                });
+                console.log("Zero-Network Server is reachable");
+            } catch (err) {
+                console.warn("Zero-Network Server is unreachable:", err);
+                $("#maintenance-block").fadeIn(1000);
+            }
+        })();
     </script>
-    <script src="jquery/jquery-3.6.2.min.js"></script>
     <script src="scripts-v9/ghost_template-v1.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <link rel="stylesheet" href="styles-v9/style-v15.css"/>
@@ -1122,7 +1134,7 @@
     <script src="scripts-v9/wslink-v13.js"></script>
     <script src="partners-v9/partners-v9.js"></script>
     <script src="models-v9/models-v3.js"></script>
-    <script src="scripts-v9/zn-v8.js"></script>
+    <script src="scripts-v9/zn-v9.js"></script>
     <script src="scripts-v9/search-v1.js"></script>
     <script src="events-v9/events-v1.js"></script>
     <script src="feed-v9/feed-v5.js"></script>
@@ -1140,15 +1152,12 @@
                     resolve("Ghost data loaded")
                 })
             })
-            checkServerHealth().then(isHealthy => {
-                if (!isHealthy) return;
-                Promise.all([load_wiki,load_feed,checkLink()])
-                .then(x => {
-                    loadAllAndConnect()
-                    if(getCookie("voice_recognition_on")){
-                        start_voice()
-                    }
-                })
+            Promise.all([load_wiki,load_feed,checkLink()])
+            .then(x => {
+                loadAllAndConnect()
+                if(getCookie("voice_recognition_on")){
+                    start_voice()
+                }
             })
         });
     </script>

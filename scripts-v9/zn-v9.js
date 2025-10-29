@@ -466,24 +466,3 @@ function copy_user_settings(){
     navigator.clipboard.writeText(copyText)
     document.getElementById("debug-console").value += "User Settings copied to clipboard\n"
 }
-
-async function checkServerHealth() {
-
-    console.log("Checking server health")
-
-    try {
-        const response = await fetch("https://zero-network.net/zn/health", {
-        signal: AbortSignal.timeout(5000),
-        cache: "no-store",
-        });
-
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        console.log("Server is healthy.");
-        return true;
-    } catch (err) {
-
-        console.warn("Server health check failed:", err);
-        $("#maintenance-block").fadeIn(1000);
-        return false;
-    }
-}
