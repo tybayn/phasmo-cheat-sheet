@@ -468,22 +468,22 @@ function copy_user_settings(){
 }
 
 async function checkServerHealth() {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 5000);
 
-  try {
-    const response = await fetch("https://zero-network.net/zn/health", {
-      signal: controller.signal,
-      cache: "no-store", // avoid cached results
-    });
-    clearTimeout(timeout);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    console.log("✅ Server is healthy.");
-    return true;
-  } catch (err) {
-    clearTimeout(timeout);
-    console.warn("⚠️ Server health check failed:", err);
-    $("#maintenance-block").fadeIn(1000);
-    return false;
-  }
+    console.log("Checking server health")
+
+    try {
+        const response = await fetch("https://zero-network.net/zn/health", {
+        signal: AbortSignal.timeout(5000),
+        cache: "no-store",
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        console.log("Server is healthy.");
+        return true;
+    } catch (err) {
+
+        console.warn("Server health check failed:", err);
+        $("#maintenance-block").fadeIn(1000);
+        return false;
+    }
 }
