@@ -1125,7 +1125,7 @@
     <script src="scripts-v9/zn-v7.js"></script>
     <script src="scripts-v9/search-v1.js"></script>
     <script src="events-v9/events-v1.js"></script>
-    <script src="feed-v9/feed-v3.js"></script>
+    <script src="feed-v9/feed-v4.js"></script>
     <script src="scripts-v9/voice_en-v1.js"></script>
     <script src="scripts-v9/voice_recognition-v2.js"></script>
     <script src="scripts-v9/sparkles-v1.js"></script>
@@ -1140,7 +1140,7 @@
                     resolve("Ghost data loaded")
                 })
             })
-            Promise.all([load_wiki,load_feed,checkLink()])
+            Promise.all([load_wiki,load_feed(),checkLink()])
             .then(x => {
                 loadAllAndConnect()
                 if(getCookie("voice_recognition_on")){
