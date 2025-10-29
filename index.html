@@ -1135,22 +1135,23 @@
         document.addEventListener('touchend', endSwipe, false); 
 
         $(window).on('load', function() {
-            let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v9/wiki-v11.html",() => {
-                    resolve("Ghost data loaded")
+            try {
+                let load_wiki = new Promise((resolve, reject) => {
+                    $("#wiki-body").load("wiki-v9/wiki-v11.html",() => {
+                        resolve("Ghost data loaded")
+                    })
                 })
-            })
-            Promise.all([load_wiki,load_feed,checkLink()])
-            .then(x => {
-                loadAllAndConnect()
-                if(getCookie("voice_recognition_on")){
-                    start_voice()
-                }
-            })
-            .catch(e => {
+                Promise.all([load_wiki,load_feed,checkLink()])
+                .then(x => {
+                    loadAllAndConnect()
+                    if(getCookie("voice_recognition_on")){
+                        start_voice()
+                    }
+                })
+            } catch{
                 // Maintenance Block
                 $("#maintenance-block").fadeIn(1000)
-            })
+            }
         });
     </script>
 
