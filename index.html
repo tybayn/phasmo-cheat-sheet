@@ -54,7 +54,7 @@
                 <div class="maintenance-window"></div>
             </div>
         </div>
-        <div id="page-loading-status"></div>
+        <div id="page-loading-status">Checking server status...</div>
         <div class="loading-container">
             <div class="loading-bar" id="loading-bar"></div>
         </div>
@@ -1122,10 +1122,10 @@
     <script src="scripts-v9/wslink-v13.js"></script>
     <script src="partners-v9/partners-v9.js"></script>
     <script src="models-v9/models-v3.js"></script>
-    <script src="scripts-v9/zn-v7.js"></script>
+    <script src="scripts-v9/zn-v8.js"></script>
     <script src="scripts-v9/search-v1.js"></script>
     <script src="events-v9/events-v1.js"></script>
-    <script src="feed-v9/feed-v4.js"></script>
+    <script src="feed-v9/feed-v5.js"></script>
     <script src="scripts-v9/voice_en-v1.js"></script>
     <script src="scripts-v9/voice_recognition-v2.js"></script>
     <script src="scripts-v9/sparkles-v1.js"></script>
@@ -1140,16 +1140,15 @@
                     resolve("Ghost data loaded")
                 })
             })
-            Promise.all([load_wiki,load_feed(),checkLink()])
-            .then(x => {
-                loadAllAndConnect()
-                if(getCookie("voice_recognition_on")){
-                    start_voice()
-                }
-            })
-            .catch(e => {
-                // Maintenance Block
-                $("#maintenance-block").fadeIn(1000)
+            checkServerHealth().then(isHealthy => {
+                if (!isHealthy) return;
+                Promise.all([load_wiki,load_feed,checkLink()])
+                .then(x => {
+                    loadAllAndConnect()
+                    if(getCookie("voice_recognition_on")){
+                        start_voice()
+                    }
+                })
             })
         });
     </script>
