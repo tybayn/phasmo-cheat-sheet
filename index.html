@@ -46,7 +46,9 @@
             <div class="maintenance-info">
                 <div class="maintenance-title">Ghosts not found!</div>
                 <div class="maintenance-desc">
-                    Seems like the servers are not responding to our calls, please refresh the page or try again later.<br><br>
+                    <!-- Seems like the servers are not responding to our calls, please refresh the page or try again later.-->
+                    We are currently experiencing a power outage as the power company repairs damage to the grid. We expect Zero-Network services to be back <b>online by 2025-10-29 16:00:00 MDT</b>
+                    <br><br>
                     You can check the network <a href="https://zero-network.net/status" target="_blank">status</a> or get updates and info over on our <a href="https://discord.gg/afpvC7Bf7Y" target="_blank">Discord</a>!
                 </div>
                 <div class="maintenance-window"></div>
@@ -1144,6 +1146,10 @@
                 if(getCookie("voice_recognition_on")){
                     start_voice()
                 }
+            })
+            .catch(e => {
+                // Maintenance Block
+                $("#maintenance-block").fadeIn(1000)
             })
         });
     </script>
