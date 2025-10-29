@@ -130,5 +130,5 @@ function applyPerms(){
 function data_unlink(){
     data_user = {}
     setCookie("data_link","",-1)
-    window.location.href = window.location.href.split("?")[0]
+    window.location.href = `https://zero-network.net/logout/redirect/?redirect=${window.location.href.split("?")[0]}`
 }

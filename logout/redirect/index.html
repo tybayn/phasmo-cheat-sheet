@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Redirecting...</title>
+        <script>
+            function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
+            window.addEventListener("DOMContentLoaded", () => {
+                const params = new URLSearchParams(window.location.search);
+
+                setCookie("data_link", "", -1);
+                let redirectUrl = "https://zero-network.net/phasmo-cheat-sheet/";
+                if (params.has("redirect")) {
+                    redirectUrl = decodeURIComponent(params.get("redirect"));
+                }
+
+                document.getElementById("link").href = redirectUrl;
+                setTimeout(() => window.location.replace(redirectUrl), 500);
+            });
+        </script>
+    </head>
+    <body style="font-family:sans-serif;text-align:center;margin-top:20%">
+        You are being redirected to <a id="link" href="#">zero-network.net</a>...
+    </body>
+</html>
