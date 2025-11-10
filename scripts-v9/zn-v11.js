@@ -412,30 +412,36 @@ function loadAllAndConnect(){
             document.getElementById("page-loading-status").innerText = "translating page..."
             Promise.all([translate(lang)])
             .then(() => {
-                setLoading(90)
-                document.getElementById("page-loading-status").innerText = "translating wiki..."
-                Promise.all([translate_wiki(lang)])
+                Promise.all([fallback_translate(lang)])
                 .then(() => {
-                    setLoading(99)
-                    document.getElementById("page-loading-status").innerText = "loading user settings..."
-                    Promise.all([getLink()])
+                    setLoading(90)
+                    document.getElementById("page-loading-status").innerText = "translating wiki..."
+                    Promise.all([translate_wiki(lang)])
                     .then(() => {
-                        setLoading(100)
-                        loadSettings()
-                        filter(true)
-                        applyPerms()
-                        auto_link()
-                        openWikiFromURL()
-                        loadSearch()
-                        load_partners()
-                        load_models()
+                        Promise.all([fallback_translate_wiki(lang)])
+                        .then(() => {
+                            setLoading(99)
+                            document.getElementById("page-loading-status").innerText = "loading user settings..."
+                            Promise.all([getLink()])
+                            .then(() => {
+                                setLoading(100)
+                                loadSettings()
+                                filter(true)
+                                applyPerms()
+                                auto_link()
+                                openWikiFromURL()
+                                loadSearch()
+                                load_partners()
+                                load_models()
 
-                        try{heartbeat()} catch(Error){console.warn("Possible latency issues!")}
-                        setInterval(function(){
-                            if(!document.hidden){
-                                try{heartbeat()} catch(Error){console.error("Heartbeat failed!")}
-                            }
-                        }, 300000)
+                                try{heartbeat()} catch(Error){console.warn("Possible latency issues!")}
+                                setInterval(function(){
+                                    if(!document.hidden){
+                                        try{heartbeat()} catch(Error){console.error("Heartbeat failed!")}
+                                    }
+                                }, 300000)
+                            })
+                        })
                     })
                 })
             })

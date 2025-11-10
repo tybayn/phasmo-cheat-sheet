@@ -280,10 +280,76 @@ function translate(to_lang){
     })
 }
 
+function fallback_translate(to_lang){
+    return new Promise((resolve, reject) => {
+        let body = document.body.innerHTML
+        fetch(`lang-v9/en/data.json`)
+        .then(data => data.json())
+        .then(data => {
+            body = body.replace(/{{([^{}]+)}}/g, (match,inner) => {
+                let parts = inner.split(',')
+                let baseKey = `{{${parts[0]}}}`
+                let args = parts.slice(1)
+
+                if(!(baseKey in data)) return match
+
+                let value = data[baseKey]
+                args.forEach((arg,i) => {
+                    value = value.replace(new RegExp(`\\{${i}\\}`,'g'),arg)
+                })
+                return value
+            })
+            Object.entries(all_ghosts).forEach(([key,value]) => {
+                body = body.replaceAll(`{{${key}}}`,value)
+            })
+            Object.entries(all_evidence).forEach(([key,value]) => {
+                body = body.replaceAll(`{{${key}}}`,value)
+            })
+            document.body.innerHTML = body
+            if(to_lang != "en")
+                $(".vcs").hide()
+            $("#page-loading").hide()
+            lang = to_lang
+            setCookie("lang",lang,90)
+            lang_data = data
+            resolve("Translation complete")
+        })
+    })
+}
+
 function translate_wiki(to_lang){
     return new Promise((resolve, reject) => {
         let body = document.body.innerHTML
         fetch(`lang-v9/${to_lang}/wiki.json`)
+        .then(data => data.json())
+        .then(data => {
+            body = body.replace(/{{([^{}]+)}}/g, (match,inner) => {
+                let parts = inner.split(',')
+                let baseKey = `{{${parts[0]}}}`
+                let args = parts.slice(1)
+
+                if(!(baseKey in data)) return match
+
+                let value = data[baseKey]
+                args.forEach((arg,i) => {
+                    value = value.replace(new RegExp(`\\{${i}\\}`,'g'),arg)
+                })
+                return value
+            })
+            document.body.innerHTML = lang_currency.includes(to_lang) ? convert_currency(body) : body
+            resolve("Translation complete")
+        })
+        .catch(err => {
+            console.log(err)
+            reject("Could not translate")
+        })
+    })
+}
+
+function fallback_translate_wiki(to_lang){
+    return new Promise((resolve, reject) => {
+        let body = document.body.innerHTML
+        fetch(`lang-v9/en/wiki.json`)
         .then(data => data.json())
         .then(data => {
             body = body.replace(/{{([^{}]+)}}/g, (match,inner) => {
