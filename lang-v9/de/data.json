@@ -116,6 +116,7 @@
     "{{disable_particles}}": "Partikeleffekte deaktivieren",
     "{{misc}}": "Sonstiges",
     "{{persist_modes}}": "Persist Blood Moon / Minion Modi",
+    "{{data_refresh}}": "Alle Daten aktualisieren",
 
     "{{links}}": "Links",
     "{{shared_journal_link}}": "Gemeinsamer Journal-Link",
@@ -146,7 +147,7 @@
     "{{multiplayer}}": "Mehrspieler",
     "{{looking_for_overlay}}": "Suchen Sie das Overlay?",
     "{{copied}}": "Kopiert!",
-    "{{login}}": "",
+    "{{login}}": "ZN Login",
     "{{data_link}}": "Data Link",
     "{{current_event}}": "Aktuelles Ereignis",
     "{{current_event_title}}": "Momentan kein Event!",

@@ -117,6 +117,22 @@
         width: 95%;
     }
 
+    .clear_cache_button{
+        cursor: pointer;
+        border: solid #ccc 2px;
+        border-radius: 20px;
+        padding: 10px;
+        text-align: center;
+        align-self: center;
+        width: fit-content;
+        opacity: 0.5;
+        font-size: 26px;
+    }
+
+    .clear_cache_button:hover{
+        opacity: 1.0;
+    }
+
     .broadcast {
         display: flex;
         justify-content: center;
@@ -298,7 +314,7 @@
         position: fixed;
         top: 0;
         width: calc(100% - 40px);
-        height: calc(100vh - 40px);
+        height: calc(100svh - 40px);
         background-color: #313248;
         display: flex;
         flex-direction: column;
@@ -467,7 +483,7 @@
         position: fixed;
         top: 0;
         width: calc(100% - 40px);
-        height: calc(100vh - 40px);
+        height: calc(100svh - 40px);
         background-color: #313248;
         display: flex;
         flex-direction: column;
@@ -505,7 +521,7 @@
         position: fixed;
         top: 0;
         width: calc(100% - 40px);
-        height: calc(100vh - 40px);
+        height: calc(100svh - 40px);
         background-color: #313248;
         display: flex;
         flex-direction: column;
@@ -546,7 +562,7 @@
         position: fixed;
         top: 0;
         width: calc(100% - 40px);
-        height: calc(100vh - 40px);
+        height: calc(100svh - 40px);
         background-color: #313248;
         display: flex;
         flex-direction: column;
@@ -635,7 +651,7 @@
         position: fixed;
         top: 0;
         width: calc(100% - 40px);
-        height: calc(100vh - 40px);
+        height: calc(100svh - 40px);
         background-color: #313248;
         display: flex;
         flex-direction: column;

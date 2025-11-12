@@ -105,7 +105,7 @@
     "{{mute_countdown}}": "静音倒计时",
     "{{mute_toggle}}": "静音计时器开启停止提示音",
     "{{timer_count_up}}": "计时器累加模式",
-    "{{split_timer}}": "拆分计时（需Zn-Desktop-link）",
+    "{{split_timer}}": "拆分计时（需ZN-Desktop-link）",
     "{{ghost_cards}}": "鬼魂卡片",
     "{{force_selection}}": "强制选择（Discord链接）",
     "{{adaptive_evidence}}": "动态显示证据",
@@ -116,6 +116,7 @@
     "{{disable_particles}}": "禁用粒子特效",
     "{{misc}}": "杂项",
     "{{persist_modes}}": "默认启用血月/万圣节模式",
+    "{{data_refresh}}": "刷新所有数据",
 
     "{{links}}": "连接",
     "{{shared_journal_link}}": "共享日志连接",

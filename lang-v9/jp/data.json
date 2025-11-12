@@ -113,6 +113,7 @@
     "{{disable_particles}}": "パーティクルを無効化",
     "{{misc}}": "その他",
     "{{persist_modes}}": "ブラッドムーン / ミニオンモードを維持",
+    "{{data_refresh}}": "すべてのデータを更新",
     "{{links}}": "リンク",
     "{{shared_journal_link}}": "共有ジャーナルリンク",
     "{{create}}": "作成",

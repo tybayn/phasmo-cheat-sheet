@@ -114,6 +114,7 @@
     "{{disable_particles}}": "파티클 이펙트 비활성화",
     "{{misc}}": "기타",
     "{{persist_modes}}": "블러드문/미니언 모드 유지",
+    "{{data_refresh}}": "모든 데이터 새로 고침",
     "{{links}}": "연결",
     "{{shared_journal_link}}": "저널 공유 링크",
     "{{create}}": "생성",

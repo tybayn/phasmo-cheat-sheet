@@ -472,3 +472,10 @@ function copy_user_settings(){
     navigator.clipboard.writeText(copyText)
     document.getElementById("debug-console").value += "User Settings copied to clipboard\n"
 }
+
+
+function force_reload(){
+    const url = new URL(location.href);
+    url.searchParams.set("refresh", "1");
+    location.href = url.toString();
+}
