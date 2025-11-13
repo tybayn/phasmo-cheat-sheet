@@ -11,6 +11,7 @@ const themes = {
     "Halloween": "theme-halloween",
     "Holiday": "theme-holiday-animated",
     "Northern Lights": "theme-northern-lights",
+    "Pixel": "theme-pixel",
     "Pride": "theme-pride",
     "Snow": "theme-snow-particle",
     "Spruce": "theme-spruce",
@@ -28,6 +29,7 @@ const theme_lights = {
 function loadThemes(){
     let theme_options = ""
     Object.keys(themes).forEach((key) => {
+        if(key=="Pixel"&&lang!='en') return;
         theme_options += `<option value="${key}">${key}</option>`
     })
     $("#theme").html(theme_options)
@@ -52,6 +54,7 @@ function changeTheme(name = null){
 
     if(isAltered){
         undoDesolate(changeObjects)
+        unpixelate()
         isAltered = false
     }
 
@@ -117,6 +120,10 @@ function changeTheme(name = null){
     else if(themes[theme_name] == "theme-desolate"){
         isAltered = true
         desolate(changeObjects)
+    }
+    else if(themes[theme_name] == "theme-pixel"){
+        isAltered = true
+        pixelate()
     }
     else{
         document.body.style.backgroundImage = "radial-gradient(circle, rgba(0,0,0,0.75), rgba(0,0,0,1)), url('https://zero-network.net/phasmophobia/static/imgs/background.jpg')"
@@ -516,4 +523,78 @@ function desolate(changeObjects){
         elem.style.filter = "invert(1)"
         elem.style.opacity = 0.4
     })
+}
+
+
+// -----------------------------
+
+function pixelate(){
+    document.body.style.backgroundImage = "radial-gradient(circle, rgb(2 22 0 / 90%), rgb(0 0 0)), url(https://zero-network.net/zn-challenge/terminal/imgs/static_background.gif)"
+    let pixel1 = ['.ghost_card','.ghost_behavior']
+    let pixel2 = ['.ghost_hunt_info']
+    let pixel3 = [
+        '.num_evidence','.custom_num_evidence','.cust_hunt_length','[id=checkbox]','.evidence',
+        '.speed','.hunt_sanity','.timers','.modifier'
+    ]
+
+    let darken = [
+        '.ghost_behavior', '.num_evidence', '.evidence', '.speed', '.hunt_sanity',
+        '.timers', '.modifier', '.info_block'
+    ]
+
+    Array.from(pixel1).forEach((c) => {
+        $(c).addClass('pixel1')
+    })
+    Array.from(pixel2).forEach((c) => {
+        $(c).addClass('pixel2')
+    })
+    Array.from(pixel3).forEach((c) => {
+        $(c).addClass('pixel3')
+    })
+    Array.from(darken).forEach((c) => {
+        $(c).css("background","rgba(0,0,0,0.4)")
+    })
+
+    $('.ghost_name').addClass('pixelfont1')
+    $('.yfont').css("font-family","PIXEL2")
+    $('.label').css("font-family","PIXEL2")
+}
+
+function unpixelate() {
+    // Reset background
+    document.body.style.backgroundImage = "";
+
+    // Lists must match the same ones from pixelate()
+    let pixel1 = ['.ghost_card','.ghost_behavior'];
+    let pixel2 = ['.ghost_hunt_info'];
+    let pixel3 = [
+        '.num_evidence','.custom_num_evidence','.cust_hunt_length','[id=checkbox]','.evidence',
+        '.speed','.hunt_sanity','.timers','.modifier'
+    ];
+
+    let darken = [
+        '.ghost_behavior', '.num_evidence', '.evidence', '.speed', '.hunt_sanity',
+        '.timers', '.modifier', '.info_block'
+    ];
+
+    // Remove pixel classes
+    Array.from(pixel1).forEach((c) => {
+        $(c).removeClass('pixel1');
+    });
+    Array.from(pixel2).forEach((c) => {
+        $(c).removeClass('pixel2');
+    });
+    Array.from(pixel3).forEach((c) => {
+        $(c).removeClass('pixel3');
+    });
+
+    // Remove darkening background style
+    Array.from(darken).forEach((c) => {
+        $(c).css("background", "");
+    });
+
+    // Remove font changes
+    $('.ghost_name').removeClass('pixelfont1');
+    $('.yfont').css("font-family", "");
+    $('.label').css("font-family", "");
 }

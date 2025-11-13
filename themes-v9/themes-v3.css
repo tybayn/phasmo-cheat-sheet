@@ -64,6 +64,10 @@
     background-attachment: inherit;
 }
 
+.theme-pixel{
+    background: url(https://zero-network.net/phasmophobia/static/imgs/background-pixel.png);
+}
+
 .theme-pride{
     background: linear-gradient(45deg, rgba(65,39,39,1) 0%, rgba(74,58,40,1) 20%, rgba(92,92,50,1) 40%, rgba(46,74,46,1) 60%, rgba(44,48,77,1) 80%, rgba(71,44,88,1) 100%);
     background-attachment: inherit;
@@ -367,4 +371,35 @@
   0% { opacity: 1; }
   50% { opacity: 0.6; }
   100% { opacity: 1; }
+}
+
+@font-face {
+    font-family: 'PIXEL1';
+    src: url('../styles-v9/fonts/alagard.ttf');
+}
+
+@font-face {
+    font-family: 'PIXEL2';
+    src: url('../styles-v9/fonts/Jersey10-Regular.ttf');
+}
+
+.pixelfont1{
+    font-family: 'PIXEL1' !important;
+    text-shadow: 0 0 8px #00ff66;
+}
+
+.pixelfont2{
+    font-family: 'PIXEL2' !important;
+}
+
+.pixel1 {
+    clip-path: polygon(0px calc(100% - 8px), 4px calc(100% - 8px), 4px calc(100% - 4px), 8px calc(100% - 4px), 8px 100%, calc(100% - 8px) 100%, calc(100% - 8px) calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) calc(100% - 8px), 100% calc(100% - 8px), 100% 8px, calc(100% - 4px) 8px, calc(100% - 4px) 4px, calc(100% - 8px) 4px, calc(100% - 8px) 0px, 8px 0px, 8px 4px, 4px 4px, 4px 8px, 0px 8px);
+}
+
+.pixel2 {
+    clip-path: polygon(0px calc(100% - 12px), 6px calc(100% - 12px), 6px calc(100% - 6px), 12px calc(100% - 6px), 12px 100%, calc(100% - 12px) 100%, calc(100% - 12px) calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) calc(100% - 12px), 100% calc(100% - 12px), 100% 12px, calc(100% - 6px) 12px, calc(100% - 6px) 6px, calc(100% - 12px) 6px, calc(100% - 12px) 0px, 12px 0px, 12px 6px, 6px 6px, 6px 12px, 0px 12px);
+}
+
+.pixel3 {
+    clip-path: polygon(0px calc(100% - 4px), 4px calc(100% - 4px), 4px 100%, calc(100% - 4px) 100%, calc(100% - 4px) calc(100% - 4px), 100% calc(100% - 4px), 100% 4px, calc(100% - 4px) 4px, calc(100% - 4px) 0px, 4px 0px, 4px 4px, 0px 4px);
 }
