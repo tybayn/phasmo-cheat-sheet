@@ -50,6 +50,7 @@
     "{{flesh}}": "Carne",
     "{{krampus}}": "Krampus",
     "{{forest_spirit}}": "Forest Spirit",
+    "{{vinyl}}": "Vinil / Azulejo",
     "{{metronome}}": "Metrônomo",
     "{{click_to_hear_speed}}": "Clique <span class=\"sound\" onclick=\"toggleSound(1.7,'spirit0')\">&#128266;</span> nos cartões para ouvir a velocidade",
     "{{bpm_finder}}": "Buscador de BPM",

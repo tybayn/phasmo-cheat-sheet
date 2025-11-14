@@ -50,6 +50,7 @@
     "{{flesh}}": "血肉",
     "{{krampus}}": "圣诞节",
     "{{forest_spirit}}": "万圣节",
+    "{{vinyl}}": "乙烯基/瓷砖",
     "{{metronome}}": "节拍器",
     "{{click_to_hear_speed}}": "按下卡片上的 <span class=\"sound\" onclick=\"toggleSound(1.7,'spirit0')\">&#128266;</span> 以聆听鬼魂脚步",
     "{{bpm_finder}}": "BPM查找器",

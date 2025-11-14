@@ -49,6 +49,7 @@
     "{{flesh}}": "肉",
     "{{krampus}}": "クランプス(イベント)",
     "{{forest_spirit}}": "森の精霊(イベント)",
+    "{{vinyl}}": "ビニール/タイル",
     "{{metronome}}": "メトロノーム",
     "{{click_to_hear_speed}}": "スピードを聞くにはカード上の <span class=\"sound\" onclick=\"toggleSound(1.7,'spirit0')\">&#128266;</span> をクリック",
     "{{bpm_finder}}": "足音で探す(BPM Finder)",
