@@ -1011,6 +1011,7 @@ function send_ghost_data_link(ghost){
         data = `<b>${ghost}:<b>\n`
         data += document.getElementById(ghost).querySelector(".ghost_evidence").innerText.trim().replaceAll("\n",", ") + (ghost == "The Mimic" ? (", *" + all_evidence["Ghost Orbs"]) : "") + "\n"
         data += document.getElementById(ghost).querySelector(".ghost_behavior").innerText.replace(`${lang_data['{{0_evidence_tests}}']} >>`,"").trim()
+        data = data.replaceAll(/Examples:\n\(.*?\)\n/g,"\n")
         data = data.replace(`${lang_data['{{tells}}']}`,`\n<b>${lang_data['{{tells}}']}:<b>\n`)
         data = data.replace(`${lang_data['{{behaviors}}']}`,`\n<b>${lang_data['{{behaviors}}']}:<b>\n`)
         data = data.replace(`${lang_data['{{hunt_sanity}}']}`,`\n<b>${lang_data['{{hunt_sanity}}']}:<b>\n`)
@@ -1030,6 +1031,7 @@ function send_ghost_tests_link(ghost){
     if(hasDLLink){
         data = `<b>${ghost} Tests:<b>\n`
         data += document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).nextElementSibling.innerText.replace("† The Mimic can copy abilities and behaviors of other ghosts, meaning that any confirmation test could also be a Mimic","").replace("Copy Share Link","").replace("†","").trim()
+        data = data.replaceAll(/Examples:\(.*?\)/g,"")
         data = data.replace(`${lang_data['{{abilities_behaviors_tells}}']}`,`<b>${lang_data['{{abilities_behaviors_tells}}']}:<b>`)
         data = data.replace(`${lang_data['{{confirmation_tests}}']}`,`\n<b>${lang_data['{{confirmation_tests}}']}:<b>`)
         data = data.replace(`${lang_data['{{elimination_tests}}']}`,`\n<b>${lang_data['{{elimination_tests}}']}:<b>`)
