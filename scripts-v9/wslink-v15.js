@@ -1248,7 +1248,7 @@ function send_sound_timer(force_start = false, force_stop = false){
 function send_guess(ghost){
     if(hasLink){
         ds_name = Object.keys(data_user).length > 0 ? data_user['username'] : ""
-        ds_image = Object.keys(data_user).length > 0 ? `https://cdn.discordapp.com/avatars/${data_user['id']}/${data_user['avatar']}`: ""
+        ds_image = Object.keys(data_user).length > 0 ? `${data_user['avatar']}`: ""
         ws.send(`{"action":"GUESS","pos":${my_pos},"ghost":"${ghost}","ds_name":"${ds_name}","ds_image":"${ds_image}"}`)
     }
 }

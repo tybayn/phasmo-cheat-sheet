@@ -489,7 +489,11 @@ function desolate(changeObjects){
                 let points = [];
                 let width = 100;
                 let height = 100;
-                for (let x = 0; x <= width; x += 20) points.push(`${x}% ${Math.random()}%`);
+                for (let x = 0; x <= width * 0.75; x += 20) points.push(`${x}% ${Math.random()}%`);
+                points.push(`${width * 0.75}% 0px`)
+                points.push(`${width * 0.75}% -20px`)
+                points.push(`${width}% -20px`)
+                points.push(`${width}% 0px`)
                 for (let y = 0; y <= height; y += 20) points.push(`${100 - Math.random()}% ${y}%`);
                 for (let x = width; x >= 0; x -= 20) points.push(`${x}% ${100 - Math.random()}%`);
                 for (let y = height; y >= 0; y -= 20) points.push(`${Math.random()}% ${y}%`);
