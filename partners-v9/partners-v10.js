@@ -20,6 +20,17 @@ function updateHint() {
     }
 }
 
+function updateHintDrops() {
+    const area = document.getElementById('drops_info_block');
+    const hint = document.getElementById('scrollHintDrops');
+
+    if (!canScroll(area) || atBottom(area)) {
+        hint.classList.add('is-hidden');
+    } else {
+        hint.classList.remove('is-hidden');
+    }
+}
+
 function load_partners() {
     let drop_live = false
     let has_drop = false
@@ -57,6 +68,7 @@ function load_partners() {
                     has_drop = true
                     $("#partner-tab").addClass("drop-active")
                 }
+                document.getElementById('drops_info_block').addEventListener('scroll', updateHintDrops, { passive: true });
                 resolve("Drops Loaded")
             },1500);
         })

@@ -147,6 +147,7 @@
 #drops_info_block{
     min-height: 350px;
     align-items: center !important;
+    max-height: 350px;
 }
 
 .drop_block{
