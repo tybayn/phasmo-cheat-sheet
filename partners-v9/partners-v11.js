@@ -92,6 +92,15 @@ function load_partners() {
         requestAnimationFrame(updateHint);
     });
     mutationObs.observe(area, { childList: true, subtree: true, characterData: true });
+
+    // Update on resize of the container or its content
+    const dropsarea = document.getElementById('partner_info_block');
+    const dropsresizeObs = new ResizeObserver(updateHintDrops);
+    dropsresizeObs.observe(dropsarea);
+    const dropsmutationObs = new MutationObserver(() => {
+        requestAnimationFrame(updateHintDrops);
+    });
+    dropsmutationObs.observe(area, { childList: true, subtree: true, characterData: true });
 }
 
 // TWITCH
