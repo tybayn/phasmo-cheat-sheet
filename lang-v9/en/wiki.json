@@ -426,7 +426,7 @@
     "{{wiki_known_bugs_intro}}": "The following is a list of known bugs related to ghosts that have the potential to impact game play or identification of the ghost",
     "{{wiki_known_bugs_spirit}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_wraith}}": "<li><i>None</i></li>",
-    "{{wiki_known_bugs_phantom}}": "<li>Can use its ability on dead players</li><li>Can use its ability on players that are outside of th einvestigation area</li><li>Will still be visible on film strip for Translucent Ghost, Shadow Ghost, DOTS Ghost, and Hunting Ghost videos </li>",
+    "{{wiki_known_bugs_phantom}}": "<li>Can use its ability on dead players</li><li>Can use its ability on players that are outside of the investigation area</li><li>Will still be visible on film strip for Translucent Ghost, Shadow Ghost, DOTS Ghost, and Hunting Ghost videos </li>",
     "{{wiki_known_bugs_poltergeist}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_banshee}}": "<li>Will change its target after killing any player, not just the target</li>",
     "{{wiki_known_bugs_jinn}}": "<li>Can use its ability on a player a floor below since the 3m range is not stopped by the floor</li>",
