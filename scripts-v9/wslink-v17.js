@@ -1008,9 +1008,8 @@ function send_ghost_data_link(ghost){
             readd_classes.push("permhidden")
 
         $(document.getElementById(ghost)).removeClass(readd_classes)
-        data = `<b>${ghost}:<b>\n`
         exclude_data = document.getElementById(ghost).querySelector(".ghost_behavior").querySelector("zcut")?.innerText
-        data += document.getElementById(ghost).querySelector(".ghost_evidence").innerText.trim().replaceAll("\n",", ") + (ghost == "The Mimic" ? (", *" + all_evidence["Ghost Orbs"]) : "") + "\n"
+        data = document.getElementById(ghost).querySelector(".ghost_evidence").innerText.trim().replaceAll("\n",", ") + (ghost == "The Mimic" ? (", *" + all_evidence["Ghost Orbs"]) : "") + "\n"
         data += document.getElementById(ghost).querySelector(".ghost_behavior").innerText.replaceAll(`${lang_data['{{0_evidence_tests}}']} >>`,"").trim()
         if (exclude_data)
             data = data.replaceAll(exclude_data,"")
@@ -1031,9 +1030,10 @@ function send_ghost_data_link(ghost){
 
 function send_ghost_tests_link(ghost){
     if(hasDLLink){
-        data = `<b>${ghost} Tests:<b>\n`
-        data += document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).nextElementSibling.innerText.replace("† The Mimic can copy abilities and behaviors of other ghosts, meaning that any confirmation test could also be a Mimic","").replace("Copy Share Link","").replace("†","").trim()
-        data = data.replaceAll(/Examples:\(.*?\)/g,"")
+        exclude_data = document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).nextElementSibling.querySelector("zcut")?.innerText
+        data = document.getElementById(`wiki-0-evidence-${ghost.toLowerCase().replace(" ","-")}`).nextElementSibling.innerText.replace(`† ${lang_data["{{mimic_disclaimer}}"]}`,"").replace(lang_data["{{copy_share_link}}"],"").replace("†","").trim()
+        if (exclude_data)
+            data = data.replaceAll(exclude_data,"")
         data = data.replace(`${lang_data['{{abilities_behaviors_tells}}']}`,`<b>${lang_data['{{abilities_behaviors_tells}}']}:<b>`)
         data = data.replace(`${lang_data['{{confirmation_tests}}']}`,`\n<b>${lang_data['{{confirmation_tests}}']}:<b>`)
         data = data.replace(`${lang_data['{{elimination_tests}}']}`,`\n<b>${lang_data['{{elimination_tests}}']}:<b>`)
@@ -1042,9 +1042,18 @@ function send_ghost_tests_link(ghost){
         data = data.replaceAll("\n ","\n")
         data = data.replaceAll(`✔ ${lang_data['{{mark_ghost}}']}`,"")
         data = data.replaceAll(`✗ ${lang_data['{{mark_ghost}}']}`,"")
-        data = data.replaceAll(`\n\n${lang_data['{{tells}}'][0]}`,`\n${lang_data['{{tells}}'][0]}`)
-        data = data.replaceAll(`\n\n${lang_data['{{behaviors}}'][0]}`,`\n${lang_data['{{behaviors}}'][0]}`)
-        data = data.replaceAll(`\n\n${lang_data['{{abilities}}'][0]}`,`\n${lang_data['{{abilities}}'][0]}`)
+        data = data.replaceAll(`${lang_data['{{tell}}']}:`,`\n${lang_data['{{tell}}']}:`)
+        data = data.replaceAll(`${lang_data['{{behavior}}']}:`,`\n${lang_data['{{behavior}}']}:`)
+        data = data.replaceAll(`${lang_data['{{ability}}']}:`,`\n${lang_data['{{ability}}']}:`)
+        data = data.replaceAll(`${lang_data['{{tell}}']} (`,`\n${lang_data['{{tell}}']} (`)
+        data = data.replaceAll(`${lang_data['{{behavior}}']} (`,`\n${lang_data['{{behavior}}']} (`)
+        data = data.replaceAll(`${lang_data['{{ability}}']} (`,`\n${lang_data['{{ability}}']} (`)
+        data = data.replaceAll(`\n\n${lang_data['{{tell}}']}:`,`\n${lang_data['{{tell}}']}:`)
+        data = data.replaceAll(`\n\n${lang_data['{{behavior}}']}:`,`\n${lang_data['{{behavior}}']}:`)
+        data = data.replaceAll(`\n\n${lang_data['{{ability}}']}:`,`\n${lang_data['{{ability}}']}:`)
+        data = data.replaceAll(`\n\n${lang_data['{{tell}}']} (`,`\n${lang_data['{{tell}}']} (`)
+        data = data.replaceAll(`\n\n${lang_data['{{behavior}}']} (`,`\n${lang_data['{{behavior}}']} (`)
+        data = data.replaceAll(`\n\n${lang_data['{{ability}}']} (`,`\n${lang_data['{{ability}}']} (`)
         data = data.replaceAll("<b>\n\n","<b>\n").trim()
         
 
