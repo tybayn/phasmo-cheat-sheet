@@ -4,7 +4,7 @@ var lang_data = null
 // ----------------------------------
 
 const lang_currency = [
-    "de", "es", "fr", "pt-br", "ru", "tr"
+    "de", "es", "fr", "it", "pt-br", "ru", "tr"
 ]
 
 const lang_menu_widths = {
@@ -27,6 +27,15 @@ const lang_menu_widths = {
         "menu_height_custom":"750px"
     },
     "fr":{
+        "left":"230px",
+        "width":"209px",
+        "maps":"calc(100% - 299px)",
+        "menu_bottom":"-660px",
+        "menu_bottom_custom":"-715px",
+        "menu_height":"695px",
+        "menu_height_custom":"750px"
+    },
+    "it":{
         "left":"230px",
         "width":"209px",
         "maps":"calc(100% - 299px)",
@@ -306,12 +315,7 @@ function fallback_translate(to_lang){
                 body = body.replaceAll(`{{${key}}}`,value)
             })
             document.body.innerHTML = body
-            if(to_lang != "en")
-                $(".vcs").hide()
             $("#page-loading").hide()
-            lang = to_lang
-            setCookie("lang",lang,90)
-            lang_data = data
             resolve("Translation complete")
         })
     })

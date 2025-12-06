@@ -1009,9 +1009,11 @@ function send_ghost_data_link(ghost){
 
         $(document.getElementById(ghost)).removeClass(readd_classes)
         data = `<b>${ghost}:<b>\n`
+        exclude_data = document.getElementById(ghost).querySelector(".ghost_behavior").querySelector("zcut")?.innerText
         data += document.getElementById(ghost).querySelector(".ghost_evidence").innerText.trim().replaceAll("\n",", ") + (ghost == "The Mimic" ? (", *" + all_evidence["Ghost Orbs"]) : "") + "\n"
-        data += document.getElementById(ghost).querySelector(".ghost_behavior").innerText.replace(`${lang_data['{{0_evidence_tests}}']} >>`,"").trim()
-        data = data.replaceAll(/Examples:\n\(.*?\)\n/g,"\n")
+        data += document.getElementById(ghost).querySelector(".ghost_behavior").innerText.replaceAll(`${lang_data['{{0_evidence_tests}}']} >>`,"").trim()
+        if (exclude_data)
+            data = data.replaceAll(exclude_data,"")
         data = data.replace(`${lang_data['{{tells}}']}`,`\n<b>${lang_data['{{tells}}']}:<b>\n`)
         data = data.replace(`${lang_data['{{behaviors}}']}`,`\n<b>${lang_data['{{behaviors}}']}:<b>\n`)
         data = data.replace(`${lang_data['{{hunt_sanity}}']}`,`\n<b>${lang_data['{{hunt_sanity}}']}:<b>\n`)
