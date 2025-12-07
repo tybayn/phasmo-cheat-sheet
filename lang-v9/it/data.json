@@ -205,7 +205,7 @@
     "{{use_map_explorer}}": "- Usa l'<a href=\"https://zero-network.net/phasmo-cheat-sheet/map-explorer/\" target=\"_blank\">Esploratore Mappe</a> per vedere distanze e range -",
     "{{mimic_disclaimer}}": "Il Mimo può copiare abilità e comportamenti di altri fantasmi, quindi quasi ogni test di conferma potrebbe essere anche un Mimo",
     "{{copy_share_link}}": "Copia Link Condiviso",
-    "{{empty_data_link}}": "Clicca su un fantasma per vedere i suoi indizi e comportamenti\n(Usa ' [ ' and ' ] ' per scorrere tra i fantasmi)",
+    "{{empty_data_link}}": "Clicca su un fantasma per vedere i suoi indizi e comportamenti\n(Usa ' [ ' e ' ] ' per scorrere tra i fantasmi)",
     "{{no_elimination_tests}}": "Non ci sono test di eliminazione per {0}",
     "{{no_confirmation_tests}}": "Non ci sono test di conferma per {0}",
     "{{weekly_map}}": "Mappa",
