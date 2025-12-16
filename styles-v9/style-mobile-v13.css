@@ -2613,6 +2613,7 @@
     }
     
     .ghost_behavior_item{
+        width: 100%;
         line-height: 32px;
         font-size: 24px;
     }

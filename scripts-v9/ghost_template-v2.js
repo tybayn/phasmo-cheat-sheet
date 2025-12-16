@@ -42,21 +42,21 @@ class Ghost {
         <div class="ghost_card" id="${data.ghost}">
             <div class="ghost_name">${data.name}</div>
             <div class="ghost_hunt_info">
-                <div class="ghost_hunt ${parseInt(data.hunt_sanity_high) > 50 ?'high':parseInt(data.hunt_sanity_high) < 50 ? 'low':'average'}">
+                <div class="ghost_hunt ${parseInt(data.hunt_sanity_high) > 50 ?'high':(parseInt(data.hunt_sanity_high) < 50 && parseInt(data.hunt_sanity_high) >=0) ? 'low':'average'}">
                     <img src="imgs/sanity.png">
                     <div class="ghost_hunt_values">
                         ${parseInt(data.hunt_sanity_low) < parseInt(data.hunt_sanity) ? ('<div class="ghost_hunt_alt">' + data.hunt_sanity_low + '</div>') : ''}
-                        <div>${data.hunt_sanity}</div>
+                        <div>${parseInt(data.hunt_sanity) == -1 ? '???%' : data.hunt_sanity}</div>
                         ${parseInt(data.hunt_sanity_high) > parseInt(data.hunt_sanity) ? ('<div class="ghost_hunt_alt">' + data.hunt_sanity_high + '</div>') : ''}
                     </div>
                 </div>
                 <div class="ghost_speed">
                     <div class="footstep_los" onclick="openWikiPath('hunts.los.los-${has_los_guide.includes(data.ghost) ? data.ghost.toLowerCase().replace(' ','-') : 'std' }')">
-                        <img src="imgs/${(+data.has_los) || data.ghost == 'The Mimic' ? 'los' : 'nlos'}.png" title="${(+data.has_los) || data.ghost == 'The Mimic' ? '{{has_los}}' : '{{not_los}}'}">
+                        <img src="imgs/${(+data.has_los) || data.ghost == 'The Mimic' ? 'los' : 'nlos'}.png" title="${(+data.has_los) || data.ghost == 'The Mimic' ? '{{has_los}}' : '{{not_los}}'}"${data.min_speed == -1 ? ' style="display:none;"' : ''}>
                         <img src="imgs/footsteps.png" style="filter: invert(1);">
                     </div>
                     <div class="ghost_speed_values">
-                        ${this.toNumStr(data.min_speed)} <span class="ms">m/s</span> <span class="sound" onclick="toggleSound(${data.min_speed},'${data.ghost}0')">&#128266;</span>${data.max_speed == null ? '' : (+data.speed_is_range)?' - ':' | '}${data.max_speed == null ? '' : this.toNumStr(data.max_speed)+' <span class="ms">m/s</span> <span class="sound" onclick="toggleSound('+data.max_speed+',\''+data.ghost+'1\')">&#128266;</span>'}${data.alt_speed == null ? '' : '<br>('+this.toNumStr(data.alt_speed)+' <span class="ms">m/s</span> <span class="sound" onclick="toggleSound('+data.alt_speed+',\''+data.ghost+'2\')">&#128266;</span>)'}
+                        ${data.min_speed == -1 ? '???' : this.toNumStr(data.min_speed)} <span class="ms">m/s</span> <span class="sound" onclick="toggleSound(${data.min_speed},'${data.ghost}0')"${data.min_speed == -1 ? ' style="display:none;"' : ''}>&#128266;</span>${data.max_speed == null ? '' : (+data.speed_is_range)?' - ':' | '}${data.max_speed == null ? '' : this.toNumStr(data.max_speed)+' <span class="ms">m/s</span> <span class="sound" onclick="toggleSound('+data.max_speed+',\''+data.ghost+'1\')">&#128266;</span>'}${data.alt_speed == null ? '' : '<br>('+this.toNumStr(data.alt_speed)+' <span class="ms">m/s</span> <span class="sound" onclick="toggleSound('+data.alt_speed+',\''+data.ghost+'2\')">&#128266;</span>)'}
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";
 function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
 
 let openSearchTab = false
+let ghost_version = null
 
 function startDebugMode(){
 
@@ -69,6 +70,10 @@ function checkLink(){
 
         if (params.get("search")){
             openSearchTab = true
+        }
+
+        if (params.get("version")){
+            ghost_version = params.get('version')
         }
 
         resolve("URL parsed")
@@ -164,11 +169,12 @@ function loadAllAndConnect(){
     let loadData = new Promise((resolve, reject) => {
 
         lang = getCookie("lang")
+
         if(!lang){
             lang = 'en'
         }
         try{
-            fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=${lang}`, {cache: 'default', signal: AbortSignal.timeout(10000)})
+            fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=${lang}${ghost_version ? ('&version='+ghost_version) : ''}`, {cache: 'default', signal: AbortSignal.timeout(10000)})
             .then(data => data.json())
             .then(data => {
 

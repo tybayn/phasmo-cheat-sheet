@@ -21,6 +21,10 @@ const ZNLANG = {
         ],
         "select jinn":["selection"],
         "select oni":["selectone"],
+        "select obambo":[
+            "selecto bombo","selectos bombo","selectos bumbo","selectable bombo",
+            "selecto bamba","selectos bamboo"
+        ],
         "not mare":["nightmare"],
         "not obake":["and auto body"],
         "not thaye":["knife"],
@@ -38,6 +42,7 @@ const ZNLANG = {
             "guessle bouquet","guessle bake","guessle bucket","guessle vodka","guessle bait","guessle rocky",
             "guessle bakke"
         ],
+        "guess obambo":["guessle bamboo","guesso bamboo","guessle bombo","gesso bombo","guessle bambo"],
         "guess thaye":["guessing"],
         "timer start":["thermostat"],
         "hunt duration":["punctuation"],
@@ -72,7 +77,10 @@ const ZNLANG = {
         "the mimic":["mimic"],
         "moroi":["mauroy"],
         "deogen":["the ocean","deion","dion","deodorant","yeojin","geodon","children","deo","dio","digging"],
-        "thaye":["stay","say","they","fe","fae","faye","thing","day","tea"]
+        "thaye":["stay","say","they","fe","fae","faye","thing","day","tea"],
+        "obambo":["obama","a bamboo","a bambo"],
+        "dayan":["day on","dan","diane","day in","dion","day an","dying","die an","die anne","day anne","daying","dating","iron"],
+        "gallu":["glue","gallery","galu"]
     },
     "evidence":{
         "emf 5":["be enough","mi5"],

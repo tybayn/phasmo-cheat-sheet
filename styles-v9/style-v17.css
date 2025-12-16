@@ -3330,6 +3330,7 @@ body{
     }
     
     .ghost_behavior_item{
+        width: 100%;
         line-height: 18px;
         font-size: 12px;
     }

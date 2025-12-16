@@ -1,6 +1,6 @@
 {
-    "version":"6.2.4",
-    "date":"2025-10-23",
-    "details": "- Bug fixes\n\nBug Fixes:\n- Fixed issue with in-game text chat not listening to keyboard strokes unless clicked on\n- Fixed support for modifier keys in text chat",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.2.4.msi"
+    "version":"6.3.0",
+    "date":"2025-12-26",
+    "details": "- Added new ghosts\n\nBug Fixes:\n- None",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.3.0.msi"
 }

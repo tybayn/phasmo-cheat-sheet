@@ -1015,6 +1015,7 @@ function send_ghost_data_link(ghost){
             data = data.replaceAll(exclude_data,"")
         data = data.replace(`${lang_data['{{tells}}']}`,`\n<b>${lang_data['{{tells}}']}:<b>\n`)
         data = data.replace(`${lang_data['{{behaviors}}']}`,`\n<b>${lang_data['{{behaviors}}']}:<b>\n`)
+        data = data.replace(`${lang_data['{{abilities}}']}`,`\n<b>${lang_data['{{abilities}}']}:<b>\n`)
         data = data.replace(`${lang_data['{{hunt_sanity}}']}`,`\n<b>${lang_data['{{hunt_sanity}}']}:<b>\n`)
         data = data.replace(`${lang_data['{{hunt_speed}}']}`,`\n<b>${lang_data['{{hunt_speed}}']}:<b>\n`)
         data = data.replace(`${lang_data['{{evidence}}']}`,`\n<b>${lang_data['{{evidence}}']}:<b>\n`)
