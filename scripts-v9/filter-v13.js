@@ -827,27 +827,18 @@ function filter(ignore_link=false){
 
         //Check for speed
         //Parse Ghost speeds
-        if (speed.includes('|')){
-            var speeds = speed.split('|')
-            var speed_type = "or"
-        }
-        else if(speed.includes('-')){
-            var speeds = speed.split('-')
+        const speeds = [...speed.matchAll(/(\d+(?:\.\d+)?)\s*m\/s/g)].map(m => parseFloat(m[1]));
+        if(speed.includes('-')){
             var speed_type = "range"
         }
         else{
-            var speeds = [speed]
             var speed_type = "or"
         }
 
         // Get min and max
-        var min_speed = parseFloat(speeds[0].replaceAll(" m/s","").replace(",","."))
-        if (speeds.length > 1){
-            var max_speed = parseFloat(speeds[1].replaceAll(" m/s","").replace(",","."))
-        }
-        else{
-            var max_speed = min_speed
-        }
+        var min_speed = speeds[0]
+        var max_speed = speeds[1] ?? min_speed
+        var alt_speed = speeds[2] ?? null
 
         // Check sanity
         if (san_array.length > 0){
@@ -860,21 +851,14 @@ function filter(ignore_link=false){
         if (spe_array.length > 0){
             var skeep = false,nkeep = false,fkeep = false;
 
-            var shas = (min_speed < base_speed || name == "The Mimic")
-            var nhas = (speed_type == "or" && (min_speed === base_speed || max_speed === base_speed || name == "The Mimic")) || (speed_type == "range" && min_speed <= base_speed && base_speed <= max_speed)
-            var fhas = (max_speed > base_speed || name == "The Mimic")
+            var shas = (min_speed < base_speed || name == "The Mimic") || (alt_speed != null && alt_speed < base_speed)
+            var nhas = (speed_type == "or" && (min_speed === base_speed || max_speed === base_speed || name == "The Mimic")) || (speed_type == "range" && min_speed <= base_speed && base_speed <= max_speed) || (alt_speed != null && alt_speed == base_speed)
+            var fhas = (max_speed > base_speed || name == "The Mimic") || (alt_speed != null && alt_speed > base_speed)
 
             spe_array.forEach(function (item,index){
-
-                if (item == "Slow"){
-                    skeep = true
-                }
-                else if (item == "Normal"){
-                    nkeep = true
-                }
-                else if (item == "Fast"){
-                    fkeep = true
-                }
+                if (item == "Slow") skeep = true
+                else if (item == "Normal") nkeep = true
+                else if (item == "Fast") fkeep = true
             });
 
             // OR Logic
