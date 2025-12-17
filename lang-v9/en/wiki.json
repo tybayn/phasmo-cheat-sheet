@@ -462,7 +462,7 @@
     "{{wiki_known_bugs_onryo}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_twins}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_raiju}}": "<li>Heartbeat radius is currently 15m instead of 10m, creating the \"bass boosted\" heartbeat audio</li><li>Only held electronics impact the hunt sanity threshold</li>",
-    "{{wiki_known_bugs_obake}}": "<li>Any ghost can leave the 6-finger handprint on double doors</li>",
+    "{{wiki_known_bugs_obake}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_mimic}}": "<li>Desynced behavior during hunts. Altered blinking, Obake shapeshifts, etc. will only be visible by the host</li>",
     "{{wiki_known_bugs_moroi}}": "<li>Is blinded for 7s instead of 5s + 50% as indicated in official patch notes</li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>None</i></li>",

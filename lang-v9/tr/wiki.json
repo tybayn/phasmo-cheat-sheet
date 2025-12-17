@@ -423,7 +423,7 @@
     "{{wiki_known_bugs_onryo}}": "<li><i>Yok</i></li>",
     "{{wiki_known_bugs_twins}}": "<li><i>Yok</i></li>",
     "{{wiki_known_bugs_raiju}}": "<li>Kalp atışı yarıçapı şu anda 10m yerine 15m'dir, bu da \"bass boosted\" kalp atışı sesini oluşturur</li><li>Sadece elde tutulan elektronikler av akıl sağlığı eşiğini etkiler</li>",
-    "{{wiki_known_bugs_obake}}": "<li>Herhangi bir hayalet çift kapılarda 6 parmak el izi bırakabilir</li>",
+    "{{wiki_known_bugs_obake}}": "<li><i>Yok</i></li>",
     "{{wiki_known_bugs_mimic}}": "<li>Avlar sırasında senkronize olmayan davranış. Değiştirilmiş yanıp sönme, Obake şekil değiştirmeleri vb. sadece host tarafından görünür olacaktır</li>",
     "{{wiki_known_bugs_moroi}}": "<li>Resmi yama notlarında belirtildiği gibi 5s + %50 yerine 7s boyunca kör edilir</li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>Yok</i></li>",

@@ -423,7 +423,7 @@
     "{{wiki_known_bugs_onryo}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_twins}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_raiju}}": "<li>Il raggio del battito cardiaco è attualmente di 15m invece di 10m, creando l'audio del battito cardiaco \"potenziato\"</li><li>Solo gli oggetti elettronici tenuti in mano influenzano la soglia di sanità per la caccia</li>",
-    "{{wiki_known_bugs_obake}}": "<li>Qualsiasi fantasma può lasciare l'impronta a 6 dita sulle doppie porte</li>",
+    "{{wiki_known_bugs_obake}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_mimic}}": "<li>Comportamento desincronizzato durante le cacce. Lampeggi alterati, trasformazioni Obake, ecc. saranno visibili solo dall'host</li>",
     "{{wiki_known_bugs_moroi}}": "<li>È accecato per 7s invece di 5s + 50% come indicato nelle patch notes ufficiali</li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>Nessuno</i></li>",

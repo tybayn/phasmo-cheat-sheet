@@ -443,7 +443,7 @@
     "{{wiki_known_bugs_onryo}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_twins}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_raiju}}": "<li>Le rayon des battements de cœur est actuellement de 15 m au lieu de 10 m, ce qui crée un son de battement de cœur avec des \"basses amplifiées\"</li><li>Seuls les appareils électroniques tenus impactent le seuil de chasse</li>",
-    "{{wiki_known_bugs_obake}}": "<li>N'importe quelle entité peut laisser l'empreinte de main à 6 doigts sur les doubles portes</li>",
+    "{{wiki_known_bugs_obake}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_mimic}}": "<li>Comportement désynchronisé pendant les chasses. Le clignotement altéré, les transformations de l'Obake, etc. ne seront visibles que par l'hôte</li>",
     "{{wiki_known_bugs_moroi}}": "<li>Est aveuglé pendant 7 s au lieu de 5 s + 50 % comme indiqué dans le patch notes officiel</li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>Aucun</i></li>",

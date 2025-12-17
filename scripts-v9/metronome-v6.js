@@ -415,35 +415,21 @@ function mark_ghosts(ms){
         
         if(ms != 0.00){
             var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
-            var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
+            var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent.replaceAll(',','.');
             var has_los = ghosts[i].getElementsByClassName("ghost_has_los")[0].textContent == '1';
 
-            if(lang_currency.includes(lang)){
-                speed = speed.replace(",",".")
-            }
-
-            //Parse Ghost speeds
-            if (speed.includes('|')){
-                var speeds = speed.split('|')
-                var speed_type = "or"
-            }
-            else if(speed.includes('-')){
-                var speeds = speed.split('-')
+            const speeds = [...speed.matchAll(/(\d+(?:\.\d+)?)\s*m\/s/g)].map(m => parseFloat(m[1]));
+            if(speed.includes('-')){
                 var speed_type = "range"
             }
             else{
-                var speeds = [speed]
                 var speed_type = "or"
             }
 
             // Get min and max
-            var min_speed = parseFloat(speeds[0].replaceAll(" m/s",""))
-            if (speeds.length > 1){
-                var max_speed = parseFloat(speeds[1].replaceAll(" m/s",""))
-            }
-            else{
-                var max_speed = min_speed
-            }
+            var min_speed = speeds[0]
+            var max_speed = speeds[1] ?? min_speed
+            var alt_speed = speeds[2] ?? null
 
             if(has_los){
                 if(["Raiju","Jinn"].includes(name)){
@@ -471,7 +457,7 @@ function mark_ghosts(ms){
                         ghosts[i].style.border = "2px solid rgb(227,224,110)"
                     bpm_list.push(ghosts[i].id)
                 }
-                else if(min_speed === ms || max_speed === ms){
+                else if(min_speed === ms || max_speed === ms || alt_speed === ms){
                     ghosts[i].style.boxShadow = '0px 0px 10px 2px #dbd994'
                     if(["Desolate","Pixel"].includes(document.getElementById("theme").value))
                         ghosts[i].style.border = "2px solid rgb(227,224,110)"
@@ -485,7 +471,7 @@ function mark_ghosts(ms){
                         ghosts[i].style.border = "2px solid rgb(227,224,110)"
                     bpm_list.push(ghosts[i].id)
                 }
-                else if(((min_speed - 0.05) <= ms && ms <= (min_speed + 0.05)) || ((max_speed - 0.05) <= ms && ms <= (max_speed + 0.05))){
+                else if(((min_speed - 0.05) <= ms && ms <= (min_speed + 0.05)) || ((max_speed - 0.05) <= ms && ms <= (max_speed + 0.05)) || ((alt_speed - 0.05) <= ms && ms <= (alt_speed + 0.05))){
                     ghosts[i].style.boxShadow = '0px 0px 10px 2px #dbd994'
                     if(["Desolate","Pixel"].includes(document.getElementById("theme").value))
                         ghosts[i].style.border = "2px solid rgb(227,224,110)"

@@ -641,7 +641,7 @@ function filter(ignore_link=false){
             evidence.push(evi_objects[j].getAttribute("name"))
         }
         var nm_evidence = ghosts[i].getElementsByClassName("ghost_nightmare_evidence")[0].textContent;
-        var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent;
+        var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent.replaceAll(',','.');
         var has_los = parseInt(ghosts[i].getElementsByClassName("ghost_has_los")[0].textContent)
         var sanity = [
             parseInt(ghosts[i].getElementsByClassName("ghost_hunt_low")[0].textContent),

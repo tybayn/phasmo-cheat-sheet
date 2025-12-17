@@ -423,7 +423,7 @@
     "{{wiki_known_bugs_onryo}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_twins}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_raiju}}": "<li>玩家起心跳的半径范围目前为15m，而不是10m，同时会有 \"低音增强\" 的心跳声</li><li>只有玩家持有电子设备，才会影响猎杀阈值</li>",
-    "{{wiki_known_bugs_obake}}": "<li>仍和鬼魂都有可能在双开门上留下六指手印</li>",
+    "{{wiki_known_bugs_obake}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_mimic}}": "<li>拟赤鬼/幻影时闪烁频率的变化，拟幻妖出现变模型，只能由主机玩家看到</li>",
     "{{wiki_known_bugs_moroi}}": "<li>被熏香致盲的时间为7s，而不是游戏补丁说明的5s + 50%</li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>无</i></li>",
