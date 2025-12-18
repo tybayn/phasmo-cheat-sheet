@@ -1889,6 +1889,23 @@ body{
         filter: drop-shadow(0px 0px 5px rgb(185, 184, 98));
     }
 
+    .coal-icon{
+        float: right;
+        height: 22px;
+        opacity: 0.5;
+        cursor: pointer;
+        padding-right: 5px;
+    }
+
+    .coal-icon:hover{
+        opacity: 1.0;
+    }
+
+    .coal-active{
+        opacity: 1.0 !important;
+        filter: drop-shadow(0px 0px 5px rgb(255,255,255));
+    }
+
     #blood-moon-effect-top, #blood-moon-effect-bottom{
         z-index: 0;
         position: fixed;
@@ -2331,7 +2348,7 @@ body{
 
     #progressBar .demon_line {
         height: 8px;
-        border-left: 1px #fff dotted;
+        border-left: 1px #ff8787 dotted;
         left: 66.666%;
         width: 0;
         top: -2px;
@@ -2351,7 +2368,7 @@ body{
 
     #progressBar .spirit_line {
         height: 8px;
-        border-left: 1px #fff dotted;
+        border-left: 1px #87f5ff dotted;
         width: 0;
         top: -2px;
         position: absolute;
@@ -2368,7 +2385,7 @@ body{
     }
 
     .spirit_line_label{
-        color: rgb(145, 145, 145);
+        color: #6ac6cf;
         font-size: 10px;
         display: inline-block;
         left: 6px;
@@ -2377,7 +2394,7 @@ body{
     }
 
     .demon_line_label{
-        color: rgb(145, 145, 145);
+        color: #ac5b5b;
         font-size: 10px;
         display: inline-block;
         left: 56.666%;
@@ -2421,7 +2438,7 @@ body{
 
     #cooldownProgressBar .demon_line {
         height: 8px;
-        border-left: 1px #fff dotted;
+        border-left: 1px #ff8787 dotted;
         left: 20%;
         width: 0;
         top: -2px;
@@ -2440,7 +2457,7 @@ body{
     }
 
     .cooldown_demon_line_label{
-        color: rgb(145, 145, 145);
+        color: #ac5b5b;
         font-size: 10px;
         display: inline-block;
         left: 22%;
@@ -2482,9 +2499,29 @@ body{
         box-sizing: border-box;
     }
 
+    #huntProgressBar .obambo_line {
+        height: 8px;
+        border-left: 1px #87f5ff dotted;
+        left: 52%;
+        width: 0;
+        top: -2px;
+        position: absolute;
+        float: left;
+    }
+
+    #huntProgressBar .obambo_cursed_line {
+        height: 8px;
+        border-left: 1px #87f5ff dotted;
+        left: 2%;
+        width: 0;
+        top: -2px;
+        position: absolute;
+        float: left;
+    }
+
     #huntProgressBar .cursed_line {
         height: 8px;
-        border-left: 1px #fff dotted;
+        border-left: 1px #ff8787 dotted;
         left: 0;
         width: 0;
         top: -2px;
@@ -2502,11 +2539,20 @@ body{
         float: left;
     }
 
-    .hunt_cursed_line_label{
-        color: rgb(145, 145, 145);
+    .hunt_obambo_line_label{
+        color: #6ac6cf;
         font-size: 10px;
         display: inline-block;
-        left: 8px;
+        left: 52%;
+        bottom: -6px;
+        position: absolute;
+    }
+
+    .hunt_cursed_line_label{
+        color: #ac5b5b;
+        font-size: 10px;
+        display: inline-block;
+        left: 5px;
         bottom: -6px;
         position: absolute;
     }
@@ -2547,7 +2593,7 @@ body{
 
     #soundProgressBar .myling_line {
         height: 8px;
-        border-left: 1px #fff dotted;
+        border-left: 1px #87f5ff dotted;
         left: 18.75%;
         width: 0;
         top: -2px;
@@ -2566,7 +2612,7 @@ body{
     }
 
     .sound_myling_line_label{
-        color: rgb(145, 145, 145);
+        color: #6ac6cf;
         font-size: 10px;
         display: inline-block;
         left: 21%;
@@ -3173,6 +3219,27 @@ body{
         grid-template-columns: 245px !important;
         grid-template-rows: 45px 35px 45px 125px !important;
         height: 250px !important;
+    }
+
+    #obambo_timer_button{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        opacity: 0.4;
+    }
+
+    #obambo_timer_button:hover{
+        opacity: 1.0;
+    }
+
+    .calm {
+        filter: brightness(0) saturate(100%) invert(60%) sepia(100%) saturate(600%) hue-rotate(190deg);
+    }
+    .aggressive{
+        filter: brightness(0) saturate(100%) invert(60%) sepia(100%) saturate(600%) hue-rotate(320deg); 
     }
 
     .ghost_name{

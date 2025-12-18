@@ -40,6 +40,7 @@ class Ghost {
 
         this.ghostTemplate = `
         <div class="ghost_card" id="${data.ghost}">
+            ${data.ghost == 'Obambo' ? '<img id="obambo_timer_button" src="imgs/stopwatch-off.png" onclick="toggle_obambo_timer()" alt="Toggle Obambo state timer">' : ''}
             <div class="ghost_name">${data.name}</div>
             <div class="ghost_hunt_info">
                 <div class="ghost_hunt ${parseInt(data.hunt_sanity_high) > 50 ?'high':(parseInt(data.hunt_sanity_high) < 50 && parseInt(data.hunt_sanity_high) >=0) ? 'low':'average'}">

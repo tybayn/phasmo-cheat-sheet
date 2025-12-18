@@ -87,6 +87,7 @@ var smudge_worker;
 var cooldown_worker;
 var hunt_worker;
 var sound_worker;
+var obambo_worker;
 
 var count_direction = 0;
 var map_size = 0;
@@ -98,12 +99,14 @@ const map_hunt_lengths = [
     [30+cursed_hunt,50+cursed_hunt,60+cursed_hunt]
 ];
 
-
 function updateMapSize(size){
     map_size = {"S":0,"M":1,"L":2}[size]
     document.getElementById("minute_hunt").innerHTML = zeroPad(Math.floor(map_hunt_lengths[map_difficulty][map_size]/60),2)
     document.getElementById("second_hunt").innerHTML = zeroPad(map_hunt_lengths[map_difficulty][map_size] % 60,2)
-    document.getElementsByClassName('normal_line')[0].style.left = `${(20/map_hunt_lengths[map_difficulty][map_size])*100}%`
+    document.getElementsByClassName('normal_line')[0].style.left = `${(cursed_hunt/map_hunt_lengths[map_difficulty][map_size])*100}%`
+    document.getElementsByClassName('obambo_line')[0].style.left = `${((cursed_hunt+((map_hunt_lengths[map_difficulty][map_size]-cursed_hunt)*0.2))/map_hunt_lengths[map_difficulty][map_size])*100}%`
+    document.getElementsByClassName('obambo_cursed_line')[0].style.left = `${(((map_hunt_lengths[map_difficulty][map_size]-cursed_hunt)*0.2)/map_hunt_lengths[map_difficulty][map_size])*100}%`
+    document.getElementsByClassName('hunt_obambo_line_label')[0].style.left = `calc(${((cursed_hunt+((map_hunt_lengths[map_difficulty][map_size]-cursed_hunt)*0.2))/map_hunt_lengths[map_difficulty][map_size])*100}% - 5px)`
     document.getElementsByClassName('hunt_size_label')[0].innerText = `${lang_data['{{map}}']}: ${["S","M","L"][map_size]}, ${lang_data['{{hunt}}']}: ${["L","M","H"][map_difficulty]}`
     document.getElementById("map_size_info").innerText = `${lang_data['{{map_size}}']}: ${lang_data[["{{small}}","{{medium}}","{{large}}"][map_size]]}`
     document.getElementById("max_num_lights").innerText = `${lang_data['{{max_lights}}']}: ${["9","8","7"][map_size]}`
@@ -117,8 +120,12 @@ function updateMapDifficulty(difficulty){
         map_difficulty = {"0":2,"1":2,"2":2,"3":2,"3I":1,"3A":0}[["-5","-1"].includes(difficulty) ? document.getElementById("cust_hunt_length").value : difficulty]
     document.getElementById("minute_hunt").innerHTML = zeroPad(Math.floor(map_hunt_lengths[map_difficulty][map_size]/60),2)
     document.getElementById("second_hunt").innerHTML = zeroPad(map_hunt_lengths[map_difficulty][map_size] % 60,2)
-    document.getElementsByClassName('normal_line')[0].style.left = `${(20/map_hunt_lengths[map_difficulty][map_size])*100}%`
+    document.getElementsByClassName('normal_line')[0].style.left = `${(cursed_hunt/map_hunt_lengths[map_difficulty][map_size])*100}%`
+    document.getElementsByClassName('obambo_line')[0].style.left = `${((cursed_hunt+((map_hunt_lengths[map_difficulty][map_size]-cursed_hunt)*0.2))/map_hunt_lengths[map_difficulty][map_size])*100}%`
+    document.getElementsByClassName('obambo_cursed_line')[0].style.left = `${(((map_hunt_lengths[map_difficulty][map_size]-cursed_hunt)*0.2)/map_hunt_lengths[map_difficulty][map_size])*100}%`
+    document.getElementsByClassName('hunt_obambo_line_label')[0].style.left = `calc(${((cursed_hunt+((map_hunt_lengths[map_difficulty][map_size]-cursed_hunt)*0.2))/map_hunt_lengths[map_difficulty][map_size])*100}% - 5px)`
     document.getElementsByClassName('hunt_size_label')[0].innerText = `${lang_data['{{map}}']}: ${["S","M","L"][map_size]}, ${lang_data['{{hunt}}']}: ${["L","M","H"][map_difficulty]}`
+    draw_graph()
 }
 
 function toggleCountup(){
@@ -570,6 +577,7 @@ function start_hunt_timer(){
         var d_seconds = Math.floor((dt % (1000 * 60)) / 1000);
 
         if(!muteTimerCountdown){
+
             if (timeleft == 27){
                 if(snds_played[0] == 0){
                     cur_sound = timer_snd[11].cloneNode()
@@ -862,6 +870,126 @@ function start_sound_timer(){
     const url = window.URL.createObjectURL(blob)
     sound_worker = new Worker(url)
     sound_worker.onmessage = () => {
+        progress()
+    }
+}
+
+
+function toggle_obambo_timer(force_start = false, force_stop = false){
+    if(force_start){
+        if($("#obambo_timer_button").hasClass("running")){
+            obambo_worker.terminate();
+            $("#obambo_timer_button").removeClass('aggressive')
+            $("#obambo_timer_button").addClass('calm')
+            start_obambo_timer();
+        }
+        else{
+            $("#obambo_timer_button").addClass("running")
+            $("#obambo_timer_button").removeClass('aggressive')
+            $("#obambo_timer_button").addClass('calm')
+            start_obambo_timer();
+        }
+    }
+
+    else if(force_stop){
+        if($("#obambo_timer_button").hasClass("running")){
+            $("#obambo_timer_button").removeClass("running")
+            obambo_worker.terminate();
+            $("#obambo_timer_button").removeClass('aggressive')
+            $("#obambo_timer_button").removeClass('calm')
+            $("#obambo_timer_button").attr("src","imgs/stopwatch-off.png");
+        }
+        if(!muteTimerToggle){
+            stop_sound = timer_snd[14].cloneNode()
+            stop_sound.volume = volume
+            stop_sound.play()
+        }
+    }
+
+    else if($("#obambo_timer_button").hasClass("running")){
+        $("#obambo_timer_button").removeClass("running")
+        obambo_worker.terminate();
+        $("#obambo_timer_button").removeClass('aggressive')
+            $("#obambo_timer_button").removeClass('calm')
+        $("#obambo_timer_button").attr("src","imgs/stopwatch-off.png");
+        if(!muteTimerToggle){
+            stop_sound = timer_snd[14].cloneNode()
+            stop_sound.volume = volume
+            stop_sound.play()
+        }
+    }
+    else{
+        $("#obambo_timer_button").addClass("running")
+        $("#obambo_timer_button").removeClass('aggressive')
+        $("#obambo_timer_button").addClass('calm')
+        start_obambo_timer()
+    }
+}
+
+function start_obambo_timer(){
+    if(!muteTimerToggle){
+        start_sound = timer_snd[13].cloneNode()
+        start_sound.volume = volume
+        start_sound.play()
+    }
+
+    var time = 120;
+    var deadline = new Date(Date.now() + (time/2) *1000);
+
+    function progress() {
+        var t = deadline - Date.now();
+        var timeleft = Math.floor(t / 1000);
+
+        if (timeleft == 120 || timeleft == 119){
+            $("#obambo_timer_button").attr("src","imgs/stopwatch-0.png");
+        }
+        if (timeleft == 105){
+            $("#obambo_timer_button").attr("src","imgs/stopwatch-1.png");
+        }
+        if (timeleft == 90){
+            $("#obambo_timer_button").attr("src","imgs/stopwatch-2.png");
+        }
+        if (timeleft == 75){
+            $("#obambo_timer_button").attr("src","imgs/stopwatch-3.png");
+        }
+        if (timeleft == 60 || timeleft == 59){
+            $("#obambo_timer_button").attr("src","imgs/stopwatch-4.png");
+        }
+        if (timeleft == 45){
+            $("#obambo_timer_button").attr("src","imgs/stopwatch-5.png");
+        }
+        if (timeleft == 30){
+            $("#obambo_timer_button").attr("src","imgs/stopwatch-6.png");
+        }
+        if (timeleft == 15){
+            $("#obambo_timer_button").attr("src","imgs/stopwatch-7.png");
+        }
+        if (timeleft == 0){
+            $("#obambo_timer_button").attr("src","imgs/stopwatch-8.png");
+        }
+ 
+        if(!muteTimerCountdown){
+            if (timeleft == 0){
+                cur_sound = timer_snd[17].cloneNode()
+                cur_sound.volume = volume
+                cur_sound.play()
+                deadline = new Date(Date.now() + time *1000);
+                if($("#obambo_timer_button").hasClass('aggressive')){
+                    $("#obambo_timer_button").removeClass('aggressive')
+                    $("#obambo_timer_button").addClass('calm')
+                }
+                else{
+                    $("#obambo_timer_button").removeClass('calm')
+                    $("#obambo_timer_button").addClass('aggressive')
+                }
+            }
+        }
+    };
+
+    const blob = new Blob([`(function(e){setInterval(function(){this.postMessage(null)},100)})()`])
+    const url = window.URL.createObjectURL(blob)
+    obambo_worker = new Worker(url)
+    obambo_worker.onmessage = () => {
         progress()
     }
 }

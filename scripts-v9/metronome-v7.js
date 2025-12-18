@@ -31,28 +31,29 @@ var muteTimerCountdown = false
 var offset = 0
 let forest_minion = 0
 let blood_moon = 0
+let coal = 0
 var step_duration = 5 * 1000
 
 var additional_ghost_data = ["hantu","moroi","thaye"]
 var additional_ghost_var = [0.18,0.085,0.175]
 
 
-let em = (bm,fm) => (bm?1.15:1.0)*(fm?1.05:1.0)
+let em = (bm,fm,c) => (bm||c?1.15:1.0)*(fm?1.05:1.0)
 
 let speedToBpm = {
-    0:(x,bm,fm) => 60/((1/(x*0.5*em(bm,fm)))-0.075),
-    1:(x,bm,fm) => 60/((1/(x*0.75*em(bm,fm)))-0.075),
-    2:(x,bm,fm) => 60/((1/(x*1.0*em(bm,fm)))-0.075),
-    3:(x,bm,fm) => 60/((1/(x*1.25*em(bm,fm)))-0.075),
-    4:(x,bm,fm) => 60/((1/(x*1.5*em(bm,fm)))-0.075)
+    0:(x,bm,fm,c) => 60/((1/(x*0.5*em(bm,fm,c)))-0.075),
+    1:(x,bm,fm,c) => 60/((1/(x*0.75*em(bm,fm,c)))-0.075),
+    2:(x,bm,fm,c) => 60/((1/(x*1.0*em(bm,fm,c)))-0.075),
+    3:(x,bm,fm,c) => 60/((1/(x*1.25*em(bm,fm,c)))-0.075),
+    4:(x,bm,fm,c) => 60/((1/(x*1.5*em(bm,fm,c)))-0.075)
 }
 
 let bpmToSpeed = {
-    0:(x,bm,fm) => x/(0.5*em(bm,fm)*(60+x*0.075)),
-    1:(x,bm,fm) => x/(0.75*em(bm,fm)*(60+x*0.075)),
-    2:(x,bm,fm) => x/(1.0*em(bm,fm)*(60+x*0.075)),
-    3:(x,bm,fm) => x/(1.25*em(bm,fm)*(60+x*0.075)),
-    4:(x,bm,fm) => x/(1.5*em(bm,fm)*(60+x*0.075))
+    0:(x,bm,fm,c) => x/(0.5*em(bm,fm,c)*(60+x*0.075)),
+    1:(x,bm,fm,c) => x/(0.75*em(bm,fm,c)*(60+x*0.075)),
+    2:(x,bm,fm,c) => x/(1.0*em(bm,fm,c)*(60+x*0.075)),
+    3:(x,bm,fm,c) => x/(1.25*em(bm,fm,c)*(60+x*0.075)),
+    4:(x,bm,fm,c) => x/(1.5*em(bm,fm,c)*(60+x*0.075))
 };
 
 var last_id = "";
@@ -74,7 +75,7 @@ function setSoundType(){
 
 function setTempo(){
     var speed_idx = parseInt($("#ghost_modifier_speed").val())
-    tempo = speedToBpm[speed_idx](speed,blood_moon,forest_minion) * (1+(offset/100))
+    tempo = speedToBpm[speed_idx](speed,blood_moon,forest_minion,coal) * (1+(offset/100))
 }
 
 function setVolume(){
@@ -92,7 +93,7 @@ function toggleSound(set_tempo,id){
     adjustOffset(0)
     speed = set_tempo
     var speed_idx = parseInt($("#ghost_modifier_speed").val())
-    tempo = speedToBpm[speed_idx](speed,blood_moon,forest_minion) * (1+(offset/100))
+    tempo = speedToBpm[speed_idx](speed,blood_moon,forest_minion,coal) * (1+(offset/100))
     if(!isPlaying){
         step()
         timerStop = setTimeout(function(){
@@ -363,7 +364,7 @@ function bpm_calc(forced=false) {
 
 function get_ms(bpm){
     var speed_idx = parseInt($("#ghost_modifier_speed").val())
-    var t_ms= bpmToSpeed[speed_idx](bpm / (1+((offset)/100)),blood_moon,forest_minion)
+    var t_ms= bpmToSpeed[speed_idx](bpm / (1+((offset)/100)),blood_moon,forest_minion,coal)
     var cur_ms = 0
     var cur_offset = 1000
     bpm_speeds.forEach(function(m){
@@ -378,7 +379,7 @@ function get_ms(bpm){
 
 function get_ms_exact(bpm){
     var speed_idx = calibrating ? 2 : parseInt($("#ghost_modifier_speed").val())
-    var cur_ms = bpmToSpeed[speed_idx](bpm / (1+((offset)/100)) ,blood_moon && !calibrating,forest_minion && !calibrating)
+    var cur_ms = bpmToSpeed[speed_idx](bpm / (1+((offset)/100)) ,blood_moon && !calibrating,forest_minion && !calibrating, coal && !calibrating)
     return cur_ms < 0 ? 0.01 : cur_ms.toFixed(2)
 }
 

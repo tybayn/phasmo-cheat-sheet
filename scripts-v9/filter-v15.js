@@ -13,7 +13,7 @@ let prev_monkey_state = 0
 let weekly_data = {}
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood","map_size":"S","prev_monkey_state":0}
-var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
 
 let znid = getCookie("znid")
 
@@ -203,6 +203,38 @@ function tristate(elem,ignore_link=false){
         checkbox.removeClass("bad")
         label.removeClass("strike")
         checkbox.addClass("neutral")
+    }
+
+    if(!ignore_link){filter(ignore_link)}
+}
+
+function toggleCoal(force_on = false, force_off = false, ignore_link=false){
+
+    if(force_off){
+        $('#coal-icon').removeClass('coal-active')
+        $('#coal-icon').attr("src","imgs/coal-w.png")
+        $('#coal-icon-2').removeClass('coal-active')
+        $('#coal-icon-2').attr("src","imgs/coal-w.png")
+        send_coal_link(false)
+        coal = 0
+        return
+    }
+
+    if(!$("#coal-icon").hasClass("coal-active") || force_on){
+        $('#coal-icon').addClass('coal-active')
+        $('#coal-icon').attr("src","imgs/coal-b.png")
+        $('#coal-icon-2').addClass('coal-active')
+        $('#coal-icon-2').attr("src","imgs/coal-b.png")
+        send_coal_link(true)
+        coal = 1
+    }
+    else{
+        $('#coal-icon').removeClass('coal-active')
+        $('#coal-icon').attr("src","imgs/coal-w.png")
+        $('#coal-icon-2').removeClass('coal-active')
+        $('#coal-icon-2').attr("src","imgs/coal-w.png")
+        send_coal_link(false)
+        coal = 0
     }
 
     if(!ignore_link){filter(ignore_link)}
@@ -1927,6 +1959,7 @@ function saveSettings(reset = false){
     user_settings['map_type'] = document.getElementById("map-type").value
     user_settings['map'] = $(".selected_map")[0] ? $(".selected_map")[0].id : 'tanglewood'
     user_settings['theme'] = $("#theme").val();
+    user_settings['coal'] = $("#coal-icon").hasClass("coal-active") ? 1 : 0
     user_settings['forest_minion'] = $("#forest-minion-icon").hasClass("forest-minion-active") ? 1 : 0
     user_settings['blood_moon'] = $("#blood-moon-icon").hasClass("blood-moon-active") ? 1 : 0
     user_settings['voice_prefix'] = document.getElementById("voice_prefix").checked ? 1 : 0
@@ -1940,7 +1973,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
     }
 
     user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
@@ -1950,6 +1983,10 @@ function loadSettings(){
 
     if($("#forest-minion-icon").css("display") == "none"){
         user_settings['forest_minion'] = 0
+    }
+
+    if($("#coal-icon").css("display") == "none"){
+        user_settings['coal'] = 0
     }
 
     document.getElementById("modifier_volume").value = load_default('volume',50)
@@ -2022,6 +2059,9 @@ function loadSettings(){
     }
 
     document.getElementById("theme").value = user_settings['theme']
+    if (user_settings['coal']){
+        toggleCoal(true)
+    }
     if (user_settings['forest_minion']){
         toggleForestMinion(true)
     }
@@ -2069,7 +2109,7 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
     document.getElementById("modifier_volume").value = load_default('volume',50)
     document.getElementById("mute_broadcast").checked = load_default('mute_broadcast',0) == 1 
     document.getElementById("mute_timer_toggle").checked = load_default('mute_timer_toggle',0) == 1 
@@ -2099,6 +2139,10 @@ function resetSettings(){
     document.getElementById("voice_prefix").checked = load_default('voice_prefix',0) == 1;
     document.getElementById("tanglewood").click()
     document.getElementById("theme").value = user_settings['theme']
+    if (user_settings['coal']){
+        $('#coal-icon').removeClass('coal-active')
+        coal = 0
+    }
     if (user_settings['forest_minion']){
         $('#forest-minion-icon').removeClass('forest-minion-active')
         forest_minion = 0
@@ -2489,6 +2533,7 @@ function reset(skip_continue_session=false){
     if(ready){
         send_reset_link()
         if(!document.getElementById("persist_modes").checked){
+            $("#coal-icon").removeClass("coal-active") 
             $("#forest-minion-icon").removeClass("forest-minion-active") 
             $("#blood-moon-icon").removeClass("blood-moon-active")
         }

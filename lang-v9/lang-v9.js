@@ -151,7 +151,9 @@ function load_voice(){
         new Audio('assets/start.mp3'),
         new Audio('assets/stop.mp3'),
         new Audio(`lang-v9/${lang}/assets/sound_cooldown.mp3`),
-        new Audio(`lang-v9/${lang}/assets/myling_cooldown.mp3`)];
+        new Audio(`lang-v9/${lang}/assets/myling_cooldown.mp3`),
+        new Audio(`assets/obambo-alert.mp3`)
+    ];
     timer_snd[0].preload = 'auto';
     timer_snd[1].preload = 'auto';
     timer_snd[2].preload = 'auto';
@@ -169,6 +171,7 @@ function load_voice(){
     timer_snd[14].preload = 'auto';
     timer_snd[15].preload = 'auto';
     timer_snd[16].preload = 'auto';
+    timer_snd[17].preload = 'auto';
     timer_snd[0].load();
     timer_snd[1].load();
     timer_snd[2].load();
@@ -186,6 +189,7 @@ function load_voice(){
     timer_snd[14].load();
     timer_snd[15].load();
     timer_snd[16].load();
+    timer_snd[17].load();
 }
 
 function load_translation(){

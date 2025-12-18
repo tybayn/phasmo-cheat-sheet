@@ -570,6 +570,15 @@ function link_room(){
                     }
                 }
 
+                if(incoming_state.hasOwnProperty("coal")){
+                    if(incoming_state["coal"]){
+                        toggleCoal(true,false,true)
+                    }
+                    else{
+                        toggleCoal(false,true,true)
+                    }
+                }
+
                 if(incoming_state.hasOwnProperty("blood_moon")){
                     if(incoming_state["blood_moon"]){
                         toggleBloodMoon(true,false,true)
@@ -769,6 +778,7 @@ function link_link(reconnect = false){
                 send_bpm_link("-", "-", ["50%", "75%", "100%", "125%", "150%"][parseInt($("#ghost_modifier_speed").val())]);
                 send_blood_moon_link($("#blood-moon-icon").hasClass("blood-moon-active"));
                 send_forest_minion_link($("#forest-minion-icon").hasClass("forest-minion-active"));
+                send_coal_link($("#coal-icon").hasClass("coal-active"));
                 filter();
 
                 start_dlws_ping();
@@ -853,6 +863,10 @@ function link_link(reconnect = false){
                 send_sound_timer(force_start)
             }
 
+            else if (action == "OBAMBOTIMER"){
+                toggle_obambo_timer()
+            }
+
             else if (action == "DL_STEP"){
                 if (incoming_state.hasOwnProperty("timestamp")){
                     bpm_tap(incoming_state["timestamp"])
@@ -865,21 +879,37 @@ function link_link(reconnect = false){
             else if (action == "BLOODMOON"){
                 toggleBloodMoon(true,false)
                 toggleForestMinion(false,true)
+                toggleCoal(false, true)
             }
 
             else if (action == "FORESTMINION"){
                 toggleBloodMoon(false,true)
                 toggleForestMinion(true,false)
+                toggleCoal(false, true)
+            }
+
+            else if (action == "COAL"){
+                toggleBloodMoon(false,true)
+                toggleForestMinion(false,true)
+                toggleCoal(true,false)
             }
 
             else if (action == "BLOODMINION"){
                 toggleBloodMoon(true,false)
                 toggleForestMinion(true,false)
+                toggleCoal(false,true)
+            }
+
+            else if (action == "BLOODCOAL"){
+                toggleBloodMoon(true,false)
+                toggleForestMinion(false,false)
+                toggleCoal(true,false)
             }
 
             else if (action == "NOMODIFER"){
                 toggleBloodMoon(false,true)
                 toggleForestMinion(false,true)
+                toggleCoal(false,true)
             }
 
             else if (action == "SANITY"){
@@ -1121,6 +1151,18 @@ function send_forest_minion_link(value){
     }
 }
 
+function send_coal_link(value){
+    if(hasDLLink){
+        if($("#blood-moon-icon").hasClass("blood-moon-active")){
+            if(value)
+                dlws.send(`{"action":"BLOODCOAL","value":1}`)
+            else
+                dlws.send(`{"action":"BLOODMOON","value":1}`)
+        }
+        else
+            dlws.send(`{"action":"COAL","value":${value ? 1 : 0}}`)
+    }
+}
 
 function send_sanity_link(value, color){
     if(hasDLLink){
@@ -1294,6 +1336,7 @@ function send_state() {
             "map": state['map'],
             "map_size": state['map_size'],
             "prev_monkey_state": state['prev_monkey_state'],
+            "coal": document.getElementById("coal-icon").classList.contains("coal-active") ? 1 : 0,
             "forest_minion": document.getElementById("forest-minion-icon").classList.contains("forest-minion-active") ? 1 : 0,
             "blood_moon": document.getElementById("blood-moon-icon").classList.contains("blood-moon-active") ? 1 : 0,
             'settings': {
