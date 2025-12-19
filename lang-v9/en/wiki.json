@@ -23,7 +23,7 @@
     "{{wiki_gallu_states_title}}":"Gallu States",
     "{{wiki_gallu_states_p1}}":"Gallu cycles through 3 states that change speed and other behaviors (Normal > Enraged > Weakened >...). Below are the states and the behaviors that they change.",
     "{{wiki_gallu_states_h1}}":"Normal State:",
-    "{{wiki_gallu_states_p2}}":"This is the starting state.<br>In this state the ghost is 1.7m/s during hunts and has no other oddities. If the ghost steps in salt, is incensed, or uses a crucifix, it will go into an 'enraged state'.",
+    "{{wiki_gallu_states_p2}}":"This is the starting state.<br>In this state the ghost is 1.7m/s during hunts and has no other oddities. If the ghost steps in salt, is incensed, or uses a crucifix, it will go into an 'enraged state'.<br><br><i>(Note: There is a 2 second delay after stepping in salt from this state to go to the 'enraged state'. Incense or crucifx will cause the state change immediately.)</i>",
     "{{wiki_gallu_states_h2}}":"Enraged State:",
     "{{wiki_gallu_states_i1}}":"Speed: 1.96m/s",
     "{{wiki_gallu_states_i2}}":"Average Sanity: 60%",
@@ -37,7 +37,7 @@
     "{{wiki_gallu_states_i8}}":"Incense Blindness: 6s",
     "{{wiki_gallu_states_i9}}":"Crucifx Range: +1m",
     "{{wiki_gallu_states_i10}}":"Does disturb salt",
-    "{{wiki_gallu_states_p4}}":" It will remain in this state until the ghost steps in salt, is incensed, or uses a crucifix, where it will return to a 'normal state'.",
+    "{{wiki_gallu_states_p4}}":" It will remain in this state until the ghost steps in salt, is incensed, or uses a crucifix, where it will return to a 'normal state'.<br><br><i>(Note: There is a 3 second delay after stepping in salt from this state to go to the 'normal state'. Incense or crucifx will cause the state change immediately.)</i>",
 
     "{{wiki_obake_blinking_title}}": "Obake Blinking",
     "{{wiki_obake_blinking_h1}}": "Blinking:",
