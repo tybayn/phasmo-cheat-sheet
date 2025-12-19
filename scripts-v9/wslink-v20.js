@@ -1172,9 +1172,11 @@ function send_sanity_link(value, color){
 
 function send_map_preload_link(){
     if(hasDLLink){
+        let non_event_maps = Object.entries(all_maps).filter(([key]) => !key.endsWith('-e')).map(([, value]) => value).join('","');
         cur_map_link = document.getElementById("map_image").style.backgroundImage.slice(4,-1).replace(/"/g,"")
-        dlws.send(`{"action":"MAPPRELOAD","message":"${cur_map_link}","list":["${Object.values(all_maps).join('","')}","${Object.values(all_maps).join('","').replaceAll(".png","_ghost.png").replaceAll(".webp","_ghost.webp")}","${Object.values(all_maps).join('","').replaceAll(".png","_sanity.png").replaceAll(".webp","_sanity.webp")}","${Object.values(all_maps).join('","').replaceAll(".png","_temperature.png").replaceAll(".webp","_temperature.webp")}"]}`)
+        dlws.send(`{"action":"MAPPRELOAD","message":"${cur_map_link}","list":["${Object.values(all_maps).join('","')}","${non_event_maps.replaceAll(".png","_sanity.png").replaceAll(".webp","_sanity.webp")}","${non_event_maps.replaceAll(".png","_temperature.png").replaceAll(".webp","_temperature.webp")}"]}`)
     }
+
 }
 
 function send_cur_map_link(){
