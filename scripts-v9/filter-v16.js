@@ -1764,9 +1764,9 @@ function showMaps(forceOpen = false, forceClose = false){
     }
 }
 
-function showSearch(){
+function showSearch(force_open=false,force_close=false){
     document.getElementById("search_bar").value = document.getElementById("search_bar").value.replace('/','')
-    if (document.getElementById("search_box").style.right == "-36px"){
+    if ((document.getElementById("search_box").style.right == "-36px" || force_open) && !force_close){
         document.getElementById("partner-box").style.zIndex = "9"
         document.getElementById("language_box").style.zIndex = "9"
         document.getElementById("theme_box").style.zIndex = "9"

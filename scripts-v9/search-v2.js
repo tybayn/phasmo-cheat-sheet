@@ -493,3 +493,35 @@ function parse_event(elem, queries){
 
     return results
 }
+
+document.addEventListener("keydown", (e) => {
+    const modKey = e.ctrlKey || e.metaKey;
+
+    if (e.key === "Escape") {
+        showSearch(false,true);
+        return;
+    }
+
+    if (!modKey) return;
+    if (e.key.toLowerCase() !== "f") return;
+
+    const active = document.activeElement;
+    const isSearchBar =
+        active instanceof HTMLElement &&
+        active.id === "search_bar";
+    const isTyping =
+        !isSearchBar &&
+        (
+            active instanceof HTMLInputElement ||
+            active instanceof HTMLTextAreaElement ||
+            active?.isContentEditable
+        );
+
+    if (isTyping) return;
+
+    if (e.shiftKey) return;
+
+    e.preventDefault();
+    showSearch(true);
+});
+
