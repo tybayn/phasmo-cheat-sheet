@@ -414,7 +414,7 @@
     "{{wiki_known_bugs_revenant}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_shade}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>Nessuno</i></li>",
-    "{{wiki_known_bugs_yurei}}": "<li>Dopo essere stato incensato, uno Yurei può lasciare la sua stanza preferita se un punto di percorso finisce in un muro o in un mobile e viene corretto posizionandolo fuori dalla stanza</li><li>Può aprire parzialmente le porte degli armadietti</li>",
+    "{{wiki_known_bugs_yurei}}": "<li>Può aprire parzialmente le porte degli armadietti</li>",
     "{{wiki_known_bugs_oni}}": "<li>Riduce la sanità solo del 10% invece del 20% durante gli eventi di canto</li>",
     "{{wiki_known_bugs_yokai}}": "<li>La distanza dal carillon a cui uno Yokai inizia il suo evento è di 5m standard invece di 2,5m</li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>Nessuno</i></li>",

@@ -414,7 +414,7 @@
     "{{wiki_known_bugs_revenant}}": "<li><i>既知のバグなし</i></li>",
     "{{wiki_known_bugs_shade}}": "<li><i>既知のバグなし</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>既知のバグなし</i></li>",
-    "{{wiki_known_bugs_yurei}}": "<li>移動しようとした場所が壁や家具の位置だった場合、 位置補正されて、 <i>浄化香を浴びせた後だとしてもゴーストルームの外に出ることがある。</i></li><li>干渉することのできるロッカーがある。</li>",
+    "{{wiki_known_bugs_yurei}}": "<li>干渉することのできるロッカーがある。</li>",
     "{{wiki_known_bugs_oni}}": "<li>歌の超常現象の正気度減少量が、 本来 20% のはずが 10% しか減らない。</li>",
     "{{wiki_known_bugs_yokai}}": "<li>オルゴールによる超常現象の開始距離が、 妖怪は本来 2.5m のはずが他のゴーストと同じく 5m になっている。</li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>既知のバグなし</i></li>",

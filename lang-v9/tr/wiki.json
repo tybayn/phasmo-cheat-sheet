@@ -414,7 +414,7 @@
     "{{wiki_known_bugs_revenant}}": "<li><i>Yok</i></li>",
     "{{wiki_known_bugs_shade}}": "<li><i>Yok</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>Yok</i></li>",
-    "{{wiki_known_bugs_yurei}}": "<li>Tütsülendikten sonra, bir yol noktası duvar veya mobilyalarda biterse ve odanın dışına yerleştirilerek düzeltilirse, Yurei favori odasından ayrılabilir</li><li>Dolap kapılarını kısmen açabilir</li>",
+    "{{wiki_known_bugs_yurei}}": "<li>Dolap kapılarını kısmen açabilir</li>",
     "{{wiki_known_bugs_oni}}": "<li>Şarkı söyleme olayları için %20 yerine sadece %10 akıl sağlığı tüketir</li>",
     "{{wiki_known_bugs_yokai}}": "<li>Müzik Kutusundan Yokai'nin olayını başlatacağı mesafe standart 2.5m yerine 5m'dir</li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>Yok</i></li>",

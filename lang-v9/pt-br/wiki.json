@@ -414,7 +414,7 @@
     "{{wiki_known_bugs_revenant}}": "<li><i>Nenhum</i></li>",
     "{{wiki_known_bugs_shade}}": "<li><i>Nenhum</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>Nenhum</i></li>",
-    "{{wiki_known_bugs_yurei}}": "<li>Depois de ser incensado, um Yurei pode sair do seu quarto favorito se um ponto de trajetória terminar numa parede ou num móvel e for corrigido ao ser colocado fora do quarto</li><li>Pode abrir parcialmente as portas dos cacifos</li>",
+    "{{wiki_known_bugs_yurei}}": "<li>Pode abrir parcialmente as portas dos cacifos</li>",
     "{{wiki_known_bugs_oni}}": "<li>Drena apenas 10% da sanidade em vez de 20% para eventos de canto</li>",
     "{{wiki_known_bugs_yokai}}": "<li>A distância da Caixa de Música a partir da qual um Yokai iniciará seu evento é a padrão de 5m, em vez de 2,5m</li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>Nenhum</i></li>",

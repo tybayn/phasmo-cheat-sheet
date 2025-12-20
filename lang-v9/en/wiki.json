@@ -453,7 +453,7 @@
     "{{wiki_known_bugs_revenant}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_shade}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>None</i></li>",
-    "{{wiki_known_bugs_yurei}}": "<li>After being smudged, a Yurei is able to leave its favorite room if a pathing point ends up in a wall or in furniture and gets corrected by being placed outside the room</li><li>Can partially open locker doors</li>",
+    "{{wiki_known_bugs_yurei}}": "<li>Can partially open locker doors</li>",
     "{{wiki_known_bugs_oni}}": "<li>Only drains 10% sanity instead of 20% for singing events</li>",
     "{{wiki_known_bugs_yokai}}": "<li>The distance from the Music Box that a Yokai will start its event is the standard 5m instead of 2.5m</li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>None</i></li>",

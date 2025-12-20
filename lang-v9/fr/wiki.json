@@ -434,7 +434,7 @@
     "{{wiki_known_bugs_revenant}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_shade}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>Aucun</i></li>",
-    "{{wiki_known_bugs_yurei}}": "<li>Après avoir été affecté par de l'encens, un Yurei peut quitter sa pièce favorite si un point de cheminement se retrouve dans un mur ou un meuble et est corrigé en étant placé à l'extérieur de la pièce</li><li>Peut ouvrir les portes de casier partiellement</li>",
+    "{{wiki_known_bugs_yurei}}": "<li>Peut ouvrir les portes de casier partiellement</li>",
     "{{wiki_known_bugs_oni}}": "<li>Ne draine que 10 % de santé mentale au lieu de 30 % pour les événements de chant</li>",
     "{{wiki_known_bugs_yokai}}": "<li>Le distance par rapport à la Boîte à musique à partir de laquelle un Yokai commencera son événement est de 5 m au lieu de 2,5 m</li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>Aucun</i></li>",

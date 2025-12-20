@@ -414,7 +414,7 @@
     "{{wiki_known_bugs_revenant}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_shade}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>无</i></li>",
-    "{{wiki_known_bugs_yurei}}": "<li>被熏香致盲后，如果猎杀追踪的路径点在墙里或者在家具中，然后游戏将其修正在鬼房外，幽灵则此时可以离开鬼房</li><li>可以打开部分的储物柜门</li>",
+    "{{wiki_known_bugs_yurei}}": "<li>可以打开部分的储物柜门</li>",
     "{{wiki_known_bugs_oni}}": "<li>鬼魂唱歌事件中只会扣除玩家10%的理智，而不是原先的20%</li>",
     "{{wiki_known_bugs_yokai}}": "<li>玩家使用八音盒，妖怪会和其它鬼魂一样从八音盒5m外开始追踪，而不是2.5m</li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>无</i></li>",
