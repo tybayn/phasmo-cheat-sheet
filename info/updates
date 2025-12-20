@@ -1,6 +1,6 @@
 {
-    "version":"6.3.3",
+    "version":"6.3.4",
     "date":"2025-12-20",
     "details": "- Added Obambo Timer Hotkey\n- Added 'Coal Speed' compatibility\n\nBug Fixes:\n- Fixed a bug with ctrl-c, ctrl-v, and alt-tab when using text chat",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.3.3.msi"
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.3.4.msi"
 }
