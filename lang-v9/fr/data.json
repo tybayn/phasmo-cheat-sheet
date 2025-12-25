@@ -31,9 +31,9 @@
     "{{small}}": "Petite",
     "{{medium}}": "Moyenne",
     "{{large}}": "Grande",
-
     "{{blood_moon_weather}}": "Météo Lune de sang",
-    "{{forest_minion_weather}}": "Forest Minion Ran Away",
+    "{{forest_minion_weather}}": "Le sbire de la forêt s'est enfui",
+    "{{coal_weather}}": "Le cadeau de Krampus est du charbon",
     "{{tools}}": "Outils",
     "{{timers}}": "Minuteurs",
     "{{to_start_stop}}": " pour activer",
@@ -60,7 +60,6 @@
     "{{possible_los}}": "Vitesse en LdV possible",
     "{{press_r}}": "Appuyez sur \"R\" pour réinitialiser",
     "{{see_los_guide}}": "Voir \"Guides >> Chasses >> Vitesse & Ligne de Vue (LdV)\" pour plus d'infos sur comment lire le graphique",
-
     "{{current_map}}": "Carte actuelle",
     "{{click_to_change}}": "Cliquez pour changer",
     "{{reset}}": "Réinitialiser",
@@ -75,7 +74,6 @@
     "{{reset_all}}": "Tout réinitialiser sans sauvegarder",
     "{{active_users}}": "Utilisateurs actifs",
     "{{info_copyright}}": "Info / Copyright",
-
     "{{settings}}": "Paramètres",
     "{{to_close}}": "pour fermer",
     "{{speed_offset}}": "Décalage de la vitesse",
@@ -118,7 +116,6 @@
     "{{misc}}": "Divers",
     "{{persist_modes}}": "Persist Blood Moon / Minion Modes",
     "{{data_refresh}}": "Actualiser toutes les données",
-
     "{{links}}": "Liens",
     "{{shared_journal_link}}": "Lien vers le journal partagé",
     "{{create}}": "Créer",
@@ -148,7 +145,6 @@
     "{{multiplayer}}": "Multijoueur",
     "{{looking_for_overlay}}": "Vous cherchez l'overlay ?",
     "{{copied}}": "Copié !",
-
     "{{login}}": "Connexion ZN",
     "{{data_link}}": "Lien de données",
     "{{current_event}}": "Événement en cours",
@@ -166,34 +162,30 @@
     "{{max_lights}}": "Lumières allumées max",
     "{{hover_touch}}": "Survoler/toucher pour zoomer",
     "{{show_event_maps}}": "Afficher les événements sur la carte",
-    "{{map_type}}":"Type de carte",
-    "{{ghost_room_map}}":"Limites normales / Pièces favorites valides",
-    "{{sanity_drain_map}}":"Prévention de la perte de santé mentale",
-    "{{temperature_map}}":"Températures des pièces",
+    "{{map_type}}": "Type de carte",
+    "{{ghost_room_map}}": "Limites normales / Pièces favorites valides",
+    "{{sanity_drain_map}}": "Prévention de la perte de santé mentale",
+    "{{temperature_map}}": "Températures des pièces",
     "{{map_images_belong_to}}": "Les images de la carte appartiennent à",
     "{{images}}": "Images",
     "{{map_explorer}}": "Explorateur de carte",
-
-    "{{search}}":"Recherche",
-    "{{ghost_card}}":"Cartes fantômes",
-    "{{see_more}}":"Cliquez pour en savoir plus >>",
+    "{{search}}": "Recherche",
+    "{{ghost_card}}": "Cartes fantômes",
+    "{{see_more}}": "Cliquez pour en savoir plus >>",
     "{{news_feed}}": "Fil d'actualités",
     "{{3d_print_models}}": "Modèle d'impression 3D",
     "{{3d_models_disclaimer}}": "Tous les modèles sont fournis gratuitement sous licence CC BY-NC-ND ou CC BY-SA et sont modélisés de A à Z en utilisant uniquement le jeu comme référence visuelle.",
     "{{partners}}": "ZN Partenaires",
     "{{twitch_drops}}": "Twitch Drops",
     "{{no_drops}}": "(Aucune récompense actuellement)",
-
     "{{has_los}}": "Accélère en LdV",
     "{{not_los}}": "N'accélère pas en LdV",
-
     "{{select_ghost}}": "Sélectionner l'entité",
     "{{guess_ghost}}": "Proposer l'entité",
     "{{not_ghost}}": "Éliminer l'entité",
     "{{died_to_ghost}}": "Mort par l'entité",
     "{{sort_ghosts}}": "Trier les entités effacées en bas",
     "{{show_manually_hidden_ghosts}}": "Afficher les entités masquées manuellement",
-
     "{{0_evidence_tests}}": "Tests 0 preuve",
     "{{tell}}": "Indice",
     "{{tells}}": "Indices",
@@ -216,7 +208,6 @@
     "{{empty_data_link}}": "Cliquez sur une entité pour voir ses indices et comportements\n(Utilisez ' [ ' et ' ] ' pour faire défiler les entités)",
     "{{no_elimination_tests}}": "Il n'y a pas de test d'élimination pour {0}",
     "{{no_confirmation_tests}}": "Il n'y a pas de test de confirmation pour {0}",
-
     "{{weekly_map}}": "Carte",
     "{{weekly_player_speed}}": "Vitesse du joueur",
     "{{weekly_ghost_speed}}": "Vitesse de l'entité",
@@ -225,7 +216,6 @@
     "{{weekly_friendly_ghost}}": "Entité amicale",
     "{{weekly_difficulty_settings}}": "Paramètres de difficulté",
     "{{weekly_missing_image}}": "Tenez bon ! Nous aurons bientôt une image !",
-
     "{{zndl_title}}": "Merci d'avoir téléchargé ZN-Desktop-Link !",
     "{{zndl_p1}}": "Veuillez lire les informations importantes suivantes concernant ZN-Desktop-Link, les conseils d'installation, les avertissements et les brèves instructions d'utilisation.",
     "{{zndl_h1}}": "Avertissement",
@@ -254,7 +244,6 @@
     "{{zndl_h11}}": "Overlay de santé mentale",
     "{{zndl_p15}}": "Il existe un troisième overlay qui peut être activé et qui permet de suivre votre état de santé mentale. Lorsqu'il est activé, il démarre un chronomètre qui simule la perte de santé mentale passive. (basé sur \"Paramètres de santé mentale\" en bas de l'onglet \"Lien\"). Il vous permettra également d'ajouter et de soustraire diverses valeurs de santé mentale en fonction des événements des entités, des objets maudits, etc.",
     "{{zndl_p16}}": "Pour que la perte de santé mentale soit précise, il est important que les \"Paramètres de santé mentale\" soient réglés correctement (tous les \"Paramètres de santé mentale\", à l'exception du Type de lobby, seront réglés automatiquement en fonction de la difficulté choisie. Si vous avez choisi une difficulté personnalisée, vous devrez régler les valeurs pour qu'elles correspondent à vos paramètres de jeu).",
-
     "{{infocopy_h1}}": "Précision des données",
     "{{infocopy_p1}}": "Les données ont d'abord été corrigées et vérifiées par la modératrice du Discord Phasmophobia \"Shuee01\" le 04/01/2023 (v0.8.0.5). Les données sont gardées à jour avec les informations vérifiées obtenues auprès des développeurs de Kinetic Games et par les tests et la vérification en interne par Zero-Network des mécaniques du jeu.",
     "{{infocopy_p2}}": "Les paramètres graphiques et la charge du GPU/CPU ont un impact sur la vitesse des bruits de pas dans le jeu. Ce que vous entendez dans le jeu peut différer et ne pas correspondre exactement à ce que vous entendez dans ce guide. Vous pouvez ajuster le \"Décalage de vitesse\" dans les paramètres pour rapprocher les bruits de pas de ce que l'on entend dans le jeu. Lors de la comparaison des bruits de pas à l'aide d'exemples sonores : les doubles bruits de pas, les escaliers et l'entité qui se retourne peuvent entraîner un léger décalage de l'audio.",
@@ -271,7 +260,6 @@
     "{{infocopy_p10}}": "Et un énorme merci au partenaire de Kinetic Games @bepisttv pour<br>pour nous avoir aidés à rassembler, documenter et vérifier les mécaniques du jeu",
     "{{infocopy_p11}}": "Vous avez trouvé un bug ? Vous avez des idées ? Vous voulez jouer quelques parties ?",
     "{{infocopy_p12}}": "Rejoignez le serveur \"Zero-Network: Ghost Hunters\"",
-
     "{{data_link_h1}}": "Se connecter à Zero-Network",
     "{{data_link_p1}}": "La connexion vous permettra de :<ol><li>Enregistrer ce qui est saisi dans ce Cheat Sheet, vous permettant de voir les statistiques sur les entités, les preuves, et le style de jeu</li><li>Importer des difficultés personnalisées du Difficulty Builder et les utiliser comme préréglages lors du choix d'une difficulté dans la liste déroulante de difficulté du Cheat Sheet</li></ol>",
     "{{data_link_p2}}": "(1) La connexion ne maintient pas une connexion active à Discord/Twitch, vous devrez vous connecter tous les 30 jours ou si vous mettez à jour votre profil Discord/Twitch. (2) Les statistiques fournies viennent purement de l'utilisation de ce Cheat Sheet. Nous ne nous connectons d'aucune manière au jeu Phasmophobia ou à Steam.",
