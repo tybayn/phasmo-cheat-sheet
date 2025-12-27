@@ -464,7 +464,10 @@
                 <div class="modifier_volume yfont white">{{misc}}</div> 
                 <div class="modifier_option less_pad">
                     <input type="checkbox" id="persist_modes" name="persist_modes" class="settings_check" onclick="saveSettings();"><label for="persist_modes">{{persist_modes}}</label>
-                </div>    
+                </div>   
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="keep_alive" name="keep_alive" class="settings_check" onclick="toggleKeepAlive(this);saveSettings();"><label for="keep_alive">{{keep_alive}}</label>
+                </div>  
             </div>
             <div id="session">C: -</div>
             <div id="prev-session">P: -</div>
@@ -1158,7 +1161,7 @@
     <script src="scripts-v9/timer-v5.js"></script>
     <script src="login-v9/login-v3.js"></script>
     <script src="wiki-v9/wiki-v3.js"></script>
-    <script src="scripts-v9/filter-v16.js"></script>
+    <script src="scripts-v9/filter-v17.js"></script>
     <script src="scripts-v9/sanity-v1.js"></script>
     <script src="scripts-v9/wslink-v20.js"></script>
     <script src="partners-v9/partners-v11.js"></script>

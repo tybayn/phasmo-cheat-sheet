@@ -118,6 +118,7 @@
     "{{disable_particles}}": "Disable Particle Effects",
     "{{misc}}": "Misc.",
     "{{persist_modes}}": "Persist Blood Moon / Minion Modes",
+    "{{keep_alive}}": "Keep screen alive (mobile)",
     "{{data_refresh}}": "Refresh All Data",
 
     "{{links}}": "Links",

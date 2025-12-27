@@ -13,7 +13,7 @@ let prev_monkey_state = 0
 let weekly_data = {}
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood","map_size":"S","prev_monkey_state":0}
-var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"keep_alive":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
 
 let znid = getCookie("znid")
 
@@ -23,6 +23,7 @@ let markedDead = false;
 let polled = false;
 let filter_locked = false;
 let voice_prefix = false;
+let wakeLock = null;
 
 let auto_select_timeout = null
 let last_guessed = null
@@ -1955,6 +1956,7 @@ function saveSettings(reset = false){
     user_settings['priority_sort'] = document.getElementById("priority_sort").checked ? 1 : 0;
     user_settings['disable_particles'] = document.getElementById("disable_particles").checked ? 1 : 0;
     user_settings['persist_modes'] = document.getElementById("persist_modes").checked ? 1 : 0;
+    user_settings['keep_alive'] = document.getElementById("keep_alive").checked ? 1 : 0;
     user_settings['show_event_maps'] = document.getElementById("map_event_check_box").checked ? 1 : 0;
     user_settings['map_type'] = document.getElementById("map-type").value
     user_settings['map'] = $(".selected_map")[0] ? $(".selected_map")[0].id : 'tanglewood'
@@ -1973,7 +1975,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"keep_alive":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
     }
 
     user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
@@ -2040,6 +2042,7 @@ function loadSettings(){
     document.getElementById("priority_sort").checked = load_default('priority_sort',0) == 1;
     document.getElementById("disable_particles").checked = load_default('disable_particles',0) == 1;
     document.getElementById("persist_modes").checked = load_default('persist_modes',0) == 1;
+    document.getElementById("keep_alive").checked = load_default('keep_alive',0) == 1;
     document.getElementById("map_event_check_box").checked = load_default('show_event_maps',0) == 1;
     document.getElementById("map-type").value = load_default('map_type','0');
     document.getElementById("voice_prefix").checked = load_default('voice_prefix',0) == 1;
@@ -2089,6 +2092,7 @@ function loadSettings(){
 
     toggleDescriptions()
     toggleCompact()
+    toggleKeepAlive(document.getElementById("keep_alive"))
     changeTheme(user_settings['theme'])
     setVolume()
     mute("toggle")
@@ -2109,7 +2113,7 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"keep_alive":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
     document.getElementById("modifier_volume").value = load_default('volume',50)
     document.getElementById("mute_broadcast").checked = load_default('mute_broadcast',0) == 1 
     document.getElementById("mute_timer_toggle").checked = load_default('mute_timer_toggle',0) == 1 
@@ -2134,6 +2138,7 @@ function resetSettings(){
     document.getElementById("bpm_type").checked = load_default('bpm_type',0) == 1
     document.getElementById("disable_particles").checked = load_default('disable_particles',0) == 1
     document.getElementById("persist_modes").checked = load_default('persist_modes',0) == 1
+    document.getElementById("keep_alive").checked = load_default('keep_alive',0) == 1
     document.getElementById("map_event_check_box").checked = load_default('show_event_maps',0) == 1;
     document.getElementById("map-type").value = load_default('map_type','0')
     document.getElementById("voice_prefix").checked = load_default('voice_prefix',0) == 1;
@@ -2436,6 +2441,35 @@ function toggleCompact(){
 
 function toggleVoicePrefix(){
     voice_prefix = document.getElementById("voice_prefix").checked
+}
+
+async function toggleKeepAlive(elem){
+    if (elem.checked){
+        try {
+            if ('wakeLock' in navigator) {
+            wakeLock = await navigator.wakeLock.request('screen');
+
+            // Reset the variable if the system releases it automatically
+            wakeLock.addEventListener('release', () => {
+                wakeLock = null;
+                document.getElementById("keep_alive").checked = false
+            });
+            } else {
+                console.error("Wake Lock not supported on this browser.");
+                document.getElementById("keep_alive").checked = false
+            }
+        } catch (err) {
+            console.error(`${err.name}, ${err.message}`);
+            document.getElementById("keep_alive").checked = false
+        }
+    }
+    else{
+        if (wakeLock !== null) {
+            await wakeLock.release();
+            wakeLock = null;
+            return;
+        }
+    }
 }
 
 function showResetMenu(event){
