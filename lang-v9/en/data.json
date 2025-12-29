@@ -158,7 +158,7 @@
     "{{current_event_text}}": "Check back on the next update!",
     "{{guides}}": "Guides",
     "{{misconceptions}}": "Misconceptions",
-    "{{verification_warning}}": "Data with this symbol may not be fully verified or only partially verified, but extended testing shows the data to be correct.",
+    "{{verification_warning}}": "Data with this symbol may (1) not be fully verified or only partially verified, but extended testing shows the data to be correct or (2) the data is a potential bug but can be used as a tell.",
     "{{bug_warning}}": "Data with this symbol is currently bugged in-game and may not work as intended",
     "{{research_link}}": "To see our research, visit our YouTube channel >>",
     "{{map}}": "Map",
