@@ -465,14 +465,14 @@
                     ghost_cards_html[cur_page].push(ghost_card);
                 }
 
-                document.getElementById('ghost_table_1').innerHTML += ghost_cards_html[0].join('') + '<div class="footer">Copyright &copy; 2023-2025 Zero-Network</div>'
+                document.getElementById('ghost_table_1').innerHTML += ghost_cards_html[0].join('') + '<div class="footer">Copyright &copy; 2023-2026 | Zero-Network</div>'
 
                 Array.from(ghost_cards_html).forEach((page, index) => {
                     if (index == 0) return;
                     document.getElementById('main').innerHTML += `
                         <div id="ghost_table_${index + 1}" class="ghost_table">
                         ${page.join('')}
-                        <div class="footer">Copyright &copy; 2023-2025 Zero-Network</div>
+                        <div class="footer">Copyright &copy; 2023-2026 | Zero-Network</div>
                         </div>
                     `
                 })
