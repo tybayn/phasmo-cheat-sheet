@@ -216,7 +216,6 @@ function toggleCoal(force_on = false, force_off = false, ignore_link=false){
         $('#coal-icon').attr("src","imgs/coal-w.png")
         $('#coal-icon-2').removeClass('coal-active')
         $('#coal-icon-2').attr("src","imgs/coal-w.png")
-        send_coal_link(false)
         coal = 0
         return
     }
@@ -226,7 +225,6 @@ function toggleCoal(force_on = false, force_off = false, ignore_link=false){
         $('#coal-icon').attr("src","imgs/coal-b.png")
         $('#coal-icon-2').addClass('coal-active')
         $('#coal-icon-2').attr("src","imgs/coal-b.png")
-        send_coal_link(true)
         coal = 1
     }
     else{
@@ -234,9 +232,10 @@ function toggleCoal(force_on = false, force_off = false, ignore_link=false){
         $('#coal-icon').attr("src","imgs/coal-w.png")
         $('#coal-icon-2').removeClass('coal-active')
         $('#coal-icon-2').attr("src","imgs/coal-w.png")
-        send_coal_link(false)
         coal = 0
     }
+
+    send_modifier_link()
 
     if(!ignore_link){filter(ignore_link)}
 }
@@ -248,7 +247,6 @@ function toggleForestMinion(force_on = false, force_off = false, ignore_link=fal
         $('#forest-minion-icon').attr("src","imgs/minion-w.png")
         $('#forest-minion-icon-2').removeClass('forest-minion-active')
         $('#forest-minion-icon-2').attr("src","imgs/minion-w.png")
-        send_forest_minion_link(false)
         forest_minion = 0
         return
     }
@@ -258,7 +256,6 @@ function toggleForestMinion(force_on = false, force_off = false, ignore_link=fal
         $('#forest-minion-icon').attr("src","imgs/minion-y.png")
         $('#forest-minion-icon-2').addClass('forest-minion-active')
         $('#forest-minion-icon-2').attr("src","imgs/minion-y.png")
-        send_forest_minion_link(true)
         forest_minion = 1
     }
     else{
@@ -266,9 +263,10 @@ function toggleForestMinion(force_on = false, force_off = false, ignore_link=fal
         $('#forest-minion-icon').attr("src","imgs/minion-w.png")
         $('#forest-minion-icon-2').removeClass('forest-minion-active')
         $('#forest-minion-icon-2').attr("src","imgs/minion-w.png")
-        send_forest_minion_link(false)
         forest_minion = 0
     }
+
+    send_modifier_link()
 
     if(!ignore_link){filter(ignore_link)}
 }
@@ -291,7 +289,6 @@ function toggleBloodMoon(force_on = false, force_off = false, ignore_link = fals
         $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom");
         $("#blood-moon-effect-bottom").removeClass("blood-moon-effect-bottom-anim");
         stopBloodMoonParticles();
-        send_blood_moon_link(false);
         blood_moon = 0;
     } else {
         icon1.addClass('blood-moon-active').attr("src", "imgs/moon-r.png");
@@ -303,9 +300,10 @@ function toggleBloodMoon(force_on = false, force_off = false, ignore_link = fals
             $("#blood-moon-effect-bottom").addClass("blood-moon-effect-bottom-anim");
         }
         startBloodMoonParticles();
-        send_blood_moon_link(true);
         blood_moon = 1;
     }
+
+    send_modifier_link()
 
     if (!ignore_link) filter(ignore_link);
 }

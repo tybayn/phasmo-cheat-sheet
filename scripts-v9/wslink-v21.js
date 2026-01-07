@@ -776,9 +776,7 @@ function link_link(reconnect = false){
                 send_timer_link("HUNT_VAL", "0:00");
                 send_timer_link("SOUND_VAL", "0:00");
                 send_bpm_link("-", "-", ["50%", "75%", "100%", "125%", "150%"][parseInt($("#ghost_modifier_speed").val())]);
-                send_blood_moon_link($("#blood-moon-icon").hasClass("blood-moon-active"));
-                send_forest_minion_link($("#forest-minion-icon").hasClass("forest-minion-active"));
-                send_coal_link($("#coal-icon").hasClass("coal-active"));
+                send_modifier_link()
                 filter();
 
                 start_dlws_ping();
@@ -876,40 +874,48 @@ function link_link(reconnect = false){
                 }
             }
 
-            else if (action == "BLOODMOON"){
-                toggleBloodMoon(true,false)
-                toggleForestMinion(false,true)
-                toggleCoal(false, true)
-            }
+            else if (action == "NEXTMODE"){
+                // Cycle
+                // NOMODIFIER -> BLOODMOON -> FORESTMINION -> BLOODMINION -> COAL -> BLOODCOAL -> <repeat>
 
-            else if (action == "FORESTMINION"){
-                toggleBloodMoon(false,true)
-                toggleForestMinion(true,false)
-                toggleCoal(false, true)
-            }
+                bm = $("#blood-moon-icon").hasClass("blood-moon-active")
+                bma = $("#blood-moon-icon").css("display") != "none"
+                fm = $("#forest-minion-icon").hasClass("forest-minion-active")
+                fma = $("#forest-minion-icon").css("display") != "none"
+                cm = $("#coal-icon").hasClass("coal-active")
+                cma = $("#coal-icon").css("display") != "none"
 
-            else if (action == "COAL"){
-                toggleBloodMoon(false,true)
-                toggleForestMinion(false,true)
-                toggleCoal(true,false)
-            }
-
-            else if (action == "BLOODMINION"){
-                toggleBloodMoon(true,false)
-                toggleForestMinion(true,false)
-                toggleCoal(false,true)
-            }
-
-            else if (action == "BLOODCOAL"){
-                toggleBloodMoon(true,false)
-                toggleForestMinion(false,false)
-                toggleCoal(true,false)
-            }
-
-            else if (action == "NOMODIFER"){
-                toggleBloodMoon(false,true)
-                toggleForestMinion(false,true)
-                toggleCoal(false,true)
+                if (!bm && !fm && !cm){ // NOMODIFIER
+                    toggleBloodMoon(bma,!bma)
+                    toggleForestMinion(false,true)
+                    toggleCoal(false,true)
+                }
+                else if (bm && !fm && !cm){ // BLOODMOON
+                    toggleBloodMoon(false,true)
+                    toggleForestMinion(fma,!fma)
+                    toggleCoal(cma && !fma,!cma || fma)
+                }
+                else if (!bm && fm && !cm){ // FORESTMINION
+                    toggleBloodMoon(bma,!bma)
+                    toggleForestMinion(fma,!fma)
+                    toggleCoal(false,true)
+                }
+                else if (bm && fm && !cm){ // BLOODMINION
+                    toggleBloodMoon(false,true)
+                    toggleForestMinion(false,true)
+                    toggleCoal(cma,!cma)
+                }
+                else if (!bm && !fm && cm){ // COAL
+                    toggleBloodMoon(bma,!bma)
+                    toggleForestMinion(false,true)
+                    toggleCoal(cma,!cma)
+                }
+                else if (bm && !fm && cm){ // BLOODCOAL
+                    toggleBloodMoon(false,true)
+                    toggleForestMinion(false,true)
+                    toggleCoal(false,true)
+                }
+                send_modifier_link()
             }
 
             else if (action == "SANITY"){
@@ -1125,42 +1131,27 @@ function send_ghosts_link(reset = false){
     }
 }
 
-function send_blood_moon_link(value){
+function send_modifier_link(){
     if(hasDLLink){
-        if (($("#forest-minion-icon").css("display") != "none") && $("#forest-minion-icon").hasClass("forest-minion-active")){
-            if(value)
-                dlws.send(`{"action":"BLOODMINION","value":1}`)
-            else
-                dlws.send(`{"action":"FORESTMINION","value":1}`)
-        }
-        else
-            dlws.send(`{"action":"BLOODMOON","value":${value ? 1 : 0}}`)
-    }
-}
+        bm = $("#blood-moon-icon").hasClass("blood-moon-active") && $("#blood-moon-icon").css("display") != "none"
+        fm = $("#forest-minion-icon").hasClass("forest-minion-active") && $("#forest-minion-icon").hasClass("forest-minion-active")
+        cm = $("#coal-icon").hasClass("coal-active") && $("#coal-icon").css("display") != "none"
 
-function send_forest_minion_link(value){
-    if(hasDLLink){
-        if($("#blood-moon-icon").hasClass("blood-moon-active")){
-            if(value)
-                dlws.send(`{"action":"BLOODMINION","value":1}`)
-            else
-                dlws.send(`{"action":"BLOODMOON","value":1}`)
-        }
-        else
-            dlws.send(`{"action":"FORESTMINION","value":${value ? 1 : 0}}`)
-    }
-}
+        if(!bm && !fm && !cm)
+            dlws.send(`{"action":"BLOODMOON","value":0}`)
+        else if(bm && !fm && !cm)
+            dlws.send(`{"action":"BLOODMOON","value":1}`)
+        else if(!bm && fm && !cm)
+            dlws.send(`{"action":"FORESTMINION","value":1}`)
+        else if(bm && fm && !cm)
+            dlws.send(`{"action":"BLOODMINION","value":1}`)
+        else if(!bm && !fm && cm)
+            dlws.send(`{"action":"COAL","value":1}`)
+        else if(bm && !fm && cm)
+            dlws.send(`{"action":"BLOODCOAL","value":1}`)
 
-function send_coal_link(value){
-    if(hasDLLink){
-        if($("#blood-moon-icon").hasClass("blood-moon-active")){
-            if(value)
-                dlws.send(`{"action":"BLOODCOAL","value":1}`)
-            else
-                dlws.send(`{"action":"BLOODMOON","value":1}`)
-        }
         else
-            dlws.send(`{"action":"COAL","value":${value ? 1 : 0}}`)
+            console.log("Error: Impossible modifier!")
     }
 }
 
