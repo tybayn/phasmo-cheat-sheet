@@ -125,7 +125,7 @@
 
     "{{wiki_ouija_board_title}}": "Ouija Board",
     "{{wiki_ouija_board_h1}}": "How it Works:",
-    "{{wiki_ouija_board_p1}}": "When used, the player is able to ask questions and get responses regarding the ghost or its whereabouts. Asking a valid question will cause the board to respond by spelling out its answer using the planchette. Once done asking questions, the player must say goodbye to end a session.",
+    "{{wiki_ouija_board_p1}}": "When used, the player is able to ask questions and get responses regarding the ghost or its whereabouts. Asking a valid question will cause the board to respond by spelling out its answer using the planchette. Once done asking questions, any player must say goodbye within range to end a session. Alternatively, you can move the board outside the investigation area.",
     "{{wiki_ouija_board_h2}}": "Questions:",
     "{{wiki_ouija_board_h3}}": "\"Where are you?\"",
     "{{wiki_ouija_board_p2}}": "Gives the current room of the ghost (not the favorite room)",
