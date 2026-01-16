@@ -447,9 +447,15 @@
     "{{wiki_los_twins_p2}}": "The BPM Plot will keep a history of the previous hunt that was tapped as a dotted red line. Using this line you can see how the previous hunt compares to the current hunt. A different base speed can indicate the Twins.",
     "{{wiki_los_twins_p3}}": "In the example below, you can see that the previous hunt was at 1.5m/s while the next hunt was at 1.9m/s.",
     
+    "{{wiki_los_sim_title}}": "Simulate LOS Speed",
+    "{{wiki_los_sim_p1}}": "Click on a 🔊 to listen to a simulation of the LOS speed up for that ghost at that speed. The simulation will play the base speed for 2s, then simulate the LOS speed up over 13s, then will play the max speed for 2s.",
+    "{{wiki_los_sim_p2}}": "❌ indicates no LOS speed-up",
+    "{{wiki_los_sim_start}}": "LOS Start",
+    "{{wiki_los_sim_end}}": "LOS End",
+
     "{{wiki_known_bugs}}": "Known Bugs / Issues",
     "{{wiki_known_bugs_intro}}": "The following is a list of known bugs related to ghosts that have the potential to impact game play or identification of the ghost",
-    "{{wiki_known_bugs_banshee}}": "<li>Will change its target after killing any player, not just the target</li>",
+    "{{wiki_known_bugs_banshee}}": "<li>Will change its target after killing any player, not just the target</li><li>If the target player dies while using the Monkey Paw's \"I wish for life\", they will remain the target even while dead. If the dead target's sanity was above 50%, the ghost will not hunt until another player dies and forces the target to change (in a 2 player game the ghost would never hunt).</li>",
     "{{wiki_known_bugs_dayan}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>None</i></li>",

@@ -1729,7 +1729,7 @@
 
         <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
     </div>
-    <div id="wiki-los" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> {{wiki_los_title}}</div></div>
+    <div id="wiki-los" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> {{wiki_los_title}}</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div class="text">{{wiki_los_p1}}</div>
         <div class="text"><b><i>{{wiki_los_p2}}</i></b></div>
@@ -1842,7 +1842,7 @@
             <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
         </div>
 
-        <div id="wiki-los-the-mimic" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> {{The Mimic}}</div></div>
+        <div id="wiki-los-the-mimic" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> {{The Mimic}}</div></div>
         <div class="wiki_details" style="height: 0px;">
             <div class="text">
                 {{wiki_los_mimic_p1}}
@@ -1850,7 +1850,7 @@
             <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
         </div>
 
-        <div id="wiki-los-the-twins" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> {{The Twins}}</div></div>
+        <div id="wiki-los-the-twins" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> {{The Twins}}</div></div>
         <div class="wiki_details" style="height: 0px;">
             <div class="text">
                 {{wiki_los_twins_p1}}<br><br>
@@ -1862,6 +1862,188 @@
             </div>
             <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
         </div>
+
+        <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
+    </div>
+    <div id="wiki-los-sim" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> {{wiki_los_sim_title}}</div></div>
+    <div class="wiki_details" style="height: 0px;">
+        <div class="text">
+            {{wiki_los_sim_p1}}<br><br>
+            {{wiki_los_sim_p2}}<br><br>
+            <div id="losProgressBar">
+                <div id="losProgressBarInner" class="bar"></div>
+                <div class="los_start_line"></div>
+                <div class="los_end_line"></div>
+                <div class="los_start_label">{{wiki_los_sim_start}}</div>
+                <div class="los_end_label">{{wiki_los_sim_end}}</div>
+            </div>
+        </div>
+        <table id="hantu_speed_breakdown">
+            <tbody>
+                <tr>
+                    <td>{{Banshee}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'banshee-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Dayan}}</td>
+                    <td class="fade">1.2<span class="ms">m/s</span> ❌</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'dayan-los')">🔊</span></td>
+                    <td class="fade">2.25<span class="ms">m/s</span> ❌</td>
+                </tr>
+                <tr class="fade">
+                    <td>{{Deogen}}</td>
+                    <td>0.4<span class="ms">m/s</span> ❌</td>
+                    <td></td>
+                    <td>3.0<span class="ms">m/s</span> ❌</td>
+                </tr>
+                <tr>
+                    <td>{{Demon}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'demon-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Gallu}}</td>
+                    <td>1.36<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.36,0,'gallu-los-1')">🔊</span></td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'gallu-los-2')">🔊</span></td>
+                    <td>1.96<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.96,0,'gallu-los-3')">🔊</span></td>
+                </tr>
+                <tr>
+                    <td>{{Goryo}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'goryo-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr class="fade">
+                    <td>{{Hantu}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> ❌</td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Jinn}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'jinn-los')">🔊</span></td>
+                    <td class="fade">2.5<span class="ms">m/s</span> ❌</td>
+                </tr>
+                <tr>
+                    <td>{{Mare}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'mare-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Moroi}}</td>
+                    <td>1.5<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.5,0,'moroi-los-1')">🔊</span></td>
+                    <td class="fade">-</td>
+                    <td>2.25<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(2.25,0,'moroi-los-2')">🔊</span></td>
+                </tr>
+                <tr>
+                    <td>{{Myling}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'myling-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Obake}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'obake-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Obambo}}</td>
+                    <td>1.45<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.45,0,'obambo-los-1')">🔊</span></td>
+                    <td></td>
+                    <td>1.96<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.96,0,'obambo-los-2')">🔊</span></td>
+                </tr>
+                <tr>
+                    <td>{{Oni}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'oni-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Onryo}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'onryo-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Phantom}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'phantom-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Poltergeist}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'poltergeist-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Raiju}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'raiju-los')">🔊</span></td>
+                    <td class="fade">2.5<span class="ms">m/s</span> ❌</td>
+                </tr>
+                <tr class="fade">
+                    <td>{{Revenant}}</td>
+                    <td>1.0<span class="ms">m/s</span> ❌</td>
+                    <td></td>
+                    <td>3.0<span class="ms">m/s</span> ❌</td>
+                </tr>
+                <tr>
+                    <td>{{Shade}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'shade-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Spirit}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'spirit-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr class="fade">
+                    <td>{{Thaye}}</td>
+                    <td>1.0<span class="ms">m/s</span> ❌</td>
+                    <td class="fade">-</td>
+                    <td>2.75<span class="ms">m/s</span> ❌</td>
+                </tr>
+                <tr>
+                    <td>{{The Mimic}}</td>
+                    <td>?</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'the-mimic-los')">🔊</span></td>
+                    <td>?</td>
+                </tr>
+                <tr>
+                    <td>{{The Twins}}</td>
+                    <td>1.5<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,-0.2,'the-twins-los-1')">🔊</span></td>
+                    <td></td>
+                    <td>1.9<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0.2,'the-twins-los-2')">🔊</span></td>
+                </tr>
+                <tr>
+                    <td>{{Wraith}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'wraith-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Yokai}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'yokai-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
+                    <td>{{Yurei}}</td>
+                    <td class="fade">-</td>
+                    <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'yurei-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+            </tbody>
+        </table>
 
         <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
     </div>
@@ -2037,7 +2219,7 @@
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a5}}</span><br><i><b>"{{wiki_media_photo_l5}}"</b></i></td>
                 <td>$15</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a4}}</span><br><i><b>"{{wiki_media_photo_l4}}"</b></i></td>
@@ -2062,7 +2244,7 @@
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a14}}</span><br><i><b>"{{wiki_media_photo_l14}}"</b></i></td>
                 <td>$10</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a15}}</span><br><i><b>"{{wiki_media_photo_l15}}"</b></i></td>
@@ -2077,7 +2259,7 @@
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a7}}</span><br><i><b>"{{wiki_media_photo_l7}}"</b></i></td>
                 <td>$5</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a9}}</span><br><i><b>"{{wiki_media_photo_l9}}"</b></i></td>
@@ -2092,7 +2274,7 @@
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a11}}</span><br><i><b>"{{wiki_media_photo_l11}}"</b></i></td>
                 <td>$5</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a12}}</span><br><i><b>"{{wiki_media_photo_l12}}"</b></i></td>
@@ -2112,37 +2294,37 @@
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a17}}</span><br><i><b>"{{wiki_media_photo_l17}}"</b></i></td>
                 <td>$5</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a18}}</span><br><i><b>"{{wiki_media_photo_l18}}"</b></i></td>
                 <td>$5</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a19}}</span><br><i><b>"{{wiki_media_photo_l19}}"</b></i></td>
                 <td>$5</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a20}}</span><br><i><b>"{{wiki_media_photo_l20}}"</b></i></td>
                 <td>$5</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a21}}</span><br><i><b>"{{wiki_media_photo_l21}}"</b></i></td>
                 <td>$5</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a22}}</span><br><i><b>"{{wiki_media_photo_l22}}"</b></i></td>
                 <td>$5</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_photo_a23}}</span><br><i><b>"{{wiki_media_photo_l23}}"</b></i></td>
                 <td>$5</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
         </table>
         *{{wiki_media_photo_n11}}
@@ -2179,7 +2361,7 @@
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_video_a8}}</span><br><i><b>"{{wiki_media_video_l8}}"</b></i></td>
                 <td>$15</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_video_a6}}</span><br><i><b>"{{wiki_media_video_l6}}"</b></i></td>
@@ -2209,7 +2391,7 @@
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_video_a9}}</span><br><i><b>"{{wiki_media_video_l9}}"</b></i></td>
                 <td>$10</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_video_a10}}</span><br><i><b>"{{wiki_media_video_l10}}"</b></i></td>
@@ -2299,7 +2481,7 @@
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_video_a24}}</span><br><i><b>"{{wiki_media_video_l24}}"</b></i></td>
                 <td>$5</td>
-                <td>-</td>
+                <td class="fade">-</td>
             </tr>
             <tr>
                 <td style="padding: 6px 3px;"><span style="color: #999; display: inline-block; padding-bottom: 5px;">{{wiki_media_video_a27}}</span><br><i><b>"{{wiki_media_video_l27}}"</b></i></td>

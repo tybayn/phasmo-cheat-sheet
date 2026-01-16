@@ -118,6 +118,70 @@ function toggleSound(set_tempo,id){
     last_id = id
 }
 
+function simulate_los(set_tempo,append_speed,id){
+    adjustOffset(0)
+    speed = set_tempo
+    var speed_idx = parseInt($("#ghost_modifier_speed").val())
+    tempo = speedToBpm[speed_idx](speed+append_speed,blood_moon,forest_minion,coal) * (1+(offset/100))
+    var progress_bar = $('#losProgressBar')
+    var progress_bar_inner = document.getElementById('losProgressBarInner')
+
+    if(!isPlaying){
+        step()
+        var los_speed = speed * 1.65
+        var los_tempo = speedToBpm[speed_idx](los_speed+append_speed,blood_moon,forest_minion,coal) * (1+(offset/100))
+        var increase_steps_start = 4
+        var increase_steps_end = 30
+        var increase_steps_total = 34
+        var step_increase = (los_tempo - tempo) / (increase_steps_end - increase_steps_start)
+        var current_step = 0
+        timerStop = setTimeout(function increaseSpeed(){
+            if(isPlaying){
+                current_step++
+
+                var progressBarWidth = current_step * progress_bar.width() / increase_steps_total + "px";
+                progress_bar_inner.style.width = progressBarWidth;
+
+                if(current_step < increase_steps_start){
+                    timerID = setTimeout(increaseSpeed,500)
+                }
+                
+                else if(current_step < increase_steps_end){
+                    tempo += step_increase
+                    timerID = setTimeout(increaseSpeed,500)
+                }
+
+                else if(current_step < increase_steps_total){
+                    tempo = los_tempo
+                    timerID = setTimeout(increaseSpeed,500)
+                }
+
+                else{
+                    tempo = los_tempo
+                    timerStop = setTimeout(function(){
+                        if(isPlaying){
+                            isPlaying = !isPlaying;
+                            window.clearTimeout(timerID);
+                        }
+                    },500)
+                }
+            }
+        },500)
+    }
+    else if(last_id == id){
+        step()
+    }
+    else{
+        window.clearTimeout(timerStop)
+        timerStop = setTimeout(function(){
+            if(isPlaying){
+                isPlaying = !isPlaying;
+                window.clearTimeout(timerID);
+            }
+        },step_duration)
+    }
+    last_id = id
+}
 
 // ------------------------------------------------------------------------------
 

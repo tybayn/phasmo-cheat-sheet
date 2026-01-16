@@ -47,6 +47,9 @@
     color: #00ff00;
 }
 
+.fade{
+    opacity: 0.4;
+}
 
 @keyframes yellow-flash {
     0% {
@@ -428,6 +431,76 @@
         height: 20px;
         background-size: cover;
         margin-left: 5px;
+    }
+
+    #hantu_speed_breakdown .ms{
+        font-size: 10px;
+        color: #ffffff60;
+        margin-left: 2px;
+    }
+
+    #losProgressBar {
+        width: calc(100% - 40px);
+        margin: 20px 20px 10px 20px;
+        height: 15px;
+        box-shadow: inset 0 0 10px #161615;
+        background: rgba(0,0,0,0.25);
+        display: inline-block;
+        position: relative;
+    }
+
+    #losProgressBar .bar {
+        height: 15px;
+        text-align: right;
+        line-height: 15px;
+        width: 0;
+        background-color: #ffffff60;
+        box-sizing: border-box;
+        position: absolute;
+        float: left;
+        transition: width 0.5s linear;
+    }
+
+    #losProgressBar .los_start_line {
+        height: 25px;
+        border-left: 2px #fff dotted;
+        left: 11.76%;
+        width: 0;
+        top: -10px;
+        position: absolute;
+        float: left;
+    }
+
+    #losProgressBar .los_end_line {
+        height: 25px;
+        border-left: 2px #fff dotted;
+        left: 88.24%;
+        width: 0;
+        top: -10px;
+        position: absolute;
+        float: left;
+    }
+
+    #losProgressBar .los_start_label {
+        height: 25px;
+        left: calc(11.76% - 30px);
+        width: 60px;
+        top: -25px;
+        position: absolute;
+        float: left;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    #losProgressBar .los_end_label {
+        height: 25px;
+        left: calc(88.24% - 30px);
+        width: 60px;
+        top: -25px;
+        position: absolute;
+        float: left;
+        font-size: 11px;
+        text-align: center;
     }
 
     .tarot-img {
@@ -856,6 +929,76 @@
         height: 50px;
         background-size: cover;
         margin-left: 10px;
+    }
+
+    #hantu_speed_breakdown .ms{
+        font-size: 25px;
+        color: #ffffff60;
+        margin-left: 4px;
+    }
+
+    #losProgressBar {
+        width: calc(100% - 80px);
+        margin: 40px 40px 20px 40px;
+        height: 30px;
+        box-shadow: inset 0 0 10px #161615;
+        background: rgba(0, 0, 0, 0.25);
+        display: inline-block;
+        position: relative;
+    }
+
+    #losProgressBar .bar {
+        height: 30px;
+        text-align: right;
+        line-height: 30px;
+        width: 0;
+        background-color: #ffffff60;
+        box-sizing: border-box;
+        position: absolute;
+        float: left;
+        transition: width 0.5s linear;
+    }
+
+    #losProgressBar .los_start_line {
+        height: 50px;
+        border-left: 5px #fff dotted;
+        left: 11.76%;
+        width: 0;
+        top: -10px;
+        position: absolute;
+        float: left;
+    }
+
+    #losProgressBar .los_end_line {
+        height: 50px;
+        border-left: 5px #fff dotted;
+        left: 88.24%;
+        width: 0;
+        top: -10px;
+        position: absolute;
+        float: left;
+    }
+
+    #losProgressBar .los_start_label {
+        height: 50px;
+        left: calc(11.76% - 75px);
+        width: 150px;
+        top: -45px;
+        position: absolute;
+        float: left;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    #losProgressBar .los_end_label {
+        height: 50px;
+        left: calc(88.24% - 75px);
+        width: 150px;
+        top: -45px;
+        position: absolute;
+        float: left;
+        font-size: 25px;
+        text-align: center;
     }
 
     .tarot-img {

@@ -52,7 +52,7 @@ class Ghost {
                     </div>
                 </div>
                 <div class="ghost_speed">
-                    <div class="footstep_los" onclick="openWikiPath('hunts.los.los-${has_los_guide.includes(data.ghost) ? data.ghost.toLowerCase().replace(' ','-') : 'std' }')">
+                    <div class="footstep_los" onclick="openWikiPath('hunts.los-sim')">
                         <img src="imgs/${(+data.has_los) || data.ghost == 'The Mimic' ? 'los' : 'nlos'}.png" title="${(+data.has_los) || data.ghost == 'The Mimic' ? '{{has_los}}' : '{{not_los}}'}"${data.min_speed == -1 ? ' style="display:none;"' : ''}>
                         <img src="imgs/footsteps.png" style="filter: invert(1);">
                     </div>

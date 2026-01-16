@@ -53,13 +53,13 @@
             }
         })();
     </script>
-    <script src="scripts-v9/ghost_template-v3.js"></script>
+    <script src="scripts-v9/ghost_template-v4.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <link rel="stylesheet" href="styles-v9/style-v19.css"/>
     <link rel="stylesheet" href="styles-v9/style-mobile-v14.css"/>
     <link rel="stylesheet" href="themes-v9/themes-v4.css"/>
     <link rel="stylesheet" href="login-v9/login-v1.css" >
-    <link rel="stylesheet" href="wiki-v9/wiki-v1.css" >
+    <link rel="stylesheet" href="wiki-v9/wiki-v2.css" >
     <link rel="stylesheet" href="wiki-v9/wiki-spoiler-v1.css" >
     <link rel="stylesheet" href="events-v9/events-v1.css" >
     <link rel="stylesheet" href="models-v9/models-v1.css" >
@@ -995,7 +995,7 @@
                         <div>{{tap}}<div class="tap_note">({{press_f}})</div></div>
                         <div id="input_speed">0<br>m/s</div>
                     </button>
-                    <canvas id="bpm_hist" height="85" width="150"></canvas>
+                    <canvas id="bpm_hist" height="85" width="150" style="cursor: pointer;" onclick="openWikiPath('hunts.los')"></canvas>
                     <div id="tap_viz"></div>
                     <div class="legend">
                         <div class="legend_box" style="box-shadow: 0px 0px 4px 1px #dbd994"></div>
@@ -1157,7 +1157,7 @@
     <script src="lang-v9/lang-v9.js"></script>
     <script src="themes-v9/themes-v9.js"></script>
     <script src="scripts-v9/audio_controller-v2.js"></script>
-    <script src="scripts-v9/metronome-v7.js"></script>
+    <script src="scripts-v9/metronome-v8.js"></script>
     <script src="scripts-v9/timer-v5.js"></script>
     <script src="login-v9/login-v3.js"></script>
     <script src="wiki-v9/wiki-v3.js"></script>
@@ -1180,7 +1180,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v9/wiki-v18.html",() => {
+                $("#wiki-body").load("wiki-v9/wiki-v19.html",() => {
                     resolve("Ghost data loaded")
                 })
             })
