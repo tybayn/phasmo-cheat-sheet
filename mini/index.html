@@ -126,6 +126,7 @@
                 padding: 20px 5px 20px 5px;
                 min-width: 40%;
                 flex:1;
+                break-inside: avoid;
             }
 
             .ghost_card + .ghost_card + .ghost_card{
@@ -367,12 +368,28 @@
     </div>
 
     <script>
+        let lang = null;
+
         function playSound(resource){
             var snd = new Audio(resource);
             snd.play()
         }
 
         $(window).on('load', function() {
+            function getCookie(e){let t=e+"=",i=decodeURIComponent(document.cookie).split(";");for(let n=0;n<i.length;n++){let o=i[n];for(;" "==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(t))return o.substring(t.length,o.length)}return""}
+            function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="expires="+n.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
+            params = new URL(window.location.href).searchParams
+            if (params.get('lang')){
+                lang = params.get('lang').toLowerCase()
+            }
+
+            if (!lang) {
+                lang = getCookie("lang")
+            }
+
+            if (!lang || ['ko','zh-cn','jp','ru'].includes(lang)) {
+                lang = "en"
+            }
 
             function toNumStr(num) { 
                 let new_num = num
@@ -407,11 +424,11 @@
             let short_evidence = {
                 "EMF 5":"EMF 5",
                 "Ultraviolet":"UV",
-                "Writing":"Writing",
-                "Freezing":"Freezing",
-                "DOTs":"DOTs",
-                "Ghost Orbs":"Orbs",
-                "Spirit Box":"Box"
+                "Writing":{'en':'Writing','tr':'Yazma','it':'Libro','es':'Escritura','fr':'Écriture','de':'Schreiben','pt-br':'Escrita'}[lang],
+                "Freezing":{'en':'Freezing','tr':'Donma','it':'Cong.','es':' Heladas','fr':'Glaciales','de':'Einfrieren','pt-br':'Cong.'}[lang],
+                "DOTs":"DOTS",
+                "Ghost Orbs":{'en':'Orbs','tr':'Küresi','it':'Sfera','es':'Orbes','fr':'Orbe','de':'Orbs','pt-br':'Orbe'}[lang],
+                "Spirit Box":{'en':'Box','tr':'Telsizi','it':'Box','es':'Caja','fr':'Box','de':'Box','pt-br':'Box'}[lang]
             }
 
             let evidence_img = {
@@ -424,23 +441,17 @@
                 "Spirit Box":"../imgs/spirit-box-icon.png"
             }
 
-            fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=en`, {cache: 'default', signal: AbortSignal.timeout(10000)})
+            fetch(`https://zero-network.net/phasmophobia/data/ghosts.json?lang=${lang}`, {cache: 'default', signal: AbortSignal.timeout(10000)})
             .then(data => data.json())
             .then(data => {
 
-                let ghost_cards_html = []
-
                 data.ghosts = data.ghosts.sort((a,b) => (a.name > b.name) ? 1 : (a.name < b.name) ? -1 : 0)
 
+                // First, render all ghost cards as HTML
+                let all_ghost_cards = []
                 for(var i = 0; i < data.ghosts.length; i++){
-                    cur_page = Math.floor(i / 10);
-
-                    if (!ghost_cards_html[cur_page]) {
-                        ghost_cards_html[cur_page] = [];
-                    }
-
                     let ghost_card = `
-                        <div class="ghost_card">
+                        <div class="ghost_card" data-ghost-index="${i}">
                             <div class="ghost_name">${data.ghosts[i].name}</div>
                             <div class="ghost_evidence_list">
                                 <div class="ghost_evidence" style="background-image: url(${evidence_img[data.ghosts[i].evidence[0]]});">${short_evidence[data.ghosts[i].evidence[0]]}</div>
@@ -461,22 +472,88 @@
                             </div>
                         </div>
                     `
-
-                    ghost_cards_html[cur_page].push(ghost_card);
+                    all_ghost_cards.push(ghost_card);
                 }
 
-                document.getElementById('ghost_table_1').innerHTML += ghost_cards_html[0].join('') + '<div class="footer">Copyright &copy; 2023-2026 | Zero-Network</div>'
+                // Create a temporary container to measure individual card heights
+                const tempContainer = document.createElement('div');
+                tempContainer.style.cssText = 'position: absolute; visibility: hidden; width: 7.9in; display: flex; flex-wrap: wrap;';
+                document.body.appendChild(tempContainer);
+                
+                // Measure each card's height individually
+                const cardHeights = [];
+                all_ghost_cards.forEach((cardHtml) => {
+                    tempContainer.innerHTML = cardHtml;
+                    const card = tempContainer.firstElementChild;
+                    cardHeights.push(card.offsetHeight);
+                });
+                document.body.removeChild(tempContainer);
 
-                Array.from(ghost_cards_html).forEach((page, index) => {
-                    if (index == 0) return;
+                // Calculate available height for cards (page height minus title and footer)
+                const pageHeightPx = (10.8 * 96) - 10; // 10.8in - 10px
+                const paddingTop = 11.5;
+                const paddingBottom = 11.5;
+                const availableHeight = pageHeightPx - paddingTop - paddingBottom;
+
+                // Since cards are arranged in flex-wrap with roughly 2 per row, calculate row heights
+                const cardsPerRow = 2;
+                let pages = [[]];
+                let currentPageHeight = 0;
+                let currentPageIndex = 0;
+                let currentRowCards = [];
+                let currentRowMaxHeight = 0;
+
+                all_ghost_cards.forEach((cardHtml, index) => {
+                    currentRowCards.push(cardHtml);
+                    currentRowMaxHeight = Math.max(currentRowMaxHeight, cardHeights[index]);
+                    
+                    // When we have enough cards for a row, or it's the last card
+                    if (currentRowCards.length === cardsPerRow || index === all_ghost_cards.length - 1) {
+                        const rowHeight = currentRowMaxHeight + 10; // Add margin
+                        
+                        // Check if adding this row would exceed page height
+                        if (currentPageHeight + rowHeight > availableHeight && pages[currentPageIndex].length > 0) {
+                            // Start a new page
+                            currentPageIndex++;
+                            pages[currentPageIndex] = [];
+                            currentPageHeight = 0;
+                        }
+                        
+                        // Add the row's cards to current page
+                        pages[currentPageIndex].push(...currentRowCards);
+                        currentPageHeight += rowHeight;
+                        
+                        // Reset for next row
+                        currentRowCards = [];
+                        currentRowMaxHeight = 0;
+                    }
+                });
+
+                // Build first page
+                document.getElementById('ghost_table_1').innerHTML = `
+                    <button class="print" onclick="window.print()">Print</button> 
+                    <div id="page_title">
+                        <div id="title_zn">Zero-Network's</div>
+                        <div id="title_title">Unofficial Phasmo Cheat Sheet</div>
+                        <div id="title_mini">
+                            <span>^</span>
+                            <span>mini</span>
+                        </div>
+                        <div id="title_version">Game Version: ${data.version}</div>
+                    </div>
+                    ${pages[0].join('')}
+                    <div class="footer">Copyright &copy; 2023-2026 | Zero-Network</div>
+                `;
+
+                // Create additional pages if needed
+                for (let i = 1; i < pages.length; i++) {
                     document.getElementById('main').innerHTML += `
-                        <div id="ghost_table_${index + 1}" class="ghost_table">
-                        ${page.join('')}
+                        <div id="ghost_table_${i + 1}" class="ghost_table">
+                        ${pages[i].join('')}
                         <div class="footer">Copyright &copy; 2023-2026 | Zero-Network</div>
                         </div>
-                    `
-                })
-                document.getElementById('title_version').innerText = `Game Version: ${data.version}`
+                    `;
+                }
             })
         })
 
