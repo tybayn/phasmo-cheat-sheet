@@ -370,6 +370,10 @@
     <script>
         let lang = null;
 
+        const lang_currency = [
+            "de", "es", "fr", "it", "pt-br", "tr"
+        ]
+
         function playSound(resource){
             var snd = new Audio(resource);
             snd.play()
@@ -419,6 +423,37 @@
 
                 msg += "</ul></div>"
                 return msg
+            }
+
+            function convert_currency(content) {
+                return content.replace(/\b(\d+)\.(\d+)\b/g, (match, p1, p2, offset, string) => {
+                    const before = string.slice(0, offset);
+                    const after = string.slice(offset + match.length);
+
+                    // Skip function call arguments or chained decimals
+                    if (/\b\w+\($/.test(before) || /\d\.\d*$/.test(before)) {
+                        return match;
+                    }
+
+                    if (/^\.\d/.test(after)) {
+                        return match;
+                    }
+
+                    // Skip if match is within a CSS style attribute or CSS block
+                    const styleAttrStart = string.lastIndexOf('style="', offset);
+                    const styleAttrEnd = string.indexOf('"', styleAttrStart + 7);
+                    if (styleAttrStart !== -1 && styleAttrEnd !== -1 && offset > styleAttrStart && offset < styleAttrEnd) {
+                        return match;
+                    }
+
+                    const styleAttrStart2 = string.lastIndexOf("style='", offset);
+                    const styleAttrEnd2 = string.indexOf("'", styleAttrStart2 + 7);
+                    if (styleAttrStart2 !== -1 && styleAttrEnd2 !== -1 && offset > styleAttrStart2 && offset < styleAttrEnd2) {
+                        return match;
+                    }
+
+                    return `${p1},${p2}`;
+                });
             }
 
             let short_evidence = {
@@ -541,7 +576,7 @@
                         </div>
                         <div id="title_version">Game Version: ${data.version}</div>
                     </div>
-                    ${pages[0].join('')}
+                    ${lang_currency.includes(lang) ? convert_currency(pages[0].join('')) : pages[0].join('')}
                     <div class="footer">Copyright &copy; 2023-2026 | Zero-Network</div>
                 `;
 
@@ -549,7 +584,7 @@
                 for (let i = 1; i < pages.length; i++) {
                     document.getElementById('main').innerHTML += `
                         <div id="ghost_table_${i + 1}" class="ghost_table">
-                        ${pages[i].join('')}
+                        ${lang_currency.includes(lang) ? convert_currency(pages[i].join('')) : pages[i].join('')}
                         <div class="footer">Copyright &copy; 2023-2026 | Zero-Network</div>
                         </div>
                     `;
