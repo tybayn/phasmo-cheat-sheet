@@ -396,13 +396,17 @@
             }
 
             function toNumStr(num) { 
-                let new_num = num
+                let new_num = Number(num);
+
                 if (Number.isInteger(new_num)) { 
-                    new_num += ".0"
+                    new_num = new_num.toFixed(1); // 1 → "1.0"
                 } else {
-                    new_num = new_num.toString(); 
+                    new_num = Number(new_num.toFixed(2)).toString(); // round + trim
                 }
-                return new_num;
+
+                return lang_currency.includes(lang)
+                    ? new_num.replace(".", ",")
+                    : new_num;
             }
 
             function behavior(value){
