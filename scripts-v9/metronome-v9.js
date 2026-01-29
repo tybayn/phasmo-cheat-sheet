@@ -480,10 +480,10 @@ function mark_ghosts(ms){
         
         if(ms != 0.00){
             var name = ghosts[i].getElementsByClassName("ghost_name")[0].textContent;
-            var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].textContent.replaceAll(',','.');
+            var speed = ghosts[i].getElementsByClassName("ghost_speed")[0].innerHTML;
             var has_los = ghosts[i].getElementsByClassName("ghost_has_los")[0].textContent == '1';
 
-            const speeds = [...speed.matchAll(/(\d+(?:\.\d+)?)\s*m\/s/g)].map(m => parseFloat(m[1]));
+            const speeds = [...speed.matchAll(/toggleSound\((\d+(?:\.\d+)?)\s*,/g)].map(m => parseFloat(m[1]));
             if(speed.includes('-')){
                 var speed_type = "range"
             }
