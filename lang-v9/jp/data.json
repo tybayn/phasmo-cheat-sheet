@@ -115,6 +115,7 @@
     "{{disable_particles}}": "パーティクルを無効化",
     "{{misc}}": "その他",
     "{{persist_modes}}": "ブラッドムーン / ミニオンモードを維持",
+    "{{keep_alive}}": "Keep screen alive (mobile)",
     "{{data_refresh}}": "すべてのデータをリセット",
     "{{links}}": "リンク",
     "{{shared_journal_link}}": "共有ジャーナルリンク",
