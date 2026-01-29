@@ -53,7 +53,7 @@
             }
         })();
     </script>
-    <script src="scripts-v9/ghost_template-v4.js"></script>
+    <script src="scripts-v9/ghost_template-v5.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <link rel="stylesheet" href="styles-v9/style-v19.css"/>
     <link rel="stylesheet" href="styles-v9/style-mobile-v14.css"/>
@@ -526,7 +526,7 @@
                 <div class="modifier_volume yfont white">
                     <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo(event)">
                     {{desktop_link}}
-                    <a id="zndl-download-icon" class="download" href="assets/ZN-Desktop-Link-Installer-v6.3.7.msi" download="ZN-Desktop-Link-Installer-v6.3.7.msi" onclick="showZNDLInfo(event)"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
+                    <a id="zndl-download-icon" class="download" href="assets/ZN-Desktop-Link-Installer-v6.3.8.msi" download="ZN-Desktop-Link-Installer-v6.3.8.msi" onclick="showZNDLInfo(event)"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
                 </div>
                 <div class="journal_link">
                     <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="" disabled style="color:#444;">
@@ -587,7 +587,7 @@
             </div>
             <div id="zndl-download-button" class="find-overlay">
                 {{looking_for_overlay}}<br>
-                <a href="assets/ZN-Desktop-Link-Installer-v6.3.7.msi" download="ZN-Desktop-Link-Installer-v6.3.7.msi" onclick="showZNDLInfo(event)" style="text-decoration: none;">
+                <a href="assets/ZN-Desktop-Link-Installer-v6.3.8.msi" download="ZN-Desktop-Link-Installer-v6.3.8.msi" onclick="showZNDLInfo(event)" style="text-decoration: none;">
                     <div class="button-zn"><img class="download_icon" src="imgs/download.png" style="filter: invert(1); padding-right: 5px;">ZN-Desktop-Link</div>
                 </a>
             </div>
@@ -1180,7 +1180,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v9/wiki-v20.html",() => {
+                $("#wiki-body").load("wiki-v9/wiki-v21.html",() => {
                     resolve("Ghost data loaded")
                 })
             })

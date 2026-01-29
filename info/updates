@@ -1,6 +1,6 @@
 {
-    "version":"6.3.7",
-    "date":"2026-01-06",
-    "details": "- Made switching between speed modes more dynamic\n\nBug Fixes:\n --",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.3.7.msi"
+    "version":"6.3.8",
+    "date":"2026-01-28",
+    "details": "- Added a confirmation screen when clicking the 'Reset' button for resetting hotkeys\n\nBug Fixes:\n - Fixed an issue where restting hotkeys was missing a few and updating the wrong labels",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.3.8.msi"
 }
