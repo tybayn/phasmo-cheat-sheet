@@ -437,7 +437,7 @@
     "{{wiki_known_bugs_dayan}}": "<li><i>Yok</i></li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>Yok</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>Yok</i></li>",
-    "{{wiki_known_bugs_gallu}}": "<li><i>Yok</i></li>",
+    "{{wiki_known_bugs_gallu}}": "<li><i>Sadece lobi sahibi Gallu'nun tuzu bozduğunu görebilir. Hayalet, ev lobi sahibi olmayan bir oyuncu onun tuzu bozmadan içinden geçtiğini görse bile durumunu değiştirebilir.</i></li>",
     "{{wiki_known_bugs_goryo}}": "<li><i>Yok</i></li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>Yok</i></li>",
     "{{wiki_known_bugs_jinn}}": "<li>3m menzili zemin tarafından durdurulmadığı için yeteneğini bir kat aşağıdaki oyuncuya kullanabilir</li>",
