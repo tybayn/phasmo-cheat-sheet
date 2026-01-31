@@ -437,7 +437,7 @@
     "{{wiki_known_bugs_dayan}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>Aucun</i></li>",
-    "{{wiki_known_bugs_gallu}}": "<li><i>Aucun</i></li>",
+    "{{wiki_known_bugs_gallu}}": "<li>Seul l'hôte peut voir un Gallu perturber du sel. L'entité peut toujours changer d'état même si un joueur non hôte la voit marcher dans du sel sans le perturber.</li>",
     "{{wiki_known_bugs_goryo}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_jinn}}": "<li>Peut utiliser sa capacité sur un joueur à un étage en dessous car la portée de 3 m n'est pas stoppée par le sol</li>",
