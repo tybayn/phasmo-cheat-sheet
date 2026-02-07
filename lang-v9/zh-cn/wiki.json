@@ -437,7 +437,7 @@
     "{{wiki_known_bugs_dayan}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>无</i></li>",
-    "{{wiki_known_bugs_gallu}}": "<li><i>多人模式下，只有房主可以看到加鲁踩盐。加鲁可以在客机看到它走过盐但是没踩散的情况下更换形态。</i></li>",
+    "{{wiki_known_bugs_gallu}}": "<li><i>多人模式下，因为某些原因，只有房主可以看到加鲁踩盐。加鲁可以在客机看到它走过盐但是没踩散的情况下更换形态。</i></li>",
     "{{wiki_known_bugs_goryo}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_jinn}}": "<li>可以对相对于鬼魂楼下的玩家使用技能，因为楼板不能阻挡3m外冲刺的判断</li>",
