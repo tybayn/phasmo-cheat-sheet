@@ -459,7 +459,7 @@
     "{{wiki_known_bugs_dayan}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>None</i></li>",
-    "{{wiki_known_bugs_gallu}}": "<li>Only the host is able to see a Gallu disturb salt. The ghost can still change states even if a non-host player sees it walk through salt without disturbing it.</li>",
+    "{{wiki_known_bugs_gallu}}": "<li>There are situations in which only the host is able to see a Gallu disturb salt. The ghost can still change states even if a non-host player sees it walk through salt without disturbing it.</li>",
     "{{wiki_known_bugs_goryo}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_hantu}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_jinn}}": "<li>Can use its ability on a player a floor below since the 3m range is not stopped by the floor</li>",
