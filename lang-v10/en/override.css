@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'ZNPrimary';
+    src: url('../../styles-v10/fonts/october_crow.ttf');
+}
+
+@font-face {
+    font-family: 'ZNSecondary';
+    src: url('../../styles-v10/fonts/yahfie.ttf');
+}
+
+/* Desktop Adjustments */
+@media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
+
+    #links_tab, #data_link_tab, #event_tab, #wiki_tab, #maps_tab{
+        font-size: 15px;
+    }
+
+}

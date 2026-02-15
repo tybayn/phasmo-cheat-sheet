@@ -53,22 +53,22 @@
             }
         })();
     </script>
-    <script src="scripts-v9/ghost_template-v5.js"></script>
+    <script src="scripts-v10/ghost_template-v1.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
-    <link rel="stylesheet" href="styles-v9/style-v19.css"/>
-    <link rel="stylesheet" href="styles-v9/style-mobile-v14.css"/>
-    <link rel="stylesheet" href="themes-v9/themes-v4.css"/>
-    <link rel="stylesheet" href="login-v9/login-v1.css" >
-    <link rel="stylesheet" href="wiki-v9/wiki-v2.css" >
-    <link rel="stylesheet" href="wiki-v9/wiki-spoiler-v1.css" >
-    <link rel="stylesheet" href="events-v9/events-v1.css" >
-    <link rel="stylesheet" href="models-v9/models-v1.css" >
-    <link rel="stylesheet" href="partners-v9/partners-v9.css" >
-    <link rel="stylesheet" href="feed-v9/feed-v1.css" >
-    <link rel="stylesheet" href="styles-v9/plugins-v1/plugins-v2.css" >
-    <link rel="stylesheet" href="styles-v9/plugins-v1/makeship-v1.css" >
-    <link rel="stylesheet" href="styles-v9/plugins-v1/musicboxstore-v1.css" >
-    <link rel="stylesheet" href="styles-v9/sparkles-v1.css" >
+    <link rel="stylesheet" href="styles-v10/style-v1.css"/>
+    <link rel="stylesheet" href="styles-v10/style-mobile-v1.css"/>
+    <link rel="stylesheet" href="themes-v10/themes-v1.css"/>
+    <link rel="stylesheet" href="login-v10/login-v1.css" >
+    <link rel="stylesheet" href="wiki-v10/wiki-v1.css" >
+    <link rel="stylesheet" href="wiki-v10/wiki-spoiler-v1.css" >
+    <link rel="stylesheet" href="events-v10/events-v1.css" >
+    <link rel="stylesheet" href="models-v10/models-v1.css" >
+    <link rel="stylesheet" href="partners-v10/partners-v1.css" >
+    <link rel="stylesheet" href="feed-v10/feed-v1.css" >
+    <link rel="stylesheet" href="styles-v10/plugins-v1/plugins-v1.css" >
+    <link rel="stylesheet" href="styles-v10/plugins-v1/makeship-v1.css" >
+    <link rel="stylesheet" href="styles-v10/plugins-v1/musicboxstore-v1.css" >
+    <link rel="stylesheet" href="styles-v10/sparkles-v1.css" >
 </head>
 
 <body>
@@ -373,11 +373,11 @@
         </div>
     </div>
 
-    <div id="settings_box" style="left: -1000px;">
-        <div id="settings_tab" onclick="showSettings()">
+    <div id="settings_box" class="side-menu" style="left: -1000px;" ontouchstart="lock(event)" ontouchend="move(event,{'left': [showSideMenu,['settings']]})">
+        <div id="settings_tab" onclick="showSideMenu('settings')" onpointerdown="tabDown(event,'settings')" onpointermove="tabMove(event,'settings')" onpointerup="tabEnd(event,'settings')" onpointercancel="tabEnd(event,'settings')">
             <img class="settings_icon" src="imgs/settings.png">
         </div>
-        <span class="icon" onclick="showSettings()"></span>
+        <span class="icon" onclick="showSideMenu('settings')"></span>
 
         <div class="moving_content">
             <div class="settings_title yfont white">{{settings}}</div>
@@ -475,14 +475,14 @@
         </div>
     </div>
 
-    <div id="links_box" style="left: -1000px;">
-        <div id="links_tab" onclick="showLinks()">
+    <div id="links_box" class="side-menu" style="left: -1000px;" ontouchstart="lock(event)" ontouchend="move(event,{'left': [showSideMenu,['links']]})">
+        <div id="links_tab" onclick="showSideMenu('links')" onpointerdown="tabDown(event,'links')" onpointermove="tabMove(event,'links')" onpointerup="tabEnd(event,'links')" onpointercancel="tabEnd(event,'links')">
             <div class="tab_rotate">{{links}}</div>
             <div id="settings_status"></div>
             <div id="dllink_status"></div>
             <div id="voice_recognition_status" class="pulse_animation" style="display:none; background-image: url(imgs/mic.png);"></div>
         </div>
-        <span class="icon" onclick="showLinks()"></span>
+        <span class="icon" onclick="showSideMenu('links')"></span>
 
         <div class="moving_content">
             <div class="settings_title yfont white">{{links}}</div>
@@ -526,7 +526,7 @@
                 <div class="modifier_volume yfont white">
                     <img class="zndlinfo" src="imgs/question.png" onclick="showZNDLInfo(event)">
                     {{desktop_link}}
-                    <a id="zndl-download-icon" class="download" href="assets/ZN-Desktop-Link-Installer-v6.3.8.msi" download="ZN-Desktop-Link-Installer-v6.3.8.msi" onclick="showZNDLInfo(event)"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
+                    <a id="zndl-download-icon" class="download" href="assets/ZN-Desktop-Link-Installer-v1.3.8.msi" download="ZN-Desktop-Link-Installer-v1.3.8.msi" onclick="showZNDLInfo(event)"><img class="download_icon" src="imgs/download.png" alt="Download ZN-Desktop-Link"></a>
                 </div>
                 <div class="journal_link">
                     <input type="text" placeholder="DL-XXXXX" id="link_id" class="text" value="" disabled style="color:#444;">
@@ -587,19 +587,19 @@
             </div>
             <div id="zndl-download-button" class="find-overlay">
                 {{looking_for_overlay}}<br>
-                <a href="assets/ZN-Desktop-Link-Installer-v6.3.8.msi" download="ZN-Desktop-Link-Installer-v6.3.8.msi" onclick="showZNDLInfo(event)" style="text-decoration: none;">
+                <a href="assets/ZN-Desktop-Link-Installer-v1.3.8.msi" download="ZN-Desktop-Link-Installer-v1.3.8.msi" onclick="showZNDLInfo(event)" style="text-decoration: none;">
                     <div class="button-zn"><img class="download_icon" src="imgs/download.png" style="filter: invert(1); padding-right: 5px;">ZN-Desktop-Link</div>
                 </a>
             </div>
         </div>
     </div>
 
-    <div id="data_link_box" style="left: -1000px;">
-        <div id="data_link_tab" onclick="showDiscordLink();getLink();">
+    <div id="data_link_box" class="side-menu" style="left: -1000px;" ontouchstart="lock(event)" ontouchend="move(event,{'left': [showSideMenu,['data_link']]})">
+        <div id="data_link_tab" onclick="showSideMenu('data_link');getLink();" onpointerdown="tabDown(event,'data_link')" onpointermove="tabMove(event,'data_link')" onpointerup="tabEnd(event,'data_link')" onpointercancel="tabEnd(event,'data_link')">
             <div id="data_link_tab_label" class="tab_rotate">{{login}}</div>
             <div id="data_link_status"></div>
         </div>
-        <span class="icon" onclick="showDiscordLink()"></span>
+        <span class="icon" onclick="showSideMenu('data_link')"></span>
 
         <div class="moving_content">
             <div class="settings_title yfont white">{{data_link}}</div>
@@ -672,11 +672,11 @@
         </div>
     </div>
 
-    <div id="event_box" style="left: -1000px;">
-        <div id="event_tab" onclick="showEvent()">
+    <div id="event_box" class="side-menu"style="left: -1000px;" ontouchstart="lock(event)" ontouchend="move(event,{'left': [showSideMenu,['event']]})">
+        <div id="event_tab" onclick="showSideMenu('event')" onpointerdown="tabDown(event,'event')" onpointermove="tabMove(event,'event')" onpointerup="tabEnd(event,'event')" onpointercancel="tabEnd(event,'event')">
             <div class="tab_rotate">{{current_event}}</div>
         </div>
-        <span class="icon" onclick="showEvent()"></span>
+        <span class="icon" onclick="showSideMenu('event')"></span>
         <div class="moving_content">
             <div class="settings_title yfont white">{{current_event}}</div>
             <div class="title_note">( '◄' {{to_close}} )</div>
@@ -690,12 +690,12 @@
         </div>
     </div>
 
-    <div id="wiki_box" style="left: -1000px;">
-        <div id="wiki_tab" onclick="showWiki()">
+    <div id="wiki_box" class="side-menu" style="left: -1000px;" ontouchstart="lock(event)" ontouchend="move(event,{'left': [showSideMenu,['wiki']]})">
+        <div id="wiki_tab" onclick="showSideMenu('wiki')" onpointerdown="tabDown(event,'wiki')" onpointermove="tabMove(event,'wiki')" onpointerup="tabEnd(event,'wiki')" onpointercancel="tabEnd(event,'wiki')">
             <div class="tab_rotate">{{guides}}</div>
             <div id="guide_tab_footstep" style="display: none;"></div>
         </div>
-        <span class="icon" onclick="showWiki();"></span>
+        <span class="icon" onclick="showSideMenu('wiki')"></span>
 
         <div class="moving_content">
             <div class="settings_title yfont white">{{guides}}</div>
@@ -716,11 +716,11 @@
         </div>
     </div>
 
-    <div id="maps_box" style="left: -1000px;">
-        <div id="maps_tab" onclick="showMaps()">
+    <div id="maps_box" class="side-menu" style="left: -1000px;" ontouchstart="lock(event)" ontouchend="move(event,{'left': [showSideMenu,['maps']]})">
+        <div id="maps_tab" onclick="showSideMenu('maps')" onpointerdown="tabDown(event,'maps')" onpointermove="tabMove(event,'maps')" onpointerup="tabEnd(event,'maps')" onpointercancel="tabEnd(event,'maps')">
             <div class="tab_rotate">{{maps}}</div>
         </div>
-        <span class="icon" onclick="showMaps()"></span>
+        <span class="icon" onclick="showSideMenu('maps')"></span>
 
         <div class="maps_title yfont white">{{maps}}</div>
         <div class="title_note">( '◄' {{to_close}}, 'M' {{to_toggle}})</div>
@@ -737,7 +737,7 @@
             <div class="maps_credit">{{map_images_belong_to}} <a href="https://www.reddit.com/user/Fantismal" target="_blank">Fantismal</a> (<a href="https://imgur.com/a/iEI0tJo" target="_blank">{{images}}</a>)</div>
         </div>
         <div id="maps_list" class="maps_buttons"></div>
-        <div class="flex-holder-split">
+        <div class="flex-holder-split-map">
             <div class="map-type-container">
                 {{map_type}}:
                 <select id="map-type" onchange="switchMapType();send_cur_map_link();saveSettings();">
@@ -857,7 +857,8 @@
     </div>
     
     <div class="data">
-        <div id="menu" class="menu">
+        <div id="menu" class="menu" ontouchstart="lock(event)" ontouchend="move(event,{'left':[toggleFilterTools,[]],'right':[toggleFilterTools,[]],'down':[closeMenu,[]]})">
+            <div id="menu_tab" onpointerdown="menuTabDown(event)" onpointermove="menuTabMove(event)" onpointerup="menuTabEnd()" onpointercancel="menuTabEnd()" onclick="toggleMenu()">▲ ▲ ▲</div>
             <div class="tools-filter-buttons">
                 <button id="show_filter_button" class="filter_tool_button filter_tool_button_live" onclick="showMenu()">{{filters}}</button>
                 <button id="show_tool_button" class="filter_tool_button filter_tool_button_back" onclick="toggleFilterTools();showMenu();">{{tools}}</button>
@@ -878,15 +879,17 @@
                             <div class="spirit_line_label">{{Spirit}}</div>
                             <div class="demon_line_label">{{Demon}}</div>
                         </div>
-                        <div id="progress" onclick="toggle_timer();send_timer();">
-                            <img src="imgs/play.png" id="play_button" class="play_button">
-                            <div id="progressBar">
+                        <div id="progress" class="progress" onclick="toggle_timer();send_timer();">
+                            <div id="play_button" class="play_button">
+                                <ion-icon name="play" id="play_button_icon"></ion-icon>
+                            </div>
+                            <div id="progressBar" class="progressBar">
                                 <div id="progressBarInner" class="bar"></div>
                                 <div class="demon_line"></div>
                                 <div class="ghost_line"></div>
                                 <div class="spirit_line"></div>
                             </div>
-                            <div id="time_left" onclick="toggle_timer();send_timer();">
+                            <div id="time_left" class="time_left" onclick="toggle_timer();send_timer();">
                                 <span id="minute">03</span>:<span id="second">00</span>
                             </div>
                         </div>
@@ -899,14 +902,16 @@
                         <div class="line_labels" onclick="toggle_cooldown_timer();send_cooldown_timer();">
                             <div class="cooldown_demon_line_label">{{Demon}}</div>
                         </div>
-                        <div id="cooldownProgress" onclick="toggle_cooldown_timer();send_cooldown_timer();">
-                            <img src="imgs/play.png" id="play_cooldown_button" class="play_button">
-                            <div id="cooldownProgressBar">
+                        <div id="cooldownProgress" class="progress" onclick="toggle_cooldown_timer();send_cooldown_timer();">
+                            <div id="play_cooldown_button" class="play_button">
+                                <ion-icon name="play" id="play_cooldown_button_icon"></ion-icon>
+                            </div>
+                            <div id="cooldownProgressBar" class="progressBar">
                                 <div id="cooldownProgressBarInner" class="bar"></div>
                                 <div class="ghost_line"></div>
                                 <div class="demon_line"></div>
                             </div>
-                            <div id="time_left_cooldown" onclick="toggle_cooldown_timer();send_cooldown_timer();">
+                            <div id="time_left_cooldown" class="time_left" onclick="toggle_cooldown_timer();send_cooldown_timer();">
                                 <span id="minute_cooldown">00</span>:<span id="second_cooldown">25</span>
                             </div>
                         </div>
@@ -921,16 +926,18 @@
                             <div class="hunt_cursed_line_label">{{cursed}}</div>
                             <div class="hunt_obambo_line_label">{{Obambo}}</div>
                         </div>
-                        <div id="huntProgress" onclick="toggle_hunt_timer();send_hunt_timer();">
-                            <img src="imgs/play.png" id="play_hunt_button" class="play_button">
-                            <div id="huntProgressBar">
+                        <div id="huntProgress" class="progress" onclick="toggle_hunt_timer();send_hunt_timer();">
+                            <div id="play_hunt_button" class="play_button">
+                                <ion-icon name="play" id="play_hunt_button_icon"></ion-icon>
+                            </div>
+                            <div id="huntProgressBar" class="progressBar">
                                 <div id="huntProgressBarInner" class="bar"></div>
                                 <div class="obambo_line"></div>
                                 <div class="normal_line"></div>
                                 <div class="obambo_cursed_line"></div>
                                 <div class="cursed_line"></div>
                             </div>
-                            <div id="time_left_hunt" onclick="toggle_hunt_timer();send_hunt_timer();">
+                            <div id="time_left_hunt" class="time_left" onclick="toggle_hunt_timer();send_hunt_timer();">
                                 <span id="minute_hunt">00</span>:<span id="second_hunt">50</span>
                             </div>
                         </div>
@@ -943,14 +950,16 @@
                         <div class="line_labels" onclick="toggle_sound_timer();send_sound_timer();">
                             <div class="sound_myling_line_label">{{Myling}}</div>
                         </div>
-                        <div id="huntProgress" onclick="toggle_sound_timer();send_sound_timer();">
-                            <img src="imgs/play.png" id="play_sound_button" class="play_button">
-                            <div id="soundProgressBar">
+                        <div id="soundProgress" class="progress" onclick="toggle_sound_timer();send_sound_timer();">
+                            <div id="play_sound_button" class="play_button">
+                                <ion-icon name="play" id="play_sound_button_icon"></ion-icon>
+                            </div>
+                            <div id="soundProgressBar" class="progressBar">
                                 <div id="soundProgressBarInner" class="bar"></div>
                                 <div class="normal_line"></div>
                                 <div class="myling_line"></div>
                             </div>
-                            <div id="time_left_sound" onclick="toggle_sound_timer();send_sound_timer();">
+                            <div id="time_left_sound" class="time_left" onclick="toggle_sound_timer();send_sound_timer();">
                                 <span id="minute_sound">01</span>:<span id="second_sound">20</span>
                             </div>
                         </div>
@@ -992,7 +1001,7 @@
                     <div class="modifier_bpm_finder yfont white">{{bpm_finder}}</div>
                     <button id="tap" class="yfont" onmousedown="bpm_tap()">
                         <div id="input_bpm">0<br>bpm</div>
-                        <div>{{tap}}<div class="tap_note">({{press_f}})</div></div>
+                        <div class="tap_info">{{tap}}<div class="tap_note">({{press_f}})</div></div>
                         <div id="input_speed">0<br>m/s</div>
                     </button>
                     <canvas id="bpm_hist" height="85" width="150" style="cursor: pointer;" onclick="openWikiPath('hunts.los')"></canvas>
@@ -1099,20 +1108,17 @@
 
             </div>
             <div id="cur_map_label" class="yfont">{{current_map}}<div class="modifier_note_2">({{click_to_change}})</div></div>
-            <button id="cur_map" class="maps_button" onclick="closeAll(true);showMaps();">
+            <button id="cur_map" class="maps_button" onclick="closeAll(true);showSideMenu('maps',true);">
                 <div class="map_size s">S</div>
                 6 Tanglewood Drive
             </button>
             <button id="reset" class="yfont standard_reset" onclick="reset()" onmouseenter="checkResetButton()" onmouseleave="resetResetButton()" oncontextmenu="showResetMenu(event)">{{reset}}</button>
             <a id="kofi" href="https://ko-fi.com/severelyzero" target="_blank"><span>Support us on</span><img src="https://zero-network.net/phasmophobia/static/imgs/kofi.png"></a>
-            <div id="active-users"><span id="current-version-label"></span> | <span id="active-users-label">{{active_users}}: -</span></div>
+            <div id="active-users"><span id="current-version-label"></span><span id="active-users-label">{{active_users}}: -</span></div>
             <div class="copyright" onclick="showInfo(event)">{{info_copyright}}</div>
-            <div id="close-menu-button" onclick="closeMenu()"></div>
-            
-
         </div>
 
-        <div id="cards" class="cards"><div class="dot-flashing"></div></div>
+        <div id="cards" class="cards" onscroll="updateScaling()"><div class="dot-flashing"></div></div>
     </div>
 
     <div id="domovoi" style="display: none;">
@@ -1153,34 +1159,37 @@
         if(navigator.userAgent.includes("CriOS") && (/iPad/.test(navigator.userAgent) || (navigator.platform.toLowerCase().includes('mac') && 'ontouchend' in document)))
             document.body.style.position = 'fixed';
     </script>
-    <script src="scripts-v9/utils-v1.js"></script>
-    <script src="lang-v9/lang-v9.js"></script>
-    <script src="themes-v9/themes-v9.js"></script>
-    <script src="scripts-v9/audio_controller-v2.js"></script>
-    <script src="scripts-v9/metronome-v9.js"></script>
-    <script src="scripts-v9/timer-v5.js"></script>
-    <script src="login-v9/login-v3.js"></script>
-    <script src="wiki-v9/wiki-v3.js"></script>
-    <script src="scripts-v9/filter-v18.js"></script>
-    <script src="scripts-v9/sanity-v1.js"></script>
-    <script src="scripts-v9/wslink-v21.js"></script>
-    <script src="partners-v9/partners-v11.js"></script>
-    <script src="models-v9/models-v3.js"></script>
-    <script src="scripts-v9/zn-v13.js"></script>
-    <script src="scripts-v9/search-v2.js"></script>
-    <script src="events-v9/events-v2.js"></script>
-    <script src="feed-v9/feed-v5.js"></script>
-    <script src="scripts-v9/voice_en-v2.js"></script>
-    <script src="scripts-v9/voice_recognition-v2.js"></script>
-    <script src="scripts-v9/sparkles-v1.js"></script>
+    <script src="scripts-v10/utils-v1.js"></script>
+    <script src="scripts-v10/mobile-v1.js"></script>
+    <script src="lang-v10/lang-v1.js"></script>
+    <script src="themes-v10/themes-v1.js"></script>
+    <script src="scripts-v10/audio_controller-v1.js"></script>
+    <script src="scripts-v10/metronome-v1.js"></script>
+    <script src="scripts-v10/timer-v1.js"></script>
+    <script src="login-v10/login-v1.js"></script>
+    <script src="wiki-v10/wiki-v1.js"></script>
+    <script src="scripts-v10/filter-v1.js"></script>
+    <script src="scripts-v10/sanity-v1.js"></script>
+    <script src="scripts-v10/wslink-v1.js"></script>
+    <script src="partners-v10/partners-v1.js"></script>
+    <script src="models-v10/models-v1.js"></script>
+    <script src="scripts-v10/zn-v1.js"></script>
+    <script src="scripts-v10/search-v1.js"></script>
+    <script src="events-v10/events-v1.js"></script>
+    <script src="feed-v10/feed-v1.js"></script>
+    <script src="scripts-v10/voice_en-v1.js"></script>
+    <script src="scripts-v10/voice_recognition-v1.js"></script>
+    <script src="scripts-v10/sparkles-v1.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script>
         document.onclick = hideResetMenu;
-        document.addEventListener('touchstart', startSwipe, false);
-        document.addEventListener('touchend', endSwipe, false); 
+        // document.addEventListener('touchstart', startSwipe, false);
+        // document.addEventListener('touchend', endSwipe, false); 
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v9/wiki-v23.html",() => {
+                $("#wiki-body").load("wiki-v10/wiki-v1.html",() => {
                     resolve("Ghost data loaded")
                 })
             })

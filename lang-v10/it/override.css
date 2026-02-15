@@ -1,0 +1,97 @@
+@font-face {
+    font-family: 'ZNPrimary';
+    src: url('../../styles-v10/fonts/unutterable.ttf');
+}
+
+@font-face {
+    font-family: 'ZNSecondary';
+    src: url('../../styles-v10/fonts/yahfie.ttf');
+}
+
+
+
+/* Desktop Adjustments */
+@media screen and (pointer: fine),screen and (pointer: coarse) and (min-device-width: 601px) {
+    
+    .ghost_name{
+        font-size: 20px !important;
+        font-weight: lighter !important;
+    }
+
+    .data{
+        grid-template-columns: 220px auto !important;
+    }
+
+    .label{
+        letter-spacing: 1px;
+    }
+
+    #settings_box, #links_box, #data_link_box, #event_box, #wiki_box {
+        width: 209px;
+    }
+
+    #maps_box{
+        min-width: 597px !important;
+    }
+
+    #data_link_tab{
+        height: 115px !important;
+    }
+
+    #event_tab{
+        height: 130px !important;
+        top: 289px !important;
+    }
+
+    #wiki_tab{   
+        top: 437px !important;
+    }
+
+    #maps_tab {
+        top: 545px !important;
+    }
+
+    #game_mode {
+        font-size: 24px !important;
+    }
+
+    .data-entry{
+        font-size: 9px !important;
+    }
+
+    .modifier .modifier_note{
+        display: block !important;
+    }
+}
+
+/* Mobile Adjustments */
+@media screen and (pointer: coarse) and (max-device-width: 600px) {
+    
+    .ghost_name{
+        font-size: 30px !important;
+        margin-bottom: -8px !important;
+        margin-top: 8px !important
+    }
+
+    #data_link_tab{
+        height: 235px !important;
+    }
+
+    #wiki_tab{
+        top: 605px !important;
+    }
+
+    #maps_tab{
+        top: 834px !important;
+    }
+
+    #event_tab{
+        height: 280px !important;
+        top: 1062px !important;
+    }
+
+    .modifier .modifier_note{
+        font-size: 23px !important;
+        padding-top: 0 !important;
+    }
+}
