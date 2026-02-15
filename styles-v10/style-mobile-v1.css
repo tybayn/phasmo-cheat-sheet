@@ -2531,7 +2531,7 @@
         height: auto;
         position: relative;
         align-items: center;
-        transition: transform 0.08s linear, opacity 0.08s linear;
+        transition: transform 0.02s linear, opacity 0.02s linear;
         will-change: transform, opacity;
     }
 
