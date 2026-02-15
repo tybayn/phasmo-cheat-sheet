@@ -30,6 +30,10 @@
         letter-spacing: 1px;
     }
 
+    #active-users{
+        font-size: 8px !important;
+    }
+
     #settings_box, #links_box, #data_link_box, #event_box, #wiki_box {
         width: 188px;
     }
