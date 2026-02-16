@@ -57,14 +57,14 @@ document.body.onkeyup = function(e) {
         e.keyCode == 77
     ){
         closeAll(true,false)
-        showMaps();
+        showSideMenu('maps')
     }
     if(e.key == "g" ||
         e.code == "keyG" ||
         e.keyCode == 71
     ){
         closeAll(false, true)
-        showWiki();
+        showSideMenu('wiki')
     }
     if(e.keyCode == 37){
         closeAll();

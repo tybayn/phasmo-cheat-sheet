@@ -3136,6 +3136,12 @@ body{
         height: 250px !important;
     }
 
+    .ghost_warn_icon{
+        width: 15px !important;
+        height: 15px !important;
+        margin-bottom: -2px !important;
+    }
+
     .mobile-spacer{
         display: none;
     }

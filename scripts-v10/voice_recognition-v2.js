@@ -815,7 +815,7 @@ function parse_speech(vtext){
             send_cur_map_link()
         }
 
-        showMaps(true,false)
+        showSideMenu('maps',true,false)
 
         domovoi_heard(domovoi_msg)
         running_log[cur_idx]["Domo"] = domovoi_msg
@@ -872,7 +872,7 @@ function parse_speech(vtext){
         console.log(`Heard '${vtext}'`)
         domovoi_msg = "closing map"
 
-        showMaps(false, true)
+        showSideMenu('maps',false, true)
 
         domovoi_heard(domovoi_msg)
         running_log[cur_idx]["Domo"] = domovoi_msg

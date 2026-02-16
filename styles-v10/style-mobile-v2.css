@@ -2539,6 +2539,12 @@
         grid-template-rows: auto 0px auto auto !important;
     }
 
+    .ghost_warn_icon{
+        width: 40px !important;
+        height: 40px !important;
+        margin-bottom: -10px !important;
+    }
+
     #obambo_timer_button{
         position: absolute;
         top: 13px;

@@ -487,7 +487,7 @@ function parse_event(elem, queries){
     list_items.forEach(item => {
         if (all_match(item.innerText.toLowerCase(),queries)) {
             let preview = `<div class="result_part">${shrink_text(item.innerText.toLowerCase(),queries)}</div>`
-            results += `<div class="search_result" onclick="$('.ghost_card').removeClass('result_focus');showEvent(true)"><div class="result_title">${title}<span class="result_location_event"> (${lang_data["{{current_event}}"]})</span></div><div class="result_preview">${preview}</div><div class="click_more">${lang_data["{{see_more}}"]}</div></div><hr>`
+            results += `<div class="search_result" onclick="$('.ghost_card').removeClass('result_focus');showSideMenu('event',true)"><div class="result_title">${title}<span class="result_location_event"> (${lang_data["{{current_event}}"]})</span></div><div class="result_preview">${preview}</div><div class="click_more">${lang_data["{{see_more}}"]}</div></div><hr>`
         }
     });
 
