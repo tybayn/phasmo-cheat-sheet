@@ -2,16 +2,18 @@ const MQUERY = window.matchMedia("screen and (pointer: coarse) and (max-device-w
 
 let lastTap = 0;
 function doubleTap(callback, event, elem, ms = 500) {
-  const now = Date.now();
-  if (now - lastTap < ms) {
-    lastTap = 0;
-    callback(elem);
-  } else {
-    lastTap = now;
-  }
+    if(!MQUERY.matches) return;
+    const now = Date.now();
+    if (now - lastTap < ms) {
+        lastTap = 0;
+        callback(elem);
+    } else {
+        lastTap = now;
+    }
 }
 
 function toggleGhostExpand(elem){
+    if(!MQUERY.matches) return;
 
     let behavior = $(elem).siblings(".ghost_behavior")
     let touch_info = $(elem).hasClass("ghost_expand") ? $(elem) : $($(elem).siblings(".ghost_expand")[0])
@@ -31,6 +33,7 @@ function toggleGhostExpand(elem){
 }
 
 function expandAll(){
+    if(!MQUERY.matches) return;
     let bevs = document.getElementsByClassName("ghost_behavior")
     for(let i = 0; i < bevs.length; i++){
         bevs[i].style.height = `${bevs[i].scrollHeight + 5}px`
@@ -41,6 +44,7 @@ function expandAll(){
 }
 
 function collapseAll(){
+    if(!MQUERY.matches) return;
     $(".ghost_behavior").css("height", "0px")
     $(".ghost_hunt_info").css("height", "0px")
     $(".ghost_expand").html(`▼ ${lang_data["{{show_more}}"]} ▼`)
@@ -76,12 +80,14 @@ const OPEN = window.innerHeight * 0.25;
 const WOPEN = 0;
 
 function openMenu() {
+    if(!MQUERY.matches) return;
     const tab = document.getElementById('menu_tab');
     document.getElementById('menu').style.top = `${OPEN}px`;
     tab.innerHTML = "▼ ▼ ▼";
 }
 
 function closeMenu() {
+    if(!MQUERY.matches) return;
     const tab = document.getElementById('menu_tab');
     const CLOSED = window.innerHeight;
     document.getElementById('menu').style.top = `${CLOSED}px`;
@@ -89,6 +95,7 @@ function closeMenu() {
 }
 
 function toggleMenu() {
+    if(!MQUERY.matches) return;
     const tab = document.getElementById('menu_tab');
     if(tab.innerHTML.includes("▼")){
         closeMenu();
@@ -113,6 +120,7 @@ const DIRECTION_THRESHOLD = 15; // reduced back to prevent missing swipes
 
 // MENU TAB
 function menuTabDown(e) { 
+    if(!MQUERY.matches) return;
     const menu = document.getElementById('menu'); 
     const tab = document.getElementById('menu_tab'); 
     dragging = true; 
@@ -123,7 +131,8 @@ function menuTabDown(e) {
 } 
 
 function menuTabMove(e) { 
-    if (!dragging) return; 
+    if (!dragging) return;
+    if(!MQUERY.matches) return; 
     const menu = document.getElementById('menu'); 
     const tab = document.getElementById('menu_tab'); 
     const CLOSED = window.innerHeight; 
@@ -140,6 +149,7 @@ function menuTabMove(e) {
 
 function menuTabEnd(e) { 
     if (!dragging) return; 
+    if(!MQUERY.matches) return;
     dragging = false; 
     const menu = document.getElementById('menu'); 
     const CLOSED = window.innerHeight; 
