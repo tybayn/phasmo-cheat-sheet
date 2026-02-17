@@ -7,6 +7,8 @@ let reconnecting = false
 let relink_interval = null
 let relink_timeout = null
 let relink_live = false
+let reconnectAttempts = 0
+let missedPongs = 0
 
 var ws_ping;
 var dlws_ping;
@@ -626,6 +628,13 @@ function reconnect_link(reconnect=true){
 function scheduleReconnect(force = false) {
     if (kill_gracefully) return;
 
+    // Clear any competing reconnection mechanisms
+    clearInterval(relink_interval);
+    clearTimeout(relink_timeout);
+    relink_interval = null;
+    relink_timeout = null;
+    relink_live = false;
+
     connectionState = "reconnecting";
 
     reconnectAttempts++;
@@ -659,7 +668,11 @@ function link_link(reconnect = false){
     var link_id = reconnect ? reconn_id : document.getElementById("link_id").value 
 
     // Prevent overlapping reconnect attempts
-    if (reconnecting && reconnect) return;
+    if (reconnecting && reconnect) {
+        console.warn("[WS] Reconnect already in progress, skipping");
+        relink_live = false; // Reset flag so next attempt can proceed
+        return;
+    }
 
     reconnecting = reconnect;
     connectionState = reconnect ? "reconnecting" : "connecting";
@@ -689,6 +702,13 @@ function link_link(reconnect = false){
         kill_gracefully = false;
         await_dlws_pong = false;
         hasDLLink = true;
+
+        // Clear all reconnection timers
+        clearInterval(relink_interval);
+        clearTimeout(relink_timeout);
+        relink_interval = null;
+        relink_timeout = null;
+        relink_live = false;
 
         clearInterval(dlws_ping);
         dlws_ping = null;
@@ -729,11 +749,8 @@ function link_link(reconnect = false){
         try {
             const incoming_state = JSON.parse(event.data);
 
-            // Reset reconnect flags on valid messages
+            // Reset pong counter on valid messages
             missedPongs = 0;
-            reconnecting = false;
-            connectionState = "connected";
-            kill_gracefully = false;
 
             if (!incoming_state.action && incoming_state.error) {
                 document.getElementById("link_id_note").innerText =
@@ -1208,6 +1225,10 @@ function send_reset_link(){
 function disconnect_link(reset = false, has_status = false, code = 1005, reason = null) {
     console.log(`[WS] Disconnect link: code=${code}, reason=${reason}, reset=${reset}, has_status=${has_status}`);
 
+    // 🔹 Set kill_gracefully FIRST to prevent onclose from triggering reconnect
+    kill_gracefully = true;
+    connectionState = "closed";
+
     // 🔹 Clear all reconnection & ping timers
     clearInterval(relink_interval);
     clearTimeout(relink_timeout);
@@ -1215,7 +1236,6 @@ function disconnect_link(reset = false, has_status = false, code = 1005, reason 
 
     relink_live = false;
     reconnecting = false;
-    kill_gracefully = false;
     relink_interval = null;
     relink_timeout = null;
 
@@ -1252,10 +1272,7 @@ function disconnect_link(reset = false, has_status = false, code = 1005, reason 
         toggleSanitySettings();
     }
 
-    // 🔹 Graceful close
-    kill_gracefully = true;
-    connectionState = "closed";
-
+    // 🔹 Close the socket (kill_gracefully already set above)
     if (dlws && dlws.readyState !== WebSocket.CLOSED) {
         try {
             dlws.close(code, reason || "Graceful disconnect");
