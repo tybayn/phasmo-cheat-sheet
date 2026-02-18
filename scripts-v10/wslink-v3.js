@@ -665,7 +665,8 @@ function start_dlws_ping() {
 }
 
 function link_link(reconnect = false){
-    var link_id = reconnect ? reconn_id : document.getElementById("link_id").value 
+    let conn_id = document.getElementById("link_id").value 
+    var link_id = reconnect || !conn_id ? reconn_id : conn_id
 
     // Prevent overlapping reconnect attempts
     if (reconnecting && reconnect) {
@@ -985,7 +986,8 @@ function link_link(reconnect = false){
 
             else if (action == "UNLINK"){
                 kill_gracefully = true
-                disconnect_link(false,false,1000,"Server or Desktop Link requested Cheat Sheet to disconnect")
+                let mes = incoming_state.hasOwnProperty("message") ? incoming_state.message : null
+                disconnect_link(false,false,1000,mes)
             }
 
             return
@@ -1259,12 +1261,9 @@ function disconnect_link(reset = false, has_status = false, code = 1005, reason 
 
     // 🔹 Update status / fields if not in reset mode
     if (!reset) {
-        if (!has_status) {
-            document.getElementById("link_id_note").innerText =
-                `${lang_data['{{status}}']}: ${lang_data['{{not_linked}}']}`;
-            document.getElementById("dllink_status").className = null;
-            document.getElementById("link_id").value = "";
-        }
+        document.getElementById("link_id_note").innerText = `${lang_data['{{status}}']}: ${reason ? reason : lang_data['{{not_linked}}']}`;
+        document.getElementById("dllink_status").className = null;
+        document.getElementById("link_id").value = "";
 
         // Clear link_id cookie
         setCookie("link_id", "", -1);

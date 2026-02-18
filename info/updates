@@ -1,6 +1,6 @@
 {
-    "version":"6.3.8",
-    "date":"2026-01-28",
-    "details": "- Added a confirmation screen when clicking the 'Reset' button for resetting hotkeys\n\nBug Fixes:\n - Fixed an issue where restting hotkeys was missing a few and updating the wrong labels",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.3.8.msi"
+    "version":"6.4.0",
+    "date":"2026-02-17",
+    "details": "- Current DL code will appear on the title of the main window\n\nBug Fixes:\n - Fixed a logic error with reconnects",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.4.0.msi"
 }
