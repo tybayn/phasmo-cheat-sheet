@@ -706,7 +706,7 @@
     "{{wiki_misconceptions_emf_1_r}}": "Though this may be because of a hunt or event, the activity monitor displays the total EMF activity in the map. Because of that you can get to 10 with a few interactions as well",
 
     "{{wiki_misconceptions_freezing_1_c}}": "\"Seeing your breath means the ghost has freezing temperatures\"",
-    "{{wiki_misconceptions_freezing_1_r}}": "Not any more. This used to be the case, but ever since v1.9.0.0 you can see your breath with any temperature lower than 5° Celsius",
+    "{{wiki_misconceptions_freezing_1_r}}": "Not any more. This used to be the case, but ever since v0.9.0.0 you can see your breath with any temperature lower than 5° Celsius",
 
     "{{wiki_misconceptions_comms_1_c}}": "\"What the comms guy says at the beginning of a contract gives us some clues\"",
     "{{wiki_misconceptions_comms_1_r}}": "Not at all. It is only flavor text as confirmed by the devs.",
@@ -1100,7 +1100,7 @@
     "{{wiki_xp_grinding_p6}}": "(Multiplayer) Have one player grab an igniter and 2 incense and the other player grab salt, an electronic device (for testing raiju and/or completing objectives), and any other equipment that could be used to complete other objectives.",
     "{{wiki_xp_grinding_p7}}": "Head toward either the picnic tables just inside the gate or to the campfire in the middle of the logs. Place your salt on the ground in a location the ghost will likely walk through (opening to the campfire circle or in between the picnic tables). Then wait for the ghost to hunt.",
     "{{wiki_xp_grinding_p8}}": "Once the ghost begins to hunt, start to identify what it is based on behaviour (footstep speed, flicker/blink rate, speed up near electronics, freezing breath, etc). Continue to loop the ghost around the campfire / picnic tables and smudge if needed.",
-    "{{wiki_xp_grinding_p9}}": "Note: As of v1.9.2.0 the campfire no longer breaks line-of-sight.",
+    "{{wiki_xp_grinding_p9}}": "Note: As of v0.9.2.0 the campfire no longer breaks line-of-sight.",
     "{{wiki_xp_grinding_p10}}": "After the hunt is over, you can either use a timer to narrow down if it is a spirit or demon based on smudge cooldown (this takes quite a bit of time, but allows time to complete more objectives), or you can guess the ghost and leave. This entire process can be done in under 2 minutes if optimized and rewards between 2000xp - 5000xp for correct ghost and completed objectives.",
     "{{wiki_xp_grinding_p11}}": "Custom Difficulty Settings:"
 }
