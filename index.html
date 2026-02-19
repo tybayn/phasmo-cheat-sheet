@@ -56,7 +56,7 @@
     <script src="scripts-v10/ghost_template-v1.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <link rel="stylesheet" href="styles-v10/style-v2.css"/>
-    <link rel="stylesheet" href="styles-v10/style-mobile-v2.css"/>
+    <link rel="stylesheet" href="styles-v10/style-mobile-v3.css"/>
     <link rel="stylesheet" href="themes-v10/themes-v1.css"/>
     <link rel="stylesheet" href="login-v10/login-v1.css" >
     <link rel="stylesheet" href="wiki-v10/wiki-v1.css" >
@@ -450,6 +450,9 @@
                 </div>     
                 <div class="modifier_option less_pad">
                     <input type="checkbox" id="hide_descriptions" name="hide_descriptions" class="settings_check" onclick="toggleDescriptions();saveSettings();"><label for="hide_descriptions">{{hide_behaviors}}</label>
+                </div>
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="hide_sanity_speed" name="hide_sanity_speed" class="settings_check" onclick="toggleSanitySpeed();saveSettings();"><label for="hide_sanity_speed">{{hide_sanity_speed}}</label>
                 </div>
                 <div class="modifier_option less_pad">
                     <input type="checkbox" id="compact_cards" name="compact_cards" class="settings_check" onclick="toggleCompact();saveSettings();"><label for="compact_cards">{{compact_view}}</label>
@@ -1168,7 +1171,7 @@
     <script src="scripts-v10/timer-v2.js"></script>
     <script src="login-v10/login-v1.js"></script>
     <script src="wiki-v10/wiki-v1.js"></script>
-    <script src="scripts-v10/filter-v1.js"></script>
+    <script src="scripts-v10/filter-v2.js"></script>
     <script src="scripts-v10/sanity-v1.js"></script>
     <script src="scripts-v10/wslink-v3.js"></script>
     <script src="partners-v10/partners-v1.js"></script>

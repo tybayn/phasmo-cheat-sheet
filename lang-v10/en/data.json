@@ -112,6 +112,7 @@
     "{{force_selection}}": "Force Selection (Data Link)",
     "{{adaptive_evidence}}": "Adaptive Evidence",
     "{{hide_behaviors}}": "Hide Behaviors",
+    "{{hide_sanity_speed}}": "Hide Hunt Sanity / Speed (Mobile)",
     "{{compact_view}}": "Compact View",
     "{{compact_disclaimer}}": "Compact View has no effect on mobile",
     "{{graphics}}": "Graphics",

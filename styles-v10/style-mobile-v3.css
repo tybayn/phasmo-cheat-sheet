@@ -2183,6 +2183,10 @@
         padding: 0px 0px 0px 75px;
     }
 
+    .ghost_info_lock{
+        height: 100px !important;
+    }
+
     .mobile-spacer{
         width: 100%;
         height: calc(100dvh - 180px);
@@ -2652,14 +2656,14 @@
     }
 
     .ghost_speed img{
-        height: 30px;
+        height: 40px;
         cursor: pointer;
     }
 
     .footstep_los{
         display: flex;
         flex-direction: column;
-        margin-right: 3px;
+        margin-right: 10px;
     }
 
     .ghost_speed .ms{
@@ -2670,6 +2674,7 @@
 
     .ghost_speed_values{
         width: fit-content;
+        letter-spacing: 3px;
     }
 
     .ghost_hunt{
