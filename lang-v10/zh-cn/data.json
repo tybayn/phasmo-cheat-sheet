@@ -109,6 +109,7 @@
     "{{force_selection}}": "强制选择（Discord链接）",
     "{{adaptive_evidence}}": "动态显示证据",
     "{{hide_behaviors}}": "隐藏鬼魂特征",
+    "{{hide_sanity_speed}}": "隐藏猎杀所需理智值 / 移速 （移动端）",
     "{{compact_view}}": "紧凑视图",
     "{{compact_disclaimer}}": "紧凑视图在移动端无效",
     "{{graphics}}": "画面设置",
