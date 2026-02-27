@@ -1679,19 +1679,19 @@ function showNews(){
         document.getElementById("theme_box").style.zIndex = "9"
         document.getElementById("z3d-box").style.zIndex = "9"
         document.getElementById("news_box").style.zIndex = "11"
-        NEWSBOX.style.boxShadow = "-5px 0px 10px 0px #000"
-        NEWSTAB.style.boxShadow = "-5px 6px 5px -2px #000"
-        NEWSBOX.style.right = "0px"
-        NEWSBOX.style.width = "350px"
+        document.getElementById("news_box").style.boxShadow = "-5px 0px 10px 0px #000"
+        document.getElementById("news_tab").style.boxShadow = "-5px 6px 5px -2px #000"
+        document.getElementById("news_box").style.right = "0px"
+        document.getElementById("news_box").style.width = "350px"
         if(mquery.matches)
             $("#menu").hide()
         mark_feed_read()
     }
     else {
-        NEWSBOX.style.width = "20px"
-        NEWSBOX.style.right = "-36px"
-        NEWSBOX.style.boxShadow = "none"
-        NEWSBOX.style.boxShadow = "none"
+        document.getElementById("news_box").style.width = "20px"
+        document.getElementById("news_box").style.right = "-36px"
+        document.getElementById("news_box").style.boxShadow = "none"
+        document.getElementById("news_tab").style.boxShadow = "none"
         if(mquery.matches)
             $("#menu").show()
     }
