@@ -647,6 +647,33 @@ body{
         border-radius: 0px 5px 5px 0px;
     }
 
+    .phasmotier_info{
+        text-align: center;
+        font-size: 10px;
+        margin: 5px 10px;
+        color: #ccc;
+    }
+
+    .phasmotier-button{
+        display: flex;
+        background: #0b0f1a;
+        border-radius: 5px;
+        align-items: center;
+        justify-content: center;
+        filter: contrast(0.9) brightness(1.2);
+        width: 80%;
+        margin: 0px 10%;
+    }
+
+    .phasmotier-button:hover{
+        opacity: 0.8;
+    }
+
+    .phasmotier-button img{
+        padding: 10px;
+        width: calc(100% - 20px);
+    }
+
     #wiki_box{
         position: fixed;
         top: 0;

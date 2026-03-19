@@ -557,6 +557,39 @@
         touch-action: none !important;
     }
 
+    .phasmotier{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .phasmotier_info{
+        text-align: left;
+        font-size: 25px;
+        margin-left: 10px;
+        color: #ccc;
+    }
+
+    .phasmotier-button{
+        display: flex;
+        background: #0b0f1a;
+        border-radius: 30px;
+        align-items: center;
+        justify-content: center;
+        filter: contrast(0.9) brightness(1.2);
+    }
+
+    .phasmotier-button:hover{
+        opacity: 0.8;
+    }
+
+    .phasmotier-button img{
+        padding: 20px;
+        width: calc(100% - 40px);
+    }
+
     #wiki_box{
         position: fixed;
         top: 0;
