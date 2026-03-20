@@ -2053,7 +2053,7 @@ function resetSettings(){
 
 function toggleSanitySettings(){
 
-    if (hasDLLink && document.getElementById("num_evidence").value == "-1"){
+    if (document.getElementById("num_evidence").value == "-1"){
         $("#cust_starting_sanity").removeAttr("disabled")
         $("#cust_sanity_pill_rest").removeAttr("disabled")
         $("#cust_sanity_drain").removeAttr("disabled")
@@ -2064,7 +2064,7 @@ function toggleSanitySettings(){
         $("#cust_lobby_type").removeClass("option-disabled")
 
     }
-    else if(hasDLLink && document.getElementById("num_evidence").value != "-1"){
+    else {
         $("#cust_starting_sanity").attr("disabled","disabled")
         $("#cust_sanity_pill_rest").attr("disabled","disabled")
         $("#cust_sanity_drain").attr("disabled","disabled")
@@ -2073,16 +2073,6 @@ function toggleSanitySettings(){
         $("#cust_sanity_pill_rest").addClass("option-disabled")
         $("#cust_sanity_drain").addClass("option-disabled")
         $("#cust_lobby_type").removeClass("option-disabled")
-    }
-    else{
-        $("#cust_starting_sanity").attr("disabled","disabled")
-        $("#cust_sanity_pill_rest").attr("disabled","disabled")
-        $("#cust_sanity_drain").attr("disabled","disabled")
-        $("#cust_lobby_type").attr("disabled","disabled")
-        $("#cust_starting_sanity").addClass("option-disabled")
-        $("#cust_sanity_pill_rest").addClass("option-disabled")
-        $("#cust_sanity_drain").addClass("option-disabled")
-        $("#cust_lobby_type").addClass("option-disabled")
     }
 }
 
