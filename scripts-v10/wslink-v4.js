@@ -163,7 +163,7 @@ function auto_link(){
 
 function copy_code(){
     var copyText = document.getElementById("link_id").value
-    navigator.clipboard.writeText(copyText)
+    ZNCopyShare(copyText,"Copy Link ID")
     $("#link_id_cover").fadeIn(150)
     setTimeout(function(){
         $("#link_id_cover").fadeOut(150)
@@ -172,7 +172,7 @@ function copy_code(){
 
 function copy_url_code(){
     var copyText = document.getElementById("room_id").value
-    navigator.clipboard.writeText(`${window.location.href.split("?")[0]}?journal=${copyText}`)
+    ZNCopyShare(`${window.location.href.split("?")[0]}?journal=${copyText}`,"Copy Room URL")
     $("#room_id_cover").fadeIn(150)
     setTimeout(function(){
         $("#room_id_cover").fadeOut(150)

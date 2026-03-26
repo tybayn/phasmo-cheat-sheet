@@ -81,6 +81,10 @@ class Ghost {
                 </div>
                 <div class="ghost_tests_button" onClick="openGhostInfo('${data.ghost}')">{{0_evidence_tests}} >></div>
                 ${this.behavior(data.wiki)}
+                <div class="ghost_extra">
+                    <div class="ghost_extra_button" onClick="openWikiPath('known-bugs#${data.ghost.replace(" ","-")}-bugs')">[{{known_bugs}}]</div>
+                    ${document.getElementById("wiki-extra-"+data.ghost.replace(" ","-").toLowerCase()) ? "<div class=\"ghost_extra_button\" onClick=\"openWikiPath('ghost-data.extra-"+data.ghost.replace(" ","-").toLowerCase()+"')\">[{{more_details}}]</div>" : ''}
+                </div>
             </div>
             <div class="ghost_clear">
                 <img class="card_icon card_icon_select" title="{{select_ghost}}" src="imgs/select.png" onclick="select(this.parentElement.parentElement)">

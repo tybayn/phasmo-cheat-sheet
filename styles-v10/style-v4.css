@@ -209,7 +209,7 @@ body{
     hr{
         border: 1px dashed rgba(204, 204, 204, 0.26);
         margin: 5px;
-        width: 90%;
+        width: auto;
     }
 
     #resetMenu{
@@ -3397,6 +3397,29 @@ body{
 
     .ghost_tests_button:hover{
         opacity: 0.8;
+    }
+
+    .ghost_extra_button{
+        opacity: 0.4;
+        font-size: 11px;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        margin: -5px 0px -5px 0px;
+    }
+
+    .ghost_extra_button:hover{
+        opacity: 0.8;
+    }
+
+    .ghost_extra{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        margin-top: 8px;
+        padding-top: 9px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .ghost_clear{

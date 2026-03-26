@@ -373,7 +373,7 @@
     }
 
     #settings_status, #data_link_status{
-        width: 50px;
+        width: 74px;
         height: 10px;
         border-radius: 0px 20px 0px 0px;
         top: 0px;
@@ -382,7 +382,7 @@
     }
 
     #dllink_status{
-        width: 50px;
+        width: 74px;
         height: 10px;
         border-radius: 0px 0px 0px 0px;
         top: 12px;
@@ -2805,6 +2805,33 @@
 
     .ghost_tests_button:hover{
         opacity: 0.8;
+    }
+
+    .ghost_tests_button{
+        opacity: 0.4;
+        font-size: 28px;
+        cursor: pointer;
+        width: calc(100% - 20px);
+        text-align: right;
+        margin: 10px 20px -55px 0px;
+    }
+
+    .ghost_tests_button:hover{
+        opacity: 0.8;
+    }
+
+    .ghost_extra{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        margin-top: 8px;
+        padding-top: 25px;
+        margin-bottom: 25px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        justify-content: space-evenly;
+        font-size: 24px;
+        color: #ccc;
     }
 
     .ghost_clear{

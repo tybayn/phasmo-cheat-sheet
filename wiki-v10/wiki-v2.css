@@ -216,8 +216,7 @@
     }
 
     .wiki_embed{
-        width: 316px;
-        height: 178px;
+        width: 100%;
         padding-top: 5px;
     }
 
@@ -819,8 +818,7 @@
     }
 
     .wiki_embed{
-        width: 820px;
-        height: 461px;
+        width: 100%;
         padding-top: 20px;
     }
 

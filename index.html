@@ -12,6 +12,7 @@
     <meta property="og:title" content="Zero-Network | Unofficial Phasmo Cheat Sheet">
     <meta property="og:description" content="The ultimate Phasmo Cheat Sheet! Smart filters, ghost behaviors, footstep speeds, bpm finder, maps, and more!">
     <meta property="og:image" content="https://file.garden/Z-9fual_RynAMoLc/zn-logo-2.png">
+    <script src="https://zero-network.net/zn/static/scripts/copyShare.js"></script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script>
         if (location.search.includes('refresh=1')) {
@@ -53,13 +54,13 @@
             }
         })();
     </script>
-    <script src="scripts-v10/ghost_template-v1.js"></script>
+    <script src="scripts-v10/ghost_template-v2.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
-    <link rel="stylesheet" href="styles-v10/style-v3.css"/>
-    <link rel="stylesheet" href="styles-v10/style-mobile-v4.css"/>
+    <link rel="stylesheet" href="styles-v10/style-v4.css"/>
+    <link rel="stylesheet" href="styles-v10/style-mobile-v5.css"/>
     <link rel="stylesheet" href="themes-v10/themes-v1.css"/>
     <link rel="stylesheet" href="login-v10/login-v1.css" >
-    <link rel="stylesheet" href="wiki-v10/wiki-v1.css" >
+    <link rel="stylesheet" href="wiki-v10/wiki-v2.css" >
     <link rel="stylesheet" href="wiki-v10/wiki-spoiler-v1.css" >
     <link rel="stylesheet" href="events-v10/events-v1.css" >
     <link rel="stylesheet" href="models-v10/models-v1.css" >
@@ -1182,13 +1183,13 @@
     <script src="scripts-v10/metronome-v2.js"></script>
     <script src="scripts-v10/timer-v2.js"></script>
     <script src="login-v10/login-v1.js"></script>
-    <script src="wiki-v10/wiki-v1.js"></script>
+    <script src="wiki-v10/wiki-v2.js"></script>
     <script src="scripts-v10/filter-v4.js"></script>
     <script src="scripts-v10/sanity-v1.js"></script>
-    <script src="scripts-v10/wslink-v3.js"></script>
+    <script src="scripts-v10/wslink-v4.js"></script>
     <script src="partners-v10/partners-v1.js"></script>
     <script src="models-v10/models-v1.js"></script>
-    <script src="scripts-v10/zn-v1.js"></script>
+    <script src="scripts-v10/zn-v2.js"></script>
     <script src="scripts-v10/search-v2.js"></script>
     <script src="events-v10/events-v1.js"></script>
     <script src="feed-v10/feed-v1.js"></script>
@@ -1202,7 +1203,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v10/wiki-v4.html",() => {
+                $("#wiki-body").load("wiki-v10/wiki-v5.html",() => {
                     resolve("Ghost data loaded")
                 })
             })

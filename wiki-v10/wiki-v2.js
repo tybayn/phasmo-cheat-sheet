@@ -209,6 +209,10 @@ function openWikiPath(path){
 
     if(!$("#wiki_box").hasClass("tab-open"))
         showSideMenu("wiki",true)
+
+    final_el = path.split("#")[1]??false
+    path = path.split("#")[0]
+    
     path.split(delim).forEach(id => {
         if(!$(document.getElementById(`wiki-${id}`)).hasClass("wiki_active")){
             let wiki_elem = document.getElementById(`wiki-${id}`)
@@ -217,6 +221,8 @@ function openWikiPath(path){
         }
     })
     document.getElementById(`wiki-${path.split(delim)[path.split(delim).length - 1]}`).scrollIntoView({alignToTop:true,behavior:"smooth"})
+    if(final_el)
+        document.getElementById(final_el).scrollIntoView({alignToTop:true,behavior:"smooth"})
 }
 
 function generateWikiShareLink(elem,inline=false){
@@ -235,14 +241,14 @@ function generateWikiShareLink(elem,inline=false){
         e = e.parentElement.previousElementSibling
     } while (e.id != "wiki-body" && e.id != "");
 
-    navigator.clipboard.writeText(`${window.location.href}${window.location.href.includes("?") ? "&" : "?"}wiki=${url}`)
+    ZNCopyShare(`${window.location.href}${window.location.href.includes("?") ? "&" : "?"}wiki=${url}`,"Copy Wiki Share Link")
 
     $(".wiki-share").html(`${lang_data['{{copy_share_link}}']} <img loading="lazy" src="imgs/share.png">`)
     elem.innerHTML = `${lang_data['{{copied}}']} <img loading="lazy" src="imgs/share.png">`
 }
 
 function generateEventShareLink(elem){
-    navigator.clipboard.writeText(`${window.location.href}${window.location.href.includes("?") ? "&" : "?"}wiki=current-event`)
+    ZNCopyShare(`${window.location.href}${window.location.href.includes("?") ? "&" : "?"}wiki=current-event`,"Copy Event Link")
     $(".wiki-share").html(`${lang_data['{{copy_share_link}}']} <img loading="lazy" src="imgs/share.png">`)
     elem.innerHTML = `${lang_data['{{copied}}']} <img loading="lazy" src="imgs/share.png">`
 }

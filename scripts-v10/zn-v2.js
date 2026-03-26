@@ -482,7 +482,7 @@ function loadSearch(){
 
 function copy_user_settings(){
     var copyText = JSON.stringify(user_settings)
-    navigator.clipboard.writeText(copyText)
+    ZNCopyShare(copyText,"Copy User Settings")
     document.getElementById("debug-console").value += "User Settings copied to clipboard\n"
 }
 

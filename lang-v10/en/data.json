@@ -206,6 +206,8 @@
     "{{show_manually_hidden_ghosts}}": "Show manually hidden ghosts",
 
     "{{0_evidence_tests}}": "0 Evidence Tests",
+    "{{known_bugs}}": "Known Bugs",
+    "{{more_details}}": "More Details",
     "{{tell}}": "Tell",
     "{{tells}}": "Tells",
     "{{behavior}}": "Behavior",
@@ -278,7 +280,7 @@
     "{{infocopy_p7}}": "The website itself, its design, layout, functionality, and additional softwares are copyrighted by Ty Bayn (Zero-Network).",
     "{{infocopy_h4}}": "Recognition",
     "{{infocopy_p8}}": "The developer of this guide (SeverelyZero) received an in-game VIP badge from Kinetic Games Partner \"JOJOsaysbreee\" for the creation of this guide as a community resource (2022-12-29)",
-    "{{infocopy_p9}}": "A special thank you to @fantismalspider, @darkhooper, @.wavebuster, @sassysalamence, @alunny,<br>@idshay16, @vandelayind, @.donutman, and @werdna64 for their continued support in QA, testing,<br>ideas, data validation, and the creation of fantastic community resources",
+    "{{infocopy_p9}}": "A special thank you to @fantismalspider, @darkhooper, @.wavebuster, @sassysalamence, @idshay16,<br> @vandelayind, @thrasherop, and @pixelenthusiast. for their continued support in QA, testing,<br>ideas, data validation, and the creation of fantastic community resources",
     "{{infocopy_p10}}": "And a huge thank you to Kinetic Games Partner @bepisttv for<br>helping us gather, document, and verify game mechanics",
     "{{infocopy_p11}}": "Found a bug? Have ideas? Want to play a few rounds?",
     "{{infocopy_p12}}": "Join the 'Zero-Network: Ghost Hunters' server",
