@@ -209,7 +209,7 @@ body{
     hr{
         border: 1px dashed rgba(204, 204, 204, 0.26);
         margin: 5px;
-        width: auto;
+        width: calc(100% - 20px);
     }
 
     #resetMenu{
