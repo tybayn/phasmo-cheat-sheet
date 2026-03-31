@@ -1933,7 +1933,7 @@ body{
         font-weight: bold;
         width: calc(100% - 2px);
         text-align: center;
-        padding-top: 6px;
+        padding-top: 3px;
         text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black, 0 -0.05em black, -0.05em -0.05em black, -0.05em 0.05em black, 0.05em -0.05em black, 0.05em 0.05em black;
         z-index: 3;
     }

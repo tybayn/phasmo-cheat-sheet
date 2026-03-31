@@ -56,8 +56,8 @@
     </script>
     <script src="scripts-v10/ghost_template-v2.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
-    <link rel="stylesheet" href="styles-v10/style-v6.css"/>
-    <link rel="stylesheet" href="styles-v10/style-mobile-v7.css"/>
+    <link rel="stylesheet" href="styles-v10/style-v7.css"/>
+    <link rel="stylesheet" href="styles-v10/style-mobile-v8.css"/>
     <link rel="stylesheet" href="themes-v10/themes-v1.css"/>
     <link rel="stylesheet" href="login-v10/login-v1.css" >
     <link rel="stylesheet" href="wiki-v10/wiki-v2.css" >
@@ -884,10 +884,10 @@
                     {{timers}}
                     <img id="blood-moon-icon-2" class="blood-moon-icon" src="imgs/moon-w.png" title="{{blood_moon_weather}}" onclick="toggleBloodMoon();bpm_calc(true);saveSettings();">
                     <div class="minion-modifiers">
-                        <div class="minion-modifier-arrow" onclick="toggleForestMinion(-1);bpm_calc(true);saveSettings();" title="{{forest_minion_ran_away}}" >⬇</div>
+                        <div class="minion-modifier-arrow" onclick="toggleForestMinion(-1);bpm_calc(true);saveSettings();" title="{{forest_minion_ran_away}}" >-</div>
                         <div id="forest-minion-mod-2" class="forest-minion-mod">0</div>
                         <img id="forest-minion-icon-2" class="forest-minion-icon" src="imgs/minion-w.png" ">
-                        <div class="minion-modifier-arrow" onclick="toggleForestMinion(1);bpm_calc(true);saveSettings();" title="{{forest_minion_jump_scare}}" >⬆</div>
+                        <div class="minion-modifier-arrow" onclick="toggleForestMinion(1);bpm_calc(true);saveSettings();" title="{{forest_minion_jump_scare}}" >+</div>
                     </div>
                     <img id="coal-icon-2" style="display: none;" class="coal-icon" src="imgs/coal-w.png" title="{{coal_weather}}" onclick="toggleCoal();bpm_calc(true);saveSettings();">
                 </div>
@@ -1044,10 +1044,10 @@
                     {{evidence}}
                     <img id="blood-moon-icon" class="blood-moon-icon" src="imgs/moon-w.png" title="{{blood_moon_weather}}" onclick="toggleBloodMoon();bpm_calc(true);saveSettings();">
                     <div class="minion-modifiers">
-                        <div class="minion-modifier-arrow" onclick="toggleForestMinion(-1);bpm_calc(true);saveSettings();" title="{{forest_minion_ran_away}}" >⬇</div>
+                        <div class="minion-modifier-arrow" onclick="toggleForestMinion(-1);bpm_calc(true);saveSettings();" title="{{forest_minion_ran_away}}" >-</div>
                         <div id="forest-minion-mod" class="forest-minion-mod">0</div>
-                        <img id="forest-minion-icon" class="forest-minion-icon" src="imgs/minion-w.png" ">
-                        <div class="minion-modifier-arrow" onclick="toggleForestMinion(1);bpm_calc(true);saveSettings();" title="{{forest_minion_jump_scare}}" >⬆</div>
+                        <img id="forest-minion-icon" class="forest-minion-icon" src="imgs/minion-w.png">
+                        <div class="minion-modifier-arrow" onclick="toggleForestMinion(1);bpm_calc(true);saveSettings();" title="{{forest_minion_jump_scare}}" >+</div>
                     </div>
                     <img id="coal-icon" style="display: none;" class="coal-icon" src="imgs/coal-w.png" title="{{coal_weather}}" onclick="toggleCoal();bpm_calc(true);saveSettings();">
                 </div>
