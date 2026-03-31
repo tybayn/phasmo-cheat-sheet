@@ -37,8 +37,13 @@ var step_duration = 5 * 1000
 var additional_ghost_data = ["hantu","moroi","thaye"]
 var additional_ghost_var = [0.18,0.085,0.175]
 
+let em = (bm,fm,c) => (bm||c?1.15:1.0)*(1.0+(fm*-0.1))
 
-let em = (bm,fm,c) => (bm||c?1.15:1.0)*(fm?1.05:1.0)
+// Jinn 1.7 -> 1.5 (run,run,jump)
+
+// 1 run -> 1.45m/s
+// 1 jump -> 1.8m/s?
+// 2 jump -> 
 
 let speedToBpm = {
     0:(x,bm,fm,c) => 60/((1/(x*0.5*em(bm,fm,c)))-0.075),
@@ -55,6 +60,9 @@ let bpmToSpeed = {
     3:(x,bm,fm,c) => x/(1.25*em(bm,fm,c)*(60+x*0.075)),
     4:(x,bm,fm,c) => x/(1.5*em(bm,fm,c)*(60+x*0.075))
 };
+
+let bpmToSpeedTest = (x,mm) => x/(1.0*mm*(60+x*0.075));
+
 
 var last_id = "";
 
@@ -443,7 +451,7 @@ function get_ms(bpm){
 
 function get_ms_exact(bpm){
     var speed_idx = calibrating ? 2 : parseInt($("#ghost_modifier_speed").val())
-    var cur_ms = bpmToSpeed[speed_idx](bpm / (1+((offset)/100)) ,blood_moon && !calibrating,forest_minion && !calibrating, coal && !calibrating)
+    var cur_ms = bpmToSpeed[speed_idx](bpm / (1+((offset)/100)) ,blood_moon && !calibrating,calibrating ? 0 : forest_minion, coal && !calibrating)
     return cur_ms < 0 ? 0.01 : cur_ms.toFixed(2)
 }
 

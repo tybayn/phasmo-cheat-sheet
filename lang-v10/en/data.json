@@ -33,7 +33,8 @@
     "{{large}}": "Large",
 
     "{{blood_moon_weather}}": "Blood Moon Weather",
-    "{{forest_minion_weather}}": "Forest Minion Ran Away",
+    "{{forest_minion_ran_away}}": "Forest Minion Ran Away",
+    "{{forest_minion_jump_scare}}": "Forest Minion Jump Scare",
     "{{coal_weather}}": "Krampus Gift is Coal",
     "{{tools}}": "Tools",
     "{{timers}}": "Timers",

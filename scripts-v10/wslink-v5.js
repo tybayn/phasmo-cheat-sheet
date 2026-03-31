@@ -565,10 +565,10 @@ function link_room(){
 
                 if(incoming_state.hasOwnProperty("forest_minion")){
                     if(incoming_state["forest_minion"]){
-                        toggleForestMinion(true,false,true)
+                        toggleForestMinion(0, true, true)
                     }
                     else{
-                        toggleForestMinion(false,true,true)
+                        toggleForestMinion(1, true)
                     }
                 }
 
@@ -905,32 +905,32 @@ function link_link(reconnect = false){
 
                 if (!bm && !fm && !cm){ // NOMODIFIER
                     toggleBloodMoon(bma,!bma)
-                    toggleForestMinion(false,true)
+                    toggleForestMinion(0,true,true)
                     toggleCoal(false,true)
                 }
                 else if (bm && !fm && !cm){ // BLOODMOON
                     toggleBloodMoon(false,true)
-                    toggleForestMinion(fma,!fma)
+                    toggleForestMinion(1,fma,!fma)
                     toggleCoal(cma && !fma,!cma || fma)
                 }
                 else if (!bm && fm && !cm){ // FORESTMINION
                     toggleBloodMoon(bma,!bma)
-                    toggleForestMinion(fma,!fma)
+                    toggleForestMinion(1,fma,!fma)
                     toggleCoal(false,true)
                 }
                 else if (bm && fm && !cm){ // BLOODMINION
                     toggleBloodMoon(false,true)
-                    toggleForestMinion(false,true)
+                    toggleForestMinion(0,true,true)
                     toggleCoal(cma,!cma)
                 }
                 else if (!bm && !fm && cm){ // COAL
                     toggleBloodMoon(bma,!bma)
-                    toggleForestMinion(false,true)
+                    toggleForestMinion(0,true,true)
                     toggleCoal(cma,!cma)
                 }
                 else if (bm && !fm && cm){ // BLOODCOAL
                     toggleBloodMoon(false,true)
-                    toggleForestMinion(false,true)
+                    toggleForestMinion(0,true,true)
                     toggleCoal(false,true)
                 }
                 send_modifier_link()

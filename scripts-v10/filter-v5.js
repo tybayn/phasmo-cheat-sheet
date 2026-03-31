@@ -230,7 +230,7 @@ function toggleCoal(force_on = false, force_off = false, ignore_link=false){
     if(!ignore_link){filter(ignore_link)}
 }
 
-function toggleForestMinion(force_on = false, force_off = false, ignore_link=false){
+function toggleForestMinion(value, reset=false, force_off = false, ignore_link=false){
 
     if(force_off){
         $('#forest-minion-icon').removeClass('forest-minion-active')
@@ -238,22 +238,27 @@ function toggleForestMinion(force_on = false, force_off = false, ignore_link=fal
         $('#forest-minion-icon-2').removeClass('forest-minion-active')
         $('#forest-minion-icon-2').attr("src","imgs/minion-w.png")
         forest_minion = 0
+        $("#forest-minion-mod").text(forest_minion)
+        $("#forest-minion-mod-2").text(forest_minion)
         return
     }
 
-    if(!$("#forest-minion-icon").hasClass("forest-minion-active") || force_on){
-        $('#forest-minion-icon').addClass('forest-minion-active')
-        $('#forest-minion-icon').attr("src","imgs/minion-y.png")
-        $('#forest-minion-icon-2').addClass('forest-minion-active')
-        $('#forest-minion-icon-2').attr("src","imgs/minion-y.png")
-        forest_minion = 1
-    }
-    else{
+    let cur_val = reset ? 0 : parseInt($("#forest-minion-mod").text())
+    forest_minion = Math.max(Math.min(cur_val + value, 8),-8)
+    $("#forest-minion-mod").text(forest_minion)
+    $("#forest-minion-mod-2").text(forest_minion)
+
+    if (forest_minion == 0){
         $('#forest-minion-icon').removeClass('forest-minion-active')
         $('#forest-minion-icon').attr("src","imgs/minion-w.png")
         $('#forest-minion-icon-2').removeClass('forest-minion-active')
         $('#forest-minion-icon-2').attr("src","imgs/minion-w.png")
-        forest_minion = 0
+    }
+    else{
+        $('#forest-minion-icon').addClass('forest-minion-active')
+        $('#forest-minion-icon').attr("src","imgs/minion-y.png")
+        $('#forest-minion-icon-2').addClass('forest-minion-active')
+        $('#forest-minion-icon-2').attr("src","imgs/minion-y.png")
     }
 
     send_modifier_link()
@@ -1849,7 +1854,7 @@ function saveSettings(reset = false){
     user_settings['map'] = $(".selected_map")[0] ? $(".selected_map")[0].id : 'tanglewood'
     user_settings['theme'] = $("#theme").val();
     user_settings['coal'] = $("#coal-icon").hasClass("coal-active") ? 1 : 0
-    user_settings['forest_minion'] = $("#forest-minion-icon").hasClass("forest-minion-active") ? 1 : 0
+    user_settings['forest_minion'] = reset ? 0 : parseInt($("#forest-minion-mod").text())
     user_settings['blood_moon'] = $("#blood-moon-icon").hasClass("blood-moon-active") ? 1 : 0
     user_settings['voice_prefix'] = document.getElementById("voice_prefix").checked ? 1 : 0
 
@@ -1956,7 +1961,7 @@ function loadSettings(){
         toggleCoal(true)
     }
     if (user_settings['forest_minion']){
-        toggleForestMinion(true)
+        toggleForestMinion(user_settings['forest_minion'],true)
     }
     if (user_settings['blood_moon']){
         toggleBloodMoon(true)
@@ -2042,6 +2047,8 @@ function resetSettings(){
     }
     if (user_settings['forest_minion']){
         $('#forest-minion-icon').removeClass('forest-minion-active')
+        $("#forest-minion-mod").text("0")
+        $("#forest-minion-mod-2").text("0")
         forest_minion = 0
     }
     if (user_settings['blood_moon']){
@@ -2474,7 +2481,6 @@ function reset(skip_continue_session=false){
         send_reset_link()
         if(!document.getElementById("persist_modes").checked){
             $("#coal-icon").removeClass("coal-active") 
-            $("#forest-minion-icon").removeClass("forest-minion-active") 
             $("#blood-moon-icon").removeClass("blood-moon-active")
         }
         state['settings'] = JSON.stringify(user_settings)

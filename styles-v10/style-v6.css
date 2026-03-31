@@ -1903,20 +1903,49 @@ body{
         filter: drop-shadow(0px 0px 5px #a00);
     }
 
-    .forest-minion-icon{
+    .minion-modifiers{
+        position: relative;
+        display: flex;
+        flex-direction: row;
         float: right;
-        height: 22px;
-        opacity: 0.5;
-        cursor: pointer;
-        padding-right: 5px;
+        align-items: center;
+        padding-right: 3px;
+        margin-right: 3px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: -6px;
     }
 
-    .forest-minion-icon:hover{
+    .minion-modifier-arrow{
+        font-size: 20px;
+        opacity: 0.5;
+        cursor: pointer;
+        z-index: 5;
+        user-select: none;
+    }
+
+    .minion-modifier-arrow:hover{
         opacity: 1.0;
     }
 
+    .forest-minion-mod{
+        position: absolute;
+        font-size: 15px;
+        font-weight: bold;
+        width: calc(100% - 2px);
+        text-align: center;
+        padding-top: 6px;
+        text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black, 0 -0.05em black, -0.05em -0.05em black, -0.05em 0.05em black, 0.05em -0.05em black, 0.05em 0.05em black;
+        z-index: 3;
+    }
+
+    .forest-minion-icon{
+        height: 30px;
+        opacity: 0.3;
+        margin-right: -9px;
+        pointer-events: none;
+    }
+
     .forest-minion-active{
-        opacity: 1.0 !important;
         filter: drop-shadow(0px 0px 5px rgb(185, 184, 98));
     }
 

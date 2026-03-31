@@ -748,15 +748,29 @@ function parse_speech(vtext){
         running_log[cur_idx]["Domo"] = domovoi_msg
         reset_voice_status()
     }
-    else if(vtext.startsWith('set forest minion')){
+    else if(vtext.startsWith('forest minion ran')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
         console.log("Recognized forest minion command")
-        running_log[cur_idx]["Type"] = "set forest minion"
+        running_log[cur_idx]["Type"] = "set forest minion as ran away"
         console.log(`Heard '${vtext}'`)
         domovoi_msg += "setting forest minion..."
 
-        toggleForestMinion(true, false)
+        toggleForestMinion(-1)
+
+        domovoi_heard(domovoi_msg)
+        running_log[cur_idx]["Domo"] = domovoi_msg
+        reset_voice_status()
+    }
+    else if(vtext.startsWith('forest minion jump')){
+        document.getElementById("voice_recognition_status").className = null
+        document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
+        console.log("Recognized forest minion command")
+        running_log[cur_idx]["Type"] = "set forest minion as jump scare"
+        console.log(`Heard '${vtext}'`)
+        domovoi_msg += "setting forest minion..."
+
+        toggleForestMinion(1)
 
         domovoi_heard(domovoi_msg)
         running_log[cur_idx]["Domo"] = domovoi_msg
@@ -765,12 +779,12 @@ function parse_speech(vtext){
     else if(vtext.startsWith('set not forest minion') || vtext.startsWith('remove forest minion')){
         document.getElementById("voice_recognition_status").className = null
         document.getElementById("voice_recognition_status").style.backgroundImage = "url(imgs/mic-recognized.png)"
-        console.log("Recognized forest minioncommand")
+        console.log("Recognized forest minion command")
         running_log[cur_idx]["Type"] = "remove forest minion"
         console.log(`Heard '${vtext}'`)
         domovoi_msg += "removing forest minion..."
 
-        toggleForestMinion(false, true)
+        toggleForestMinion(0, true, true)
 
         domovoi_heard(domovoi_msg)
         running_log[cur_idx]["Domo"] = domovoi_msg
