@@ -529,7 +529,7 @@
     "{{wiki_known_bugs_phantom}}": "<li>Can use its ability on dead players</li><li>Can use its ability on players that are outside of the investigation area</li><li>Will still be visible on film strip for Translucent Ghost, Shadow Ghost, DOTS Ghost, and Hunting Ghost videos </li>",
     "{{wiki_known_bugs_poltergeist}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_raiju}}": "<li>Heartbeat radius is currently 15m instead of 10m, creating the \"bass boosted\" heartbeat audio</li><li>Only held electronics impact the hunt sanity threshold</li>",
-    "{{wiki_known_bugs_revenant}}": "<li><i>None</i></li>",
+    "{{wiki_known_bugs_revenant}}": "<li>On event maps, revealing a forest minion (rabbit) that results in it running away or a jump scare will force a Revenant to move at its faster speed of 3.0 m/s for the remainder of the contract regardless of its ability.</li>",
     "{{wiki_known_bugs_shade}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_spirit}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_thaye}}": "<li>Can age from a player located a floor below since the 3m range is not stopped by the floor</li><li>Hunt threshold is 1% lower than intended</li>",
