@@ -194,6 +194,15 @@
 .drop_desc{
     font-size: 12px;
     padding: 5px;
+    text-align: center;
+}
+
+.drop_desc a{
+    color: #ffff00;
+}
+
+.drop_desc a:hover{
+    color: #ff9100;
 }
 
 .drop_dates{
