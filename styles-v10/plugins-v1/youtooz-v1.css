@@ -1,0 +1,25 @@
+.youtooz_logo{
+    grid-row: 1;
+    grid-column: 2;
+    max-width: 100%;
+}
+
+.youtooz_link{
+    grid-column: 1 / 4;
+    grid-row: 5;
+    text-decoration: none;
+}
+
+.youtooz_buy{
+    color: rgb(255, 255, 255);
+    border-radius: 45px;
+    padding: 10px 15px;
+    line-height: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 60px;
+}
+
+.youtooz_buy:hover{
+    filter: brightness(0.8);
+}

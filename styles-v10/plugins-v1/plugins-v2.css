@@ -35,3 +35,21 @@
     font-size: 15px;
     text-align: right;
 }
+
+.plugin_status{
+    grid-column: 1 / 4;
+    grid-row: 3;
+    padding: 10px 0px;
+    font-size: 13px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.plugin_shipping{
+    grid-column: 1 / 4;
+    grid-row: 4;
+    padding: 10px 0px;
+    font-size: 11px;
+    color: #444;
+    text-align: center;
+}
