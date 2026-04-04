@@ -1,4 +1,5 @@
 {
+    "{{wiki_coming_soon}}": "Coming Soon...",
     "{{wiki_0_evidence}}": "0 Evidence",
 
     "{{wiki_additional_ghost_data}}": "Additional Ghost Data",
@@ -776,7 +777,9 @@
     "{{wiki_misconceptions_insurance_1_r}}": "Insurance is based on difficulty and if you die, no photo necessary.",
     "{{wiki_radio}}": "Radio",
 
-    "{{wiki_puzzles}}": "Puzzles / Unlockables",
+    "{{wiki_puzzles}}": "Unlockables (+Puzzles)",
+    "{{wiki_puzzles_cosmetics}}": "Cosmetics",
+    "{{wiki_puzzles_id_cards}}": "ID Cards / Badges",
 
     "{{wiki_achievement_hunter_title}}": "Achievement Hunter",
     "{{wiki_achievement_hunter_p1}}": "\"Prove your worth, discover every secret and conquer every challenge.\"",
