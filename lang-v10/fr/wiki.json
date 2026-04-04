@@ -504,7 +504,7 @@
     "{{wiki_known_bugs_phantom}}": "<li>Peut utiliser sa capacité sur les joueurs morts</li><li>Peut utiliser sa capacité sur des joueurs qui sont à l'extérieur de la zone d'enquête</li><li>Sera toujours visible sur la pellicule de film pour les vidéos Fantôme Translucide, Fantôme Ombre, Trace D.O.T.S., et Fantôme en chasse</li>",
     "{{wiki_known_bugs_poltergeist}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_raiju}}": "<li>Le rayon des battements de cœur est actuellement de 15 m au lieu de 10 m, ce qui crée un son de battement de cœur avec des \"basses amplifiées\"</li><li>Seuls les appareils électroniques tenus impactent le seuil de chasse</li>",
-    "{{wiki_known_bugs_revenant}}": "<li>Sur les cartes d'événement, révéler un sbire de la forêt (lapin) pour le faire s'enfuir ou nous faire sursauter forcera un Revenant à se déplacer à sa vitesse plus rapide de 3,0 m/s pour le reste du contrat indépendamment de sa capacité.</li>",
+    "{{wiki_known_bugs_revenant}}": "<li>Sur les cartes d'événement Vallée maudite, si le multiplicateur de vitesse dû aux interactions avec les jackalopes est supérieur à 1,0 (ce qui signifie que vous avez eu plus de sursauts que de fuites), alors le Revenant se déplacera à sa vitesse plus rapide de 3,0 m/s indépendamment de sa capacité. Il peut être ramené à la normale si le multiplicateur est ramené à 1,0 ou moins.</li>",
     "{{wiki_known_bugs_shade}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_spirit}}": "<li><i>Aucun</i></li>",
     "{{wiki_known_bugs_thaye}}": "<li>Peut vieillir à cause d'un joueur situé à un étage en dessous car la portée de 3 m n'est pas stoppée par le sol</li><li>Le seuil de chasse est 1 % plus bas que prévu</li>",
