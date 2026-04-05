@@ -1,4 +1,5 @@
 {
+    "{{wiki_coming_soon}}": "Bientôt...",
     "{{wiki_0_evidence}}": "0 Preuve",
     "{{wiki_additional_ghost_data}}": "Données additionnelles sur les entités",
     "{{wiki_interaction_range_title}}": "Portées d'interaction",
@@ -721,7 +722,9 @@
     "{{wiki_misconceptions_insurance_1_c}}": "\"Il faut prendre des photos des coéquipiers morts pour obtenir de l'argent de l'assurance\"",
     "{{wiki_misconceptions_insurance_1_r}}": "L'assurance dépend de la difficulté et, si vous mourez, aucune photo n'est nécessaire.",
     "{{wiki_radio}}": "Radio",
-    "{{wiki_puzzles}}": "Énigmes / Débloquables",
+    "{{wiki_puzzles}}": "Débloquables (+Énigmes)",
+    "{{wiki_puzzles_cosmetics}}": "Cosmétiques",
+    "{{wiki_puzzles_id_cards}}": "Cartes d'identité / Badges",
     "{{wiki_achievement_hunter_title}}": "Chasseur de succès",
     "{{wiki_achievement_hunter_p1}}": "\"Prouvez votre valeur, découvrez chaque secret et relevez chaque défi.\"",
     "{{wiki_achievement_hunter_h1}}": "Conditions requises",
