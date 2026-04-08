@@ -56,7 +56,7 @@
     </script>
     <script src="scripts-v10/ghost_template-v2.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
-    <link rel="stylesheet" href="styles-v10/style-v8.css"/>
+    <link rel="stylesheet" href="styles-v10/style-v9.css"/>
     <link rel="stylesheet" href="styles-v10/style-mobile-v9.css"/>
     <link rel="stylesheet" href="themes-v10/themes-v1.css"/>
     <link rel="stylesheet" href="login-v10/login-v1.css" >
@@ -259,77 +259,102 @@
             </div>
             <hr>
             <h3>{{zntdl_h2}}</h3>
-            <h4>{{zntdl_h3}}</h4>
-            <ol>
-                <li>{{zntdl_li1}}</li>
-                <li>{{zntdl_li2}}</li>
-                <li>{{zntdl_li3}}</li>
-            </ol>
-            <div class="info_text">{{zntdl_p7}}</div>
-            <br>
-            <h4>{{zntdl_h4}}</h4>
-            <ol>
-                <li>{{zntdl_li4}}</li>
-                <li>{{zntdl_li5}}</li>
-                <li>{{zntdl_li6}}<br>`{{zntdl_p8}}`</li>
-                <li>{{zntdl_li7}}</li>
-            </ol>
-            <hr>
-            <h3>{{zntdl_h5}}</h3>
-            <div class="info_text">{{zntdl_p9}}</div>
-            <ul>
-                <li>{{zntdl_li8}}</li>
-                <li>{{zntdl_li9}}</li>
-                <li>{{zntdl_li10}}</li>
-            </ul>
-            <div class="info_text">
-                {{zntdl_p10}}<br><br>
-                {{zntdl_p11}}<br><br>
-                {{zntdl_p12}}<br>
-                {{zntdl_p13}}
+            <div class="info-cols">
+                <div style="grid-column: 1;">
+                    <h4>{{zntdl_h3}}</h4>
+                    <ol>
+                        <li>{{zntdl_li1}}</li>
+                        <li>{{zntdl_li2}}</li>
+                        <li>{{zntdl_li3}}</li>
+                    </ol>
+                    <div class="info_text">{{zntdl_p7}}</div>
+                </div>
+                <div style="grid-column: 2;">
+                    <h4>{{zntdl_h4}}</h4>
+                    <ol>
+                        <li>{{zntdl_li4}}</li>
+                        <li>{{zntdl_li5}}</li>
+                        <li>{{zntdl_li6}}</li>
+                    </ol>
+                </div>
+                <div style="grid-column: 3;">
+                    <h4>{{zntdl_h5}}</h4>
+                    <ol>
+                        <li>{{zntdl_li7}}</li>
+                        <li>{{zntdl_li8}}</li>
+                        <li>{{zntdl_li9}}</li>
+                    </ol>
+                    <div class="info_text">{{zntdl_p7.1}}</div>
+                </div>
             </div>
             <hr>
             <h3>{{zntdl_h6}}</h3>
+            <div class="info_text">{{zntdl_p8}}</div>
+            <ul>
+                <li>{{zntdl_li10}}</li>
+                <li>{{zntdl_li11}}</li>
+                <li>{{zntdl_li12}}</li>
+            </ul>
+            <div class="info_text">
+                {{zntdl_p9}}<br><br>
+                {{zntdl_p10}}<br><br>
+                {{zntdl_p11}}<br>
+                {{zntdl_p12}}
+            </div>
+            <hr>
+            <h3>{{zntdl_h7}}</h3>
             <div class="info_text">
                 {{zntdl_p14}}<br><br>
                 {{zntdl_p15}}
             </div>
             <ol>
-                <li>{{zntdl_li11}}</li>
-                <li>{{zntdl_li12}}</li>
                 <li>{{zntdl_li13}}</li>
                 <li>{{zntdl_li14}}</li>
                 <li>{{zntdl_li15}}</li>
+                <li>{{zntdl_li16}}</li>
+                <li>{{zntdl_li17}}</li>
             </ol>
             <div class="info_text">{{zntdl_p16}}</div>
             <br><br>
             <div class="info_text">{{zntdl_p25}}</div>
             <ul>
-                <li>{{zntdl_li16}}</li>
-                <li>{{zntdl_li17}}</li>
                 <li>{{zntdl_li18}}</li>
                 <li>{{zntdl_li19}}</li>
                 <li>{{zntdl_li20}}</li>
+                <li>{{zntdl_li21}}</li>
+                <li>{{zntdl_li22}}</li>
             </ul>
             <hr>
-            <h3>{{zntdl_h7}}</h3>
+            <h3>{{zntdl_h8}}</h3>
             <div class="info_text">
                 {{zntdl_p17}}<br><br>
                 {{zntdl_p18}}
             </div>
-            <br>
-            <h4>{{zntdl_h8}}</h4>
-            <div class="info_text">
-                {{zntdl_p19}}<br><br>
-                {{zntdl_p20}}<br><br>
-                {{zntdl_p21}}
-            </div>
-            <br>
-            <h4>{{zntdl_h9}}</h4>
-            <div class="info_text">
-                {{zntdl_p22}}<br><br>
-                {{zntdl_p23}}<br><br>
-                {{zntdl_p24}}
+            <div class="info-cols">
+                <div style="grid-column: 1;">
+                    <h4>{{zntdl_h9}}</h4>
+                    <div class="info_text">
+                        {{zntdl_p19}}<br><br>
+                        {{zntdl_p20}}<br><br>
+                        {{zntdl_p21}}
+                    </div>
+                </div>
+                <div style="grid-column: 2;">
+                    <h4>{{zntdl_h10}}</h4>
+                    <div class="info_text">
+                        {{zntdl_p22}}<br><br>
+                        {{zntdl_p23}}<br><br>
+                        {{zntdl_p24}}
+                    </div>
+                </div>
+                <div style="grid-column: 3;">
+                    <h4>{{zntdl_h11}}</h4>
+                    <div class="info_text">
+                        {{zntdl_p26}}<br><br>
+                        {{zntdl_p27}}<br><br>
+                        {{zntdl_p28}}
+                    </div>
+                </div>
             </div>
             <hr>
             <div class="copyright_text">Copyright © 2023-2026 | Ty Bayn (Zero-Network)</div>
@@ -963,8 +988,9 @@
                 {{zntdl_p1}}<br>
                 {{zntdl_p2}}
                 <div class="zntdl-buttons">
-                    <a class="zntdl-download" href="assets/ZN-Drops-Launcher-v0.0.1.exe" download="ZN-Drops-Launcher-v0.0.1.exe" onclick="showZNTDLInfo(event)"><div class="zntdl-download-info"><img class="download_icon_static" src="imgs/windows.png">{{windows}}<img class="download_icon_static invert" src="imgs/download.png" alt="Download ZN-Drops-Launcher"></div></a>
-                    <a class="zntdl-download" href="assets/ZN-Drops-Launcher-v0.0.1.bin" download="ZN-Drops-Launcher-v0.0.1.bin" onclick="showZNTDLInfo(event)"><div class="zntdl-download-info"><img class="download_icon_static" src="imgs/ubuntu.png">{{linux}}<img class="download_icon_static invert" src="imgs/download.png" alt="Download ZN-Drops-Launcher (Linux)"></div></a>
+                    <a class="zntdl-download" href="assets/ZN-Drops-Launcher-v0.0.2-win-x64.zip" download="ZN-Drops-Launcher-v0.0.2-win-x64.zip" onclick="showZNTDLInfo(event)"><div class="zntdl-download-info"><img class="download_icon_static" src="imgs/windows.png">{{windows}}</div></a>
+                    <a class="zntdl-download" href="assets/ZN-Drops-Launcher-v0.0.2-linux-x64.tar.gz" download="ZN-Drops-Launcher-v0.0.2-linux-x64.tar.gz" onclick="showZNTDLInfo(event)"><div class="zntdl-download-info"><img class="download_icon_static" src="imgs/ubuntu.png">{{linux}}</div></a>
+                    <a class="zntdl-download" href="assets/ZN-Drops-Launcher-v0.0.2-mac-arm64.zip" download="ZN-Drops-Launcher-v0.0.2-mac-arm64.zip" onclick="showZNTDLInfo(event)"><div class="zntdl-download-info"><img class="download_icon_static" src="imgs/mac.png">{{mac}}</div></a>
                 </div>
             </div>
         </div>
