@@ -31,10 +31,18 @@ function updateHintDrops() {
     }
 }
 
-function load_partners() {
+function load_partners(first_time_loading = false){
     let drop_live = false
     let has_drop = false
-    
+
+    $("#partner_icon_img").attr("src","imgs/loader.gif")
+
+    if(!first_time_loading){
+        $("#partner-tab").removeClass("partner-live")
+        $("#partner-tab").removeClass("drop-active")
+        $("#partner-tab").removeClass("live_drops")
+    }
+
     let loadPartners = new Promise((resolve, reject) => {
         fetch("https://zero-network.net/zn/partners.html", {signal: AbortSignal.timeout(6000)})
         .then(data => data.text())
@@ -47,7 +55,9 @@ function load_partners() {
                         drop_live = true
                     }
                 }
-                document.getElementById('partner_info_block').addEventListener('scroll', updateHint, { passive: true });
+                if (first_time_loading){
+                    document.getElementById('partner_info_block').addEventListener('scroll', updateHint, { passive: true });
+                }
                 setTimeout(()=>{updateHint()},250)
                 resolve("Partners Loaded")
             },1500);
@@ -68,7 +78,9 @@ function load_partners() {
                     has_drop = true
                     $("#partner-tab").addClass("drop-active")
                 }
-                document.getElementById('drops_info_block').addEventListener('scroll', updateHintDrops, { passive: true });
+                if (first_time_loading){
+                    document.getElementById('drops_info_block').addEventListener('scroll', updateHintDrops, { passive: true });
+                }
                 resolve("Drops Loaded")
             },1500);
         })
@@ -82,25 +94,28 @@ function load_partners() {
         if(has_drop && drop_live){
             $("#partner-tab").addClass("live_drops")
         }
+        $("#partner_icon_img").attr("src","https://cdn.simpleicons.org/twitch/white")
     })
 
+    if(first_time_loading){
     // Update on resize of the container or its content
-    const area = document.getElementById('partner_info_block');
-    const resizeObs = new ResizeObserver(updateHint);
-    resizeObs.observe(area);
-    const mutationObs = new MutationObserver(() => {
-        requestAnimationFrame(updateHint);
-    });
-    mutationObs.observe(area, { childList: true, subtree: true, characterData: true });
+        const area = document.getElementById('partner_info_block');
+        const resizeObs = new ResizeObserver(updateHint);
+        resizeObs.observe(area);
+        const mutationObs = new MutationObserver(() => {
+            requestAnimationFrame(updateHint);
+        });
+        mutationObs.observe(area, { childList: true, subtree: true, characterData: true });
 
-    // Update on resize of the container or its content
-    const dropsarea = document.getElementById('partner_info_block');
-    const dropsresizeObs = new ResizeObserver(updateHintDrops);
-    dropsresizeObs.observe(dropsarea);
-    const dropsmutationObs = new MutationObserver(() => {
-        requestAnimationFrame(updateHintDrops);
-    });
-    dropsmutationObs.observe(area, { childList: true, subtree: true, characterData: true });
+        // Update on resize of the container or its content
+        const dropsarea = document.getElementById('partner_info_block');
+        const dropsresizeObs = new ResizeObserver(updateHintDrops);
+        dropsresizeObs.observe(dropsarea);
+        const dropsmutationObs = new MutationObserver(() => {
+            requestAnimationFrame(updateHintDrops);
+        });
+        dropsmutationObs.observe(area, { childList: true, subtree: true, characterData: true });
+    }
 }
 
 // TWITCH

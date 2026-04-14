@@ -444,13 +444,14 @@ function loadAllAndConnect(){
                                 auto_link()
                                 openWikiFromURL()
                                 loadSearch()
-                                load_partners()
+                                load_partners(true)
                                 load_models()
 
                                 try{heartbeat()} catch(Error){console.warn("Possible latency issues!")}
                                 setInterval(function(){
                                     if(!document.hidden){
                                         try{heartbeat()} catch(Error){console.error("Heartbeat failed!")}
+                                        try{load_partners()} catch(Error){console.error("Failed to load partners!")}
                                     }
                                 }, 300000)
                             })
