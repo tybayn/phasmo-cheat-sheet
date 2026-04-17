@@ -2472,6 +2472,7 @@ body{
         padding: 0px 4px;
         margin-top: 7px;
         float: right;
+        width: 30px;
     }
 
     .progress {

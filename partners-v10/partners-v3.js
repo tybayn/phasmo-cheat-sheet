@@ -73,7 +73,7 @@ function load_partners(first_time_loading = false){
         .then(data => {
             setTimeout(() => {
                 if(data != "")
-                    document.getElementById('drops_info_block').innerHTML = data
+                    document.getElementById('drops_info_block').innerHTML = localize(data)
                 if (data.includes("LIVE!")){
                     has_drop = true
                     $("#partner-tab").addClass("drop-active")

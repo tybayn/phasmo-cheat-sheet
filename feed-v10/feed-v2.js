@@ -35,7 +35,7 @@ let load_feed = new Promise((resolve, reject) => {
             </div>
             <hr>
             `
-            document.getElementById('feed_info_block').innerHTML += feed_html
+            document.getElementById('feed_info_block').innerHTML += localize(feed_html)
         }
         if(!feed_found){
             var feed_html = `

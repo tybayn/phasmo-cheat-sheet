@@ -56,16 +56,16 @@
     </script>
     <script src="scripts-v10/ghost_template-v2.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
-    <link rel="stylesheet" href="styles-v10/style-v9.css"/>
+    <link rel="stylesheet" href="styles-v10/style-v10.css"/>
     <link rel="stylesheet" href="styles-v10/style-mobile-v9.css"/>
     <link rel="stylesheet" href="themes-v10/themes-v1.css"/>
     <link rel="stylesheet" href="login-v10/login-v1.css" >
     <link rel="stylesheet" href="wiki-v10/wiki-v2.css" >
     <link rel="stylesheet" href="wiki-v10/wiki-spoiler-v1.css" >
-    <link rel="stylesheet" href="events-v10/events-v1.css" >
+    <link rel="stylesheet" href="events-v10/events-v2.css" >
     <link rel="stylesheet" href="models-v10/models-v1.css" >
     <link rel="stylesheet" href="partners-v10/partners-v2.css" >
-    <link rel="stylesheet" href="feed-v10/feed-v1.css" >
+    <link rel="stylesheet" href="feed-v10/feed-v2.css" >
     <link rel="stylesheet" href="styles-v10/plugins-v1/plugins-v2.css" >
     <link rel="stylesheet" href="styles-v10/plugins-v1/makeship-v1.css" >
     <link rel="stylesheet" href="styles-v10/plugins-v1/musicboxstore-v1.css" >
@@ -559,6 +559,9 @@
                 <div class="modifier_option less_pad">
                     <input type="checkbox" id="timer_split" name="timer_split" class="settings_check" onclick="saveSettings();"><label for="timer_split">{{split_timer}}</label>
                 </div>  
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="timer_auto_start_cooldown" name="timer_split" class="settings_check" onclick="saveSettings();"><label for="timer_auto_start_cooldown">{{auto_start_cooldown}}</label>
+                </div>  
                 <hr>
                 <div class="modifier_volume yfont white">{{ghost_cards}}</div> 
                 <div class="modifier_option less_pad">
@@ -816,6 +819,7 @@
             <div class="title_note">( '◄' {{to_close}} )</div>
             <div class="info_block">
                 <div id="event_title">{{current_event_title}}</div>
+                <div id="event_end_date"></div>
                 <hr>
                 <div id="event_details">
                     {{current_event_text}}
@@ -1313,24 +1317,24 @@
         if(navigator.userAgent.includes("CriOS") && (/iPad/.test(navigator.userAgent) || (navigator.platform.toLowerCase().includes('mac') && 'ontouchend' in document)))
             document.body.style.position = 'fixed';
     </script>
-    <script src="scripts-v10/utils-v1.js"></script>
+    <script src="scripts-v10/utils-v2.js"></script>
     <script src="scripts-v10/mobile-v2.js"></script>
     <script src="lang-v10/lang-v1.js"></script>
     <script src="themes-v10/themes-v2.js"></script>
     <script src="scripts-v10/audio_controller-v1.js"></script>
     <script src="scripts-v10/metronome-v4.js"></script>
-    <script src="scripts-v10/timer-v2.js"></script>
+    <script src="scripts-v10/timer-v3.js"></script>
     <script src="login-v10/login-v1.js"></script>
     <script src="wiki-v10/wiki-v2.js"></script>
-    <script src="scripts-v10/filter-v6.js"></script>
+    <script src="scripts-v10/filter-v7.js"></script>
     <script src="scripts-v10/sanity-v1.js"></script>
     <script src="scripts-v10/wslink-v5.js"></script>
-    <script src="partners-v10/partners-v2.js"></script>
+    <script src="partners-v10/partners-v3.js"></script>
     <script src="models-v10/models-v1.js"></script>
     <script src="scripts-v10/zn-v3.js"></script>
     <script src="scripts-v10/search-v2.js"></script>
-    <script src="events-v10/events-v2.js"></script>
-    <script src="feed-v10/feed-v1.js"></script>
+    <script src="events-v10/events-v3.js"></script>
+    <script src="feed-v10/feed-v2.js"></script>
     <script src="scripts-v10/voice_en-v1.js"></script>
     <script src="scripts-v10/voice_recognition-v3.js"></script>
     <script src="scripts-v10/sparkles-v1.js"></script>

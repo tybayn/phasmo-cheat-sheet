@@ -109,6 +109,7 @@
     "{{mute_toggle}}": "Mute Timer Toggle",
     "{{timer_count_up}}": "Timer Count Up",
     "{{split_timer}}": "Split Timer Parts (Desktop Link)",
+    "{{auto_start_cooldown}}": "Start Cooldown after Hunt Timer",
     "{{ghost_cards}}": "Ghost Cards",
     "{{force_selection}}": "Force Selection (Data Link)",
     "{{adaptive_evidence}}": "Adaptive Evidence",

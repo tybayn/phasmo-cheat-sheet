@@ -322,7 +322,7 @@ function start_timer(){
         if(timeleft <= 0){
             smudge_worker.terminate();
             $("#play_button").removeClass("playing")
-            $("#play_button").attr('src','imgs/play.png')
+            $("#play_button_icon").attr('name','play')
         }
     };
 
@@ -485,7 +485,7 @@ function start_cooldown_timer(){
         if(timeleft <= 0){
             cooldown_worker.terminate();
             $("#play_cooldown_button").removeClass("playing")
-            $("#play_cooldown_button").attr('src','imgs/play.png')
+            $("#play_cooldown_button_icon").attr('name','play')
         }
     };
 
@@ -651,6 +651,10 @@ function start_hunt_timer(){
                     cur_sound.play()
                     snds_played[6] = 1
                     snds_played[5] = 0
+                    if(document.getElementById("timer_auto_start_cooldown").checked){
+                        toggle_cooldown_timer(true,false)
+                        toggle_hunt_timer(false,true)
+                    }
                 }
             }
         }
