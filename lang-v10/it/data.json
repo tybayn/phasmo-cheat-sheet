@@ -106,7 +106,7 @@
     "{{mute_toggle}}": "Silenzia Attivazione Timer",
     "{{timer_count_up}}": "Timer Crescente",
     "{{split_timer}}": "Dividi Parti Timer (Desktop Link)",
-    "{{auto_start_cooldown}}": "",
+    "{{auto_start_cooldown}}": "Avvia il cooldown dopo il timer di caccia",
     "{{ghost_cards}}": "Carte Fantasma",
     "{{force_selection}}": "Forza Selezione (Data Link)",
     "{{adaptive_evidence}}": "Prove Adattive",
