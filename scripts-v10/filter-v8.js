@@ -1882,7 +1882,7 @@ function loadSettings(){
     user_settings['cust_hunt_length'] = user_settings['cust_hunt_length'] == "" ? "3" : user_settings['cust_hunt_length']
     user_settings['cust_lobby_type'] = ['solo','multiplayer'].includes(user_settings['cust_lobby_type']) ? user_settings['cust_lobby_type'] : 'solo'
 
-    if($("#forest-minion-icon").css("display") == "none"){
+    if($("#minion-icon").css("display") == "none"){
         user_settings['forest_minion'] = 0
     }
 

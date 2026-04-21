@@ -898,7 +898,7 @@ function link_link(reconnect = false){
 
                 bm = $("#blood-moon-icon").hasClass("blood-moon-active")
                 bma = $("#blood-moon-icon").css("display") != "none"
-                fm = $("#forest-minion-icon").hasClass("forest-minion-active")
+                fm = $("#forest-minion-mod").text() != '0'
                 fma = $("#forest-minion-icon").css("display") != "none"
                 cm = $("#coal-icon").hasClass("coal-active")
                 cma = $("#coal-icon").css("display") != "none"
@@ -1153,7 +1153,7 @@ function send_ghosts_link(reset = false){
 function send_modifier_link(){
     if(hasDLLink){
         bm = $("#blood-moon-icon").hasClass("blood-moon-active") && $("#blood-moon-icon").css("display") != "none"
-        fm = $("#forest-minion-icon").hasClass("forest-minion-active") && $("#forest-minion-icon").hasClass("forest-minion-active")
+        fm = $("#forest-minion-mod").text() != '0' && $("#minion-icon").css("display") != "none"
         cm = $("#coal-icon").hasClass("coal-active") && $("#coal-icon").css("display") != "none"
 
         if(!bm && !fm && !cm)
@@ -1346,7 +1346,7 @@ function send_state() {
             "map_size": state['map_size'],
             "prev_monkey_state": state['prev_monkey_state'],
             "coal": document.getElementById("coal-icon").classList.contains("coal-active") ? 1 : 0,
-            "forest_minion": document.getElementById("forest-minion-icon").classList.contains("forest-minion-active") ? 1 : 0,
+            "forest_minion": $("#forest-minion-mod").text() != '0' ? 1 : 0,
             "blood_moon": document.getElementById("blood-moon-icon").classList.contains("blood-moon-active") ? 1 : 0,
             'settings': {
                 "num_evidences":document.getElementById("num_evidence").value,
