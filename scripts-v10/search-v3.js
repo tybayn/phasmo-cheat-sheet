@@ -6,7 +6,10 @@ const RELATED = [
     ['extinguish','blow out','blows out'],
     ['paramic','parabolic'],
     ['guaranteed','forced'],
-    ['picture','photo']
+    ['picture','photo'],
+    ['video','clip','footage'],
+    ['ghost orb','orbs'],
+    ['fingerprints','prints','uv','ultraviolet']
 ]
 
 
@@ -503,6 +506,7 @@ document.addEventListener("keydown", (e) => {
     }
 
     if (!modKey) return;
+
     if (e.key.toLowerCase() !== "f") return;
 
     const active = document.activeElement;
