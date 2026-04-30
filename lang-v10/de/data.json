@@ -106,6 +106,7 @@
     "{{mute_toggle}}": "Timer-Ton stummschalten",
     "{{timer_count_up}}": "Timer hochzählen",
     "{{split_timer}}": "Geteilte Timerteile (Desktop Link)",
+    "{{auto_start_cooldown}}": "Start Cooldown after Hunt Timer",
     "{{ghost_cards}}": "Geister-Karten",
     "{{force_selection}}": "Auswahl erzwingen (Data Link)",
     "{{adaptive_evidence}}": "Adaptive Beweise",
