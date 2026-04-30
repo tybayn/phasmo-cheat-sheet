@@ -1,4 +1,5 @@
 {
+    "{{wiki_coming_soon}}": "Wkrótce...",
     "{{wiki_0_evidence}}": "0 Dowodów",
     "{{wiki_additional_ghost_data}}": "Dodatkowe Dane Ducha",
     "{{wiki_interaction_range_title}}": "Zasięgi Interakcji",
@@ -387,7 +388,7 @@
     "{{wiki_video_camera_p1}}": "Kamera wideo może być używana do znajdowania orlików ducha, jako kamera do CCTV w ciężarówce oraz do przechwytywania mediów wideo.",
     "{{wiki_video_camera_p2}}": "Aby znaleźć orliki, możesz zobaczyć je w noktowizji przez ekran na kamerze wideo lub przez CCTV w ciężarówce (kliknij przycisk 'użyj', aby przełączać między normalnym a nocnym widzeniem.)",
     "{{wiki_video_camera_p3}}": "Aby użyć kamery dla CCTV, po prostu użyj przycisku 'umieść', aby ustawić kamerę wideo na powierzchni (możesz także umieścić kamerę wideo na statywie). Po umieszczeniu możesz oglądać i sterować kamerą przez CCTV.",
-    "{{wiki_video_camera_p4}}": "Aby przechwycić media, skieruj kamerę wideo w stronę obiektu / bytu, który chcesz uchwycić. Jeśli przedmiot, w który celujesz, jest prawidłowym przedmiotem, który można nagrać, powinieneś zobaczyć ramkę na ekranie kamery wideo wraz z etykietą określającą, co to za obiekt lub co robi. Gdy zobaczysz ramkę i etykietę, naciśnij i przytrzymaj przycisk 'użyj'. Jeśli akcja trwa wystarczająco długo, aby animacja 'przechwytywania' się zakończyła i pojawiła się ikona 'zapisz', wideo zostało pomyślnie przechwycone i pojawi się w sekcji mediów w dzienniku.",
+    "{{wiki_video_camera_p4}}": "Aby przechwycić media, skieruj kamerę wideo w stronę obiektu / bytu, który chcesz uchwycić. Jeśli przedmiot, w którym celujesz, jest prawidłowym przedmiotem, który można nagrać, powinieneś zobaczyć ramkę na ekranie kamery wideo wraz z etykietą określającą, co to za obiekt lub co robi. Gdy zobaczysz ramkę i etykietę, naciśnij i przytrzymaj przycisk 'użyj'. Jeśli akcja trwa wystarczająco długo, aby animacja 'przechwytywania' się zakończyła i pojawiła się ikona 'zapisz', wideo zostało pomyślnie przechwycone i pojawi się w sekcji mediów w dzienniku.",
     "{{wiki_video_camera_p5}}": "Niektóre filmy są warte więcej niż inne, aby zobaczyć listę akcji, które można nagrać, zobacz <span class=\"wiki-link\" onclick=\"openWikiPath('media.media-video')\">Media >> Kamera Wideo</span>.",
     "{{wiki_video_camera_t1}}": "Poziom 1",
     "{{wiki_video_camera_t2}}": "Poziom 2",
@@ -722,6 +723,8 @@
     "{{wiki_misconceptions_insurance_1_r}}": "Ubezpieczenie zależy od poziomu trudności i tego, czy zginiesz, zdjęcie nie jest konieczne.",
     "{{wiki_radio}}": "Radio",
     "{{wiki_puzzles}}": "Zagadki / Do Odblokowania",
+    "{{wiki_puzzles_cosmetics}}": "Kosmetyki",
+    "{{wiki_puzzles_id_cards}}": "Identyfikatory / Odznaki",
     "{{wiki_achievement_hunter_title}}": "Łowca Osiągnięć",
     "{{wiki_achievement_hunter_p1}}": "\"Udowodnij swoją wartość, odkryj każdy sekret i pokonaj każde wyzwanie.\"",
     "{{wiki_achievement_hunter_h1}}": "Wymagania",
