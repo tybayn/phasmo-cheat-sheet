@@ -3500,6 +3500,7 @@ body{
 
     .ghost_behavior_item li{
         padding: 0px;
+        margin-bottom: 5px;
     }
 
     .ghost_tests_button{
