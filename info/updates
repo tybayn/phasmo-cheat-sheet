@@ -1,6 +1,6 @@
 {
-    "version":"6.4.2",
-    "date":"2026-05-01",
+    "version":"6.4.3",
+    "date":"2026-05-04",
     "details": "- Bug Fixes!\n\nBug Fixes:\n - Fixed a bug where blood moon hotkey wasn't working\n - Fixed a bug where the custom checklist could not be moved\n - Fixed a bug where having modifiers in the text chat hotkey would prevent it from closing",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.4.2.msi"
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.4.3.msi"
 }
