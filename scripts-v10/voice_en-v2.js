@@ -54,6 +54,8 @@ const ZNLANG = {
         "domo":["demo"]
     },
     "ghosts":{
+        "aswang":["awesome","ass wing","ass wong","ass wang","a swan","a song"],
+        "kormos":[],
         "spirit":["strip"],
         "wraith":["straight","race","reef","raise"],
         "phantom":[],

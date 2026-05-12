@@ -1322,7 +1322,7 @@
     <script src="lang-v10/lang-v1.js"></script>
     <script src="themes-v10/themes-v2.js"></script>
     <script src="scripts-v10/audio_controller-v1.js"></script>
-    <script src="scripts-v10/metronome-v4.js"></script>
+    <script src="scripts-v10/metronome-v5.js"></script>
     <script src="scripts-v10/timer-v3.js"></script>
     <script src="login-v10/login-v1.js"></script>
     <script src="wiki-v10/wiki-v2.js"></script>
@@ -1335,7 +1335,7 @@
     <script src="scripts-v10/search-v3.js"></script>
     <script src="events-v10/events-v3.js"></script>
     <script src="feed-v10/feed-v2.js"></script>
-    <script src="scripts-v10/voice_en-v1.js"></script>
+    <script src="scripts-v10/voice_en-v2.js"></script>
     <script src="scripts-v10/voice_recognition-v3.js"></script>
     <script src="scripts-v10/sparkles-v1.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -1345,7 +1345,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v10/wiki-v8.html",() => {
+                $("#wiki-body").load("wiki-v10/wiki-v9.html",() => {
                     resolve("Ghost data loaded")
                 })
             })

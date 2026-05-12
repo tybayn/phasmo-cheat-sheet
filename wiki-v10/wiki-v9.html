@@ -99,6 +99,25 @@
             <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
         </div>
     </div>
+    <div id="wiki-extra-kormos" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> {{Kormos}}</div></div>
+    <div class="wiki_details" style="height: 0px;">
+        <div id="wiki-kormos-detection" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9492;</div> {{wiki_kormos_detection_title}}</div></div>
+        <div class="wiki_details" style="height: 0px;">
+            <div class="text">
+                {{wiki_kormos_detection_p1}}<br><br>
+                <b>{{wiki_kormos_detection_h1}}</b><br>
+                <ul><li>{{wiki_kormos_detection_p2}}</li></ul><br>
+                <b>{{wiki_kormos_detection_h2}}</b><br>
+                <ul><li>{{wiki_kormos_detection_p3}}</li></ul><br>
+                <b>{{wiki_kormos_detection_h3}}</b><br>
+                <ul><li>{{wiki_kormos_detection_p4}}</li></ul><br>
+                {{wiki_kormos_detection_p5}}<br><br>
+                {{wiki_kormos_detection_p6}}
+            </div>
+            <hr>
+            <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
+        </div>
+    </div>
     <div id="wiki-extra-obake" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> {{Obake}}</div></div>
     <div class="wiki_details" style="height: 0px;">
         <div id="wiki-obake-blinking" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> {{wiki_obake_blinking_title}}</div></div>
@@ -1932,6 +1951,17 @@
             <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
         </div>
 
+        <div id="wiki-los-aswang" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> {{Aswang}}</div></div>
+        <div class="wiki_details" style="height: 0px;">
+            <div class="text">
+                {{wiki_los_aswang_p1}}<br>
+                 <div class="img_center">
+                    <img loading="lazy" src="https://file.garden/Z-9fual_RynAMoLc/wiki/hunts/aswang-los.png" style="max-width: 60%; padding: 10px 0px;">
+                </div>
+            </div>
+            <div onclick="generateWikiShareLink(this);" class="wiki-share">{{copy_share_link}} <img loading="lazy" src="imgs/share.png"></div>
+        </div>
+
         <div id="wiki-los-dayan" class="wiki_title accordian" onclick="accordian(this)"><div class="wiki_subtitle"><div class="wiki_crumb">&#9500;</div> {{Dayan}}</div></div>
         <div class="wiki_details" style="height: 0px;">
             <div class="text">
@@ -2068,6 +2098,12 @@
         <table id="hantu_speed_breakdown">
             <tbody>
                 <tr>
+                    <td>{{Aswang}}</td>
+                    <td class="fade">-</td>
+                    <td>1.53<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.53,0,'aswang-los')">🔊</span></td>
+                    <td class="fade">-</td>
+                </tr>
+                <tr>
                     <td>{{Banshee}}</td>
                     <td class="fade">-</td>
                     <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'banshee-los')">🔊</span></td>
@@ -2114,6 +2150,12 @@
                     <td class="fade">-</td>
                     <td>1.7<span class="ms">m/s</span> <span class="sound" onclick="simulate_los(1.7,0,'jinn-los')">🔊</span></td>
                     <td class="fade">2.5<span class="ms">m/s</span> ❌</td>
+                </tr>
+                <tr class="fade">
+                    <td>{{Kormos}}</td>
+                    <td>-</td>
+                    <td>1.7<span class="ms">m/s</span> ❌</td>
+                    <td>-</td>
                 </tr>
                 <tr>
                     <td>{{Mare}}</td>
@@ -2242,6 +2284,11 @@
         {{wiki_known_bugs_intro}}
     </div>
     <div class="text">
+        <b id="Aswang-bugs">{{Aswang}}</b>
+        <ul>
+            {{wiki_known_bugs_aswang}}
+        </ul>
+        <hr style="margin:10px 0px;">
         <b id="Banshee-bugs">{{Banshee}}</b>
         <ul>
             {{wiki_known_bugs_banshee}}
@@ -2280,6 +2327,11 @@
         <b id="Jinn-bugs">{{Jinn}}</b>
         <ul>
             {{wiki_known_bugs_jinn}}
+        </ul>
+        <hr style="margin:10px 0px;">
+        <b id="Kormos-bugs">{{Kormos}}</b>
+        <ul>
+            {{wiki_known_bugs_kormos}}
         </ul>
         <hr style="margin:10px 0px;">
         <b id="Mare-bugs">{{Mare}}</b>
