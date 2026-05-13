@@ -79,6 +79,10 @@ document.body.onkeydown = function(e){
         bpm_down = true
         bpm_tap();
     }
+    if (e.ctrlKey && e.shiftKey && (e.key == 'r' || e.code == "KeyR" || e.keyCode == 82)) {
+        console.log("Force reloading...")
+        force_reload()
+    }
 }
 
 var timer_snd = []
