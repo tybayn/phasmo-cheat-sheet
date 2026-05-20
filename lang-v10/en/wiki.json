@@ -62,6 +62,13 @@
     "{{wiki_kormos_detection_p5}}": "If you are standing completely still and not making any sound through the microphone, the Kormos will not be able to detect you (although you can still die if it happens to randomly path into you.)",
     "{{wiki_kormos_detection_p6}}": "After detecting a player it will move at the determined speed until it reaches the last known location of the player.",
 
+    "{{wiki_kormos_pseudo_los_title}}": "Pseudo-LOS",
+    "{{wiki_kormos_pseudo_los_p1}}": "The Kormos is unable to see players and thus cannot gain LOS. However, under certain conditions, the Kormos will still gain speed over 26s to a maximum speed of base speed x1.65. This is commonly referred to as 'pseudo-LOS' since the Kormos is able to mimic gaining LOS speed without actually having LOS.",
+    "{{wiki_kormos_pseudo_los_p2}}": "This pseudo-LOS is triggered if the Kormos detects a player's footsteps within 5m and will continue to gain speed until they reach that detection point. If the Kormos continues to detect the player's footstep within 5m it will continue increasing speed until it reaches the maximum speed.",
+    "{{wiki_kormos_pseudo_los_p3}}": "If the player is detected outside of the 5m range, the Kormos will stop gaining speed and begin gradually dropping back to its base speed.",
+    "{{wiki_kormos_pseudo_los_p4}}": "The speed build-up that is accumulated can be transferred between the 1.7m/s base speed (when the player is not detected or is detected within 5m) and the 2.21m/s speed (when the player is detected further than 5m away). Meaning if the Kormos has built up speed to the maximum speed of 2.81m/s and then detects the player outside of 5m, it will immediately increase to 3.65m/s as if it has gained the speed at the 2.21m/s speed.",
+
+
     "{{wiki_obake_blinking_title}}": "Blinking / Shapeshifting",
     "{{wiki_obake_blinking_h1}}": "Blinking:",
     "{{wiki_obake_blinking_p1}}": "During a hunt, the Obake will change models on predetermined blinks: 12, 27, 39, 54, 62, 80, 105, 120, and 132.",

@@ -1266,7 +1266,7 @@
 
             </div>
             <div id="cur_map_label" class="yfont">{{current_map}}<div class="modifier_note_2">({{click_to_change}})</div></div>
-            <button id="cur_map" class="maps_button" onclick="closeAll(true);showSideMenu('maps',true);">
+            <button id="cur_map" class="maps_button" onclick="closeAll(true);showSideMenu('maps');">
                 <div class="map_size s">S</div>
                 6 Tanglewood Drive
             </button>
@@ -1345,7 +1345,7 @@
 
         $(window).on('load', function() {
             let load_wiki = new Promise((resolve, reject) => {
-                $("#wiki-body").load("wiki-v10/wiki-v10.html",() => {
+                $("#wiki-body").load("wiki-v10/wiki-v11.html",() => {
                     resolve("Ghost data loaded")
                 })
             })
