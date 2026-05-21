@@ -43,7 +43,7 @@
     </script>
     <script src="scripts-v10/ghost_template-v2.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
-    <link rel="stylesheet" href="styles-v10/style-v11.css"/>
+    <link rel="stylesheet" href="styles-v10/style-v12.css"/>
     <link rel="stylesheet" href="styles-v10/style-mobile-v9.css"/>
     <link rel="stylesheet" href="themes-v10/themes-v1.css"/>
     <link rel="stylesheet" href="login-v10/login-v1.css" >
@@ -565,8 +565,10 @@
                 </div>
                 <div class="modifier_option less_pad">
                     <input type="checkbox" id="compact_cards" name="compact_cards" class="settings_check" onclick="toggleCompact();saveSettings();"><label for="compact_cards">{{compact_view}}</label>
-                </div>
-                <div class="modifier_note">{{compact_disclaimer}}</div>                
+                </div>        
+                <div class="modifier_option less_pad">
+                    <input type="checkbox" id="alternate_cards" name="alternate_cards" class="settings_check" onclick="toggleAlternate();saveSettings();"><label for="alternate_cards">{{alternate_view}}</label>
+                </div>    
                 <hr>
                 <div class="modifier_volume yfont white">{{graphics}}</div> 
                 <div class="modifier_option less_pad">
@@ -608,7 +610,7 @@
                     </div>
                 </div>
                 <div class="modifier_option vcs">
-                    <input type="checkbox" id="voice_prefix" name="voice_prefix" class="settings_check" onclick="toggleVoicePrefix();saveSettings();"><label for="disable_particles">Require "Hey Domo"</label>
+                    <input type="checkbox" id="voice_prefix" name="voice_prefix" class="settings_check" onclick="toggleVoicePrefix();saveSettings();"><label for="voice_prefix">Require "Hey Domo"</label>
                 </div> 
                 <div id="voice_recognition_note" class="vcs modifier_note"><div onclick="showVoiceInfo(event)" class="link_hover">Commands and Info &#187;</div></div>
                 <hr class="vcs">
@@ -1375,7 +1377,7 @@
     <script src="scripts-v10/timer-v4.js"></script>
     <script src="login-v10/login-v1.js"></script>
     <script src="wiki-v10/wiki-v2.js"></script>
-    <script src="scripts-v10/filter-v9.js"></script>
+    <script src="scripts-v10/filter-v10.js"></script>
     <script src="scripts-v10/sanity-v1.js"></script>
     <script src="scripts-v10/wslink-v7.js"></script>
     <script src="partners-v10/partners-v3.js"></script>

@@ -3266,6 +3266,13 @@ body{
         flex:1;
     }
 
+    .ghost_card_alt{
+        grid-template-columns: 245px auto !important;
+        grid-template-rows: 45px 200px 50px !important;
+        margin: 20px 5px 0px 5px !important;
+        height: auto !important;
+    }
+
     .ghost_card_hidden{
         max-width: 271px !important;
         min-width: 271px !important;
@@ -3322,6 +3329,11 @@ body{
         height: 30px;
     }
 
+    .ghost_name_alt{
+        padding: 10px 10px 0px 20px !important;
+        text-align: left !important;
+    }
+
     .ghost_evidence{
         grid-column: 1;
         grid-row: 2;
@@ -3332,6 +3344,11 @@ body{
         align-items: center;
         flex-direction: row;
         flex-wrap: wrap;
+    }
+
+    .ghost_evidence_alt{
+        grid-column: 2 / 3 !important;
+        grid-row: 1 !important;
     }
 
     .ghost_evidence_internal{
@@ -3371,6 +3388,14 @@ body{
         display: grid;
         grid-template-columns: 28% 72%;
         justify-content: space-evenly;
+    }
+
+    .ghost_hunt_info_alt{
+        grid-column: 1 / 4 !important;
+        grid-row: 3 !important;
+        display: grid !important;
+        padding-right: 27px !important;
+        height: 50px !important;
     }
 
     .ghost_speed{
@@ -3456,6 +3481,12 @@ body{
         margin-top: 3px;
         margin-bottom: 3px;
         z-index: 0;
+    }
+
+    .ghost_behavior_alt{
+        grid-column: 1 / 3 !important;
+        grid-row: 2 !important;
+        margin-left: 6px !important;
     }
 
     .ghost_behavior_hidden{

@@ -13,7 +13,7 @@ let prev_monkey_state = 0
 let weekly_data = {}
 
 var state = {"evidence":{},"speed":{"Slow":0,"Normal":0,"Fast":0},"los":-1,"sanity":{"Late":0,"Average":0,"Early":0,"VeryEarly":0},"ghosts":{},"map":"tanglewood","map_size":"S","prev_monkey_state":0}
-var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"auto_start_cooldown":0,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"hide_sanity_speed":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"keep_alive":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
+var user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"auto_start_cooldown":0,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"alt_cards":0,"hide_sanity_speed":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"keep_alive":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
 
 let znid = getCookie("znid")
 
@@ -1838,6 +1838,7 @@ function saveSettings(reset = false){
     user_settings['force_selection'] = document.getElementById("force_selection").checked ? 1 : 0;
     user_settings['hide_descriptions'] = document.getElementById("hide_descriptions").checked ? 1 : 0;
     user_settings['compact_cards'] = document.getElementById("compact_cards").checked ? 1 : 0;
+    user_settings['alt_cards'] = document.getElementById("alternate_cards").checked ? 1 : 0;
     user_settings['hide_sanity_speed'] = document.getElementById("hide_sanity_speed").checked ? 1 : 0;
     user_settings['offset'] = parseFloat(document.getElementById("offset_value").innerText.replace(/\d+(?:-\d+)+/g,"")).toFixed(1)
     user_settings['ghost_modifier'] = parseInt(document.getElementById("ghost_modifier_speed").value)
@@ -1875,7 +1876,7 @@ function loadSettings(){
     try{
         user_settings = JSON.parse(getCookie("settings"))
     } catch (error) {
-        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"auto_start_cooldown":0,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"hide_sanity_speed":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"keep_alive":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
+        user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0, "timer_count_up":0,"timer_split":1,"auto_start_cooldown":0,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"alt_cards":0,"hide_sanity_speed":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"keep_alive":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
     }
 
     user_settings['num_evidences'] = user_settings['num_evidences'] == "" ? "3" : user_settings['num_evidences']
@@ -1902,6 +1903,7 @@ function loadSettings(){
     document.getElementById("force_selection").checked = load_default('force_selection',1) == 1
     document.getElementById("hide_descriptions").checked = load_default('hide_descriptions',0) == 1
     document.getElementById("compact_cards").checked = load_default('compact_cards',0) == 1
+    document.getElementById("alternate_cards").checked = load_default('alt_cards',0) == 1
     document.getElementById("hide_sanity_speed").checked = load_default('hide_sanity_speed',0) == 1
     document.getElementById("offset_value").innerText = ` ${load_default('offset',0.0)}% `
     document.getElementById("ghost_modifier_speed").value = load_default('ghost_modifier',2)
@@ -1997,6 +1999,7 @@ function loadSettings(){
     toggleDescriptions()
     toggleSanitySpeed(document.getElementById("hide_sanity_speed").checked)
     toggleCompact()
+    toggleAlternate()
     toggleKeepAlive(document.getElementById("keep_alive"))
     changeTheme(user_settings['theme'])
     setVolume()
@@ -2018,7 +2021,7 @@ function loadSettings(){
 }
 
 function resetSettings(){
-    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"auto_start_cooldown":0,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"hide_sanity_speed":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"keep_alive":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
+    user_settings = {"num_evidences":"3","cust_num_evidences":"3","cust_hunt_length":"3","cust_starting_sanity":"100","cust_sanity_pill_rest":"7","cust_sanity_drain":"100","cust_lobby_type":"solo","ghost_modifier":2,"volume":50,"mute_broadcast":0,"mute_timer_toggle":0,"mute_timer_countdown":0,"timer_count_up":0,"timer_split":1,"auto_start_cooldown":0,"adaptive_evidence":0,"force_selection":1,"hide_descriptions":0,"compact_cards":0,"alt_cards":0,"hide_sanity_speed":0,"offset":0.0,"sound_type":0,"speed_logic_type":0,"bpm_type":0,"bpm":0,"domo_side":0,"priority_sort":0,"map":"tanglewood","theme":"Default","blood_moon":0,"forest_minion":0,"coal":0,"persist_modes":0,"keep_alive":0,"disable_particles":0,"show_event_maps":0,"map_type":"0","voice_prefix":0}
     document.getElementById("modifier_volume").value = load_default('volume',50)
     document.getElementById("mute_broadcast").checked = load_default('mute_broadcast',0) == 1 
     document.getElementById("mute_timer_toggle").checked = load_default('mute_timer_toggle',0) == 1 
@@ -2030,6 +2033,7 @@ function resetSettings(){
     document.getElementById("force_selection").checked = load_default('force_selection',1) == 1
     document.getElementById("hide_descriptions").checked = load_default('hide_descriptions',0) == 1
     document.getElementById("compact_cards").checked = load_default('compact_cards',0) == 1
+    document.getElementById("alternate_cards").checked = load_default('alt_cards',0) == 1
     document.getElementById("hide_sanity_speed").checked = load_default('hide_sanity_speed',0) == 1
     document.getElementById("offset_value").innerText = ` ${load_default('offset',0.0)}% `
     document.getElementById("ghost_modifier_speed").value = load_default('ghost_modifier',2)
@@ -2318,14 +2322,16 @@ function toggleDescriptions(forced = null){
     $(".ghost_behavior").removeClass(["ghost_behavior_hidden","ghost_behavior_compact"])
     $(".ghost_clear").removeClass(["ghost_clear_compact"])
 
-    if(document.getElementById("hide_descriptions").checked){
-        $(".ghost_card").addClass(["ghost_card_hidden"])
-        $(".ghost_behavior").addClass(["ghost_behavior_hidden"])
-    }
-    else if(document.getElementById("compact_cards").checked){
-        $(".ghost_card").addClass(["ghost_card_compact"])
-        $(".ghost_behavior").addClass(["ghost_behavior_compact"])
-        $(".ghost_clear").addClass(["ghost_clear_compact"])
+    if(!document.getElementById("alternate_cards").checked){
+        if(document.getElementById("hide_descriptions").checked){
+            $(".ghost_card").addClass(["ghost_card_hidden"])
+            $(".ghost_behavior").addClass(["ghost_behavior_hidden"])
+        }
+        else if(document.getElementById("compact_cards").checked){
+            $(".ghost_card").addClass(["ghost_card_compact"])
+            $(".ghost_behavior").addClass(["ghost_behavior_compact"])
+            $(".ghost_clear").addClass(["ghost_clear_compact"])
+        }
     }
 }
 
@@ -2348,7 +2354,7 @@ function toggleSanitySpeed(forced=null){
 }
 
 function toggleCompact(){
-    if(!document.getElementById("hide_descriptions").checked){
+    if(!document.getElementById("hide_descriptions").checked && !document.getElementById("alternate_cards").checked){
         if(document.getElementById("compact_cards").checked){
             $(".ghost_card").addClass(["ghost_card_compact"])
             $(".ghost_behavior").addClass(["ghost_behavior_compact"])
@@ -2359,6 +2365,29 @@ function toggleCompact(){
             $(".ghost_behavior").removeClass(["ghost_behavior_compact"])
             $(".ghost_clear").removeClass(["ghost_clear_compact"])
         }
+    }
+}
+
+function toggleAlternate(){
+    if(document.getElementById("alternate_cards").checked){
+        $(".ghost_card").removeClass(["ghost_card_hidden","ghost_card_compact"])
+        $(".ghost_behavior").removeClass(["ghost_behavior_hidden","ghost_behavior_compact"])
+        $(".ghost_clear").removeClass(["ghost_clear_compact"])
+
+        $(".ghost_card").addClass(["ghost_card_alt"])
+        $(".ghost_behavior").addClass(["ghost_behavior_alt"])
+        $(".ghost_name").addClass(["ghost_name_alt"])
+        $(".ghost_evidence").addClass(["ghost_evidence_alt"])
+        $(".ghost_hunt_info").addClass(["ghost_hunt_info_alt"])
+    }
+    else{
+        $(".ghost_card").removeClass(["ghost_card_alt"])
+        $(".ghost_behavior").removeClass(["ghost_behavior_alt"])
+        $(".ghost_name").removeClass(["ghost_name_alt"])
+        $(".ghost_evidence").removeClass(["ghost_evidence_alt"])
+        $(".ghost_hunt_info").removeClass(["ghost_hunt_info_alt"])
+        toggleCompact()
+        toggleDescriptions()
     }
 }
 
