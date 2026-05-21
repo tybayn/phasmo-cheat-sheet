@@ -123,11 +123,25 @@ function load_partners(first_time_loading = false){
 let twitchEmbed = null;
 let currentChannel = null;
 let resizeTimeout = null;
+let twitchScriptLoaded = false;
+
+function loadTwitchScript() {
+  return new Promise((resolve, reject) => {
+    if (twitchScriptLoaded) { resolve(); return; }
+    const s = document.createElement("script");
+    s.src = "https://embed.twitch.tv/embed/v1.js";
+    s.onload = () => { twitchScriptLoaded = true; resolve(); };
+    s.onerror = () => reject(new Error("Failed to load Twitch embed script"));
+    document.head.appendChild(s);
+  });
+}
 
 function openTwitch(channel) {
   $("#blackout_twitch").fadeIn(100);
   currentChannel = channel;
-  createTwitchEmbed()
+  loadTwitchScript()
+    .then(() => createTwitchEmbed())
+    .catch(err => console.warn(err));
 }
 
 function createTwitchEmbed() {
