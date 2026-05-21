@@ -115,8 +115,12 @@
     "{{adaptive_evidence}}": "Adaptive Evidence",
     "{{hide_behaviors}}": "Hide Behaviors",
     "{{hide_sanity_speed}}": "Hide Hunt Sanity / Speed (Mobile)",
-    "{{compact_view}}": "Compact View (Desktop Only)",
-    "{{alternate_view}}": "Alternate View (Desktop Only)",
+
+    "{{ghost_card_layout}}": "Layout (Desktop Only)",
+    "{{layout_default}}": "Default",
+    "{{layout_1}}": "Layout 1",
+    "{{layout_2}}": "Layout 2",
+
     "{{graphics}}": "Graphics",
     "{{disable_particles}}": "Disable Particle Effects",
     "{{misc}}": "Misc.",

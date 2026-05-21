@@ -3266,7 +3266,15 @@ body{
         flex:1;
     }
 
-    .ghost_card_alt{
+    .ghost_card_alt_1{
+        max-width: 245px !important;
+        min-width: 245px !important;
+        grid-template-columns: 245px !important;
+        grid-template-rows: 45px 35px 45px 125px !important;
+        height: 250px !important;
+    }
+
+    .ghost_card_alt_2{
         grid-template-columns: 245px auto !important;
         grid-template-rows: 45px 200px 50px !important;
         margin: 20px 5px 0px 5px !important;
@@ -3276,14 +3284,6 @@ body{
     .ghost_card_hidden{
         max-width: 271px !important;
         min-width: 271px !important;
-    }
-
-    .ghost_card_compact{
-        max-width: 245px !important;
-        min-width: 245px !important;
-        grid-template-columns: 245px !important;
-        grid-template-rows: 45px 35px 45px 125px !important;
-        height: 250px !important;
     }
 
     .ghost_warn_icon{
@@ -3329,7 +3329,7 @@ body{
         height: 30px;
     }
 
-    .ghost_name_alt{
+    .ghost_name_alt_2{
         padding: 10px 10px 0px 20px !important;
         text-align: left !important;
     }
@@ -3346,7 +3346,7 @@ body{
         flex-wrap: wrap;
     }
 
-    .ghost_evidence_alt{
+    .ghost_evidence_alt_2{
         grid-column: 2 / 3 !important;
         grid-row: 1 !important;
     }
@@ -3390,7 +3390,7 @@ body{
         justify-content: space-evenly;
     }
 
-    .ghost_hunt_info_alt{
+    .ghost_hunt_info_alt_2{
         grid-column: 1 / 4 !important;
         grid-row: 3 !important;
         display: grid !important;
@@ -3483,7 +3483,13 @@ body{
         z-index: 0;
     }
 
-    .ghost_behavior_alt{
+    .ghost_behavior_alt_1{
+        grid-column: 1 !important;
+        grid-row: 4 !important;
+        margin-left: 5px !important;
+    }
+
+    .ghost_behavior_alt_2{
         grid-column: 1 / 3 !important;
         grid-row: 2 !important;
         margin-left: 6px !important;
@@ -3493,12 +3499,6 @@ body{
         display: none !important;
     }
 
-    .ghost_behavior_compact{
-        grid-column: 1 !important;
-        grid-row: 4 !important;
-        margin-left: 5px !important;
-    }
-    
     .ghost_behavior_item{
         width: 100%;
         line-height: 18px;
@@ -3581,7 +3581,7 @@ body{
         flex-direction: column;
     }
 
-    .ghost_clear_compact{
+    .ghost_clear_alt_1{
         grid-column: 1 !important;
         grid-row: 4 !important;
     }
