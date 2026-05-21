@@ -4,26 +4,6 @@ function setCookie(e,t,i){let n=new Date;n.setTime(n.getTime()+864e5*i);let o="e
 let openSearchTab = false
 let ghost_version = null
 
-function startDebugMode(){
-
-    if(typeof console != 'undefined')
-        if(typeof console.log != 'undefined')
-            console.olog = console.log
-        else
-            console.olog = function() {}
-
-    console.log = function(message){
-        console.olog(message)
-        document.getElementById("debug-console").value += `${message}\n`
-    }
-    console.error = console.debug = console.info = console.log
-
-    window.onerror = function(event){
-        console.log(event)
-        return false
-    }
-}
-
 function setLoading(percent) {
     const bar = document.getElementById("loading-bar");
     percent = Math.max(0, Math.min(100, percent));
@@ -61,11 +41,6 @@ function checkLink(){
         if (params.get('lang')){
             lang = params.get('lang').toLowerCase()
             setCookie("lang",lang,90)
-        }
-
-        if (params.get("debug") == "true" || params.get("debug") == "True"){
-            startDebugMode()
-            $("#debug_tab").show()
         }
 
         if (params.get("search")){

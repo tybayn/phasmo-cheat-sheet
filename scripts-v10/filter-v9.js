@@ -1477,6 +1477,7 @@ function showZNTDLInfo(event){
 
 function showDebug(event){
     event.stopPropagation()
+    if (window._flushDebugLog) window._flushDebugLog();
     $("#debug_blockout").toggle()
     $("#blackout_debug").fadeToggle(400)
 }

@@ -40,19 +40,6 @@
             setTimeout(() => controller.abort(), ms);
             return controller.signal;
         };
-
-        (async () => {
-            try {
-                const res = await fetch("https://zero-network.net/zn/health", {
-                    signal: AbortSignal.timeout(5000),
-                    cache: "no-store"
-                });
-                console.log("Zero-Network Server is reachable");
-            } catch (err) {
-                console.warn("Zero-Network Server is unreachable:", err);
-                $("#maintenance-block").fadeIn(1000);
-            }
-        })();
     </script>
     <script src="scripts-v10/ghost_template-v2.js"></script>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
@@ -1288,6 +1275,68 @@
 
 
     <script>
+        let params = new URL(window.location.href).searchParams
+        if (params.get("debug") == "true" || params.get("debug") == "True"){
+            $("#debug_tab").show()
+
+            ;(function() {
+                window._debugLog = [];
+                function _formatArgs(method, rawArgs) {
+                    var prefix = method === "log" ? "" : "[" + method.toUpperCase() + "] ";
+                    var args = Array.from(rawArgs);
+                    var formatted = args;
+                    if (typeof args[0] === "string" && args[0].indexOf("%c") !== -1) {
+                        var text = args[0];
+                        var i = 1;
+                        text = text.replace(/%c/g, function() { i++; return ""; });
+                        formatted = [text].concat(args.slice(i));
+                    }
+                    return prefix + formatted.map(function(a) {
+                        if (a instanceof Error) return a.message;
+                        if (typeof a === "object") { try { return JSON.stringify(a); } catch(e) { return String(a); } }
+                        return String(a);
+                    }).join(" ");
+                }
+                window._flushDebugLog = function() {
+                    var el = document.getElementById("debug-console");
+                    if (!el || !window._debugLog.length) return;
+                    el.value = window._debugLog.join("\n") + "\n";
+                    el.scrollTop = el.scrollHeight;
+                };
+                var methods = ["log", "warn", "error", "info", "debug"];
+                methods.forEach(function(method) {
+                    var original = console[method].bind(console);
+                    console[method] = function() {
+                        original.apply(console, arguments);
+                        try {
+                            var msg = _formatArgs(method, arguments).trim();
+                            window._debugLog.push(msg);
+                            var el = document.getElementById("debug-console");
+                            if (el) {
+                                el.value = window._debugLog.join("\n") + "\n";
+                                el.scrollTop = el.scrollHeight;
+                            }
+                        } catch(e) {}
+                    };
+                });
+            })();
+
+            console.log("ZN-Debug mode enabled")
+        }
+
+        (async () => {
+            try {
+                const res = await fetch("https://zero-network.net/zn/health", {
+                    signal: AbortSignal.timeout(5000),
+                    cache: "no-store"
+                });
+                console.log("Zero-Network Server is reachable");
+            } catch (err) {
+                console.warn("Zero-Network Server is unreachable:", err);
+                $("#maintenance-block").fadeIn(1000);
+            }
+        })();
+
         mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
         if(mquery.matches){
             document.getElementById("settings_box").style.left = "-100%";
@@ -1326,12 +1375,12 @@
     <script src="scripts-v10/timer-v4.js"></script>
     <script src="login-v10/login-v1.js"></script>
     <script src="wiki-v10/wiki-v2.js"></script>
-    <script src="scripts-v10/filter-v8.js"></script>
+    <script src="scripts-v10/filter-v9.js"></script>
     <script src="scripts-v10/sanity-v1.js"></script>
     <script src="scripts-v10/wslink-v7.js"></script>
     <script src="partners-v10/partners-v3.js"></script>
     <script src="models-v10/models-v1.js"></script>
-    <script src="scripts-v10/zn-v3.js"></script>
+    <script src="scripts-v10/zn-v4.js"></script>
     <script src="scripts-v10/search-v3.js"></script>
     <script src="events-v10/events-v3.js"></script>
     <script src="feed-v10/feed-v2.js"></script>
