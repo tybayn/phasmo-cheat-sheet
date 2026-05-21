@@ -3411,6 +3411,7 @@ body{
         margin: 3px 3px 3px 0px;
         border-radius: 0px 5px 5px 0px;
         background: rgb(0,0,0,0.25);
+        z-index: 1;
     }
 
     .ghost_speed img{
