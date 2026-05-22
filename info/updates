@@ -1,6 +1,6 @@
 {
-    "version":"6.5.0",
-    "date":"2026-05-12",
-    "details": "- Added Aswang and Kormos!\n\nBug Fixes:\n - ",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.5.0.msi"
+    "version":"6.5.1",
+    "date":"2026-05-22",
+    "details": "- Bug Fix\n\nBug Fixes:\n - Fixed an issue where the map overlay always displayed on the primary monitor.",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.5.1.msi"
 }
