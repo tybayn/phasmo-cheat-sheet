@@ -1,6 +1,6 @@
 {
-    "version":"6.5.1",
-    "date":"2026-05-22",
-    "details": "- Bug Fix\n\nBug Fixes:\n - Fixed an issue where the map overlay always displayed on the primary monitor.",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.5.1.msi"
+    "version":"6.6.0",
+    "date":"2026-05-26",
+    "details": "- Optimizations\n\nBug Fixes:\n - NA",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.6.0.msi"
 }
