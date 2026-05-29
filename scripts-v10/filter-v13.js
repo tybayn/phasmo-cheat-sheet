@@ -1210,13 +1210,10 @@ function filter(ignore_link=false){
     }
 
     // Show error if evidence selection is invalid
-    console.log(evi_array)
-    console.log(parseInt(num_evidences), evi_array.length, evi_array.includes("Ghost Orbs"))
     if (
         (!evi_array.includes("Ghost Orbs") && parseInt(num_evidences) < evi_array.length) ||
         (evi_array.includes("Ghost Orbs") && parseInt(num_evidences) < evi_array.length - 1)
     ){
-        console.log("Invalid evidence selection")
         $("#evidence").css("box-shadow","inset 0 0 20px red")
         setTimeout(() => {
             flashMode('<p style="color:red;">Too many evidence selected</p>')
