@@ -594,8 +594,15 @@ function filter(ignore_link=false){
     state['los'] = speed_has_los
 
     for (var i = 0; i < good_checkboxes.length; i++) {
-        evi_array.push(good_checkboxes[i].parentElement.value);
-        state["evidence"][good_checkboxes[i].parentElement.value] = 1;
+        if (num_evidences == "0" && good_checkboxes[i].parentElement.value != "Ghost Orbs"){
+            good_checkboxes[i].parentElement.classList.remove("good")
+            good_checkboxes[i].parentElement.classList.add("neutral")
+            state["evidence"][good_checkboxes[i].parentElement.value] = 0;
+        }
+        else{
+            evi_array.push(good_checkboxes[i].parentElement.value);
+            state["evidence"][good_checkboxes[i].parentElement.value] = 1;
+        }
     }
 
     for (var i = 0; i < bad_checkboxes.length; i++) {
@@ -1200,6 +1207,23 @@ function filter(ignore_link=false){
             $(checkbox).find("#checkbox").addClass(["neutral","block","disabled"])
             $(checkbox).find(".label").addClass("disabled-text")
         })
+    }
+
+    // Show error if evidence selection is invalid
+    console.log(evi_array)
+    console.log(parseInt(num_evidences), evi_array.length, evi_array.includes("Ghost Orbs"))
+    if (
+        (!evi_array.includes("Ghost Orbs") && parseInt(num_evidences) < evi_array.length) ||
+        (evi_array.includes("Ghost Orbs") && parseInt(num_evidences) < evi_array.length - 1)
+    ){
+        console.log("Invalid evidence selection")
+        $("#evidence").css("box-shadow","inset 0 0 20px red")
+        setTimeout(() => {
+            flashMode('<p style="color:red;">Too many evidence selected</p>')
+        }, 2500);
+    }
+    else{
+        $("#evidence").css("box-shadow","inset 0 0 10px #161615")
     }
 
     prioritySort()
@@ -1807,15 +1831,21 @@ function showPartner(){
     }
 }
 
-function flashMode(){
-    var cur_evidence = document.getElementById("num_evidence").value
-    if(document.getElementById("num_evidence").value.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)){
-        var mode_text = lang_data['{{custom}}']
-        document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${document.getElementById("cust_num_evidence").value} ${lang_data['{{evidence}}']})</span>`
+function flashMode(custom_message=null){
+
+    if (custom_message){
+        document.getElementById("game_mode").innerHTML = custom_message
     }
     else{
-        var mode_text = {"-5":lang_data['{{weekly_challenge_mode}}'],"-1":lang_data['{{custom}}'],"0":lang_data['{{apocalypse_iii}}'],"1":lang_data['{{insanity}}'],"2":lang_data['{{nightmare}}'],"3":lang_data['{{professional}}'],"3I":lang_data['{{intermediate}}'],"3A":lang_data['{{amateur}}']}[cur_evidence]
-        document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} ${lang_data['{{evidence}}']})</span>`.replace("-1",document.getElementById("cust_num_evidence").value).replace("-5",document.getElementById("cust_num_evidence").value)
+        var cur_evidence = document.getElementById("num_evidence").value
+        if(document.getElementById("num_evidence").value.match(/[0-9]{4}-[0-9]{4}-[0-9]{4}/g)){
+            var mode_text = lang_data['{{custom}}']
+            document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${document.getElementById("cust_num_evidence").value} ${lang_data['{{evidence}}']})</span>`
+        }
+        else{
+            var mode_text = {"-5":lang_data['{{weekly_challenge_mode}}'],"-1":lang_data['{{custom}}'],"0":lang_data['{{apocalypse_iii}}'],"1":lang_data['{{insanity}}'],"2":lang_data['{{nightmare}}'],"3":lang_data['{{professional}}'],"3I":lang_data['{{intermediate}}'],"3A":lang_data['{{amateur}}']}[cur_evidence]
+            document.getElementById("game_mode").innerHTML = `${mode_text}<span>(${parseInt(cur_evidence)} ${lang_data['{{evidence}}']})</span>`.replace("-1",document.getElementById("cust_num_evidence").value).replace("-5",document.getElementById("cust_num_evidence").value)
+        }
     }
     $("#game_mode").fadeIn(500,function () {
         $("#game_mode").delay(500).fadeOut(500);
