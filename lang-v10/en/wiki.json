@@ -525,7 +525,7 @@
     "{{wiki_los_twins_p3}}": "In the example below, you can see that the previous hunt was at 1.5m/s while the next hunt was at 1.9m/s.",
     
     "{{wiki_los_sim_title}}": "Simulate LOS Speed",
-    "{{wiki_los_sim_p1}}": "Click on a 🔊 to listen to a simulation of the LOS speed up for that ghost at that speed. The simulation will play the base speed for 2s, then simulate the LOS speed up over 13s (8.66s for Aswang), then will play the max speed for 2s.",
+    "{{wiki_los_sim_p1}}": "Click on a 🔊 to listen to a simulation of the LOS speed up for that ghost at that speed. The simulation will play the base speed for 2s, then simulate the LOS speed up over 13s (8.667s for Aswang), then will play the max speed for 2s.",
     "{{wiki_los_sim_p2}}": "❌ indicates no LOS speed-up",
     "{{wiki_los_sim_start}}": "LOS Start",
     "{{wiki_los_sim_end}}": "LOS End",
