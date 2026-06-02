@@ -139,8 +139,8 @@ function simulate_los(set_tempo,append_speed,id){
         var los_speed = speed * 1.65
         var los_tempo = speedToBpm[speed_idx](los_speed+append_speed,blood_moon,forest_minion,coal) * (1+(offset/100))
         var increase_steps_start = 4
-        var increase_steps_end = id.includes("aswang") ? 39 : 56
-        var increase_steps_total = id.includes("aswang") ? 43 : 60
+        var increase_steps_end = id.includes("aswang") ? 21 : 30
+        var increase_steps_total = id.includes("aswang") ? 25 : 34
         document.getElementsByClassName("los_start_line")[0].style.left = `${increase_steps_start/increase_steps_total*100}%`
         document.getElementsByClassName("los_start_label")[0].style.left = `calc(${increase_steps_start/increase_steps_total*100}% - 30px)`
         document.getElementsByClassName("los_end_line")[0].style.left = `${100 - (increase_steps_start/increase_steps_total*100)}%`

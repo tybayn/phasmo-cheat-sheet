@@ -63,7 +63,7 @@
     "{{wiki_kormos_detection_p6}}": "After detecting a player it will move at the determined speed until it reaches the last known location of the player.",
 
     "{{wiki_kormos_pseudo_los_title}}": "Pseudo-LOS",
-    "{{wiki_kormos_pseudo_los_p1}}": "The Kormos is unable to see players and thus cannot gain LOS. However, under certain conditions, the Kormos will still gain speed over 26s to a maximum speed of base speed x1.65. This is commonly referred to as 'pseudo-LOS' since the Kormos is able to mimic gaining LOS speed without actually having LOS.",
+    "{{wiki_kormos_pseudo_los_p1}}": "The Kormos is unable to see players and thus cannot gain LOS. However, under certain conditions, the Kormos will still gain speed over 13s to a maximum speed of base speed x1.65. This is commonly referred to as 'pseudo-LOS' since the Kormos is able to mimic gaining LOS speed without actually having LOS.",
     "{{wiki_kormos_pseudo_los_p2}}": "This pseudo-LOS is triggered if the Kormos detects a player's footsteps within 5m and will continue to gain speed until they reach that detection point. If the Kormos continues to detect the player's footstep within 5m it will continue increasing speed until it reaches the maximum speed.",
     "{{wiki_kormos_pseudo_los_p3}}": "If the player is detected outside of the 5m range, the Kormos will stop gaining speed and begin gradually dropping back to its base speed.",
     "{{wiki_kormos_pseudo_los_p4}}": "The speed build-up that is accumulated can be transferred between the 1.7m/s base speed (when the player is not detected or is detected within 5m) and the 2.21m/s speed (when the player is detected further than 5m away). Meaning if the Kormos has built up speed to the maximum speed of 2.81m/s and then detects the player outside of 5m, it will immediately increase to 3.65m/s as if it has gained the speed at the 2.21m/s speed.",
@@ -120,7 +120,7 @@
     "{{wiki_the_twins_los_c3}}": "Normal Ghost",
     "{{wiki_the_twins_los_c4}}": "Actual Fast Twin",
     "{{wiki_the_twins_los_c5}}": "Expected Fast Twin",
-    "{{wiki_the_twins_los_p6}}": "Notably, both base speeds for The Twins do not reach the expected speed after 26s of continuous LOS, causing the slow Twin to be faster than expected and the fast Twin to be slower than expected.",
+    "{{wiki_the_twins_los_p6}}": "Notably, both base speeds for The Twins do not reach the expected speed after 13s of continuous LOS, causing the slow Twin to be faster than expected and the fast Twin to be slower than expected.",
     "{{wiki_the_twins_los_h3}}": "Why This Likely Happens",
     "{{wiki_the_twins_los_p7}}": "(This is purely speculation)",
     "{{wiki_the_twins_los_p8}}": "The most likely explanation is that The Twins use a legacy speed system from when they were introduced in late 2021",
@@ -525,7 +525,7 @@
     "{{wiki_los_twins_p3}}": "In the example below, you can see that the previous hunt was at 1.5m/s while the next hunt was at 1.9m/s.",
     
     "{{wiki_los_sim_title}}": "Simulate LOS Speed",
-    "{{wiki_los_sim_p1}}": "Click on a 🔊 to listen to a simulation of the LOS speed up for that ghost at that speed. The simulation will play the base speed for 2s, then simulate the LOS speed up over 26s (17.33s for Aswang), then will play the max speed for 2s.",
+    "{{wiki_los_sim_p1}}": "Click on a 🔊 to listen to a simulation of the LOS speed up for that ghost at that speed. The simulation will play the base speed for 2s, then simulate the LOS speed up over 13s (8.66s for Aswang), then will play the max speed for 2s.",
     "{{wiki_los_sim_p2}}": "❌ indicates no LOS speed-up",
     "{{wiki_los_sim_start}}": "LOS Start",
     "{{wiki_los_sim_end}}": "LOS End",

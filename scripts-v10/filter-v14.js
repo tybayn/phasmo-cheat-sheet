@@ -1605,7 +1605,10 @@ function closeAll(skip_map=false,skip_wiki=false){
 
 function isClosed(elem,value=0){
     mquery = window.matchMedia("screen and (pointer: coarse) and (max-device-width: 600px)")
-    return Math.abs(elem.getBoundingClientRect().left) == (mquery.matches ? elem.clientWidth : value)
+    return (
+        !$(elem).hasClass("tab-open") || 
+        Math.abs(elem.getBoundingClientRect().left) == (mquery.matches ? elem.clientWidth : value)
+    )
 }
 
 function get_open_menu_width(block){
