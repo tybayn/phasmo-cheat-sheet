@@ -15,6 +15,9 @@
     <script src="https://zero-network.net/zn/static/scripts/copyShare.js"></script>
     <script src="jquery/jquery-3.6.2.min.js"></script>
     <script>
+        if (!window.location.href.includes("tybayn.github.io") && !location.search.includes('zn=beta')){
+            window.location.href = "https://tybayn.github.io/phasmo-cheat-sheet"+window.location.search
+        }
         if (location.search.includes('refresh=1')) {
             const cacheBuster = Date.now();
             const origFetch = window.fetch;
@@ -1383,7 +1386,7 @@
     <script src="scripts-v10/wslink-v7.js"></script>
     <script src="partners-v10/partners-v4.js"></script>
     <script src="models-v10/models-v1.js"></script>
-    <script src="scripts-v10/zn-v4.js"></script>
+    <script src="scripts-v10/zn-v5.js"></script>
     <script src="scripts-v10/search-v3.js"></script>
     <script src="events-v10/events-v3.js"></script>
     <script src="feed-v10/feed-v2.js"></script>
