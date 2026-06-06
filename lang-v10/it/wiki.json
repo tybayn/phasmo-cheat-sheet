@@ -521,7 +521,7 @@
     "{{wiki_known_bugs_obake}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_obambo}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_oni}}": "<li>Riduce la sanità solo del 10% invece del 20% durante gli eventi di canto</li>",
-    "{{wiki_known_bugs_onryo}}": "<li><i>Una candela di livello 3 accesa e non tenuta in mano <i>non</i> sarà considerata accesa nonostante sia visualmente accesa. In questo stato non potrà essere spenta e sarà ignorata dall'Onryo per prevenire le cacce</i></li>",
+    "{{wiki_known_bugs_onryo}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_phantom}}": "<li>Può usare la sua abilità sui giocatori morti</li><li>Può usare la sua abilità sui giocatori che si trovano fuori dall'area di indagine</li><li>Sarà comunque visibile sulla pellicola per i video di Fantasma Traslucido, Fantasma Ombra, Fantasma DOTS e Fantasma in Caccia</li>",
     "{{wiki_known_bugs_poltergeist}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_raiju}}": "<li>Il raggio del battito cardiaco è attualmente di 15m invece di 10m, creando l'audio del battito cardiaco \"potenziato\"</li><li>Solo gli oggetti elettronici tenuti in mano influenzano la soglia di sanità per la caccia</li>",
