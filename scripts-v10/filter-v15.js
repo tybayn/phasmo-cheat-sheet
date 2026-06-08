@@ -667,7 +667,7 @@ function filter(ignore_link=false){
         var loskeep = true;
         var marked_not = $(ghosts[i]).hasClass("faded") || $(ghosts[i]).hasClass("permhidden")
         var name = ghosts[i].id;
-        var evi_objects = ghosts[i].getElementsByClassName("ghost_evidence_item")
+        var evi_objects = ghosts[i].getElementsByClassName("ghost_evidence")[0].children
         var evidence = []
         for (var j = 0; j < evi_objects.length; j++){
             $(evi_objects[j]).removeClass(["ghost_evidence_found","ghost_evidence_not"])
