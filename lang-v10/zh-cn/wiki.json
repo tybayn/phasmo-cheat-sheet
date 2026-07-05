@@ -521,7 +521,7 @@
     "{{wiki_known_bugs_obake}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_obambo}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_oni}}": "<li>鬼魂唱歌事件中只会扣除玩家10%的理智，而不是原先的20%</li>",
-    "{{wiki_known_bugs_onryo}}": "<li><i>未被手持时点燃的三级蜡烛，尽管视觉上已点燃，却<i>不会</i>被视为已点燃。在此状态下它无法被吹灭，且无法阻止怨灵猎杀</i></li>",
+    "{{wiki_known_bugs_onryo}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_phantom}}": "<li>可以对已死亡的玩家使用技能</li><li>可以对在调查区域外的玩家使用技能</li><li>对半透明鬼魂，影子形态的鬼魂，在点阵照射下的鬼魂拍摄录像时，鬼仍然在胶片上可见</li>",
     "{{wiki_known_bugs_poltergeist}}": "<li><i>无</i></li>",
     "{{wiki_known_bugs_raiju}}": "<li>玩家起心跳的半径范围目前为15m，而不是10m，同时会有 \"低音增强\" 的心跳声</li><li>即使它没有猎杀或进行事件，也会使同一楼层的所有灯闪烁</li>",
