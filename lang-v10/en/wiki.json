@@ -21,6 +21,17 @@
     "{{wiki_interaction_disclaimer}}": "Zero-Network will continue to refer to these ranges on the cheat sheet and the map explorer as a radius, using the effective radius of each range.",
     "{{wiki_interaction_research}}": "You can view Zero-Network's research <a href=\"https://youtu.be/J-EWUQvR2rQ\" target=\"_blank\">here</a>.",
 
+    "{{wiki_deildegast_speed_title}}": "Speed",
+    "{{wiki_deildegast_speed_p1}}": "The Deildegast's hunt speed is determined by the number of unique items used/picked up by the player since the last hunt or hunt attempt. The ghost starts with a speed of 3.0m/s. Each action will decrease the hunt speed by 0.1m/s until a minimum speed of 0.4m/s is reached (26 actions). The following actions will contribute to this counter:",
+    "{{wiki_deildegast_speed_i1}}": "A non-equipment item is picked up by a living or dead player",
+    "{{wiki_deildegast_speed_i2}}": "A player interacts with a non-equipment item (such as a console or microwave)",
+    "{{wiki_deildegast_speed_i3}}": "A player interacts with a light switch",
+    "{{wiki_deildegast_speed_i4}}": "A player interacts with the fusebox / breaker",
+    "{{wiki_deildegast_speed_i5}}": "A player interacts with a tap / faucet",
+    "{{wiki_deildegast_speed_p2}}": "Items that are interacted with will only count once toward the counter. For example, a shoe that is picked up and dropped multiple times will only count as 1 for the counter. The items also don't need to be near the ghost or even in the investigation area.",
+    "{{wiki_deildegast_speed_p3}}": "Once the hunt is started, the ghost's speed is locked and cannot be changed. Any items picked up or interacted with during this time will not count toward the counter.",
+    "{{wiki_deildegast_speed_p4}}": "After a hunt or hunt attempt, the ghost's speed is reset back to 3.0m/s and any items previously used to decrease the ghost's speed may be used again.",
+
     "{{wiki_banshee_target_title}}": "Player Targeting",
     "{{wiki_banshee_target_p1}}": "At the beginning of the contract, a random player is selected to be the Banshee's target. This player will remain the target until (1) any player dies or (2) the target leaves the game.",
     "{{wiki_banshee_target_p2}}": "The next target will be the first alive player in lobby order (starting with the host) who is not the previous target (unless only one player is remaining).",
