@@ -449,6 +449,7 @@
 
     "{{wiki_ghost_speed_title}}": "Ghost Speed Breakdown",
     "{{wiki_ghost_speed_p1}}": "Many ghosts have a range of speeds that they can be. These are usually dependant on some other factor (such as sanity or temperature) and will cause the speed to be somewhere in-between the speeds listed on the cards",
+    "{{wiki_ghost_speed_h0}}": "Deildegast Speeds",
     "{{wiki_ghost_speed_h1}}": "Hantu Speeds",
     "{{wiki_ghost_speed_h2}}": "Temp (C)",
     "{{wiki_ghost_speed_h3}}": "Temp (F)",
@@ -463,6 +464,7 @@
     "{{wiki_ghost_speed_h12}}": "Time Near Ghost",
     "{{wiki_ghost_speed_h13}}": "Speed",
     "{{wiki_ghost_speed_h14}}": "Example",
+    "{{wiki_ghost_speed_h15}}": "Items Moved",
 
     "{{wiki_hunt_duration_title}}": "Hunt Duration",
     "{{wiki_hunt_duration_p1}}": "The time that a ghost hunts depends on many factors including the Hunt Duration setting and the size of the map. Harder difficulties and larger maps result in longer hunt times.",
@@ -535,6 +537,7 @@
     "{{wiki_known_bugs_aswang}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_banshee}}": "<li>Will change its target after killing any player, not just the target</li><li>If the target player dies while using the Monkey Paw's \"I wish for life\", they will remain the target even while dead. If the dead target's sanity was above 50%, the ghost will not hunt until another player dies and forces the target to change (in a 2 player game the ghost would never hunt).</li>",
     "{{wiki_known_bugs_dayan}}": "<li><i>None</i></li>",
+    "{{wiki_known_bugs_deildegast}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_deogen}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_demon}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_gallu}}": "<li>There are situations in which only the host is able to see a Gallu disturb salt. The ghost can still change states even if a non-host player sees it walk through salt without disturbing it.</li>",
@@ -1093,6 +1096,17 @@
     "{{wiki_ranger_challenge_p5}}": "Once completed you will be awarded the following:",
     "{{wiki_ranger_challenge_h4}}": "ID Badge",
     "{{wiki_ranger_challenge_h5}}": "(Spoilers)",
+
+    "{{wiki_willow_challenge_title}}": "Sun Seeker",
+    "{{wiki_willow_challenge_p1}}": "",
+    "{{wiki_willow_challenge_h1}}": "Map",
+    "{{wiki_willow_challenge_p2}}": "13 Willow Street",
+    "{{wiki_willow_challenge_h2}}": "Requirements",
+    "{{wiki_willow_challenge_p3}}": "Get the ghost correct and survive 50 times",
+    "{{wiki_willow_challenge_h3}}": "Rewards",
+    "{{wiki_willow_challenge_p4}}": "Once completed you will be awarded the following:",
+    "{{wiki_willow_challenge_h4}}": "ID Badge",
+    "{{wiki_willow_challenge_h5}}": "(Spoilers)",
 
     "{{wiki_sm_survival_title}}": "Sunny Meadows Survival",
     "{{wiki_sm_survival_p1}}": "\"Will you conquer the maze of hallways and abandoned rooms?\"",

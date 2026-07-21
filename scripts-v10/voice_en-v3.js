@@ -56,6 +56,7 @@ const ZNLANG = {
     "ghosts":{
         "aswang":["awesome","ass wing","ass wong","ass wang","a swan","a song"],
         "kormos":[],
+        "deildegast":["the oldest","doll the ghost","tailgate","delta guess","dealed aghast","deal with aghast","dale the ghast","dealed aghast","deal with the guess","the all the guess","doll doe","doll do","doll due","dildo"],
         "spirit":["strip"],
         "wraith":["straight","race","reef","raise"],
         "phantom":[],

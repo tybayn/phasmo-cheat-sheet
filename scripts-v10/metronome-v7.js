@@ -34,7 +34,7 @@ let blood_moon = 0
 let coal = 0
 var step_duration = 5 * 1000
 
-var additional_ghost_data = ["hantu","moroi","thaye"]
+var additional_ghost_data = ["deildegast","hantu","moroi","thaye"]
 var additional_ghost_var = [0.18,0.085,0.175]
 
 let em = (bm,fm,c) => (bm||c?1.15:1.0)*(1.0+(fm*0.1))
