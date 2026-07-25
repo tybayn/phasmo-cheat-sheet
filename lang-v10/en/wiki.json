@@ -566,8 +566,8 @@
     "{{wiki_known_bugs_onryo}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_phantom}}": "<li>Can use its ability on dead players</li><li>Can use its ability on players that are outside of the investigation area</li><li>Will still be visible on film strip for Translucent Ghost, Shadow Ghost, DOTS Ghost, and Hunting Ghost videos </li>",
     "{{wiki_known_bugs_poltergeist}}": "<li><i>None</i></li>",
-    "{{wiki_known_bugs_raiju}}": "<li>Heartbeat radius is currently 15m instead of 10m, creating the \"bass boosted\" heartbeat audio</li><li>Makes all lights on the same floor as it flicker, even when not hunting or eventing",
-    "{{wiki_known_bugs_revenant}}": "<li>On Cursed Hollow event maps, if the speed multiplier due to jackalope interactions is greater than 1.0 (meaning you have had more jump scares than run aways), then the Revenant will move at its faster speed of 3.0 m/s regardless of its ability. It can be brought back to normal if the multiplier is brought back to 1.0 or below.</li>",
+    "{{wiki_known_bugs_raiju}}": "<li>Heartbeat radius is currently 15m instead of 10m, creating the \"bass boosted\" heartbeat audio</li>",
+    "{{wiki_known_bugs_revenant}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_shade}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_spirit}}": "<li><i>None</i></li>",
     "{{wiki_known_bugs_thaye}}": "<li>Can age from a player located a floor below since the 3m range is not stopped by the floor</li><li>Hunt threshold is 1% lower than intended</li>",
@@ -735,6 +735,9 @@
     "{{wiki_misconceptions_claim}}": "Claim",
     "{{wiki_misconceptions_reality}}": "Reality",
 
+    "{{wiki_misconceptions_aswang_1_c}}": "\"The hunt will end if the ghost sees you go into a hiding spot\"",
+    "{{wiki_misconceptions_aswang_1_r}}": "The Aswang must reach/enter the same hiding spot as the detected player in order for the hunt to stop",
+
     "{{wiki_misconceptions_banshee_1_c}}": "\"Only a Banshee's target can hear the Banshee's scream through a parabolic microphone\"",
     "{{wiki_misconceptions_banshee_1_r}}": "Any player can hear the Banshee's scream through the parabolic microphone",
 
@@ -743,6 +746,15 @@
 
     "{{wiki_misconceptions_banshee_3_c}}": "\"If the ghost hunts from another room or another room gets cold that means the ghost changed rooms\"",
     "{{wiki_misconceptions_banshee_3_r}}": "False. Ghosts can hunt from wherever they happen to be at the time. Since ghosts can roam out of their rooms, they can hunt from anywhere the roam takes them. As far as temperatures go, the temps will drop in any room that the ghost has spent time in, which can be the result of roaming frequently or stalking behavior (Banshee). The only way to confirm a room change is to observe ghost orbs being in a different room than before or if the mirror shows a new room.",
+
+    "{{wiki_misconceptions_deildegast_1_c}}": "\"The ghost can throw items to decrease its own speed\"",
+    "{{wiki_misconceptions_deildegast_1_r}}": "Any items thrown by the ghost do not alter the ghost's speed, only items thrown by the player will affect the ghost's speed",
+
+     "{{wiki_misconceptions_deildegast_2_c}}": "\"You must throw objects at the ghost\" or \"You must throw items in the ghost room\"",
+    "{{wiki_misconceptions_deildegast_2_r}}": "Non-equipment items picked up / interacted with anywhere on the map will slow down the ghost, including outside the investigation area or in the truck",
+
+     "{{wiki_misconceptions_deildegast_3_c}}": "\"Items thrown during a hunt will slow the ghost down\"",
+    "{{wiki_misconceptions_deildegast_3_r}}": "Once the hunt starts, the ghost's speed is locked and cannot be altered again until after the hunt has ended",
 
     "{{wiki_misconceptions_gallu_1_c}}": "\"Only tier 3 salt can trigger the Gallu's ability\"",
     "{{wiki_misconceptions_gallu_1_r}}": "False, any tier of salt can trigger the Gallu's ability. The slow down that is caused by tier 3 salt is a completely different mechanic that is not related to the Gallu's ability.",
@@ -789,6 +801,9 @@
     "{{wiki_misconceptions_mimic_2_c}}": "\"Guaranteed evidence means it can still be found on 0 evidence games\"",
     "{{wiki_misconceptions_mimic_2_r}}": "There is 0 evidence in 0 evidence games. Guaranteed evidence simply means that if an evidence is available, those ghosts with said evidences must show those evidences. On 0 evidence games they won't show any evidence, including guaranteed ones. The only exception to this is Mimic orbs because they are an ability and not an actual evidence.",
 
+    "{{wiki_misconceptions_mimic_3_c}}": "\"Mimics can mimic the evidence of other ghosts\"",
+    "{{wiki_misconceptions_mimic_3_r}}": "While Mimics can mimic the behavior and abilities of other ghosts, they will only ever display their own evidence (UV, Spirit Box, Freezing, Fake Ghost Orbs)",
+
     "{{wiki_misconceptions_twins_1_c}}": "\"The Twins is 2 separate ghosts\"",
     "{{wiki_misconceptions_twins_1_r}}": "The Twins is a single ghost with 2 interaction ranges; one larger and one smaller",
 
@@ -819,6 +834,9 @@
     "{{wiki_misconceptions_insurance_1_c}}": "\"You have to take photos of dead teammates to get insurance money\"",
     "{{wiki_misconceptions_insurance_1_r}}": "Insurance is based on difficulty and if you die, no photo necessary.",
     "{{wiki_radio}}": "Radio",
+
+    "{{wiki_misconceptions_incense_1_c}}": "\"The 'Cleanse the area near the ghost' objective requires lighting the incense in the ghost room\"",
+    "{{wiki_misconceptions_incense_1_r}}": "This objective requires that you smudge in the area near the ghost, in the ghost room or not",
 
     "{{wiki_puzzles}}": "Unlockables (+Puzzles)",
     "{{wiki_puzzles_cosmetics}}": "Cosmetics",
