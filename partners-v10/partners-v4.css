@@ -1,6 +1,6 @@
 .partner_block{
     margin: 10px;
-    padding: 15px 5px;
+    padding: 15px 5px 0px 5px;
     border: 0.5px solid #ccc;
     border-radius: 10px;
     background: linear-gradient(#ffffff40,#ffffff00);
@@ -213,6 +213,10 @@
 }
 
 .drop_dates{
+    position: relative;
+}
+
+.drop_image_holder{
     position: relative;
 }
 
