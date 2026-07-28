@@ -1,21 +1,28 @@
 .partner_block{
     margin: 10px;
-    padding: 15px;
+    padding: 15px 5px;
     border: 0.5px solid #ccc;
     border-radius: 10px;
     background: linear-gradient(#ffffff40,#ffffff00);
     position: relative;
+    width: calc(50% - 32px);
 }
 
 .live{
     border: 2px solid red !important;
     background: linear-gradient(#99000040,#ffffff00) !important;
+    width: calc(100% - 34px) !important;
+}
+
+.live .partner_info{
+    flex-direction: row !important;
 }
 
 .partner_info{
     display:flex;
     align-items: center;
     justify-content: flex-start;
+    flex-direction: column;
 }
 
 .partner_img{
@@ -25,10 +32,17 @@
     height: 40px;
 }
 
-.partner_name{
-    font-size: 24px;
+.live .partner_name{
+    font-size: 24px !important;
     font-weight: bolder;
-    padding-left: 10px;
+    padding-left: 10px !important;
+    padding-top: 0px !important;
+}
+
+.partner_name{
+    font-size: 20px;
+    padding-left: 0px;
+    padding-top: 5px;
 }
 
 .partner_main_link{
@@ -42,8 +56,8 @@
 }
 
 .partner_main_link_img{
-    width: 50px;
-    height: 50px;
+    width: 20px;
+    height: 20px;
 }
 
 .partner_main_link_info{
@@ -56,9 +70,16 @@
     align-items: flex-start;
 }
 
+.live .partner_desc{
+    font-size: 12px !important;
+    padding-left: 10px !important;
+    height: auto !important;
+}
+
 .partner_desc{
-    font-size: 12px;
-    padding-left: 10px;
+    font-size: 9px;
+    height: 64px;
+    padding-left: 0px;
 }
 
 .partner_block a{
@@ -72,7 +93,7 @@
     color: #ccc;
     padding-top: 10px;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -87,8 +108,11 @@
     transform: translateX(-4px);
 }
 
+.live .twitch-link-external{
+    font-size: 16px !important;
+}
 .twitch-link-external{
-    font-size: 16px;
+    font-size: 12px;
     transition: transform 0.2s ease-in-out;
 }
 .twitch-link-external:hover{
@@ -98,12 +122,14 @@
 .partner_links{
     display: flex;
     justify-content: space-evenly;
+    height: 32px;
 }
 
 .partner_link{
-    width: 26px;
+    width: 30px;
     opacity: 0.7;
     transition: all 0.2s ease-in-out;
+    height: 20px;
 }
 
 .partner_link:hover{
@@ -184,6 +210,20 @@
 .drop_title{
     font-size: 20px;
     margin-bottom: 5px;
+}
+
+.drop_dates{
+    position: relative;
+}
+
+.drop_badge{
+    width: 60px;
+    height: 60px;
+    transform: rotate(20deg);
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 .drop_image{
