@@ -537,7 +537,7 @@
     "{{wiki_known_bugs_onryo}}": "<li><i>YOK</i></li>",
     "{{wiki_known_bugs_phantom}}": "<li>Yeteneğini ölü oyunculara kullanabilir</li><li>Yeteneğini soruşturma alanının dışındaki oyunculara kullanabilir</li><li>Saydam Hayalet, Gölge Hayalet, DOTS Hayalet ve Avlanan Hayalet videoları için film şeridinde hala görünür olacaktır</li>",
     "{{wiki_known_bugs_poltergeist}}": "<li><i>Yok</i></li>",
-    "{{wiki_known_bugs_raiju}}": "<li>Kalp atışı yarıçapı şu anda 10m yerine 15m'dir, bu da bass boosted kalp atışı sesini oluşturur</li>",
+    "{{wiki_known_bugs_raiju}}": "<li>Kalp atışı yarıçapı şu anda 10m yerine 15m'dir</li>",
     "{{wiki_known_bugs_revenant}}": "<li>Yok</li>",
     "{{wiki_known_bugs_shade}}": "<li><i>Yok</i></li>",
     "{{wiki_known_bugs_spirit}}": "<li><i>Yok</i></li>",
