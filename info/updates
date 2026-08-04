@@ -1,6 +1,6 @@
 {
-    "version":"6.6.2",
-    "date":"2026-07-21",
-    "details": "- Added Deildegast\n\nBug Fixes:\n - Fixed error causing Deildegast name to appear as 'error'",
-    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.6.2.msi"
+    "version":"6.6.3",
+    "date":"2026-08-03",
+    "details": "- Bug fix\n\nBug Fixes:\n - Changed product code because Microsoft decided it was a good idea to make the installer not work anymore for some people.\n\n",
+    "path":"https://tybayn.github.io/phasmo-cheat-sheet/assets/ZN-Desktop-Link-Installer-v6.6.3.msi"
 }
