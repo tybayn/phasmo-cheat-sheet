@@ -537,7 +537,7 @@
     "{{wiki_known_bugs_onryo}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_phantom}}": "<li>Può usare la sua abilità sui giocatori morti</li><li>Può usare la sua abilità sui giocatori che si trovano fuori dall'area di indagine</li><li>Sarà comunque visibile sulla pellicola per i video di Fantasma Traslucido, Fantasma Ombra, Fantasma DOTS e Fantasma in Caccia</li>",
     "{{wiki_known_bugs_poltergeist}}": "<li><i>Nessuno</i></li>",
-    "{{wiki_known_bugs_raiju}}": "<li>Il raggio del battito cardiaco è attualmente di 15 m anziché 10 m, il che produce un suono del battito cardiaco con “bassi potenziati”</li>",
+    "{{wiki_known_bugs_raiju}}": "<li>Il raggio del battito cardiaco è attualmente di 15 m anziché 10 m</li>",
     "{{wiki_known_bugs_revenant}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_shade}}": "<li><i>Nessuno</i></li>",
     "{{wiki_known_bugs_spirit}}": "<li><i>Nessuno</i></li>",
