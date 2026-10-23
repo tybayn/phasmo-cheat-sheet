@@ -18,7 +18,7 @@ function search() {
     let results = "";
     let matched = new Set()
 
-    if (search_query.length > 1 || (search_query.length > 0 && ['ko','zh-cn'].includes(lang))) {
+    if (search_query.length > 1 || (search_query.length > 0 && ['ko','zh-cn','zh-tw','jp'].includes(lang))) {
         let query_parts = search_query.split(/\s+/);
         const relatedTerms = get_terms(query_parts, RELATED);
 

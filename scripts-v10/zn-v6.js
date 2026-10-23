@@ -375,6 +375,8 @@ function loadAllAndConnect(){
         fetch("https://zero-network.net/phasmophobia/languages", {cache: 'default', signal: AbortSignal.timeout(10000)})
         .then(data => data.json())
         .then(data => {
+            data = data.concat(local_languages.filter(l => !data.some(d => d.lang == l.lang)))
+            data.sort((a,b) => a.lang_option.localeCompare(b.lang_option))
             var lang_html = ""
             for(let i = 0; i < data.length; i++){
                 lang_html += `<option value=${data[i]['url']} ${data[i]['lang'] == lang ? "selected" : ""}>${data[i]['lang_option']}</option>`

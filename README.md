@@ -26,6 +26,17 @@ It is understandable that one may want to fork this repository and modify it for
 
 NOTE: By using this code, you agree to not use any included, external URLs present in the code in your derived works as they likely link to copyrighted material or non-privileged resources.
 
+## Traditional Chinese (zh-tw)
+
+`lang-v10/zh-tw` is generated from `lang-v10/zh-cn` with OpenCC (Taiwan phrasing) plus the fixes in `lang-v10/zh-tw/tw-phrases.js`. The server has no zh-tw data, so when zh-tw is selected `lang-v2.js` requests zh-cn data and converts it in the browser.
+
+After zh-cn changes, regenerate:
+
+```
+node tools/zh-tw/build-zh-tw.js
+python tools/zh-tw/subset-fonts.py <LXGWWenKaiTC-Regular.ttf> <Huninn-Regular.ttf>
+```
+
 ## License
 [GNU AGPLv3](https://choosealicense.com/licenses/agpl-3.0/)
 
@@ -34,4 +45,7 @@ JQuery - MIT License
 October Crow Font - Custom License  
 Caveat Font - STL Open Font License  
 Troubleside Font - SIL Open Font License (OFL)  
-Zaychik Font - CC, Zaychik is developed by Maria Khmelevskaya at HSE ART AND DESIGN SCHOOL
+Zaychik Font - CC, Zaychik is developed by Maria Khmelevskaya at HSE ART AND DESIGN SCHOOL  
+LXGW WenKai TC Font (subset) - SIL Open Font License (OFL)  
+Huninn Font (subset) - SIL Open Font License (OFL)  
+opencc-js - MIT License

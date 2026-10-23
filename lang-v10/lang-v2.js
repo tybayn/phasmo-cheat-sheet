@@ -67,8 +67,92 @@ const lang_menu_widths = {
         "left":"221px",
         "width":"193px",
         "maps":"calc(100% - 290px)"
+    },
+    "zh-tw":{
+        "left":"221px",
+        "width":"193px",
+        "maps":"calc(100% - 290px)"
     }
 }
+
+// Languages not offered by the server: data is requested in the alias language and converted locally
+const lang_server_alias = {
+    "zh-tw": "zh-cn"
+}
+
+const local_languages = [
+    {"lang":"zh-tw","lang_option":"Chinese (Traditional) 🇹🇼","url":"zh-tw"}
+]
+
+// BCP 47 tags for <html lang>, so fallback fonts pick the right CJK glyph forms
+const lang_html_tags = {
+    "jp": "ja",
+    "pt-br": "pt-BR",
+    "zh-cn": "zh-Hans",
+    "zh-tw": "zh-Hant-TW"
+}
+
+// ----------------------------------
+
+function loadScript(src){
+    return new Promise((resolve, reject) => {
+        const script = document.createElement("script")
+        script.src = src
+        script.onload = resolve
+        script.onerror = () => reject(`Failed to load script: ${src}`)
+        document.head.appendChild(script)
+    })
+}
+
+// Traditional Chinese: convert Simplified server data with OpenCC + Taiwan phrasing
+;(function(){
+    // checkLink() stores ?lang= in the cookie later, but server requests must already be patched by then
+    const url_lang = new URLSearchParams(window.location.search).get("lang")?.toLowerCase()
+    const cookie_lang = document.cookie.split(";").map(c => c.trim()).find(c => c.startsWith("lang="))?.slice(5)
+    if((url_lang ?? cookie_lang) != "zh-tw") return
+
+    const to_tw = Promise.all([
+        loadScript("lang-v10/zh-tw/opencc-cn2t.js"),
+        loadScript("lang-v10/zh-tw/tw-phrases.js")
+    ])
+    .then(() => {
+        const convert = OpenCC.Converter({ from: "cn", to: "twp" })
+        return text => zh_tw_phrases.reduce((out, [from, to]) => out.replaceAll(from, to), convert(text))
+    })
+    .catch(err => {
+        console.error(err)
+        return text => text
+    })
+
+    // Only values are converted, keys stay untouched since they are used as ids
+    const deep_convert = (value, fn) => {
+        if(typeof value === "string") return fn(value)
+        if(Array.isArray(value)) return value.map(v => deep_convert(v, fn))
+        if(value && typeof value === "object")
+            return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, deep_convert(v, fn)]))
+        return value
+    }
+
+    const native_fetch = window.fetch
+    window.fetch = (input, init = {}) => {
+        const url = input instanceof Request ? input.url : String(input)
+        const method = (init.method ?? (input instanceof Request ? input.method : "GET")).toUpperCase()
+        if(!url.includes("zero-network.net") || method != "GET")
+            return native_fetch(input, init)
+
+        const server_url = url.replace(/([?&]lang=)zh-tw(?=&|$)/, `$1${lang_server_alias["zh-tw"]}`)
+        return Promise.all([native_fetch(server_url, init), to_tw])
+        .then(([res, fn]) => {
+            if(!res.ok || !(res.headers.get("content-type") ?? "").includes("json"))
+                return res
+            return res.json().then(data => new Response(JSON.stringify(deep_convert(data, fn)), {
+                status: res.status,
+                statusText: res.statusText,
+                headers: {"Content-Type": "application/json"}
+            }))
+        })
+    }
+})()
 
 // ----------------------------------
 
@@ -115,42 +199,10 @@ function load_voice(){
         new Audio(`lang-v10/${lang}/assets/myling_cooldown.mp3`),
         new Audio(`assets/obambo-alert.mp3`)
     ];
-    timer_snd[0].preload = 'auto';
-    timer_snd[1].preload = 'auto';
-    timer_snd[2].preload = 'auto';
-    timer_snd[3].preload = 'auto';
-    timer_snd[4].preload = 'auto';
-    timer_snd[5].preload = 'auto';
-    timer_snd[6].preload = 'auto';
-    timer_snd[7].preload = 'auto';
-    timer_snd[8].preload = 'auto';
-    timer_snd[9].preload = 'auto';
-    timer_snd[10].preload = 'auto';
-    timer_snd[11].preload = 'auto';
-    timer_snd[12].preload = 'auto';
-    timer_snd[13].preload = 'auto';
-    timer_snd[14].preload = 'auto';
-    timer_snd[15].preload = 'auto';
-    timer_snd[16].preload = 'auto';
-    timer_snd[17].preload = 'auto';
-    timer_snd[0].load();
-    timer_snd[1].load();
-    timer_snd[2].load();
-    timer_snd[3].load();
-    timer_snd[4].load();
-    timer_snd[5].load();
-    timer_snd[6].load();
-    timer_snd[7].load();
-    timer_snd[8].load();
-    timer_snd[9].load();
-    timer_snd[10].load();
-    timer_snd[11].load();
-    timer_snd[12].load();
-    timer_snd[13].load();
-    timer_snd[14].load();
-    timer_snd[15].load();
-    timer_snd[16].load();
-    timer_snd[17].load();
+    timer_snd.forEach(snd => {
+        snd.preload = 'auto';
+        snd.load();
+    });
 }
 
 function load_translation(){
@@ -163,6 +215,7 @@ function load_translation(){
         .then(data => data.json())
         .then(data => {
             lang_data = data
+            document.documentElement.lang = lang_html_tags[lang] ?? lang
             loadCSS(`lang-v10/${lang}/override.css`)
             load_voice()
             resolve("Translation loaded")
