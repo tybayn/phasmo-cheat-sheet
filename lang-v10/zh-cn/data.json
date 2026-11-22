@@ -281,7 +281,7 @@
     "{{zntdl_li5}}": "解压并将 `ZN-Drops-Launcher.bin` 文件移动到您偏好的位置",
     "{{zntdl_li6}}": "双击文件或从终端运行",
     "{{zntdl_h5}}": "Apple",
-    "{{zntdl_li7}}": "下载 `ZN-Drops-Launcher-[...]-mac-arm64.zip` file",
+    "{{zntdl_li7}}": "下载 `ZN-Drops-Launcher-[...]-mac-arm64.zip`",
     "{{zntdl_li8}}": "解压并将 `ZN-Drops-Launcher.app` 文件移动到您偏好的位置",
     "{{zntdl_li9}}": "右键单击文件并选择 “打开”。您可能在首次运行程序时看到安全提示。这对于新下载的应用程序来说是正常现象。点击提示中的 “启动” 来运行应用。",
     "{{zntdl_p7.1}}": "您可能会收到一条消息，提示无法打开该软件，因为系统无法验证其不含恶意软件。这是因为 macOS 要求应用程序必须经过 Apple 验证，即使它们完全安全。如果发生这种情况，您可以前往 系统设置 > 隐私与安全性，向下滚动至 安全，然后点击 ZN-Drops-Launcher 旁边的 “仍要打开”",
